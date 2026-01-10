@@ -6,11 +6,9 @@ namespace: keycloak
 resources:
 - base/keycloak.yaml
 - base/keycloak-certificate.yaml
-- base/keycloak-crossplane-setup.yaml
 - base/keycloak-ingress.yaml
 - base/keycloak-pg-cluster.yaml
 - sealed-secrets/keycloak-user.yaml
-- sealed-secrets/keycloak-william-user.yaml
 - https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.0/kubernetes/keycloaks.k8s.keycloak.org-v1.yml
 - https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.0/kubernetes/keycloakrealmimports.k8s.keycloak.org-v1.yml
 - https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.0/kubernetes/kubernetes.yml

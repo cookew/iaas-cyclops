@@ -1,0 +1,45 @@
+apiVersion: user.keycloak.crossplane.io/v1alpha1
+kind: User
+metadata:
+  name: william
+spec:
+  forProvider:
+    email: cookewe@gmail.com
+    emailVerified: true
+    enabled: true
+    firstName: William
+    initialPassword:
+    - temporary: false
+      valueSecretRef:
+        key: password
+        name: william-credentials
+        namespace: crossplane-keycloak
+    lastName: Cooke
+    realmIdRef:
+      name: iaas
+    username: william
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: user.keycloak.crossplane.io/v1alpha1
+kind: User
+metadata:
+  name: edward
+spec:
+  forProvider:
+    email: edward@ecooke.me
+    emailVerified: true
+    enabled: true
+    firstName: Edward
+    initialPassword:
+    - temporary: true
+      valueSecretRef:
+        key: password
+        name: edward-credentials
+        namespace: crossplane-keycloak
+    lastName: Cooke
+    realmIdRef:
+      name: iaas
+    username: edward
+  providerConfigRef:
+    name: keycloak-provider-config

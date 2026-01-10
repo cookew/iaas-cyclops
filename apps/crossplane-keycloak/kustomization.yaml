@@ -5,8 +5,11 @@ namespace: crossplane-keycloak
 
 resources:
 - base/iaas-realm.yaml
+- base/iaas-users.yaml
 - base/keycloak-provider.yaml
 - base/keycloak-provider-config.yaml
 - base/kubernetes-client.yaml
 - sealed-secrets/crossplane-keycloak-credentials.yaml
+- sealed-secrets/edward-credentials.yaml
+- sealed-secrets/william-credentials.yaml
 # - sealed-secrets/crossplane-keycloak-kubernetes-oidc-client.yaml
