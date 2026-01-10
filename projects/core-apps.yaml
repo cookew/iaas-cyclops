@@ -130,7 +130,7 @@ spec:
       revisionHistoryLimit: 0
       source:
         path: apps/{{ dig "path" .name . }}
-        repoURL: git@github.com:cookew/iaas-cyclopse.git
+        repoURL: git@github.com:cookew/iaas-cyclops.git
         targetRevision: main
       syncPolicy:
         automated:
