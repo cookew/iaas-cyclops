@@ -84,14 +84,6 @@ volumes:
 #           requests:
 #             storage: 1Gi
 
-persistentVolumeClaim:
-  enabled: true
-  accessModes:
-  - ReadWriteMany
-  size: 10Gi
-  storageClassName: ceph-filesystem
-  volumeMode: Filesystem
-
 ingress:
   annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
