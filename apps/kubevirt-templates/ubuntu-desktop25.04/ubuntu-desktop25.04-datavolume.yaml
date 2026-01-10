@@ -1,0 +1,12 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: ubuntu-desktop2504
+spec:
+  source:
+    http:
+      url: https://releases.ubuntu.com/25.04/ubuntu-25.04-desktop-amd64.iso
+  storage:
+    resources:
+      requests:
+        storage: 10Gi

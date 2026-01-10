@@ -1,0 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: kubevirt-manager
+
+resources:
+- base/ingress.yaml
+
+helmGlobals:
+  chartHome: mycharts
+
+helmCharts:
+- name: kubevirt-manager
+  namespace: kubevirt-manager
+  releaseName: kubevirt-manager
+  repo: https://kubevirt-manager.io/charts
+  valuesFile: values.yaml
+  version: v1.5.3
+
+# resources:
+# - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/crd-v1.5.3.yaml
+# - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/deployment-v1.5.3.yaml
+# - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/ingress-v1.5.3.yaml
+# - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/pc-v1.5.3.yaml
+# - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/prometheus-config-v1.5.3.yaml
+# - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/rbac-v1.5.3.yaml
+# - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/service-v1.5.3.yaml
+# - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/servicemonitor-v1.5.3.yaml
+
+
+# # Do not need
+# # - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/auth-basic-configmap-v1.5.3.yaml
+# # - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/auth-basic-secret-v1.5.3.yaml
+# # - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/ns-v1.5.3.yaml
+# # - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/oauth-config-v1.5.3.yaml

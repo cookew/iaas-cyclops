@@ -1,0 +1,584 @@
+apiVersion: installation.mattermost.com/v1beta1
+kind: Mattermost
+metadata:
+  name: mattermost
+spec:
+  database:
+    external:
+      secret: mattermost-pg-credentials
+  # deploymentTemplate:
+  #   revisionHistoryLimit: 0
+  fileStore:
+    external:
+      bucket: mattermost
+      secret: mattermost-bucket-credentials
+      url: rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc
+  # image: mattermost/mattermost-enterprise-edition
+  image: mattermost/mattermost-enterprise-fips-edition
+  # image: mattermost/mattermost-team-edition
+  # image: mattermost/mattermost-preview
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+      forecastle.stakater.com/appName: Mattermost
+      forecastle.stakater.com/expose: "true"
+      forecastle.stakater.com/group: Apps
+      forecastle.stakater.com/icon: https://mattermost.apps.iaas.wcooke.me/static/images/favicon/favicon-default-64x64.png
+      forecastle.stakater.com/network-restricted: "true"
+    enabled: false
+    host: mattermost.apps.iaas.wcooke.me
+    ingressClass: cilium
+    tlsSecret: mattermost-ingress-certs
+  licenseSecret: ""
+  mattermostEnv:
+  - name: MM_FILESETTINGS_AMAZONS3SSL
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#web-server-connection-security
+  # - name: MM_SERVICESETTINGS_CONNECTIONSECURITY
+  #   value: "TLS"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#tls-certificate-file
+  - name: MM_SERVICESETTINGS_TLSCERTFILE
+    value: "/certs/tls.crt"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#tls-key-file
+  - name: MM_SERVICESETTINGS_TLSKEYFILE
+    value: "/certs/tls.key"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#enable-insecure-outgoing-connections
+  # - name: MM_SERVICESETTINGS_ENABLEINSECUREOUTGOINGCONNECTIONS
+  #   value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#tls-minimum-version
+  - name: MM_SERVICESETTINGS_TLSMINVER
+    value: "1.3"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#enable-strict-transport-security-hsts
+  - name: MM_SERVICESETTINGS_TLSSTRICTTRANSPORT
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#enable-security-alerts
+  - name: MM_SERVICESETTINGS_ENABLESECURITYFIXALERT
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#enable-push-notifications
+  - name: MM_EMAILSETTINGS_SENDPUSHNOTIFICATIONS
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#enable-rate-limiting
+  - name: MM_RATELIMITSETTINGS_ENABLE
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#enable-diagnostics-and-error-reporting
+  - name: MM_LOGSETTINGS_ENABLEDIAGNOSTICS
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#enable-sentry-reporting
+  - name: MM_LOGSETTINGS_ENABLESENTRY
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#audit-logging
+  - name: MM_EXPERIMENTALAUDITSETTINGS_FILEENABLED
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#audit-file-name
+  - name: MM_EXPERIMENTALAUDITSETTINGS_FILENAME
+    value: "/auditlogs/audit.log"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#id16
+  - name: MM_EXPERIMENTALAUDITSETTINGS_FILEMAXSIZEMB
+    value: "1"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#maximum-file-age
+  - name: MM_EXPERIMENTALAUDITSETTINGS_FILEMAXAGEDAYS
+    value: "1"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#maximum-file-backups
+  - name: MM_EXPERIMENTALAUDITSETTINGS_FILEMAXBACKUPS
+    value: "0"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#compress-audit-log-files
+  - name: MM_EXPERIMENTALAUDITSETTINGS_FILECOMPRESS
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#audit-log-queue-size
+  - name: MM_EXPERIMENTALAUDITSETTINGS_FILEMAXQUEUESIZE
+    value: "2"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#output-audit-logs-to-multiple-targets
+  - name: MM_EXPERIMENTALAUDITSETTINGS_ADVANCEDLOGGINGJSON
+    value: "{}"
+  # https://docs.mattermost.com/administration-guide/configure/environment-configuration-settings.html#session-idle-timeout
+  - name: MM_SERVICESETTINGS_SESSIONIDLETIMEOUTINMINUTES
+    value: "15"
+
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#site-name
+  - name: MM_TEAMSETTINGS_SITENAME
+    value: "WCooke"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#site-description
+  - name: MM_TEAMSETTINGS_CUSTOMDESCRIPTIONTEXT
+    value: "A cool login banner could go here."
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#custom-brand-text
+  - name: MM_TEAMSETTINGS_CUSTOMBRANDTEXT
+    value: "Custom branding text could go here."
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-ask-community-link
+  - name: MM_SUPPORTSETTINGS_ENABLEASKCOMMUNITYLINK
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#help-link
+  - name: MM_SUPPORTSETTINGS_HELPLINK
+    value: "https://forecastle.apps.iaas.wcooke.me/"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#terms-of-use-link
+  - name: MM_SUPPORTSETTINGS_TERMSOFSERVICELINK
+    value: "https://forecastle.apps.iaas.wcooke.me/"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#privacy-policy-link
+  - name: MM_SUPPORTSETTINGS_PRIVACYPOLICYLINK
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#about-link
+  - name: MM_SUPPORTSETTINGS_ABOUTLINK
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#forgot-password-custom-link
+  - name: MM_SUPPORTSETTINGS_FORGETPASSWORDLINK
+    value: "https://forecastle.apps.iaas.wcooke.me/"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#report-a-problem-link
+  - name: MM_SUPPORTSETTINGS_REPORTAPROBLEMLINK
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#allow-mobile-app-log-downloads
+  - name: MM_SUPPORTSETTINGS_ALLOWDOWNLOADLOGS
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#mattermost-apps-download-page-link
+  - name: MM_NATIVEAPPSETTINGS_APPDOWNLOADLINK
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#android-app-download-link
+  - name: MM_NATIVEAPPSETTINGS_ANDROIDAPPDOWNLOADLINK
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#ios-app-download-link
+  - name: MM_NATIVEAPPSETTINGS_IOSAPPDOWNLOADLINK
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-desktop-app-landing-page
+  - name: MM_SERVICESETTINGS_ENABLEDESKTOPLANDINGPAGE
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#default-server-language
+  - name: MM_LOCALIZATIONSETTINGS_DEFAULTSERVERLOCALE
+    value: "en"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#default-client-language
+  - name: MM_LOCALIZATIONSETTINGS_DEFAULTCLIENTLOCALE
+    value: "en"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-experimental-locales
+  - name: MM_LOCALIZATIONETTINGS_ENABLEEXPERIMENTALLOCALES
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#max-users-per-team
+  - name: MM_TEAMSETTINGS_MAXUSERSPERTEAM
+    value: "250"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#max-channels-per-team
+  - name: MM_TEAMSETTINGS_MAXCHANNELSPERTEAM
+    value: "2000"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-join-leave-messages-by-default
+  - name: MM_TEAMSETTINGS_ENABLEJOINLEAVEMESSAGEBYDEFAULT
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-users-to-open-direct-message-channels-with
+  - name: MM_TEAMSETTINGS_RESTRICTDIRECTMESSAGE
+    value: "team"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#teammate-name-display
+  - name: MM_TEAMSETTINGS_TEAMMATENAMEDISPLAY
+    value: "full_name"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#lock-teammate-name-display-for-all-users
+  - name: MM_TEAMSETTINGS_LOCKTEAMMATENAMEDISPLAY
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#allow-users-to-view-archived-channels
+  - name: MM_TEAMSETTINGS_EXPERIMENTALVIEWARCHIVEDCHANNELS
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#show-email-address
+  - name: MM_PRIVACYSETTINGS_SHOWEMAILADDRESS
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#show-full-name
+  - name: MM_PRIVACYSETTINGS_SHOWFULLNAME
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-custom-user-statuses
+  - name: MM_TEAMSETTINGS_ENABLECUSTOMUSERSTATUSES
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-last-active-time
+  - name: MM_TEAMSETTINGS_ENABLELASTACTIVETIME
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-custom-user-groups
+  - name: MM_SERVICESETTINGS_ENABLECUSTOMGROUPS
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#user-statistics-update-time
+  - name: MM_SERVICESETTINGS_REFRESHPOSTSTATSRUNTIME
+    value: "00:00"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#show-channel-all-or-here-confirmation-dialog
+  - name: MM_TEAMSETTINGS_ENABLECONFIRMNOTIFICATIONSTOCHANNEL
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-email-notifications
+  - name: MM_EMAILSETTINGS_SENDEMAILNOTIFICATIONS
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-preview-mode-banner
+  - name: MM_EMAILSETTINGS_ENABLEPREVIEWMODEBANNER
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-email-batching
+  - name: MM_EMAILSETTINGS_ENABLEEMAILBATCHING
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#email-notification-contents
+  - name: MM_EMAILSETTINGS_EMAILNOTIFICATIONCONTENTSTYPE
+    value: "full"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#notification-display-name
+  - name: MM_EMAILSETTINGS_FEEDBACKNAME
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#notification-from-address
+  - name: MM_EMAILSETTINGS_FEEDBACKEMAIL
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#support-email-address
+  - name: MM_SUPPORTSETTINGS_SUPPORTEMAIL
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#notification-reply-to-address
+  - name: MM_EMAILSETTINGS_REPLYTOADDRESS
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#notification-footer-mailing-address
+  - name: MM_EMAILSETTINGS_FEEDBACKORGANIZATION
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#push-notification-contents
+  - name: MM_EMAILSETTINGS_PUSHNOTIFICATIONCONTENTS
+    value: "generic"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-notification-monitoring
+  - name: MM_METRICSSETTINGS_ENABLENOTIFICATIONMETRICS
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-system-wide-notifications
+  - name: MM_ANNOUNCEMENTSETTINGS_SYSTEMWIDENOTIFICATIONS
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#banner-text
+  - name: MM_ANNOUNCEMENTSETTINGS_BANNERTEXT
+    value: "A cool banner!"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#banner-color
+  - name: MM_ANNOUNCEMENTSETTINGS_BANNERCOLOR
+    value: "#90EE90"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#banner-text-color
+  - name: MM_ANNOUNCEMENTSETTINGS_BANNERTEXTCOLOR
+    value: "#FFFFFF"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#allow-banner-dismissal
+  - name: MM_ANNOUNCEMENTSETTINGS_ALLOWBANNERDISMISSAL
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-emoji-picker
+  - name: MM_SERVICESETTINGS_ENABLEEMOJIPICKER
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-custom-emoji
+  - name: MM_SERVICESETTINGS_ENABLECUSTOMEMOJI
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#automatically-follow-threads
+  - name: MM_SERVICESETTINGS_THREADAUTOFOLLOW
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#threaded-discussions
+  - name: MM_SERVICESETTINGS_COLLAPSEDTHREADS
+    value: "always_on"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#message-priority
+  - name: MM_SERVICESETTINGS_POSTPRIORITY
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#persistent-notifications
+  - name: MM_SERVICESETTINGS_ALLOWPERSISTENTNOTIFICATIONS
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#maximum-number-of-recipients-for-persistent-notifications
+  - name: MM_SERVICESETTINGS_PERSISTENTNOTIFICATIONMAXRECIPIENTS
+    value: "5"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#frequency-of-persistent-notifications
+  - name: MM_SERVICESETTINGS_PERSISTENTNOTIFICATIONINTERVALMINUTES
+    value: "5"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#total-number-of-persistent-notifications-per-post
+  - name: MM_SERVICESETTINGS_PERSISTENTNOTIFICATIONMAXCOUNT
+    value: "6"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-website-link-previews
+  - name: MM_SERVICESETTINGS_ENABLELINKPREVIEWS
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#disable-link-previews-for-specific-domains
+  - name: MM_SERVICESETTINGS_RESTRICTLINKPREVIEWS
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-message-link-previews
+  - name: MM_SERVICESETTINGS_ENABLEPERMALINKPREVIEWS
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-svgs
+  - name: MM_SERVICESETTINGS_ENABLESVGS
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-latex-code-block-rendering
+  - name: MM_SERVICESETTINGS_ENABLELATEX
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-inline-latex-rendering
+  - name: MM_SERVICESETTINGS_ENABLEINLINELATEX
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#custom-url-schemes
+  # - name: MM_DISPLAYSETTINGS_CUSTOMURLSCHEMES
+  #   value: '["https", "mailto"]'
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#maximum-markdown-nodes
+  - name: MM_DISPLAYSETTINGS_MAXMARKDOWNNODES
+    value: "0"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#google-api-key
+  - name: MM_SERVICESETTINGS_GOOGLEDEVELOPERKEY
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-server-syncing-of-message-drafts
+  - name: MM_SERVICESETTINGS_ALLOWSYNCEDDRAFTS
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#unique-emoji-reaction-limit
+  - name: MM_SERVICESETTINGS_UNIQUEEMOJIREACTIONLIMITPERPOST
+    value: "50"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-content-flagging
+  - name: MM_CONTENTFLAGGINGSETTINGS_ENABLECONTENTFLAGGING
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#require-reporters-to-add-comment
+  - name: MM_CONTENTFLAGGINGSETTINGS_ADDITIONALSETTINGS_REPORTERCOMMENTREQUIRED
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#require-reviewers-to-add-comment
+  - name: MM_CONTENTFLAGGINGSETTINGS_ADDITIONALSETTINGS_REVIEWERCOMMENTREQUIRED
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#hide-message-from-channel-while-it-is-being-reviewed
+  - name: MM_CONTENTFLAGGINGSETTINGS_ADDITIONALSETTINGS_HIDEFLAGGEDCONTENT
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#same-reviewers-for-all-teams
+  - name: MM_CONTENTFLAGGINGSETTINGS_REVIEWERSETTINGS_COMMONREVIEWERS
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#system-administrators-as-reviewers
+  - name: MM_CONTENTFLAGGINGSETTINGS_REVIEWERSETTINGS_SYSTEMADMINSASREVIEWERS
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#team-administrators-as-reviewers
+  - name: MM_CONTENTFLAGGINGSETTINGS_REVIEWERSETTINGS_TEAMADMINSASREVIEWERS
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#allow-file-sharing
+  - name: MM_FILESETTINGS_ENABLEFILEATTACHMENTS
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#allow-file-uploads-on-mobile
+  - name: MM_FILESETTINGS_ENABLEMOBILEUPLOAD
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#allow-file-downloads-on-mobile
+  - name: MM_FILESETTINGS_ENABLEMOBILEDOWNLOAD
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-secure-file-preview-on-mobile
+  - name: MM_FILESETTINGS_MOBILEENABLESECUREFILEPREVIEW
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#allow-pdf-link-navigation-on-mobile
+  - name: MM_FILESETTINGS_MOBILEALLOWPDFLINKNAVIGATION
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-public-file-links
+  - name: MM_FILESETTINGS_ENABLEPUBLICLINK
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#public-link-salt
+  - name: MM_FILESETTINGS_PUBLICLINKSALT
+    value: "12345678901234567890123456789012"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-admin-notices
+  - name: MM_ANNOUNCEMENTSETTINGS_ADMINNOTICESENABLED
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#enable-end-user-notices
+  - name: MM_ANNOUNCEMENTSETTINGS_USERNOTICESENABLED
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/site-configuration-settings.html#cross-team-search
+  - name: MM_SERVICESETTINGS_ENABLECROSSTEAMSEARCH
+    value: "true"
+
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-account-creation
+  - name: MM_TEAMSETTINGS_ENABLEUSERCREATION
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-open-server
+  - name: MM_TEAMSETTINGS_ENABLEOPENSERVER
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-email-invitations
+  - name: MM_SERVICESETTINGS_ENABLEEMAILINVITATIONS
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#email
+  - name: MM_EMAILSETTINGS_ENABLESIGNUPWITHEMAIL
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#require-email-verification
+  - name: MM_EMAILSETTINGS_REQUIREEMAILVERIFICATION
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-sign-in-with-email
+  - name: MM_EMAILSETTINGS_ENABLESIGNINWITHEMAIL
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-sign-in-with-username
+  - name: MM_EMAILSETTINGS_ENABLESIGNINWITHUSERNAME
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#minimum-password-length
+  - name: MM_PASSWORDSETTINGS_MINIMUMLENGTH
+    value: "14"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#password-requirements
+  - name: MM_PASSWORDSETTINGS_LOWERCASE
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#password-requirements
+  - name: MM_PASSWORDSETTINGS_UPPERCASE
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#password-requirements
+  - name: MM_PASSWORDSETTINGS_NUMBER
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#password-requirements
+  - name: MM_PASSWORDSETTINGS_SYMBOL
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#maximum-login-attempts
+  - name: MM_SERVICESETTINGS_MAXIMUMLOGINATTEMPTS
+    value: "3"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-forgot-password-link
+  - name: MM_LDAPSETTINGS_FORGOTPASSWORDLINK
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-multi-factor-authentication
+  - name: MM_SERVICESETTINGS_ENABLEMULTIFACTORAUTHENTICATION
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enforce-multi-factor-authentication
+  - name: MM_SERVICESETTINGS_ENFORCEMULTIFACTORAUTHENTICATION
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#connection-settings
+  - name: MM_LDAPSETTINGS_ENABLE
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-synchronization-with-ad-ldap
+  - name: MM_LDAPSETTINGS_ENABLESYNC
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#login-field-name
+  - name: MM_LDAPSETTINGS_LOGINFIELDNAME
+    value: "AD/LDAP Username"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#ad-ldap-server
+  - name: MM_LDAPSETTINGS_LDAPSERVER
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#ad-ldap-port
+  - name: MM_LDAPSETTINGS_LDAPPORT
+    value: "389"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#bind-username
+  - name: MM_LDAPSETTINGS_BINDUSERNAME
+    value: ""
+  # # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#bind-password
+  # - name: MM_LDAPSETTINGS_BINDPASSWORD
+  #   value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#connection-security
+  - name: MM_LDAPSETTINGS_CONNECTIONSECURITY
+    value: "TLS"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#skip-certificate-verification
+  - name: MM_LDAPSETTINGS_SKIPCERTIFICATEVERIFICATION
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#private-key
+  - name: MM_LDAPSETTINGS_PRIVATEKEYFILE
+    value: "/ldapcerts/tls.key"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#public-certificate
+  - name: MM_LDAPSETTINGS_PUBLICCERTIFICATEFILE
+    value: "/ldapcerts/tls.key"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#id1
+  - name: MM_LDAPSETTINGS_MAXIMUMLOGINATTEMPTS
+    value: "3"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#base-dn
+  - name: MM_LDAPSETTINGS_BASEDN
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#user-filter
+  - name: MM_LDAPSETTINGS_USERFILTER
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#group-filter
+  - name: MM_LDAPSETTINGS_GROUPFILTER
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-admin-filter
+  - name: MM_LDAPSETTINGS_ENABLEADMINFILTER
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#admin-filter
+  - name: MM_LDAPSETTINGS_ADMINFILTER
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#guest-filter
+  - name: MM_LDAPSETTINGS_GUESTFILTER
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#id-attribute
+  - name: MM_LDAPSETTINGS_IDATTRIBUTE
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#login-id-attribute
+  - name: MM_LDAPSETTINGS_LOGINIDATTRIBUTE
+    value: "username"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#username-attribute
+  - name: MM_LDAPSETTINGS_USERNAMEATTRIBUTE
+    value: "username"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#email-attribute
+  - name: MM_LDAPSETTINGS_EMAILATTRIBUTE
+    value: "email"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#first-name-attribute
+  - name: MM_LDAPSETTINGS_FIRSTNAMEATTRIBUTE
+    value: "firstname"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#last-name-attribute
+  - name: MM_LDAPSETTINGS_LASTNAMEATTRIBUTE
+    value: "lastname"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#nickname-attribute
+  - name: MM_LDAPSETTINGS_NICKNAMEATTRIBUTE
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#position-attribute
+  - name: MM_LDAPSETTINGS_POSITIONATTRIBUTE
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#profile-picture-attribute
+  - name: MM_LDAPSETTINGS_PICTUREATTRIBUTE
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#group-display-name-attribute
+  - name: MM_LDAPSETTINGS_GROUPDISPLAYNAMEATTRIBUTE
+    value: "name"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#group-id-attribute
+  - name: MM_LDAPSETTINGS_GROUPIDATTRIBUTE
+    value: "objectGUID"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#synchronization-interval-minutes
+  - name: MM_LDAPSETTINGS_SYNCINTERVALMINUTES
+    value: "60"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#maximum-page-size
+  - name: MM_LDAPSETTINGS_MAXPAGESIZE
+    value: "0"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#query-timeout-seconds
+  - name: MM_LDAPSETTINGS_QUERYTIMEOUT
+    value: "60"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#re-add-removed-members-on-sync
+  - name: MM_LDAPSETTINGS_READDREMOVEDMEMBERS
+    value: "false"
+
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-openid-connect-authentication-with-other-service-providers
+  - name: MM_OPENIDSETTINGS_ENABLE
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#openid-connect-other-button-name
+  - name: MM_OPENIDSETTINGS_BUTTONTEXT
+    value: "Login"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#openid-connect-other-button-color
+  - name: MM_OPENIDSETTINGS_BUTTONCOLOR
+    value: "#145DBF"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#openid-connect-other-discovery-endpoint
+  - name: MM_OPENIDSETTINGS_DISCOVERYENDPOINT
+    value: "https://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#openid-connect-other-client-id
+  - name: MM_OPENIDSETTINGS_ID
+    value: "mattermost"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#openid-connect-other-client-secret
+  - name: MM_OPENIDSETTINGS_SECRET
+    valueFrom:
+      secretKeyRef:
+        key: MM_OPENIDSETTINGS_SECRET
+        name: mattermost-secrets
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-guest-access
+  - name: MM_GUESTACCOUNTSSETTINGS_ENABLE
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#whitelisted-guest-domains
+  - name: MM_GUESTACCOUNTSSETTINGS_RESTRICTCREATIONTODOMAINS
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#show-guest-tag
+  - name: MM_GUESTACCOUNTSSETTINGS_HIDETAGS
+    value: "true"
+
+  podExtensions:
+    initContainers:
+    - command: ["chown", "2000:2000", "/auditlogs"]
+      image: docker.io/library/ubuntu
+      name: audit-logs-chown
+      volumeMounts:
+      - name: auditlogs
+        mountPath: /auditlogs
+    sidecarContainers:
+    - command: ["tail", "--max-unchanged-stats", "2", "--quiet", "--retry", "--follow", "/auditlogs/audit.log"]
+      image: docker.io/library/ubuntu
+      name: audit-logs
+      securityContext:
+        runAsGroup: 2000
+        runAsUser: 2000
+      volumeMounts:
+      - name: auditlogs
+        mountPath: /auditlogs
+  replicas: 1
+  scheduling:
+    nodeSelector:
+      kubernetes.io/arch: amd64
+  # size: 100users
+  version: 11.2.1
+  volumeMounts:
+  - mountPath: /certs
+    name: certificates
+    readOnly: true
+  - name: auditlogs
+    mountPath: /auditlogs
+  - name: ca-certificates
+    mountPath: /etc/ssl/certs
+    readOnly: true
+  volumes:
+  - name: ca-certificates
+    configMap:
+      name: tm-ca-bundle
+      items:
+      - key: ca-bundle.pem
+        path: ca-certificates.crt
+  - name: certificates
+    secret:
+      defaultMode: 0400
+      secretName: mattermost-certificates
+  - name: auditlogs
+    ephemeral:
+      volumeClaimTemplate:
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          storageClassName: ceph-filesystem
+          resources:
+            requests:
+              storage: 1Gi

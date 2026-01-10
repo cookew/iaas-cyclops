@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: mattermost
+
+resources:
+- base/mattermost.yaml
+- base/mattermost-certificates.yaml
+- base/mattermost-ingress.yaml
+- base/mattermost-objectbucketclaim.yaml
+- base/mattermost-pg-cluster.yaml
+- sealed-secrets/mattermost-bucket-credentials.yaml
+- sealed-secrets/mattermost-pg-credentials.yaml
+- sealed-secrets/mattermost-secrets.yaml

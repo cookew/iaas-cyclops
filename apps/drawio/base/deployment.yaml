@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: deployment
+    app.kubernetes.io/name: drawio
+    app.kubernetes.io/part-of: drawio
+  name: drawio
+spec:
+  replicas: 2
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: pod
+      app.kubernetes.io/name: drawio
+      app.kubernetes.io/part-of: drawio
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: pod
+        app.kubernetes.io/name: drawio
+        app.kubernetes.io/part-of: drawio
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - image: jgraph/drawio:29.3.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        name: drawio
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          failureThreshold: 20
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 20m
+            memory: 384Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: false
+        volumeMounts:
+        - mountPath: /usr/local/tomcat/logs
+          name: logs
+        - mountPath: /usr/local/tomcat/conf/Catalina/localhost
+          name: html
+      nodeSelector:
+        kubernetes.io/os: linux
+      securityContext:
+        fsGroup: 999
+      volumes:
+      - emptyDir:
+          sizeLimit: 5Mi
+        name: html
+      - emptyDir:
+          sizeLimit: 16Mi
+        name: logs

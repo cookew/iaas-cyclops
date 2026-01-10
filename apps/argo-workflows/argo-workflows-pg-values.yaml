@@ -1,0 +1,29 @@
+cluster:
+  additionalLabels:
+    app.kubernetes.io/component: database
+
+  affinity:
+    topologyKey: kubernetes.io/hostname
+
+  description: Argo Workflows DB Cluster
+
+  initdb:
+    database: argo-workflows
+    encoding: UTF8
+
+  instances: 3
+
+  monitoring:
+    enabled: true
+
+  storage:
+    size: 10Gi
+    storageClass: ceph-filesystem
+
+  walStorage:
+    enabled: true
+    size: 2Gi
+    storageClass: ceph-filesystem
+
+version:
+  postgresql: "17"

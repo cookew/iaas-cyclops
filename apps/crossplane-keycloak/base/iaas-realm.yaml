@@ -1,0 +1,55 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: ClientScope
+metadata:
+  name: groups
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    description: "OpenID Connect scope: include user groups in tokens"
+    includeInTokenScope: true
+    name: groups
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: realm.keycloak.crossplane.io/v1alpha1
+kind: OptionalClientScopes
+metadata:
+  name: realm-optional-client-scopes
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    optionalScopes:
+    # Default Scopes
+    - address
+    - microprofile-jwt
+    - offline_access
+    - organization
+    - phone
+    # Custom Scopes
+    - groups
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: openidgroup.keycloak.crossplane.io/v1alpha1
+kind: GroupMembershipProtocolMapper
+metadata:
+  name: groups
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    addToAccessToken: true
+    addToIdToken: true
+    addToUserinfo: true
+    claimName: groups
+    clientScopeIdRef:
+      name: groups
+    fullPath: false
+    name: groups
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config

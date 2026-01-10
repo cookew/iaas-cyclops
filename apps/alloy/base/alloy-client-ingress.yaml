@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    # ingress.cilium.io/tls-passthrough: enabled
+  name: alloy-client
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: alloy-client.apps.iaas.wcooke.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: alloy
+            port:
+              number: 4400
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - alloy-client.apps.iaas.wcooke.me
+    secretName: alloy-client-ingress-cert

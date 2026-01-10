@@ -1,0 +1,132 @@
+admin:
+  existingSecret: grafana-admin
+
+extraConfigmapMounts:
+- name: ca-bundle
+  configMap: tm-ca-bundle
+  mountPath: /ca-bundle
+  optional: false
+  readOnly: true
+
+extraSecretMounts:
+- name: grafana-pg-cluster-app
+  mountPath: /grafana-pg-cluster-app
+  optional: false
+  secretName: grafana-pg-cluster-app
+  readOnly: true
+- name: grafana-keycloak-client
+  mountPath: /grafana-keycloak-client
+  optional: false
+  secretName: grafana-keycloak-client
+  readOnly: true
+
+grafana.ini:
+  analytics:
+    enabled: false
+    check_for_plugin_updates: false
+    check_for_updates: false
+    feedback_links_enabled: false
+    reporting_enabled: false
+  database:
+    host: "$__file{/grafana-pg-cluster-app/host}:$__file{/grafana-pg-cluster-app/port}"
+    name: "$__file{/grafana-pg-cluster-app/dbname}"
+    password: "$__file{/grafana-pg-cluster-app/password}"
+    type: postgres
+    user: "$__file{/grafana-pg-cluster-app/user}"
+  auth.generic_oauth:
+    allow_assign_grafana_admin: true
+    allow_sign_up: true
+    api_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
+    auth_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
+    auto_login: true
+    client_id: "$__file{/grafana-keycloak-client/client-id}"
+    client_secret: "$__file{/grafana-keycloak-client/client-secret}"
+    email_attribute_path: email
+    enabled: true
+    # groups_attribute_path: groups
+    login_attribute_path: preferred_username
+    name_attribute_path: name
+    name: Keycloak
+    # role_attribute_path: contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'
+    role_attribute_path: contains(resource_access.grafana.roles[*], 'grafana-server-admin') && 'GrafanaAdmin' || contains(resource_access.grafana.roles[*], 'grafana-admin') && 'Admin' || contains(resource_access.grafana.roles[*], 'grafana-editor') && 'Editor' || contains(resource_access.grafana.roles[*], 'grafana-viewer') && 'Viewer'
+    scopes: openid email profile offline_access roles
+    signout_redirect_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/logout?post_logout_redirect_uri=https%3A%2F%2Fgrafana.apps.iaas.wcooke.me%2Flogin
+    tls_client_ca: /ca-bundle/ca-bundle.pem
+    token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
+    use_pkce: true
+    use_refresh_token: true
+  auth.security:
+    protected_roles: server_admins
+  feature_toggles:
+    provisioning: true
+    kubernetesClientDashboardsFolders: true
+    kubernetesDashboards: true # use k8s from browser
+    # If you want easy kubectl setup development mode
+    grafanaAPIServerEnsureKubectlAccess: true
+  grafana_net:
+    url: https://grafana.net
+  news:
+    news_feed_enabled: false
+  security:
+    allow_embedding: true
+  server:
+    root_url: https://grafana.apps.iaas.wcooke.me
+
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Grafana
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Observability
+    forecastle.stakater.com/icon: https://grafana.apps.iaas.wcooke.me/public/img/grafana_icon.svg
+    forecastle.stakater.com/network-restricted: "true"
+  enabled: true
+  hosts:
+  - grafana.apps.iaas.wcooke.me
+  ingressClassName: cilium
+  tls:
+  - hosts:
+    - grafana.apps.iaas.wcooke.me
+    secretName: grafana-ingress-tls
+
+initChownData:
+  resources:
+    limits:
+      cpu: 100m
+      memory: 32Mi
+    requests:
+      cpu: 50m
+      memory: 16Mi
+
+# plugins:
+# - grafana-lokioperational-app
+
+replicas: 2
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 256Mi
+  requests:
+    cpu: 250m
+    memory: 128Mi
+
+serviceMonitorSelector:
+  enabled: true
+
+sidecar:
+  alerts:
+    enabled: true
+    searchNamespace: ALL
+  dashboards:
+    enabled: true
+    searchNamespace: ALL
+  datasources:
+    enabled: true
+    searchNamespace: ALL
+  notifiers:
+    enabled: true
+    searchNamespace: ALL
+  plugins:
+    enabled: true
+    searchNamespace: ALL

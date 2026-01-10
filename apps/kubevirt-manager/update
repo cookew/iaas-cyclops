@@ -1,0 +1,31 @@
+#!/usr/bin/bash -e
+
+REPO=https://github.com/alagoutte/kubevirt-manager.git
+BRANCH=helm-chart
+REPO_SUB_DIR=charts
+
+CHART_HOME="$(grep '  chartHome: ' kustomization.yaml | cut -f 2 -d ':' | tr -d ' ')"
+CHART_NAME="$(grep '\- name: ' kustomization.yaml | cut -f 2 -d ':' | tr -d ' ')"
+CHART_VERSION="$(grep '  version: ' kustomization.yaml | cut -f 2 -d ':' | tr -d ' ')"
+
+echo "REPO is ${REPO}"
+echo "BRANCH is ${BRANCH}"
+echo "REPO_SUB_DIR is ${REPO_SUB_DIR}"
+
+echo "CHART_HOME is ${CHART_HOME}"
+echo "CHART_NAME is ${CHART_NAME}"
+echo "CHART_VERSION is ${CHART_VERSION}"
+
+rm -rf ${CHART_HOME}
+mkdir ${CHART_HOME}
+git clone -b ${BRANCH} --depth 1 ${REPO} ${CHART_HOME}/${CHART_NAME}
+mkdir -p ${CHART_HOME}/${CHART_NAME}-${CHART_VERSION}
+cp -r ${CHART_HOME}/${CHART_NAME}/${REPO_SUB_DIR} ${CHART_HOME}/${CHART_NAME}-${CHART_VERSION}/${CHART_NAME}
+rm -rf ${CHART_HOME}/${CHART_NAME}
+
+# Remove .gitignore if it exists
+rm ${CHART_HOME}/${CHART_NAME}-${CHART_VERSION}/${CHART_NAME}/.gitignore || true
+
+# Pull in any charts if needed
+cd ${CHART_HOME}/${CHART_NAME}-${CHART_VERSION}/${CHART_NAME}
+helm dependency build

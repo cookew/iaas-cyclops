@@ -1,0 +1,13 @@
+apiVersion: keycloak.crossplane.io/v1beta1
+kind: ProviderConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: keycloak-provider-config
+spec:
+  credentials:
+    secretRef:
+      key: credentials
+      name: keycloak-credentials
+      namespace: crossplane-keycloak
+    source: Secret

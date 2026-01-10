@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loki-distributor
+  namespace: loki
+spec:
+  template:
+    spec:
+      volumes:
+        - configMap:
+            defaultMode: 420
+            items:
+              - key: config.yaml
+                path: config.yaml
+              - key: otel-config.yaml
+                path: otel-config.yaml
+            name: loki
+          name: config

@@ -1,0 +1,73 @@
+global:
+  defaultStorageClass: ""
+
+manager:
+  image:
+    tag: 1.5.3
+  replicaCount: 1
+  ## @param manager.resources Set manager container requests and limits for different resources like CPU or memory (essential for production workloads)
+  ## Example:
+  ## resources:
+  ##   requests:
+  ##     cpu: 2
+  ##     memory: 512Mi
+  ##   limits:
+  ##     cpu: 3
+  ##     memory: 1024Mi
+  ##
+  resources: {}
+
+  ## @param manager.existingConfigmap The name of an existing ConfigMap with your custom configuration for manager
+  ##
+  existingConfigmap:
+  ## @param manager.automountServiceAccountToken Mount Service Account token in manager pods
+  ##
+  automountServiceAccountToken: false
+  ## @param manager.extraEnvVars Array with extra environment variables to add to manager containers
+  ## e.g:
+  ## extraEnvVars:
+  ##   - name: FOO
+  ##     value: "bar"
+  ##
+  extraEnvVars: []
+  ## @param manager.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for manager containers
+  ##
+  extraEnvVarsCM: ""
+  ## @param manager.extraEnvVarsSecret Name of existing Secret containing extra env vars for manager containers
+  ##
+  extraEnvVarsSecret: ""
+  ## @param manager.extraVolumes Optionally specify extra list of additional volumes for the manager pods
+  ##
+  extraVolumes: []
+  ## @param manager.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the manager containers
+  ##
+  extraVolumeMounts: []
+
+ingress:
+  enabled: false
+  pathType: Prefix
+  hostname: kubevirt.apps.iaas.wcooke.me
+  ingressClassName: cilium
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: KubeVirt Manager
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Kubernetes
+    forecastle.stakater.com/icon: https://kubevirt-manager.apps.iaas.wcooke.me/assets/logo-transparent.png
+    forecastle.stakater.com/network-restricted: "true"
+  tls: true
+  extraTls:
+  - hosts:
+    - kubevirt.apps.iaas.wcooke.me
+    secretName: kubevirt-manager-ingress-cert
+
+persistence:
+  storageClass: ceph-filesystem
+  # accessModes:
+  #   - ReadWriteOnce
+  # size: 8Gi
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true

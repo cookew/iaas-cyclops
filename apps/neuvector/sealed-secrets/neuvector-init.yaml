@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: neuvector-init
+  namespace: neuvector
+spec:
+  encryptedData:
+    userinitcfg.yaml: AgAzT8txp6OxoptIoJePB8XSBh38jtdTDyLVtu7y+rWAj2CH6KuWgSHglX+yvL4iiSzrNSaVthGYdx84dA62nR7oMmRoEXx92669yaRfuoRJ2+B5waLmBkjQ/+PqpJ3obw7C5rBYnxNBJGN3xMdvIwWYmLSpOGN9iXyk4fZAQRr1u4ot4P2hJu75kz1vU324oDCUYRLebjmuY5GuDqh69Grtp4yK6viwsqO6+Tll4yelKzaMdy0JV87AxKscRXDwwUkXG83L+4KzNd+5WAzvPqd5F4AHYF3Mlk6g1BcaJ6pEUq0C2vE/Izu2P0pLAeZXhTolHbPE4E0ItKRV7EDInSl8nuPWwq8tdABLaRmNt587fG+842WMEqFLkt6o1pOg+lmrJAlyJaq8VWdhVKHmSeV6CopZbxakY//n5G3x0/sexT/iaLBBFrAQpL0fZSseSlt0RAzcFFKjTgY4n5Skz/4XwbmxcB+QCnELi9svNpEBKUXGX8YV/Ou/LTHU+NQxi1xa66SRzQeBrAeL35984WTzkakqDsggxjcoJScAwxdXKSpxXYKoQ5RATcLbnqzNazwFDP+WOhi+aLlpVgv5cgY/AD917nDTQIlXiUH4FfYOkMAPbzuMTVcmILy1D2dLDA8SII6+WoiOzmb0/U6XHOUO52P2Tj379+0/zzFR+6T+DGyA8d12m989h1EuQ0VevDvLYYm/V3nW+0dCHFBEGvnRb1tcvKLsvwRdUd+y61YI8oXTNebBimByAAYrMPMCjZJ6jCeYDsL+igEv/LIdj6yQ7penz/BEG/hnaCVrwfBqYru0J9KlJ2jsh8xbOZ8uRtc26mK5NfxLFvy44d8IDbTdvnmZPOulPBTHGToNX6hf/6LbM1KOmSPWlZ4aLpzkAU9GMO12zxJ4Jff+E9zMRf/O0+izKniTBqZX1jw=
+  template:
+    metadata:
+      name: neuvector-init
+      namespace: neuvector
+    type: stringData

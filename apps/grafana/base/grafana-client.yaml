@@ -1,0 +1,203 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  name: grafana
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    accessType: confidential
+    baseUrl: /
+    clientId: grafana
+    clientSecretSecretRef:
+      key: client-secret
+      name: grafana-keycloak-client
+      namespace: grafana
+    directAccessGrantsEnabled: true
+    name: grafana
+    pkceCodeChallengeMethod: S256
+    realmIdRef:
+      name: iaas
+    rootUrl: https://grafana.apps.iaas.wcooke.me
+    standardFlowEnabled: true
+    validPostLogoutRedirectUris:
+    - /login
+    validRedirectUris:
+    - /login/generic_oauth
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: grafana-server-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: grafana
+    name: grafana-server-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: grafana-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: grafana
+    name: grafana-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: grafana-editor
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: grafana
+    name: grafana-editor
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: grafana-viewer
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: grafana
+    name: grafana-viewer
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: grafana-server-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: grafana-server-admins
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: grafana-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: grafana-admins
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: grafana-editors
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: grafana-editors
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: grafana-viewers
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: grafana-viewers
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: grafana-server-admins-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: grafana-server-admins
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: grafana-server-admin
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: grafana-admins-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: grafana-admins
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: grafana-admin
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: grafana-editors-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: grafana-editors
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: grafana-editor
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: grafana-viewers-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: grafana-viewers
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: grafana-viewer
+  providerConfigRef:
+    name: keycloak-provider-config

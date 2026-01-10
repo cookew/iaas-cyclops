@@ -1,0 +1,57 @@
+apiVersion: kubevirt.io/v1
+kind: KubeVirt
+metadata:
+  name: kubevirt
+  namespace: kubevirt
+spec:
+  certificateRotateStrategy: {}
+  configuration:
+    developerConfiguration:
+      # Feature gates are defined here
+      # https://github.com/kubevirt/kubevirt/blob/main/pkg/virt-config/featuregate/active.go
+      featureGates:
+      - ExpandDisks
+      - CPUManager
+      - ExperimentalIgnitionSupport
+      - HypervStrictCheck
+      - Sidecar
+      - HostDevices
+      - Snapshot
+      - VMExport
+      - HotplugVolumes
+      - HostDisk
+      - DownwardMetrics
+      # - Root
+      # - WorkloadEncryptionSEV
+      # - WorkloadEncryptionTDX
+      # - VSOCK
+      - KubevirtSeccompProfile
+      # - DisableMDEVConfiguration
+      - PersistentReservation
+      - MultiArchitecture
+      - AlignCPUs
+      - NodeRestriction
+      - ImageVolume
+      - IncrementalBackup
+      - EnableVirtioFsConfigVolumes
+      - EnableVirtioFsStorageVolumes
+      - GPUsWithDRA
+      - HostDevicesWithDRA
+      - DecentralizedLiveMigration
+      - ObjectGraph
+      - DeclarativeHotplugVolumes
+      - VideoConfig
+      - PanicDevices
+      - PasstIPStackMigration
+      # - MigrationPriorityQueue
+    # permittedHostDevices:
+    #   usb:
+    #   - resourceName: "zwave"
+    #     selectors:
+    #     - vendor: "0658"
+    #       product: "0200"
+  customizeComponents: {}
+  imagePullPolicy: IfNotPresent
+  workloadUpdateStrategy: {}
+
+

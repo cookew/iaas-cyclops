@@ -1,0 +1,54 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: argo-workflows-artifiacts
+spec:
+  bucketName: argo-workflows-artifiacts
+  # generateBucketName: hello
+  storageClassName: ceph-bucket
+  additionalConfig:
+    maxObjects: "100000"
+    maxSize: "10G"
+    # bucketMaxObjects: "3000"
+    # bucketMaxSize: "4G"
+    # bucketPolicy: |
+    #   {
+    #       "Version": "2012-10-17",
+    #       "Statement": [
+    #           {
+    #               "Effect": "Allow",
+    #               "Principal": {
+    #                   "AWS": "arn:aws:iam:::user/bar"
+    #               },
+    #               "Action": [
+    #                   "s3:GetObject",
+    #                   "s3:ListBucket",
+    #                   "s3:GetBucketLocation"
+    #               ],
+    #               "Resource": [
+    #                   "arn:aws:s3:::bucket-policy-test/*"
+    #               ]
+    #           }
+    #       ]
+    #   }
+    # bucketLifecycle: |
+    #   {
+    #     "Rules": [
+    #       {
+    #         "ID": "AbortIncompleteMultipartUploads",
+    #         "Status": "Enabled",
+    #         "Prefix": "",
+    #         "AbortIncompleteMultipartUpload": {
+    #           "DaysAfterInitiation": 1
+    #         }
+    #       },
+    #       {
+    #         "ID": "ExpireAfter30Days",
+    #         "Status": "Enabled",
+    #         "Prefix": "",
+    #         "Expiration": {
+    #           "Days": 30
+    #         }
+    #       }
+    #     ]
+    #   }

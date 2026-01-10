@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: kubevirt-templates
+
+resources:
+- clone-templates.yaml
+- rocky-linux9/rocky-linux9-datasource.yaml
+- rocky-linux9/rocky-linux9-datavolume.yaml
+- rocky-linux9/rocky-linux9-server-small-template.yaml
+- rocky-linux9/rocky-linux9-virtualmachineclusterpreference.yaml
+# - rocky-linux10/rocky-linux10-datasource.yaml
+# - rocky-linux10/rocky-linux10-datavolume.yaml
+- rocky-linux10/rocky-linux10-server-small-template.yaml
+- rocky-linux10/rocky-linux10-virtualmachineclusterpreference.yaml
+- ubuntu-desktop25.04/ubuntu-desktop25.04-datasource.yaml
+- ubuntu-desktop25.04/ubuntu-desktop25.04-datavolume.yaml
+- ubuntu-desktop25.04/ubuntu-desktop25.04-server-medium-template.yaml
+- ubuntu-desktop25.04/ubuntu-desktop25.04-virtualmachineclusterpreference.yaml

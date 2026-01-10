@@ -1,0 +1,35 @@
+apiVersion: instancetype.kubevirt.io/v1beta1
+kind: VirtualMachineClusterPreference
+metadata:
+  annotations:
+    iconClass: icon-ubuntu
+    # kubevirt.io/generation: '2'
+    # kubevirt.io/install-strategy-identifier: 2e7d86a032576b6e434493059989028757cf0922
+    # kubevirt.io/install-strategy-registry: quay.io/kubevirt
+    kubevirt.io/install-strategy-version: v1.5.0
+    openshift.io/display-name: Ubuntu Desktop 25.04
+    # openshift.io/documentation-url: https://github.com/kubevirt/common-instancetypes
+    openshift.io/provider-display-name: KubeVirt
+    # openshift.io/support-url: https://github.com/kubevirt/common-instancetypes/issues
+    tags: 'hidden,kubevirt,linux,ubuntu'
+  labels:
+    instancetype.kubevirt.io/common-instancetypes-version: v1.3.0
+    instancetype.kubevirt.io/os-type: linux
+    instancetype.kubevirt.io/vendor: kubevirt.io
+  name: ubuntu-desktop2504
+spec:
+  annotations:
+    vm.kubevirt.io/os: linux
+  devices:
+    # preferredAutoattachInputDevice: true
+    preferredDiskBus: virtio
+    preferredDiskDedicatedIoThread: true
+    # preferredInputBus: virtio
+    # preferredInputType: tablet
+    preferredInterfaceModel: virtio
+    preferredRng: {}
+  requirements:
+    cpu:
+      guest: 1
+    memory:
+      guest: 4Gi

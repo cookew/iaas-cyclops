@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  labels:
+    app.kubernetes.io/part-of: argocd
+data:
+  accounts.william: apiKey, login
+  accounts.william.enabled: "true"
+  # admin.enabled false is to disable the admin user
+  admin.enabled: "false"
+  # exec.enabled true is to enable the web based terminal
+  exec.enabled: "true"
+  # https://argo-cd.readthedocs.io/en/stable/user-guide/kustomize/#kustomizing-helm-charts
+  kustomize.buildOptions: --enable-helm
+  # oidc.config: |
+  #   name: Keycloak
+  #   issuer: https://
+  #   clientID:
+  #   clientSecret: $oidc:keycloak.clientSecret
+  #   requestedIDTokenClaims:
+  #     groups:
+  #       essential: true
+  #   requestedScopes:
+  #   - openid
+  #   - profile
+  #   - email
+  # https://argo-cd.readthedocs.io/en/stable/user-guide/status-badge/
+  statusbadge.enabled: "true"
+  url: https://argocd.apps.iaas.wcooke.me
+  # https://docs.cilium.io/en/stable/configuration/argocd-issues/#argo-cd-deletes-customresourcedefinitions
+  resource.exclusions: |
+    - apiGroups:
+        - cilium.io
+      kinds:
+        - CiliumIdentity
+      clusters:
+        - "*"
+    - apiGroups:
+        - project.openshift.io
+      kinds:
+        - Project
+      clusters:
+        - "*"

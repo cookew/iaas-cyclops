@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: william-realm-credentials
+  namespace: keycloak
+spec:
+  encryptedData:
+    password: AgBLyOWkoeUn+nQLaf7OGX8fBcZderWviknT0IL4Jv1VdabJIBi/LwXfSxC9AlsGYYtNFWgZbUQ3qRsb5A9Siz5iDln6swfNWBcFV1JOWGGFpF/Zb0LuYihdd1xwUXTD+OpifXUTd8ie8cv4RelTFOI1vDTXm8bDaq1mhUTmCYFQ3bDJaFzzg6YTlhaaaurXbKct39lKU405yF9L71i+1+8w9sNVAgXMkN+lXgwx5L1u/m9A/XZbOtJWoSPOwF4ZH13KOJHJKztwxWQm47seXzoY1Nozm7RNGg4PPaA2Z/qhzsPbjCwiI+d4h09ludEBWfJcvA/3tSO16r6wo+opIFtGGm7GOKZ35Wtf3HatBjtTnTblKYmPddkWuY9/DBAzefKd1G7Xgs3UnsAKHc8bGB4r4MNVwMlGR76ax+zEVJUNA+69jHiNoBCviRcj7H6c9Q3IHgqkv5YNrZwf1kTkO3M5Jezse22t5VeTLgaaH2xAwE/2WX5rGQuuyj0JRwLgdbK9u+cCni2FS7T3rxaGin5VJS3KfevWUQZyDlf1mQ9BnT0yy3fdeQbjN1u17GotrehG5JFF+qGUZfTYn8GEs4WMI69XeYcmaGsUO8iVtJr4EeHIGi308PJ1k7EngCveJZPiUF26qBEnoLsE/xzb/waY/I3P+c+VhXfpu4VZA0dUOAEVEbJ73zgo8yFX6p71VDRtqCZYi8ED721d
+  template:
+    metadata:
+      name: william-realm-credentials
+      namespace: keycloak
+    type: stringData

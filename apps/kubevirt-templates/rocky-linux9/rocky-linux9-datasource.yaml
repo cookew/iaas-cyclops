@@ -1,0 +1,12 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataSource
+metadata:
+  name: rocky-linux9
+  labels:
+    instancetype.kubevirt.io/default-instancetype: u1.small
+    instancetype.kubevirt.io/default-preference: rocky-linux9
+spec:
+  source:
+    pvc:
+      name: rocky-linux9
+      namespace: kubevirt-templates

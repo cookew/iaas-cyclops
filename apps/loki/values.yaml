@@ -1,0 +1,191 @@
+backend:
+   replicas: 0
+
+compactor:
+  replicas: 2
+  # persistence:
+  #   enabled: true
+  #   claims:
+  #     - name: data
+  #       accessModes:
+  #         - ReadWriteOnce
+  #       size: 10Gi
+  #       storageClass: ceph-filesystem
+  #   whenDeleted: Delete
+
+deploymentMode: Distributed
+
+distributor:
+  maxUnavailable: 2
+  replicas: 3
+
+gateway:
+  basicAuth:
+    enabled: false
+    # -- Existing basic auth secret to use. Must contain '.htpasswd'
+    existingSecret: null
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+      # forecastle.stakater.com/appName: Loki
+      # forecastle.stakater.com/expose: "true"
+      # forecastle.stakater.com/group: Observability
+      # # forecastle.stakater.com/icon: https://loki.apps.iaas.wcooke.me/
+      # forecastle.stakater.com/network-restricted: "true"
+      # forecastle.stakater.com/url: https://loki.apps.iaas.wcooke.me/ui/
+    enabled: true
+    ingressClassName: cilium
+    hosts:
+    - host: loki.apps.iaas.wcooke.me
+      paths:
+      - path: /
+        pathType: Prefix
+    tls:
+    - hosts:
+      - loki.apps.iaas.wcooke.me
+      secretName: loki-gateway-ingress-certs
+  replicas: 3
+  service:
+    port: 8080
+
+global:
+  extraEnvFrom:
+  - configMapRef:
+      name: loki-bucket
+  - secretRef:
+      name: loki-bucket
+  extraArgs:
+  - -config.expand-env=true
+
+indexGateway:
+  maxUnavailable: 2
+  replicas: 3
+  # persistence:
+  #   enabled: true
+  #   storageClass: ceph-filesystem
+  #   whenDeleted: Delete
+
+ingester:
+  # persistence:
+  #   enabled: true
+  #   claims:
+  #     - name: data
+  #       accessModes:
+  #         - ReadWriteOnce
+  #       size: 10Gi
+  #       storageClass: ceph-filesystem
+  #   whenDeleted: Delete
+  replicas: 3 # To ensure data durability with replication
+  zoneAwareReplication:
+     enabled: false
+
+loki:
+  auth_enabled: false
+  compactor:
+    # working_directory: /data/retention
+    compaction_interval: 10m
+    delete_request_store: filesystem
+    retention_delete_delay: 2h
+    retention_delete_worker_count: 150
+    retention_enabled: true
+  limits_config:
+    allow_structured_metadata: true
+    ingestion_burst_size_mb: 100
+    ingestion_rate_mb: 50
+    max_chunks_per_query: 20000000
+    max_concurrent_tail_requests: 100
+    max_entries_limit_per_query: 100000
+    max_global_streams_per_user: 500000
+    max_label_name_length: 10000
+    max_label_names_per_series: 5000
+    max_label_value_length: 10000
+    max_line_size: 0
+    max_query_length: 0
+    max_query_series: 10000
+    per_stream_rate_limit_burst: 200MB
+    per_stream_rate_limit: 100MB
+    query_timeout: 5m
+    retention_period: 1h
+    tsdb_precompute_chunks: true
+    # volume_enabled: true
+    shard_streams:
+      enabled: true
+      # desired_rate: 2097152 #2MiB
+  pattern_ingester:
+    enabled: true
+  schemaConfig:
+    configs:
+    - from: 2025-01-01
+      index:
+        period: 24h
+      object_store: s3
+      schema: v13
+      store: tsdb
+  server:
+    grpc_server_max_recv_msg_size: 104857600 #100MB
+  storage:
+    bucketNames:
+      admin: loki
+      chunks: loki
+      ruler: loki
+    type: s3
+    s3:
+      access_key_id: "${AWS_ACCESS_KEY_ID}"
+      bucketnames: "${BUCKET_NAME}"
+      endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
+      http_config:
+        insecure_skip_verify: true
+      s3ForcePathStyle: true
+      secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
+    object_store:
+      storage_prefix: os
+      type: s3
+      s3:
+        access_key_id: "${AWS_ACCESS_KEY_ID}"
+        bucketnames: "${BUCKET_NAME}"
+        endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
+        http_config:
+          insecure_skip_verify: true
+        s3ForcePathStyle: true
+        secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
+  ui:
+    enabled: true
+
+overridesExporter:
+  enabled: true
+  maxUnavailable: 2
+  replicas: 3
+
+patternIngester:
+  persistence:
+    enabled: true
+    enableStatefulSetAutoDeletePVC: true
+    storageClass: ceph-filesystem
+    whenDeleted: Delete
+  maxUnavailable: 2
+  replicas: 3
+
+querier:
+  maxUnavailable: 2
+  replicas: 3
+
+queryFrontend:
+  maxUnavailable: 2
+  replicas: 3
+
+queryScheduler:
+  maxUnavailable: 2
+  replicas: 3
+
+read:
+   replicas: 0
+
+ruler:
+  maxUnavailable: 2
+  # persistence:
+  #   enabled: true
+  #   storageClass: ceph-filesystem
+  replicas: 3
+
+write:
+  replicas: 0

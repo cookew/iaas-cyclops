@@ -1,0 +1,90 @@
+# apiVersion: objectbucket.io/v1alpha1
+# kind: ObjectBucketClaim
+# metadata:
+#   name: harbor-pg-backup
+# spec:
+#   bucketName: harbor-pg-backup
+#   storageClassName: ceph-bucket
+#   additionalConfig:
+#     maxObjects: "1000000"
+#     maxSize: "10G"
+# ---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: harbor-pg-cluster
+spec:
+  affinity:
+    topologyKey: kubernetes.io/hostname
+  bootstrap:
+    initdb:
+      database: harbor
+  #     encoding: UTF8
+  #     localeCType: C
+  #     localeCollate: C
+  #     owner: harbor
+  # enablePDB: true
+  # enableSuperuserAccess: false
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    major: 17
+    name: postgresql
+  # imageName: ghcr.io/cloudnative-pg/postgresql:17
+  # imagePullPolicy: IfNotPresent
+  instances: 3
+  monitoring:
+    enablePodMonitor: true
+  # plugins:
+  # - name: barman-cloud.cloudnative-pg.io
+  #   isWALArchiver: true
+  #   parameters:
+  #     barmanObjectName: harbor-pg
+  primaryUpdateMethod: switchover
+  storage:
+    resizeInUseVolumes: true
+    size: 1Gi
+    storageClass: ceph-filesystem
+  walStorage:
+    resizeInUseVolumes: true
+    size: 1Gi
+    storageClass: ceph-filesystem
+# ---
+# apiVersion: barmancloud.cnpg.io/v1
+# kind: ObjectStore
+# metadata:
+#   name: harbor-pg
+# spec:
+#   configuration:
+#     data:
+#       compression: bzip2
+#     destinationPath: s3://harbor-pg-backup
+#     endpointCA:
+#       key: ca.crt
+#       name: harbor-ca-bundle
+#     endpointURL: https://rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc
+#     s3Credentials:
+#       accessKeyId:
+#         key: AWS_ACCESS_KEY_ID
+#         name: harbor-pg-backup
+#       inheritFromIAMRole: false
+#       secretAccessKey:
+#         key: AWS_SECRET_ACCESS_KEY
+#         name: harbor-pg-backup
+#     wal:
+#       compression: bzip2
+#   retentionPolicy: 90d
+# ---
+# apiVersion: postgresql.cnpg.io/v1
+# kind: ScheduledBackup
+# metadata:
+#   name: harbor-pg
+# spec:
+#   backupOwnerReference: cluster
+#   cluster:
+#     name: harbor-pg-cluster
+#   method: plugin
+#   pluginConfiguration:
+#     name: barman-cloud.cloudnative-pg.io
+#   schedule: "@daily"
+#   target: prefer-standby

@@ -1,0 +1,12 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: rocky-linux10
+spec:
+  source:
+    http:
+      url: https://dl.rockylinux.org/pub/rocky/10/images/x86_64/Rocky-10-GenericCloud-LVM.latest.x86_64.qcow2
+  storage:
+    resources:
+      requests:
+        storage: 10Gi

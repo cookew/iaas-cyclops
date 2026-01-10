@@ -1,0 +1,16 @@
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPAdvertisement
+metadata:
+  labels:
+    advertise: generic
+  name: services
+spec:
+  advertisements:
+  - advertisementType: Service
+    selector:
+      matchExpressions:
+      - key: iomqjrygnysboaem
+        operator: DoesNotExist
+    service:
+      addresses:
+      - LoadBalancerIP

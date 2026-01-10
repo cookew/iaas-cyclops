@@ -1,0 +1,12 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataSource
+metadata:
+  labels:
+    instancetype.kubevirt.io/default-instancetype: u1.medium
+    instancetype.kubevirt.io/default-preference: ubuntu-desktop2504
+  name: ubuntu-desktop2504
+spec:
+  source:
+    pvc:
+      name: ubuntu-desktop2504
+      namespace: kubevirt-templates

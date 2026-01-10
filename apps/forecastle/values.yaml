@@ -1,0 +1,44 @@
+forecastle:
+  config:
+    headerBackground: maroon
+    # headerForeground:
+    namespaceSelector:
+      any: true
+    title: IaaS Apps
+    customApps:
+    # - name: Name of the custom app
+    #   icon: URL of the icon for the custom app
+    #   url: URL of the custom app
+    #   group: Group for the custom app
+    #   properties: Additional Properties of the app as a map
+    #   networkRestricted: Whether app is network restricted or not
+    # - name: Okd
+    #   group: Kubernetes
+    #   icon: https://console-openshift-console.apps.iaas.wcooke.me/static/assets/public/imgs/okd-favicon.png
+    #   networkRestricted: true
+    #   url: https://console-openshift-console.apps.iaas.wcooke.me/
+  deployment:
+    replicas: 2
+    resources:
+      limits:
+        cpu: 250m
+        memory: 64Mi
+      requests:
+        cpu: 100m
+        memory: 32Mi
+    revisionHistoryLimit: 0
+  namespace: forecastle
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+    className: cilium
+    enabled: true
+    hosts:
+    - host: forecastle.apps.iaas.wcooke.me
+      paths:
+      - path: /
+        pathType: Prefix
+    tls:
+    - hosts:
+      - forecastle.apps.iaas.wcooke.me
+      secretName: forecastle-ingress-certs

@@ -1,0 +1,38 @@
+# affinity:
+#   nodeAffinity:
+#     requiredDuringSchedulingIgnoredDuringExecution:
+#       nodeSelectorTerms:
+#       - matchExpressions:
+#         - key: node-role.kubernetes.io/control-plane
+#           operator: Exists
+
+app:
+  logFormat: json
+
+  metrics:
+    service:
+      servicemonitor:
+        enabled: true
+
+filterExpiredCertificates:
+  enabled: true
+
+replicaCount: 2
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 64Mi
+  requests:
+    cpu: 100m
+    memory: 32Mi
+
+secretTargets:
+  enabled: true
+  authorizedSecrets:
+  - tm-ca-bundle-secret
+
+# tolerations:
+# - effect: NoSchedule
+#   key: node-role.kubernetes.io/control-plane
+#   operator: Exists

@@ -1,0 +1,280 @@
+alloy:
+  configMap:
+    content: |-
+      logging {
+        format = "json"
+        level  = "info"
+      }
+
+      livedebugging {
+        enabled = false
+      }
+
+
+      // Backend storage
+      prometheus.remote_write "prometheus" {
+        endpoint {
+          url = "http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc:9090/api/v1/write"
+        }
+      }
+
+      loki.write "loki" {
+        endpoint {
+          url = "http://loki-distributor.loki.svc:3100/loki/api/v1/push"
+        }
+      }
+
+      otelcol.exporter.otlp "tempo" {
+        client {
+          endpoint = "tempo-distributor.tempo.svc:4317"
+        }
+      }
+      // End backend storage
+
+
+      // Kubernetes Metrics
+      /*
+      discovery.kubernetes "pods" {
+          role = "pod"
+      }
+
+      discovery.kubernetes "nodes" {
+          role = "node"
+      }
+
+      discovery.kubernetes "services" {
+          role = "service"
+      }
+
+      discovery.kubernetes "endpointslices" {
+          role = "endpointslice"
+      }
+
+      discovery.kubernetes "ingresses" {
+          role = "ingress"
+      }
+
+      prometheus.scrape "kubernetes_nodes" {
+        clustering {
+            enabled = true
+        }
+        targets    = discovery.kubernetes.nodes.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.scrape "kubernetes_pods" {
+        clustering {
+            enabled = true
+        }
+        targets    = discovery.kubernetes.pods.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.scrape "kubernetes_services" {
+        clustering {
+            enabled = true
+        }
+        targets    = discovery.kubernetes.services.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.scrape "kubernetes_endpointslices" {
+        clustering {
+            enabled = true
+        }
+        targets    = discovery.kubernetes.endpointslices.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.scrape "kubernetes_ingresses" {
+        clustering {
+            enabled = true
+        }
+        targets    = discovery.kubernetes.ingresses.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.operator.servicemonitors "kube_cluster" {
+        clustering {
+            enabled = true
+        }
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+      */
+      // End Kubernetes Metrics
+
+
+      // Syslog listeners
+      loki.source.syslog "local" {
+        listener {
+          address  = "0.0.0.0:51893"
+          labels   = { component = "loki.source.syslog", protocol = "tcp" }
+        }
+
+        listener {
+          address  = "0.0.0.0:51898"
+          protocol = "udp"
+          labels   = { component = "loki.source.syslog", protocol = "udp" }
+        }
+
+        forward_to = [otelcol.receiver.loki.default.receiver]
+      }
+      // End Syslog listeners
+
+
+      // OTel converters
+      otelcol.receiver.loki "default" {
+        output {
+          logs    = [otelcol.processor.batch.default.input]
+          metrics = [otelcol.processor.batch.default.input]
+          traces  = [otelcol.processor.batch.default.input]
+        }
+      }
+      // End OTel converters
+
+
+      // OpenTelemetry Collector
+      otelcol.receiver.otlp "default" {
+        grpc {
+          endpoint = "0.0.0.0:4317"
+        }
+
+        http {
+          endpoint = "0.0.0.0:4318"
+        }
+
+        output {
+          logs    = [otelcol.processor.batch.default.input]
+          metrics = [otelcol.processor.batch.default.input]
+          traces  = [otelcol.processor.batch.default.input]
+        }
+      }
+
+      otelcol.processor.batch "default" {
+        output {
+          logs    = [otelcol.exporter.loki.loki.input]
+          metrics = [otelcol.exporter.prometheus.prometheus.input]
+          traces  = [otelcol.exporter.otlp.tempo.input]
+        }
+      }
+
+      otelcol.exporter.prometheus "prometheus" {
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      otelcol.exporter.loki "loki" {
+        forward_to = [loki.write.loki.receiver]
+      }
+      // End OpenTelemetry Collector
+
+
+      // OpenTelemetry Collector - Client Receivers
+      remote.kubernetes.secret "client_credentials" {
+        namespace = "alloy"
+        name = "client-credentials"
+        poll_frequency = "15s" // Default is 1m
+      }
+
+      otelcol.auth.basic "client" {
+        password = remote.kubernetes.secret.client_credentials.data.password
+        username = convert.nonsensitive(remote.kubernetes.secret.client_credentials.data.username)
+      }
+
+      otelcol.receiver.otlp "clients" {
+        http {
+          auth = otelcol.auth.basic.client.handler
+          endpoint = "0.0.0.0:4400"
+          /*
+          tls {
+            ca_file        = "/client-ca-cert/ca.crt"
+            cert_file      = "/client-ca-cert/tls.crt"
+            key_file       = "/client-ca-cert/tls.key"
+            client_ca_file = "/client-ca-cert/ca.crt"
+            min_version = "1.3"
+            reload_interval = "15s" // Default is 0s (never)
+          }
+          */
+        }
+        /*
+        grpc {
+          auth = otelcol.auth.basic.client.handler
+          endpoint = "0.0.0.0:4400"
+          tls {
+            ca_file        = "/client-ca-cert/ca.crt"
+            cert_file      = "/client-ca-cert/tls.crt"
+            key_file       = "/client-ca-cert/tls.key"
+            client_ca_file = "/client-ca-cert/ca.crt"
+            min_version = "1.3"
+            reload_interval = "15s" // Default is 0s (never)
+          }
+        }
+        */
+        // include_metadata = true
+        output {
+          logs    = [otelcol.processor.batch.default.input]
+          metrics = [otelcol.processor.batch.default.input]
+          traces  = [otelcol.processor.batch.default.input]
+        }
+      }
+      // End OpenTelemetry Collector - Client Receivers
+
+  clustering:
+    enabled: true
+    name: kube-cluster
+
+  enableReporting: false
+
+  envFrom: []
+
+  extraArgs: []
+
+  extraEnv: []
+
+  extraPorts:
+  - name: alloy-client
+    port: 4400
+    targetPort: 4400
+
+  # -- Scheme is needed for readiness probes. If enabling tls in your configs, set to "HTTPS"
+  listenScheme: HTTP
+
+  mounts:
+    extra:
+    - mountPath: /storage
+      name: storage
+    - name: client-ca-cert
+      mountPath: "/client-ca-cert"
+      readOnly: true
+
+  storagePath: /storage
+
+controller:
+  enableStatefulSetAutoDeletePVC: true
+
+  podDisruptionBudget:
+    enabled: true
+    maxUnavailable: 2
+
+  replicas: 3
+
+  # Must be one of 'daemonset', 'deployment', or 'statefulset'.
+  type: statefulset
+
+  volumeClaimTemplates:
+  - metadata:
+      name: storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: ceph-filesystem
+
+  volumes:
+    extra:
+    - name: client-ca-cert
+      secret:
+        secretName: alloy-client-ca-cert
+
+serviceMonitor:
+  enabled: true

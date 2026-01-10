@@ -1,0 +1,19 @@
+mattermostOperator:
+  # enabled: true
+  replicas: 2
+  # rbac:
+  #   create: true
+  # serviceAccount:
+  #   create: true
+  # env:
+  #   maxReconcilingInstallations: 20
+  #   maxReconcilingConcurrency: 10
+  #   requeuOnLimitDelay: 20s
+  image:
+  #   repository: mattermost/mattermost-operator
+    repository: mattermost/mattermost-operator-fips
+    tag: v1.25.3
+  #   pullPolicy: IfNotPresent
+  # args:
+  #   - --enable-leader-election
+  #   - --metrics-addr=0.0.0.0:8383

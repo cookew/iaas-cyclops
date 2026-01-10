@@ -1,0 +1,26 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  name: headlamp
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    accessType: confidential
+    baseUrl: /
+    clientId: headlamp
+    clientSecretSecretRef:
+      key: OIDC_CLIENT_SECRET
+      name: headlamp-oidc-client
+      namespace: headlamp
+    directAccessGrantsEnabled: true
+    name: headlamp
+    # pkceCodeChallengeMethod: S256
+    realmIdRef:
+      name: test
+    rootUrl: https://headlamp.apps.iaas.wcooke.me
+    standardFlowEnabled: true
+    validRedirectUris:
+    - /*
+    - /oidc-callback
+  providerConfigRef:
+    name: keycloak-provider-config

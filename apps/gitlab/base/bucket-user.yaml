@@ -1,0 +1,15 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: gitlab-ceph-user
+spec:
+  clusterNamespace: rook-ceph-cluster
+  displayName: gitlab
+  keys:
+  - accessKeyRef:
+      key: accesskey
+      name: bucket-user-creds
+    secretKeyRef:
+      key: secretkey
+      name: bucket-user-creds
+  store: ceph-objectstore

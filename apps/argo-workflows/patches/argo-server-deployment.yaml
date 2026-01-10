@@ -1,0 +1,40 @@
+# https://argo-workflows.readthedocs.io/en/latest/high-availability/#argo-server
+- op: add
+  path: /spec/replicas
+  value: 1
+
+- op: add
+  path: /spec/template/spec/containers/0/args
+  value:
+    - server
+    - '--tls-certificate-secret-name'
+    - argo-server-service-cert
+    - '--auth-mode=sso'
+    # - '--certificate-authority'
+    # - /ca-bundle/cabundle
+    # - --help
+    # - --auth-mode=server
+    # - --auth-mode=client
+
+# - op: add
+#   path: /spec/template/spec/containers/0/env
+#   value:
+#     - name: ARGO_INSECURE_SKIP_VERIFY
+#       value: "true"
+
+# - op: add
+#   path: /spec/template/spec/containers/0/volumeMounts
+#   value:
+#     - mountPath: /tmp
+#       name: tmp
+#     - mountPath: /ca-bundle
+#       name: ca-bundle
+# - op: add
+#   path: /spec/template/spec/volumes
+#   value:
+#     - emptyDir: {}
+#       name: tmp
+#     - configMap:
+#         defaultMode: 420
+#         name: ca-bundle
+#       name: ca-bundle

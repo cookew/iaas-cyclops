@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: kubernetes-oidc-client
+  namespace: crossplane-keycloak
+spec:
+  encryptedData:
+    OIDC_CLIENT_SECRET: AgCpxWGgBP1RaNDIRXSkbcjvC4TjtbFgQk2c9C44+FNMtvQDYts0TcGyeCByhBjrOIiA6gVT+Ywl/VyeubaA9DBqwVYIHCtFTvp/zspG/l3MPl1VNn3JLHho8GCmkSalz1BMQsSXmapOKK2zeD3nyN/t6clusBEpGxpQbmkwAJuXLp5EnXZf983d/3ZjMrr/wnA80IkMV9c1Eo6ELVnJSJg38DOASAW9V4wj/XwhB6TOfkPJzJszxQpFEcz+tQ6C4P5lgW2UabWzhoqyrp1sXsPwjIyWzKY1iCNkjaPZEt+2ugUi7KqLde/VNxyvgDgvIzkdD5ydLrahbtRtpMspUel/gNuv+/p632vMptpbGEK+ZveByof4dHH3tw2sjqRHKZlDw14qwNr61PR6FD0lkBAYGeknpzRQyRUzacj91LFMtrQlS/HGnBbxtlcxnsFbFsvHDLPNOysTTcRp3AJmd0+R68S6/GnZkFQRhc5iCi6rpTj0xq2qluY5gOZFdd7ytdA03YN4yIihDymPthTGlgqA+J5G7zhyLIryri7V1+8WYNIU5WRSgtbXXBXRxnujPMRS9bJtXZ1lSNpmNGkSMKiCyuJss1oW5pYvVtY+RUnZ2Oa48ArFMa5pu5PvBBBlHHfjS4gbpxyLz6iH7YfksZIrik5PVMBQFgGKwXrW2TkXXfHfFlByZH2UcQC6jv8oHk89puF16cim9FqgWDBuz4/G8gK1RVEIN4fRs3PiYbqgRg==
+  template:
+    metadata:
+      name: kubernetes-oidc-client
+      namespace: crossplane-keycloak
+    type: stringData

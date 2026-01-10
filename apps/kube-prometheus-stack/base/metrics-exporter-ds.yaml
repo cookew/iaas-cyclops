@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: metrics-proxy
+spec:
+  selector:
+    matchLabels:
+      app: metrics-proxy
+  template:
+    metadata:
+      labels:
+        app: metrics-proxy
+    spec:
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: kubernetes.io/os
+      #           operator: In
+      #           values:
+      #           - linux
+      #         - key: node-role.kubernetes.io/control-plane
+      #           operator: Exists
+      containers:
+      - name: haproxy
+        env:
+        - name: NODE_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.hostIP
+        image: haproxy:latest
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 1940
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 1940
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        # resources:
+        #   limits:
+        #     cpu: 100m
+        #     memory: 64m
+        #   requests:
+        #     cpu: 50m
+        #     memory: 16m
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: 1940
+        volumeMounts:
+        - mountPath: /usr/local/etc/haproxy
+          name: haproxy-config
+      hostNetwork: true
+      # tolerations:
+      # - effect: NoSchedule
+      #   key: node-role.kubernetes.io/control-plane
+      #   operator: Exists
+      volumes:
+      - configMap:
+          name: metrics-proxy
+        name: haproxy-config

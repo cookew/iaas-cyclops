@@ -1,0 +1,128 @@
+# Cluster API provider options
+core:
+  cluster-api: {}         # Name, required
+#   namespace: ""         # Optional
+#   version: ""           # Optional
+#   createNamespace: true # Optional
+#   manager:              # Optional
+#     featureGates:
+#       ClusterTopology: true
+#     metrics:
+#       insecureDiagnostics: true
+#       diagnosticsAddress: localhost:8080
+
+bootstrap:
+  kubeadm: {}             # Name, required
+#   namespace: ""         # Optional
+#   version: ""           # Optional
+#   createNamespace: true # Optional
+#   manager:              # Optional
+#     metrics:
+#       insecureDiagnostics: true
+#       diagnosticsAddress: localhost:8080
+
+controlPlane:
+  kubeadm: {}             # Name, required
+#   namespace: ""         # Optional
+#   version: ""           # Optional
+#   createNamespace: true # Optional
+#   manager:              # Optional
+#     featureGates:
+#       ClusterTopology: true
+#     metrics:
+#       insecureDiagnostics: true
+#       diagnosticsAddress: localhost:8080
+
+infrastructure:
+  kubevirt: {}
+# docker: {}              # Name, required
+#   namespace: ""         # Optional
+#   version: ""           # Optional
+#   createNamespace: true # Optional
+#   manager:              # Optional
+#     featureGates:
+#       ClusterTopology: true
+#     metrics:
+#       insecureDiagnostics: true
+#       diagnosticsAddress: localhost:8080
+
+addon:
+  helm: {}                # Name, required
+#   namespace: ""         # Optional
+#   version: ""           # Optional
+#   createNamespace: true # Optional
+#   manager:              # Optional
+#     metrics:
+#       insecureDiagnostics: true
+#       diagnosticsAddress: localhost:8080
+
+ipam: {}
+# in-cluster: {}          # Name, required
+#   namespace: ""         # Optional
+#   version: ""           # Optional
+#   createNamespace: true # Optional
+#   manager:              # Optional
+#     featureGates:
+#       ClusterTopology: true
+#     metrics:
+#       insecureDiagnostics: true
+#       diagnosticsAddress: localhost:8080
+
+fetchConfig: {}
+# ---
+# Common configuration secret options
+
+configSecret: {}
+# ---
+# CAPI operator deployment options
+
+logLevel: 2
+
+replicaCount: 1
+
+leaderElection:
+  enabled: true
+
+env:
+  manager: []
+
+diagnosticsAddress: ":8443"
+
+healthAddr: ":9440"
+
+profilerAddress: ":6060"
+
+contentionProfiling: false
+
+insecureDiagnostics: false
+
+watchConfigSecret: false
+
+watchConfigMap: false
+
+imagePullSecrets: {}
+
+resources:
+  manager:
+    limits:
+      cpu: 100m
+      memory: 300Mi
+    requests:
+      cpu: 100m
+      memory: 100Mi
+
+containerSecurityContext: {}
+
+volumes:
+  - name: cert
+    secret:
+      defaultMode: 420
+      secretName: capi-operator-webhook-service-cert
+
+volumeMounts:
+  manager:
+    - mountPath: /tmp/k8s-webhook-server/serving-certs
+      name: cert
+      readOnly: true
+
+enableHelmHook: true

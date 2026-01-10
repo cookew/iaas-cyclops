@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: tenant-a-to-tenant-a-ingress
+spec:
+  description: Tenant A to Tenant A Ingress
+  endpointSelector: {}
+  ingress:
+  - fromEndpoints:
+    - matchExpressions:
+      - key: "k8s:io.kubernetes.pod.namespace"
+        operator: "In"
+        values:
+        - "tenant-a"
+  - fromEndpoints:
+    - matchLabels:
+        name: luke

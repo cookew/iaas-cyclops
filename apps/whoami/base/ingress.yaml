@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whoami
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Who Am I
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Apps
+    # forecastle.stakater.com/icon: https://whoami.apps.iaas.wcooke.me/images/apple-touch-icon.png
+    forecastle.stakater.com/network-restricted: "true"
+    ingress.cilium.io/tls-passthrough: enabled
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: whoami.apps.iaas.wcooke.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: whoami
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - whoami.apps.iaas.wcooke.me
+    secretName: whoami-server-tls

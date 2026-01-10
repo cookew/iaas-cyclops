@@ -1,0 +1,240 @@
+cephClusterSpec:
+  cephConfig:
+    global:
+      mon_max_pg_per_osd: "512"
+    mgr:
+      mgr/dashboard/ALERTMANAGER_API_HOST: http://kube-prometheus-stack-alertmanager.kube-prometheus-stack.svc:9093
+      mgr/dashboard/ALERTMANAGER_API_SSL_VERIFY: "true"
+      mgr/dashboard/GRAFANA_API_PASSWORD: ceph_dashboard
+      mgr/dashboard/GRAFANA_API_SSL_VERIFY: "false"
+      mgr/dashboard/GRAFANA_API_URL: http://grafana.grafana.svc.cluster.local
+      mgr/dashboard/GRAFANA_API_USERNAME: ceph_dashboard
+      mgr/dashboard/GRAFANA_FRONTEND_API_URL: https://grafana.apps.iaas.wcooke.me
+      mgr/dashboard/GRAFANA_UPDATE_DASHBOARDS: "true"
+    mon:
+      mon_allow_pool_delete: "true"
+#  cephConfigFromSecret:
+#    mgr:
+#      mgr/dashboard/GRAFANA_API_PASSWORD:
+#        name: grafana-api-credential # name of the Kubernetes secret
+#        key: password                # key of the secret value in Kubernetes secret.Data map[string]string
+  crashCollector:
+    disable: true
+  dashboard:
+    # port: 8443
+    prometheusEndpoint: http://prometheus-operated.kube-prometheus-stack.svc:9090
+    #prometheusEndpoint: http://mimir-distributed-nginx.mimir-distributed.svc/prometheus
+    #prometheusEndpointSSLVerify: true
+    ssl: false
+    urlPrefix: /
+  mgr:
+    modules:
+    - name: rook
+      enabled: true
+  network:
+    connections:
+      encryption:
+        enabled: false
+      compression:
+        enabled: false
+      requireMsgr2: false
+  storage:
+    nearFullRatio: 0.67
+  upgradeOSDRequiresHealthyPGs: true
+
+ingress:
+  dashboard:
+    # labels:
+    #   external-dns/private: "true"
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+    #   external-dns.alpha.kubernetes.io/hostname: dashboard.example.com
+    #   nginx.ingress.kubernetes.io/rewrite-target: /ceph-dashboard/$2
+    # If the dashboard has ssl: true the following will make sure the NGINX Ingress controller can expose the dashboard correctly
+    #  nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    #  nginx.ingress.kubernetes.io/server-snippet: |
+    #    proxy_ssl_verify off;
+      forecastle.stakater.com/appName: Ceph
+      forecastle.stakater.com/expose: "true"
+      forecastle.stakater.com/group: Storage
+      forecastle.stakater.com/icon: https://ceph.apps.iaas.wcooke.me/assets/Ceph_Logo.svg
+      forecastle.stakater.com/network-restricted: "true"
+    host:
+      name: ceph.apps.iaas.wcooke.me
+      path: /
+      pathType: Prefix
+    ingressClassName: cilium
+    tls:
+    - hosts:
+      - ceph.apps.iaas.wcooke.me
+      secretName: rook-ceph-ingress-certs
+
+monitoring:
+  createPrometheusRules: true
+  enabled: true
+
+toolbox:
+  enabled: true
+
+cephBlockPools: []
+
+cephFileSystems:
+- name: ceph-filesystem
+  spec:
+    metadataPool:
+      replicated:
+        size: 3
+    dataPools:
+      - failureDomain: host
+        name: data0
+        replicated:
+          size: 3
+    metadataServer:
+      activeCount: 1
+      activeStandby: true
+      resources:
+        limits:
+          memory: 4Gi
+        requests:
+          cpu: 1000m
+          memory: 4Gi
+      priorityClassName: system-cluster-critical
+      placement:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - rook-ceph-mds
+              topologyKey: kubernetes.io/hostname
+  storageClass:
+    allowVolumeExpansion: true
+    annotations: {}
+    enabled: true
+    isDefault: true
+    labels: {}
+    mountOptions: []
+    name: ceph-filesystem
+    pool: data0
+    reclaimPolicy: Delete
+    parameters:
+      csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+      csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+      csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+      csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
+      csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+      csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
+      csi.storage.k8s.io/fstype: ext4
+    volumeBindingMode: Immediate
+
+cephBlockPoolsVolumeSnapshotClass:
+  enabled: true
+
+cephFileSystemVolumeSnapshotClass:
+  enabled: true
+
+cephECBlockPools:
+- name: ceph-block
+  spec:
+    metadataPool:
+      replicated:
+        size: 2
+    dataPool:
+      failureDomain: host
+      erasureCoded:
+        dataChunks: 2
+        codingChunks: 1
+    enableRBDStats: true
+
+  parameters:
+    clusterID: rook-ceph-cluster
+    imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
+    imageFormat: "2"
+
+  storageClass:
+    allowVolumeExpansion: true
+    annotations:
+      storageclass.kubevirt.io/is-default-virt-class: "true"
+    enabled: true
+    isDefault: false
+    mapOptions: "krbd:rxbounce"
+    mounter: rbd
+    name: ceph-block
+    reclaimPolicy: Delete
+
+cephObjectStores:
+- name: ceph-objectstore
+  spec:
+    allowUsersInNamespaces:
+    - "*"
+    dataPool:
+      erasureCoded:
+        dataChunks: 2
+        codingChunks: 1
+      failureDomain: host
+      parameters:
+        bulk: "true"
+    gateway:
+      # annotations:
+      # caBundleRef: ca-bundle-secret
+      instances: 2
+      opsLogSidecar:
+        resources:
+          limits:
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 40Mi
+      # placement:
+      port: 80
+      priorityClassName: system-cluster-critical
+      resources:
+        limits:
+          memory: 2Gi
+        requests:
+          cpu: 1000m
+          memory: 1Gi
+      securePort: 443
+      sslCertificateRef: objectstore-certificate
+    hosting:
+      advertiseEndpoint:
+        dnsName: rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc
+        port: 443
+        useTls: true
+      dnsNames:
+      - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc.cluster.local
+      - s3.apps.iaas.wcooke.me
+    metadataPool:
+      failureDomain: host
+      replicated:
+        size: 3
+    preservePoolsOnDelete: false
+  # ingress:
+  #   annotations:
+  #     cert-manager.io/cluster-issuer: iaas-wcooke-me
+  #     # route.openshift.io/termination: reencrypt
+  #   enabled: true
+  #   host:
+  #     name: s3-endpoint.apps.iaas.wcooke.me
+  #     path: /
+  #     pathType: Prefix
+  #   ingressClassName: cilium
+  #   tls:
+  #   - hosts:
+  #     - s3-endpoint.apps.iaas.wcooke.me
+  #     secretName: ceph-objectstore-tls
+  storageClass:
+    annotations: {}
+    enabled: true
+    labels: {}
+    name: ceph-bucket
+    parameters:
+      region: us-east-1
+    reclaimPolicy: Delete
+    volumeBindingMode: Immediate
+  # zone:
+  #   name: zone-a

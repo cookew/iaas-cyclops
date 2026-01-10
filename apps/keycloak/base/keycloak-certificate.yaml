@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: keycloak-certificate
+spec:
+  commonName: keycloak
+  dnsNames:
+    - keycloak
+    - keycloak-service
+    - keycloak-service.keycloak.svc
+    - keycloak-service.keycloak.svc.cluster.local
+    - keycloak.apps.iaas.wcooke.me
+  duration: 960h
+  isCA: false
+  issuerRef:
+    kind: ClusterIssuer
+    name: iaas-wcooke-me
+  secretName: keycloak-certificate
+  usages:
+  - client auth
+  - server auth

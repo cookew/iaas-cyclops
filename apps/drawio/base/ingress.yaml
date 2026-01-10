@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: drawio
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: DrawIO
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Apps
+    forecastle.stakater.com/icon: https://drawio.apps.iaas.wcooke.me/images/apple-touch-icon.png
+    forecastle.stakater.com/network-restricted: "true"
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: drawio.apps.iaas.wcooke.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: drawio
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - drawio.apps.iaas.wcooke.me
+    secretName: drawio-server-tls

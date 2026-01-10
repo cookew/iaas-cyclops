@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: crossplane-keycloak
+
+resources:
+- base/iaas-realm.yaml
+- base/keycloak-provider.yaml
+- base/keycloak-provider-config.yaml
+- base/kubernetes-client.yaml
+- sealed-secrets/crossplane-keycloak-credentials.yaml
+# - sealed-secrets/crossplane-keycloak-kubernetes-oidc-client.yaml

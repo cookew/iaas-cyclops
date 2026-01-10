@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Alloy
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Observability
+    forecastle.stakater.com/icon: https://alloy.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/network-restricted: "true"
+  name: alloy-ui
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: alloy.apps.iaas.wcooke.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: alloy
+            port:
+              number: 12345
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - alloy.apps.iaas.wcooke.me
+    secretName: alloy-ingress-cert

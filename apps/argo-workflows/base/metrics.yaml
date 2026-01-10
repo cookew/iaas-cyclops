@@ -1,0 +1,27 @@
+# https://argo-workflows.readthedocs.io/en/latest/metrics/#prometheus-scraping
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: workflow-controller
+  name: workflow-controller-metrics
+spec:
+  clusterIP: None
+  ports:
+  - name: metrics
+    port: 9090
+    protocol: TCP
+    targetPort: 9090
+  selector:
+    app: workflow-controller
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: argo-workflows
+spec:
+  endpoints:
+  - port: metrics
+  selector:
+    matchLabels:
+      app: workflow-controller

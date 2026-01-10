@@ -1,0 +1,188 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  annotations:
+    defaults.template.kubevirt.io/disk: rootdisk
+    description: Ubuntu Desktop 25.04
+    iconClass: icon-ubuntu
+    name.os.template.kubevirt.io/ubuntu: Ubuntu Desktop 2504
+    openshift.io/display-name: Ubuntu Desktop 25.04
+    openshift.io/provider-display-name: Custom
+    tags: 'hidden,kubevirt,virtualmachine,linux,ubuntu'
+    template.kubevirt.io/images: |
+      https://releases.ubuntu.com/25.04/ubuntu-25.04-desktop-amd64.iso
+    template.kubevirt.io/editable: |
+      /objects[0].spec.template.spec.domain.cpu.sockets
+      /objects[0].spec.template.spec.domain.cpu.cores
+      /objects[0].spec.template.spec.domain.cpu.threads
+      /objects[0].spec.template.spec.domain.devices.disks
+      /objects[0].spec.template.spec.domain.devices.inputs
+      /objects[0].spec.template.spec.domain.devices.interfaces
+      /objects[0].spec.template.spec.domain.firmware.bootloader.efi
+      /objects[0].spec.template.spec.domain.memory.guest
+      /objects[0].spec.template.spec.hostname
+      /objects[0].spec.template.spec.networks
+      /objects[0].spec.template.spec.volumes
+    template.kubevirt.io/version: v1alpha1
+    template.openshift.io/bindable: 'false'
+  labels:
+    flavor.template.kubevirt.io/medium: 'true'
+    os.template.kubevirt.io/ubuntu: 'true'
+    template.kubevirt.io/architecture: amd64
+    template.kubevirt.io/type: vm
+    template.kubevirt.io/version: v0.34.1
+    workload.template.kubevirt.io/desktop: 'true'
+  name: ubuntu-desktop2504-medium
+objects:
+- apiVersion: kubevirt.io/v1
+  kind: VirtualMachine
+  metadata:
+    name: '${NAME}'
+    annotations:
+      vm.kubevirt.io/validations: |
+        [
+          {
+            "name": "minimal-required-memory",
+            "path": "jsonpath::.spec.domain.memory.guest",
+            "rule": "integer",
+            "message": "This VM requires more memory.",
+            "min": 1610612736
+          }
+        ]
+    labels:
+      app: '${NAME}'
+      vm.kubevirt.io/template: ubuntu-desktop2504-medium
+      vm.kubevirt.io/template.revision: '1'
+      vm.kubevirt.io/template.version: v0.34.1
+  spec:
+    dataVolumeTemplates:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      kind: DataVolume
+      metadata:
+        creationTimestamp: null
+        name: '${NAME}-${ROOTDISK_NAME}'
+      spec:
+        source:
+          blank: {}
+        storage:
+          resources:
+            requests:
+              storage: 30Gi
+          accessModes:
+          - ReadWriteMany
+          volumeMode: Block
+          storageClassName: ceph-block
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      kind: DataVolume
+      metadata:
+        creationTimestamp: null
+        name: '${NAME}-${CDROM_NAME}'
+      spec:
+        sourceRef:
+          kind: DataSource
+          name: ubuntu-desktop2504
+          namespace: kubevirt-templates
+        storage:
+          resources:
+            requests:
+              storage: 10Gi
+    # - apiVersion: cdi.kubevirt.io/v1beta1
+    #   kind: DataVolume
+    #   metadata:
+    #     name: '${NAME}-rootdisk'
+    #   spec:
+    #     storage:
+    #       resources:
+    #         requests:
+    #           storage: 30Gi
+    #     sourceRef:
+    #       kind: DataSource
+    #       name: '${DATA_SOURCE_NAME}'
+    #       namespace: '${DATA_SOURCE_NAMESPACE}'
+    runStrategy: RerunOnFailure
+    template:
+      metadata:
+        annotations:
+          vm.kubevirt.io/flavor: medium
+          vm.kubevirt.io/os: linux
+          vm.kubevirt.io/workload: desktop
+        labels:
+          kubevirt.io/domain: '${NAME}'
+          kubevirt.io/size: medium
+      spec:
+        architecture: amd64
+        domain:
+          cpu:
+            cores: 4
+            sockets: 1
+            threads: 1
+          devices:
+            disks:
+            - disk:
+                bus: virtio
+              name: rootdisk
+              # bootOrder: 1
+            - cdrom:
+                bus: sata
+              name: cdrom
+              # bootOrder: 2
+            inputs:
+            - bus: virtio
+              name: tablet
+              type: tablet
+            interfaces:
+            - masquerade: {}
+              model: virtio
+              name: default
+            rng: {}
+            tpm:
+              persistent: true
+          features:
+            acpi: {}
+            smm:
+              enabled: true
+          firmware:
+            bootloader:
+              efi:
+                persistent: true
+                secureBoot: true
+          machine:
+            type: q35
+          memory:
+            guest: 8Gi
+          resources: {}
+        hostname: '${NAME}'
+        networks:
+        - name: default
+          pod: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - dataVolume:
+            name: '${NAME}-${ROOTDISK_NAME}'
+          name: rootdisk
+        - dataVolume:
+            name: '${NAME}-${CDROM_NAME}'
+          name: cdrom
+parameters:
+- description: VM name
+  from: 'ubuntu-desktop2504-[a-z0-9]{16}'
+  generate: expression
+  name: NAME
+- name: DATA_SOURCE_NAME
+  description: Name of the DataSource to clone
+  value: ubuntu-desktop2504
+- name: DATA_SOURCE_NAMESPACE
+  description: Namespace of the DataSource
+  value: kubevirt-templates
+- description: Randomized password for the cloud-init user rocky
+  from: '[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}'
+  generate: expression
+  name: CLOUD_USER_PASSWORD
+- description: Randomized rootdisk name
+  from: '[a-z0-9]{16}'
+  generate: expression
+  name: ROOTDISK_NAME
+- description: Randomized cdrom name
+  from: '[a-z0-9]{16}'
+  generate: expression
+  name: CDROM_NAME

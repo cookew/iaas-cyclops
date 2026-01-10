@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: nfd
+
+helmCharts:
+- name: nfd
+  namespace: nfd
+  releaseName: nfd
+  repo: https://
+  version: 1.2.3
+  valuesFile: values.yaml

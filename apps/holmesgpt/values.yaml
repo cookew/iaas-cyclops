@@ -1,0 +1,109 @@
+certificate: "" # base64 encoded
+logLevel: DEBUG
+
+additionalEnvVars:
+- name: OLLAMA_API_BASE
+  value: "http://ollama.ollama.svc:11434"
+
+additional_env_vars: []
+imagePullSecrets: []
+podAnnotations: {}
+
+replicas: 1
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPU: "60"
+  targetMemory: ""
+  behavior: {}
+
+enableAccountsCreate: true
+revisionHistoryLimit: 1
+
+createServiceAccount: true
+customServiceAccountName: ""
+
+customClusterRoleRules:
+- apiGroups: ["monitoring.coreos.com"]
+  resources: ["servicemonitors", "podmonitors", "prometheusrules"]
+  verbs: ["get", "list"]
+
+# CRD permissions for common Kubernetes operators and tools
+crdPermissions:
+  argo: true
+  flux: true
+  kafka: true
+  keda: true
+  crossplane: true
+  istio: true
+  gatewayApi: true
+  velero: true
+  externalSecrets: true
+
+# toolsets:
+  # kubernetes/core:
+  #   enabled: true
+  # kubernetes/logs:
+  #   enabled: true
+  # robusta:
+  #   enabled: false
+  # internet:
+  #   enabled: false
+  # prometheus/metrics:
+  #   enabled: false
+  # runbook:
+  #   enabled: false
+  # cilium/core:
+  #   enabled: true
+  # hubble/observability:
+  #   enabled: true
+  # kubernetes/live_metrics:
+  #     enabled: true
+  # kubernetes/resource_lineage_extras:
+  #     enabled: true
+
+mcp_servers: {}
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 2048Mi
+  limits:
+    memory: 2048Mi
+
+additionalVolumes: []
+additionalVolumeMounts: []
+
+priorityClassName: ""
+
+modelList:
+  # ollama-llama4:
+  #   api_base: "{{ env.OLLAMA_API_BASE }}"
+  #   model: ollama_chat/llama4
+  #   temperature: 1
+
+  # ollama-codellama:
+  #   api_base: "{{ env.OLLAMA_API_BASE }}"
+  #   model: ollama/codellama
+  #   temperature: 1
+  #   custom_args:
+  #     max_context_size: 100000
+
+  # ollama-mistral:
+  #   api_base: "{{ env.OLLAMA_API_BASE }}"
+  #   model: ollama/mistral
+  #   temperature: 1
+  #   custom_args:
+  #     max_context_size: 100000
+
+  ollama-llama2:
+    api_base: "{{ env.OLLAMA_API_BASE }}"
+    model: ollama/llama2
+    temperature: 1
+    custom_args:
+      max_context_size: 500000
+
+config:
+  model: ollama-llama2

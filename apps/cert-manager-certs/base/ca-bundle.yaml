@@ -1,0 +1,226 @@
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
+  name: tm-ca-bundle
+spec:
+  sources:
+  - secret:
+      name: iaas-wcooke-me
+      key: tls.crt
+  target:
+    configMap:
+      key: ca-bundle.pem
+---
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
+  name: tm-ca-bundle-secret
+spec:
+  sources:
+  - secret:
+      name: iaas-wcooke-me
+      key: tls.crt
+  target:
+    secret:
+      key: ca-bundle.pem
+      metadata:
+        labels:
+          # Auto reload cloudnative-pg instances when this secret changes
+          # https://cloudnative-pg.io/plugin-barman-cloud/docs/object_stores/#using-object-storage-with-a-private-ca
+          cnpg.io/reload: ""
+---
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
+  name: ca-bundle-secret
+spec:
+  sources:
+  - secret:
+      name: iaas-wcooke-me
+      key: tls.crt
+  target:
+    secret:
+      key: cabundle
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: rook-ceph-cluster
+---
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
+  name: ca-bundle-rook-ceph-cluster
+spec:
+  sources:
+  - secret:
+      name: iaas-wcooke-me
+      key: tls.crt
+  target:
+    secret:
+      key: tls.crt
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: rook-ceph-cluster
+---
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
+  name: tm-harbor-ca-bundle
+spec:
+  sources:
+  - secret:
+      name: iaas-wcooke-me
+      key: tls.crt
+  target:
+    secret:
+      key: ca.crt
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: harbor
+# ---
+# apiVersion: trust.cert-manager.io/v1alpha1
+# kind: Bundle
+# metadata:
+#   name: kedaorg-ca
+# spec:
+#   sources:
+#   - secret:
+#       name: iaas-wcooke-me
+#       key: tls.crt
+#   target:
+#     # annotations:
+#     #   cert-manager.io/allow-direct-injection: "true"
+#     secret:
+#       key: tls.crt
+#     namespaceSelector:
+#       matchLabels:
+#         kubernetes.io/metadata.name: keda
+# ---
+# apiVersion: trust.cert-manager.io/v1alpha1
+# kind: Bundle
+# metadata:
+#   name: harbor-ca-bundle
+# spec:
+#   sources:
+#   - secret:
+#       name: iaas-wcooke-me
+#       key: tls.crt
+#   - configMap:
+#       name: openshift-service-ca.crt
+#       key: service-ca.crt
+#   target:
+#     secret:
+#       key: ca.crt
+#     namespaceSelector:
+#       matchLabels:
+#         kubernetes.io/metadata.name: harbor
+# ---
+# apiVersion: trust.cert-manager.io/v1alpha1
+# kind: Bundle
+# metadata:
+#   name: grafana-ca-bundle
+# spec:
+#   sources:
+#   - configMap:
+#       name: openshift-service-ca.crt
+#       key: service-ca.crt
+#   target:
+#     secret:
+#       key: ca.crt
+#     namespaceSelector:
+#       matchLabels:
+#         kubernetes.io/metadata.name: grafana
+# ---
+# apiVersion: trust.cert-manager.io/v1alpha1
+# kind: Bundle
+# metadata:
+#   name: keycloak-ca-bundle
+# spec:
+#   sources:
+#   - configMap:
+#       name: openshift-service-ca.crt
+#       key: service-ca.crt
+#   target:
+#     secret:
+#       key: ca.crt
+#     namespaceSelector:
+#       matchLabels:
+#         kubernetes.io/metadata.name: keycloak
+# ---
+# apiVersion: trust.cert-manager.io/v1alpha1
+# kind: Bundle
+# metadata:
+#   name: gitlab-ca-bundle
+# spec:
+#   sources:
+#   - configMap:
+#       name: root-ca-cert
+#       key: root-ca.crt
+#   - secret:
+#       name: iaas-wcooke-me
+#       key: tls.crt
+#   - configMap:
+#       name: openshift-service-ca.crt
+#       key: service-ca.crt
+#   target:
+#     configMap:
+#       key: kube-certs.crt
+#     namespaceSelector:
+#       matchLabels:
+#         kubernetes.io/metadata.name: gitlab-system
+# ---
+# apiVersion: trust.cert-manager.io/v1alpha1
+# kind: Bundle
+# metadata:
+#   name: gitlab-runner-bundle
+# spec:
+#   sources:
+#   - secret:
+#       name: iaas-wcooke-me
+#       key: tls.crt
+#   - configMap:
+#       name: root-ca-cert
+#       key: root-ca.crt
+#   - configMap:
+#       name: openshift-service-ca.crt
+#       key: service-ca.crt
+#   target:
+#     secret:
+#       key: ca-certs.crt
+#     namespaceSelector:
+#       matchLabels:
+#         kubernetes.io/metadata.name: gitlab-runners
+# ---
+# apiVersion: trust.cert-manager.io/v1alpha1
+# kind: Bundle
+# metadata:
+#   name: nextcloud-ca-bundle
+# spec:
+#   sources:
+#   - secret:
+#       name: iaas-wcooke-me
+#       key: tls.crt
+#   - configMap:
+#       name: openshift-service-ca.crt
+#       key: service-ca.crt
+#   target:
+#     secret:
+#       key: ca.crt
+#     namespaceSelector:
+#       matchLabels:
+#         kubernetes.io/metadata.name: nextcloud
+# ---
+# apiVersion: trust.cert-manager.io/v1alpha1
+# kind: Bundle
+# metadata:
+#   name: openbao-ca-bundle
+# spec:
+#   sources:
+#   - configMap:
+#       name: openshift-service-ca.crt
+#       key: service-ca.crt
+#   target:
+#     secret:
+#       key: ca.crt
+#     namespaceSelector:
+#       matchLabels:
+#         kubernetes.io/metadata.name: openbao

@@ -1,0 +1,79 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: core-tls
+spec:
+  commonName: core
+  isCA: false
+  issuerRef:
+    name: iaas-wcooke-me
+    kind: ClusterIssuer
+  secretName: core-tls
+  usages:
+    - server auth
+    - client auth
+  duration: 960h
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jobservice-tls
+spec:
+  commonName: jobservice
+  isCA: false
+  issuerRef:
+    name: iaas-wcooke-me
+    kind: ClusterIssuer
+  secretName: jobservice-tls
+  usages:
+    - server auth
+    - client auth
+  duration: 960h
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: registry-tls
+spec:
+  commonName: registry
+  isCA: false
+  issuerRef:
+    name: iaas-wcooke-me
+    kind: ClusterIssuer
+  secretName: registry-tls
+  usages:
+    - server auth
+    - client auth
+  duration: 960h
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: portal-tls
+spec:
+  commonName: portal
+  isCA: false
+  issuerRef:
+    name: iaas-wcooke-me
+    kind: ClusterIssuer
+  secretName: portal-tls
+  usages:
+    - server auth
+    - client auth
+  duration: 960h
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: trivy-tls
+spec:
+  commonName: trivy
+  isCA: false
+  issuerRef:
+    name: iaas-wcooke-me
+    kind: ClusterIssuer
+  secretName: trivy-tls
+  usages:
+    - server auth
+    - client auth
+  duration: 960h

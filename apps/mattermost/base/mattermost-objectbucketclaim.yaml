@@ -1,0 +1,27 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: mattermost
+spec:
+  clusterNamespace: rook-ceph-cluster
+  displayName: mattermost
+  store: ceph-objectstore
+  keys:
+    - accessKeyRef:
+        name: mattermost-bucket-credentials
+        key: accesskey
+      secretKeyRef:
+        name: mattermost-bucket-credentials
+        key: secretkey
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: mattermost-bucket
+spec:
+  bucketName: mattermost
+  storageClassName: ceph-bucket
+  additionalConfig:
+    maxObjects: "1000000"
+    maxSize: "10G"
+    bucketOwner: mattermost

@@ -1,0 +1,157 @@
+expose:
+  tls:
+    certSource: secret
+    secret:
+      secretName: harbor-ingress-cert
+  ingress:
+    hosts:
+      core: harbor.apps.iaas.wcooke.me
+    className: cilium
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+      forecastle.stakater.com/appName: Harbor
+      forecastle.stakater.com/expose: "true"
+      forecastle.stakater.com/group: Kubernetes
+      forecastle.stakater.com/icon: https://harbor.apps.iaas.wcooke.me/favicon.ico?v=2
+      forecastle.stakater.com/network-restricted: "true"
+      forecastle.stakater.com/url: https://harbor.apps.iaas.wcooke.me
+
+externalURL: https://harbor.apps.iaas.wcooke.me
+
+persistence:
+  resourcePolicy: empty
+  persistentVolumeClaim:
+    registry:
+      storageClass: ceph-filesystem
+      size: 10Gi
+    jobservice:
+      jobLog:
+        storageClass: ceph-filesystem
+        size: 5Gi
+    database:
+      storageClass: ceph-filesystem
+      size: 5Gi
+    redis:
+      storageClass: ceph-filesystem
+    trivy:
+      storageClass: ceph-filesystem
+      size: 5Gi
+  imageChartStorage:
+    # false is default, don't know if it needs to change
+    disableredirect: true
+    # not set by default, might need to be changed. Key in secret needs to be ca.crt
+    caBundleSecretName: tm-harbor-ca-bundle
+    type: s3
+    s3:
+      existingSecret: harbor-registry-bucket
+      region: us-east-1
+      bucket: harbor-registry
+      accesskey: AWS_ACCESS_KEY_ID
+      secretkey: AWS_SECRET_ACCESS_KEY
+      regionendpoint: rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc:443
+      #encrypt: false
+      #keyid: mykeyid
+      secure: true
+      # skipverify: true
+      #v4auth: true
+      #chunksize: "5242880"
+      #rootdirectory: /s3/object/name/prefix
+      #storageclass: STANDARD
+      #multipartcopychunksize: "33554432"
+      #multipartcopymaxconcurrency: 100
+      #multipartcopythresholdsize: "33554432"
+
+existingSecretAdminPassword: harbor-admin-password
+
+caBundleSecretName: tm-harbor-ca-bundle
+# caSecretName: harbor-ca
+
+existingSecretSecretKey: harbor-encryption-key
+
+## UAA Authentication Options
+# If you're using UAA for authentication behind a self-signed
+# certificate you will need to provide the CA Cert.
+# Set uaaSecretName below to provide a pre-created secret that
+# contains a base64 encoded CA Certificate named `ca.crt`.
+# uaaSecretName:
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+
+cache:
+  enabled: true
+  expireHours: 96
+
+core:
+  extraEnvVars:
+  - name: CONFIG_OVERWRITE_JSON
+    valueFrom:
+      secretKeyRef:
+        key: CONFIG_OVERWRITE_JSON
+        name: harbor-core-config
+  replicas: 2
+  revisionHistoryLimit: 0
+
+exporter:
+  replicas: 2
+  revisionHistoryLimit: 0
+
+jobservice:
+  replicas: 1
+  revisionHistoryLimit: 0
+
+portal:
+  replicas: 2
+  revisionHistoryLimit: 0
+
+registry:
+  replicas: 2
+  revisionHistoryLimit: 0
+
+trivy:
+  replicas: 2
+  # You can create a GitHub token by following the instructions in
+  # https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
+  gitHubToken: ""
+
+database:
+  type: external
+  external:
+    host: harbor-pg-cluster-rw
+    port: 5432
+    username: harbor
+    coreDatabase: harbor
+    # if using existing secret, the key must be "password"
+    existingSecret: harbor-pg-cluster-app
+    # "disable" - No SSL
+    # "require" - Always SSL (skip verification)
+    # "verify-ca" - Always SSL (verify that the certificate presented by the server was signed by a trusted CA)
+    # "verify-full" - Always SSL (verify that the certification presented by the server was signed by a trusted CA and the server host name matches the one in the certificate)
+    sslmode: require
+
+redis:
+  type: internal
+  external:
+    # support redis, redis+sentinel
+    # addr for redis: <host_redis>:<port_redis>
+    # addr for redis+sentinel: <host_sentinel1>:<port_sentinel1>,<host_sentinel2>:<port_sentinel2>,<host_sentinel3>:<port_sentinel3>
+    addr: somethinghere
+    # The name of the set of Redis instances to monitor, it must be set to support redis+sentinel
+    sentinelMasterSet: ""
+    # TLS configuration for redis connection
+    # only server-authentication is supported, mTLS for redis connection is not supported
+    # tls connection will be disable by default
+    # Once `tlsOptions.enable` set as true, tls/ssl connection will be used for redis
+    # Please set the `caBundleSecretName` in this configuration file which conatins redis server rootCA if it is self-signed.
+    # The secret must contain keys named "ca.crt" which will be injected into the trust store
+    tlsOptions:
+      enable: true
+      caBundleSecretName: "" # I don't know if this is under tlsOptions or not.
+    harborDatabaseIndex: "6"
+    cacheLayerDatabaseIndex: "7"
+    # username field can be an empty string, and it will be authenticated against the default user
+    username:
+    # If using existingSecret, the key must be REDIS_PASSWORD
+    existingSecret:

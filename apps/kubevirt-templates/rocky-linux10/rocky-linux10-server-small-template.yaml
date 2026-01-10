@@ -1,0 +1,129 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  annotations:
+    defaults.template.kubevirt.io/disk: rootdisk
+    description: Rocky Linux 10
+    iconClass: icon-rockylinux
+    name.os.template.kubevirt.io/rocky-linux: Rocky Linux 10
+    openshift.io/display-name: Rocky Linux 10
+    openshift.io/provider-display-name: Custom
+    tags: 'hidden,kubevirt,virtualmachine,linux,rockylinux'
+    template.kubevirt.io/images: |
+      https://dl.rockylinux.org/pub/rocky/10/images/x86_64/Rocky-10-GenericCloud-LVM.latest.x86_64.qcow2
+    template.kubevirt.io/editable: |
+      /objects[0].spec.template.spec.domain.cpu.sockets
+      /objects[0].spec.template.spec.domain.cpu.cores
+      /objects[0].spec.template.spec.domain.cpu.threads
+      /objects[0].spec.template.spec.domain.memory.guest
+      /objects[0].spec.template.spec.domain.devices.disks
+      /objects[0].spec.template.spec.volumes
+      /objects[0].spec.template.spec.networks
+    template.kubevirt.io/version: v1alpha1
+    template.openshift.io/bindable: 'false'
+  labels:
+    flavor.template.kubevirt.io/small: 'true'
+    os.template.kubevirt.io/rocky-linux: 'true'
+    template.kubevirt.io/architecture: amd64
+    template.kubevirt.io/type: vm
+    template.kubevirt.io/version: v0.34.1
+    workload.template.kubevirt.io/server: 'true'
+  name: rocky-linux10-server-small
+objects:
+- apiVersion: kubevirt.io/v1
+  kind: VirtualMachine
+  metadata:
+    name: '${NAME}'
+    labels:
+      app: '${NAME}'
+      vm.kubevirt.io/template: rocky-linux-server-small
+      vm.kubevirt.io/template.revision: '1'
+      vm.kubevirt.io/template.version: v0.34.1
+    annotations:
+      vm.kubevirt.io/validations: |
+        [
+          {
+            "name": "minimal-required-memory",
+            "path": "jsonpath::.spec.domain.memory.guest",
+            "rule": "integer",
+            "message": "This VM requires more memory.",
+            "min": 1610612736
+          }
+        ]
+  spec:
+    dataVolumeTemplates:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      kind: DataVolume
+      metadata:
+        name: '${NAME}'
+      spec:
+        storage:
+          resources:
+            requests:
+              storage: 30Gi
+        sourceRef:
+          kind: DataSource
+          name: '${DATA_SOURCE_NAME}'
+          namespace: '${DATA_SOURCE_NAMESPACE}'
+    runStrategy: Halted
+    template:
+      metadata:
+        annotations:
+          vm.kubevirt.io/flavor: small
+          vm.kubevirt.io/os: rocky-linux10
+          vm.kubevirt.io/workload: server
+        labels:
+          kubevirt.io/domain: '${NAME}'
+          kubevirt.io/size: small
+      spec:
+        architecture: amd64
+        domain:
+          cpu:
+            cores: 1
+            sockets: 1
+            threads: 1
+          memory:
+            guest: 2Gi
+          devices:
+            disks:
+            - disk:
+                bus: virtio
+              name: rootdisk
+            - disk:
+                bus: virtio
+              name: cloudinitdisk
+            interfaces:
+            - masquerade: {}
+              model: virtio
+              name: default
+            rng: {}
+        networks:
+        - name: default
+          pod: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - dataVolume:
+            name: '${NAME}'
+          name: rootdisk
+        - cloudInitNoCloud:
+            userData: |-
+              #cloud-config
+              user: rocky
+              password: ${CLOUD_USER_PASSWORD}
+              chpasswd: { expire: False }
+          name: cloudinitdisk
+parameters:
+- description: VM name
+  from: 'rocky-linux10-[a-z0-9]{16}'
+  generate: expression
+  name: NAME
+- name: DATA_SOURCE_NAME
+  description: Name of the DataSource to clone
+  value: 'rocky-linux10'
+- name: DATA_SOURCE_NAMESPACE
+  description: Namespace of the DataSource
+  value: kubevirt-templates
+- description: Randomized password for the cloud-init user rocky
+  from: '[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}'
+  generate: expression
+  name: CLOUD_USER_PASSWORD

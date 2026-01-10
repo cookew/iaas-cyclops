@@ -1,0 +1,32 @@
+apiVersion: instancetype.kubevirt.io/v1beta1
+kind: VirtualMachineClusterPreference
+metadata:
+  annotations:
+    kubevirt.io/install-strategy-registry: quay.io/kubevirt
+    openshift.io/display-name: Rocky Linux 9
+    openshift.io/documentation-url: https://github.com/kubevirt/common-instancetypes
+    kubevirt.io/install-strategy-version: v1.5.0
+    kubevirt.io/install-strategy-identifier: 2e7d86a032576b6e434493059989028757cf0922
+    kubevirt.io/generation: '2'
+    tags: 'hidden,kubevirt,linux,rocky-linux'
+    openshift.io/support-url: https://github.com/kubevirt/common-instancetypes/issues
+    iconClass: icon-rockylinux
+    openshift.io/provider-display-name: KubeVirt
+  labels:
+    instancetype.kubevirt.io/common-instancetypes-version: v1.3.0
+    instancetype.kubevirt.io/os-type: linux
+    instancetype.kubevirt.io/vendor: kubevirt.io
+  name: rocky-linux9
+spec:
+  annotations:
+    vm.kubevirt.io/os: linux
+  devices:
+    preferredDiskBus: virtio
+    preferredDiskDedicatedIoThread: true
+    preferredInterfaceModel: virtio
+    preferredRng: {}
+  requirements:
+    cpu:
+      guest: 1
+    memory:
+      guest: 2048Mi

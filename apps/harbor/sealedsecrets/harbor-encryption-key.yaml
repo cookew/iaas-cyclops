@@ -1,0 +1,16 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: harbor-encryption-key
+  namespace: harbor
+spec:
+  encryptedData:
+    secretKey: AgAR2J2bqpqtDWQwcJ2JxKo1wZ7GyAsPURv8QCYW77nUI0FTZAyHXbQeDq0IpcHhnKMTRGV2zk3l/XhXRu8vrJuuPHmbxPTkkeDc6K0fKaxdXYFsTtWLfwqYNVPdzBaoc7CyaM6ij6uKBCUvFAemM7QS0LgupDThD2gH5O3/hyt7FQv9SBFdyj9E3V3YnR5PbKQ5mkvpsWRUfpS2q2KiIJ7v9cpgA5SRktyl9o6v0XsKJw0G6148Nlgrv5fsuZ6LieXRCvVGZi5x/Sg2/WcCAZApSojNjwBbIYm6FEAGGNqnYhQ0zI4foBnCq0BaqMh0WBPOnihP15L46m6VqE+oQ0zpFESxoMdX/kBLlKII7+Rt+EVjfjQngaFyRaeRy44P0vmkpxiPj0jtUVenNzA1Uxmbe6RCcxMlt966/ANApcepRjZy8aBRUTWHjtEp3Ncj4iG7H0xYadTyCrOQZR44VBScEtF0vtZzGbW92EuHm1LXIxjVl+BHfbZixQnuz/8zoH5UzqwtISB/EkcVKXnS1z9Q1ihBFF+xIoZv1f8WtfTRoAgQ8FkByyHy0D6fbn6yujKWlJDjh49RJ/vNj9sLgeWPiITw4VIS6dYYBHOx6h6C89T+PWEsRXfXnzgx0ZAaGqXVB20Q252VAXE9CaFwoC/G+zcx+z+/aEv42s8kIOUq16R7+jziEKSEG/VpLIGaw4EoBTIKgf2G1KXA7FBi51sD
+  template:
+    metadata:
+      creationTimestamp: null
+      name: harbor-encryption-key
+      namespace: harbor
+    type: stringData

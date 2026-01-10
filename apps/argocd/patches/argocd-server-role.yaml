@@ -1,0 +1,11 @@
+# This patch is to enable the web based terminal
+# https://argo-cd.readthedocs.io/en/stable/operator-manual/web_based_terminal/#enabling-the-terminal
+- op: add
+  path: /rules/-
+  value:
+    apiGroups:
+    - "*"
+    resources:
+    - pods/exec
+    verbs:
+    - create

@@ -1,0 +1,4 @@
+# https://argo-workflows.readthedocs.io/en/latest/high-availability/#multiple-workflow-controller-replicas
+- op: add
+  path: /spec/replicas
+  value: 3

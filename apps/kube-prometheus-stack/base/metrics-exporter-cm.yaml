@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metrics-proxy
+data:
+  haproxy.cfg: |
+    global
+      log stdout format raw local0
+
+    defaults
+      mode tcp
+      log global
+      option tcplog
+      timeout connect 5000ms
+      timeout client 5000ms
+      timeout server 5000ms
+      default-server maxconn 10
+
+    listen stats
+      bind ${NODE_IP}:1940
+      mode http
+      log global
+      stats enable
+      stats refresh 30s
+      stats show-node
+      stats uri /haproxy?stats
+      http-request use-service prometheus-exporter if { path /metrics }
+      monitor-uri /healthz
+
+    listen kube-controller-manager
+      bind ${NODE_IP}:10257
+      acl white_list src 10.42.41.0/24 10.244.0.0/16
+      tcp-request content accept if white_list
+      tcp-request content reject
+      server kube-controller-manager 127.0.0.1:10257
+
+    listen kube-scheduler
+      bind ${NODE_IP}:10259
+      acl white_list src 10.42.41.0/24 10.244.0.0/16
+      tcp-request content accept if white_list
+      tcp-request content reject
+      server kube-scheduler 127.0.0.1:10259
+
+    listen etcd
+      mode http
+      bind ${NODE_IP}:2381
+      acl white_list src 10.42.41.0/24 10.244.0.0/16
+      http-request deny if !{ path /metrics }
+      http-request deny if !white_list
+      server etcd 127.0.0.1:2381

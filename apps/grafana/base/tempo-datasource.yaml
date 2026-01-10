@@ -1,0 +1,56 @@
+# https://grafana.com/docs/grafana/latest/datasources/tempo/configure-tempo-data-source/#example-file
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tempo-datasource
+  labels:
+    grafana_datasource: "1"
+data:
+  tempo-datasource.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: tempo
+      access: proxy
+      type: tempo
+      url: http://tempo-query-frontend.tempo.svc:3200
+      version: 7
+      jsonData:
+        nodeGraph:
+          enabled: true
+        search:
+          hide: false
+        serviceMap:
+          datasourceUid: 'prometheus'
+        spanBar:
+          tag: 'http.path'
+          type: 'Tag'
+        streamingEnabled:
+          metrics: true
+          search: true
+        traceQuery:
+          spanEndTimeShift: '1h'
+          spanStartTimeShift: '-1h'
+          timeShiftEnabled: true
+        tracesToLogsV2:
+          customQuery: true
+          datasourceUid: 'loki'
+          filterBySpanID: false
+          filterByTraceID: false
+          query: 'method="$${__span.tags.method}"'
+          spanEndTimeShift: '1h'
+          spanStartTimeShift: '-1h'
+          tags: ['job', 'instance', 'pod', 'namespace']
+        tracesToMetrics:
+          datasourceUid: 'prometheus'
+          queries:
+            - name: 'Sample query'
+              query: 'sum(rate(traces_spanmetrics_latency_bucket{$$__tags}[5m]))'
+          spanEndTimeShift: '1h'
+          spanStartTimeShift: '-1h'
+          tags: [{ key: 'service.name', value: 'service' }, { key: 'job' }]
+        tracesToProfiles:
+          customQuery: true
+          datasourceUid: 'pyroscope'
+          profileTypeId: 'process_cpu:cpu:nanoseconds:cpu:nanoseconds'
+          query: 'method="$${__span.tags.method}"'
+          tags: ['job', 'instance', 'pod', 'namespace']

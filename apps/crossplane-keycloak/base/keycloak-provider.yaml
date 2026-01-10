@@ -1,0 +1,32 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-keycloak
+spec:
+  package: xpkg.upbound.io/crossplane-contrib/provider-keycloak:v2.12.1
+  runtimeConfigRef:
+    name: runtimeconfig-provider-keycloak
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
+metadata:
+  name: runtimeconfig-provider-keycloak
+spec:
+  deploymentTemplate:
+    spec:
+      selector: {}
+      template:
+        spec:
+          containers:
+            - name: package-runtime
+              env:
+              - name: CA_BUNDLE_PATH
+                value: /certs/ca-bundle.pem
+              volumeMounts:
+              - mountPath: /certs
+                name: ca-certificates
+                readOnly: true
+          volumes:
+          - name: ca-certificates
+            configMap:
+              name: tm-ca-bundle

@@ -1,0 +1,28 @@
+# affinity:
+#   nodeAffinity:
+#     requiredDuringSchedulingIgnoredDuringExecution:
+#       nodeSelectorTerms:
+#       - matchExpressions:
+#         - key: node-role.kubernetes.io/control-plane
+#           operator: Exists
+
+fullnameOverride: sealed-secrets-controller
+
+logFormat: json
+
+metrics:
+  serviceMonitor:
+    enabled: true
+  dashboards:
+    create: true
+    labels:
+      grafana_dashboard: "1"
+
+resources:
+  limits: {}
+  requests: {}
+
+# tolerations:
+# - effect: NoSchedule
+#   key: node-role.kubernetes.io/control-plane
+#   operator: Exists

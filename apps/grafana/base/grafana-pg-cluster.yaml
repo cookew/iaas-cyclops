@@ -1,0 +1,90 @@
+# apiVersion: objectbucket.io/v1alpha1
+# kind: ObjectBucketClaim
+# metadata:
+#   name: grafana-pg-backup
+# spec:
+#   bucketName: grafana-pg-backup
+#   storageClassName: ceph-bucket
+#   additionalConfig:
+#     maxObjects: "1000000"
+#     maxSize: "10G"
+# ---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: grafana-pg-cluster
+spec:
+  affinity:
+    topologyKey: kubernetes.io/hostname
+  bootstrap:
+    initdb:
+      database: grafana
+  #     encoding: UTF8
+  #     localeCType: C
+  #     localeCollate: C
+  #     owner: grafana
+  # enablePDB: true
+  # enableSuperuserAccess: false
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    major: 17
+    name: postgresql
+  # imageName: ghcr.io/cloudnative-pg/postgresql:17
+  # imagePullPolicy: IfNotPresent
+  instances: 3
+  monitoring:
+    enablePodMonitor: true
+  # plugins:
+  # - name: barman-cloud.cloudnative-pg.io
+  #   isWALArchiver: true
+  #   parameters:
+  #     barmanObjectName: grafana-pg
+  primaryUpdateMethod: switchover
+  storage:
+    resizeInUseVolumes: true
+    size: 1Gi
+    storageClass: ceph-filesystem
+  walStorage:
+    resizeInUseVolumes: true
+    size: 3Gi
+    storageClass: ceph-filesystem
+# ---
+# apiVersion: barmancloud.cnpg.io/v1
+# kind: ObjectStore
+# metadata:
+#   name: grafana-pg
+# spec:
+#   configuration:
+#     data:
+#       compression: bzip2
+#     destinationPath: s3://grafana-pg-backup
+#     endpointCA:
+#       key: ca-bundle.pem
+#       name: tm-ca-bundle-secret
+#     endpointURL: https://rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc
+#     s3Credentials:
+#       accessKeyId:
+#         key: AWS_ACCESS_KEY_ID
+#         name: grafana-pg-backup
+#       inheritFromIAMRole: false
+#       secretAccessKey:
+#         key: AWS_SECRET_ACCESS_KEY
+#         name: grafana-pg-backup
+#     wal:
+#       compression: bzip2
+#   retentionPolicy: 90d
+# ---
+# apiVersion: postgresql.cnpg.io/v1
+# kind: ScheduledBackup
+# metadata:
+#   name: grafana-pg
+# spec:
+#   backupOwnerReference: cluster
+#   cluster:
+#     name: grafana-pg-cluster
+#   method: plugin
+#   pluginConfiguration:
+#     name: barman-cloud.cloudnative-pg.io
+#   schedule: "@daily"
+#   target: prefer-standby

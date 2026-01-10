@@ -1,0 +1,382 @@
+pyroscope:
+  replicaCount: 2
+
+  # -- Enable or disable Self profile push, useful to test
+  disableSelfProfile: true
+
+  # -- Kubernetes cluster domain suffix for DNS discovery
+  cluster_domain: .cluster.local.
+
+  extraArgs:
+    log.level: info
+    config.expand-env: "true"
+
+  extraCustomEnvVars: {}
+    # The following environment variables raw form.
+    # - name: MY_NODE_NAME
+    #   valueFrom:
+    #     fieldRef:
+    #       fieldPath: spec.nodeName
+
+  # -- Environment variables from secrets or configmaps to add to the pods
+  extraEnvFrom:
+  - configMapRef:
+      name: pyroscope-bucket
+  - secretRef:
+      name: pyroscope-bucket
+
+  podAnnotations:
+    # Scrapes itself see https://grafana.com/docs/pyroscope/latest/deploy-kubernetes/helm/#optional-scrape-your-own-workloads-profiles
+    profiles.grafana.com/memory.scrape: "true"
+    profiles.grafana.com/memory.port_name: http2
+    profiles.grafana.com/cpu.scrape: "true"
+    profiles.grafana.com/cpu.port_name: http2
+    profiles.grafana.com/goroutine.scrape: "true"
+    profiles.grafana.com/goroutine.port_name: http2
+    # profiles.grafana.com/block.scrape: "true"
+    # profiles.grafana.com/mutex.scrape: "true"
+
+  resources:
+    {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources'.
+    #
+    # Note that if memory consumption is higher than you would like, you can decrease the interval
+    # that profiles are written into blocks by setting `pyroscopedb.max-block-duration` in the `extraArgs`
+    # stanza. By default, it is set to 3h - override it, for example, as below:
+    # ```
+    # extraArgs:
+    #   pyroscopedb.max-block-duration: 30m
+    # ```
+    #
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  config: |
+    storage:
+      backend: s3
+      s3:
+        endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
+        bucket_name: "${BUCKET_NAME}"
+        access_key_id: "${AWS_ACCESS_KEY_ID}"
+        secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
+        http:
+          insecure_skip_verify: true
+        force_path_style: true
+
+  ## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+  ## If you set enabled as "True", you need :
+  ## - create a pv which above 10Gi and has same namespace with pyroscope
+  ## - keep storageClassName same with below setting
+  persistence:
+    enabled: true
+    accessModes:
+    - ReadWriteOnce
+    size: 10Gi
+    annotations: {}
+    storageClassName: ceph-filesystem
+    # selector:
+    #   matchLabels:
+    #     app.kubernetes.io/name: pyroscope
+    # subPath: ""
+    # existingClaim:
+
+  # run specific components separately
+  components: {}
+
+  # -- Allows to override Pyroscope's configuration using structured format.
+  structuredConfig: {}
+
+architecture:
+  storage:
+    # -- (bool) Enable v1 storage layer.
+    v1: false
+    # -- (bool) Enable v2 storage layer.
+    v2: true
+
+  # -- Deploy unified write/read services. These endpoints will can be used no matter if the helm chart is configured as single-binary or microservices
+  deployUnifiedServices: false
+
+  microservices:
+    # -- (bool) Enable micro-services deployment mode. This is recommend for larger scale deployment and allow right size each aspect of Pyroscope.
+    enabled: true
+
+    # -- (string) Memberlist cluster label that will be used for all members of this cluster
+    clusterLabelSuffix: -micro-services
+
+    # -- @ignored
+    # Not useful to be indivually exposed
+    v1:
+      querier:
+        kind: Deployment
+        replicaCount: 3
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            memory: 256Mi
+            cpu: 1
+        extraArgs:
+          store-gateway.sharding-ring.replication-factor: "3"
+      query-frontend:
+        kind: Deployment
+        replicaCount: 2
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            memory: 256Mi
+            cpu: 100m
+      query-scheduler:
+        kind: Deployment
+        replicaCount: 2
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            memory: 256Mi
+            cpu: 100m
+      distributor:
+        kind: Deployment
+        replicaCount: 2
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            memory: 256Mi
+            cpu: 500m
+      ingester:
+        kind: StatefulSet
+        replicaCount: 3
+        terminationGracePeriodSeconds: 600
+        resources:
+          limits:
+            memory: 16Gi
+          requests:
+            memory: 8Gi
+            cpu: 1
+      compactor:
+        kind: StatefulSet
+        replicaCount: 3
+        terminationGracePeriodSeconds: 1200
+        persistence:
+          enabled: false
+        resources:
+          limits:
+            memory: 16Gi
+          requests:
+            memory: 8Gi
+            cpu: 1
+      store-gateway:
+        kind: StatefulSet
+        replicaCount: 3
+        persistence:
+          # The store-gateway needs not need persistent storage, but we still run it as a StatefulSet
+          # This is to avoid having blocks of data being
+          enabled: false
+        resources:
+          limits:
+            memory: 16Gi
+          requests:
+            memory: 8Gi
+            cpu: 1
+        readinessProbe:
+          # The store gateway can be configured to wait on startup for ring stability to be reached before it becomes
+          # ready. See the `store-gateway.sharding-ring.wait-stability-min-duration` server argument for more information.
+          #
+          # Depending on this flag and the number of tenants + blocks that need to be synced on startup, pods can take
+          # some time to become ready. This value can be used to ensure Kubernetes waits long enough and reduce errors.
+          initialDelaySeconds: 60
+        extraArgs:
+          store-gateway.sharding-ring.replication-factor: "3"
+      tenant-settings:
+        kind: Deployment
+        replicaCount: 1
+        resources:
+          limits:
+            memory: 4Gi
+          requests:
+            memory: 16Mi
+            cpu: 0.1
+      ad-hoc-profiles:
+        kind: Deployment
+        replicaCount: 1
+        resources:
+          limits:
+            memory: 4Gi
+          requests:
+            memory: 16Mi
+            cpu: 0.1
+    # -- @ignored
+    # Not useful to be indivually exposed
+    v2:
+      query-backend:
+        kind: Deployment
+        replicaCount: 3
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            memory: 256Mi
+            cpu: 1
+      query-frontend:
+        kind: Deployment
+        replicaCount: 2
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            memory: 256Mi
+            cpu: 100m
+      distributor:
+        kind: Deployment
+        replicaCount: 2
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            memory: 256Mi
+            cpu: 500m
+      segment-writer:
+        kind: StatefulSet
+        replicaCount: 3
+        terminationGracePeriodSeconds: 600
+        resources:
+          limits:
+            memory: 4Gi
+          requests:
+            memory: 2Gi
+            cpu: 1
+      compaction-worker:
+        kind: StatefulSet
+        replicaCount: 3
+        terminationGracePeriodSeconds: 1200
+        persistence:
+          enabled: false
+        resources:
+          limits:
+            memory: 2Gi
+          requests:
+            memory: 1Gi
+            cpu: 1
+      metastore:
+        kind: StatefulSet
+        replicaCount: 3
+        terminationGracePeriodSeconds: 1200
+        persistence:
+          enabled: false
+        resources:
+          limits:
+            memory: 2Gi
+          requests:
+            memory: 1Gi
+            cpu: 1
+        extraArgs:
+          # Expect 3 metastores
+          metastore.raft.bootstrap-expect-peers: 3
+          # TODO(kolesnikovae): Update defaults.
+          adaptive-placement.max-dataset-shards: 1024
+          adaptive-placement.unit-size-bytes: 131072
+          # enable cleanup of blocks beyond retention
+          metastore.index.cleanup-interval: 1m
+          metastore.snapshot-compact-on-restore: true
+      tenant-settings:
+        kind: Deployment
+        replicaCount: 1
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 16Mi
+            cpu: 0.1
+      ad-hoc-profiles:
+        kind: Deployment
+        replicaCount: 1
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 16Mi
+            cpu: 0.1
+      admin:
+        kind: Deployment
+        replicaCount: 1
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 16Mi
+            cpu: 0.1
+
+# -------------------------------------
+# Configuration for `alloy` child chart
+# -------------------------------------
+alloy:
+  enabled: true
+  controller:
+    type: "statefulset"
+    replicas: 1
+    podAnnotations:
+      profiles.grafana.com/memory.scrape: "true"
+      profiles.grafana.com/memory.port_name: "http-metrics"
+      profiles.grafana.com/cpu.scrape: "true"
+      profiles.grafana.com/cpu.port_name: "http-metrics"
+      profiles.grafana.com/goroutine.scrape: "true"
+      profiles.grafana.com/goroutine.port_name: "http-metrics"
+      profiles.grafana.com/service_repository: 'https://github.com/grafana/alloy'
+      profiles.grafana.com/service_git_ref: 'v1.8.1'
+
+  alloy:
+    stabilityLevel: "public-preview"  # This needs to be set for some of our resources until verison v1.2 is released
+    configMap:
+      create: false
+      name: alloy-config-pyroscope
+    clustering:
+      enabled: true
+
+# -------------------------------------
+# Configuration for `grafana-agent` child chart
+# -------------------------------------
+agent:
+  enabled: false
+  controller:
+    type: "statefulset"
+    replicas: 1
+    podAnnotations:
+      profiles.grafana.com/memory.scrape: "true"
+      profiles.grafana.com/memory.port_name: "http-metrics"
+      profiles.grafana.com/cpu.scrape: "true"
+      profiles.grafana.com/cpu.port_name: "http-metrics"
+      profiles.grafana.com/goroutine.scrape: "true"
+      profiles.grafana.com/goroutine.port_name: "http-metrics"
+  agent:
+    clustering:
+      enabled: true
+    configMap:
+      create: false
+      name: grafana-agent-config-pyroscope
+
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Pyroscope
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Observability
+    forecastle.stakater.com/icon: https://pyroscope.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/network-restricted: "true"
+  className: cilium
+  enabled: true
+  hosts:
+  - pyroscope.apps.iaas.wcooke.me
+  pathType: Prefix
+  tls:
+  - secretName: pyroscope-certs
+
+serviceMonitor:
+  enabled: true

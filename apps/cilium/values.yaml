@@ -1,0 +1,158 @@
+bgpControlPlane:
+  enabled: true
+
+bpf:
+  lbExternalClusterIP: true
+  lbSourceRangeAllTypes: true
+  tproxy: true
+  vlanBypass: [0]
+
+bpfClockProbe: true
+
+cni:
+  enableRouteMTUForCNIChaining: true
+  exclusive: false
+
+dashboards:
+  enabled: true
+
+devices: "br0"
+
+encryption:
+  enabled: true
+  nodeEncryption: true
+  type: wireguard
+
+envoy:
+  enabled: true
+  log:
+    format_json:
+      date: "%Y-%m-%dT%T.%e"
+      level: "%l"
+      logger: "%n"
+      message: "%j"
+      source_line: "%s:%#"
+      thread_id: "%t"
+  prometheus:
+    enabled: true
+    # post cluster init
+    serviceMonitor:
+      enabled: true
+  rollOutPods: true
+  securityContext:
+    capabilities:
+      envoy:
+      - NET_ADMIN
+      - NET_BIND_SERVICE
+      - BPF
+      - PERFMON
+      keepCapNetBindService: true
+
+gatewayAPI:
+  enabled: true
+  enableAlpn: true
+  enableAppProtocol: true
+  externalTrafficPolicy: Cluster
+
+hubble:
+  metrics:
+    enabled:
+    - dns
+    - drop
+    - flow
+    - flows-to-world
+    - httpV2
+    - icmp
+    - kafka
+    - port-distribution
+    - tcp
+  relay:
+    enabled: true
+    rollOutPods: true
+    prometheus:
+      enabled: true
+      # post cluster init
+      serviceMonitor:
+        enabled: true
+  ui:
+    enabled: true
+    ingress:
+      annotations:
+        cert-manager.io/cluster-issuer: "iaas-wcooke-me"
+        forecastle.stakater.com/appName: Hubble
+        forecastle.stakater.com/expose: "true"
+        forecastle.stakater.com/group: Observability
+        forecastle.stakater.com/icon: https://hubble.apps.iaas.wcooke.me/favicon.ico
+        forecastle.stakater.com/network-restricted: "true"
+      className: cilium
+      enabled: true
+      hosts:
+      - hubble.apps.iaas.wcooke.me
+      tls:
+      - hosts:
+        - hubble.apps.iaas.wcooke.me
+        secretName: hubble-ingress-tls
+    rollOutPods: true
+  tls:
+    auto:
+      # post cluster init
+      certManagerIssuerRef:
+        group: cert-manager.io
+        kind: ClusterIssuer
+        name: "iaas-wcooke-me"
+      certValidityDuration: 47
+      method: certmanager
+
+ingressController:
+  default: true
+  enabled: true
+  enforceHttps: false
+  loadbalancerMode: shared
+#  hostNetwork:
+#    enabled: false
+#    nodes:
+#      matchExpressions:
+#      - key: node.kubernetes.io/exclude-from-external-load-balancers
+#        operator: DoesNotExist
+#    sharedListenerPort: 80
+  service:
+    externalTrafficPolicy: Cluster
+#    loadBalancerIP: 10.42.41.130
+
+ipam:
+  mode: cluster-pool
+  operator:
+    clusterPoolIPv4PodCIDRList:
+    - 10.244.0.0/16
+    clusterPoolIPv4MaskSize: 24
+    clusterPoolIPv6PodCIDRList:
+    - fd42:42:244::/64
+    clusterPoolIPv6MaskSize: 112
+
+k8sServiceHost: api.iaas.wcooke.me
+
+k8sServicePort: 6443
+
+kubeProxyReplacement: true
+
+logOptions:
+  format: json
+
+monitor:
+  enabled: true
+
+operator:
+  replicas: 3
+  rollOutPods: true
+  prometheus:
+    # post cluster init
+    serviceMonitor:
+      enabled: true
+
+pmtuDiscovery:
+  enabled: true
+
+prometheus:
+  enabled: true
+
+rollOutCiliumPods: true

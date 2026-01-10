@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  name: projects
+  namespace: argocd
+spec:
+  destination:
+    name: in-cluster
+  project: core
+  source:
+    path: projects
+    repoURL: git@github.com:cookew/iaas-cyclopse.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: false
+      selfHeal: true

@@ -1,0 +1,28 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: KubeVirt Manager
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Kubernetes
+    forecastle.stakater.com/icon: https://kubevirt.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/network-restricted: "true"
+  name: kubevirt-manager
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: kubevirt.apps.iaas.wcooke.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: kubevirt-manager
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - kubevirt.apps.iaas.wcooke.me
+    secretName: kubevirt-manager-ingress-cert

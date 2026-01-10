@@ -1,0 +1,31 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    # nginx.ingress.kubernetes.io/backend-protocol: https
+    # nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    # external-dns.alpha.kubernetes.io/hostname: argocd.apps.iaas.wcooke.me
+    forecastle.stakater.com/appName: ArgoCD
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Kubernetes
+    forecastle.stakater.com/icon: https://argocd.apps.iaas.wcooke.me/assets/images/logo.png
+    forecastle.stakater.com/network-restricted: "true"
+  name: argocd-server
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: argocd.apps.iaas.wcooke.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: argocd-server
+            port:
+              name: https
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - argocd.apps.iaas.wcooke.me
+    secretName: argocd-ingress

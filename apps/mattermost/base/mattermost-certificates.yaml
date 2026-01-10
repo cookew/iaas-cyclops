@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mattermost-certificates
+spec:
+  commonName: mattermost
+  dnsNames:
+    - mattermost
+    - mattermost.mattermost.svc
+    - mattermost.mattermost.svc.cluster.local
+    - mattermost.apps.iaas.wcooke.me
+  duration: 960h
+  isCA: false
+  issuerRef:
+    kind: ClusterIssuer
+    name: iaas-wcooke-me
+  secretName: mattermost-certificates
+  usages:
+  - client auth
+  - server auth

@@ -1,0 +1,29 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    route.openshift.io/termination: reencrypt
+    forecastle.stakater.com/appName: Argo Workflows
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Kubernetes
+    forecastle.stakater.com/icon: https://argo-workflows.apps.iaas.wcooke.me/assets/images/logo.png
+    forecastle.stakater.com/network-restricted: "true"
+  name: argo-workflows
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: argo-workflows.apps.iaas.wcooke.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: argo-server
+            port:
+              name: web
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - argo-workflows.apps.iaas.wcooke.me
+    secretName: argo-workflows-ingress-cert

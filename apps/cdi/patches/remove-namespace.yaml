@@ -1,0 +1,6 @@
+# Remove the kubevirt namespace so that argocd can create it
+$patch: delete
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cdi

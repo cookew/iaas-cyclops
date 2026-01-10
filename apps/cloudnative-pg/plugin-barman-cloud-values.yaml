@@ -1,0 +1,24 @@
+replicaCount: 1
+
+resources: {}
+  # If you want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  #
+  # limits:
+  #   cpu: 100m
+  #   memory: 200Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 100Mi
+
+certificate:
+  # -- Specifies whether the client certificate should be created.
+  createClientCertificate: true
+  # -- Specifies whether the server certificate should be created.
+  createServerCertificate: true
+  # -- The name of the issuer to use for the certificates.
+  issuerName: iaas-wcooke-me
+  # -- The duration of the certificates.
+  duration: 960h
+  # -- The renew before time for the certificates.
+  renewBefore: 360h

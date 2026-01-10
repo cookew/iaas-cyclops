@@ -1,0 +1,22 @@
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts
+  value:
+    - mountPath: /var/lib/rook
+      name: rook-config
+    - mountPath: /etc/ceph
+      name: default-config-dir
+    - mountPath: /etc/ssl/certs/cacert.pem
+      name: ca
+      readOnly: true
+      subPath: cabundle
+- op: add
+  path: /spec/template/spec/volumes
+  value:
+    - emptyDir: {}
+      name: rook-config
+    - emptyDir: {}
+      name: default-config-dir
+    - configMap:
+        defaultMode: 420
+        name: ca-bundle
+      name: ca

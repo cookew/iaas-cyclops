@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: headlamp-oidc-client
+  namespace: headlamp
+spec:
+  encryptedData:
+    OIDC_CLIENT_SECRET: AgAcQ6ejKtv1n+fo6SfvIMoYED8RQedk4+TTQlFDrHcvfYsP7EDMZKyjQiI7zme5rYxetYX2FKAkr2eQxotp+U8GBfaMFaFnCUNbjS67NQy/Ooi67OJojDza48TpqehLDXg73oNhYoyDTHxQoPD/8Fv2oSjZNT+hw4v4e/2HEH5SJTFvcPkCfXZZDSwSaTrFcESehuo7GaSPhPxoYC/2RVKKqkJjqTSh6WU8qCpnFeqDaACCYS2lJ6CKZwACvMLr417xlVwYTE20QAT3tIpdzXz3BolLrJYaDefVuCDyTv4dJrK/TTylo/6GGYOGBZaVvjxE3+6oJJ8Jdx4b4fxk6YLp1yy9ZhW5LMnAvQMnYLWr04I6d4jbG9IylAEbWgHguxSTlGNnTjreFjvx9YdUh3gOHpad09UAxOZXlUzniByYB8tulz7S+sClBWohnyXtpkZnjR4h3TYPVXwMUYJoFlbMXlp5TUDoJj9QdAnsx4VhmQQqlMbSpJfdoVX1+bkAxBVCfGi+a66uDxYV3E1q1L2jX1bbw6s+DLu6+qpVxDCkLutFMGpFkqNHFTVzsoPrs8TGXQjFCgA9uYQbL4RzumvE7UFhI/k8MNVzNBQbzwG/jufD9nP69BjmRtVF2VklFQ44Gb1kIbGj0PZ0DNM35I+/8gHQrB0Km96S/K1K/NLd9y0XJ+ynS9TCTEZsZk2ZIr+cgLuo6sL5eL995HKpyKttOu7LSp3/2iLVMCUtn4FLDg==
+  template:
+    metadata:
+      name: headlamp-oidc-client
+      namespace: headlamp
+    type: stringData

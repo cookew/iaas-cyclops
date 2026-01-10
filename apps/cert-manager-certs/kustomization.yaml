@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: cert-manager
+
+resources:
+- base/ca-bundle.yaml
+- base/clusterissuer.yaml
+- base/clusterrolebinding.yaml
+- base/root-ca-cert.yaml
+- sealed-secrets/ca.yaml
+

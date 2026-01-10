@@ -1,0 +1,13 @@
+- op: replace
+  path: /spec/revisionHistoryLimit
+  value: 0
+- op: add
+  path: /spec/template/spec/containers/0/resources/limits
+  value:
+    cpu: 1000m
+    memory: 1Gi
+- op: add
+  path: /spec/template/spec/containers/0/resources/requests
+  value:
+    cpu: 50m
+    memory: 650Mi

@@ -1,0 +1,157 @@
+apiVersion: apps.gitlab.com/v1beta1
+kind: GitLab
+metadata:
+  name: gitlab
+spec:
+  chart:
+    version: "9.3.1" # https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/Chart.yaml?ref_type=heads
+    values:
+      gitlab:
+        webservice:
+          ingress:
+            annotations:
+              forecastle.stakater.com/appName: GitLab
+              forecastle.stakater.com/expose: "true"
+              forecastle.stakater.com/group: Kubernetes
+              forecastle.stakater.com/icon: https://gitlab.wcooke.me/-/pwa-icons/logo-192.png
+              forecastle.stakater.com/network-restricted: "true"
+      global:
+        appConfig:
+          enableUsagePing: false
+          defaultColorMode: 2
+          # defaultSyntaxHighlightingTheme: 4
+          # defaultTheme: 2
+          # enableImpersonation: true
+          # ldap.preventSignin: true
+          object_store:
+            enabled: true
+            proxy_download: true
+            connection:
+              secret: gitlab-connection
+              key: connection
+          omniauth:
+            allowSingleSignOn: true
+            autoLinkUsers: true
+            autoSignInWithProvider: openid_connect
+            enabled: true
+            syncProfileFromProvider: true
+            syncProfileAttributes:
+            - name
+            - email
+            - job_title
+            - location
+            - organization
+            providers:
+            - secret: gitlab-oidc
+          terraformState:
+            enabled: true
+          ciSecureFiles:
+            enabled: true
+          dependencyProxy:
+            enabled: true
+        certificates:
+          customCAs:
+          - configMap: gitlab-ca-bundle
+            keys:
+            - kube-certs.crt
+          - configMap: openshift-service-ca.crt
+            keys:
+            - service-ca.crt
+        edition: ce
+        email:
+          display_name: WCooke GitLab
+          from: cookewe@gmail.com
+          reply_to: cookewe@gmail.com
+        hosts:
+          domain: gitlab.wcooke.me
+          https: true
+          gitlab:
+            name: gitlab.wcooke.me
+          # registry:
+          #   name: registry.gitlab.wcooke.me
+          # kas:
+          #   name: kas.gitlab.wcooke.me
+          # pages:
+          #   name: pages.gitlab.wcooke.me
+          # ssh: gitlab.wcooke.me
+        ingress:
+          configureCertmanager: false
+          controller:
+            electionID: gitlab-nginx-ingress-leader
+          enabled: true
+          tls:
+            secretName: gitlab-certificate
+        minio:
+          enabled: false
+        pages:
+          customDomainMode: https
+          enabled: true
+          host: pages.gitlab.wcooke.me
+        serviceAccount:
+          enabled: false
+          create: true
+        shell:
+          metrics:
+            enabled: true
+            serviceMonitor:
+              enabled: true
+          service:
+            type: LoadBalancer
+            # loadBalancerIP: 10.42.41.100
+          sshDaemon: gitlab-sshd
+        smtp:
+          enabled: false
+          address: smtp.wcooke.me
+          authentication: ""
+          port: 25
+          tls: false
+        time_zone: America/Denver
+      installCertmanager: false
+      certmanager:
+        installCRDs: false
+      prometheus:
+        install: false
+      registry:
+        storage:
+          secret: gitlab-registry-connection
+          key: connection
+          redirect:
+            disable: true
+      # postgresql:
+      #   install: false
+      # https://docs.gitlab.com/charts/charts/globals#configure-postgresql-settings
+      # psql:
+      #   connectTimeout:
+      #   keepalives:
+      #   keepalivesIdle:
+      #   keepalivesInterval:
+      #   keepalivesCount:
+      #   tcpUserTimeout:
+      #   password: {}
+          # useSecret:
+          # secret:
+          # key:
+          # file:
+        # host: postgresql.hostedsomewhere.else
+        # port: 123
+        # username: gitlab
+        # database: gitlabhq_production
+        # applicationName:
+        # preparedStatements: false
+        # databaseTasks: true
+        # main: {}
+          # host: postgresql.hostedsomewhere.else
+          # port: 123
+          # username: gitlab
+          # database: gitlabhq_production
+          # applicationName:
+          # preparedStatements: false
+          # databaseTasks: true
+        # ci: {}
+          # host: postgresql.hostedsomewhere.else
+          # port: 123
+          # username: gitlab
+          # database: gitlabhq_production_ci
+          # applicationName:
+          # preparedStatements: false
+          # databaseTasks: false

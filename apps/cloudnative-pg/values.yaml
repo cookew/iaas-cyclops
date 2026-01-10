@@ -1,0 +1,31 @@
+replicaCount: 2
+
+# image:
+#   repository: ghcr.io/cloudnative-pg/cloudnative-pg-ubi9
+
+# updateStrategy:
+#   rollingUpdate:
+#     maxUnavailable: 1
+#   type: RollingUpdate
+
+# config:
+#   secret: true
+#   data: {}
+
+monitoring:
+  grafanaDashboard:
+    create: true
+  podMonitorEnabled: true
+
+# affinity:
+#   nodeAffinity:
+#     requiredDuringSchedulingIgnoredDuringExecution:
+#       nodeSelectorTerms:
+#       - matchExpressions:
+#         - key: node-role.kubernetes.io/control-plane
+#           operator: Exists
+
+# tolerations:
+#   - effect: NoSchedule
+#     key: node-role.kubernetes.io/control-plane
+#     operator: Exists

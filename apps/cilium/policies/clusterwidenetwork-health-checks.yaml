@@ -1,0 +1,16 @@
+# https://docs.cilium.io/en/stable/security/policy/kubernetes/#k8s-namespaces
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: cilium-health-checks
+spec:
+  description: Allow health checks
+  endpointSelector:
+    matchLabels:
+      'reserved:health': ''
+  ingress:
+  - fromEntities:
+    - remote-node
+  egress:
+  - toEntities:
+    - remote-node

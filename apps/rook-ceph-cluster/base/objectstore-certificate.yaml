@@ -1,0 +1,24 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: objectstore-certificate
+spec:
+  commonName: s3.apps.iaas.wcooke.me
+  dnsNames:
+  - "*.s3.apps.iaas.wcooke.me"
+  - s3.apps.iaas.wcooke.me
+  - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc.cluster.local
+  - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc.cluster.local
+  - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc.cluster
+  - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc
+  - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster
+  - rook-ceph-rgw-ceph-objectstore
+  duration: 2160h
+  isCA: false
+  issuerRef:
+    kind: ClusterIssuer
+    name: iaas-wcooke-me
+  secretName: objectstore-certificate
+  usages:
+  - server auth
+  - client auth

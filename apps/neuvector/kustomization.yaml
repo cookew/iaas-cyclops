@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- base/neuvector-certs.yaml
+- base/neuvector-init-cm.yaml
+- sealed-secrets/neuvector-init.yaml
+
+# https://github.com/neuvector/neuvector-helm
+helmCharts:
+- name: core
+  includeCRDs: true
+  namespace: neuvector
+  releaseName: neuvector
+  repo: https://neuvector.github.io/neuvector-helm/
+  valuesFile: values.yaml
+  version: 2.8.10

@@ -1,0 +1,37 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: argocd
+
+resources:
+- base/argocd-dex-server-tls.yaml
+- base/argocd-redis-ha-proxy-service-monitor.yaml
+- base/argocd-repo-server-tls.yaml
+- base/argocd-server-tls.yaml
+- base/dashboards.yaml
+- base/ingress.yaml
+- base/namespace.yaml
+- base/servicemonitor.yaml
+- sealed-secrets/argocd-secret.yaml
+- sealed-secrets/svc-1.wcooke.me-repo-creds.yaml
+- sealed-secrets/svc-1.wcooke.me-repo.yaml
+- https://github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=release-3.2
+
+patches:
+- path: patches/argocd-cm.yaml
+- path: patches/argocd-cmd-params-cm.yaml
+- path: patches/argocd-rbac-cm.yaml
+- path: patches/argocd-secret.yaml
+- path: patches/argocd-server-role.yaml
+  target:
+    kind: ClusterRole
+    name: argocd-server
+# - path: patches/argocd-ssh-known-hosts-cm.yaml
+#   target:
+#     kind: ConfigMap
+#     name: argocd-ssh-known-hosts-cm
+#     version: v1
+- path: patches/argocd-redis-ha-server-network-policy.yaml
+  target:
+    kind: NetworkPolicy
+    name: argocd-redis-ha-server-network-policy

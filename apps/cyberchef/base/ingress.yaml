@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cyberchef
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: CyberChef
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Apps
+    forecastle.stakater.com/icon: https://cyberchef.apps.iaas.wcooke.me/images/cyberchef-128x128.png
+    forecastle.stakater.com/network-restricted: "true"
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: cyberchef.apps.iaas.wcooke.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: cyberchef
+            port:
+              number: 8080
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - cyberchef.apps.iaas.wcooke.me
+    secretName: cyberchef-server-tls

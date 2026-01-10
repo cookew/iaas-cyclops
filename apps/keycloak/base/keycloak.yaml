@@ -1,0 +1,84 @@
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: Keycloak
+metadata:
+  name: keycloak
+spec:
+  bootstrapAdmin:
+    user:
+      secret: keycloak-user
+  db:
+    database: keycloak
+    host: keycloak-pg-cluster-rw
+    passwordSecret:
+      key: password
+      name: keycloak-pg-cluster-app
+    usernameSecret:
+      key: username
+      name: keycloak-pg-cluster-app
+    vendor: postgres
+  features:
+    enabled:
+    - docker
+    - client-auth-federated
+    - fips
+    - ipa-tuura-federation
+    - kerberos
+    - kubernetes-service-accounts
+    - passkeys
+    - spiffe
+  hostname:
+    # admin: https://keycloak.apps.iaas.wcooke.me/admin
+    hostname: https://keycloak.apps.iaas.wcooke.me
+    # strict: false
+  http:
+    tlsSecret: keycloak-certificate
+  image: registry.wcooke.me:5000/keycloak/keycloak-fips:26.5.0-fips
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+      forecastle.stakater.com/appName: Keycloak
+      forecastle.stakater.com/expose: "true"
+      forecastle.stakater.com/group: Kubernetes
+      forecastle.stakater.com/icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
+      forecastle.stakater.com/network-restricted: "true"
+      ingress.cilium.io/tls-passthrough: enabled
+    className: cilium
+    enabled: false
+    tlsSecret: keycloak-ingress-cert
+  instances: 2
+  # networkPolicy:
+  #   enabled: true
+  #   https:
+  #   - namespaceSelector:
+  #       matchLabels:
+  #         kubernetes.io/metadata.name: ingress-nginx
+  #   management:
+  #   - namespaceSelector:
+  #       matchLabels:
+  #         kubernetes.io/metadata.name: prometheus
+  proxy:
+    headers: xforwarded # double check your reverse proxy sets and overwrites the X-Forwarded-* headers
+  resources:
+    requests:
+      cpu: 250m
+      memory: 1500Mi
+    limits:
+      cpu: 1000m
+      memory: 6Gi
+  # scheduling:
+  #   affinity:
+  #     nodeAffinity:
+  #       requiredDuringSchedulingIgnoredDuringExecution:
+  #         nodeSelectorTerms:
+  #         - matchExpressions:
+  #           - key: node-role.kubernetes.io/control-plane
+  #             operator: Exists
+  #   tolerations:
+  #     - effect: NoSchedule
+  #       key: node-role.kubernetes.io/control-plane
+  #       operator: Exists
+  serviceMonitor:
+    enabled: true
+  # startOptimized: true
+
+# https://www.keycloak.org/operator/advanced-configuration

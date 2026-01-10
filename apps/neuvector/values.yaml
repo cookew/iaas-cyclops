@@ -1,0 +1,115 @@
+# autoGenerateCert: false
+
+containerd:
+  enabled: true
+
+controller:
+  certificate:
+    secret: neuvector-controller-cert
+    pemFile: tls.crt
+  # ingress:
+  #   annotations:
+  #     cert-manager.io/cluster-issuer: iaas-wcooke-me
+  #     forecastle.stakater.com/appName: Neuvector Controller
+  #     forecastle.stakater.com/expose: "true"
+  #     forecastle.stakater.com/group: Kubernetes
+  #     forecastle.stakater.com/icon: https://neuvector.apps.iaas.wcooke.me/assets/img/fav%402x.png
+  #     forecastle.stakater.com/network-restricted: "true"
+  #     ingress.cilium.io/tls-passthrough: "enabled"
+  #   enabled: true
+  #   host: neuvector-controller.apps.iaas.wcooke.me
+  #   ingressClassName: cilium
+  #   secretName: neuvector-ingress-controller-cert
+  #   tls: true
+  # prime:
+  #   enabled: true
+  # internal:
+  #   certificate:
+  #     secret: neuvector-internal-cert
+  pvc:
+    enabled: true
+    storageClass: ceph-filesystem
+    capacity: 1Gi
+  resources:
+    {}
+    # limits:
+    #   cpu: 400m
+    #   memory: 2792Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 2280Mi
+
+cve:
+  adapter:
+    # certificate:
+    #   secret: neuvector-internal-cert
+    enabled: true
+    # ingress:
+    #   annotations:
+    #     cert-manager.io/cluster-issuer: iaas-wcooke-me
+    #     forecastle.stakater.com/appName: Neuvector CVE Adapter
+    #     forecastle.stakater.com/expose: "true"
+    #     forecastle.stakater.com/group: Kubernetes
+    #     forecastle.stakater.com/icon: https://neuvector.apps.iaas.wcooke.me/assets/img/fav%402x.png
+    #     forecastle.stakater.com/network-restricted: "true"
+    #     ingress.cilium.io/tls-passthrough: "enabled"
+    #   enabled: true
+    #   host: neuvector-cve.apps.iaas.wcooke.me
+    #   ingressClassName: cilium
+    #   secretName: neuvector-ingress-cve-cert
+    #   tls: true
+    # internal:
+    #   certificate:
+    #     secret: neuvector-internal-cert
+  # scanner:
+  #   internal:
+  #     certificate:
+  #       secret: neuvector-internal-cert
+
+defaultValidityPeriod: 40
+
+# enforcer:
+#   internal:
+#     certificate:
+#       secret: neuvector-internal-cert
+
+# internal:
+#   certmanager: # enable when cert-manager is installed for the internal certificates
+#     enabled: false
+#     secretname: neuvector-internal-cert
+#   autoGenerateCert: true
+#   autoRotateCert: false
+
+manager:
+  certificate:
+    secret: neuvector-manager-cert
+    pemFile: tls.crt
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+      forecastle.stakater.com/appName: Neuvector
+      forecastle.stakater.com/expose: "true"
+      forecastle.stakater.com/group: Kubernetes
+      forecastle.stakater.com/icon: https://neuvector.apps.iaas.wcooke.me/assets/img/fav%402x.png
+      forecastle.stakater.com/network-restricted: "true"
+      ingress.cilium.io/tls-passthrough: "enabled"
+    enabled: true
+    host: neuvector.apps.iaas.wcooke.me
+    ingressClassName: cilium
+    secretName: neuvector-ingress-manager-cert
+    tls: true
+  probes:
+    enabled: true
+  resources:
+    {}
+    # limits:
+    #   cpu: 400m
+    #   memory: 2792Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 2280Mi
+  route:
+    enabled: false
+  svc:
+    type: ClusterIP
+

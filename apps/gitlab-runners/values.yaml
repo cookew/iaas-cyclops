@@ -1,0 +1,41 @@
+#certsSecretName: gitlab-runner-bundle
+gitlabUrl: https://gitlab.wcooke.me
+# gitlabUrl: http://gitlab-webservice-default.gitlab-system.svc:8080
+# logFormat: json
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+rbac:
+  create: true
+replicas: 1
+revisionHistoryLimit: 0
+runners:
+  config: |
+    [[runners]]
+      environment = ['DOCKER_HOST=tcp://localhost:2376', 'DOCKER_DRIVER=overlay2', 'DOCKER_TLS_CERTDIR=/certs', 'DOCKER_TLS_VERIFY=1', 'DOCKER_CERT_PATH=/certs/client' ]
+      [runners.kubernetes]
+        namespace = "{{ default .Release.Namespace .Values.runners.jobNamespace }}"
+        image = "ubuntu:24.04"
+        privileged = true
+        wait_for_services_timeout = 120
+        [[runners.kubernetes.volumes.empty_dir]]
+          name = "dind-certs"
+          mount_path = "/certs"
+          medium = "Memory"
+  locked: null
+  secret: gitlab-runner-token
+serviceAccount:
+  create: true
+  name: gitlab-runner
+service:
+  enabled: true
+terminationGracePeriodSeconds: 1
+volumeMounts:
+- name: ca-bundle
+  mountPath: /etc/ssl/certs/ca-certs.crt
+  subPath: cabundle
+volumes:
+- name: ca-bundle
+  configMap:
+    name: ca-bundle

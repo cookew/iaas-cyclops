@@ -1,0 +1,253 @@
+global:
+  extraEnvFrom:
+  - configMapRef:
+      name: tempo-bucket
+  - secretRef:
+      name: tempo-bucket
+
+compactor:
+  extraArgs:
+  - -config.expand-env=true
+  maxUnavailable: 2
+  replicas: 3
+  config:
+    compaction:
+      # -- Duration to keep blocks
+      block_retention: 48h
+      # Duration to keep blocks that have been compacted elsewhere
+      compacted_block_retention: 1h
+      # -- Blocks in this time window will be compacted together
+      compaction_window: 1h
+      # -- Amount of data to buffer from input blocks
+      v2_in_buffer_bytes: 5242880
+      # -- Flush data to backend when buffer is this large
+      v2_out_buffer_bytes: 20971520
+      # -- Maximum number of traces in a compacted block. WARNING: Deprecated. Use max_block_bytes instead.
+      max_compaction_objects: 6000000
+      # -- Maximum size of a compacted block in bytes
+      max_block_bytes: 107374182400
+      # -- Number of tenants to process in parallel during retention
+      retention_concurrency: 10
+      # -- Number of traces to buffer in memory during compaction
+      v2_prefetch_traces_count: 1000
+      # -- The maximum amount of time to spend compacting a single tenant before moving to the next
+      max_time_per_tenant: 5m
+      # -- The time between compaction cycles
+      compaction_cycle: 30s
+
+distributor:
+  maxUnavailable: 2
+  replicas: 3
+
+gateway:
+  enabled: true
+  maxUnavailable: 2
+  replicas: 3
+
+ingester:
+  extraArgs:
+  - -config.expand-env=true
+  maxUnavailable: 2
+  replicas: 3
+
+ingress:
+  enabled: true
+  ingressClassName: cilium
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Tempo
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Observability
+    forecastle.stakater.com/icon: https://tempo.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/network-restricted: "true"
+  paths:
+    distributor:
+      - path: /v1/traces
+        port: 4318
+      - path: /distributor/ring
+        pathType: Prefix
+      - path: /ingester/ring
+      - path: /metrics-generator/ring
+    ingester:
+      - path: /flush
+      - path: /shutdown
+    query-frontend:
+      - path: /api
+    compactor:
+      - path: /compactor/ring
+  hosts:
+    - tempo.apps.iaas.wcooke.me
+
+memcached:
+  maxUnavailable: 2
+  replicas: 3
+
+memcachedExporter:
+  enabled: true
+
+metaMonitoring:
+  serviceMonitor:
+    enabled: true
+
+multitenancyEnabled: false
+
+querier:
+  replicas: 3
+  extraArgs:
+  - -config.expand-env=true
+
+queryFrontend:
+  extraArgs:
+  - -config.expand-env=true
+  maxUnavailable: 2
+  replicas: 3
+  query:
+    enabled: true
+#   ingress:
+#     enabled: true
+#     ingressClassName: cilium
+#     annotations:
+#       cert-manager.io/cluster-issuer: iaas-wcooke-me
+#       forecastle.stakater.com/appName: Tempo Query
+#       forecastle.stakater.com/expose: "true"
+#       forecastle.stakater.com/group: Observability
+#       forecastle.stakater.com/icon: https://query.tempo.apps.iaas.wcooke.me/favicon.ico
+#       forecastle.stakater.com/network-restricted: "true"
+#     hosts:
+#       - host: query.tempo.apps.iaas.wcooke.me
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#     tls:
+#       - secretName: tempo-query-cert
+#         hosts:
+#           - query.tempo.apps.iaas.wcooke.me
+
+prometheusRule:
+  enabled: true
+  groups:
+  - name: loki-rules
+    rules:
+      - record: job:loki_request_duration_seconds_bucket:sum_rate
+        expr: sum(rate(loki_request_duration_seconds_bucket[1m])) by (le, job)
+      - record: job_route:loki_request_duration_seconds_bucket:sum_rate
+        expr: sum(rate(loki_request_duration_seconds_bucket[1m])) by (le, job, route)
+      - record: node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate
+        expr: sum(rate(container_cpu_usage_seconds_total[1m])) by (node, namespace, pod, container)
+
+reportingEnabled: false
+
+server:
+  logFormat: json
+
+storage:
+  trace:
+    backend: s3
+    s3:
+      bucket: "${BUCKET_NAME}"
+      endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
+      access_key: "${AWS_ACCESS_KEY_ID}"
+      secret_key: "${AWS_SECRET_ACCESS_KEY}"
+      tls_insecure_skip_verify: true
+      forcepathstyle: true
+      # enable_dual_stack: true
+  admin:
+    backend: s3
+
+tempo:
+  revisionHistoryLimit: 0
+  structuredConfig:
+    stream_over_http_enabled: true
+
+rbac:
+  # -- Specifies whether RBAC manifests should be created
+  create: false
+  # -- Specifies whether a PodSecurityPolicy should be created
+  pspEnabled: false
+
+# Configuration for the metrics-generator
+metricsGenerator:
+  enabled: true
+  kind: Deployment
+  maxUnavailable: 2
+  replicas: 3
+  extraArgs:
+  - -config.expand-env=true
+  # -- The EmptyDir location where the /var/tempo will be mounted on. Defaults to local disk, can be set to memory.
+  walEmptyDir: {}
+    ## Here shows how to configure 1Gi memory as emptyDir.
+    ## Ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#emptydirvolumesource-v1-core
+    # medium: "Memory"
+    # sizeLimit: 1Gi
+  extraVolumeMounts: []
+  extraVolumes: []
+  persistentVolumeClaimRetentionPolicy:
+    enabled: true
+    whenScaled: Retain
+    whenDeleted: Delete
+  ports:
+    - name: grpc
+      port: 9095
+      service: true
+    - name: http-memberlist
+      port: 7946
+      service: false
+    - name: http-metrics
+      port: 3200
+      service: true
+  # -- More information on configuration: https://grafana.com/docs/tempo/latest/configuration/#metrics-generator
+  config:
+    registry:
+      collection_interval: 15s
+      external_labels: {}
+      stale_duration: 15m
+    processor:
+      # -- For processors to be enabled and generate metrics, pass the names of the processors to `overrides.defaults.metrics_generator.processors` value like `[service-graphs, span-metrics]`.
+      service_graphs:
+        # -- Additional dimensions to add to the metrics along with the default dimensions.
+        # -- The resource and span attributes to be added to the service graph metrics, if present.
+        dimensions: []
+        histogram_buckets: [0.1, 0.2, 0.4, 0.8, 1.6, 3.2, 6.4, 12.8]
+        max_items: 10000
+        wait: 10s
+        workers: 10
+      span_metrics:
+        # -- Additional dimensions to add to the metrics along with the default dimensions.
+        # -- The resource and span attributes to be added to the span metrics, if present.
+        dimensions: []
+        histogram_buckets: [0.002, 0.004, 0.008, 0.016, 0.032, 0.064, 0.128, 0.256, 0.512, 1.02, 2.05, 4.10]
+    storage:
+      path: /var/tempo/wal
+      wal:
+      remote_write_flush_deadline: 1m
+      # Whether to add X-Scope-OrgID header in remote write requests
+      remote_write_add_org_id_header: true
+      # -- A list of remote write endpoints.
+      # -- https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write
+      remote_write: []
+    # -- Used by the local blocks processor to store a wal for traces.
+    traces_storage:
+      path: /var/tempo/traces
+    metrics_ingestion_time_range_slack: 30s
+
+traces:
+  otlp:
+    http:
+      # -- Enable Tempo to ingest Open Telemetry HTTP traces
+      enabled: true
+      # -- HTTP receiver advanced config
+      receiverConfig: {}
+    grpc:
+      # -- Enable Tempo to ingest Open Telemetry GRPC traces
+      enabled: true
+      # -- GRPC receiver advanced config
+      receiverConfig: {}
+      # -- Default OTLP gRPC port
+      port: 4317
+  opencensus:
+    # -- Enable Tempo to ingest Open Census traces
+    enabled: false
+    # -- Open Census receiver config
+    receiverConfig: {}
+  # -- Enable Tempo to ingest traces from Kafka. Reference: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/kafkareceiver
+  kafka: {}

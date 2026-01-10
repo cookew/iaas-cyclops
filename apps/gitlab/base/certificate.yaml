@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gitlab
+spec:
+  commonName: gitlab
+  dnsNames:
+  - "gitlab.wcooke.me"
+  - "*.gitlab.wcooke.me"
+  - "*.pages.gitlab.wcooke.me"
+  duration: 960h
+  isCA: false
+  issuerRef:
+    kind: ClusterIssuer
+    name: iaas-wcooke-me
+  secretName: gitlab-certificate
+  usages:
+  - server auth
+  - client auth

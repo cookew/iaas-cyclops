@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Keycloak
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Kubernetes
+    forecastle.stakater.com/icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
+    forecastle.stakater.com/network-restricted: "true"
+    ingress.cilium.io/tls-passthrough: enabled
+  name: keycloak-ingress
+spec:
+  # defaultBackend:
+  #   service:
+  #     name: keycloak-service
+  #     port:
+  #       name: https
+  ingressClassName: cilium
+  rules:
+  - host: keycloak.apps.iaas.wcooke.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: keycloak-service
+            port:
+              name: https
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - keycloak.apps.iaas.wcooke.me
+    secretName: keycloak-ingress-cert

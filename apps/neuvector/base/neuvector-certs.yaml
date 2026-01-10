@@ -1,0 +1,61 @@
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: neuvector-internal-cert
+# spec:
+#   commonName: neuvector-internal-cert
+#   dnsNames:
+#   - neuvector-controller
+#   - neuvector-service-registry-adapter
+#   - neuvector-service-webui
+#   - neuvector-svc-admission-webhook
+#   - neuvector-svc-crd-webhook
+#   duration: 960h
+#   isCA: false
+#   issuerRef:
+#     kind: ClusterIssuer
+#     name: iaas-wcooke-me
+#   secretName: neuvector-internal-cert
+#   usages:
+#   - client auth
+#   - server auth
+# ---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: neuvector-controller-cert
+spec:
+  commonName: neuvector-controller-cert
+  dnsNames:
+  - "neuvector-controller.apps.iaas.wcooke.me"
+  - "neuvector-svc-controller.neuvector.svc.cluster.local"
+  - "neuvector-svc-controller.neuvector.svc"
+  duration: 960h
+  isCA: false
+  issuerRef:
+    kind: ClusterIssuer
+    name: iaas-wcooke-me
+  secretName: neuvector-controller-cert
+  usages:
+  - client auth
+  - server auth
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: neuvector-manager-cert
+spec:
+  commonName: neuvector-manager-cert
+  dnsNames:
+  - "neuvector.apps.iaas.wcooke.me"
+  - "neuvector-service-webui.neuvector.svc.cluster.local"
+  - "neuvector-service-webui.neuvector.svc"
+  duration: 960h
+  isCA: false
+  issuerRef:
+    kind: ClusterIssuer
+    name: iaas-wcooke-me
+  secretName: neuvector-manager-cert
+  usages:
+  - client auth
+  - server auth

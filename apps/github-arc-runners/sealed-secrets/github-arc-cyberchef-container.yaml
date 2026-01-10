@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: github-arc-cyberchef-container
+  namespace: github-arc-runners
+spec:
+  encryptedData:
+    github_token: AgAjeg9WuEhBv2BxpwVlZXwkhoCFm/W/9e2BFq9pOuxqD7U81NR1ySaDEWBZjrq0XRxStbGA5D0o0/603UtEW53LJl4jzMmt0k0Xl8YHZi1DTQXq/u+nAsQA7HKiHvFuFFEziqPTBJMcl+2GJN7tSlSHtQilDHUoJBjQRT1ImG5eOM+gcRGWzV4uRzH9q9T9iOOSEGd/dUXJZhFsGkAY7QzzZG9k9sHbIeEqLeDdSKGVYhDKrUoEX5nGRD56M1nlveOTu3FTfFBT0wKVj9RK9nVUrbPLmZ6oiD2QXf60jKmLMVD/bOqC9pfokSPDs4bvbXsxUCbB+DdSZbd6QGQ8BuLGZhNezB8BzCIvHo5W9OBt2h3S7cyWLGUJ51iLujtDbS/bRWytW4keZTIkzfsnYBH4NfXgHAborYOybPDCqaFWBEHzWyi23mu7pMsXaSeNJ+wsQi6+9REGVvRLE1DOFjFOdhuhS31hRj4Pvi0T/aEe2sk8eFj0xTfmFZdgN6GyosaaP/ZjbiWI66DknIj80qI6qiEPbQ11fmiWP8kK74bzHI/PXpKWPSjFjQAOp5BQitFqEQGKPEanHNz2/+p3fcFaAVtLLG19Tf1Po31BThpOVcdOzhFSJl8sxJocOWHyno2EWohQR+4xbigKTiyvIz2kTNTJ7ek4i7o6eIDMPOGdW6sulWMG4s5+q/t03U4o3ZebT2mFTEGKMzuXNRTs/iGd2cNShEB9MlvOb2+ZO7DIew4bU9TVJIudIlaw8qpial3cw8+vzY79Bbbu5Dv7QvNv6Efl2NTv8yV57eQcmhRm/Ix/RpC62gm9sPVbTRQ=
+  template:
+    metadata:
+      name: github-arc-cyberchef-container
+      namespace: github-arc-runners
+    type: stringData

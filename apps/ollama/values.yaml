@@ -1,0 +1,101 @@
+ollama:
+  port: 11434
+
+  gpu:
+    enabled: false
+    draEnabled: false
+    draDriverClass: "gpu.nvidia.com"
+    draExistingClaimTemplate: ""
+    type: 'nvidia'
+    number: 1
+    nvidiaResource: "nvidia.com/gpu"
+    mig:
+      enabled: false
+      devices: {}
+
+  models:
+    # -- List of models to pull at container startup
+    # The more you add, the longer the container will take to start if models are not present
+    # pull:
+    #  - llama2
+    #  - mistral
+    pull:
+    # - llama4
+    # - mistral
+    # - codellama
+    - llama2
+
+    # -- List of models to load in memory at container startup
+    # run:
+    #  - llama2
+    #  - mistral
+    run:
+    # - llama4
+    # - mistral
+    # - codellama
+    - llama2
+
+    # -- List of models to create at container startup, there are two options
+    # 1. Create a raw model
+    # 2. Load a model from configMaps, configMaps must be created before and are loaded as volume in "/models" directory.
+    # create:
+    #  - name: llama3.1-ctx32768
+    #    configMapRef: my-configmap
+    #    configMapKeyRef: configmap-key
+    #  - name: llama3.1-ctx32768
+    #    template: |
+    #      FROM llama3.1
+    #      PARAMETER num_ctx 32768
+    create: []
+
+    # -- Automatically remove models present on the disk but not specified in the values file
+    clean: false
+
+  # -- Add insecure flag for pulling at container startup
+  insecure: false
+
+  # -- Override ollama-data volume mount path, default: "/root/.ollama"
+  mountPath: ""
+
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Ollama
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Apps
+    # forecastle.stakater.com/icon: https://ollama.apps.iaas.wcooke.me/assets/images/logo.png
+    forecastle.stakater.com/network-restricted: "true"
+  className: cilium
+  enabled: true
+  hosts:
+    - host: ollama.apps.iaas.wcooke.me
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+  - secretName: ollama-tls
+    hosts:
+      - ollama.apps.iaas.wcooke.me
+
+nodeSelector: {}
+
+persistentVolume:
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  size: 100Gi
+  storageClass: ceph-filesystem
+
+replicaCount: 1
+
+resources:
+  requests:
+    memory: 32Gi
+    cpu: 1200m
+  limits: {}
+    # memory: 8192Mi
+    # cpu: 4000m
+
+serviceAccount:
+  automount: false
+  create: false

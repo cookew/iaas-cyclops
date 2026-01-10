@@ -1,0 +1,10 @@
+#!/usr/bin/bash -e
+
+REGISTRY=harbor.apps.iaas.wcooke.me
+REPO=me/cyberchef
+VERSION=10.19.4
+
+docker build -t ${REGISTRY}/${REPO}:${VERSION} .
+docker image push ${REGISTRY}/${REPO}:${VERSION}
+
+sed -i "s@- image: ${REGISTRY}/${REPO}:.*@- image: ${REGISTRY}/${REPO}:${VERSION}@g" base/deployment.yml

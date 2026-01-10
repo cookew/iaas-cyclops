@@ -1,0 +1,135 @@
+alertmanager:
+  alertmanagerSpec:
+    logFormat: json
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Delete
+      whenScaled: Retain
+    replicas: 1
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteMany"]
+          resources:
+            requests:
+              storage: 10Gi
+          storageClassName: ceph-filesystem
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+      forecastle.stakater.com/appName: Alertmanager
+      forecastle.stakater.com/expose: "true"
+      forecastle.stakater.com/group: Observability
+      forecastle.stakater.com/icon: https://alertmanager.apps.iaas.wcooke.me/favicon.ico
+      forecastle.stakater.com/network-restricted: "true"
+    enabled: true
+    hosts:
+    - alertmanager.apps.iaas.wcooke.me
+    ingressClassName: cilium
+    paths:
+    - /
+    pathType: Prefix
+    tls:
+    - secretName: alertmanager-ingress-cert
+      hosts:
+      - alertmanager.apps.iaas.wcooke.me
+
+crds:
+  enabled: false
+
+defaultRules:
+  rules:
+    kubeProxy: false
+
+grafana:
+  enabled: false
+  forceDeployDashboards: true
+  forceDeployDatasources: true
+
+kubeProxy:
+  enabled: false
+
+nodeExporter:
+  operatingSystems:
+    aix:
+      enabled: false
+    darwin:
+      enabled: false
+
+prometheus:
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+      forecastle.stakater.com/appName: Prometheus
+      forecastle.stakater.com/expose: "true"
+      forecastle.stakater.com/group: Observability
+      forecastle.stakater.com/icon: https://prometheus.apps.iaas.wcooke.me/favicon.svg
+      forecastle.stakater.com/network-restricted: "true"
+    enabled: true
+    hosts:
+    - prometheus.apps.iaas.wcooke.me
+    ingressClassName: cilium
+    paths:
+    - /
+    pathType: Prefix
+    tls:
+    - secretName: prometheus-ingress-cert
+      hosts:
+      - prometheus.apps.iaas.wcooke.me
+  prometheusSpec:
+    enableAdminAPI: true
+    enableOTLPReceiver: true
+    enableRemoteWriteReceiver: true
+    externalUrl: https://prometheus.apps.iaas.wcooke.me
+    logFormat: json
+    otlp: {}
+      # promoteResourceAttributes: []
+      # keepIdentifyingResourceAttributes: false
+      # translationStrategy: NoUTF8EscapingWithSuffixes
+      # convertHistogramsToNHCB: false
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Delete
+      whenScaled: Retain
+    remoteWriteDashboards: true
+    # replicas: 2
+    retention: 1y
+    retentionSize: 125GiB
+    # shards: 1
+    resources:
+      limits:
+        cpu: 2000m
+        memory: 4Gi
+      requests:
+        cpu: 100m
+        memory: 2Gi
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteMany"]
+          storageClassName: ceph-filesystem
+          resources:
+            requests:
+              storage: 150Gi
+    tsdb:
+      outOfOrderTimeWindow: 30m
+
+prometheus-node-exporter:
+  prometheus:
+    podMonitor:
+      enabled: true
+
+prometheusOperator:
+  admissionWebhooks:
+    deployment:
+      enabled: true
+      replicas: 2
+    certManager:
+      admissionCert:
+        duration: 960h
+      enabled: true
+      issuerRef:
+        name: iaas-wcooke-me
+        kind: ClusterIssuer
+  kubeletEndpointsEnabled: false
+  kubeletEndpointSliceEnabled: true
+  kubeletService:
+    enabled: true

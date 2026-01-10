@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: gitlab-system
+
+# https://gitlab.com/gitlab-org/cloud-native/gitlab-operator/-/blob/master/deploy/chart/Chart.yaml?ref_type=heads
+helmCharts:
+- includeCRDs: true
+  name: gitlab-operator
+  namespace: gitlab-system
+  releaseName: gitlab-operator
+  repo: https://charts.gitlab.io
+  version: 2.3.1

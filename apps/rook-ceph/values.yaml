@@ -1,0 +1,233 @@
+csi:
+  # csiAddons:
+  #   enabled: true
+  # enableCSIEncryption: true
+  enableLiveness: true
+  enableMetadata: true
+  enableOMAPGenerator: true
+  # logLevel: 1
+  nfs:
+    enabled: true
+  # pluginNodeAffinity: node-role.kubernetes.io/control-plane=""
+  # pluginTolerations:
+  # - effect: NoSchedule
+  #   key: node-role.kubernetes.io/control-plane
+  #   operator: Exists
+  # provisionerNodeAffinity: node-role.kubernetes.io/control-plane=""
+  # provisionerTolerations:
+  # - effect: NoSchedule
+  #   key: node-role.kubernetes.io/control-plane
+  #   operator: Exists
+  serviceMonitor:
+    enabled: true
+    namespace: rook-ceph
+  # sidecarLogLevel: 1
+
+  csiRBDProvisionerResource: |
+    - name : csi-provisioner
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 100m
+        limits:
+          memory: 256Mi
+    - name : csi-resizer
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 100m
+        limits:
+          memory: 256Mi
+    - name : csi-attacher
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 100m
+        limits:
+          memory: 256Mi
+    - name : csi-snapshotter
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 100m
+        limits:
+          memory: 256Mi
+    - name : csi-rbdplugin
+      resource:
+        requests:
+          memory: 512Mi
+        limits:
+          memory: 1Gi
+    - name : csi-omap-generator
+      resource:
+        requests:
+          memory: 512Mi
+          cpu: 100m
+        limits:
+          memory: 1Gi
+    - name : liveness-prometheus
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 50m
+        limits:
+          memory: 256Mi
+
+  csiRBDPluginResource: |
+    - name : driver-registrar
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 50m
+        limits:
+          memory: 256Mi
+    - name : csi-rbdplugin
+      resource:
+        requests:
+          memory: 512Mi
+          cpu: 100m
+        limits:
+          memory: 1Gi
+    - name : liveness-prometheus
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 50m
+        limits:
+          memory: 256Mi
+
+  csiCephFSProvisionerResource: |
+    - name : csi-provisioner
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 100m
+        limits:
+          memory: 256Mi
+    - name : csi-resizer
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 100m
+        limits:
+          memory: 256Mi
+    - name : csi-attacher
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 100m
+        limits:
+          memory: 256Mi
+    - name : csi-snapshotter
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 100m
+        limits:
+          memory: 256Mi
+    - name : csi-cephfsplugin
+      resource:
+        requests:
+          memory: 512Mi
+          cpu: 100m
+        limits:
+          memory: 1Gi
+    - name : liveness-prometheus
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 50m
+        limits:
+          memory: 256Mi
+
+  csiCephFSPluginResource: |
+    - name : driver-registrar
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 50m
+        limits:
+          memory: 256Mi
+    - name : csi-cephfsplugin
+      resource:
+        requests:
+          memory: 512Mi
+          cpu: 100m
+        limits:
+          memory: 1Gi
+    - name : liveness-prometheus
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 50m
+        limits:
+          memory: 256Mi
+
+  csiNFSProvisionerResource: |
+    - name : csi-provisioner
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 100m
+        limits:
+          memory: 256Mi
+    - name : csi-nfsplugin
+      resource:
+        requests:
+          memory: 512Mi
+          cpu: 100m
+        limits:
+          memory: 1Gi
+    - name : csi-attacher
+      resource:
+        requests:
+          memory: 512Mi
+          cpu: 100m
+        limits:
+          memory: 1Gi
+
+  csiNFSPluginResource: |
+    - name : driver-registrar
+      resource:
+        requests:
+          memory: 128Mi
+          cpu: 50m
+        limits:
+          memory: 256Mi
+    - name : csi-nfsplugin
+      resource:
+        requests:
+          memory: 512Mi
+          cpu: 100m
+        limits:
+          memory: 1Gi
+
+discover:
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+    operator: Exists
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+  resources: |
+    '{"resources":{"requests":{"memory":"128Mi","cpu":"100m"},"limits":{"memory":"512Mi"}}}'
+
+hostpathRequiresPrivileged: true
+
+monitoring:
+  enabled: true
+
+#nodeSelector:
+#  node-role.kubernetes.io/control-plane: ""
+#  kubernetes.io/arch: amd64
+
+obcAllowAdditionalConfigFields: "maxObjects,maxSize,bucketMaxObjects,bucketMaxSize,bucketPolicy,bucketLifecycle,bucketOwner"
+
+# tolerations:
+# - effect: NoSchedule
+#   key: node-role.kubernetes.io/control-plane
+#   operator: Exists

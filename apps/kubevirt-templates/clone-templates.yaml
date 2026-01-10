@@ -1,0 +1,40 @@
+# https://docs.okd.io/4.19/virt/storage/virt-enabling-user-permissions-to-clone-datavolumes.html
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubevirt-clone-pvc
+rules:
+- apiGroups:
+  - cdi.kubevirt.io
+  resources:
+  - datavolumes/source
+  verbs:
+  - "*"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kubevirt-clone-pvc
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubevirt-clone-pvc
+# Add other service accounts in other namespaces here
+subjects:
+- kind: Group
+  name: system:serviceaccounts:default
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kubevirt-clone-pvc-vm-test
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubevirt-clone-pvc
+# Add other service accounts in other namespaces here
+subjects:
+- kind: Group
+  name: system:serviceaccounts:vm-test
+  apiGroup: rbac.authorization.k8s.io

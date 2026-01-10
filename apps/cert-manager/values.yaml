@@ -1,0 +1,81 @@
+# affinity:
+#   nodeAffinity:
+#     requiredDuringSchedulingIgnoredDuringExecution:
+#       nodeSelectorTerms:
+#       - matchExpressions:
+#         - key: node-role.kubernetes.io/control-plane
+#           operator: Exists
+cainjector:
+  # affinity:
+  #   nodeAffinity:
+  #     requiredDuringSchedulingIgnoredDuringExecution:
+  #       nodeSelectorTerms:
+  #       - matchExpressions:
+  #         - key: node-role.kubernetes.io/control-plane
+  #           operator: Exists
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
+  replicaCount: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+  # tolerations:
+  #   - effect: NoSchedule
+  #     key: node-role.kubernetes.io/control-plane
+  #     operator: Exists
+crds:
+  enabled: true
+enableCertificateOwnerRef: true
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+prometheus:
+  enabled: true
+  servicemonitor:
+    enabled: true
+replicaCount: 2
+# startupapicheck:
+#   affinity:
+#     nodeAffinity:
+#       requiredDuringSchedulingIgnoredDuringExecution:
+#         nodeSelectorTerms:
+#         - matchExpressions:
+#           - key: node-role.kubernetes.io/control-plane
+#             operator: Exists
+#   tolerations:
+#     - effect: NoSchedule
+#       key: node-role.kubernetes.io/control-plane
+#       operator: Exists
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 0
+    maxUnavailable: 1
+# tolerations:
+#   - effect: NoSchedule
+#     key: node-role.kubernetes.io/control-plane
+#     operator: Exists
+webhook:
+  # affinity:
+  #   nodeAffinity:
+  #     requiredDuringSchedulingIgnoredDuringExecution:
+  #       nodeSelectorTerms:
+  #       - matchExpressions:
+  #         - key: node-role.kubernetes.io/control-plane
+  #           operator: Exists
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
+  replicaCount: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+  # tolerations:
+  #   - effect: NoSchedule
+  #     key: node-role.kubernetes.io/control-plane
+  #     operator: Exists
