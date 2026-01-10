@@ -89,16 +89,15 @@ spec:
       - name: headlamp
       - name: kubevirt-manager
       - name: loki
+      - name: ollama
       - name: pyroscope
       - name: tempo
-      # - name: trivy
       - name: whoami
 
       - name: mattermost-operator
       - name: mattermost
 
       # - name: holmesgpt
-      # - name: ollama
       # - name: argo-workflows
       #   serverSideApply: "true"
       # - name: capi-operator
@@ -114,6 +113,7 @@ spec:
       # - name: kubevirt-templates
       # - name: mermaid
       # - name: neuvector
+      # - name: trivy
 
   template:
     metadata:
