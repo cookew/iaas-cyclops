@@ -49,11 +49,13 @@ spec:
 
       - name: cluster-network-addons
         syncWave: -60
+      - name: crossplane
+        syncWave: -60
       - name: rook-ceph
         serverSideApply: "true"
         syncWave: -60
 
-      - name: crossplane
+      - name: crossplane-keycloak-provider
         syncWave: -50
       - name: kubevirt
         syncWave: -50
@@ -67,7 +69,7 @@ spec:
       - name: cloudnative-pg
         serverSideApply: "true"
         syncWave: -40
-      - name: crossplane-keycloak
+      - name: crossplane-keycloak-realms
         syncWave: -40
 
       - name: keycloak
