@@ -67,22 +67,22 @@ volumeMounts:
 - mountPath: /certs
   name: ca-certificates
   readOnly: true
-- name: plugins
-  mountPath: /headlamp/plugins
+# - name: plugins
+#   mountPath: /headlamp/plugins
 
 volumes:
 - name: ca-certificates
   configMap:
     name: tm-ca-bundle
-- name: plugins
-  ephemeral:
-    volumeClaimTemplate:
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        storageClassName: ceph-filesystem
-        resources:
-          requests:
-            storage: 1Gi
+# - name: plugins
+#   ephemeral:
+#     volumeClaimTemplate:
+#       spec:
+#         accessModes: [ "ReadWriteOnce" ]
+#         storageClassName: ceph-filesystem
+#         resources:
+#           requests:
+#             storage: 1Gi
 
 persistentVolumeClaim:
   # -- Enable Persistent Volume Claim
