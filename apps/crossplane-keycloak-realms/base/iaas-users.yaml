@@ -13,7 +13,7 @@ spec:
       valueSecretRef:
         key: password
         name: william-credentials
-        namespace: crossplane-keycloak
+        namespace: crossplane-keycloak-realms
     lastName: Cooke
     realmIdRef:
       name: iaas
@@ -36,7 +36,7 @@ spec:
       valueSecretRef:
         key: password
         name: edward-credentials
-        namespace: crossplane-keycloak
+        namespace: crossplane-keycloak-realms
     lastName: Cooke
     realmIdRef:
       name: iaas
