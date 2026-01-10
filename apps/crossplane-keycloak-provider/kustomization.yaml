@@ -6,4 +6,4 @@ namespace: crossplane-keycloak-provider
 resources:
 - base/keycloak-provider.yaml
 - base/keycloak-provider-config.yaml
-- sealed-secrets/crossplane-keycloak-credentials.yaml
+- sealed-secrets/crossplane-keycloak-provider-credentials.yaml
