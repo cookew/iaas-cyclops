@@ -7,5 +7,5 @@ resources:
 - base/iaas-realm.yaml
 - base/iaas-users.yaml
 - base/kubernetes-client.yaml
-- sealed-secrets/edward-credentials.yaml
-- sealed-secrets/william-credentials.yaml
+- sealed-secrets/crossplane-keycloak-realms-edward-credentials.yaml
+- sealed-secrets/crossplane-keycloak-realms-william-credentials.yaml
