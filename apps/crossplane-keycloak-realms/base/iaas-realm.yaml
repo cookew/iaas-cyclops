@@ -5,7 +5,7 @@ metadata:
 spec:
   deletionPolicy: Delete
   forProvider:
-    displayName: IaaS Realm
+    displayName: IaaS
     duplicateEmailsAllowed: false
     enabled: true
     passwordPolicy: length(8) and digits(1) and upperCase(1) and lowerCase(1) and specialChars(1) and forceExpiredPasswordChange(365) and notUsername(undefined)
