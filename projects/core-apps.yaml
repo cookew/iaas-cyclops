@@ -86,7 +86,7 @@ spec:
         serverSideApply: "true"
       - name: github-arc-runners
       - name: grafana
-      # - name: headlamp
+      - name: headlamp
       - name: kubevirt-manager
       - name: loki
       - name: ollama
