@@ -35,6 +35,7 @@ config:
     provider = "keycloak-oidc"
     provider_ca_files = [ "/certs/ca.crt" ]
     redirect_url = "https://alertmanager.apps.iaas.wcooke.me/oauth2/callback"
+    reverse_proxy = true
     set_authorization_header = true
     set_xauthrequest = true
     ssl_insecure_skip_verify = false
