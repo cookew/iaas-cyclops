@@ -20,20 +20,20 @@ ollama:
     #  - llama2
     #  - mistral
     pull:
+    - codellama
     - llama2
-    # - mistral
-    # - llama4
-    # - codellama
+    - llama4
+    - mistral
 
     # -- List of models to load in memory at container startup
     # run:
     #  - llama2
     #  - mistral
     run:
+    - codellama
     - llama2
-    # - mistral
-    # - llama4
-    # - codellama
+    - llama4
+    - mistral
 
     # -- List of models to create at container startup, there are two options
     # 1. Create a raw model

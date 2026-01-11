@@ -86,23 +86,30 @@ modelList:
   #   model: ollama_chat/llama4
   #   temperature: 1
 
-  # ollama-codellama:
-  #   api_base: "{{ env.OLLAMA_API_BASE }}"
-  #   model: ollama/codellama
-  #   temperature: 1
-  #   custom_args:
-  #     max_context_size: 100000
-
-  mistral:
+  codellama:
     api_base: "{{ env.OLLAMA_API_BASE }}"
-    model: ollama_chat/mistral
+    model: ollama/codellama
     temperature: 1
     custom_args:
-      max_context_size: 100000
+      max_context_size: 500000
 
   llama2:
     api_base: "{{ env.OLLAMA_API_BASE }}"
-    model: ollama_chat/llama2
+    model: ollama/llama2
+    temperature: 1
+    custom_args:
+      max_context_size: 500000
+
+  llama4:
+    api_base: "{{ env.OLLAMA_API_BASE }}"
+    model: ollama/llama4
+    temperature: 1
+    custom_args:
+      max_context_size: 500000
+
+  mistral:
+    api_base: "{{ env.OLLAMA_API_BASE }}"
+    model: ollama/mistral
     temperature: 1
     custom_args:
       max_context_size: 500000
