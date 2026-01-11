@@ -20,7 +20,7 @@ spec:
     rootUrl: https://alertmanager.apps.iaas.wcooke.me
     standardFlowEnabled: true
     validPostLogoutRedirectUris:
-    - /login
+    - /oauth2/sign_out
     validRedirectUris:
     - /oauth2/callback
   providerConfigRef:

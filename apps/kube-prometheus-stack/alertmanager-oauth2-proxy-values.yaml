@@ -43,6 +43,7 @@ config:
     reverse_proxy = true
     set_authorization_header = true
     set_xauthrequest = true
+    skip_provider_button = true
     ssl_insecure_skip_verify = false
     tls_cert_file = "/certs/tls.crt"
     tls_cipher_suites = [ "TLS_AES_256_GCM_SHA384" ]
