@@ -3,7 +3,8 @@ kind: Kustomization
 
 namespace: holmesgpt
 
-# resources:
+resources:
+- base/ingress.yaml
 
 helmCharts:
 - name: holmes
