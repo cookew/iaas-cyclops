@@ -9,6 +9,7 @@ resources:
 - base/metrics-exporter-cm.yaml
 - base/metrics-exporter-ds.yaml
 - sealed-secrets/kube-prometheus-stack-alertmanager-oauth2-proxy.yaml
+- sealed-secrets/kube-prometheus-stack-prometheus-oauth2-proxy.yaml
 
 helmCharts:
 - name: kube-prometheus-stack
