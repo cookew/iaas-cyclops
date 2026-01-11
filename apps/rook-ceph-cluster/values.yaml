@@ -56,7 +56,7 @@ ingress:
     #    proxy_ssl_verify off;
       forecastle.stakater.com/appName: Ceph
       forecastle.stakater.com/expose: "true"
-      forecastle.stakater.com/group: Storage
+      forecastle.stakater.com/group: Kubernetes
       forecastle.stakater.com/icon: https://ceph.apps.iaas.wcooke.me/assets/Ceph_Logo.svg
       forecastle.stakater.com/network-restricted: "true"
     host:

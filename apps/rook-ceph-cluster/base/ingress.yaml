@@ -3,12 +3,12 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
-    forecastle.stakater.com/appName: Ceph S3 Frontend
-    forecastle.stakater.com/expose: "true"
-    forecastle.stakater.com/group: Storage
-    forecastle.stakater.com/icon: https://ceph.apps.iaas.wcooke.me/assets/Ceph_Logo.svg
-    forecastle.stakater.com/network-restricted: "true"
-    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    # forecastle.stakater.com/appName: Ceph S3 Frontend
+    # forecastle.stakater.com/expose: "true"
+    # forecastle.stakater.com/group: Storage
+    # forecastle.stakater.com/icon: https://ceph.apps.iaas.wcooke.me/assets/Ceph_Logo.svg
+    # forecastle.stakater.com/network-restricted: "true"
+    # nginx.ingress.kubernetes.io/backend-protocol: HTTPS
   name: ceph-objectstore
 spec:
   ingressClassName: cilium
