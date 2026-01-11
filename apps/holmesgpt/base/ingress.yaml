@@ -17,9 +17,9 @@ spec:
       paths:
       - backend:
           service:
-            name: holmesgpt
+            name: holmesgpt-holmes
             port:
-              name: https
+              number: 80
         path: /
         pathType: Prefix
   tls:
