@@ -25,8 +25,11 @@ config:
     allowed_roles = [ "alertmanager:alertmanager-admin" ]
     banner = "-"
     code_challenge_method = "S256"
+    cookie_csrf_per_request_limit = 1
     cookie_expire = "0"
+    cookie_samesite = "strict"
     cookie_secure = true
+    custom_sign_in_logo = "-"
     email_domains = [ "*" ]
     footer = "-"
     force_https = true
