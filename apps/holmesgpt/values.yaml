@@ -95,14 +95,14 @@ modelList:
 
   mistral:
     api_base: "{{ env.OLLAMA_API_BASE }}"
-    model: ollama/mistral
+    model: ollama_chat/mistral
     temperature: 1
     custom_args:
       max_context_size: 100000
 
   llama2:
     api_base: "{{ env.OLLAMA_API_BASE }}"
-    model: ollama/llama2
+    model: ollama_chat/llama2
     temperature: 1
     custom_args:
       max_context_size: 500000
