@@ -5,7 +5,13 @@ forecastle:
     namespaceSelector:
       any: true
     title: IaaS Apps
-    # customApps:
+    customApps:
+    - group: Kubernetes
+      icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
+      name: IaaS Keycloak Account
+      properties:
+        Version: "1.0"
+      url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/account
     # - name: Name of the custom app
     #   icon: URL of the icon for the custom app
     #   url: URL of the custom app
