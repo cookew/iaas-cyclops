@@ -76,6 +76,8 @@ extraObjects:
     name: alertmanager-oauth2-proxy
   spec:
     commonName: alertmanager-oauth2-proxy
+    dnsNames:
+    - alertmanager.apps.iaas.wcooke.me
     duration: 960h
     isCA: false
     issuerRef:
