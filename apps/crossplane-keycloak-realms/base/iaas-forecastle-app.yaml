@@ -8,6 +8,8 @@ spec:
   name: IaaS Keycloak Account
   networkRestricted: true
   properties:
-    Version: 1.0
+    Version: "1.0"
   url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/account
-  urlFrom:
+  # urlFrom:
+  #   ingressRef:
+  #     name:
