@@ -97,5 +97,5 @@ resources:
     # cpu: 4000m
 
 serviceAccount:
-  automount: true
-  create: true
+  automount: false
+  create: false
