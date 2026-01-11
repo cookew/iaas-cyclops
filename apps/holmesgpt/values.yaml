@@ -35,14 +35,14 @@ customClusterRoleRules:
 # CRD permissions for common Kubernetes operators and tools
 crdPermissions:
   argo: true
-  flux: true
-  kafka: true
-  keda: true
+  # flux: true
+  # kafka: true
+  # keda: true
   crossplane: true
-  istio: true
+  # istio: true
   gatewayApi: true
-  velero: true
-  externalSecrets: true
+  # velero: true
+  # externalSecrets: true
 
 # toolsets:
   # kubernetes/core:
