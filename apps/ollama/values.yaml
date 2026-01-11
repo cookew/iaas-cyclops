@@ -20,10 +20,10 @@ ollama:
     #  - llama2
     #  - mistral
     pull:
-    # - llama4
     - llama2
-    - mistral
-    - codellama
+    # - mistral
+    # - llama4
+    # - codellama
 
     # -- List of models to load in memory at container startup
     # run:
@@ -31,7 +31,7 @@ ollama:
     #  - mistral
     run:
     - llama2
-    - mistral
+    # - mistral
     # - llama4
     # - codellama
 
