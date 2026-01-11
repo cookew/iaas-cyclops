@@ -21,19 +21,19 @@ ollama:
     #  - mistral
     pull:
     # - llama4
-    - mistral
-    # - codellama
     - llama2
+    - mistral
+    - codellama
 
     # -- List of models to load in memory at container startup
     # run:
     #  - llama2
     #  - mistral
     run:
-    # - llama4
-    - mistral
-    # - codellama
     - llama2
+    - mistral
+    # - llama4
+    # - codellama
 
     # -- List of models to create at container startup, there are two options
     # 1. Create a raw model
@@ -97,5 +97,5 @@ resources:
     # cpu: 4000m
 
 serviceAccount:
-  automount: false
-  create: false
+  automount: true
+  create: true
