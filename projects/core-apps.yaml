@@ -87,6 +87,7 @@ spec:
       - name: github-arc-runners
       - name: grafana
       - name: headlamp
+      - name: holmesgpt
       - name: kubevirt-manager
       - name: loki
       - name: ollama
@@ -97,7 +98,6 @@ spec:
       - name: mattermost-operator
       - name: mattermost
 
-      # - name: holmesgpt
       # - name: argo-workflows
       #   serverSideApply: "true"
       # - name: capi-operator

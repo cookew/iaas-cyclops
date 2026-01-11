@@ -1,3 +1,5 @@
+# https://github.com/HolmesGPT/holmesgpt/blob/master/helm/holmes/values.yaml
+
 certificate: "" # base64 encoded
 logLevel: DEBUG
 
@@ -91,14 +93,14 @@ modelList:
   #   custom_args:
   #     max_context_size: 100000
 
-  # ollama-mistral:
-  #   api_base: "{{ env.OLLAMA_API_BASE }}"
-  #   model: ollama/mistral
-  #   temperature: 1
-  #   custom_args:
-  #     max_context_size: 100000
+  mistral:
+    api_base: "{{ env.OLLAMA_API_BASE }}"
+    model: ollama/mistral
+    temperature: 1
+    custom_args:
+      max_context_size: 100000
 
-  ollama-llama2:
+  llama2:
     api_base: "{{ env.OLLAMA_API_BASE }}"
     model: ollama/llama2
     temperature: 1
@@ -106,4 +108,4 @@ modelList:
       max_context_size: 500000
 
 config:
-  model: ollama-llama2
+  model: llama2
