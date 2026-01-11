@@ -22,14 +22,14 @@ config:
   cookieName: ""
   # Default configuration, to be overridden
   configFile: |-
-    allowed_roles = [ "alertmanager-admin" ]
-    allow_unverified_email = true
+    allowed_roles = [ ]"alertmanager-admin" ]
     banner = "-"
     code_challenge_method = "S256"
     cookie_expire = "0"
-    footer = "-"
     cookie_secure = true
+    footer = "-"
     email_domains = [ "*" ]
+    insecure_oidc_allow_unverified_email = true
     oidc_issuer_url = "https://keycloak.iaas.wcooke.me/realms/iaas"
     pass_authorized_header = true
     provider = "keycloak-oidc"
