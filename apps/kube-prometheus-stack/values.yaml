@@ -64,7 +64,7 @@ prometheus:
       forecastle.stakater.com/group: Observability
       forecastle.stakater.com/icon: https://prometheus.apps.iaas.wcooke.me/favicon.svg
       forecastle.stakater.com/network-restricted: "true"
-    enabled: true
+    enabled: false
     hosts:
     - prometheus.apps.iaas.wcooke.me
     ingressClassName: cilium
