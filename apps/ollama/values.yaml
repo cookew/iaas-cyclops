@@ -20,7 +20,7 @@ ollama:
     #  - llama2
     #  - mistral
     pull:
-    - llama4
+    # - llama4
     - mistral
     # - codellama
     - llama2
@@ -30,7 +30,7 @@ ollama:
     #  - llama2
     #  - mistral
     run:
-    - llama4
+    # - llama4
     - mistral
     # - codellama
     - llama2
