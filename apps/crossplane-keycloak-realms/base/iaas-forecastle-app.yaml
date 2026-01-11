@@ -1,0 +1,13 @@
+apiVersion: forecastle.stakater.com/v1alpha1
+kind: ForecastleApp
+metadata:
+  name: iaas-forecastle-app
+spec:
+  group: Kubernetes
+  # icon:
+  name: IaaS Keycloak Account
+  networkRestricted: true
+  properties:
+    Version: 1.0
+  url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/account
+  urlFrom:

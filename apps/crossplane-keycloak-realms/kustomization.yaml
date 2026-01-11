@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: crossplane-keycloak-realms
 
 resources:
+- base/iaas-forecastle-app.yaml
 - base/iaas-realm.yaml
 - base/iaas-users.yaml
 - base/kubernetes-client.yaml
