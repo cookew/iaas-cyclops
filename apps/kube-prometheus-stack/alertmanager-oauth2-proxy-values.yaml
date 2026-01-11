@@ -30,7 +30,7 @@ config:
     footer = "-"
     email_domains = [ "*" ]
     insecure_oidc_allow_unverified_email = true
-    oidc_issuer_url = "https://keycloak.iaas.wcooke.me/realms/iaas"
+    oidc_issuer_url = "https://keycloak-service.keycloak.svc:8443/realms/iaas"
     pass_authorization_header = true
     provider = "keycloak-oidc"
     provider_ca_files = [ "/certs/ca.crt" ]
