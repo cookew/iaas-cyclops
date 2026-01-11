@@ -44,13 +44,13 @@ crdPermissions:
   # velero: true
   # externalSecrets: true
 
-# toolsets:
+toolsets:
   # kubernetes/core:
   #   enabled: true
   # kubernetes/logs:
   #   enabled: true
-  # robusta:
-  #   enabled: false
+  robusta:
+    enabled: false
   # internet:
   #   enabled: false
   # prometheus/metrics:
