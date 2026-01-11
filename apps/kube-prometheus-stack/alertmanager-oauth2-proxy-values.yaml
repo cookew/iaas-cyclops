@@ -1,0 +1,260 @@
+# https://github.com/oauth2-proxy/manifests/blob/main/helm/oauth2-proxy/values.yaml
+
+# Affinity for pod assignment
+# Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+# affinity: {}
+
+config:
+  # Add config annotations
+  annotations: {}
+  # OAuth client ID
+  clientID: "alertmanager"
+  # OAuth client secret
+  clientSecret: "XXXXXXXX"
+  # Create a new secret with the following command
+  # openssl rand -base64 32 | head -c 32 | base64
+  # Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)
+  # Example:
+  existingSecret: alertmanager-oauth2-proxy
+  # cookieSecret: "XXXXXXXXXXXXXXXX"
+  # The name of the cookie that oauth2-proxy will create
+  # If left empty, it will default to the release name
+  cookieName: ""
+  # Default configuration, to be overridden
+  configFile: |-
+    allowed_roles = [ "alertmanager-admin" ]
+    allow_unverified_email = true
+    banner = "-"
+    code_challenge_method = "S256"
+    cookie_expire = "0"
+    footer = "-"
+    cookie_secure = true
+    email_domains = [ "*" ]
+    oidc_issuer_url = "https://keycloak.iaas.wcooke.me/realms/iaas"
+    pass_authorized_header = true
+    provider = "keycloak-oidc"
+    provider_ca_file = "/certs/ca.crt"
+    redirect_url = "https://alertmanager.apps.iaas.wcooke.me/oauth2/callback"
+    set_authorization_header = true
+    set_tls_cipher_suites = [ "TLS_AES_256_GCM_SHA384" ]
+    set_xauthrequest = true
+    tls_cert_file = "/certs/tls.crt"
+    tls_key_file = "/certs/tls.key"
+    tls_insecure_skip_verify = false
+
+# Set a custom containerPort if required.
+# This will default to 4180 if this value is not set and the httpScheme set to http
+# This will default to 4443 if this value is not set and the httpScheme set to https
+# containerPort: 4180
+
+envFrom: []
+#  - configMapRef:
+#      name: special-config
+#  - secretRef:
+#      name: special-config-secret
+
+extraArgs: {}
+
+extraContainers: []
+  #  - name: my-sidecar
+  #    image: nginx:latest
+
+extraEnv: []
+
+extraInitContainers: []
+  #  - name: wait-for-idp
+  #    image: my-idp-wait:latest
+  #    command:
+  #    - sh
+  #    - -c
+  #    - wait-for-idp.sh
+
+# Extra K8s manifests to deploy
+extraObjects: []
+  # - apiVersion: secrets-store.csi.x-k8s.io/v1
+  #   kind: SecretProviderClass
+  #   metadata:
+  #     name: oauth2-proxy-secrets-store
+  #   spec:
+  #     provider: aws
+  #     parameters:
+  #       objects: |
+  #         - objectName: "oauth2-proxy"
+  #           objectType: "secretsmanager"
+  #           jmesPath:
+  #               - path: "client_id"
+  #                 objectAlias: "client-id"
+  #               - path: "client_secret"
+  #                 objectAlias: "client-secret"
+  #               - path: "cookie_secret"
+  #                 objectAlias: "cookie-secret"
+  #     secretObjects:
+  #     - data:
+  #       - key: client-id
+  #         objectName: client-id
+  #         - key: client-secret
+  #           objectName: client-secret
+  #         - key: cookie-secret
+  #         objectName: cookie-secret
+  #       secretName: oauth2-proxy-secrets-store
+  #       type: Opaque
+
+extraVolumes: []
+  # - name: ca-bundle-cert
+  #   secret:
+  #     secretName: <secret-name>
+
+extraVolumeMounts: []
+  # - mountPath: /etc/ssl/certs/
+  #   name: ca-bundle-cert
+
+gatewayApi:
+  annotations: {}
+  enabled: false
+  gatewayRef:
+    name: ""
+    namespace: ""
+  hostnames:
+  - chart-example.local
+  labels: {}
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+
+# whether to use http or https
+httpScheme: https
+
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Alertmanager
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Observability
+    forecastle.stakater.com/icon: https://alertmanager.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/network-restricted: "true"
+    ingress.cilium.io/tls-passthrough: enabled
+  className: cilium
+  enabled: true
+  hosts:
+  - alertmanager.apps.iaas.wcooke.me
+  labels: {}
+  path: /
+  pathType: Prefix
+  tls:
+  - hosts:
+    - alertmanager.apps.iaas.wcooke.me
+    secretName: alertmanager-ingress-cert
+
+initContainers:
+  waitForRedis:
+    enabled: false
+
+metrics:
+  # Enable Prometheus metrics endpoint
+  enabled: true
+  # Serve Prometheus metrics on this port
+  port: 44180
+  # when service.type is NodePort ...
+  # nodePort: 44180
+  # Protocol set on the service for the metrics port
+  service:
+    appProtocol: http
+  serviceMonitor:
+    # Enable Prometheus Operator ServiceMonitor
+    enabled: false
+    # Define the namespace where to deploy the ServiceMonitor resource
+    namespace: ""
+    # Prometheus Instance definition
+    prometheusInstance: default
+    # Prometheus scrape interval
+    interval: 60s
+    # Prometheus scrape timeout
+    scrapeTimeout: 30s
+    # Add custom labels to the ServiceMonitor resource
+    labels: {}
+
+    ## scheme: HTTP scheme to use for scraping. Can be used with `tlsConfig` for example if using istio mTLS.
+    scheme: ""
+
+    ## tlsConfig: TLS configuration to use when scraping the endpoint. For example if using istio mTLS.
+    ## Of type: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#tlsconfig
+    tlsConfig: {}
+
+    ## bearerTokenFile: Path to bearer token file.
+    bearerTokenFile: ""
+
+    ## Used to pass annotations that are used by the Prometheus installed in your cluster to select Service Monitors to work with
+    ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#prometheusspec
+    annotations: {}
+
+    ## Metric relabel configs to apply to samples before ingestion.
+    ## [Metric Relabeling](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#metric_relabel_configs)
+    metricRelabelings: []
+    # - action: keep
+    #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+    #   sourceLabels: [__name__]
+
+    ## Relabel configs to apply to samples before ingestion.
+    ## [Relabeling](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config)
+    relabelings: []
+    # - sourceLabels: [__meta_kubernetes_pod_node_name]
+    #   separator: ;
+    #   regex: ^(.*)$
+    #   targetLabel: nodename
+    #   replacement: $1
+    #   action: replace
+
+networkPolicy:
+  create: false
+  ingress: []
+  egress: []
+
+# Whether to use secrets instead of environment values for setting up OAUTH2_PROXY variables
+proxyVarsAsSecrets: true
+
+replicaCount: 2
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 300Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 300Mi
+
+revisionHistoryLimit: 1
+
+service:
+  type: ClusterIP
+  # when service.type is ClusterIP ...
+  # clusterIP: 192.0.2.20
+  # when service.type is LoadBalancer ...
+  # loadBalancerIP: 198.51.100.40
+  # loadBalancerSourceRanges: 203.0.113.0/24
+  # when service.type is NodePort ...
+  # nodePort: 80
+  portNumber: 80
+  # Protocol set on the service
+  appProtocol: http
+  annotations: {}
+  # foo.io/bar: "true"
+  # configure externalTrafficPolicy
+  externalTrafficPolicy: ""
+  # configure internalTrafficPolicy
+  internalTrafficPolicy: ""
+  # configure service target port
+  targetPort: ""
+  # Configures the service to use IPv4/IPv6 dual-stack.
+  # Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+  ipDualStack:
+    enabled: false
+    ipFamilies: ["IPv6", "IPv4"]
+    ipFamilyPolicy: "PreferDualStack"
+  # Configure traffic distribution for the service
+  # Ref: https://kubernetes.io/docs/concepts/services-networking/service/#traffic-distribution
+  trafficDistribution: ""
+
+serviceAccount:
+  enabled: false

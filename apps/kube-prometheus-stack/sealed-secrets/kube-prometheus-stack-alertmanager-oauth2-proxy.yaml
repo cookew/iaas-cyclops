@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: alertmanager-oauth2-proxy
+  namespace: kube-prometheus-stack
+spec:
+  encryptedData:
+    OAUTH2_PROXY_CLIENT_SECRET: AgAd6Y9pd9fiTRWzAblk1i2f7wj7y4BuOXvbsE16bUA8gT7wVEstMjI9Jn0Kathds+c17MXUlvebHF4wx02VuvnlaQi5ISSHqdVhy/bZkqD8xHfjAKfkxWe/1YAAJ8xnobTepC8MmIRghYNKUXrgDtqvKBi9iw7OLQ2QzVNA/2MXBd9k3ius/d9d0nsYso/+Jrh6xoXkE5J1OZTdNWYXW4KtvQUwpiJprMRn3WO2nmPPpHEXtKH507ukAk1xNq4TTUV2JiS4GWU/xZg28RinklE0xJznrcuKbbxYx9xtqmbnBjmbkXvPeONFbhqTjbLHx51IInVh68+A5qrNpq29H21ZsFGal9kir+tStiPZXrmrFvl6dJp5SSZQqMyqkzSTz4IhgDQYbpXmi6T7t+u1OtUhKbT1F7Ulzo74kz2UCiXzcDCuyR58w05mbN2HErmfd6isTUNPNVXbdo3nSIm5Jq1C/cqc+hUYhKqEDlI/6kQ8xl8A2r+eeY2bfo3FC/4CnhvwlZ3bGnXK6Cza2yTLVG6dz8E6xllEDS1NgoEarWo9p2zZmX9FDzGFJ3pFEQ+QEBjdGmdxT3jvUc4GCYeueuPNZxg8tNftvL6LeOovET49NMSTD7j2Dog96vEz91894YjLrdaQGz74S1aQX85Pt+zqSqwaqm9N8Bi01V7QZkBX0TVUaG9VDx9EYTjr6N422ZWvblxAXi++G0l2K0GVE2tGbQaz1lwpZfU1w/A3Ldig+g==
+  template:
+    metadata:
+      name: alertmanager-oauth2-proxy
+      namespace: kube-prometheus-stack
+    type: stringData
