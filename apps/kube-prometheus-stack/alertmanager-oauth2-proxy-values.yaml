@@ -22,7 +22,7 @@ config:
   cookieName: ""
   # Default configuration, to be overridden
   configFile: |-
-    allowed_roles = [ "alertmanager-admin" ]
+    allowed_roles = [ "alertmanager:alertmanager-admin" ]
     banner = "-"
     code_challenge_method = "S256"
     cookie_expire = "0"
