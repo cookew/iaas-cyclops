@@ -21,7 +21,7 @@ alertmanager:
       forecastle.stakater.com/group: Observability
       forecastle.stakater.com/icon: https://alertmanager.apps.iaas.wcooke.me/favicon.ico
       forecastle.stakater.com/network-restricted: "true"
-    enabled: true
+    enabled: false
     hosts:
     - alertmanager.apps.iaas.wcooke.me
     ingressClassName: cilium
