@@ -44,7 +44,7 @@ config:
     tls_cert_file = "/certs/tls.crt"
     tls_cipher_suites = [ "TLS_AES_256_GCM_SHA384" ]
     tls_key_file = "/certs/tls.key"
-    upstreams = [ "http://kube-prometheus-stack-alertmanager:9093/" ]
+    upstreams = [ "http://kube-prometheus-stack-alertmanager.kube-prometheus-stack.svc:9093/" ]
 
 # Set a custom containerPort if required.
 # This will default to 4180 if this value is not set and the httpScheme set to http
