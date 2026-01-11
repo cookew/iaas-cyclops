@@ -9,7 +9,7 @@ spec:
     baseUrl: /
     clientId: alertmanager
     clientSecretSecretRef:
-      key: client_secret
+      key: client-secret
       name: alertmanager-oauth2-proxy
       namespace: kube-prometheus-stack
     directAccessGrantsEnabled: true
