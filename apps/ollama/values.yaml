@@ -60,11 +60,11 @@ ollama:
 ingress:
   annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
-    forecastle.stakater.com/appName: Ollama
-    forecastle.stakater.com/expose: "true"
-    forecastle.stakater.com/group: Apps
-    # forecastle.stakater.com/icon: https://ollama.apps.iaas.wcooke.me/assets/images/logo.png
-    forecastle.stakater.com/network-restricted: "true"
+    # forecastle.stakater.com/appName: Ollama
+    # forecastle.stakater.com/expose: "true"
+    # forecastle.stakater.com/group: Apps
+    # # forecastle.stakater.com/icon: https://ollama.apps.iaas.wcooke.me/assets/images/logo.png
+    # forecastle.stakater.com/network-restricted: "true"
   className: cilium
   enabled: true
   hosts:
