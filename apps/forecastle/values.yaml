@@ -1,11 +1,11 @@
 forecastle:
   config:
-    headerBackground: maroon
+    # headerBackground: maroon
     # headerForeground:
     namespaceSelector:
       any: true
     title: IaaS Apps
-    customApps:
+    # customApps:
     # - name: Name of the custom app
     #   icon: URL of the icon for the custom app
     #   url: URL of the custom app
