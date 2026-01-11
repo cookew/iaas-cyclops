@@ -6,14 +6,14 @@ forecastle:
       any: true
       matchNames: []
     title: IaaS Apps
-    # customApps:
-    # - group: Kubernetes
-    #   icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
-    #   name: Keycloak Account
-    #   networkRestricted: true
-    #   properties:
-    #     Realm: IaaS
-    #   url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/account
+    customApps:
+    - group: Kubernetes
+      icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
+      name: Keycloak Account
+      networkRestricted: true
+      properties:
+        Realm: IaaS
+      url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/account
     # - name: Name of the custom app
     #   icon: URL of the icon for the custom app
     #   url: URL of the custom app
