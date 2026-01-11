@@ -31,16 +31,16 @@ config:
     email_domains = [ "*" ]
     insecure_oidc_allow_unverified_email = true
     oidc_issuer_url = "https://keycloak.iaas.wcooke.me/realms/iaas"
-    pass_authorized_header = true
+    pass_authorization_header = true
     provider = "keycloak-oidc"
-    provider_ca_file = "/certs/ca.crt"
+    provider_ca_files = [ "/certs/ca.crt" ]
     redirect_url = "https://alertmanager.apps.iaas.wcooke.me/oauth2/callback"
     set_authorization_header = true
-    set_tls_cipher_suites = [ "TLS_AES_256_GCM_SHA384" ]
     set_xauthrequest = true
+    ssl_insecure_skip_verify = false
     tls_cert_file = "/certs/tls.crt"
+    tls_cipher_suites = [ "TLS_AES_256_GCM_SHA384" ]
     tls_key_file = "/certs/tls.key"
-    tls_insecure_skip_verify = false
 
 # Set a custom containerPort if required.
 # This will default to 4180 if this value is not set and the httpScheme set to http
@@ -69,8 +69,23 @@ extraInitContainers: []
   #    - -c
   #    - wait-for-idp.sh
 
-# Extra K8s manifests to deploy
-extraObjects: []
+extraObjects:
+- apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: alertmanager-oauth2-proxy
+  spec:
+    commonName: alertmanager-oauth2-proxy
+    duration: 960h
+    isCA: false
+    issuerRef:
+      kind: ClusterIssuer
+      name: iaas-wcooke-me
+    secretName: alertmanager-oauth2-proxy
+    usages:
+    - client auth
+    - server auth
+
   # - apiVersion: secrets-store.csi.x-k8s.io/v1
   #   kind: SecretProviderClass
   #   metadata:
@@ -99,14 +114,14 @@ extraObjects: []
   #       secretName: oauth2-proxy-secrets-store
   #       type: Opaque
 
-extraVolumes: []
-  # - name: ca-bundle-cert
-  #   secret:
-  #     secretName: <secret-name>
+extraVolumes:
+- name: oauth2-proxy-certs
+  secret:
+    secretName: alertmanager-oauth2-proxy
 
-extraVolumeMounts: []
-  # - mountPath: /etc/ssl/certs/
-  #   name: ca-bundle-cert
+extraVolumeMounts:
+- mountPath: /certs
+  name: oauth2-proxy-certs
 
 gatewayApi:
   annotations: {}
