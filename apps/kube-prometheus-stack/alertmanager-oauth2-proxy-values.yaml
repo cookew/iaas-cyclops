@@ -5,22 +5,7 @@
 # affinity: {}
 
 config:
-  # Add config annotations
-  annotations: {}
-  # OAuth client ID
-  # clientID: "alertmanager"
-  # OAuth client secret
-  # clientSecret: "XXXXXXXX"
-  # Create a new secret with the following command
-  # openssl rand -base64 32 | head -c 32 | base64
-  # Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)
-  # Example:
   existingSecret: alertmanager-oauth2-proxy
-  # cookieSecret: "XXXXXXXXXXXXXXXX"
-  # The name of the cookie that oauth2-proxy will create
-  # If left empty, it will default to the release name
-  cookieName: ""
-  # Default configuration, to be overridden
   configFile: |-
     allowed_roles = [ "alertmanager:alertmanager-admin" ]
     banner = "-"
@@ -51,33 +36,6 @@ config:
     tls_min_version = "TLS1.3"
     upstreams = [ "http://kube-prometheus-stack-alertmanager.kube-prometheus-stack.svc:9093/" ]
 
-# Set a custom containerPort if required.
-# This will default to 4180 if this value is not set and the httpScheme set to http
-# This will default to 4443 if this value is not set and the httpScheme set to https
-# containerPort: 4180
-
-envFrom: []
-#  - configMapRef:
-#      name: special-config
-#  - secretRef:
-#      name: special-config-secret
-
-extraArgs: {}
-
-extraContainers: []
-  #  - name: my-sidecar
-  #    image: nginx:latest
-
-extraEnv: []
-
-extraInitContainers: []
-  #  - name: wait-for-idp
-  #    image: my-idp-wait:latest
-  #    command:
-  #    - sh
-  #    - -c
-  #    - wait-for-idp.sh
-
 extraObjects:
 - apiVersion: cert-manager.io/v1
   kind: Certificate
@@ -97,34 +55,6 @@ extraObjects:
     - client auth
     - server auth
 
-  # - apiVersion: secrets-store.csi.x-k8s.io/v1
-  #   kind: SecretProviderClass
-  #   metadata:
-  #     name: oauth2-proxy-secrets-store
-  #   spec:
-  #     provider: aws
-  #     parameters:
-  #       objects: |
-  #         - objectName: "oauth2-proxy"
-  #           objectType: "secretsmanager"
-  #           jmesPath:
-  #               - path: "client_id"
-  #                 objectAlias: "client-id"
-  #               - path: "client_secret"
-  #                 objectAlias: "client-secret"
-  #               - path: "cookie_secret"
-  #                 objectAlias: "cookie-secret"
-  #     secretObjects:
-  #     - data:
-  #       - key: client-id
-  #         objectName: client-id
-  #         - key: client-secret
-  #           objectName: client-secret
-  #         - key: cookie-secret
-  #         objectName: cookie-secret
-  #       secretName: oauth2-proxy-secrets-store
-  #       type: Opaque
-
 extraVolumes:
 - name: oauth2-proxy-certs
   secret:
@@ -134,22 +64,21 @@ extraVolumeMounts:
 - mountPath: /certs
   name: oauth2-proxy-certs
 
-gatewayApi:
-  annotations: {}
-  enabled: false
-  gatewayRef:
-    name: ""
-    namespace: ""
-  hostnames:
-  - chart-example.local
-  labels: {}
-  rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /
+# gatewayApi:
+#   annotations: {}
+#   enabled: false
+#   gatewayRef:
+#     name: ""
+#     namespace: ""
+#   hostnames:
+#   - chart-example.local
+#   labels: {}
+#   rules:
+#   - matches:
+#     - path:
+#         type: PathPrefix
+#         value: /
 
-# whether to use http or https
 httpScheme: https
 
 ingress:
@@ -178,69 +107,14 @@ initContainers:
     enabled: false
 
 metrics:
-  # Enable Prometheus metrics endpoint
   enabled: true
-  # Serve Prometheus metrics on this port
-  port: 44180
-  # when service.type is NodePort ...
-  # nodePort: 44180
-  # Protocol set on the service for the metrics port
-  service:
-    appProtocol: http
-  serviceMonitor:
-    # Enable Prometheus Operator ServiceMonitor
-    enabled: false
-    # Define the namespace where to deploy the ServiceMonitor resource
-    namespace: ""
-    # Prometheus Instance definition
-    prometheusInstance: default
-    # Prometheus scrape interval
-    interval: 60s
-    # Prometheus scrape timeout
-    scrapeTimeout: 30s
-    # Add custom labels to the ServiceMonitor resource
-    labels: {}
-
-    ## scheme: HTTP scheme to use for scraping. Can be used with `tlsConfig` for example if using istio mTLS.
-    scheme: ""
-
-    ## tlsConfig: TLS configuration to use when scraping the endpoint. For example if using istio mTLS.
-    ## Of type: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#tlsconfig
-    tlsConfig: {}
-
-    ## bearerTokenFile: Path to bearer token file.
-    bearerTokenFile: ""
-
-    ## Used to pass annotations that are used by the Prometheus installed in your cluster to select Service Monitors to work with
-    ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#prometheusspec
-    annotations: {}
-
-    ## Metric relabel configs to apply to samples before ingestion.
-    ## [Metric Relabeling](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#metric_relabel_configs)
-    metricRelabelings: []
-    # - action: keep
-    #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
-    #   sourceLabels: [__name__]
-
-    ## Relabel configs to apply to samples before ingestion.
-    ## [Relabeling](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config)
-    relabelings: []
-    # - sourceLabels: [__meta_kubernetes_pod_node_name]
-    #   separator: ;
-    #   regex: ^(.*)$
-    #   targetLabel: nodename
-    #   replacement: $1
-    #   action: replace
 
 networkPolicy:
   create: false
   ingress: []
   egress: []
 
-# Whether to use secrets instead of environment values for setting up OAUTH2_PROXY variables
-proxyVarsAsSecrets: true
-
-replicaCount: 1
+replicaCount: 2
 
 resources: {}
   # limits:
@@ -251,36 +125,6 @@ resources: {}
   #   memory: 300Mi
 
 revisionHistoryLimit: 0
-
-service:
-  type: ClusterIP
-  # when service.type is ClusterIP ...
-  # clusterIP: 192.0.2.20
-  # when service.type is LoadBalancer ...
-  # loadBalancerIP: 198.51.100.40
-  # loadBalancerSourceRanges: 203.0.113.0/24
-  # when service.type is NodePort ...
-  # nodePort: 80
-  portNumber: 80
-  # Protocol set on the service
-  appProtocol: http
-  annotations: {}
-  # foo.io/bar: "true"
-  # configure externalTrafficPolicy
-  externalTrafficPolicy: ""
-  # configure internalTrafficPolicy
-  internalTrafficPolicy: ""
-  # configure service target port
-  targetPort: ""
-  # Configures the service to use IPv4/IPv6 dual-stack.
-  # Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
-  ipDualStack:
-    enabled: false
-    ipFamilies: ["IPv6", "IPv4"]
-    ipFamilyPolicy: "PreferDualStack"
-  # Configure traffic distribution for the service
-  # Ref: https://kubernetes.io/docs/concepts/services-networking/service/#traffic-distribution
-  trafficDistribution: ""
 
 serviceAccount:
   enabled: false
