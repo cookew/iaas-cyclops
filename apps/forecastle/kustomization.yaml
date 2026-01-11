@@ -3,9 +3,9 @@ kind: Kustomization
 
 helmCharts:
 - name: forecastle
+  includeCRDs: true
   namespace: forecastle
   releaseName: forecastle
   repo: https://stakater.github.io/stakater-charts
   valuesFile: values.yaml
   version: v2.0.0
-  # includeCRDs: true
