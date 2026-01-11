@@ -4,6 +4,7 @@ forecastle:
     # headerForeground:
     namespaceSelector:
       any: true
+      matchNames: []
     title: IaaS Apps
     customApps:
     - group: Kubernetes
