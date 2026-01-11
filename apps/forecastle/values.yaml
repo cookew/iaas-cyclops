@@ -8,9 +8,9 @@ forecastle:
     customApps:
     - group: Kubernetes
       icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
-      name: IaaS Keycloak Account
+      name: Keycloak Account
       properties:
-        Version: "1.0"
+        Realm: IaaS
       url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/account
     # - name: Name of the custom app
     #   icon: URL of the icon for the custom app
