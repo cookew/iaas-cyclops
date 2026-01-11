@@ -3,7 +3,7 @@ kind: ForecastleApp
 metadata:
   name: iaas-forecastle-app
 spec:
-  group: "test"
+  group: "zxcvadsfasdf"
   icon: "https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg"
   name: "IaaSKeycloakAccount"
   # networkRestricted: true
