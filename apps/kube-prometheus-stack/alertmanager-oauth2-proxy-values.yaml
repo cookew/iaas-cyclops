@@ -28,6 +28,7 @@ config:
     reverse_proxy = true
     set_authorization_header = true
     set_xauthrequest = true
+    silence_ping_logging = true
     skip_provider_button = true
     ssl_insecure_skip_verify = false
     tls_cert_file = "/certs/tls.crt"
@@ -35,6 +36,7 @@ config:
     tls_key_file = "/certs/tls.key"
     tls_min_version = "TLS1.3"
     upstreams = [ "http://kube-prometheus-stack-alertmanager.kube-prometheus-stack.svc:9093/" ]
+    whitelist_domains = [ "*.apps.iaas.wcooke.me" ]
 
 extraObjects:
 - apiVersion: cert-manager.io/v1
