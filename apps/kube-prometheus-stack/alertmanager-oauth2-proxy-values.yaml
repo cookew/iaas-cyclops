@@ -1,7 +1,5 @@
 # https://github.com/oauth2-proxy/manifests/blob/main/helm/oauth2-proxy/values.yaml
 
-# Affinity for pod assignment
-# Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 affinity:
   podAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
