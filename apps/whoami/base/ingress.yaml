@@ -8,7 +8,7 @@ metadata:
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Apps
     # forecastle.stakater.com/icon: https://whoami.apps.iaas.wcooke.me/images/apple-touch-icon.png
-    forecastle.stakater.com/network-restricted: "true"
+    # forecastle.stakater.com/network-restricted: "true"
     ingress.cilium.io/tls-passthrough: enabled
 spec:
   ingressClassName: cilium
