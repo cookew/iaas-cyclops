@@ -3,13 +3,13 @@ kind: ForecastleApp
 metadata:
   name: iaas-forecastle-app
 spec:
-  group: test
-  icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
-  name: IaaS Keycloak Account
+  group: "test"
+  icon: "https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg"
+  name: "IaaSKeycloakAccount"
   # networkRestricted: true
   # properties:
   #   stuff: asdf
-  url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/account
+  url: "https://keycloak.apps.iaas.wcooke.me/realms/iaas/account"
   # urlFrom:
   #   ingressRef:
   #     name:
