@@ -4,7 +4,7 @@ metadata:
   name: iaas-forecastle-app
 spec:
   group: Kubernetes
-  # icon:
+  icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
   name: IaaS Keycloak Account
   networkRestricted: true
   properties:
