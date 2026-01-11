@@ -9,6 +9,7 @@ forecastle:
     - group: Kubernetes
       icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
       name: Keycloak Account
+      networkRestricted: true
       properties:
         Realm: IaaS
       url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/account
