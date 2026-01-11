@@ -241,7 +241,7 @@ resources: {}
   #   cpu: 100m
   #   memory: 300Mi
 
-revisionHistoryLimit: 1
+revisionHistoryLimit: 0
 
 service:
   type: ClusterIP
