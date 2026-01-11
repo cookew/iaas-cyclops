@@ -7,8 +7,8 @@ spec:
   icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
   name: IaaS Keycloak Account
   networkRestricted: true
-  properties:
-    stuff: asdf
+  # properties:
+  #   stuff: asdf
   url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/account
   # urlFrom:
   #   ingressRef:
