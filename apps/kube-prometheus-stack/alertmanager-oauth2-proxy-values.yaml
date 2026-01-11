@@ -27,13 +27,15 @@ config:
     code_challenge_method = "S256"
     cookie_expire = "0"
     cookie_secure = true
-    footer = "-"
     email_domains = [ "*" ]
+    footer = "-"
+    force_https = true
     insecure_oidc_allow_unverified_email = true
     oidc_issuer_url = "https://keycloak.apps.iaas.wcooke.me/realms/iaas"
     pass_authorization_header = true
     provider = "keycloak-oidc"
     provider_ca_files = [ "/certs/ca.crt" ]
+    real_client_ip_header = X-Forwarded-For
     redirect_url = "https://alertmanager.apps.iaas.wcooke.me/oauth2/callback"
     reverse_proxy = true
     set_authorization_header = true
@@ -42,6 +44,7 @@ config:
     tls_cert_file = "/certs/tls.crt"
     tls_cipher_suites = [ "TLS_AES_256_GCM_SHA384" ]
     tls_key_file = "/certs/tls.key"
+    upstreams = [ "http://kube-prometheus-stack-alertmanager:8080" ]
 
 # Set a custom containerPort if required.
 # This will default to 4180 if this value is not set and the httpScheme set to http
