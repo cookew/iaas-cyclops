@@ -339,6 +339,7 @@ template:
       volumeMounts:
       - name: dind-externals
         mountPath: /home/runner/tmpDir
+    containers:
     - name: dind
       image: docker:dind
       args:
@@ -369,7 +370,6 @@ template:
         mountPath: /var/run
       - name: dind-externals
         mountPath: /home/runner/externals
-    containers:
     - name: runner
       image: ghcr.io/actions/actions-runner:latest
       command: ["/home/runner/run.sh"]
@@ -378,9 +378,11 @@ template:
         value: unix:///var/run/docker.sock
       - name: RUNNER_WAIT_FOR_DOCKER_IN_SECONDS
         value: "120"
-      # securityContext:
+      securityContext:
       #   allowPrivilegeEscalation: false
-      #   capabilities:
+        capabilities:
+          add:
+          - NET_ADMIN
       #     drop:
       #     - ALL
       #   runAsNonRoot: true
@@ -393,9 +395,6 @@ template:
         mountPath: /var/run
     securityContext:
       fsGroup: 1001
-      capabilities:
-        add:
-        - NET_ADMIN
     volumes:
     - name: work
       ephemeral:
