@@ -405,7 +405,7 @@ template:
             storageClassName: ceph-filesystem
             resources:
               requests:
-                storage: 50Gi
+                storage: 64Gi
     - name: dind-sock
       emptyDir:
         medium: Memory
