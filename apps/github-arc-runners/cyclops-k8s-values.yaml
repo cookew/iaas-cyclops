@@ -5,7 +5,7 @@ githubConfigUrl: https://github.com/cyclops-k8s
 githubConfigSecret: github-arc-cyclops-k8s-container
 
 ## maxRunners is the max number of runners the autoscaling runner set will scale up to.
-maxRunners: 5
+maxRunners: 20
 
 minRunners: 1
 
@@ -405,7 +405,7 @@ template:
             storageClassName: ceph-filesystem
             resources:
               requests:
-                storage: 10Gi
+                storage: 50Gi
     - name: dind-sock
       emptyDir:
         medium: Memory
