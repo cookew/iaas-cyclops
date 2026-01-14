@@ -393,6 +393,9 @@ template:
         mountPath: /var/run
     securityContext:
       fsGroup: 1001
+      capabilities:
+        add:
+        - NET_ADMIN
     volumes:
     - name: work
       ephemeral:
