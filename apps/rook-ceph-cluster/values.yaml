@@ -53,10 +53,10 @@ cephClusterSpec:
     #     memory: "1Gi"
     osd:
       limits:
-        memory: 8Gi
-        cpu: 2000m
+        memory: 4Gi
+        cpu: 3000m
       requests:
-        cpu: 1000m
+        cpu: 2000m
         memory: 4Gi
   storage:
     nearFullRatio: 0.67
