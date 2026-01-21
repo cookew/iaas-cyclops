@@ -23,7 +23,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-      - image: jgraph/drawio:29.3.2
+      - image: jgraph/drawio:29.3.5
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
