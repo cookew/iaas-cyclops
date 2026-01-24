@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: kubevirt-manager
 
 resources:
-- base/ingress.yaml
+# - base/ingress.yaml
+- base/kubevirt-manager-keycloak-client.yaml
 
 helmGlobals:
   chartHome: mycharts
@@ -16,6 +17,12 @@ helmCharts:
   repo: https://kubevirt-manager.io/charts
   valuesFile: values.yaml
   version: v1.5.3
+- name: oauth2-proxy
+  namespace: kubevirt-manager
+  releaseName: pkubevirt-manager-oauth2-proxy
+  repo: https://oauth2-proxy.github.io/manifests
+  valuesFile: kubevirt-manager-oauth2-proxy-values.yaml
+  version: 10.1.1
 
 # resources:
 # - https://github.com/kubevirt-manager/kubevirt-manager/releases/download/v1.5.3/crd-v1.5.3.yaml

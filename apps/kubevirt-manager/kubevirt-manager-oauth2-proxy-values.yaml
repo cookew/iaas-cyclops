@@ -1,0 +1,140 @@
+# https://github.com/oauth2-proxy/manifests/blob/main/helm/oauth2-proxy/values.yaml
+
+affinity:
+  podAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 1
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - kubevirt-manager
+        topologyKey: kubernetes.io/hostname
+
+config:
+  existingSecret: kubevirt-manager-oauth2-proxy
+  configFile: |-
+    allowed_roles = [ "kubevirt-manager:kubevirt-manager-admin" ]
+    banner = "-"
+    code_challenge_method = "S256"
+    cookie_csrf_per_request_limit = 1
+    cookie_expire = "0"
+    cookie_samesite = "strict"
+    cookie_secure = true
+    custom_sign_in_logo = "-"
+    email_domains = [ "*" ]
+    footer = "-"
+    force_https = true
+    insecure_oidc_allow_unverified_email = true
+    oidc_issuer_url = "https://keycloak.apps.iaas.wcooke.me/realms/iaas"
+    pass_authorization_header = true
+    provider = "keycloak-oidc"
+    provider_ca_files = [ "/certs/ca.crt" ]
+    real_client_ip_header = "X-Forwarded-For"
+    redirect_url = "https://kubevirt-manager.apps.iaas.wcooke.me/oauth2/callback"
+    reverse_proxy = true
+    set_authorization_header = true
+    set_xauthrequest = true
+    silence_ping_logging = true
+    skip_provider_button = true
+    ssl_insecure_skip_verify = false
+    tls_cert_file = "/certs/tls.crt"
+    tls_cipher_suites = [ "TLS_AES_256_GCM_SHA384" ]
+    tls_key_file = "/certs/tls.key"
+    tls_min_version = "TLS1.3"
+    upstreams = [ "http://kubevirt-manager.kubevirt-manager.svc:8080/" ]
+    whitelist_domains = [ "*.apps.iaas.wcooke.me" ]
+
+extraObjects:
+- apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: kubevirt-manager-oauth2-proxy
+  spec:
+    commonName: kubevirt-manager-oauth2-proxy
+    dnsNames:
+    - kubevirt-manager.apps.iaas.wcooke.me
+    duration: 960h
+    isCA: false
+    issuerRef:
+      kind: ClusterIssuer
+      name: iaas-wcooke-me
+    secretName: kubevirt-manager-oauth2-proxy-certs
+    usages:
+    - client auth
+    - server auth
+
+extraVolumes:
+- name: oauth2-proxy-certs
+  secret:
+    secretName: kubevirt-manager-oauth2-proxy-certs
+
+extraVolumeMounts:
+- mountPath: /certs
+  name: oauth2-proxy-certs
+
+# gatewayApi:
+#   annotations: {}
+#   enabled: false
+#   gatewayRef:
+#     name: ""
+#     namespace: ""
+#   hostnames:
+#   - chart-example.local
+#   labels: {}
+#   rules:
+#   - matches:
+#     - path:
+#         type: PathPrefix
+#         value: /
+
+httpScheme: https
+
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: KubeVirt Manager
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Kubernetes
+    forecastle.stakater.com/icon: https://kubevirt.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/network-restricted: "true"
+    # ingress.cilium.io/tls-passthrough: enabled
+  className: cilium
+  enabled: true
+  hosts:
+  - kubevirt.apps.iaas.wcooke.me
+  labels: {}
+  path: /
+  pathType: Prefix
+  tls:
+  - hosts:
+    - kubevirt.apps.iaas.wcooke.me
+    secretName: kubevirt-manager-ingress-cert
+initContainers:
+  waitForRedis:
+    enabled: false
+
+metrics:
+  enabled: true
+
+networkPolicy:
+  create: false
+  ingress: []
+  egress: []
+
+replicaCount: 2
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 300Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 300Mi
+
+revisionHistoryLimit: 0
+
+serviceAccount:
+  enabled: false
