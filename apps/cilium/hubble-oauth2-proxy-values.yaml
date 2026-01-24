@@ -20,7 +20,7 @@ config:
     banner = "-"
     code_challenge_method = "S256"
     cookie_csrf_per_request_limit = 1
-    cookie_expire = "0"
+    cookie_expire = "30s"
     cookie_refresh = "5s"
     cookie_samesite = "strict"
     cookie_secure = true
