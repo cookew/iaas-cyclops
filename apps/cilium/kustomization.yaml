@@ -8,6 +8,8 @@ resources:
 - base/ciliumbgpclusterconfig.yaml
 - base/ciliumbgppeerconfig.yaml
 - base/ciliumloadbalancerippool.yaml
+- base/hubble-keycloak-client.yaml
+- sealed-secrets/hubble-oauth2-proxy.yaml
 - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.4.0/config/crd/standard/gateway.networking.k8s.io_gatewayclasses.yaml
 - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.4.0/config/crd/standard/gateway.networking.k8s.io_gateways.yaml
 - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.4.0/config/crd/standard/gateway.networking.k8s.io_httproutes.yaml
@@ -23,3 +25,9 @@ helmCharts:
   repo: https://helm.cilium.io/
   valuesFile: values.yaml
   version: 1.18.6
+- name: oauth2-proxy
+  namespace: kubevirt-manager
+  releaseName: hubble-oauth2-proxy
+  repo: https://oauth2-proxy.github.io/manifests
+  valuesFile: hubble-oauth2-proxy-values.yaml
+  version: 10.1.1

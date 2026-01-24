@@ -75,10 +75,10 @@ hubble:
       serviceMonitor:
         enabled: true
   ui:
-    enabled: true
+    enabled: false
     ingress:
       annotations:
-        cert-manager.io/cluster-issuer: "iaas-wcooke-me"
+        cert-manager.io/cluster-issuer: iaas-wcooke-me
         forecastle.stakater.com/appName: Hubble
         forecastle.stakater.com/expose: "true"
         forecastle.stakater.com/group: Observability
