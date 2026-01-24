@@ -1,6 +1,8 @@
 apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
 kind: Client
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   name: hubble
 spec:
   deletionPolicy: Delete
@@ -29,6 +31,8 @@ spec:
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   name: hubble-admin
 spec:
   deletionPolicy: Delete
@@ -44,6 +48,8 @@ spec:
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Group
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   name: hubble-admins
 spec:
   deletionPolicy: Delete
@@ -57,6 +63,8 @@ spec:
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Roles
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   name: hubble-roles
 spec:
   deletionPolicy: Delete
