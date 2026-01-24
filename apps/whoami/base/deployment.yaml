@@ -26,10 +26,10 @@ spec:
       - args:
         # - --cacert
         # - /certs/ca.crt
-        - --cert
-        - /certs/tls.crt
-        - --key
-        - /certs/tls.key
+        # - --cert
+        # - /certs/tls.crt
+        # - --key
+        # - /certs/tls.key
         - --verbose
         env:
         - name: WHOAMI_PORT_NUMBER
