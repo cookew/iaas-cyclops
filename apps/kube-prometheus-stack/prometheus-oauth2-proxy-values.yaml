@@ -98,7 +98,7 @@ ingress:
     forecastle.stakater.com/appName: Prometheus
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Observability
-    forecastle.stakater.com/icon: https://prometheus.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/icon: https://prometheus.apps.iaas.wcooke.me/favicon.svg
     forecastle.stakater.com/network-restricted: "true"
     ingress.cilium.io/tls-passthrough: enabled
   className: cilium
