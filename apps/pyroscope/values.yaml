@@ -371,7 +371,7 @@ ingress:
     forecastle.stakater.com/icon: https://pyroscope.apps.iaas.wcooke.me/favicon.ico
     forecastle.stakater.com/network-restricted: "true"
   className: cilium
-  enabled: true
+  enabled: false
   hosts:
   - pyroscope.apps.iaas.wcooke.me
   pathType: Prefix
