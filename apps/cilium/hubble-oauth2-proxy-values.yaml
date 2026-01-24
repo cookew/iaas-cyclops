@@ -44,7 +44,7 @@ config:
     tls_cipher_suites = [ "TLS_AES_256_GCM_SHA384" ]
     tls_key_file = "/certs/tls.key"
     tls_min_version = "TLS1.3"
-    upstreams = [ "http://hubble-ui.kube-system.svc/" ]
+    upstreams = [ "https://hubble-ui.kube-system.svc:80/" ]
     whitelist_domains = [ "*.apps.iaas.wcooke.me" ]
 
 extraObjects:
