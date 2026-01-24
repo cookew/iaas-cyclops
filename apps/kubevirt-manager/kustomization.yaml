@@ -6,7 +6,7 @@ namespace: kubevirt-manager
 resources:
 # - base/ingress.yaml
 - base/kubevirt-manager-keycloak-client.yaml
-- sealed-secret/kubevirt-manager-oauth2-proxy.yaml
+- sealed-secrets/kubevirt-manager-oauth2-proxy.yaml
 
 helmGlobals:
   chartHome: mycharts
