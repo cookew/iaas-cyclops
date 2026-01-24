@@ -90,7 +90,7 @@ extraVolumeMounts:
 #         type: PathPrefix
 #         value: /
 
-httpScheme: http
+httpScheme: https
 
 ingress:
   annotations:

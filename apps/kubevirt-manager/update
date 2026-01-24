@@ -16,16 +16,16 @@ echo "CHART_HOME is ${CHART_HOME}"
 echo "CHART_NAME is ${CHART_NAME}"
 echo "CHART_VERSION is ${CHART_VERSION}"
 
-rm -rf ${CHART_HOME}
-mkdir ${CHART_HOME}
-git clone -b ${BRANCH} --depth 1 ${REPO} ${CHART_HOME}/${CHART_NAME}
-mkdir -p ${CHART_HOME}/${CHART_NAME}-${CHART_VERSION}
-cp -r ${CHART_HOME}/${CHART_NAME}/${REPO_SUB_DIR} ${CHART_HOME}/${CHART_NAME}-${CHART_VERSION}/${CHART_NAME}
-rm -rf ${CHART_HOME}/${CHART_NAME}
+rm -rf "${CHART_HOME}"
+mkdir "${CHART_HOME}"
+git clone -b ${BRANCH} --depth 1 ${REPO} "${CHART_HOME}/${CHART_NAME}"
+mkdir -p "${CHART_HOME}/${CHART_NAME}-${CHART_VERSION}"
+cp -r "${CHART_HOME}/${CHART_NAME}/${REPO_SUB_DIR}" "${CHART_HOME}/${CHART_NAME}-${CHART_VERSION}/${CHART_NAME}"
+rm -rf "${CHART_HOME:?}/${CHART_NAME:?}"
 
 # Remove .gitignore if it exists
-rm ${CHART_HOME}/${CHART_NAME}-${CHART_VERSION}/${CHART_NAME}/.gitignore || true
+rm "${CHART_HOME}/${CHART_NAME}-${CHART_VERSION}/${CHART_NAME}/.gitignore" || true
 
 # Pull in any charts if needed
-cd ${CHART_HOME}/${CHART_NAME}-${CHART_VERSION}/${CHART_NAME}
+cd "${CHART_HOME}/${CHART_NAME}-${CHART_VERSION}/${CHART_NAME}"
 helm dependency build
