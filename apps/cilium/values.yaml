@@ -99,7 +99,7 @@ hubble:
       certManagerIssuerRef:
         group: cert-manager.io
         kind: ClusterIssuer
-        name: "iaas-wcooke-me"
+        name: iaas-wcooke-me
       certValidityDuration: 47
       method: certmanager
 

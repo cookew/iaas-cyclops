@@ -44,7 +44,7 @@ config:
     tls_cipher_suites = [ "TLS_AES_256_GCM_SHA384" ]
     tls_key_file = "/certs/tls.key"
     tls_min_version = "TLS1.3"
-    upstreams = [ "http://hubble-ui.kube-system.svc:80/" ]
+    upstreams = [ "http://hubble-ui.kube-system.svc/" ]
     whitelist_domains = [ "*.apps.iaas.wcooke.me" ]
 
 extraObjects:
@@ -97,10 +97,10 @@ ingress:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
     forecastle.stakater.com/appName: Hubble
     forecastle.stakater.com/expose: "true"
-    forecastle.stakater.com/group: Kubernetes
+    forecastle.stakater.com/group: Observability
     forecastle.stakater.com/icon: https://hubble.apps.iaas.wcooke.me/favicon.ico
     forecastle.stakater.com/network-restricted: "true"
-    # ingress.cilium.io/tls-passthrough: enabled
+    ingress.cilium.io/tls-passthrough: enabled
   className: cilium
   enabled: true
   hosts:
