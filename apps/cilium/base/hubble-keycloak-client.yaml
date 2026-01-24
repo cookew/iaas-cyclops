@@ -13,7 +13,7 @@ spec:
     clientSecretSecretRef:
       key: client-secret
       name: hubble-oauth2-proxy
-      namespace: hubble
+      namespace: kube-system
     directAccessGrantsEnabled: true
     name: Hubble
     pkceCodeChallengeMethod: S256
