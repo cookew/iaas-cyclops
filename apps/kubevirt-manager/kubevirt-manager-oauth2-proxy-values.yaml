@@ -100,7 +100,7 @@ ingress:
     forecastle.stakater.com/group: Kubernetes
     forecastle.stakater.com/icon: https://kubevirt.apps.iaas.wcooke.me/favicon.ico
     forecastle.stakater.com/network-restricted: "true"
-    # ingress.cilium.io/tls-passthrough: enabled
+    ingress.cilium.io/tls-passthrough: enabled
   className: cilium
   enabled: true
   hosts:
