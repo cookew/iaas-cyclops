@@ -13,7 +13,7 @@ spec:
       name: grafana-keycloak-client
       namespace: grafana
     directAccessGrantsEnabled: true
-    name: grafana
+    name: Grafana
     pkceCodeChallengeMethod: S256
     realmIdRef:
       name: iaas
