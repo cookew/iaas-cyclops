@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: kubevirt
 
 resources:
-- https://github.com/kubevirt/kubevirt/releases/download/v1.6.3/kubevirt-operator.yaml
+- https://github.com/kubevirt/kubevirt/releases/download/v1.7.0/kubevirt-operator.yaml
 - base/kubevirt.yaml
 
 patches:
