@@ -20,7 +20,7 @@ helmCharts:
   version: v1.5.3
 - name: oauth2-proxy
   namespace: kubevirt-manager
-  releaseName: pkubevirt-manager-oauth2-proxy
+  releaseName: kubevirt-manager-oauth2-proxy
   repo: https://oauth2-proxy.github.io/manifests
   valuesFile: kubevirt-manager-oauth2-proxy-values.yaml
   version: 10.1.1

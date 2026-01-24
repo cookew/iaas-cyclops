@@ -51,7 +51,7 @@ ingester:
   replicas: 3
 
 ingress:
-  enabled: true
+  enabled: false
   ingressClassName: cilium
   annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
