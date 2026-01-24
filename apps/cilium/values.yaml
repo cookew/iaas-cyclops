@@ -75,7 +75,7 @@ hubble:
       serviceMonitor:
         enabled: true
   ui:
-    enabled: false
+    enabled: true
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: iaas-wcooke-me
@@ -85,7 +85,7 @@ hubble:
         forecastle.stakater.com/icon: https://hubble.apps.iaas.wcooke.me/favicon.ico
         forecastle.stakater.com/network-restricted: "true"
       className: cilium
-      enabled: true
+      enabled: false
       hosts:
       - hubble.apps.iaas.wcooke.me
       tls:
