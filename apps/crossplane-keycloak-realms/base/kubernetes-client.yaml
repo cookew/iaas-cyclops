@@ -13,7 +13,7 @@ spec:
       name: headlamp-oidc-client
       namespace: headlamp
     directAccessGrantsEnabled: true
-    name: headlamp
+    name: Headlamp
     # pkceCodeChallengeMethod: S256
     realmIdRef:
       name: iaas
