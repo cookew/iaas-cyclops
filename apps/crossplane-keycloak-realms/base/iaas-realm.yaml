@@ -18,6 +18,22 @@ spec:
   providerConfigRef:
     name: keycloak-provider-config
 ---
+apiVersion: realm.keycloak.crossplane.io/v1alpha1
+kind: RealmEvents
+metadata:
+  name: iaas-events
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    adminEventsDetailsEnabled: true
+    adminEventsEnabled: true
+    eventsEnabled: true
+    eventsExpiration: 2592000
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
 apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
 kind: ClientScope
 metadata:
