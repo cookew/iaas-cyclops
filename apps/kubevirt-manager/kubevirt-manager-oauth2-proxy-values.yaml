@@ -55,7 +55,7 @@ extraObjects:
   spec:
     commonName: kubevirt-manager-oauth2-proxy
     dnsNames:
-    - kubevirt-manager.apps.iaas.wcooke.me
+    - kubevirt.apps.iaas.wcooke.me
     duration: 960h
     isCA: false
     issuerRef:
