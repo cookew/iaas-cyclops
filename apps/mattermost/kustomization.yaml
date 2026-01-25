@@ -7,6 +7,7 @@ resources:
 - base/mattermost.yaml
 - base/mattermost-certificates.yaml
 - base/mattermost-ingress.yaml
+- base/mattermost-keycloak-client.yaml
 - base/mattermost-objectbucketclaim.yaml
 - base/mattermost-pg-cluster.yaml
 - sealed-secrets/mattermost-bucket-credentials.yaml

@@ -1,0 +1,137 @@
+# apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+# kind: Client
+# metadata:
+#   name: mattermost
+# spec:
+#   deletionPolicy: Delete
+#   forProvider:
+#     accessType: confidential
+#     baseUrl: /
+#     clientId: mattermost
+#     clientSecretSecretRef:
+#       key: client-secret
+#       name: mattermost-keycloak-client
+#       namespace: mattermost
+#     directAccessGrantsEnabled: true
+#     name: Mattermost
+#     pkceCodeChallengeMethod: S256
+#     realmIdRef:
+#       name: iaas
+#     rootUrl: https://mattermost.apps.iaas.wcooke.me
+#     standardFlowEnabled: true
+#     validPostLogoutRedirectUris:
+#     - /oauth2/sign_out
+#     validRedirectUris:
+#     - /oauth2/callback
+#   providerConfigRef:
+#     name: keycloak-provider-config
+apiVersion: samlclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  name: mattermost
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    alwaysDisplayInConsole: true
+    # assertionConsumerPostUrl:
+    # assertionConsumerRedirectUrl:
+    # authenticationFlowBindingOverrides:
+    #   browserId:
+    #   directGrantId:
+    baseUrl: /
+    canonicalizationMethod: EXCLUSIVE
+    clientId: mattermost
+    clientSignatureRequired: true
+    consentRequired: false
+    encryptAssertions: false
+    # encryptionAlgorithm:
+    # encryptionCertificateSecretRef:
+    #   key: encryptionCertificate
+    #   name: mattermost-keycloak-client
+    #   namespace: mattermost
+    forceNameIdFormat: false
+    forcePostBinding: true
+    frontChannelLogout: true
+    # fullScopeAllowed:
+    # idpInitiatedSsoRelayState:
+    # idpInitiatedSsoUrlName:
+    includeAuthnStatement: true
+    # logoutServicePostBindingUrl:
+    # logoutServiceRedirectBindingUrl:
+    # masterSamlProcessingUrl:
+    name: Mattermost
+    # nameIdFormat:
+    realmIdRef:
+      name: iaas
+    rootUrl: https://mattermost.apps.iaas.wcooke.me
+    signAssertions: false
+    signDocuments: true
+    signatureAlgorithm: RSA_SHA512
+    signatureKeyName: NONE
+    # signingPrivateKeySecretRef:
+    #   key: signingPrivateKey
+    #   name: mattermost-keycloak-client
+    #   namespace: mattermost
+    # validRedirectUris:
+    # -
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: mattermost-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: mattermost
+    name: mattermost-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: mattermost-user
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: mattermost
+    name: mattermost-user
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: mattermost-users
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: mattermost-users
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: mattermost-user-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: mattermost-users
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: mattermost-user
+  providerConfigRef:
+    name: keycloak-provider-config

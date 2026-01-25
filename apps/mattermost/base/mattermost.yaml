@@ -498,6 +498,94 @@ spec:
   - name: MM_LDAPSETTINGS_READDREMOVEDMEMBERS
     value: "false"
 
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-login-with-saml
+  - name: MM_SAMLSETTINGS_ENABLE
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-synchronizing-saml-accounts-with-ad-ldap
+  - name: MM_SAMLSETTINGS_ENABLESYNCWITHLDAP
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#ignore-guest-users-when-synchronizing-with-ad-ldap
+  - name: MM_SAMLSETTINGS_IGNOREGUESTSLDAPSYNC
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#override-saml-bind-data-with-ad-ldap-information
+  - name: MM_SAMLSETTINGS_ENABLESYNCWITHLDAPINCLUDEAUTH
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#identity-provider-metadata-url
+  - name: MM_SAMLSETTINGS_IDPMETADATAURL
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#saml-sso-url
+  - name: MM_SAMLSETTINGS_IDPURL
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#identity-provider-issuer-url
+  - name: MM_SAMLSETTINGS_IDPDESCRIPTORURL
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#identity-provider-public-certificate
+  - name: MM_SAMLSETTINGS_IDPCERTIFICATEFILE
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#verify-signature
+  - name: MM_SAMLSETTINGS_VERIFY
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#service-provider-login-url
+  - name: MM_SAMLSETTINGS_ASSERTIONCONSUMERSERVICEURL
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#service-provider-identifier
+  - name: MM_SAMLSETTINGS_SERVICEPROVIDERIDENTIFIER
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-encryption
+  - name: MM_SAMLSETTINGS_ENCRYPT
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#service-provider-private-key
+  - name: MM_SAMLSETTINGS_PRIVATEKEYFILE
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#service-provider-public-certificate
+  - name: MM_SAMLSETTINGS_PUBLICCERTIFICATEFILE
+    value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#sign-request
+  - name: MM_SAMLSETTINGS_SIGNREQUEST
+    value: "true"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#signature-algorithm
+  - name: MM_SAMLSETTINGS_SIGNATUREALGORITHM
+    value: "RSAwithSHA512"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#canonical-algorithm
+  - name: MM_SAMLSETTINGS_CANONICALALGORITHM
+    value: "Canonical1.0"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#id2
+  - name: MM_SAMLSETTINGS_EMAILATTRIBUTE
+    value: "email"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#id3
+  - name: MM_SAMLSETTINGS_USERNAMEATTRIBUTE
+    value: "username"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#id4
+  # - name: MM_SAMLSETTINGS_IDATTRIBUTE
+  #   value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#guest-attribute
+  # - name: MM_SAMLSETTINGS_GUESTATTRIBUTE
+  #   value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-admin-attribute
+  - name: MM_SAMLSETTINGS_ENABLEADMINATTRIBUTE
+    value: "false"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#admin-attribute
+  # - name: MM_SAMLSETTINGS_ADMINATTRIBUTE
+  #   value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#id5
+  # - name: MM_SAMLSETTINGS_FIRSTNAMEATTRIBUTE
+  #   value: "firstname"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#id6
+  # - name: MM_SAMLSETTINGS_LASTNAMEATTRIBUTE
+  #   value: "lastname"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#id7
+  # - name: MM_SAMLSETTINGS_NICKNAMEATTRIBUTE
+  #   value: "nickname"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#id8
+  # - name: MM_SAMLSETTINGS_POSITIONATTRIBUTE
+  #   value: "postition"
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#preferred-language-attribute
+  # - name: MM_SAMLSETTINGS_LOCALEATTRIBUTE
+  #   value: ""
+  # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#login-button-text
+  - name: MM_SAMLSETTINGS_LOGINBUTTONTEXT
+    value: "SAML"
+
   # https://docs.mattermost.com/administration-guide/configure/authentication-configuration-settings.html#enable-openid-connect-authentication-with-other-service-providers
   - name: MM_OPENIDSETTINGS_ENABLE
     value: "true"
