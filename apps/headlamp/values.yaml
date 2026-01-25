@@ -144,6 +144,9 @@ pluginsManager:
     - name: gatekeeper
       source: https://artifacthub.io/packages/headlamp/gatekeeper-headlamp-plugin/gatekeeper
       version: 0.2.0
+    - name: kubescape
+      source: https://artifacthub.io/packages/headlamp/kubescape-headlamp-plugin/headlamp_kubescape
+      version: 0.10.3
     - name: opencost
       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_opencost
       version: 0.1.3
