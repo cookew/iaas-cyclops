@@ -3,8 +3,8 @@ kind: Kustomization
 
 namespace: kubescape
 
-# resources:
-# -
+resources:
+- base/storage-clusterrole.yaml
 
 helmCharts:
 - name: kubescape-operator
