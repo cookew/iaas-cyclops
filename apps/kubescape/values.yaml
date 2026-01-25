@@ -32,8 +32,6 @@ capabilities:
   httpDetection: disable
   seccompProfileService: disable
 
-
-
   # runtimeObservability: enable
   # networkPolicyService: enable
   # networkEventsStreaming: enable
@@ -43,6 +41,7 @@ capabilities:
   # admissionController: enable
   # httpDetection: enable
   # seccompProfileService: enable
+
   # Storage backend for SeccompProfile resources: "crd" (Kubernetes CRD) or "storage" (aggregated API)
   seccompProfileBackend: crd
   manageWorkloads: disable
@@ -164,7 +163,7 @@ nodeAgent:
       url: http://synchronizer:8089/apis/v1/kubescape.io
       maxAlertsPerMinute: 1000
       method: POST
-    alertManagerExporterUrls: []
+    alertManagerExporterUrls: [ "kube-prometheus-stack-alertmanager.kube-prometheus-stack.svc:9093" ]
     stdoutExporter: true
     syslogExporterURL: ""
     skipKernelVersionCheck: false
