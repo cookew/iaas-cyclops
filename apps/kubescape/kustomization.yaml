@@ -8,6 +8,7 @@ resources:
 
 helmCharts:
 - name: kubescape-operator
+  includeCRDs: true
   namespace: kubescape
   releaseName: kubescape
   repo: https://kubescape.github.io/helm-charts
