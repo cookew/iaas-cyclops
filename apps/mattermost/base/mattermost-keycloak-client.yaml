@@ -60,7 +60,7 @@ spec:
     # logoutServiceRedirectBindingUrl:
     # masterSamlProcessingUrl:
     name: Mattermost
-    # nameIdFormat:
+    nameIdFormat: username
     realmIdRef:
       name: iaas
     rootUrl: https://mattermost.apps.iaas.wcooke.me
@@ -74,6 +74,21 @@ spec:
     #   namespace: mattermost
     # validRedirectUris:
     # -
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: mattermost-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: mattermost
+    name: mattermost-admin
+    realmIdRef:
+      name: iaas
   providerConfigRef:
     name: keycloak-provider-config
 ---
@@ -110,6 +125,19 @@ spec:
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Group
 metadata:
+  name: mattermost-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: mattermost-admins
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
   name: mattermost-users
 spec:
   deletionPolicy: Delete
@@ -117,6 +145,22 @@ spec:
     name: mattermost-users
     realmIdRef:
       name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: mattermost-admin-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: mattermost-admins
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: mattermost-admin
   providerConfigRef:
     name: keycloak-provider-config
 ---
