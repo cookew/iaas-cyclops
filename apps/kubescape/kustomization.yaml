@@ -11,5 +11,5 @@ helmCharts:
   namespace: kubescape
   releaseName: kubescape
   repo: https://kubescape.github.io/helm-charts
-  # valuesFile: values.yaml
+  valuesFile: values.yaml
   version: 1.30.2
