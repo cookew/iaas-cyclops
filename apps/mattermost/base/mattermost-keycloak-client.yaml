@@ -84,11 +84,11 @@ metadata:
 spec:
   deletionPolicy: Delete
   forProvider:
-    clientIdRef:
-      name: mattermost
     name: mattermost-admin
     realmIdRef:
       name: iaas
+    samlClientIdRef:
+      name: mattermost
   providerConfigRef:
     name: keycloak-provider-config
 ---
@@ -99,11 +99,11 @@ metadata:
 spec:
   deletionPolicy: Delete
   forProvider:
-    clientIdRef:
-      name: mattermost
     name: mattermost-user
     realmIdRef:
       name: iaas
+    samlClientIdRef:
+      name: mattermost
   providerConfigRef:
     name: keycloak-provider-config
 ---
