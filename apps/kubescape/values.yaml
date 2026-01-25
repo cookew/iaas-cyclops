@@ -136,9 +136,9 @@ kubevuln:
     - name: CA_MAX_VULN_SCAN_ROUTINES # TODO update the kubevuln
       value: "1"
 
-storage:
-  mtls:
-    certificateValidityInDays: 40
+# storage:
+#   mtls:
+#     certificateValidityInDays: 40
 
 nodeAgent:
   config:
