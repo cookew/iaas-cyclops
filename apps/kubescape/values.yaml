@@ -22,15 +22,27 @@ capabilities:
   # Generate VEX documents alongside the image vulnerabilities report (experimental)
   vexGeneration: disable
 
-  runtimeObservability: enable
-  networkPolicyService: enable
-  networkEventsStreaming: enable
-  runtimeDetection: enable
-  malwareDetection: enable
-  nodeProfileService: enable
-  admissionController: enable
-  httpDetection: enable
-  seccompProfileService: enable
+  runtimeObservability: disable
+  networkPolicyService: disable
+  networkEventsStreaming: disable
+  runtimeDetection: disable
+  malwareDetection: disable
+  nodeProfileService: disable
+  admissionController: disable
+  httpDetection: disable
+  seccompProfileService: disable
+
+
+
+  # runtimeObservability: enable
+  # networkPolicyService: enable
+  # networkEventsStreaming: enable
+  # runtimeDetection: enable
+  # malwareDetection: enable
+  # nodeProfileService: enable
+  # admissionController: enable
+  # httpDetection: enable
+  # seccompProfileService: enable
   # Storage backend for SeccompProfile resources: "crd" (Kubernetes CRD) or "storage" (aggregated API)
   seccompProfileBackend: crd
   manageWorkloads: disable
@@ -136,9 +148,9 @@ kubevuln:
     - name: CA_MAX_VULN_SCAN_ROUTINES # TODO update the kubevuln
       value: "1"
 
-# storage:
-#   mtls:
-#     certificateValidityInDays: 40
+storage:
+  mtls:
+    certificateValidityInDays: 40
 
 nodeAgent:
   config:
