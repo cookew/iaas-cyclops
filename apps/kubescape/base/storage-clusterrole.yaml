@@ -47,7 +47,7 @@ metadata:
   namespace: kube-system
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: role
+  kind: Role
   name: kubescape-storage-configmaps
 subjects:
 - kind: ServiceAccount
