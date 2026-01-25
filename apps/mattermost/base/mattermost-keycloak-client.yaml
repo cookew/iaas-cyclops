@@ -95,21 +95,6 @@ spec:
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
 metadata:
-  name: mattermost-admin
-spec:
-  deletionPolicy: Delete
-  forProvider:
-    clientIdRef:
-      name: mattermost
-    name: mattermost-admin
-    realmIdRef:
-      name: iaas
-  providerConfigRef:
-    name: keycloak-provider-config
----
-apiVersion: role.keycloak.crossplane.io/v1alpha1
-kind: Role
-metadata:
   name: mattermost-user
 spec:
   deletionPolicy: Delete
