@@ -88,7 +88,7 @@ spec:
       - name: grafana
       - name: headlamp
       - name: holmesgpt
-      # - name: kubescape
+      - name: kubescape
       - name: kubevirt-manager
       - name: loki
       - name: ollama
