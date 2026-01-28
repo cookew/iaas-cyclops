@@ -79,6 +79,7 @@ spec:
         syncWave: -30
 
       - name: alloy
+      - name: cyberchef
       - name: drawio
       - name: fluent-bit
       - name: forecastle
@@ -102,7 +103,6 @@ spec:
       # - name: argo-workflows
       #   serverSideApply: "true"
       # - name: capi-operator
-      # - name: cyberchef
       # - name: gitlab
       #   namespace: gitlab-system
       # - name: gitlab-operator
