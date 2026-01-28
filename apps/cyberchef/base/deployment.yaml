@@ -24,7 +24,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - image: registry.wcooke.me:5000/cyberchef:10.20.0
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           httpGet:
             path: /

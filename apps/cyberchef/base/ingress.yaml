@@ -8,7 +8,7 @@ metadata:
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Apps
     forecastle.stakater.com/icon: https://cyberchef.apps.iaas.wcooke.me/images/cyberchef-128x128.png
-    forecastle.stakater.com/network-restricted: "true"
+    forecastle.stakater.com/network-restricted: "false"
 spec:
   ingressClassName: cilium
   rules:
@@ -21,7 +21,7 @@ spec:
             port:
               number: 8080
         path: /
-        pathType: ImplementationSpecific
+        pathType: Prefix
   tls:
   - hosts:
     - cyberchef.apps.iaas.wcooke.me
