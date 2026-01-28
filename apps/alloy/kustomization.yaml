@@ -17,4 +17,4 @@ helmCharts:
   releaseName: alloy
   repo: https://grafana.github.io/helm-charts
   valuesFile: values.yaml
-  version: 1.5.2
+  version: 1.5.3
