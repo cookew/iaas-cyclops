@@ -110,7 +110,7 @@ prometheus:
             requests:
               storage: 150Gi
     tsdb:
-      outOfOrderTimeWindow: 30m
+      outOfOrderTimeWindow: 5s
 
 prometheus-node-exporter:
   prometheus:
