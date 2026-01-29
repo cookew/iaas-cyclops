@@ -164,3 +164,7 @@ prometheus:
     enabled: true
 
 rollOutCiliumPods: true
+
+bandwidthManager:
+  bbr: true
+  enabled: true
