@@ -112,7 +112,7 @@ hubble:
 ingressController:
   default: true
   enabled: true
-  enforceHttps: false
+  enforceHttps: true
   loadbalancerMode: shared
 #  hostNetwork:
 #    enabled: false
@@ -160,5 +160,7 @@ pmtuDiscovery:
 
 prometheus:
   enabled: true
+  serviceMonitor:
+    enabled: true
 
 rollOutCiliumPods: true
