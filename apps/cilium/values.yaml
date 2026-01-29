@@ -56,6 +56,9 @@ gatewayAPI:
 
 hubble:
   metrics:
+    # post cluster init
+    dashboards:
+      enabled: true
     enabled:
     - dns
     - drop
@@ -66,6 +69,9 @@ hubble:
     - kafka
     - port-distribution
     - tcp
+    # post cluster init
+    serviceMonitor:
+      enabled: true
   relay:
     enabled: true
     rollOutPods: true
