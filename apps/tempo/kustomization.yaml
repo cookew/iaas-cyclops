@@ -10,6 +10,6 @@ helmCharts:
 - name: tempo-distributed
   namespace: tempo
   releaseName: tempo
-  repo: https://grafana.github.io/helm-charts
+  repo: https://grafana-community.github.io/helm-charts
   valuesFile: values.yaml
-  version: 1.61.2
+  version: 1.62.0
