@@ -112,4 +112,3 @@ manager:
     enabled: false
   svc:
     type: ClusterIP
-
