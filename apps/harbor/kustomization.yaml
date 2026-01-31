@@ -10,6 +10,7 @@ resources:
 - sealed-secrets/harbor-admin-password.yaml
 - sealed-secrets/harbor-core-config.yaml
 - sealed-secrets/harbor-encryption-key.yaml
+- sealed-secrets/harbor-keycloak-client.yaml
 
 helmCharts:
 - name: harbor

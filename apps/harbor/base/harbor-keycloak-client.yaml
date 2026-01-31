@@ -12,11 +12,11 @@ spec:
     clientId: harbor
     clientSecretSecretRef:
       key: client-secret
-      name: harbor-oauth2-proxy
+      name: harbor-keycloak-client
       namespace: harbor
     directAccessGrantsEnabled: true
     name: Harbor
-    pkceCodeChallengeMethod: S256
+    # pkceCodeChallengeMethod: S256
     realmIdRef:
       name: iaas
     rootUrl: https://harbor.apps.iaas.wcooke.me
