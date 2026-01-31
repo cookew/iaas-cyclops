@@ -13,7 +13,33 @@ spec:
     registrationEmailAsUsername: false
     rememberMe: true
     resetPasswordAllowed: false
+    securityDefenses:
+    - bruteForceDetection:
+      - failureFactor: 5
+      # - maxFailureWaitSeconds:
+      - maxLoginFailures: 30
+      # - maxTemporaryLockouts:
+      # - minimumQuickLoginWaitSeconds:
+      - permanentLockout: true
+      - quickLoginCheckMilliSeconds: 1000
+      # - waitIncrementSeconds: 60
     sslRequired: all
+    webAuthnPasswordlessPolicy:
+    - avoidSameAuthenticatorRegister: false
+      relyingPartyId: apps.iaas.wcooke.me
+      relyingPartyEntityName: Keycloak
+      signatureAlgorithms:
+      - RS512
+      - ES512
+      userVerificationRequirement: required
+    webAuthnPolicy:
+    - avoidSameAuthenticatorRegister: false
+      relyingPartyId: apps.iaas.wcooke.me
+      relyingPartyEntityName: Keycloak
+      signatureAlgorithms:
+      - RS512
+      - ES512
+      userVerificationRequirement: required
     verifyEmail: false
   providerConfigRef:
     name: keycloak-provider-config
