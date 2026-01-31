@@ -1,4 +1,4 @@
-autoGenerateCert: false
+# autoGenerateCert: false
 
 controller:
   certificate:
