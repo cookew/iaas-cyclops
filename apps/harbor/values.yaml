@@ -11,7 +11,7 @@ expose:
       cert-manager.io/cluster-issuer: iaas-wcooke-me
       forecastle.stakater.com/appName: Harbor
       forecastle.stakater.com/expose: "true"
-      forecastle.stakater.com/group: Apps
+      forecastle.stakater.com/group: Kubernetes
       forecastle.stakater.com/icon: https://harbor.apps.iaas.wcooke.me/favicon.ico?v=2
       forecastle.stakater.com/network-restricted: "true"
       forecastle.stakater.com/url: https://harbor.apps.iaas.wcooke.me
