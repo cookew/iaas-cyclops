@@ -1,8 +1,5 @@
 autoGenerateCert: false
 
-containerd:
-  enabled: true
-
 controller:
   certificate:
     secret: neuvector-controller-cert
