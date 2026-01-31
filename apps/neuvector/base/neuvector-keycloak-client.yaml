@@ -41,21 +41,6 @@ spec:
   providerConfigRef:
     name: keycloak-provider-config
 ---
-apiVersion: role.keycloak.crossplane.io/v1alpha1
-kind: Role
-metadata:
-  name: neuvector-admin
-spec:
-  deletionPolicy: Delete
-  forProvider:
-    clientIdRef:
-      name: neuvector
-    name: neuvector-admin
-    realmIdRef:
-      name: iaas
-  providerConfigRef:
-    name: keycloak-provider-config
----
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Group
 metadata:
