@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
 - base/neuvector-certs.yaml
 - base/neuvector-keycloak-client.yaml
-- base/neuvector-init-cm.yaml
+# - base/neuvector-init-cm.yaml
 - sealed-secrets/neuvector-init.yaml
 - sealed-secrets/neuvector-keycloak-client.yaml
 
