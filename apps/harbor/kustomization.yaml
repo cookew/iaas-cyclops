@@ -5,6 +5,7 @@ namespace: harbor
 
 resources:
 - base/certificates.yaml
+- base/harbor-keycloak-client.yaml
 - base/harbor-pg-cluster.yaml
 - base/objectbucketclaim.yaml
 - sealed-secrets/harbor-admin-password.yaml
