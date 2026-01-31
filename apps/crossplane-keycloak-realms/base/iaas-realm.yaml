@@ -13,16 +13,16 @@ spec:
     registrationEmailAsUsername: false
     rememberMe: true
     resetPasswordAllowed: false
-    securityDefenses:
-    - bruteForceDetection:
-      - failureFactor: 5
-      # - maxFailureWaitSeconds:
-      - maxLoginFailures: 30
-      # - maxTemporaryLockouts:
-      # - minimumQuickLoginWaitSeconds:
-      - permanentLockout: true
-      - quickLoginCheckMilliSeconds: 1000
-      # - waitIncrementSeconds: 60
+    # securityDefenses:
+    # - bruteForceDetection:
+    #   - failureFactor: 5
+    #   # - maxFailureWaitSeconds:
+    #   - maxLoginFailures: 30
+    #   # - maxTemporaryLockouts:
+    #   # - minimumQuickLoginWaitSeconds:
+    #   - permanentLockout: true
+    #   - quickLoginCheckMilliSeconds: 1000
+    #   # - waitIncrementSeconds: 60
     sslRequired: all
     webAuthnPasswordlessPolicy:
     - attestationConveyancePreference: not specified
