@@ -47,7 +47,7 @@ spec:
     storageClass: ceph-filesystem
   walStorage:
     resizeInUseVolumes: true
-    size: 1Gi
+    size: 3Gi
     storageClass: ceph-filesystem
 # ---
 # apiVersion: barmancloud.cnpg.io/v1

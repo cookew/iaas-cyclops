@@ -23,8 +23,8 @@ spec:
     standardFlowEnabled: true
     # validPostLogoutRedirectUris:
     # - /oauth2/sign_out
-    # validRedirectUris:
-    # - /oauth2/callback
+    validRedirectUris:
+    - /harbor/projects
   providerConfigRef:
     name: keycloak-provider-config
 ---
