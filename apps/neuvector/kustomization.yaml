@@ -9,11 +9,11 @@ resources:
 - sealed-secrets/neuvector-keycloak-client.yaml
 
 # https://github.com/neuvector/neuvector-helm
-# helmCharts:
-# - name: core
-#   includeCRDs: true
-#   namespace: neuvector
-#   releaseName: neuvector
-#   repo: https://neuvector.github.io/neuvector-helm/
-#   valuesFile: values.yaml
-#   version: 2.8.10
+helmCharts:
+- name: core
+  includeCRDs: true
+  namespace: neuvector
+  releaseName: neuvector
+  repo: https://neuvector.github.io/neuvector-helm/
+  valuesFile: values.yaml
+  version: 2.8.10
