@@ -25,20 +25,28 @@ spec:
       # - waitIncrementSeconds: 60
     sslRequired: all
     webAuthnPasswordlessPolicy:
-    - avoidSameAuthenticatorRegister: false
-      relyingPartyId: apps.iaas.wcooke.me
+    - attestationConveyancePreference: not specified
+      authenticatorAttachment: not specified
+      avoidSameAuthenticatorRegister: false
+      createTimeout: 0
       relyingPartyEntityName: Keycloak
+      relyingPartyId: apps.iaas.wcooke.me
+      requireResidentKey: not specified
       signatureAlgorithms:
-      - RS512
-      - ES512
+        - ES512
+        - RS512
       userVerificationRequirement: required
     webAuthnPolicy:
-    - avoidSameAuthenticatorRegister: false
-      relyingPartyId: apps.iaas.wcooke.me
+    - attestationConveyancePreference: not specified
+      authenticatorAttachment: not specified
+      avoidSameAuthenticatorRegister: false
+      createTimeout: 0
       relyingPartyEntityName: Keycloak
+      relyingPartyId: apps.iaas.wcooke.me
+      requireResidentKey: not specified
       signatureAlgorithms:
-      - RS512
-      - ES512
+        - ES512
+        - RS512
       userVerificationRequirement: required
     verifyEmail: false
   providerConfigRef:
