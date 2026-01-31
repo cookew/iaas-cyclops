@@ -24,7 +24,7 @@ spec:
     # validPostLogoutRedirectUris:
     # - /oauth2/sign_out
     validRedirectUris:
-    - /
+    - /*
   providerConfigRef:
     name: keycloak-provider-config
 ---
