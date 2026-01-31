@@ -7,9 +7,9 @@ resources:
 - base/certificates.yaml
 - base/harbor-pg-cluster.yaml
 - base/objectbucketclaim.yaml
-- sealedsecrets/harbor-admin-password.yaml
-- sealedsecrets/harbor-core-config.yaml
-- sealedsecrets/harbor-encryption-key.yaml
+- sealed-secrets/harbor-admin-password.yaml
+- sealed-secrets/harbor-core-config.yaml
+- sealed-secrets/harbor-encryption-key.yaml
 
 helmCharts:
 - name: harbor
@@ -17,7 +17,7 @@ helmCharts:
   releaseName: harbor
   repo: https://helm.goharbor.io
   valuesFile: values.yaml
-  version: 1.18.1
+  version: 1.18.2
 
 patches:
 - path: patches/harbor-jobservice-pvc.yaml

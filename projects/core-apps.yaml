@@ -87,6 +87,7 @@ spec:
         serverSideApply: "true"
       - name: github-arc-runners
       - name: grafana
+      - name: harbor
       - name: headlamp
       - name: holmesgpt
       - name: kubevirt-manager
@@ -107,7 +108,6 @@ spec:
       # - name: gitlab-operator
       #   namespace: gitlab-system
       # - name: gitlab-runners
-      # - name: harbor
       # - name: keda
       #   replace: "true"
       # - name: kubescape

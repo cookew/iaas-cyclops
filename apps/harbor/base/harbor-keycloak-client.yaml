@@ -1,0 +1,79 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: harbor
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    accessType: confidential
+    baseUrl: /
+    clientId: harbor
+    clientSecretSecretRef:
+      key: client-secret
+      name: harbor-oauth2-proxy
+      namespace: harbor
+    directAccessGrantsEnabled: true
+    name: Harbor
+    pkceCodeChallengeMethod: S256
+    realmIdRef:
+      name: iaas
+    rootUrl: https://harbor.apps.iaas.wcooke.me
+    standardFlowEnabled: true
+    # validPostLogoutRedirectUris:
+    # - /oauth2/sign_out
+    # validRedirectUris:
+    # - /oauth2/callback
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: harbor-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: harbor
+    name: harbor-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: harbor-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: harbor-admins
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: harbor-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: harbor-admins
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: harbor-admin
+  providerConfigRef:
+    name: keycloak-provider-config
