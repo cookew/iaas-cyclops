@@ -7,7 +7,7 @@ metadata:
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Observability
     forecastle.stakater.com/icon: https://alloy.apps.iaas.wcooke.me/favicon.ico
-    forecastle.stakater.com/network-restricted: "true"
+    forecastle.stakater.com/network-restricted: "false"
   name: alloy-ui
 spec:
   ingressClassName: cilium
