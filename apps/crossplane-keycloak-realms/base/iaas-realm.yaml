@@ -15,14 +15,14 @@ spec:
     resetPasswordAllowed: false
     securityDefenses:
     - bruteForceDetection:
-      - maxLoginFailures: 29
+      - # failureFactor: 5
+        # maxFailureWaitSeconds:
+        maxLoginFailures: 5
+        # maxTemporaryLockouts:
+        minimumQuickLoginWaitSeconds: 60
         permanentLockout: true
-      # - failureFactor: 5
-      # - maxFailureWaitSeconds:
-      # - maxTemporaryLockouts:
-      # - minimumQuickLoginWaitSeconds:
-      # - quickLoginCheckMilliSeconds: 1000
-      # - waitIncrementSeconds: 60
+        quickLoginCheckMilliSeconds: 1000
+        # waitIncrementSeconds: 60
     sslRequired: all
     webAuthnPasswordlessPolicy:
     - attestationConveyancePreference: not specified
