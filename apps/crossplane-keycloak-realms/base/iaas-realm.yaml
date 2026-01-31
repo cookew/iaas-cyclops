@@ -31,7 +31,7 @@ spec:
       createTimeout: 0
       relyingPartyEntityName: Keycloak
       relyingPartyId: apps.iaas.wcooke.me
-      requireResidentKey: Yes
+      requireResidentKey: "Yes"
       signatureAlgorithms:
         - ES512
         - RS512
@@ -43,7 +43,7 @@ spec:
       createTimeout: 0
       relyingPartyEntityName: Keycloak
       relyingPartyId: apps.iaas.wcooke.me
-      requireResidentKey: yes
+      requireResidentKey: "Yes"
       signatureAlgorithms:
         - ES512
         - RS512
