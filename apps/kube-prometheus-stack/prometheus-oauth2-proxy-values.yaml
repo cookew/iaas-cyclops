@@ -20,7 +20,7 @@ config:
     banner = "-"
     code_challenge_method = "S256"
     cookie_csrf_per_request_limit = 1
-    cookie_expire = "15m"
+    cookie_expire = "10m"
     cookie_refresh = "1m"
     cookie_samesite = "strict"
     cookie_secure = true
@@ -66,6 +66,74 @@ extraObjects:
     usages:
     - client auth
     - server auth
+- apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+  kind: Client
+  metadata:
+    name: prometheus
+  spec:
+    deletionPolicy: Delete
+    forProvider:
+      accessType: confidential
+      baseUrl: /
+      clientId: prometheus
+      clientSecretSecretRef:
+        key: client-secret
+        name: prometheus-oauth2-proxy
+        namespace: kube-prometheus-stack
+      directAccessGrantsEnabled: true
+      name: Prometheus
+      pkceCodeChallengeMethod: S256
+      realmIdRef:
+        name: iaas
+      rootUrl: https://prometheus.apps.iaas.wcooke.me
+      standardFlowEnabled: true
+      validPostLogoutRedirectUris:
+      - /oauth2/sign_out
+      validRedirectUris:
+      - /oauth2/callback
+    providerConfigRef:
+      name: keycloak-provider-config
+- apiVersion: role.keycloak.crossplane.io/v1alpha1
+  kind: Role
+  metadata:
+    name: prometheus-admin
+  spec:
+    deletionPolicy: Delete
+    forProvider:
+      clientIdRef:
+        name: prometheus
+      name: prometheus-admin
+      realmIdRef:
+        name: iaas
+    providerConfigRef:
+      name: keycloak-provider-config
+- apiVersion: group.keycloak.crossplane.io/v1alpha1
+  kind: Group
+  metadata:
+    name: prometheus-admins
+  spec:
+    deletionPolicy: Delete
+    forProvider:
+      name: prometheus-admins
+      realmIdRef:
+        name: iaas
+    providerConfigRef:
+      name: keycloak-provider-config
+- apiVersion: group.keycloak.crossplane.io/v1alpha1
+  kind: Roles
+  metadata:
+    name: prometheus-roles
+  spec:
+    deletionPolicy: Delete
+    forProvider:
+      groupIdRef:
+        name: prometheus-admins
+      realmIdRef:
+        name: iaas
+      roleIdsRefs:
+      - name: prometheus-admin
+    providerConfigRef:
+      name: keycloak-provider-config
 
 extraVolumes:
 - name: oauth2-proxy-certs

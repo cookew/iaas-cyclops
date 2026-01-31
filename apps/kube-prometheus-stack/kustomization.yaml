@@ -4,8 +4,6 @@ kind: Kustomization
 namespace: kube-prometheus-stack
 
 resources:
-- base/alertmanager-keycloak-client.yaml
-- base/prometheus-keycloak-client.yaml
 - base/metrics-exporter-cm.yaml
 - base/metrics-exporter-ds.yaml
 - sealed-secrets/kube-prometheus-stack-alertmanager-oauth2-proxy.yaml
