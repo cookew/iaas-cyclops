@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: neuvector-keycloak-client
+  namespace: neuvector
+spec:
+  encryptedData:
+    client-secret: AgCqhjVW498jqaBgJ2oMYDr+4WSOlwKm3aBcMDLpWXSu6iYaUcUy3yKh7/tsNy85iwxnzh4Wfz/Vc4DGo3ljtzI1MhPbwJ5WIdQwkXaaDs9J4Sk6MIChHmfsM7GndIK/EqPu9ApadTAm8n25IQuNFszrfaW9vyKyxnzbGtYaccrQPMEoXuwmk7m8+DhLQFLUT/Xybho604tge7iAOpNt88loJKWOQKFmIv6l97eAVQvbIVwJxqT2R7kDegQPjxm/D61YNfeSR8yviuZ7Njm3/BtunwqHpEtzJIhuAlyrXuZTsXTWB/hP6Z1++AGjG4cBWelj1z4uC/58qrGGMOlmAU11RCN0aomJfo57sBBbYQgKh1Xv39qk/3GHsgOv/Tco348/Van+68Asdd/F8heO6ioV/PCOb2CGcqN5OGmxS/PvOVho02mRZgrhSC5VeeC69SeE19wPdNKTLSupYceECaLWKjRytUR2mvEJK+uo81FKoJ2SggAHb78VdYQcFHrvVH/A4wDBZMpLSqZiK9j+4yF7WSmkAbYWpblc6Put9qvckktoAzktDLivwZ5jtUUvIAwtwh/ZHyPMKz6N0pC/ciWgAn72976AS8yYT3/88ypd9nezsJM9WjDB92L1h+yNXrKVXbgnYBFsKTh3f6FfgEEMfmrj4gUaT3vxPXgXb1JF1EWprGxC4IxZLelaIg6mXtVAIUBqYUvvkGVdPFVbgmrXnlHkGhFR7y51VIaRtiii5VHwTZApxNJ8
+  template:
+    metadata:
+      name: neuvector-keycloak-client
+      namespace: neuvector
+    type: stringData

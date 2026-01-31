@@ -1,0 +1,86 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  name: neuvector
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    accessType: confidential
+    baseUrl: /
+    clientId: neuvector
+    clientSecretSecretRef:
+      key: client-secret
+      name: neuvector-keycloak-client
+      namespace: neuvector
+    directAccessGrantsEnabled: true
+    name: NeuVector
+    pkceCodeChallengeMethod: S256
+    realmIdRef:
+      name: iaas
+    rootUrl: https://neuvector.apps.iaas.wcooke.me
+    standardFlowEnabled: true
+    validPostLogoutRedirectUris:
+    - /
+    validRedirectUris:
+    - /openid_auth
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: neuvector-server-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: neuvector
+    name: neuvector-server-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: neuvector-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: neuvector
+    name: neuvector-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: neuvector-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: neuvector-admins
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: neuvector-admins-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: neuvector-admins
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: neuvector-admin
+  providerConfigRef:
+    name: keycloak-provider-config

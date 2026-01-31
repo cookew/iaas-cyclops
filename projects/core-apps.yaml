@@ -92,6 +92,7 @@ spec:
       - name: holmesgpt
       - name: kubevirt-manager
       - name: loki
+      - name: neuvector
       - name: ollama
       - name: pyroscope
       - name: tempo
@@ -113,7 +114,6 @@ spec:
       # - name: kubescape
       # - name: kubevirt-templates
       # - name: mermaid
-      # - name: neuvector
       # - name: trivy
 
   template:

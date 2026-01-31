@@ -6,7 +6,7 @@ metadata:
 data:
   passwordprofileinitcfg.yaml: |
     # Optional. true or false or empty string(false)
-    always_reload: false
+    always_reload: true
     active_profile_name: default
     pwd_profiles:
     # only default profile is supported.
