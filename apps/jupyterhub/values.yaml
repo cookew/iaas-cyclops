@@ -33,7 +33,7 @@ hub:
         - ReadWriteOnce
       storage: 1Gi
       subPath:
-      storageClassName:
+      storageClassName: ceph-filesystem
     url:
     password:
   # labels: {}
@@ -146,22 +146,22 @@ singleuser:
   uid: 1000
   fsGid: 100
   serviceAccountName:
-  storage:
-    type: dynamic
-    extraLabels: {}
-    extraVolumes:
-    extraVolumeMounts:
-    static:
-      pvcName:
-      subPath: "{username}"
-    capacity: 10Gi
-    homeMountPath: /home/jovyan
-    dynamic:
-      storageClass:
-      pvcNameTemplate:
-      volumeNameTemplate: volume-{user_server}
-      storageAccessModes: [ReadWriteOnce]
-      subPath:
+  # storage:
+  #   type: dynamic
+  #   extraLabels: {}
+  #   extraVolumes:
+  #   extraVolumeMounts:
+  #   static:
+  #     pvcName:
+  #     subPath: "{username}"
+  #   capacity: 10Gi
+  #   homeMountPath: /home/jovyan
+  #   dynamic:
+  #     storageClass:
+  #     pvcNameTemplate:
+  #     volumeNameTemplate: volume-{user_server}
+  #     storageAccessModes: [ReadWriteOnce]
+  #     subPath:
   startTimeout: 300
   cpu:
     limit:
