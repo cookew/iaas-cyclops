@@ -20,9 +20,9 @@ hub:
       enable_auth_state: true
     GenericOAuthenticator:
       admin_groups:
-        jupyterhub-admins
+        jupyterhub-admin
       allowed_groups:
-        # jupyterhub-admins
+        # jupyterhub-admin
         jupyterhub-users
       # # Allow all Keycloak users
       # allow_all: true
