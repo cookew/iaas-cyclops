@@ -2,7 +2,7 @@
 
 # custom can contain anything you want to pass to the hub pod, as all passed
 # Helm template values will be made available there.
-custom: {}
+# custom: {}
 
 # hub relates to the hub pod, responsible for running JupyterHub, its configured
 # Authenticator class KubeSpawner, and its configured Proxy class
@@ -54,19 +54,19 @@ hub:
   # concurrentSpawnLimit: 64
   # consecutiveFailureLimit: 5
   # activeServerLimit:
-  db:
-    type: sqlite-pvc
-    upgrade:
-    pvc:
-      annotations: {}
-      selector: {}
-      accessModes:
-        - ReadWriteOnce
-      storage: 1Gi
-      subPath:
-      storageClassName: ceph-filesystem
-    url:
-    password:
+  # db:
+  #   type: sqlite-pvc
+  #   upgrade:
+  #   pvc:
+  #     annotations: {}
+  #     selector: {}
+  #     accessModes:
+  #       - ReadWriteOnce
+  #     storage: 1Gi
+  #     subPath:
+  #     storageClassName: ceph-filesystem
+  #   url:
+  #   password:
   # labels: {}
   # annotations: {}
   # command: []
@@ -235,7 +235,7 @@ singleuser:
   # extraResource:
   #   limits: {}
   #   guarantees: {}
-  cmd: jupyterhub-singleuser
+  # cmd: jupyterhub-singleuser
   # defaultUrl:
   # extraPodConfig: {}
   # profileList: []
@@ -245,8 +245,8 @@ scheduling:
   userScheduler:
     enabled: true
     revisionHistoryLimit: 1
-    replicas: 2
-    logLevel: 4
+    # replicas: 2
+    # logLevel: 4
     # plugins are configured on the user-scheduler to make us score how we
     # schedule user pods in a way to help us schedule on the most busy node. By
     # doing this, we help scale down more effectively. It isn't obvious how to
@@ -255,8 +255,8 @@ scheduling:
     # plugins ref: https://kubernetes.io/docs/reference/scheduling/config/#scheduling-plugins-1
     # migration ref: https://kubernetes.io/docs/reference/scheduling/config/#scheduler-configuration-migrations
     #
-    plugins:
-      score:
+    # plugins:
+      # score:
         # We make use of the default scoring plugins, but we re-enable some with
         # a new priority, leave some enabled with their lower default priority,
         # and disable some.
@@ -278,89 +278,89 @@ scheduling:
         # Disabled for scoring:
         # - NodeResourcesBalancedAllocation
         #
-        disabled:
-          # We disable these plugins (with regards to scoring) to not interfere
-          # or complicate our use of NodeResourcesFit.
-          - name: NodeResourcesBalancedAllocation
-          # Disable plugins to be allowed to enable them again with a different
-          # weight and avoid an error.
-          - name: NodeAffinity
-          - name: InterPodAffinity
-          - name: NodeResourcesFit
-          - name: ImageLocality
-        enabled:
-          - name: NodeAffinity
-            weight: 14631
-          - name: InterPodAffinity
-            weight: 1331
-          - name: NodeResourcesFit
-            weight: 121
-          - name: ImageLocality
-            weight: 11
-    pluginConfig:
-      # Here we declare that we should optimize pods to fit based on a
-      # MostAllocated strategy instead of the default LeastAllocated.
-      - name: NodeResourcesFit
-        args:
-          scoringStrategy:
-            type: MostAllocated
-            resources:
-              - name: cpu
-                weight: 1
-              - name: memory
-                weight: 1
-    nodeSelector: {}
-    tolerations: []
-    labels: {}
-    annotations: {}
-    pdb:
-      enabled: true
-      maxUnavailable: 1
-      minAvailable:
-    resources: {}
-    serviceAccount:
-      create: true
-      name:
-      annotations: {}
+        # disabled:
+        #   # We disable these plugins (with regards to scoring) to not interfere
+        #   # or complicate our use of NodeResourcesFit.
+        #   - name: NodeResourcesBalancedAllocation
+        #   # Disable plugins to be allowed to enable them again with a different
+        #   # weight and avoid an error.
+        #   - name: NodeAffinity
+        #   - name: InterPodAffinity
+        #   - name: NodeResourcesFit
+        #   - name: ImageLocality
+        # enabled:
+        #   - name: NodeAffinity
+        #     weight: 14631
+        #   - name: InterPodAffinity
+        #     weight: 1331
+        #   - name: NodeResourcesFit
+        #     weight: 121
+        #   - name: ImageLocality
+        #     weight: 11
+    # pluginConfig:
+    #   # Here we declare that we should optimize pods to fit based on a
+    #   # MostAllocated strategy instead of the default LeastAllocated.
+    #   - name: NodeResourcesFit
+    #     args:
+    #       scoringStrategy:
+    #         type: MostAllocated
+    #         resources:
+    #           - name: cpu
+    #             weight: 1
+    #           - name: memory
+    #             weight: 1
+    # nodeSelector: {}
+    # tolerations: []
+    # labels: {}
+    # annotations: {}
+    # pdb:
+    #   enabled: true
+    #   maxUnavailable: 1
+    #   minAvailable:
+    # resources: {}
+    # serviceAccount:
+    #   create: true
+    #   name:
+    #   annotations: {}
     # extraPodSpec: {}
-  podPriority:
-    enabled: false
-    globalDefault: false
-    defaultPriority: 0
-    imagePullerPriority: -5
-    userPlaceholderPriority: -10
-  userPlaceholder:
-    enabled: true
-    revisionHistoryLimit: 1
-    replicas: 0
-    labels: {}
-    annotations: {}
-    resources: {}
+  # podPriority:
+  #   enabled: false
+  #   globalDefault: false
+  #   defaultPriority: 0
+  #   imagePullerPriority: -5
+  #   userPlaceholderPriority: -10
+  # userPlaceholder:
+  #   enabled: true
+  #   revisionHistoryLimit: 1
+  #   replicas: 0
+  #   labels: {}
+  #   annotations: {}
+  #   resources: {}
     # extraPodSpec: {}
-  corePods:
-    tolerations:
-      - key: hub.jupyter.org/dedicated
-        operator: Equal
-        value: core
-        effect: NoSchedule
-      - key: hub.jupyter.org_dedicated
-        operator: Equal
-        value: core
-        effect: NoSchedule
-    nodeAffinity:
-      matchNodePurpose: prefer
-  userPods:
-    tolerations:
-      - key: hub.jupyter.org/dedicated
-        operator: Equal
-        value: user
-        effect: NoSchedule
-      - key: hub.jupyter.org_dedicated
-        operator: Equal
-        value: user
-        effect: NoSchedule
-    nodeAffinity:
-      matchNodePurpose: prefer
+  # corePods:
+  #   tolerations:
+  #     - key: hub.jupyter.org/dedicated
+  #       operator: Equal
+  #       value: core
+  #       effect: NoSchedule
+  #     - key: hub.jupyter.org_dedicated
+  #       operator: Equal
+  #       value: core
+  #       effect: NoSchedule
+  #   nodeAffinity:
+  #     matchNodePurpose: prefer
+  # userPods:
+  #   tolerations:
+  #     - key: hub.jupyter.org/dedicated
+  #       operator: Equal
+  #       value: user
+  #       effect: NoSchedule
+  #     - key: hub.jupyter.org_dedicated
+  #       operator: Equal
+  #       value: user
+  #       effect: NoSchedule
+  #   nodeAffinity:
+  #     matchNodePurpose: prefer
 
 # # prePuller relates to the hook|continuous-image-puller DaemonsSets
 prePuller:
