@@ -35,10 +35,10 @@ hub:
       logout_redirect_url: https://forecastle.apps.iaas.wcooke.me
       manage_groups: true
       oauth_callback_url: https://jupyterhub.apps.iaas.wcooke.me/hub/oauth_callback
-      # scope:
-      # - openid
-      # - email
-      # - client_roles
+      scope:
+      - openid
+      - email
+      - client_roles
       token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
       # userdata_params:
       #   state: state
