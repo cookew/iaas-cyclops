@@ -116,7 +116,7 @@ proxy:
   # service relates to the proxy-public service
   service:
     type: ClusterIP
-    disableHttpPort: false
+    # disableHttpPort: false
   traefik:
     revisionHistoryLimit: 1
   # https:
