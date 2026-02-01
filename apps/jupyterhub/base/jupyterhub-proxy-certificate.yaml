@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: proxy-certificate
+  name: jupyterhub-proxy-certificate
 spec:
   commonName: proxy-certificate
   duration: 960h
