@@ -14,7 +14,7 @@ spec:
       namespace: neuvector
     directAccessGrantsEnabled: true
     name: NeuVector
-    pkceCodeChallengeMethod: S256
+    # pkceCodeChallengeMethod: S256
     realmIdRef:
       name: iaas
     rootUrl: https://neuvector.apps.iaas.wcooke.me
