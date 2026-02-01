@@ -21,7 +21,7 @@ spec:
     standardFlowEnabled: true
     validPostLogoutRedirectUris:
     - /
-    - http://localhost:8081/hub/oauth_callback
+    # - http://localhost:8081/hub/oauth_callback
     validRedirectUris:
     - /hub/oauth_callback
   providerConfigRef:
