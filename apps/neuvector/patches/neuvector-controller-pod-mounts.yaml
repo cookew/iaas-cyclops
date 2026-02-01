@@ -10,7 +10,8 @@
       echo Existing CA certificates in /etc/ssl/certs:
       ls -al /etc/ssl/certs/
       echo Combining CA certificates
-      for cert in /etc/ssl/certs/*.{0,pem} /private-ca-certificates/*; do
+      for cert in /etc/ssl/certs/*.{0,pem} /private-ca-certificates/*
+      do
         echo "Adding cert: $cert"
         cat "${cert}" >> /new-ca-certificates/ca-certificates.crt
         echo "" >> /new-ca-certificates/ca-certificates.crt
