@@ -7,7 +7,12 @@
     - |
       ls -al /private-ca-certificates
       ls -al /etc/ssl/certs/
-      [ -f /etc/ssl/certs/ca-certificates.crt ] && cat /etc/ssl/certs/ca-certificates.crt >> /new-ca-certificates/ca-certificates.crt
+      # [ -f /etc/ssl/certs/ca-certificates.crt ] && cat /etc/ssl/certs/ca-certificates.crt >> /new-ca-certificates/ca-certificates.crt
+      for cert in /etc/ssl/certs/*.pem; do
+        echo "Adding cert: $cert"
+        cat "${cert}" >> /new-ca-certificates/ca-certificates.crt
+        echo "" >> /new-ca-certificates/ca-certificates.crt
+      done
       cat /private-ca-certificates/* >> /new-ca-certificates/ca-certificates.crt
       ls -al /new-ca-certificates
       cat /new-ca-certificates/ca-certificates.crt
