@@ -54,7 +54,7 @@ hub:
   # concurrentSpawnLimit: 64
   # consecutiveFailureLimit: 5
   # activeServerLimit:
-  # db:
+  db:
   #   type: sqlite-pvc
   #   upgrade:
   #   pvc:
@@ -64,7 +64,7 @@ hub:
   #       - ReadWriteOnce
   #     storage: 1Gi
   #     subPath:
-  #     storageClassName: ceph-filesystem
+      storageClassName: ceph-filesystem
   #   url:
   #   password:
   # labels: {}
