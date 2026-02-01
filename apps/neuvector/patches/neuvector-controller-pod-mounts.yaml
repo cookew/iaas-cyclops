@@ -7,15 +7,12 @@
     - |
       ls -al /private-ca-certificates
       ls -al /etc/ssl/certs/
-      # [ -f /etc/ssl/certs/ca-certificates.crt ] && cat /etc/ssl/certs/ca-certificates.crt >> /new-ca-certificates/ca-certificates.crt
-      for cert in /etc/ssl/certs/*.pem; do
+      for cert in /etc/ssl/certs/*.pem /private-ca-certificates/*; do
         echo "Adding cert: $cert"
         cat "${cert}" >> /new-ca-certificates/ca-certificates.crt
         echo "" >> /new-ca-certificates/ca-certificates.crt
       done
-      cat /private-ca-certificates/* >> /new-ca-certificates/ca-certificates.crt
       ls -al /new-ca-certificates
-      cat /new-ca-certificates/ca-certificates.crt
     command: ["/usr/bin/bash", "-c"]
     image: docker.io/neuvector/controller:5.4.8
     name: certificate-fixer
