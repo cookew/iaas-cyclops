@@ -1,7 +1,7 @@
 # These four patches add private CA certificates to the neuvector-controller pod
 # 1. Using init container to append private CA certificates
 - op: add
-  path: /spec/template/spec/containers/0/initContainers/-
+  path: /spec/template/spec/initContainers/-
   value:
     args:
     - |
