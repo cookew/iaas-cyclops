@@ -38,7 +38,7 @@ hub:
       oauth_callback_url: https://jupyterhub.apps.iaas.wcooke.me/hub/oauth_callback
       scope:
       - email
-      # - openid
+      - openid
       # - preferred_username
       - profile
       # - jupyterhub-dedicated
