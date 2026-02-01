@@ -1,7 +1,7 @@
 - op: add
   path: /spec/template/spec/containers/0/volumeMounts/-
   value:
-    mountPath: /etc/ssl/certs/cacert.pem
+    mountPath: /etc/ssl/certs/ca-certificates.crt
     name: ca
     readOnly: true
     subPath: ca-bundle.pem
