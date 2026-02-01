@@ -46,7 +46,7 @@ hub:
       # https://z2jh.jupyter.org/en/latest/jupyterhub/customizing/user-management.html#admin-users
       admin_access: false
       authenticator_class: generic-oauth
-      subdomain_host: jupyterhub.apps.iaas.wcooke.me
+      subdomain_host: https://jupyterhub.apps.iaas.wcooke.me
   # baseUrl: /
   # cookieSecret:
   # initContainers: []
@@ -118,6 +118,8 @@ proxy:
   service:
     type: ClusterIP
     # disableHttpPort: false
+  chp:
+    revisionHistoryLimit: 0
   traefik:
     revisionHistoryLimit: 0
   https:
@@ -405,10 +407,19 @@ ingress:
     forecastle.stakater.com/icon: https://jupyterhub.apps.iaas.wcooke.me/favicon.ico
     forecastle.stakater.com/network-restricted: "true"
     # ingress.cilium.io/tls-passthrough: "enabled"
+  extraPaths:
+  - backend:
+      service:
+        name: jupyterhub-proxy-public
+        port:
+          name: https
+    path: /
+    pathType: Prefix
   ingressClassName: cilium
   hosts:
   - jupyterhub.apps.iaas.wcooke.me
   # - "*.jupyterhub.apps.iaas.wcooke.me"
+  pathSuffix: /doesnotexist
   tls:
   - hosts:
     - jupyterhub.apps.iaas.wcooke.me
