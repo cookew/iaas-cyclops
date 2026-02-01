@@ -22,8 +22,8 @@ hub:
       admin_groups:
         jupyterhub-admin
       allowed_groups:
-        # jupyterhub-admin
-        jupyterhub-users
+        jupyterhub-admin
+        jupyterhub-user
       # # Allow all Keycloak users
       # allow_all: true
       authorize_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
