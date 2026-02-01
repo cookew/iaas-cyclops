@@ -30,6 +30,7 @@ hub:
       client_id: jupyterhub
       client_secret: jupyterhub-client-secret
       login_service: keycloak
+      manage_groups: true
       oauth_callback_url: https://jupyterhub.apps.iaas.wcooke.me/hub/oauth_callback
       token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
       username_claim: preferred_username
