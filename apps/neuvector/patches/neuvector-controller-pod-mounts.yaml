@@ -28,7 +28,7 @@
   path: /spec/template/spec/volumes/-
   value:
     emptyDir:
-      medium: memory
+      medium: Memory
       sizeLimit: 5Mi
     name: new-ca-certificates
 
