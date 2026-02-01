@@ -90,6 +90,7 @@ spec:
       - name: harbor
       - name: headlamp
       - name: holmesgpt
+      - name: jupyterhub
       - name: kubevirt-manager
       - name: loki
       - name: neuvector

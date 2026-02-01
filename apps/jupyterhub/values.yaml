@@ -1,0 +1,384 @@
+# https://github.com/jupyterhub/zero-to-jupyterhub-k8s/blob/main/jupyterhub/values.yaml
+
+# custom can contain anything you want to pass to the hub pod, as all passed
+# Helm template values will be made available there.
+custom: {}
+
+# hub relates to the hub pod, responsible for running JupyterHub, its configured
+# Authenticator class KubeSpawner, and its configured Proxy class
+# ConfigurableHTTPProxy. KubeSpawner creates the user pods, and
+# ConfigurableHTTPProxy speaks with the actual ConfigurableHTTPProxy server in
+# the proxy pod.
+hub:
+  revisionHistoryLimit: 0
+  # config:
+  #   JupyterHub:
+  #     admin_access: true
+  #     authenticator_class: dummy
+  # baseUrl: /
+  # cookieSecret:
+  # initContainers: []
+  # nodeSelector: {}
+  # tolerations: []
+  # concurrentSpawnLimit: 64
+  # consecutiveFailureLimit: 5
+  # activeServerLimit:
+  db:
+    type: sqlite-pvc
+    upgrade:
+    pvc:
+      annotations: {}
+      selector: {}
+      accessModes:
+        - ReadWriteOnce
+      storage: 1Gi
+      subPath:
+      storageClassName:
+    url:
+    password:
+  # labels: {}
+  # annotations: {}
+  # command: []
+  # args: []
+  # extraConfig: {}
+  # extraFiles: {}
+  # extraEnv: {}
+  # extraContainers: []
+  # extraVolumes: []
+  # extraVolumeMounts: []
+  # resources: {}
+  # lifecycle: {}
+  # loadRoles: {}
+  # services: {}
+  # pdb:
+  #   enabled: false
+  #   maxUnavailable:
+  #   minAvailable: 1
+  # networkPolicy:
+  #   enabled: true
+  #   ingress: []
+  #   egress: []
+  #   egressAllowRules:
+  #     cloudMetadataServer: true
+  #     dnsPortsCloudMetadataServer: true
+  #     dnsPortsKubeSystemNamespace: true
+  #     dnsPortsPrivateIPs: true
+  #     nonPrivateIPs: true
+  #     privateIPs: true
+  #   interNamespaceAccessLabels: ignore
+  #   allowedIngressPorts: []
+  # allowNamedServers: false
+  # namedServerLimitPerUser:
+  # authenticatePrometheus:
+  # redirectToServer:
+  # shutdownOnLogout:
+  # templatePaths: []
+  # templateVars: {}
+  # existingSecret:
+  # extraPodSpec: {}
+
+# proxy relates to the proxy pod, the proxy-public service, and the autohttps
+# pod and proxy-http service.
+proxy:
+  secretToken:
+  annotations: {}
+  # service relates to the proxy-public service
+  service:
+    type: ClusterIP
+    disableHttpPort: true
+  traefik:
+    revisionHistoryLimit: 0
+  https:
+    enabled: true
+    type: secret
+    secret:
+      name: proxy-certificate
+      key: tls.key
+      crt: tls.crt
+    hosts:
+    - jupyterhub.apps.iaas.wcooke.me
+
+# singleuser relates to the configuration of KubeSpawner which runs in the hub
+# pod, and its spawning of user pods such as jupyter-myusername.
+singleuser:
+  podNameTemplate:
+  extraTolerations: []
+  nodeSelector: {}
+  extraNodeAffinity:
+    required: []
+    preferred: []
+  extraPodAffinity:
+    required: []
+    preferred: []
+  extraPodAntiAffinity:
+    required: []
+    preferred: []
+  networkTools:
+    resources: {}
+  cloudMetadata:
+    # block set to true will append a privileged initContainer using the
+    # iptables to block the sensitive metadata server at the provided ip.
+    blockWithIptables: true
+    ip: 169.254.169.254
+  networkPolicy:
+    enabled: true
+    ingress: []
+    egress: []
+    egressAllowRules:
+      cloudMetadataServer: false
+      dnsPortsCloudMetadataServer: true
+      dnsPortsKubeSystemNamespace: true
+      dnsPortsPrivateIPs: true
+      nonPrivateIPs: true
+      privateIPs: false
+    interNamespaceAccessLabels: ignore
+    allowedIngressPorts: []
+  events: true
+  extraAnnotations: {}
+  extraLabels:
+    hub.jupyter.org/network-access-hub: "true"
+  extraFiles: {}
+  extraEnv: {}
+  lifecycleHooks: {}
+  initContainers: []
+  extraContainers: []
+  allowPrivilegeEscalation: false
+  uid: 1000
+  fsGid: 100
+  serviceAccountName:
+  storage:
+    type: dynamic
+    extraLabels: {}
+    extraVolumes:
+    extraVolumeMounts:
+    static:
+      pvcName:
+      subPath: "{username}"
+    capacity: 10Gi
+    homeMountPath: /home/jovyan
+    dynamic:
+      storageClass:
+      pvcNameTemplate:
+      volumeNameTemplate: volume-{user_server}
+      storageAccessModes: [ReadWriteOnce]
+      subPath:
+  startTimeout: 300
+  cpu:
+    limit:
+    guarantee:
+  memory:
+    limit:
+    guarantee: 1G
+  extraResource:
+    limits: {}
+    guarantees: {}
+  cmd: jupyterhub-singleuser
+  defaultUrl:
+  extraPodConfig: {}
+  profileList: []
+
+# scheduling relates to the user-scheduler pods and user-placeholder pods.
+scheduling:
+  userScheduler:
+    enabled: true
+    revisionHistoryLimit: 0
+    replicas: 2
+    logLevel: 4
+    # plugins are configured on the user-scheduler to make us score how we
+    # schedule user pods in a way to help us schedule on the most busy node. By
+    # doing this, we help scale down more effectively. It isn't obvious how to
+    # enable/disable scoring plugins, and configure them, to accomplish this.
+    #
+    # plugins ref: https://kubernetes.io/docs/reference/scheduling/config/#scheduling-plugins-1
+    # migration ref: https://kubernetes.io/docs/reference/scheduling/config/#scheduler-configuration-migrations
+    #
+    plugins:
+      score:
+        # We make use of the default scoring plugins, but we re-enable some with
+        # a new priority, leave some enabled with their lower default priority,
+        # and disable some.
+        #
+        # Below are the default scoring plugins as of 2024-09-23 according to
+        # https://kubernetes.io/docs/reference/scheduling/config/#scheduling-plugins.
+        #
+        # Re-enabled with high priority:
+        # - NodeAffinity
+        # - InterPodAffinity
+        # - NodeResourcesFit
+        # - ImageLocality
+        #
+        # Remains enabled with low default priority:
+        # - TaintToleration
+        # - PodTopologySpread
+        # - VolumeBinding
+        #
+        # Disabled for scoring:
+        # - NodeResourcesBalancedAllocation
+        #
+        disabled:
+          # We disable these plugins (with regards to scoring) to not interfere
+          # or complicate our use of NodeResourcesFit.
+          - name: NodeResourcesBalancedAllocation
+          # Disable plugins to be allowed to enable them again with a different
+          # weight and avoid an error.
+          - name: NodeAffinity
+          - name: InterPodAffinity
+          - name: NodeResourcesFit
+          - name: ImageLocality
+        enabled:
+          - name: NodeAffinity
+            weight: 14631
+          - name: InterPodAffinity
+            weight: 1331
+          - name: NodeResourcesFit
+            weight: 121
+          - name: ImageLocality
+            weight: 11
+    pluginConfig:
+      # Here we declare that we should optimize pods to fit based on a
+      # MostAllocated strategy instead of the default LeastAllocated.
+      - name: NodeResourcesFit
+        args:
+          scoringStrategy:
+            type: MostAllocated
+            resources:
+              - name: cpu
+                weight: 1
+              - name: memory
+                weight: 1
+    nodeSelector: {}
+    tolerations: []
+    labels: {}
+    annotations: {}
+    pdb:
+      enabled: true
+      maxUnavailable: 1
+      minAvailable:
+    resources: {}
+    serviceAccount:
+      create: true
+      name:
+      annotations: {}
+    extraPodSpec: {}
+  podPriority:
+    enabled: false
+    globalDefault: false
+    defaultPriority: 0
+    imagePullerPriority: -5
+    userPlaceholderPriority: -10
+  userPlaceholder:
+    enabled: true
+    revisionHistoryLimit: 0
+    replicas: 0
+    labels: {}
+    annotations: {}
+    resources: {}
+    extraPodSpec: {}
+  corePods:
+    tolerations:
+      - key: hub.jupyter.org/dedicated
+        operator: Equal
+        value: core
+        effect: NoSchedule
+      - key: hub.jupyter.org_dedicated
+        operator: Equal
+        value: core
+        effect: NoSchedule
+    nodeAffinity:
+      matchNodePurpose: prefer
+  userPods:
+    tolerations:
+      - key: hub.jupyter.org/dedicated
+        operator: Equal
+        value: user
+        effect: NoSchedule
+      - key: hub.jupyter.org_dedicated
+        operator: Equal
+        value: user
+        effect: NoSchedule
+    nodeAffinity:
+      matchNodePurpose: prefer
+
+# prePuller relates to the hook|continuous-image-puller DaemonsSets
+prePuller:
+  revisionHistoryLimit: 0
+  labels: {}
+  annotations: {}
+  resources: {}
+  extraTolerations: []
+  # hook relates to the hook-image-awaiter Job and hook-image-puller DaemonSet
+  hook:
+    enabled: true
+    pullOnlyOnChanges: true
+    # image and the configuration below relates to the hook-image-awaiter Job
+    podSchedulingWaitDuration: 10
+    nodeSelector: {}
+    tolerations: []
+    resources: {}
+    # Service Account for the hook-image-awaiter Job
+    serviceAccount:
+      create: true
+      name:
+      annotations: {}
+    # Service Account for the hook-image-puller DaemonSet
+    serviceAccountImagePuller:
+      create: true
+      name:
+      annotations: {}
+    daemonsetAnnotations: {}
+  continuous:
+    enabled: true
+    serviceAccount:
+      create: true
+      name:
+      annotations: {}
+    daemonsetAnnotations: {}
+  pullProfileListImages: true
+  extraImages: {}
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: JupyterHub
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Apps
+    forecastle.stakater.com/icon: https://jupyterhub.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/network-restricted: "true"
+    ingress.cilium.io/tls-passthrough: "enabled"
+  ingressClassName: cilium
+  hosts:
+  - jupyterhub.apps.iaas.wcooke.me
+  pathSuffix: /
+  pathType: Prefix
+  tls:
+  - hosts:
+    - jupyterhub.apps.iaas.wcooke.me
+    secretName: jupyterhub-ingress-certs
+  extraPaths: []
+
+httpRoute:
+  enabled: false
+  annotations: {}
+  hostnames: []
+  gateway:
+    name: your-gateway
+    namespace: "" # required for a gateway resource in another namespace
+    # sectionName: https # optional: specify Gateway listener section (e.g., 'http', 'https')
+
+# cull relates to the jupyterhub-idle-culler service, responsible for evicting
+# inactive singleuser pods.
+#
+# The configuration below, except for enabled, corresponds to command-line flags
+# for jupyterhub-idle-culler as documented here:
+# https://github.com/jupyterhub/jupyterhub-idle-culler#as-a-standalone-script
+#
+cull:
+  enabled: true
+  users: false # --cull-users
+  adminUsers: true # --cull-admin-users
+  removeNamedServers: false # --remove-named-servers
+  timeout: 3600 # --timeout
+  every: 600 # --cull-every
+  concurrency: 10 # --concurrency
+  maxAge: 0 # --max-age

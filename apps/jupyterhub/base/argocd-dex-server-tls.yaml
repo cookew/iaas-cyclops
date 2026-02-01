@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: proxy-certificate
+spec:
+  commonName: proxy-certificate
+  duration: 960h
+  isCA: false
+  issuerRef:
+    kind: ClusterIssuer
+    name: iaas-wcooke-me
+  secretName: proxy-certificate
+  usages:
+  - client auth
+  - server auth
