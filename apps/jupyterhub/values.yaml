@@ -128,7 +128,7 @@ proxy:
   traefik:
     revisionHistoryLimit: 0
   https:
-    enabled: false
+    enabled: true
     type: secret
     secret:
       name: proxy-certificate
