@@ -22,7 +22,7 @@ spec:
     validPostLogoutRedirectUris:
     - /
     validRedirectUris:
-    - /openId_auth
+    - /hub/oauth_callback
   providerConfigRef:
     name: keycloak-provider-config
 ---
