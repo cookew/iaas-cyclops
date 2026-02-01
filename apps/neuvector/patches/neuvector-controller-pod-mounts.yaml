@@ -4,7 +4,7 @@
     mountPath: /etc/ssl/certs/cacert.pem
     name: ca
     readOnly: true
-    subPath: cabundle
+    subPath: ca-bundle.pem
 - op: add
   path: /spec/template/spec/volumes/-
   value:
