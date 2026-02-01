@@ -2,8 +2,8 @@ autoGenerateCert: false
 
 controller:
   certificate:
-    secret: neuvector-controller-cert
     pemFile: tls.crt
+    secret: neuvector-controller-cert
   disruptionBudget: 0
   # ingress:
   #   annotations:
