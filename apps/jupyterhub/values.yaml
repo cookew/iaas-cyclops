@@ -410,7 +410,7 @@ ingress:
   extraPaths:
   - backend:
       service:
-        name: jupyterhub-proxy-public
+        name: proxy-public
         port:
           name: https
     path: /
