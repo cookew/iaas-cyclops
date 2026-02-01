@@ -8,18 +8,18 @@ resources:
 - sealed-secrets/neuvector-init.yaml
 - sealed-secrets/neuvector-keycloak-client.yaml
 
-patches:
-- path: patches/neuvector-controller-pod-mounts.yaml
-  target:
-    kind: Deployment
-    name: neuvector-controller-pod
+# patches:
+# - path: patches/neuvector-controller-pod-mounts.yaml
+#   target:
+#     kind: Deployment
+#     name: neuvector-controller-pod
 
-# https://github.com/neuvector/neuvector-helm
-helmCharts:
-- name: core
-  includeCRDs: true
-  namespace: neuvector
-  releaseName: neuvector
-  repo: https://neuvector.github.io/neuvector-helm/
-  valuesFile: values.yaml
-  version: 2.8.10
+# # https://github.com/neuvector/neuvector-helm
+# helmCharts:
+# - name: core
+#   includeCRDs: true
+#   namespace: neuvector
+#   releaseName: neuvector
+#   repo: https://neuvector.github.io/neuvector-helm/
+#   valuesFile: values.yaml
+#   version: 2.8.10
