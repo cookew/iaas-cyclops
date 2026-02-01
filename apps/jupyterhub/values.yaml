@@ -11,10 +11,16 @@ custom: {}
 # the proxy pod.
 hub:
   revisionHistoryLimit: 1
-  # config:
-  #   JupyterHub:
-  #     admin_access: true
+  config:
+    Authenticator:
+      # https://z2jh.jupyter.org/en/latest/jupyterhub/customizing/user-management.html#admin-users
+      admin_users:
+      - william
+    JupyterHub:
+      # https://z2jh.jupyter.org/en/latest/jupyterhub/customizing/user-management.html#admin-users
+      admin_access: false
   #     authenticator_class: dummy
+      subdomain_host: jupyter.apps.iaas.wcooke.me
   # baseUrl: /
   # cookieSecret:
   # initContainers: []
@@ -137,7 +143,30 @@ singleuser:
   extraAnnotations: {}
   extraLabels:
     hub.jupyter.org/network-access-hub: "true"
-  extraFiles: {}
+  extraFiles:
+    # https://z2jh.jupyter.org/en/latest/jupyterhub/customizing/user-management.html#culling-user-pods
+    # jupyter_notebook_config reference: https://jupyter-notebook.readthedocs.io/en/stable/config.html
+    jupyter_notebook_config.json:
+      mountPath: /etc/jupyter/jupyter_notebook_config.json
+      # data is a YAML structure here but will be rendered to JSON file as our
+      # file extension is ".json".
+      data:
+        MappingKernelManager:
+          # cull_idle_timeout: timeout (in seconds) after which an idle kernel is
+          # considered ready to be culled
+          cull_idle_timeout: 1200 # default: 0
+
+          # cull_interval: the interval (in seconds) on which to check for idle
+          # kernels exceeding the cull timeout value
+          cull_interval: 120 # default: 300
+
+          # cull_connected: whether to consider culling kernels which have one
+          # or more connections
+          cull_connected: true # default: false
+
+          # cull_busy: whether to consider culling kernels which are currently
+          # busy running some code
+          cull_busy: false # default: false
   extraEnv: {}
   lifecycleHooks: {}
   initContainers: []
@@ -146,22 +175,31 @@ singleuser:
   uid: 1000
   fsGid: 100
   serviceAccountName:
-  # storage:
-  #   type: dynamic
-  #   extraLabels: {}
-  #   extraVolumes:
-  #   extraVolumeMounts:
-  #   static:
-  #     pvcName:
-  #     subPath: "{username}"
-  #   capacity: 10Gi
-  #   homeMountPath: /home/jovyan
-  #   dynamic:
-  #     storageClass:
-  #     pvcNameTemplate:
-  #     volumeNameTemplate: volume-{user_server}
-  #     storageAccessModes: [ReadWriteOnce]
-  #     subPath:
+  storage:
+    type: dynamic
+    # extraLabels: {}
+    # extraVolumes:
+    #   # Arbitrary key for identity & ordering
+    #   jupyterhub-shared:
+    #     name: jupyterhub-shared
+    #     persistentVolumeClaim:
+    #       claimName: jupyterhub-shared-volume
+    # extraVolumeMounts:
+    #   # Arbitrary key for identity & ordering
+    #   jupyterhub-shared:
+    #     name: jupyterhub-shared
+    #     mountPath: /home/shared
+    # static:
+    #   pvcName:
+    #   subPath: "{username}"
+    capacity: 10Gi
+    # homeMountPath: /home/jovyan
+    dynamic:
+      storageClass: ceph-filesystem
+      pvcNameTemplate: pvc-{username}
+      volumeNameTemplate: volume-{user_server}
+      storageAccessModes: [ReadWriteOnce]
+      # subPath:
   startTimeout: 300
   cpu:
     limit:
@@ -344,13 +382,12 @@ ingress:
   ingressClassName: cilium
   hosts:
   - jupyterhub.apps.iaas.wcooke.me
-  # pathSuffix: /
-  pathType: Prefix
+  - "*.jupyterhub.apps.iaas.wcooke.me"
   tls:
   - hosts:
     - jupyterhub.apps.iaas.wcooke.me
+    - "*.jupyterhub.apps.iaas.wcooke.me"
     secretName: jupyterhub-ingress-certs
-  # extraPaths: []
 
 # httpRoute:
 #   enabled: false
