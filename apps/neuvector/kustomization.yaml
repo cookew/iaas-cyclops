@@ -6,7 +6,7 @@ resources:
 - base/neuvector-keycloak-client.yaml
 # - base/neuvector-init-cm.yaml
 - sealed-secrets/neuvector-init.yaml
-- sealed-secrets/neuvector-keycloak-client.yaml
+# - sealed-secrets/neuvector-keycloak-client.yaml
 
 patches:
 - path: patches/neuvector-controller-pod-mounts.yaml
