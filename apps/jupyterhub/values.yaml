@@ -21,11 +21,10 @@ hub:
     GenericOAuthenticator:
       admin_groups:
         jupyterhub-admin
+      # allow_all: true
       allowed_groups:
         jupyterhub-admin
         jupyterhub-user
-      # Allow all Keycloak users
-      # allow_all: true
       auth_state_groups_key: client_roles
       authorize_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
       client_id: jupyterhub
@@ -34,15 +33,13 @@ hub:
       enable_pkce: true
       login_service: keycloak
       logout_redirect_url: https://forecastle.apps.iaas.wcooke.me
-      manage_groups: true
+      # manage_groups: true
       oauth_callback_url: https://jupyterhub.apps.iaas.wcooke.me/hub/oauth_callback
-      scope:
-      - email
-      - openid
-      # - preferred_username
-      - profile
-      # - jupyterhub-dedicated
-      # - client_roles
+      # scope:
+      # - email
+      # - openid
+      # - profile
+      # # - preferred_username
       token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
       userdata_params:
         state: state
@@ -52,7 +49,7 @@ hub:
       # https://z2jh.jupyter.org/en/latest/jupyterhub/customizing/user-management.html#admin-users
       admin_access: false
       authenticator_class: generic-oauth
-      subdomain_host: https://jupyterhub.apps.iaas.wcooke.me
+      # subdomain_host: https://jupyterhub.apps.iaas.wcooke.me
   # baseUrl: /
   # cookieSecret:
   # initContainers: []
