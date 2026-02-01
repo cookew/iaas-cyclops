@@ -44,8 +44,8 @@ hub:
       # - jupyterhub-dedicated
       # - client_roles
       token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
-      # userdata_params:
-      #   state: state
+      userdata_params:
+        state: session_state
       userdata_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
       username_claim: preferred_username
     JupyterHub:
