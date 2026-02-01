@@ -40,8 +40,8 @@ hub:
       - email
       # - openid
       - preferred_username
-      # - profile
-      # - client_roles
+      - profile
+      - jupyterhub-dedicated
       token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
       # userdata_params:
       #   state: state
