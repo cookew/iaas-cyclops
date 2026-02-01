@@ -10,7 +10,7 @@ custom: {}
 # ConfigurableHTTPProxy speaks with the actual ConfigurableHTTPProxy server in
 # the proxy pod.
 hub:
-  revisionHistoryLimit: 0
+  revisionHistoryLimit: 1
   # config:
   #   JupyterHub:
   #     admin_access: true
@@ -87,7 +87,7 @@ proxy:
     type: ClusterIP
     disableHttpPort: true
   traefik:
-    revisionHistoryLimit: 0
+    revisionHistoryLimit: 1
   https:
     enabled: true
     type: secret
@@ -181,7 +181,7 @@ singleuser:
 scheduling:
   userScheduler:
     enabled: true
-    revisionHistoryLimit: 0
+    revisionHistoryLimit: 1
     replicas: 2
     logLevel: 4
     # plugins are configured on the user-scheduler to make us score how we
@@ -268,7 +268,7 @@ scheduling:
     userPlaceholderPriority: -10
   userPlaceholder:
     enabled: true
-    revisionHistoryLimit: 0
+    revisionHistoryLimit: 1
     replicas: 0
     labels: {}
     annotations: {}
@@ -301,7 +301,7 @@ scheduling:
 
 # # prePuller relates to the hook|continuous-image-puller DaemonsSets
 # prePuller:
-#   revisionHistoryLimit: 0
+#   revisionHistoryLimit: 1
 #   labels: {}
 #   annotations: {}
 #   resources: {}
