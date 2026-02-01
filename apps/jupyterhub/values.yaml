@@ -407,11 +407,11 @@ ingress:
   ingressClassName: cilium
   hosts:
   - jupyterhub.apps.iaas.wcooke.me
-  - "*.jupyterhub.apps.iaas.wcooke.me"
+  # - "*.jupyterhub.apps.iaas.wcooke.me"
   tls:
   - hosts:
     - jupyterhub.apps.iaas.wcooke.me
-    - "*.jupyterhub.apps.iaas.wcooke.me"
+    # - "*.jupyterhub.apps.iaas.wcooke.me"
     secretName: jupyterhub-ingress-certs
 
 # httpRoute:
