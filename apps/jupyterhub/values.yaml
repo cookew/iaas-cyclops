@@ -36,9 +36,9 @@ hub:
       manage_groups: true
       oauth_callback_url: https://jupyterhub.apps.iaas.wcooke.me/hub/oauth_callback
       scope:
-      - openid
+      # - openid
       - email
-      - client_roles
+      # - client_roles
       token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
       # userdata_params:
       #   state: state
