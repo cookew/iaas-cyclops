@@ -42,7 +42,7 @@ hub:
       # - preferred_username
       - profile
       # - jupyterhub-dedicated
-      - client_roles
+      # - client_roles
       token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
       # userdata_params:
       #   state: state
