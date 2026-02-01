@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: JupyterHub
+    forecastle.stakater.com/expose: 'true'
+    forecastle.stakater.com/group: Apps
+    forecastle.stakater.com/icon: https://jupyterhub.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/network-restricted: 'true'
+    ingress.cilium.io/tls-passthrough: enabled
+  name: jupyterhub
+spec:
+  ingressClassName: cilium
+  rules:
+    - host: jupyterhub.apps.iaas.wcooke.me
+      http:
+        paths:
+          - backend:
+              service:
+                name: proxy-public
+                port:
+                  name: https
+            path: /
+            pathType: Prefix
+    - host: '*.jupyterhub.apps.iaas.wcooke.me'
+      http:
+        paths:
+          - backend:
+              service:
+                name: proxy-public
+                port:
+                  name: https
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - jupyterhub.apps.iaas.wcooke.me
+        - '*.jupyterhub.apps.iaas.wcooke.me'
+      secretName: jupyterhub-ingress-certs

@@ -2,6 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
+- base/jupyterhub-ingress.yaml
 - base/jupyterhub-keycloak-client.yaml
 - base/jupyterhub-proxy-certificate.yaml
 - sealed-secrets/jupyterhub-keycloak-client.yaml

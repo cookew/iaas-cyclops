@@ -403,7 +403,7 @@ prePuller:
 #   extraImages: {}
 
 ingress:
-  enabled: true
+  enabled: false
   annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
     forecastle.stakater.com/appName: JupyterHub
