@@ -11,8 +11,10 @@ resources:
 patches:
 - path: patches/neuvector-controller-pod-mounts.yaml
   target:
+    group: apps
     kind: Deployment
     name: neuvector-controller-pod
+    version: v1
 
 # https://github.com/neuvector/neuvector-helm
 helmCharts:
