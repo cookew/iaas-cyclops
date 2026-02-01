@@ -111,63 +111,63 @@ hub:
 # proxy relates to the proxy pod, the proxy-public service, and the autohttps
 # pod and proxy-http service.
 proxy:
-  secretToken:
-  annotations: {}
+  # secretToken:
+  # annotations: {}
   # service relates to the proxy-public service
   service:
     type: ClusterIP
     disableHttpPort: false
   traefik:
     revisionHistoryLimit: 1
-  https:
-    enabled: true
-    type: secret
-    secret:
-      name: proxy-certificate
-      key: tls.key
-      crt: tls.crt
-    hosts:
-    - jupyterhub.apps.iaas.wcooke.me
+  # https:
+  #   enabled: true
+  #   type: secret
+  #   secret:
+  #     name: proxy-certificate
+  #     key: tls.key
+  #     crt: tls.crt
+  #   hosts:
+  #   - jupyterhub.apps.iaas.wcooke.me
 
 # singleuser relates to the configuration of KubeSpawner which runs in the hub
 # pod, and its spawning of user pods such as jupyter-myusername.
 singleuser:
-  podNameTemplate:
-  extraTolerations: []
-  nodeSelector: {}
-  extraNodeAffinity:
-    required: []
-    preferred: []
-  extraPodAffinity:
-    required: []
-    preferred: []
-  extraPodAntiAffinity:
-    required: []
-    preferred: []
-  networkTools:
-    resources: {}
-  cloudMetadata:
-    # block set to true will append a privileged initContainer using the
-    # iptables to block the sensitive metadata server at the provided ip.
-    blockWithIptables: true
-    ip: 169.254.169.254
-  networkPolicy:
-    enabled: true
-    ingress: []
-    egress: []
-    egressAllowRules:
-      cloudMetadataServer: false
-      dnsPortsCloudMetadataServer: true
-      dnsPortsKubeSystemNamespace: true
-      dnsPortsPrivateIPs: true
-      nonPrivateIPs: true
-      privateIPs: false
-    interNamespaceAccessLabels: ignore
-    allowedIngressPorts: []
-  events: true
-  extraAnnotations: {}
-  extraLabels:
-    hub.jupyter.org/network-access-hub: "true"
+  # podNameTemplate:
+  # extraTolerations: []
+  # nodeSelector: {}
+  # extraNodeAffinity:
+  #   required: []
+  #   preferred: []
+  # extraPodAffinity:
+  #   required: []
+  #   preferred: []
+  # extraPodAntiAffinity:
+  #   required: []
+  #   preferred: []
+  # networkTools:
+  #   resources: {}
+  # cloudMetadata:
+  #   # block set to true will append a privileged initContainer using the
+  #   # iptables to block the sensitive metadata server at the provided ip.
+  #   blockWithIptables: true
+  #   ip: 169.254.169.254
+  # networkPolicy:
+  #   enabled: true
+  #   ingress: []
+  #   egress: []
+  #   egressAllowRules:
+  #     cloudMetadataServer: false
+  #     dnsPortsCloudMetadataServer: true
+  #     dnsPortsKubeSystemNamespace: true
+  #     dnsPortsPrivateIPs: true
+  #     nonPrivateIPs: true
+  #     privateIPs: false
+  #   interNamespaceAccessLabels: ignore
+  #   allowedIngressPorts: []
+  # events: true
+  # extraAnnotations: {}
+  # extraLabels:
+  #   hub.jupyter.org/network-access-hub: "true"
   extraFiles:
     # https://z2jh.jupyter.org/en/latest/jupyterhub/customizing/user-management.html#culling-user-pods
     # jupyter_notebook_config reference: https://jupyter-notebook.readthedocs.io/en/stable/config.html
@@ -192,14 +192,14 @@ singleuser:
           # cull_busy: whether to consider culling kernels which are currently
           # busy running some code
           cull_busy: false # default: false
-  extraEnv: {}
-  lifecycleHooks: {}
-  initContainers: []
-  extraContainers: []
-  allowPrivilegeEscalation: false
-  uid: 1000
-  fsGid: 100
-  serviceAccountName:
+  # extraEnv: {}
+  # lifecycleHooks: {}
+  # initContainers: []
+  # extraContainers: []
+  # allowPrivilegeEscalation: false
+  # uid: 1000
+  # fsGid: 100
+  # serviceAccountName:
   storage:
     type: dynamic
     # extraLabels: {}
@@ -225,20 +225,20 @@ singleuser:
       volumeNameTemplate: volume-{user_server}
       storageAccessModes: [ReadWriteOnce]
       # subPath:
-  startTimeout: 300
-  cpu:
-    limit:
-    guarantee:
-  memory:
-    limit:
-    guarantee: 1G
-  extraResource:
-    limits: {}
-    guarantees: {}
+  # startTimeout: 300
+  # cpu:
+  #   limit:
+  #   guarantee:
+  # memory:
+  #   limit:
+  #   guarantee: 1G
+  # extraResource:
+  #   limits: {}
+  #   guarantees: {}
   cmd: jupyterhub-singleuser
-  defaultUrl:
-  extraPodConfig: {}
-  profileList: []
+  # defaultUrl:
+  # extraPodConfig: {}
+  # profileList: []
 
 # scheduling relates to the user-scheduler pods and user-placeholder pods.
 scheduling:
@@ -363,8 +363,8 @@ scheduling:
       matchNodePurpose: prefer
 
 # # prePuller relates to the hook|continuous-image-puller DaemonsSets
-# prePuller:
-#   revisionHistoryLimit: 1
+prePuller:
+  revisionHistoryLimit: 1
 #   labels: {}
 #   annotations: {}
 #   resources: {}
