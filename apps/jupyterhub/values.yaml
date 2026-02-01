@@ -39,7 +39,7 @@ hub:
       scope:
       - email
       # - openid
-      - preferred_username
+      # - preferred_username
       - profile
       - jupyterhub-dedicated
       token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
