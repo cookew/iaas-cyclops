@@ -37,7 +37,7 @@ hub:
       userdata_params:
         state: state
       userdata_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
-      # auth_state_groups_key: client_roles
+      auth_state_groups_key: client_roles
       # scope:
       # - openid
       # - email
