@@ -406,7 +406,7 @@ ingress:
     forecastle.stakater.com/group: Apps
     forecastle.stakater.com/icon: https://jupyterhub.apps.iaas.wcooke.me/favicon.ico
     forecastle.stakater.com/network-restricted: "true"
-    ingress.cilium.io/tls-passthrough: "enabled"
+    # ingress.cilium.io/tls-passthrough: "enabled"
   # extraPaths:
   # - backend:
   #     service:
