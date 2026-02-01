@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: jupyterhub-keycloak-client
+  namespace: jupyterhub
+spec:
+  encryptedData:
+    client-secret: AgCRoVqCce8JHNExI58+k38wAqD4Jit5t2H5OTXM3IDn8NmRXJHyPDEE7qo9+jOVqq2MpKPZ+GxAldJHqNzmNDNOe3NZ+9xjOeusrFPE0vafnDY8QDQY1ShCp8QUiHSWuvG3waYyeqSC/lGIVt3ozLMalkzA94uO+G5cVeVlE9rV79Up8CbiCJY6V2vEnZ5C8sD6rt+A8qCMi/u3eVz6XKmXcCc9cVJsUfYRGPY/ytwcY3HHYBL956uQ29fnGoqPlUVdEEwSj1YihgbJKYfFbBjVBJsf0M5iRB4WR7uJ8BwkDmIJ4urJYob8yUDEg8/V0bmWppIwW7XBzligbMZeljI+jJ9Su1ftUtBagtNBRo9LeNdPEwT+61EWNUcdml3aFaUQJtI4rQX9fen4ungeoujVLin4HebRRuAlnhydv+PE5BpysKDTnfhWbAW3zRjCSkhN1nxUT207WSdl2BDFtVZkj8wb3nTFitDgZ70aB22toYIdLTSBmtkOWx2+6oj2smAJRr8EUt7CTCtvbvInKcL+1BKd+fgKCaBJND4mUbE+D4tS0SM1ZiINeZMqYk79dZHcL65bPZl+FzrZXvFzaMKfHjrXwYaWZ/ogeYAh9jsKeNjL0g8JeWYPHgPxb6mnfULnASUujqnOkX/XZMdVufP9rMGTF0vISqeNONG6qE8rLcmEKxSgErhMhoNnZ7sOvV9bSn4GkavIRhx0frXH6aF/H7e1LLphXpQ=
+  template:
+    metadata:
+      name: jupyterhub-keycloak-client
+      namespace: jupyterhub
+    type: stringData
