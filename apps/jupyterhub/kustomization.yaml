@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - base/jupyterhub-keycloak-client.yaml
 - base/jupyterhub-proxy-certificate.yaml
+- sealed-secrets/jupyterhub-keycloak-client.yaml
 
 helmCharts:
 - name: jupyterhub
