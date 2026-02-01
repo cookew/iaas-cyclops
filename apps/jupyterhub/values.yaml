@@ -57,7 +57,7 @@ hub:
   db:
   #   type: sqlite-pvc
   #   upgrade:
-  #   pvc:
+    pvc:
   #     annotations: {}
   #     selector: {}
   #     accessModes:
