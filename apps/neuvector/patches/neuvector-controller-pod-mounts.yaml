@@ -5,13 +5,17 @@
   value:
     args:
     - |
+      echo Certificates in /private-ca-certificates:
       ls -al /private-ca-certificates
+      echo Existing CA certificates in /etc/ssl/certs:
       ls -al /etc/ssl/certs/
-      for cert in /etc/ssl/certs/*.pem /private-ca-certificates/*; do
+      echo Combining CA certificates
+      for cert in /etc/ssl/certs/*.{0,pem} /private-ca-certificates/*; do
         echo "Adding cert: $cert"
         cat "${cert}" >> /new-ca-certificates/ca-certificates.crt
         echo "" >> /new-ca-certificates/ca-certificates.crt
       done
+      echo New CA certificates file:
       ls -al /new-ca-certificates
     command: ["/usr/bin/bash", "-c"]
     image: docker.io/neuvector/controller:5.4.8
