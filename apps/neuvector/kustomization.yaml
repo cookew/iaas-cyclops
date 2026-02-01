@@ -8,11 +8,11 @@ resources:
 - sealed-secrets/neuvector-init.yaml
 - sealed-secrets/neuvector-keycloak-client.yaml
 
-# patches:
-# - path: patches/neuvector-controller-pod-mounts.yaml
-#   target:
-#     kind: Deployment
-#     name: neuvector-controller-pod
+patches:
+- path: patches/neuvector-controller-pod-mounts.yaml
+  target:
+    kind: Deployment
+    name: neuvector-controller-pod
 
 # https://github.com/neuvector/neuvector-helm
 helmCharts:
