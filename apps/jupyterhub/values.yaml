@@ -259,7 +259,7 @@ scheduling:
       create: true
       name:
       annotations: {}
-    extraPodSpec: {}
+    # extraPodSpec: {}
   podPriority:
     enabled: false
     globalDefault: false
@@ -273,7 +273,7 @@ scheduling:
     labels: {}
     annotations: {}
     resources: {}
-    extraPodSpec: {}
+    # extraPodSpec: {}
   corePods:
     tolerations:
       - key: hub.jupyter.org/dedicated
@@ -299,42 +299,37 @@ scheduling:
     nodeAffinity:
       matchNodePurpose: prefer
 
-# prePuller relates to the hook|continuous-image-puller DaemonsSets
-prePuller:
-  revisionHistoryLimit: 0
-  labels: {}
-  annotations: {}
-  resources: {}
-  extraTolerations: []
-  # hook relates to the hook-image-awaiter Job and hook-image-puller DaemonSet
-  hook:
-    enabled: true
-    pullOnlyOnChanges: true
-    # image and the configuration below relates to the hook-image-awaiter Job
-    podSchedulingWaitDuration: 10
-    nodeSelector: {}
-    tolerations: []
-    resources: {}
-    # Service Account for the hook-image-awaiter Job
-    serviceAccount:
-      create: true
-      name:
-      annotations: {}
-    # Service Account for the hook-image-puller DaemonSet
-    serviceAccountImagePuller:
-      create: true
-      name:
-      annotations: {}
-    daemonsetAnnotations: {}
-  continuous:
-    enabled: true
-    serviceAccount:
-      create: true
-      name:
-      annotations: {}
-    daemonsetAnnotations: {}
-  pullProfileListImages: true
-  extraImages: {}
+# # prePuller relates to the hook|continuous-image-puller DaemonsSets
+# prePuller:
+#   revisionHistoryLimit: 0
+#   labels: {}
+#   annotations: {}
+#   resources: {}
+#   extraTolerations: []
+#   # hook relates to the hook-image-awaiter Job and hook-image-puller DaemonSet
+#   hook:
+#     enabled: true
+#     pullOnlyOnChanges: true
+#     # image and the configuration below relates to the hook-image-awaiter Job
+#     podSchedulingWaitDuration: 10
+#     nodeSelector: {}
+#     tolerations: []
+#     resources: {}
+#     # Service Account for the hook-image-awaiter Job
+#     serviceAccount:
+#       create: true
+#       name:
+#       annotations: {}
+#     daemonsetAnnotations: {}
+#   continuous:
+#     enabled: true
+#     serviceAccount:
+#       create: true
+#       name:
+#       annotations: {}
+#     daemonsetAnnotations: {}
+#   pullProfileListImages: true
+#   extraImages: {}
 
 ingress:
   enabled: true
