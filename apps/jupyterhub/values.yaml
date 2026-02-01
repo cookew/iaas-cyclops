@@ -10,7 +10,7 @@
 # ConfigurableHTTPProxy speaks with the actual ConfigurableHTTPProxy server in
 # the proxy pod.
 hub:
-  revisionHistoryLimit: 1
+  revisionHistoryLimit: 0
   config:
     Authenticator:
       # https://z2jh.jupyter.org/en/latest/jupyterhub/customizing/user-management.html#admin-users
@@ -46,7 +46,7 @@ hub:
       # https://z2jh.jupyter.org/en/latest/jupyterhub/customizing/user-management.html#admin-users
       admin_access: false
       authenticator_class: generic-oauth
-      subdomain_host: jupyter.apps.iaas.wcooke.me
+      subdomain_host: jupyterhub.apps.iaas.wcooke.me
   # baseUrl: /
   # cookieSecret:
   # initContainers: []
@@ -119,16 +119,16 @@ proxy:
     type: ClusterIP
     # disableHttpPort: false
   traefik:
-    revisionHistoryLimit: 1
-  # https:
-  #   enabled: true
-  #   type: secret
-  #   secret:
-  #     name: proxy-certificate
-  #     key: tls.key
-  #     crt: tls.crt
-  #   hosts:
-  #   - jupyterhub.apps.iaas.wcooke.me
+    revisionHistoryLimit: 0
+  https:
+    enabled: true
+    type: secret
+    secret:
+      name: proxy-certificate
+      key: tls.key
+      crt: tls.crt
+    hosts:
+    - jupyterhub.apps.iaas.wcooke.me
 
 # singleuser relates to the configuration of KubeSpawner which runs in the hub
 # pod, and its spawning of user pods such as jupyter-myusername.
@@ -245,7 +245,7 @@ singleuser:
 scheduling:
   userScheduler:
     enabled: true
-    revisionHistoryLimit: 1
+    revisionHistoryLimit: 0
     # replicas: 2
     # logLevel: 4
     # plugins are configured on the user-scheduler to make us score how we
@@ -332,7 +332,7 @@ scheduling:
   #   userPlaceholderPriority: -10
   # userPlaceholder:
   #   enabled: true
-  #   revisionHistoryLimit: 1
+  #   revisionHistoryLimit: 0
   #   replicas: 0
   #   labels: {}
   #   annotations: {}
@@ -365,7 +365,7 @@ scheduling:
 
 # # prePuller relates to the hook|continuous-image-puller DaemonsSets
 prePuller:
-  revisionHistoryLimit: 1
+  revisionHistoryLimit: 0
 #   labels: {}
 #   annotations: {}
 #   resources: {}
