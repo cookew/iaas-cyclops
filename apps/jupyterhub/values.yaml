@@ -349,13 +349,13 @@ ingress:
   ingressClassName: cilium
   hosts:
   - jupyterhub.apps.iaas.wcooke.me
-  pathSuffix: /
+  # pathSuffix: /
   pathType: Prefix
   tls:
   - hosts:
     - jupyterhub.apps.iaas.wcooke.me
     secretName: jupyterhub-ingress-certs
-  extraPaths: []
+  # extraPaths: []
 
 # httpRoute:
 #   enabled: false
