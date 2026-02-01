@@ -14,8 +14,8 @@ hub:
   config:
     Authenticator:
       # https://z2jh.jupyter.org/en/latest/jupyterhub/customizing/user-management.html#admin-users
-      admin_users:
-      - william
+      # admin_users:
+      # - william
       auto_login: true
       enable_auth_state: true
     GenericOAuthenticator:
@@ -116,7 +116,7 @@ proxy:
   # service relates to the proxy-public service
   service:
     type: ClusterIP
-    disableHttpPort: true
+    disableHttpPort: false
   traefik:
     revisionHistoryLimit: 1
   https:
@@ -403,7 +403,7 @@ ingress:
     forecastle.stakater.com/group: Apps
     forecastle.stakater.com/icon: https://jupyterhub.apps.iaas.wcooke.me/favicon.ico
     forecastle.stakater.com/network-restricted: "true"
-    ingress.cilium.io/tls-passthrough: "enabled"
+    # ingress.cilium.io/tls-passthrough: "enabled"
   ingressClassName: cilium
   hosts:
   - jupyterhub.apps.iaas.wcooke.me
