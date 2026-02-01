@@ -53,7 +53,7 @@ hub:
       admin_access: false
       authenticator_class: generic-oauth
       subdomain_host: https://jupyterhub.apps.iaas.wcooke.me
-  # baseUrl: /
+  baseUrl: https://jupyterhub.apps.iaas.wcooke.me/
   # cookieSecret:
   # initContainers: []
   # nodeSelector: {}
