@@ -19,9 +19,9 @@
       ls -al /new-ca-certificates
     command: ["/usr/bin/bash", "-c"]
     image: docker.io/neuvector/controller:5.4.8
-    name: certificate-fixer
-    securityContext:
-      runAsUser: 0
+    name: ca-certificate-fixer
+    # securityContext:
+    #   runAsUser: 0
     volumeMounts:
     - mountPath: /new-ca-certificates
       name: new-ca-certificates
@@ -57,19 +57,23 @@
     name: new-ca-certificates
     readOnly: true
     subPath: ca-certificates.crt
-
-# Using trust-manager
-# - op: add
-#   path: /spec/template/spec/containers/0/volumeMounts/-
-#   value:
-#     mountPath: /etc/ssl/certs/ca-certificates.crt
-#     name: ca
-#     readOnly: true
-#     subPath: ca-bundle.pem
-# - op: add
-#   path: /spec/template/spec/volumes/-
-#   value:
-#     configMap:
-#       defaultMode: 420
-#       name: tm-ca-bundle
-#     name: ca
+---
+# Using trust-manager, or any config map
+# This adds a volumeMount to the container
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts/-
+  value:
+    mountPath: /etc/ssl/certs/ca-certificates.crt
+    name: ca
+    readOnly: true
+    # Change this to the key name in the config map that holds the CA certificate
+    subPath: ca-bundle.pem
+# This adds the volume to the pod, which is used by the container
+- op: add
+  path: /spec/template/spec/volumes/-
+  value:
+    configMap:
+      defaultMode: 420
+      # Change this to your config map name that holds the private CA certificates
+      name: tm-ca-bundle
+    name: ca
