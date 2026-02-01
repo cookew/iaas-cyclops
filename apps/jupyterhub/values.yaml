@@ -40,7 +40,6 @@ hub:
       # - email
       # - client_roles
       token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
-      userdata_from_id_token: true
       # userdata_params:
       #   state: state
       userdata_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
