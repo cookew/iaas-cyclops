@@ -1,25 +1,3 @@
-# apiVersion: cert-manager.io/v1
-# kind: Certificate
-# metadata:
-#   name: neuvector-internal-cert
-# spec:
-#   commonName: neuvector-internal-cert
-#   dnsNames:
-#   - neuvector-controller
-#   - neuvector-service-registry-adapter
-#   - neuvector-service-webui
-#   - neuvector-svc-admission-webhook
-#   - neuvector-svc-crd-webhook
-#   duration: 960h
-#   isCA: false
-#   issuerRef:
-#     kind: ClusterIssuer
-#     name: iaas-wcooke-me
-#   secretName: neuvector-internal-cert
-#   usages:
-#   - client auth
-#   - server auth
-# ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:

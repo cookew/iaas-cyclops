@@ -4,6 +4,13 @@ metadata:
   name: jupyterhub-proxy-certificate
 spec:
   commonName: proxy-certificate
+  dnsNames:
+  - jupyterhub.apps.iaas.wcooke.me
+  - "*.jupyterhub.apps.iaas.wcooke.me"
+  - proxy-public.jupyterhub.svc.cluster.local
+  - proxy-public.jupyterhub.svc
+  - "*.proxy-public.jupyterhub.svc.cluster.local"
+  - "*.proxy-public.jupyterhub.svc"
   duration: 960h
   isCA: false
   issuerRef:
