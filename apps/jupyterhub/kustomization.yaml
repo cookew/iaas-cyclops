@@ -5,7 +5,7 @@ resources:
 - base/jupyterhub-ingress.yaml
 - base/jupyterhub-keycloak-client.yaml
 - base/jupyterhub-proxy-certificate.yaml
-- sealed-secrets/jubpyterhub-hub-env-vars.yaml
+- sealed-secrets/jupyterhub-hub-env-vars.yaml
 - sealed-secrets/jupyterhub-keycloak-client.yaml
 
 helmCharts:
