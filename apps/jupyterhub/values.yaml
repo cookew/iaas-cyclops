@@ -44,7 +44,7 @@ hub:
       # # - preferred_username
       token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
       userdata_params:
-        state: oauthenticator-state
+        state: lookforme-state
       userdata_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
       username_claim: preferred_username
       validate_server_cert: false
