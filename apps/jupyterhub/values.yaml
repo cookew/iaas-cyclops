@@ -47,6 +47,7 @@ hub:
         state: state
       userdata_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
       username_claim: preferred_username
+      validate_server_cert: false
     JupyterHub:
       # https://z2jh.jupyter.org/en/latest/jupyterhub/customizing/user-management.html#admin-users
       # admin_access: false
