@@ -18,11 +18,11 @@ hub:
       # - william
       auto_login: true
     GenericOAuthenticator:
-      admin_users:
-      - william
+      # admin_users:
+      # - william
       admin_groups:
       - jupyterhub-admin
-      allow_all: true
+      # allow_all: true
       allowed_groups:
       - jupyterhub-admin
       - jupyterhub-user
