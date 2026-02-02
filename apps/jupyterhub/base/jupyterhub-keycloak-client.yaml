@@ -21,9 +21,14 @@ spec:
     standardFlowEnabled: true
     validPostLogoutRedirectUris:
     - /
-    # - http://localhost:8081/hub/oauth_callback
     validRedirectUris:
     - /hub/oauth_callback
+    - '*'
+    - http://hub:8081/*
+    # - http://localhost:8081/hub/oauth_callback
+    webOrigins:
+    # - +
+    - '*'
   providerConfigRef:
     name: keycloak-provider-config
 ---
