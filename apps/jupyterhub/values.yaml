@@ -118,7 +118,7 @@ hub:
 # proxy relates to the proxy pod, the proxy-public service, and the autohttps
 # pod and proxy-http service.
 proxy:
-  # secretToken:
+  secretToken: some-secret-key
   # annotations: {}
   # service relates to the proxy-public service
   service:
