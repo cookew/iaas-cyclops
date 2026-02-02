@@ -127,6 +127,8 @@ proxy:
     revisionHistoryLimit: 0
   traefik:
     revisionHistoryLimit: 0
+    hsts:
+      includeSubdomains: true
   https:
     enabled: true
     type: secret
@@ -331,19 +333,19 @@ scheduling:
     #   name:
     #   annotations: {}
     # extraPodSpec: {}
-  # podPriority:
-  #   enabled: false
+  podPriority:
+    enabled: true
   #   globalDefault: false
   #   defaultPriority: 0
   #   imagePullerPriority: -5
   #   userPlaceholderPriority: -10
-  # userPlaceholder:
-  #   enabled: true
-  #   revisionHistoryLimit: 0
-  #   replicas: 0
-  #   labels: {}
-  #   annotations: {}
-  #   resources: {}
+  userPlaceholder:
+    enabled: true
+    revisionHistoryLimit: 0
+    replicas: 2
+    # labels: {}
+    # annotations: {}
+    # resources: {}
     # extraPodSpec: {}
   # corePods:
   #   tolerations:
@@ -378,8 +380,8 @@ prePuller:
 #   resources: {}
 #   extraTolerations: []
 #   # hook relates to the hook-image-awaiter Job and hook-image-puller DaemonSet
-#   hook:
-#     enabled: true
+  hook:
+    enabled: false
 #     pullOnlyOnChanges: true
 #     # image and the configuration below relates to the hook-image-awaiter Job
 #     podSchedulingWaitDuration: 10
@@ -392,8 +394,8 @@ prePuller:
 #       name:
 #       annotations: {}
 #     daemonsetAnnotations: {}
-#   continuous:
-#     enabled: true
+  continuous:
+    enabled: false
 #     serviceAccount:
 #       create: true
 #       name:
@@ -456,3 +458,6 @@ cull:
   every: 600 # --cull-every
   concurrency: 10 # --concurrency
   maxAge: 0 # --max-age
+
+debug:
+  enabled: true
