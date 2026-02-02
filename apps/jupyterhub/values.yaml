@@ -37,7 +37,7 @@ hub:
       manage_groups: true
       oauth_callback_url: https://jupyterhub.apps.iaas.wcooke.me/hub/oauth_callback
       scope:
-      - client_roles
+      - jupyterhub-dedicated
       - email
       - openid
       - profile
