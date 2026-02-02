@@ -86,6 +86,11 @@ hub:
         secretKeyRef:
           name: jupyterhub-hub-env-vars
           key: JUPYTERHUB_CRYPT_KEY
+    JPY_COOKIE_SECRET:
+      valueFrom:
+        secretKeyRef:
+          name: jupyterhub-hub-env-vars
+          key: JPY_COOKIE_SECRET
   # extraContainers: []
   # extraVolumes: []
   # extraVolumeMounts: []
