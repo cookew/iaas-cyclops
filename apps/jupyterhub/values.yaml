@@ -14,8 +14,8 @@ hub:
   config:
     Authenticator:
       # https://z2jh.jupyter.org/en/latest/jupyterhub/customizing/user-management.html#admin-users
-      # admin_users:
-      # - william
+      admin_users:
+      - william
       auto_login: true
       # enable_auth_state: true
     GenericOAuthenticator:
