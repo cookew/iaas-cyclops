@@ -19,14 +19,14 @@ hub:
       auto_login: true
       enable_auth_state: true
     GenericOAuthenticator:
-      admin_users:
-        - william
-      # admin_groups:
-      #   jupyterhub-admin
-      allow_all: true
-      # allowed_groups:
-      #   jupyterhub-admin
-      #   jupyterhub-user
+      # admin_users:
+      #   - william
+      admin_groups:
+        jupyterhub-admin
+      # allow_all: true
+      allowed_groups:
+        jupyterhub-admin
+        jupyterhub-user
       auth_state_groups_key: client_roles
       authorize_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
       client_id: jupyterhub
@@ -37,14 +37,14 @@ hub:
       # logout_redirect_url: https://forecastle.apps.iaas.wcooke.me
       manage_groups: true
       oauth_callback_url: https://jupyterhub.apps.iaas.wcooke.me/hub/oauth_callback
-      # scope:
-      # - email
-      # - openid
-      # - profile
-      # # - preferred_username
+      scope:
+      - email
+      - openid
+      - profile
+      # - preferred_username
       token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
-      # userdata_params:
-      #   state: session_state
+      userdata_params:
+        state: state
       userdata_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
       username_claim: preferred_username
       validate_server_cert: false
