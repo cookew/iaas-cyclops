@@ -8,10 +8,10 @@ resources:
 - sealed-secrets/jupyterhub-hub-env-vars.yaml
 - sealed-secrets/jupyterhub-keycloak-client.yaml
 
-helmCharts:
-- name: jupyterhub
-  namespace: jupyterhub
-  releaseName: jupyterhub
-  repo: https://hub.jupyter.org/helm-chart
-  valuesFile: values.yaml
-  version: 4.3.2
+# helmCharts:
+# - name: jupyterhub
+#   namespace: jupyterhub
+#   releaseName: jupyterhub
+#   repo: https://hub.jupyter.org/helm-chart
+#   valuesFile: values.yaml
+#   version: 4.3.2
