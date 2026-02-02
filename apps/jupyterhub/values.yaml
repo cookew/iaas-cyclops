@@ -17,7 +17,7 @@ hub:
       # admin_users:
       # - william
       auto_login: true
-      enable_auth_state: true
+      # enable_auth_state: true
     GenericOAuthenticator:
       # admin_users:
       #   - william
