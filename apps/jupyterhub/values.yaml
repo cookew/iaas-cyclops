@@ -21,11 +21,11 @@ hub:
       # admin_users:
       # - william
       admin_groups:
-      - jupyterhub-admin
+        jupyterhub-admin
       allow_all: true
       allowed_groups:
-      - jupyterhub-admin
-      - jupyterhub-user
+        jupyterhub-admin
+        jupyterhub-user
       auth_state_groups_key: client_roles
       authorize_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
       client_id: jupyterhub
