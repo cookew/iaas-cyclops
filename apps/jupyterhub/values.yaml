@@ -31,7 +31,7 @@ hub:
       authorize_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
       client_id: jupyterhub
       client_secret: jupyterhub-client-secret
-      # enable_auth_state: false
+      enable_auth_state: false
       enable_pkce: true
       login_service: keycloak
       # logout_redirect_url: https://forecastle.apps.iaas.wcooke.me
