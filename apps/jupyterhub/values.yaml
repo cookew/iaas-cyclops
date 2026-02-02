@@ -41,7 +41,6 @@ hub:
       # - email
       # - openid
       # - profile
-      # # - preferred_username
       token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
       userdata_params:
         state: state
@@ -107,8 +106,8 @@ hub:
   #   enabled: false
   #   maxUnavailable:
   #   minAvailable: 1
-  # networkPolicy:
-  #   enabled: true
+  networkPolicy:
+    enabled: false
   #   ingress: []
   #   egress: []
   #   egressAllowRules:
