@@ -35,7 +35,7 @@ hub:
       enable_pkce: true
       login_service: keycloak
       # logout_redirect_url: https://forecastle.apps.iaas.wcooke.me
-      # manage_groups: true
+      manage_groups: true
       oauth_callback_url: https://jupyterhub.apps.iaas.wcooke.me/hub/oauth_callback
       # scope:
       # - email
