@@ -9,4 +9,4 @@ helmCharts:
   releaseName: crossplane
   repo: https://charts.crossplane.io/stable
   valuesFile: values.yaml
-  version: 2.1.3
+  version: 2.1.4
