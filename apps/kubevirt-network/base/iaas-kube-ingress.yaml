@@ -11,7 +11,7 @@ spec:
         "cniVersion": "0.3.1",
         "name": "kube-ingress",
         "type": "bridge",
-        "bridge": "kube-ingress",
+        "bridge": "kube-ingress@br0",
         "ipam": {},
         "macspoofchk": true,
         "preserveDefaultVlan": false
