@@ -2,8 +2,8 @@ apiVersion: k8s.cni.cncf.io/v1
 kind: NetworkAttachmentDefinition
 metadata:
   annotations:
-    k8s.v1.cni.cncf.io/resourceName: bridge.network.kubevirt.io/iaas-kube-ingress
-  name: iaas-kube-ingress
+    k8s.v1.cni.cncf.io/resourceName: bridge.network.kubevirt.io/kube-ingress
+  name: kube-ingress
   namespace: default
 spec:
   config: |-
