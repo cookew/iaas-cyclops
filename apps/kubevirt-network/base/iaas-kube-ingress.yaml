@@ -8,10 +8,10 @@ metadata:
 spec:
   config: |-
     {
-        "cniVersion": "1.1.0",
-        "name": "iaas-kube-ingress",
+        "cniVersion": "0.3.1",
+        "name": "kube-ingress",
         "type": "bridge",
-        "bridge": "br0",
+        "bridge": "kube-ingress",
         "ipam": {},
         "macspoofchk": true,
         "preserveDefaultVlan": false
