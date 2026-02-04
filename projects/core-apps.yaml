@@ -40,7 +40,7 @@ spec:
       - name: argocd
         syncWave: -70
       - name: cilium
-        # createNamespace: "false"
+        createNamespace: "false"
         namespace: kube-system
         serverSideApply: "true"
         syncWave: -70
