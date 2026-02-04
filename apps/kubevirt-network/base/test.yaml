@@ -1,0 +1,23 @@
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: bridge.network.kubevirt.io/test
+  name: test
+  namespace: default
+spec:
+  config: |-
+    {
+        "cniVersion": "1.0.0",
+        "name": "mynet",
+        "type": "bridge",
+        "bridge": "mynet0",
+        "isDefaultGateway": true,
+        "forceAddress": false,
+        "ipMasq": true,
+        "hairpinMode": true,
+        "ipam": {
+            "type": "host-local",
+            "subnet": "10.10.0.0/16"
+        }
+    }

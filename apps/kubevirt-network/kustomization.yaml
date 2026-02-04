@@ -3,5 +3,5 @@ kind: Kustomization
 
 resources:
 - base/iaas-access.yaml
-# - base/iaas-kube-ingress.yaml
-- base/kube-ingress.yaml
+- base/iaas-kube-ingress.yaml
+- base/test.yaml
