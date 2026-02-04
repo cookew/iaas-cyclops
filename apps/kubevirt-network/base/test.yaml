@@ -9,7 +9,7 @@ spec:
   config: |-
     {
         "cniVersion": "1.0.0",
-        "name": "mynet",
+        "name": "test",
         "type": "bridge",
         "bridge": "br0",
         "vlan": 16,
