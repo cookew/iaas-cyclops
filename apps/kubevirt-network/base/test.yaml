@@ -12,12 +12,6 @@ spec:
         "name": "mynet",
         "type": "bridge",
         "bridge": "br0",
-        "isDefaultGateway": true,
-        "forceAddress": false,
-        "ipMasq": true,
-        "hairpinMode": true,
-        "ipam": {
-            "type": "host-local",
-            "subnet": "10.10.0.0/16"
-        }
+        "vlan": 16,
+        "ipam": {}
     }
