@@ -27,4 +27,5 @@ patches:
     - op: add
       path: /spec/template/spec/containers/0/env/-
       value:
-        CNAO_LOG_LEVEL: "-1"
+        - name: CNAO_LOG_LEVEL
+          value: "-1"
