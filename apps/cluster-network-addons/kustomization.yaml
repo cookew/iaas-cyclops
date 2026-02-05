@@ -18,14 +18,14 @@ patches:
   patch: |-
     - op: remove
       path: /spec/preserveUnknownFields
-- target:
-    group: apps
-    version: v1
-    kind: Deployment
-    name: cluster-network-addons-operator
-  patch: |-
-    - op: add
-      path: /spec/template/spec/containers/0/env/-
-      value:
-        - name: CNAO_LOG_LEVEL
-          value: "stuff"
+# - target:
+#     group: apps
+#     version: v1
+#     kind: Deployment
+#     name: cluster-network-addons-operator
+#   patch: |-
+#     - op: add
+#       path: /spec/template/spec/containers/0/env/-
+#       value:
+#         - name: CNAO_LOG_LEVEL
+#           value: "-1"
