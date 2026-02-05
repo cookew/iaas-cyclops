@@ -4,10 +4,10 @@ kind: Kustomization
 namespace: cluster-network-addons
 
 resources:
+- https://github.com/kubevirt/cluster-network-addons-operator/releases/tag/v0.101.1/network-addons-config.crd.yaml
+- https://github.com/kubevirt/cluster-network-addons-operator/releases/tag/v0.101.1/operator.yaml
 # - https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.101.1/network-addons-config.crd.yaml
-- https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.101.1/network-addons-config.crd.yaml
 # - https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.101.1/operator.yaml
-- https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.101.1/operator.yaml
 - base/network-addons.yaml
 
 #add preserve unknown fields to networkaddonsconfigs.networkaddonsoperator.network.kubevirt.io crd
