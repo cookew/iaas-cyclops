@@ -13,14 +13,57 @@ spec:
       name: headlamp-oidc-client
       namespace: headlamp
     directAccessGrantsEnabled: true
-    name: headlamp
+    name: Headlamp
     # pkceCodeChallengeMethod: S256
     realmIdRef:
-      name: test
+      name: iaas
     rootUrl: https://headlamp.apps.iaas.wcooke.me
     standardFlowEnabled: true
     validRedirectUris:
-    - /*
     - /oidc-callback
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: headlamp-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: headlamp
+    name: headlamp-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: headlamp-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: headlamp-admins
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: headlamp-admins-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: headlamp-admins
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: headlamp-admin
   providerConfigRef:
     name: keycloak-provider-config
