@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: headlamp
 
 resources:
-- base/cluster-role-binding.yaml
 - base/headlamp-client.yaml
 - sealed-secrets/headlamp-oidc-client.yaml
 
