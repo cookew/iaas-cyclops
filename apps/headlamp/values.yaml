@@ -1,7 +1,7 @@
 # https://headlamp.dev/docs/latest/installation/in-cluster/
 # https://github.com/kubernetes-sigs/headlamp/blob/main/charts/headlamp/values.yaml
 
-replicaCount: 1
+replicaCount: 2
 
 config:
   inCluster: true
