@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: crossplane-keycloak-realms
 
 resources:
+- base/cluster-role-binding.yaml
 # - base/iaas-forecastle-app.yaml
 - base/iaas-realm.yaml
 - base/iaas-users.yaml
