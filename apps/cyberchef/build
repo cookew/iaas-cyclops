@@ -2,7 +2,7 @@
 
 REGISTRY=registry.wcooke.me:5000
 REPO=cyberchef
-VERSION=10.20.0
+VERSION=10.21.0
 
 docker build -t ${REGISTRY}/${REPO}:${VERSION} .
 docker image push ${REGISTRY}/${REPO}:${VERSION}
