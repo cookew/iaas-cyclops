@@ -6,5 +6,5 @@ helmCharts:
   namespace: monitoring
   releaseName: prometheus-operator-crds
   repo: https://prometheus-community.github.io/helm-charts
-  version: 26.0.1
+  version: 27.0.0
   valuesFile: prometheus-operator-crds-values.yaml
