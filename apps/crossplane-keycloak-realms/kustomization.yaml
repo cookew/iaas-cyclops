@@ -10,4 +10,5 @@ resources:
 - base/headlamp-client.yaml
 - base/kubernetes-client.yaml
 - sealed-secrets/crossplane-keycloak-realms-edward-credentials.yaml
+- sealed-secrets/crossplane-keycloak-realms-kubernetes-oidc-client.yaml
 - sealed-secrets/crossplane-keycloak-realms-william-credentials.yaml
