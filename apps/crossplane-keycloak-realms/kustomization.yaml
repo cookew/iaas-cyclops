@@ -7,6 +7,7 @@ resources:
 # - base/iaas-forecastle-app.yaml
 - base/iaas-realm.yaml
 - base/iaas-users.yaml
+- base/headlamp-client.yaml
 - base/kubernetes-client.yaml
 - sealed-secrets/crossplane-keycloak-realms-edward-credentials.yaml
 - sealed-secrets/crossplane-keycloak-realms-william-credentials.yaml

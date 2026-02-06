@@ -1,39 +1,39 @@
 apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
 kind: Client
 metadata:
-  name: kubernetes
+  name: headlamp
 spec:
   deletionPolicy: Delete
   forProvider:
     accessType: confidential
     baseUrl: /
-    clientId: kubernetes
+    clientId: headlamp
     clientSecretSecretRef:
       key: OIDC_CLIENT_SECRET
-      name: kubernetes-oidc-client
-      namespace: crossplane-keycloak-realms
+      name: headlamp-oidc-client
+      namespace: headlamp
     directAccessGrantsEnabled: true
-    name: Kubernetes
+    name: Headlamp
     # pkceCodeChallengeMethod: S256
     realmIdRef:
       name: iaas
-    rootUrl: http://localhost:8000
+    rootUrl: https://headlamp.apps.iaas.wcooke.me
     standardFlowEnabled: true
     validRedirectUris:
-    - /
+    - /oidc-callback
   providerConfigRef:
     name: keycloak-provider-config
 ---
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
 metadata:
-  name: kubernetes-admin
+  name: headlamp-admin
 spec:
   deletionPolicy: Delete
   forProvider:
     clientIdRef:
-      name: kubernetes
-    name: kubernetes-admin
+      name: headlamp
+    name: headlamp-admin
     realmIdRef:
       name: iaas
   providerConfigRef:
@@ -42,11 +42,11 @@ spec:
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Group
 metadata:
-  name: kubernetes-admins
+  name: headlamp-admins
 spec:
   deletionPolicy: Delete
   forProvider:
-    name: kubernetes-admins
+    name: headlamp-admins
     realmIdRef:
       name: iaas
   providerConfigRef:
@@ -55,15 +55,15 @@ spec:
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Roles
 metadata:
-  name: kubernetes-admin-roles
+  name: headlamp-admins-roles
 spec:
   deletionPolicy: Delete
   forProvider:
     groupIdRef:
-      name: kubernetes-admins
+      name: headlamp-admins
     realmIdRef:
       name: iaas
     roleIdsRefs:
-    - name: kubernetes-admin
+    - name: headlamp-admin
   providerConfigRef:
     name: keycloak-provider-config
