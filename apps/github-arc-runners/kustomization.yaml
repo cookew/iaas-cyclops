@@ -6,14 +6,14 @@ namespace: github-arc-runners
 # resources:
 # - sealed-secrets/github-arc-cyberchef-container.yaml
 
-helmCharts:
-- includeCRDs: true
-  name: gha-runner-scale-set
-  namespace: github-arc-runners
-  releaseName: cyclops-k8s
-  repo: oci://ghcr.io/actions/actions-runner-controller-charts
-  valuesFile: cyclops-k8s-values.yaml
-  version: 0.13.1
+# helmCharts:
+# - includeCRDs: true
+#   name: gha-runner-scale-set
+#   namespace: github-arc-runners
+#   releaseName: cyclops-k8s
+#   repo: oci://ghcr.io/actions/actions-runner-controller-charts
+#   valuesFile: cyclops-k8s-values.yaml
+#   version: 0.13.1
 # - includeCRDs: true
 #   name: gha-runner-scale-set
 #   namespace: github-arc-runners
