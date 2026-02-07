@@ -85,7 +85,7 @@ spec:
       - name: forecastle
       - name: github-arc
         serverSideApply: "true"
-      - name: github-arc-runners
+      # - name: github-arc-runners
       - name: grafana
       - name: harbor
       - name: headlamp
