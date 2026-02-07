@@ -1,0 +1,149 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: core-apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions:
+  - missingkey=error
+  generators:
+  - list:
+      elements:
+      - createNamespace: "false"
+        name: prometheus-operator-crds
+        namespace: kube-prometheus-stack
+        serverSideApply: "true"
+        syncWave: -100
+      - createNamespace: "false"
+        name: metrics-server
+        namespace: kube-system
+        syncWave: -100
+
+      - name: cert-manager
+        createNamespace: "false"
+        syncWave: -90
+      - name: sealed-secrets
+        createNamespace: "false"
+        namespace: kube-system
+        syncWave: -90
+      - name: trust-manager
+        namespace: cert-manager
+        createNamespace: "false"
+        syncWave: -90
+
+      - name: cert-manager-certs
+        createNamespace: "false"
+        namespace: cert-manager
+        syncWave: -80
+
+      - name: argocd
+        syncWave: -70
+      - name: cilium
+        createNamespace: "false"
+        namespace: kube-system
+        serverSideApply: "true"
+        syncWave: -70
+      - name: external-snapshotter
+        syncWave: -70
+
+      - name: cluster-network-addons
+        syncWave: -60
+      - name: crossplane
+        syncWave: -60
+      - name: rook-ceph
+        serverSideApply: "true"
+        syncWave: -60
+
+      - name: crossplane-keycloak-provider
+        syncWave: -50
+      - name: kubevirt
+        syncWave: -50
+      - name: rook-ceph-cluster
+        createNamespace: "true"
+        syncWave: -50
+
+      - name: kubevirt-network
+        createNamespace: "false"
+        syncWave: -40
+      - name: cloudnative-pg
+        serverSideApply: "true"
+        syncWave: -40
+      - name: crossplane-keycloak-realms
+        syncWave: -40
+
+      - name: keycloak
+        syncWave: -30
+      - name: kube-prometheus-stack
+        serverSideApply: "true"
+        syncWave: -30
+
+      - name: alloy
+      - name: cyberchef
+      - name: drawio
+      - name: fluent-bit
+      - name: forecastle
+      - name: github-arc
+        serverSideApply: "true"
+      - name: github-arc-runners
+      - name: grafana
+      - name: harbor
+      - name: headlamp
+      - name: holmesgpt
+      - name: jupyterhub
+      - name: kubevirt-manager
+      - name: loki
+      - name: neuvector
+      - name: ollama
+      - name: pyroscope
+      - name: tempo
+      - name: whoami
+
+      - name: mattermost-operator
+      - name: mattermost
+
+      # - name: argo-workflows
+      #   serverSideApply: "true"
+      # - name: capi-operator
+      # - name: gitlab
+      #   namespace: gitlab-system
+      # - name: gitlab-operator
+      #   namespace: gitlab-system
+      # - name: gitlab-runners
+      # - name: keda
+      #   replace: "true"
+      # - name: kubescape
+      # - name: kubevirt-templates
+      # - name: mermaid
+      # - name: trivy
+
+  template:
+    metadata:
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io
+      name: '{{ .name }}'
+      namespace: argocd
+      annotations:
+        # acargocd.argoproj.io/hook: '{{ dig "hook" "" . }}'
+        argocd.argoproj.io/sync-wave: '{{ dig "syncWave" 0 . }}'
+    spec:
+      destination:
+        name: in-cluster
+        namespace: '{{ dig "namespace" .name . }}'
+      project: core
+      revisionHistoryLimit: 0
+      source:
+        path: apps/{{ dig "path" .name . }}
+        repoURL: git@github.com:cookew/iaas-cyclops.git
+        targetRevision: main
+      syncPolicy:
+        automated:
+          allowEmpty: true
+          enabled: true
+          prune: true
+          selfHeal: true
+          # selfHeal: false
+        syncOptions:
+        - CreateNamespace={{ dig "createNamespace" "true" . }}
+        - Replace={{ dig "replace" "false" . }}
+        - ServerSideApply={{ dig "serverSideApply" "false" . }}

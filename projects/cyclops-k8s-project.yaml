@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  name: cyclops-k8s
+  namespace: argocd
+spec:
+  destination:
+    name: in-cluster
+  project: cyclops-k8s
+  source:
+    path: projects
+    repoURL: git@github.com:cookew/iaas-cyclops-k8s.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
