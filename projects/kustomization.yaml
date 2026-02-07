@@ -2,6 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- core-apps.yaml
-- core-project.yaml
+- core-applicationset.yaml
+- core-appproject.yaml
 - core-apps/cdi.yaml
+
+- cyclops-k8s-project.yaml
+- cyclops-k8s-appproject.yaml

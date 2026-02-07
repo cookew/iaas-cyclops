@@ -3,9 +3,8 @@ kind: Kustomization
 
 namespace: github-arc-runners
 
-resources:
+# resources:
 # - sealed-secrets/github-arc-cyberchef-container.yaml
-- sealed-secrets/github-arc-cyclops-k8s-container.yaml
 
 helmCharts:
 - includeCRDs: true
