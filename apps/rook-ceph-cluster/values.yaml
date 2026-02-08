@@ -10,7 +10,7 @@ cephClusterSpec:
       mgr/dashboard/GRAFANA_API_URL: http://grafana.grafana.svc.cluster.local
       mgr/dashboard/GRAFANA_API_USERNAME: ceph_dashboard
       mgr/dashboard/GRAFANA_FRONTEND_API_URL: https://grafana.apps.iaas.wcooke.me
-      mgr/dashboard/GRAFANA_UPDATE_DASHBOARDS: "true"
+      mgr/dashboard/GRAFANA_UPDATE_DASHBOARDS: "false"
     mon:
       mon_allow_pool_delete: "true"
 #  cephConfigFromSecret:
