@@ -49,8 +49,8 @@ spec:
     #     selectors:
     #     - vendor: "0658"
     #       product: "0200"
+    vmStateStorageClass: ceph-filesystem
   customizeComponents: {}
   imagePullPolicy: IfNotPresent
   serviceMonitorNamespace: kubevirt
-  vmStateStorageClass: ceph-filesystem
   workloadUpdateStrategy: {}
