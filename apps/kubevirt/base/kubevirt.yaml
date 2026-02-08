@@ -2,7 +2,6 @@ apiVersion: kubevirt.io/v1
 kind: KubeVirt
 metadata:
   name: kubevirt
-  namespace: kubevirt
 spec:
   certificateRotateStrategy: {}
   configuration:
@@ -20,20 +19,19 @@ spec:
       - VMExport
       - HotplugVolumes
       - HostDisk
+      - UtilityVolumes
       - DownwardMetrics
-      # - Root
-      # - WorkloadEncryptionSEV
-      # - WorkloadEncryptionTDX
-      # - VSOCK
+      - Root
+      - WorkloadEncryptionSEV
+      - WorkloadEncryptionTDX
+      - VSOCK
       - KubevirtSeccompProfile
-      # - DisableMDEVConfiguration
       - PersistentReservation
-      - MultiArchitecture
       - AlignCPUs
       - NodeRestriction
       - ImageVolume
+      - LibvirtHooksServerAndClient
       - IncrementalBackup
-      - EnableVirtioFsConfigVolumes
       - EnableVirtioFsStorageVolumes
       - GPUsWithDRA
       - HostDevicesWithDRA
@@ -43,7 +41,8 @@ spec:
       - VideoConfig
       - PanicDevices
       - PasstIPStackMigration
-      # - MigrationPriorityQueue
+      - MigrationPriorityQueue
+      - PodSecondaryInterfaceNamingUpgrade
     # permittedHostDevices:
     #   usb:
     #   - resourceName: "zwave"
@@ -52,6 +51,6 @@ spec:
     #       product: "0200"
   customizeComponents: {}
   imagePullPolicy: IfNotPresent
+  serviceMonitorNamespace: kubevirt
+  vmStateStorageClass: ceph-filesystem
   workloadUpdateStrategy: {}
-
-
