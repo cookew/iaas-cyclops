@@ -38,10 +38,10 @@ cephClusterSpec:
       compression:
         enabled: false
       requireMsgr2: false
-  # resources:
-    # mgr:
-    #   limits:
-    #     memory: "1Gi"
+  resources:
+    mgr:
+      limits:
+        memory: "2Gi"
     #   requests:
     #     cpu: "500m"
     #     memory: "512Mi"
