@@ -30,7 +30,7 @@ spec:
       avoidSameAuthenticatorRegister: false
       createTimeout: 0
       relyingPartyEntityName: Keycloak
-      relyingPartyId: iaas.wcooke.me
+      relyingPartyId: keycloak.apps.iaas.wcooke.me
       requireResidentKey: "Yes"
       signatureAlgorithms:
         - ES512
@@ -42,7 +42,7 @@ spec:
       avoidSameAuthenticatorRegister: false
       createTimeout: 0
       relyingPartyEntityName: Keycloak
-      relyingPartyId: iaas.wcooke.me
+      relyingPartyId: keycloak.apps.iaas.wcooke.me
       requireResidentKey: "Yes"
       signatureAlgorithms:
         - ES512
