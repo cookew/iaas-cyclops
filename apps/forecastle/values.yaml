@@ -29,7 +29,7 @@ forecastle:
     replicas: 2
     resources:
       limits:
-        cpu: 250m
+        cpu: 500m
         memory: 96Mi
       requests:
         cpu: 100m
