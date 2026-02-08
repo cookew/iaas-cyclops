@@ -10,7 +10,7 @@ resources:
 # - https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.101.0/operator.yaml
 # - https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.101.1/network-addons-config.crd.yaml
 # - https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.101.1/operator.yaml
-- base/cnao-allow-egress-to-cluster-api-https.yaml
+# - base/cnao-allow-egress-to-cluster-api-https.yaml
 - base/network-addons.yaml
 
 #add preserve unknown fields to networkaddonsconfigs.networkaddonsoperator.network.kubevirt.io crd
