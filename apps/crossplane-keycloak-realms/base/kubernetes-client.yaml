@@ -20,7 +20,7 @@ spec:
     rootUrl: http://localhost:8000
     standardFlowEnabled: true
     validRedirectUris:
-    - /
+    - http://localhost:8000
   providerConfigRef:
     name: keycloak-provider-config
 ---
