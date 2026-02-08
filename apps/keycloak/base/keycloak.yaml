@@ -63,7 +63,7 @@ spec:
       cpu: 500m
       memory: 1500Mi
     limits:
-      cpu: 2000m
+      cpu: 3000m
       memory: 8Gi
   # scheduling:
   #   affinity:
