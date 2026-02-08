@@ -10,7 +10,7 @@
 # ConfigurableHTTPProxy speaks with the actual ConfigurableHTTPProxy server in
 # the proxy pod.
 hub:
-  revisionHistoryLimit: 0
+  revisionHistoryLimit: 1
   config:
     Authenticator:
       # https://z2jh.jupyter.org/en/latest/jupyterhub/customizing/user-management.html#admin-users
