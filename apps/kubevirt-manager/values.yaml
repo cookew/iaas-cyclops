@@ -3,7 +3,7 @@ global:
 
 manager:
   image:
-    tag: 1.5.3
+    tag: 1.5.4
   replicaCount: 1
   ## @param manager.resources Set manager container requests and limits for different resources like CPU or memory (essential for production workloads)
   ## Example:
