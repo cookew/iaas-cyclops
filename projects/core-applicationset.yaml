@@ -79,13 +79,13 @@ spec:
         syncWave: -30
 
       - name: alloy
+      - name: capi-operator
       - name: cyberchef
       - name: drawio
       - name: fluent-bit
       - name: forecastle
       - name: github-arc
         serverSideApply: "true"
-      # - name: github-arc-runners
       - name: grafana
       - name: harbor
       - name: headlamp
@@ -104,7 +104,7 @@ spec:
 
       # - name: argo-workflows
       #   serverSideApply: "true"
-      # - name: capi-operator
+      # - name: github-arc-runners
       # - name: gitlab
       #   namespace: gitlab-system
       # - name: gitlab-operator
@@ -114,8 +114,6 @@ spec:
       #   replace: "true"
       # - name: kubescape
       # - name: kubevirt-templates
-      # - name: mermaid
-      # - name: trivy
 
   template:
     metadata:

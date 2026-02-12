@@ -8,5 +8,5 @@ helmCharts:
   namespace: capi-operator
   releaseName: capi-operator
   repo: https://kubernetes-sigs.github.io/cluster-api-operator
-  version: 0.24.0
   # valuesFile: values.yaml
+  version: 0.25.0
