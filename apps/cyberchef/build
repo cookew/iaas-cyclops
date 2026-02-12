@@ -2,7 +2,7 @@
 
 REGISTRY=registry.wcooke.me:5000
 REPO=cyberchef
-VERSION=10.22.0
+VERSION=10.22.1
 
 docker buildx prune --all --force
 docker build -t ${REGISTRY}/${REPO}:${VERSION} .
