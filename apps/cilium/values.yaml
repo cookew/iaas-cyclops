@@ -16,7 +16,9 @@ cni:
 dashboards:
   enabled: true
 
-devices: "br0 kube-mgmt"
+devices:
+- br0
+- kube-mgmt
 
 encryption:
   enabled: true
