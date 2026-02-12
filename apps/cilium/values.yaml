@@ -18,7 +18,7 @@ dashboards:
 
 devices:
 - br0
-- kube-mgmt
+- enp1s0
 
 encryption:
   enabled: true
