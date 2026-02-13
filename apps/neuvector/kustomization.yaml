@@ -24,4 +24,4 @@ helmCharts:
   releaseName: neuvector
   repo: https://neuvector.github.io/neuvector-helm/
   valuesFile: values.yaml
-  version: 2.8.10
+  version: 2.8.11
