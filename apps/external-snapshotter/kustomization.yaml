@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: external-snapshotter
 
 resources:
-- https://github.com/kubernetes-csi/external-snapshotter/client/config/crd?ref=release-8.4
-- https://github.com/kubernetes-csi/external-snapshotter/deploy/kubernetes/csi-snapshotter?ref=release-8.4
-- https://github.com/kubernetes-csi/external-snapshotter/deploy/kubernetes/snapshot-controller?ref=release-8.4
+- https://github.com/kubernetes-csi/external-snapshotter/client/config/crd?ref=release-8.5
+- https://github.com/kubernetes-csi/external-snapshotter/deploy/kubernetes/csi-snapshotter?ref=release-8.5
+- https://github.com/kubernetes-csi/external-snapshotter/deploy/kubernetes/snapshot-controller?ref=release-8.5
