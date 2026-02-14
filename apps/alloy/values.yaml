@@ -1,3 +1,5 @@
+# https://github.com/grafana/alloy/tree/main/operations/helm/charts/alloy
+
 alloy:
   configMap:
     content: |-
@@ -245,6 +247,10 @@ alloy:
     - name: client-ca-cert
       mountPath: "/client-ca-cert"
       readOnly: true
+
+  resources:
+    limits:
+      cpu: 500m
 
   storagePath: /storage
 
