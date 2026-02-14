@@ -29,10 +29,10 @@ forecastle:
     replicas: 2
     resources:
       limits:
-        cpu: 750m
+        cpu: 500m
         memory: 128Mi
       requests:
-        cpu: 100m
+        cpu: 50m
         memory: 32Mi
     revisionHistoryLimit: 0
   namespace: forecastle
