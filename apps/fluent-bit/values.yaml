@@ -74,11 +74,11 @@ dashboards:
 
 resources:
   limits:
-    cpu: 500m
+    cpu: 250m
     memory: 384Mi
   requests:
-    cpu: 250m
-    memory: 256Mi
+    cpu: 100m
+    memory: 200Mi
 
 securityContext:
   privileged: true
