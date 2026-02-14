@@ -250,7 +250,7 @@ alloy:
 
   resources:
     requests:
-      cpu: 250m
+      cpu: 333m
 
   storagePath: /storage
 
