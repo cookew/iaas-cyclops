@@ -129,7 +129,7 @@ prometheusOperator:
       issuerRef:
         name: iaas-wcooke-me
         kind: ClusterIssuer
-  # kubeletEndpointsEnabled: false
-  # kubeletEndpointSliceEnabled: true
+  kubeletEndpointsEnabled: false
+  kubeletEndpointSliceEnabled: true
   kubeletService:
     enabled: true
