@@ -45,7 +45,7 @@ spec:
   primaryUpdateMethod: switchover
   storage:
     resizeInUseVolumes: true
-    size: 1Gi
+    size: 10Gi
     storageClass: ceph-filesystem
   walStorage:
     resizeInUseVolumes: true
