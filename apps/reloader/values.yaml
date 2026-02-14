@@ -1,0 +1,16 @@
+# https://github.com/stakater/Reloader/tree/master/deployments/kubernetes/chart/reloader
+
+reloader:
+  deployment:
+    replicas: 2
+
+  enableHA: true
+
+  logFormat: json
+
+  podMonitor:
+    enabled: true
+
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1

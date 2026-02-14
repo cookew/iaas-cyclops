@@ -96,6 +96,7 @@ spec:
       - name: neuvector
       - name: ollama
       - name: pyroscope
+      - name: reloader
       - name: tempo
       - name: whoami
 
