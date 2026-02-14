@@ -121,7 +121,7 @@ architecture:
             memory: 1Gi
           requests:
             memory: 256Mi
-            cpu: 1
+            cpu: 100m
         extraArgs:
           store-gateway.sharding-ring.replication-factor: "3"
       query-frontend:
@@ -150,7 +150,7 @@ architecture:
             memory: 1Gi
           requests:
             memory: 256Mi
-            cpu: 500m
+            cpu: 100m
       ingester:
         kind: StatefulSet
         replicaCount: 3
@@ -160,7 +160,7 @@ architecture:
             memory: 16Gi
           requests:
             memory: 8Gi
-            cpu: 1
+            cpu: 100m
       compactor:
         kind: StatefulSet
         replicaCount: 3
@@ -172,7 +172,7 @@ architecture:
             memory: 16Gi
           requests:
             memory: 8Gi
-            cpu: 1
+            cpu: 100m
       store-gateway:
         kind: StatefulSet
         replicaCount: 3
@@ -185,7 +185,7 @@ architecture:
             memory: 16Gi
           requests:
             memory: 8Gi
-            cpu: 1
+            cpu: 100m
         readinessProbe:
           # The store gateway can be configured to wait on startup for ring stability to be reached before it becomes
           # ready. See the `store-gateway.sharding-ring.wait-stability-min-duration` server argument for more information.
@@ -224,7 +224,7 @@ architecture:
             memory: 1Gi
           requests:
             memory: 256Mi
-            cpu: 1
+            cpu: 100m
       query-frontend:
         kind: Deployment
         replicaCount: 2
@@ -242,7 +242,7 @@ architecture:
             memory: 1Gi
           requests:
             memory: 256Mi
-            cpu: 500m
+            cpu: 100m
       segment-writer:
         kind: StatefulSet
         replicaCount: 3
@@ -252,7 +252,7 @@ architecture:
             memory: 4Gi
           requests:
             memory: 2Gi
-            cpu: 1
+            cpu: 100m
       compaction-worker:
         kind: StatefulSet
         replicaCount: 3
@@ -264,7 +264,7 @@ architecture:
             memory: 2Gi
           requests:
             memory: 1Gi
-            cpu: 1
+            cpu: 100m
       metastore:
         kind: StatefulSet
         replicaCount: 3
@@ -276,7 +276,7 @@ architecture:
             memory: 2Gi
           requests:
             memory: 1Gi
-            cpu: 1
+            cpu: 100m
         extraArgs:
           # Expect 3 metastores
           metastore.raft.bootstrap-expect-peers: 3
