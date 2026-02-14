@@ -249,8 +249,8 @@ alloy:
       readOnly: true
 
   resources:
-    limits:
-      cpu: 500m
+    requests:
+      cpu: 250m
 
   storagePath: /storage
 
