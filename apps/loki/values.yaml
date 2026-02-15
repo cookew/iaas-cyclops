@@ -160,6 +160,7 @@ patternIngester:
   persistence:
     enabled: true
     enableStatefulSetAutoDeletePVC: true
+    size: 1Gi
     storageClass: ceph-filesystem
     whenDeleted: Delete
   maxUnavailable: 2
