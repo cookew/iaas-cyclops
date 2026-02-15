@@ -158,6 +158,8 @@ overridesExporter:
 
 patternIngester:
   persistence:
+    claims:
+      size: 1Gi
     enabled: true
     enableStatefulSetAutoDeletePVC: true
     size: 1Gi
