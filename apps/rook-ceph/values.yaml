@@ -227,6 +227,8 @@ monitoring:
 
 obcAllowAdditionalConfigFields: "maxObjects,maxSize,bucketMaxObjects,bucketMaxSize,bucketPolicy,bucketLifecycle,bucketOwner"
 
+scaleDownOperator: true
+
 # tolerations:
 # - effect: NoSchedule
 #   key: node-role.kubernetes.io/control-plane
