@@ -158,6 +158,12 @@ overridesExporter:
 
 patternIngester:
   persistence:
+    claims:
+    - name: data
+      accessModes:
+        - ReadWriteOnce
+      size: 1Gi
+      storageClass: ceph-filesystem
     enabled: true
     enableStatefulSetAutoDeletePVC: true
     size: 1Gi
