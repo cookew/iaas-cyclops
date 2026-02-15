@@ -22,7 +22,7 @@ cephClusterSpec:
     disable: true
   dashboard:
     # port: 8443
-    prometheusEndpoint: http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc:9090
+    prometheusEndpoint: http://prometheus-operated.kube-prometheus-stack.svc:9090
     #prometheusEndpoint: http://mimir-distributed-nginx.mimir-distributed.svc/prometheus
     #prometheusEndpointSSLVerify: true
     ssl: false
