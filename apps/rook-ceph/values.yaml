@@ -227,7 +227,7 @@ monitoring:
 
 obcAllowAdditionalConfigFields: "maxObjects,maxSize,bucketMaxObjects,bucketMaxSize,bucketPolicy,bucketLifecycle,bucketOwner"
 
-scaleDownOperator: true
+# scaleDownOperator: true
 
 # tolerations:
 # - effect: NoSchedule
