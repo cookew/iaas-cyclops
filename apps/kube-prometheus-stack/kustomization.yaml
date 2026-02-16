@@ -15,7 +15,7 @@ helmCharts:
   releaseName: kube-prometheus-stack
   repo: https://prometheus-community.github.io/helm-charts
   valuesFile: values.yaml
-  version: 82.0.0
+  version: 82.0.1
 - name: oauth2-proxy
   namespace: kube-prometheus-stack
   releaseName: alertmanager-oauth2-proxy

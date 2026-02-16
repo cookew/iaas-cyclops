@@ -3,12 +3,10 @@ kind: Kustomization
 
 namespace: ollama
 
-# resources:
-
 helmCharts:
 - name: ollama
   namespace: ollama
   releaseName: ollama
   repo: https://helm.otwld.com/
-  version: 1.41.0
+  version: 1.43.0
   valuesFile: values.yaml
