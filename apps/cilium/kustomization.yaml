@@ -29,4 +29,4 @@ helmCharts:
   releaseName: hubble-oauth2-proxy
   repo: https://oauth2-proxy.github.io/manifests
   valuesFile: hubble-oauth2-proxy-values.yaml
-  version: 10.1.2
+  version: 10.1.4

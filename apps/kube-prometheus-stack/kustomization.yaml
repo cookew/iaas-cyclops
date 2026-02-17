@@ -21,10 +21,10 @@ helmCharts:
   releaseName: alertmanager-oauth2-proxy
   repo: https://oauth2-proxy.github.io/manifests
   valuesFile: alertmanager-oauth2-proxy-values.yaml
-  version: 10.1.2
+  version: 10.1.4
 - name: oauth2-proxy
   namespace: kube-prometheus-stack
   releaseName: prometheus-oauth2-proxy
   repo: https://oauth2-proxy.github.io/manifests
   valuesFile: prometheus-oauth2-proxy-values.yaml
-  version: 10.1.2
+  version: 10.1.4
