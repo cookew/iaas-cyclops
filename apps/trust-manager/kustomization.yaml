@@ -9,7 +9,7 @@ helmCharts:
   releaseName: trust-manager
   repo: https://charts.jetstack.io
   valuesFile: values.yaml
-  version: v0.20.3
+  version: v0.21.1
 
 patches:
 - path: patches/liveness-probe.yaml
