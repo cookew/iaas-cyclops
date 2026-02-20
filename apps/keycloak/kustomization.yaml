@@ -9,9 +9,9 @@ resources:
 - base/keycloak-ingress.yaml
 - base/keycloak-pg-cluster.yaml
 - sealed-secrets/keycloak-user.yaml
-- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.3/kubernetes/keycloaks.k8s.keycloak.org-v1.yml
-- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.3/kubernetes/keycloakrealmimports.k8s.keycloak.org-v1.yml
-- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.3/kubernetes/kubernetes.yml
+- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.4/kubernetes/keycloaks.k8s.keycloak.org-v1.yml
+- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.4/kubernetes/keycloakrealmimports.k8s.keycloak.org-v1.yml
+- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.4/kubernetes/kubernetes.yml
 
 patches:
 - path: patches/keycloak-operator-deployment.yaml
