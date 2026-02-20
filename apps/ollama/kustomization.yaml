@@ -8,5 +8,5 @@ helmCharts:
   namespace: ollama
   releaseName: ollama
   repo: https://helm.otwld.com/
-  version: 1.43.0
+  version: 1.44.0
   valuesFile: values.yaml
