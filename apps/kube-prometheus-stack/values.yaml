@@ -121,7 +121,7 @@ prometheusOperator:
   admissionWebhooks:
     deployment:
       enabled: true
-      replicas: 2
+      # replicas: 2
     certManager:
       admissionCert:
         duration: 960h
