@@ -113,9 +113,10 @@ prometheus:
       outOfOrderTimeWindow: 5s
 
 prometheus-node-exporter:
-  prometheus:
-    podMonitor:
-      enabled: true
+  hostNetwork: true
+  # prometheus:
+  #   podMonitor:
+  #     enabled: true
 
 prometheusOperator:
   admissionWebhooks:
