@@ -29,14 +29,14 @@ data:
 
     listen kube-controller-manager
       bind ${NODE_IP}:10257
-      acl white_list src 10.42.41.0/24 10.240.0.0/16 10.244.0.0/16
+      acl white_list src 10.42.41.0/24 10.240.0.0/16 10.242.0.0/16 10.244.0.0/16
       tcp-request content accept if white_list
       tcp-request content reject
       server kube-controller-manager 127.0.0.1:10257
 
     listen kube-scheduler
       bind ${NODE_IP}:10259
-      acl white_list src 10.42.41.0/24 10.240.0.0/16 10.244.0.0/16
+      acl white_list src 10.42.41.0/24 10.240.0.0/16 10.242.0.0/16 10.244.0.0/16
       tcp-request content accept if white_list
       tcp-request content reject
       server kube-scheduler 127.0.0.1:10259
@@ -44,7 +44,7 @@ data:
     listen etcd
       mode http
       bind ${NODE_IP}:2381
-      acl white_list src 10.42.41.0/24 10.240.0.0/16 10.244.0.0/16
+      acl white_list src 10.42.41.0/24 10.240.0.0/16 10.242.0.0/16 10.244.0.0/16
       http-request deny if !{ path /metrics }
       http-request deny if !white_list
       server etcd 127.0.0.1:2381
