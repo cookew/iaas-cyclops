@@ -55,7 +55,7 @@ env:
 - name: OIDC_CLIENT_ID
   value: headlamp
 - name: OIDC_SCOPES
-  value: profile
+  value: profile,roles
 - name: HEADLAMP_CONFIG_OIDC_CA_FILE
   value: /certs/ca-bundle.pem
 # - name: HEADLAMP_CONFIG_ME_USERNAME_PATH
