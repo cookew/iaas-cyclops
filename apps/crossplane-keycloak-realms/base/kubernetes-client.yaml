@@ -21,6 +21,7 @@ spec:
     standardFlowEnabled: true
     validRedirectUris:
     - http://localhost:8000
+    - https://headlamp.apps.iaas.wcooke.me/oidc-callback
   providerConfigRef:
     name: keycloak-provider-config
 ---
