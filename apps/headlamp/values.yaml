@@ -35,7 +35,7 @@ config:
 
     # -- URL to fetch additional user info for the /me endpoint.
     # For oauth2proxy /oauth2/userinfo can be used. Empty and it will not be used.
-    meUserInfoURL: ""
+    meUserInfoURL: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
 
   # -- directory to look for plugins
   pluginsDir: /headlamp/plugins
@@ -56,7 +56,7 @@ env:
   # value: headlamp
   value: kubernetes
 - name: OIDC_SCOPES
-  value: email,profile
+  value: profile
 - name: HEADLAMP_CONFIG_OIDC_CA_FILE
   value: /certs/ca-bundle.pem
 # - name: HEADLAMP_CONFIG_ME_USERNAME_PATH
