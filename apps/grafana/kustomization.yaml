@@ -19,4 +19,4 @@ helmCharts:
   releaseName: grafana
   repo: https://grafana-community.github.io/helm-charts
   valuesFile: values.yaml
-  version: 11.1.7
+  version: 11.1.8
