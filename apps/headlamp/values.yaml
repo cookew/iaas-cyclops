@@ -53,9 +53,10 @@ env:
 - name: OIDC_ISSUER_URL
   value: https://keycloak.apps.iaas.wcooke.me/realms/iaas
 - name: OIDC_CLIENT_ID
-  value: headlamp
+  # value: headlamp
+  value: kubernetes
 - name: OIDC_SCOPES
-  value: email,profile,roles
+  value: email,profile
 - name: HEADLAMP_CONFIG_OIDC_CA_FILE
   value: /certs/ca-bundle.pem
 # - name: HEADLAMP_CONFIG_ME_USERNAME_PATH
