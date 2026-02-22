@@ -3,6 +3,9 @@ kind: Kustomization
 
 namespace: ollama
 
+resources:
+- base/ingress.yaml
+
 helmCharts:
 - name: ollama
   namespace: ollama
