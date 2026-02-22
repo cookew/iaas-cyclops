@@ -5,7 +5,7 @@ metadata:
 spec:
   deletionPolicy: Delete
   forProvider:
-    # accessType: confidential
+    accessType: confidential
     baseUrl: /
     clientId: headlamp
     clientSecretSecretRef:
