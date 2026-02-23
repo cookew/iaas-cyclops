@@ -4,11 +4,11 @@ ollama:
   gpu:
     enabled: false
     draEnabled: false
-    draDriverClass: "gpu.nvidia.com"
+    draDriverClass: gpu.nvidia.com
     draExistingClaimTemplate: ""
-    type: 'nvidia'
+    type: nvidia
     number: 1
-    nvidiaResource: "nvidia.com/gpu"
+    nvidiaResource: nvidia.com/gpu
     mig:
       enabled: false
       devices: {}
@@ -49,7 +49,7 @@ ollama:
     create: []
 
     # -- Automatically remove models present on the disk but not specified in the values file
-    clean: false
+    clean: true
 
   # -- Add insecure flag for pulling at container startup
   insecure: false
@@ -68,33 +68,33 @@ ingress:
   className: cilium
   enabled: true
   hosts:
-    - host: ollama.apps.iaas.wcooke.me
-      paths:
-        - path: /
-          pathType: Prefix
+  - host: ollama.apps.iaas.wcooke.me
+    paths:
+    - path: /
+      pathType: Prefix
   tls:
-  - secretName: ollama-tls
-    hosts:
-      - ollama.apps.iaas.wcooke.me
+  - hosts:
+    - ollama.apps.iaas.wcooke.me
+    secretName: ollama-tls
 
 nodeSelector: {}
 
 persistentVolume:
-  enabled: true
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
+  enabled: true
   size: 100Gi
   storageClass: ceph-filesystem
 
 replicaCount: 1
 
 resources:
-  requests:
-    memory: 32Gi
-    cpu: 1200m
   limits: {}
-    # memory: 8192Mi
     # cpu: 4000m
+    # memory: 8192Mi
+  requests:
+    cpu: 1200m
+    memory: 32Gi
 
 serviceAccount:
   automount: false

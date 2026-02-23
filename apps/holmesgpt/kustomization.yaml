@@ -11,5 +11,5 @@ helmCharts:
   namespace: holmesgpt
   releaseName: holmesgpt
   repo: https://robusta-charts.storage.googleapis.com
-  version: 0.18.3
+  version: 0.19.1
   valuesFile: values.yaml
