@@ -5,3 +5,12 @@ namespace: pulp
 
 resources:
 - base/pulp-repo-manager.yaml
+
+helmCharts:
+- name: pulp-operator
+  includeCRDs: true
+  namespace: pulp
+  releaseName: pulp-operator
+  repo: https://github.com/pulp/pulp-k8s-resources/raw/main/helm-charts/
+  # valuesFile: values.yaml
+  version: 0.5.0
