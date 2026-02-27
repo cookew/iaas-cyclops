@@ -8,18 +8,12 @@ spec:
     replicas: 1
   content:
     replicas: 1
-  worker:
-    replicas: 1
   database:
     postgres_storage_class: ceph-filesystem
     version: 15
-  web:
-    replicas: 1
-
   file_storage_access_mode: ReadWriteMany
   file_storage_size: 50Gi
   file_storage_storage_class: ceph-filesystem
-
   ingress_annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
     forecastle.stakater.com/appName: Pulp
@@ -32,3 +26,10 @@ spec:
   ingress_type: Ingress
   ingress_tls_secret: pulp-ingress-tls
   # object_storage_s3_secret:
+
+  web:
+    replicas: 1
+  worker:
+    replicas: 1
+
+

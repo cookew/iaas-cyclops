@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: pulp
 
 resources:
-- base/pulp-repo-manager.yaml
+# - base/pulp-repo-manager.yaml
 
 helmCharts:
 - name: pulp-operator
