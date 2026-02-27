@@ -95,6 +95,7 @@ spec:
       - name: loki
       - name: neuvector
       - name: ollama
+      - name: pulp-operator
       - name: pyroscope
       - name: reloader
       - name: tempo
