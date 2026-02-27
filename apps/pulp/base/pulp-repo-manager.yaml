@@ -6,8 +6,10 @@ spec:
   allowed_content_checksums: ["sha256", "sha384", "sha512"]
   api:
     replicas: 1
+  # cache:
   content:
     replicas: 1
+  # custom_pulp_settings:
   database:
     postgres_image: docker.io/library/postgres:15
     postgres_storage_class: ceph-filesystem
@@ -27,10 +29,9 @@ spec:
   ingress_type: Ingress
   ingress_tls_secret: pulp-ingress-tls
   # object_storage_s3_secret:
+  # sso_secret:
 
   web:
     replicas: 1
   worker:
     replicas: 1
-
-
