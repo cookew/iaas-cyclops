@@ -96,7 +96,6 @@ spec:
       - name: neuvector
       - name: ollama
       - name: pulp
-      - name: pulp-operator
       - name: pyroscope
       - name: reloader
       - name: tempo
