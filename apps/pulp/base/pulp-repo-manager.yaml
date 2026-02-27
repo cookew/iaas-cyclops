@@ -12,6 +12,7 @@ spec:
     replicas: 1
   database:
     postgres_storage_class: ceph-filesystem
+    version: 15
   web:
     replicas: 1
 
