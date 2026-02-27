@@ -7,6 +7,8 @@ metadata:
 data:
   accounts.william: apiKey, login
   accounts.william.enabled: "true"
+  accounts.edward: apiKey, login
+  accounts.edward.enabled: "true"
   # admin.enabled false is to disable the admin user
   admin.enabled: "false"
   # exec.enabled true is to enable the web based terminal
