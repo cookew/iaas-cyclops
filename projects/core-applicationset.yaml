@@ -95,8 +95,8 @@ spec:
       - name: loki
       - name: neuvector
       - name: ollama
-      - name: pulp
-        serverSideApply: "true"
+      # - name: pulp
+      #   serverSideApply: "true"
       - name: pyroscope
       - name: reloader
       - name: tempo

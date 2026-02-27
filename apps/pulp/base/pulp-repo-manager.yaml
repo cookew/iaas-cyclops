@@ -9,7 +9,7 @@ spec:
   # cache:
   content:
     replicas: 1
-  # custom_pulp_settings:
+  # custom_pulp_settings: ""
   database:
     postgres_image: docker.io/library/postgres:15
     postgres_storage_class: ceph-filesystem
