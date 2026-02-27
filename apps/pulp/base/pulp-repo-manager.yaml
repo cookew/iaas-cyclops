@@ -18,3 +18,14 @@ spec:
   file_storage_access_mode: "ReadWriteMany"
   file_storage_size: "50Gi"
   file_storage_storage_class: ceph-filesystem
+
+  ingress_annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Pulp
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Kubernetes
+    forecastle.stakater.com/icon: https://pulp.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/network-restricted: "true"
+  ingress_class_name: cilium
+  ingress_host: pulp.apps.iaas.wcooke.me
+  ingress_type: Ingress
