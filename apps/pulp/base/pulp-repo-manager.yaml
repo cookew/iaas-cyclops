@@ -29,3 +29,5 @@ spec:
   ingress_class_name: cilium
   ingress_host: pulp.apps.iaas.wcooke.me
   ingress_type: Ingress
+  ingress_tls_secret: pulp-ingress-tls
+  # object_storage_s3_secret:
