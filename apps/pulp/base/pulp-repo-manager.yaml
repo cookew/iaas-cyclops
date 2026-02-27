@@ -9,6 +9,7 @@ spec:
   content:
     replicas: 1
   database:
+    postgres_image: docker.io/library/postgres:15
     postgres_storage_class: ceph-filesystem
     version: "15"
   file_storage_access_mode: ReadWriteMany
