@@ -38,6 +38,7 @@ spec:
         syncWave: -80
 
       - name: argocd
+        serverSideApply: "true"
         syncWave: -70
       - name: cilium
         createNamespace: "false"
