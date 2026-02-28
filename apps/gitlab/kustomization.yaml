@@ -24,6 +24,7 @@ resources:
 - sealed-secrets/gitlab-keycloak-client.yaml
 - sealed-secrets/gitlab-oidc.yaml
 - sealed-secrets/gitlab-registry-connection.yaml
+- sealed-secrets/gitlab-valkey-password.yaml
 
 helmCharts:
 # - includeCRDs: true
