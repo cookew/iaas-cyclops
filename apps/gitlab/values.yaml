@@ -99,6 +99,8 @@ global:
   time_zone: America/Denver
   certmanager-issuer:
     email: cookewe@gmail.com
+certmanager-issuer:
+  email: cookewe@gmail.com
 
 certmanager:
   install: false
