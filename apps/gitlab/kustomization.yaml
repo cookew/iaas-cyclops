@@ -15,7 +15,7 @@ resources:
 - base/bucket-gitlab-terraform-state.yaml
 - base/bucket-gitlab-uploads.yaml
 - base/bucket-user.yaml
-- base/certificate.yaml
+# - base/certificate.yaml
 - base/ingress-role-binding.yaml
 - base/ingress-role.yaml
 - sealed-secrets/bucket-user-creds.yaml
