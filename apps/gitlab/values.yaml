@@ -6,7 +6,11 @@ upgradeCheck:
 global:
   affinity:
     podAntiAffinity:
-      topologyKey: "kubernetes.io/hostname"
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+        topologyKey: kubernetes.io/hostname
+        weight: 1
+
   antiAffinity: soft
   appConfig:
     ciSecureFiles:
