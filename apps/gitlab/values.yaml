@@ -89,8 +89,8 @@ global:
       enabled: true
       serviceMonitor:
         enabled: true
-    # service:
-      # type: LoadBalancer
+    service:
+      type: ClusterIP
       # loadBalancerIP: 10.42.41.129
     sshDaemon: gitlab-sshd
   smtp:
