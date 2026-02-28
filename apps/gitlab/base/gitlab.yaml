@@ -51,9 +51,9 @@ spec:
             enabled: true
         certificates:
           customCAs:
-          - configMap: tm-ca-bundle
+          - configMap: gitlab-ca-bundle
             keys:
-            - ca-bundle.pem
+            - kube-certs.crt
         edition: ce
         email:
           display_name: WCooke GitLab
