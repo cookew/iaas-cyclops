@@ -177,7 +177,8 @@ tls:
 
 affinity:
   podAntiAffinity:
-    topologyKey: "kubernetes.io/hostname"
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - topologyKey: kubernetes.io/hostname
 
 # Valkey logging level: debug, verbose, notice, warning
 valkeyLogLevel: "notice"
