@@ -43,12 +43,6 @@ global:
       - organization
       providers:
       - secret: gitlab-oidc
-    redis:
-      auth:
-        secret: gitlab-valkey-password
-        key: default
-      enabled: true
-      host: valkey.gitlab.svc
     terraformState:
       enabled: true
   certificates:
@@ -94,6 +88,12 @@ global:
     customDomainMode: https
     enabled: true
     host: pages.gitlab.apps.iaas.wcooke.me
+  redis:
+    auth:
+      secret: gitlab-valkey-password
+      key: default
+    enabled: true
+    host: valkey.gitlab.svc
   serviceAccount:
     enabled: false
     create: true
