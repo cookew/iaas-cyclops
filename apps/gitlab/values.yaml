@@ -123,6 +123,8 @@ gitlab:
         forecastle.stakater.com/network-restricted: "true"
       tls:
         secretName: gitlab-webservice-tls
+gitlab-runner:
+  install: false
 
 # haproxy:
 #   install: true
