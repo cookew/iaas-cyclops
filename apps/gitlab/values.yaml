@@ -109,6 +109,8 @@ certmanager:
 
 gitlab:
   webservice:
+    extraEnv:
+      SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
     ingress:
       annotations:
         forecastle.stakater.com/appName: GitLab
