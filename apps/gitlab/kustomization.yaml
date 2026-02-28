@@ -30,4 +30,4 @@ helmCharts:
   releaseName: gitlab
   repo: https://charts.gitlab.io
   valuesFile: values.yaml
-  version: 9.8.0
+  version: 9.9.1

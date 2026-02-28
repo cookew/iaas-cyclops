@@ -1,5 +1,8 @@
 # https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/Chart.yaml?ref_type=heads
 
+upgradeCheck:
+  enabled: false
+
 global:
   affinity:
     podAntiAffinity:
