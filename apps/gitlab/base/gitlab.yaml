@@ -54,9 +54,9 @@ spec:
           - configMap: gitlab-ca-bundle
             keys:
             - kube-certs.crt
-          - configMap: openshift-service-ca.crt
-            keys:
-            - service-ca.crt
+          # - configMap: openshift-service-ca.crt
+          #   keys:
+          #   - service-ca.crt
         edition: ce
         email:
           display_name: WCooke GitLab
