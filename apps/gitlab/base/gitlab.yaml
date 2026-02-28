@@ -51,9 +51,9 @@ spec:
             enabled: true
         certificates:
           customCAs:
-          - configMap: gitlab-ca-bundle
+          - configMap: tm-ca-bundle
             keys:
-            - kube-certs.crt
+            - ca-bundle.pem
           # - configMap: openshift-service-ca.crt
           #   keys:
           #   - service-ca.crt
