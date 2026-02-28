@@ -17,6 +17,7 @@ resources:
 - base/bucket-user.yaml
 # - base/certificate.yaml
 - base/gitlab-keycloak-client.yaml
+- base/gitlab-pg-cluster.yaml
 - base/ingress-role-binding.yaml
 - base/ingress-role.yaml
 - sealed-secrets/gitlab-bucket-user-creds.yaml

@@ -10,7 +10,6 @@ global:
       - podAffinityTerm:
         topologyKey: kubernetes.io/hostname
         weight: 1
-
   antiAffinity: soft
   appConfig:
     ciSecureFiles:
@@ -88,6 +87,13 @@ global:
     customDomainMode: https
     enabled: true
     host: pages.gitlab.apps.iaas.wcooke.me
+  psql:
+    database: gitlab
+    host: gitlab-pg-cluster-rw.gitlab.svc
+    password:
+      secret: gitlab-pg-cluster-app
+      key: password
+    username: gitlab
   redis:
     auth:
       secret: gitlab-valkey-password
@@ -144,6 +150,9 @@ installCertmanager: false
 nginx-ingress:
   # Disable the deployment of the in-chart NGINX Ingress provider.
   enabled: false
+
+postgresql:
+  install: false
 
 prometheus:
   install: false
