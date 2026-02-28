@@ -8,12 +8,11 @@ spec:
   - "*.s3.apps.iaas.wcooke.me"
   - s3.apps.iaas.wcooke.me
   - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc.cluster.local
-  - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc.cluster.local
   - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc.cluster
   - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc
   - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster
   - rook-ceph-rgw-ceph-objectstore
-  duration: 2160h
+  duration: 960h
   isCA: false
   issuerRef:
     kind: ClusterIssuer
