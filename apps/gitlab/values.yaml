@@ -102,6 +102,7 @@ certmanager-issuer:
   email: cookewe@gmail.com
 
 certmanager:
+  install: false
   installCRDs: false
   rbac:
     create: false
