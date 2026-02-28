@@ -56,6 +56,15 @@ global:
     # pages:
     #   name: pages.gitlab.wcooke.me
     # ssh: gitlab.wcooke.me
+  ingress:
+    configureCertmanager: false
+    # controller:
+    #   electionID: gitlab-nginx-ingress-leader
+    enabled: true
+    # provider: haproxy
+    # tls:
+    #   secretName: gitlab-certificate
+    class: cilium
   minio:
     enabled: false
   pages:
@@ -83,15 +92,6 @@ global:
     display_name: WCooke GitLab
     from: cookewe@gmail.com
     reply_to: cookewe@gmail.com
-  ingress:
-    # configureCertmanager: false
-    # controller:
-    #   electionID: gitlab-nginx-ingress-leader
-    enabled: true
-    # provider: haproxy
-    # tls:
-    #   secretName: gitlab-certificate
-    class: cilium
   serviceAccount:
     enabled: false
     create: true
