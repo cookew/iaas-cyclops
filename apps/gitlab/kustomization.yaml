@@ -27,6 +27,6 @@ helmCharts:
 - includeCRDs: true
   name: gitlab
   namespace: gitlab
-  releaseName: gitlab
+  releaseName: gitlab/gitlab
   repo: https://charts.gitlab.io
   version: 9.9.1
