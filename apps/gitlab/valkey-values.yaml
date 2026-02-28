@@ -123,7 +123,7 @@ auth:
 
 # Replica configuration for master-replica replication mode
 replica:
-  enabled: true
+  enabled: false
   replicas: 2
 
   # Username for replicas to authenticate to master, ignored if auth.enabled is false.
@@ -149,7 +149,7 @@ replica:
     # Size of the PVC for each replica (required when replica.enabled is true)
     size: ""
     # Storage class name (empty = use default storage class)
-    storageClass: ""
+    storageClass: ceph-filesystem
     # Access modes for the PVC
     accessModes:
       - ReadWriteOnce
