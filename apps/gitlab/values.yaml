@@ -45,7 +45,7 @@ global:
     customCAs:
     - configMap: gitlab-ca-bundle
       keys:
-      - root-ca.crt
+      - wcooke-root-ca-cert.crt
     - configMap: tm-ca-bundle
       keys:
       - ca-bundle.pem
