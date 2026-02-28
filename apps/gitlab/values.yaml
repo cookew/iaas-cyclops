@@ -57,13 +57,15 @@ global:
     #   name: pages.gitlab.wcooke.me
     # ssh: gitlab.wcooke.me
   ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
     configureCertmanager: false
     # controller:
     #   electionID: gitlab-nginx-ingress-leader
     enabled: true
     # provider: haproxy
-    # tls:
-    #   secretName: gitlab-certificate
+    tls:
+      secretName: gitlab-certificate
     class: cilium
   minio:
     enabled: false
@@ -108,6 +110,8 @@ gitlab:
         forecastle.stakater.com/group: Kubernetes
         forecastle.stakater.com/icon: https://gitlab.apps.iaas.wcooke.me/-/pwa-icons/logo-192.png
         forecastle.stakater.com/network-restricted: "true"
+      tls:
+        secretName: gitlab-webservice-tls
 
 # haproxy:
 #   install: true
@@ -124,6 +128,9 @@ prometheus:
 registry:
   # https://docs.gitlab.com/charts/charts/registry/metadata_database/
   # database:
+  ingress:
+    tls:
+      secretName: gitlab-registry-tls
   metrics:
     enabled: true
     serviceMonitor:
