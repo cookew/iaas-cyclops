@@ -43,10 +43,10 @@ global:
       enabled: true
   certificates:
     customCAs:
-    - configMap: wcooke-root-ca-cert
+    - configMap: gitlab-ca-bundle
       keys:
       - root-ca.crt
-    - configMap: ca-bundle.pem
+    - configMap: tm-ca-bundle
       keys:
       - ca-bundle.pem
   edition: ce
