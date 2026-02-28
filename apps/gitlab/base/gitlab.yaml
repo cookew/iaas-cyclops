@@ -94,7 +94,7 @@ spec:
               enabled: true
           service:
             type: LoadBalancer
-            loadBalancerIP: 10.42.41.101
+            # loadBalancerIP: 10.42.41.101
           sshDaemon: gitlab-sshd
         smtp:
           enabled: false
