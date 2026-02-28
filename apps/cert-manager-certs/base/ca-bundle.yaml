@@ -76,6 +76,25 @@ spec:
     namespaceSelector:
       matchLabels:
         kubernetes.io/metadata.name: harbor
+---
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
+  name: gitlab-ca-bundle
+spec:
+  sources:
+  - configMap:
+      name: root-ca-cert
+      key: root-ca.crt
+  - secret:
+      name: iaas-wcooke-me
+      key: tls.crt
+  target:
+    configMap:
+      key: kube-certs.crt
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: gitlab-system
 # ---
 # apiVersion: trust.cert-manager.io/v1alpha1
 # kind: Bundle
@@ -145,28 +164,6 @@ spec:
 #     namespaceSelector:
 #       matchLabels:
 #         kubernetes.io/metadata.name: keycloak
-# ---
-# apiVersion: trust.cert-manager.io/v1alpha1
-# kind: Bundle
-# metadata:
-#   name: gitlab-ca-bundle
-# spec:
-#   sources:
-#   - configMap:
-#       name: root-ca-cert
-#       key: root-ca.crt
-#   - secret:
-#       name: iaas-wcooke-me
-#       key: tls.crt
-#   - configMap:
-#       name: openshift-service-ca.crt
-#       key: service-ca.crt
-#   target:
-#     configMap:
-#       key: kube-certs.crt
-#     namespaceSelector:
-#       matchLabels:
-#         kubernetes.io/metadata.name: gitlab-system
 # ---
 # apiVersion: trust.cert-manager.io/v1alpha1
 # kind: Bundle

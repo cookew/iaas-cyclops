@@ -54,9 +54,6 @@ spec:
           - configMap: tm-ca-bundle
             keys:
             - ca-bundle.pem
-          # - configMap: openshift-service-ca.crt
-          #   keys:
-          #   - service-ca.crt
         edition: ce
         email:
           display_name: WCooke GitLab
