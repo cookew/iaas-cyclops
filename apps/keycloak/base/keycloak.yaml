@@ -29,7 +29,7 @@ spec:
   hostname:
     # admin: https://keycloak.apps.iaas.wcooke.me/admin
     hostname: https://keycloak.apps.iaas.wcooke.me
-    # strict: false
+    strict: false
   http:
     tlsSecret: keycloak-certificate
   image: registry.wcooke.me:5000/keycloak/keycloak-fips:26.5.4-fips
