@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: gitlab-system
+namespace: gitlab
 
 resources:
 - base/bucket-git-lfs.yaml
@@ -23,3 +23,11 @@ resources:
 - sealed-secrets/gitlab-connection.yaml
 - sealed-secrets/gitlab-oidc.yaml
 - sealed-secrets/gitlab-registry-connection.yaml
+
+helmCharts:
+- includeCRDs: true
+  name: gitlab
+  namespace: gitlab
+  releaseName: gitlab
+  repo: https://charts.gitlab.io
+  version: 9.9.1
