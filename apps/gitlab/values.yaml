@@ -45,17 +45,17 @@ global:
       keys:
       - kube-certs.crt
   hosts:
-    domain: gitlab.wcooke.me
+    domain: gitlab.apps.iaas.wcooke.me
     https: true
     gitlab:
-      name: gitlab.wcooke.me
+      name: gitlab.apps.iaas.wcooke.me
     # registry:
-    #   name: registry.gitlab.wcooke.me
+    #   name: registry.gitlab.apps.iaas.wcooke.me
     # kas:
-    #   name: kas.gitlab.wcooke.me
+    #   name: kas.gitlab.apps.iaas.wcooke.me
     # pages:
-    #   name: pages.gitlab.wcooke.me
-    # ssh: gitlab.wcooke.me
+    #   name: pages.gitlab.apps.iaas.wcooke.me
+    # ssh: gitlab.apps.iaas.wcooke.me
   ingress:
     annotations:
       cert-manager.io/cluster-issuer: iaas-wcooke-me

@@ -5,9 +5,9 @@ metadata:
 spec:
   commonName: gitlab
   dnsNames:
-  - "gitlab.wcooke.me"
-  - "*.gitlab.wcooke.me"
-  - "*.pages.gitlab.wcooke.me"
+  - "gitlab.apps.iaas.wcooke.me"
+  - "*.gitlab.apps.iaas.wcooke.me"
+  - "*.pages.gitlab.apps.iaas.wcooke.me"
   duration: 960h
   isCA: false
   issuerRef:
