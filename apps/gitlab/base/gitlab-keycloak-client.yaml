@@ -59,7 +59,7 @@ spec:
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
 metadata:
-  name: gitlab-users
+  name: gitlab-user
 spec:
   deletionPolicy: Delete
   forProvider:
