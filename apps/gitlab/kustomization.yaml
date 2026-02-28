@@ -20,9 +20,9 @@ resources:
 - base/ingress-role.yaml
 - sealed-secrets/gitlab-bucket-user-creds.yaml
 - sealed-secrets/gitlab-connection.yaml
+- sealed-secrets/gitlab-keycloak-client.yaml
 - sealed-secrets/gitlab-oidc.yaml
 - sealed-secrets/gitlab-registry-connection.yaml
-- sealed-secrets/gitlab-keycloak-client.yaml
 
 helmCharts:
 # - includeCRDs: true
