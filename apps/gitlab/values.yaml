@@ -98,9 +98,6 @@ global:
     tls: false
   time_zone: America/Denver
 
-certmanager-issuer:
-  email: cookewe@gmail.com
-
 certmanager:
   install: false
   installCRDs: false
