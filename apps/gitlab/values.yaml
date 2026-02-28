@@ -1,17 +1,20 @@
 # https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/Chart.yaml?ref_type=heads
 
 global:
-
   affinity:
     podAntiAffinity:
       topologyKey: "kubernetes.io/hostname"
   antiAffinity: soft
   appConfig:
-    enableUsagePing: false
+    ciSecureFiles:
+      enabled: true
+    dependencyProxy:
+      enabled: true
     defaultColorMode: 2
     # defaultSyntaxHighlightingTheme: 4
     # defaultTheme: 2
     # enableImpersonation: true
+    enableUsagePing: false
     # ldap.preventSignin: true
     object_store:
       enabled: true
@@ -34,10 +37,6 @@ global:
       providers:
       - secret: gitlab-oidc
     terraformState:
-      enabled: true
-    ciSecureFiles:
-      enabled: true
-    dependencyProxy:
       enabled: true
   certificates:
     customCAs:
@@ -99,9 +98,13 @@ global:
     tls: false
   time_zone: America/Denver
 
-certmanager:
+certmanager-issuer:
   email: cookewe@gmail.com
+
+certmanager:
   installCRDs: false
+  rbac:
+    create: false
 
 gitlab:
   webservice:
