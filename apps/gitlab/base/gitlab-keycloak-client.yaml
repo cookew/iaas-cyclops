@@ -1,0 +1,159 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  name: gitlab
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    accessType: confidential
+    baseUrl: /
+    clientId: gitlab
+    clientSecretSecretRef:
+      key: client-secret
+      name: gitlab-keycloak-client
+      namespace: gitlab
+    directAccessGrantsEnabled: true
+    name: GitLab
+    pkceCodeChallengeMethod: S256
+    realmIdRef:
+      name: iaas
+    rootUrl: https://gitlab.apps.iaas.wcooke.me
+    standardFlowEnabled: true
+    validPostLogoutRedirectUris:
+    - /users/sign_in
+    validRedirectUris:
+    - /users/auth/openid_connect/callback
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: gitlab-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: gitlab
+    name: gitlab-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: gitlab-auditor
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: gitlab
+    name: gitlab-auditor
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: gitlab-users
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: gitlab
+    name: gitlab-user
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: gitlab-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: gitlab-admins
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: gitlab-auditors
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: gitlab-auditors
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: gitlab-users
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: gitlab-users
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: gitlab-admins-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: gitlab-admins
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: gitlab-admin
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: gitlab-auditors-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: gitlab-auditors
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: gitlab-auditor
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: gitlab-users-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: gitlab-users
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: gitlab-user
+  providerConfigRef:
+    name: keycloak-provider-config
