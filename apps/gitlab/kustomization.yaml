@@ -18,7 +18,7 @@ resources:
 # - base/certificate.yaml
 - base/ingress-role-binding.yaml
 - base/ingress-role.yaml
-- sealed-secrets/bucket-user-creds.yaml
+- sealed-secrets/gitlab-bucket-user-creds.yaml
 - sealed-secrets/gitlab-connection.yaml
 - sealed-secrets/gitlab-oidc.yaml
 - sealed-secrets/gitlab-registry-connection.yaml
