@@ -87,11 +87,11 @@ spec:
       - name: forecastle
       - name: github-arc
         serverSideApply: "true"
-      - name: gitlab
-        namespace: gitlab-system
-      - name: gitlab-operator
-        namespace: gitlab-system
-      - name: gitlab-runners
+      # - name: gitlab
+      #   namespace: gitlab-system
+      # - name: gitlab-operator
+      #   namespace: gitlab-system
+      # - name: gitlab-runners
       - name: grafana
       - name: harbor
       - name: headlamp
