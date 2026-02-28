@@ -148,6 +148,9 @@ nginx-ingress:
 prometheus:
   install: false
 
+redis:
+  install: false
+
 registry:
   # https://docs.gitlab.com/charts/charts/registry/metadata_database/
   # database:
