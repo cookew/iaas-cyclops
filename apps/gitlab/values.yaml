@@ -80,7 +80,7 @@ global:
   pages:
     customDomainMode: https
     enabled: true
-    host: pages.apps.iaas.gitlab.wcooke.me
+    host: pages.gitlab.apps.iaas.wcooke.me
   serviceAccount:
     enabled: false
     create: true
