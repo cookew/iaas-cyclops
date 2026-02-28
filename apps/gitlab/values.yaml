@@ -65,6 +65,7 @@ global:
     enabled: true
     # provider: haproxy
     tls:
+      enabled: true
       secretName: gitlab-certificate
     class: cilium
   minio:
