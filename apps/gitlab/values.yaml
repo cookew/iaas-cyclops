@@ -43,9 +43,12 @@ global:
       enabled: true
   certificates:
     customCAs:
-    - configMap: gitlab-ca-bundle
+    - configMap: wcooke-root-ca-cert
       keys:
-      - kube-certs.crt
+      - root-ca.crt
+    - configMap: ca-bundle.pem
+      keys:
+      - ca-bundle.pem
   edition: ce
   email:
     display_name: WCooke GitLab

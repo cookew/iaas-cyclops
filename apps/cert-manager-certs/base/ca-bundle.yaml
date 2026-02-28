@@ -86,12 +86,9 @@ spec:
   - configMap:
       name: root-ca-cert
       key: root-ca.crt
-  - secret:
-      name: iaas-wcooke-me
-      key: tls.crt
   target:
     configMap:
-      key: kube-certs.crt
+      key: wcooke-root-ca-cert
     namespaceSelector:
       matchLabels:
         kubernetes.io/metadata.name: gitlab
