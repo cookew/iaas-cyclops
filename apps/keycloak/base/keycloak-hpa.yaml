@@ -11,12 +11,12 @@ spec:
   #     stabilizationWindowSeconds: 60
   maxReplicas: 5
   metrics:
-  - type: Resource
-    resource:
+  - resource:
       name: cpu
       target:
         averageUtilization: 95
         type: Utilization
+    type: Resource
   minReplicas: 2
   scaleTargetRef:
     apiVersion: k8s.keycloak.org/v2alpha1
