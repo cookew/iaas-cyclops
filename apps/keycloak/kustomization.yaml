@@ -5,9 +5,11 @@ namespace: keycloak
 
 resources:
 - base/keycloak.yaml
+- base/keycloak-capacity-planning-dashboard.yaml
 - base/keycloak-certificate.yaml
 - base/keycloak-ingress.yaml
 - base/keycloak-pg-cluster.yaml
+- base/keycloak-troubleshooting-dashboard.yaml
 - sealed-secrets/keycloak-user.yaml
 - https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.4/kubernetes/keycloaks.k8s.keycloak.org-v1.yml
 - https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.4/kubernetes/keycloakrealmimports.k8s.keycloak.org-v1.yml
