@@ -1,3 +1,5 @@
+# https://www.keycloak.org/operator/advanced-configuration
+
 apiVersion: k8s.keycloak.org/v2alpha1
 kind: Keycloak
 metadata:
@@ -5,12 +7,6 @@ metadata:
 spec:
   additionalOptions:
     - name: metrics-enabled
-      value: "true"
-    - name: cache-metrics-histograms-enabled
-      value: "true"
-    - name: http-metrics-histograms-enabled
-      value: "true"
-    - name: event-metrics-user-enabled
       value: "true"
   bootstrapAdmin:
     user:
@@ -65,7 +61,6 @@ spec:
     tlsSecret: keycloak-ingress-cert
   instances: 2
   networkPolicy:
-    enabled: false
     management:
     - namespaceSelector:
         matchLabels:
@@ -86,20 +81,7 @@ spec:
         - weight: 100
           podAffinityTerm:
             topologyKey: kubernetes.io/hostname
-  #   affinity:
-  #     nodeAffinity:
-  #       requiredDuringSchedulingIgnoredDuringExecution:
-  #         nodeSelectorTerms:
-  #         - matchExpressions:
-  #           - key: node-role.kubernetes.io/control-plane
-  #             operator: Exists
-  #   tolerations:
-  #     - effect: NoSchedule
-  #       key: node-role.kubernetes.io/control-plane
-  #       operator: Exists
   serviceMonitor:
     enabled: true
-    # interval: 10s
+    interval: 10s
   # startOptimized: true
-
-# https://www.keycloak.org/operator/advanced-configuration

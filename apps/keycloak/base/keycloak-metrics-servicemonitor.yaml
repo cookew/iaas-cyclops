@@ -1,0 +1,26 @@
+# The servicemonitor the operator deploys is missing the labels, so we have to deploy our own.
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    release: kube-prometheus-stack
+  name: keycloak-metrics
+spec:
+  endpoints:
+  - interval: 10s
+    path: /metrics
+    port: management
+    # scrapeTimeout: 10s
+    scheme: https
+    tlsConfig:
+      insecureSkipVerify: true
+  namespaceSelector:
+    matchNames:
+    - keycloak
+  scrapeProtocols:
+  - OpenMetricsText1.0.0
+  selector:
+    matchLabels:
+      app: keycloak
+      app.kubernetes.io/instance: keycloak
+      app.kubernetes.io/managed-by: keycloak-operator
