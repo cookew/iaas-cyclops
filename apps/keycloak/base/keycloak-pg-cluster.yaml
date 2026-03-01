@@ -36,8 +36,10 @@ spec:
   # plugins:
   # - name: barman-cloud.cloudnative-pg.io
   #   isWALArchiver: true
-  #   parameters:
+    parameters:
   #     barmanObjectName: keycloak-pg
+      shared_buffers: 256MB
+
   primaryUpdateMethod: switchover
   storage:
     resizeInUseVolumes: true

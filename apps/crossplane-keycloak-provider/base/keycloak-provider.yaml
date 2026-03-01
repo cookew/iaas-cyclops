@@ -19,6 +19,8 @@ spec:
         spec:
           containers:
             - name: package-runtime
+              args:
+              - --max-reconcile-rate=1
               env:
               - name: CA_BUNDLE_PATH
                 value: /certs/ca-bundle.pem
