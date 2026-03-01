@@ -23,6 +23,8 @@ spec:
     value: "true"
   - name: KC_HTTP_METRICS_HISTOGRAMS_ENABLED
     value: "true"
+  - name: KC_EVENT_METRICS_USER_ENABLED
+    value: "true"
   features:
     enabled:
     - docker
