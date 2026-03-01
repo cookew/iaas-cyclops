@@ -111,6 +111,66 @@ prometheus:
               storage: 150Gi
     tsdb:
       outOfOrderTimeWindow: 5s
+    podMonitorSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    podMonitorNamespaceSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    probeSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    probeNamespaceSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    ruleSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    ruleNamespaceSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    scrapeConfigNamespaceSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    scrapeConfigSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    serviceMonitorSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    serviceMonitorNamespaceSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
 
 prometheus-node-exporter:
   hostNetwork: true
