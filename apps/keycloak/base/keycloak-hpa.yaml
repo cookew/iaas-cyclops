@@ -1,0 +1,23 @@
+# https://www.keycloak.org/getting-started/getting-started-scaling-and-tuning#_horizontal_scaling
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: keycloak-hpa
+  namespace: keycloak
+spec:
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 120
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 75
+  minReplicas: 2
+  scaleTargetRef:
+    apiVersion: k8s.keycloak.org/v2alpha1
+    kind: Keycloak
+    name: keycloak

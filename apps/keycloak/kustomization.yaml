@@ -7,6 +7,7 @@ resources:
 - base/keycloak.yaml
 - base/keycloak-capacity-planning-dashboard.yaml
 - base/keycloak-certificate.yaml
+- base/keycloak-hpa.yaml
 - base/keycloak-ingress.yaml
 - base/keycloak-metrics-servicemonitor.yaml
 - base/keycloak-pg-cluster.yaml
