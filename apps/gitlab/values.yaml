@@ -69,6 +69,11 @@ global:
     # pages:
     #   name: pages.gitlab.apps.iaas.wcooke.me
     # ssh: gitlab.apps.iaas.wcooke.me
+  hpa:
+    cpu:
+      targetAverageValue: 700m
+    maxReplicas: 3
+    maxUnavailable: 2
   ingress:
     annotations:
       cert-manager.io/cluster-issuer: iaas-wcooke-me
@@ -84,6 +89,7 @@ global:
   minio:
     enabled: false
   pages:
+    accessControl: true
     customDomainMode: https
     enabled: true
     host: pages.gitlab.apps.iaas.wcooke.me
@@ -139,6 +145,7 @@ gitlab:
         forecastle.stakater.com/network-restricted: "true"
       tls:
         secretName: gitlab-webservice-tls
+
 gitlab-runner:
   install: false
 
