@@ -96,11 +96,11 @@ prometheus:
     # shards: 1
     resources:
       limits:
-        cpu: 1000m
-        memory: 4Gi
+        cpu: 2000m
+        memory: 8Gi
       requests:
         cpu: 200m
-        memory: 3Gi
+        memory: 4Gi
     storageSpec:
       volumeClaimTemplate:
         spec:
