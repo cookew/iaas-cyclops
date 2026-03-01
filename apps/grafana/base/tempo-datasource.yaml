@@ -9,7 +9,7 @@ data:
   tempo-datasource.yaml: |-
     apiVersion: 1
     datasources:
-    - name: tempo
+    - name: Tempo
       access: proxy
       editable: false
       type: tempo

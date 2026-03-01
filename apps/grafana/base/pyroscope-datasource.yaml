@@ -9,7 +9,7 @@ data:
   tempo-datasource.yaml: |-
     apiVersion: 1
     datasources:
-    - name: pyroscope
+    - name: Pyroscope
       editable: false
       type: grafana-pyroscope-datasource
       uid: pyroscope

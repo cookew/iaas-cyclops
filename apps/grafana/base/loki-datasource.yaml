@@ -8,7 +8,7 @@ data:
   loki-datasource.yaml: |-
     apiVersion: 1
     datasources:
-    - name: loki
+    - name: Loki
       access: proxy
       editable: false
       type: loki
