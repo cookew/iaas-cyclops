@@ -70,11 +70,11 @@ spec:
     headers: xforwarded # double check your reverse proxy sets and overwrites the X-Forwarded-* headers
   resources:
     limits:
-      cpu: 6
-      memory: 18Gi
+      cpu: 12
+      memory: 36Gi
     requests:
-      cpu: 2
-      memory: 4Gi
+      cpu: 4
+      memory: 12Gi
   scheduling:
     affinity:
       podAntiAffinity:
