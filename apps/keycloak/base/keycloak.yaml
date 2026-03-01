@@ -98,7 +98,7 @@ spec:
   #       operator: Exists
   serviceMonitor:
     enabled: true
-    interval: 10s
+    # interval: 10s
   # startOptimized: true
 
 # https://www.keycloak.org/operator/advanced-configuration
