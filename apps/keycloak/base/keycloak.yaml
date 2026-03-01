@@ -55,16 +55,11 @@ spec:
     enabled: false
     tlsSecret: keycloak-ingress-cert
   instances: 2
-  # networkPolicy:
-  #   enabled: true
-  #   https:
-  #   - namespaceSelector:
-  #       matchLabels:
-  #         kubernetes.io/metadata.name: ingress-nginx
-  #   management:
-  #   - namespaceSelector:
-  #       matchLabels:
-  #         kubernetes.io/metadata.name: prometheus
+  networkPolicy:
+    management:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-prometheus-stack
   proxy:
     headers: xforwarded # double check your reverse proxy sets and overwrites the X-Forwarded-* headers
   resources:
