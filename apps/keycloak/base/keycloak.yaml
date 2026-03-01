@@ -59,6 +59,7 @@ spec:
     className: cilium
     enabled: false
     tlsSecret: keycloak-ingress-cert
+    # Comment instances if using the HPA
   # instances: 2
   networkPolicy:
     management:
