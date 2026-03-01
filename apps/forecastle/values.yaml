@@ -16,7 +16,7 @@ forecastle:
       url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/account
     - group: Apps
       icon: https://forecastle.cookes.io/favicon.ico
-      name: Ed's Forecastle
+      name: Ed's Cluster
       networkRestricted: false
       url: https://forecastle.cookes.io/
     # - name: Name of the custom app
