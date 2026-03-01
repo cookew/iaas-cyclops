@@ -11,7 +11,9 @@ data:
     datasources:
     - name: tempo
       access: proxy
+      editable: false
       type: tempo
+      uid: tempo
       url: http://tempo-query-frontend.tempo.svc:3200
       version: 7
       jsonData:

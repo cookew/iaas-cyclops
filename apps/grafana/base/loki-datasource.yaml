@@ -10,6 +10,8 @@ data:
     datasources:
     - name: loki
       access: proxy
+      editable: false
       type: loki
+      uid: loki
       url: http://loki-query-frontend.loki.svc:3100
       version: 2
