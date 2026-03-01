@@ -60,7 +60,7 @@ spec:
     headers: xforwarded # double check your reverse proxy sets and overwrites the X-Forwarded-* headers
   resources:
     limits:
-      cpu: 4
+      cpu: 6
       memory: 4Gi
     requests:
       cpu: 1
