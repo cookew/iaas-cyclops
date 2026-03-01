@@ -5,11 +5,11 @@ metadata:
   name: keycloak-hpa
   namespace: keycloak
 spec:
-  behavior:
-    scaleDown:
-      stabilizationWindowSeconds: 120
-    scaleUp:
-      stabilizationWindowSeconds: 60
+  # behavior:
+  #   scaleDown:
+  #     stabilizationWindowSeconds: 120
+  #   scaleUp:
+  #     stabilizationWindowSeconds: 60
   maxReplicas: 10
   metrics:
   - type: Resource
