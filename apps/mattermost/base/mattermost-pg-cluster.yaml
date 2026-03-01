@@ -30,7 +30,7 @@ spec:
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ClusterImageCatalog
-    major: 17
+    major: 18
     name: postgresql-standard-trixie
   instances: 3
   monitoring:
