@@ -8,7 +8,7 @@ resources:
 # - base/clusterrolebinding.yaml
 # - https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.26/releases/cnpg-1.26.0.yaml
 - https://raw.githubusercontent.com/cloudnative-pg/postgis-containers/refs/heads/main/image-catalogs/postgis-standard-trixie.yaml
-- https://raw.githubusercontent.com/cloudnative-pg/postgres-containers/refs/heads/main/Debian/ClusterImageCatalog-bookworm.yaml
+# - https://raw.githubusercontent.com/cloudnative-pg/postgres-containers/refs/heads/main/Debian/ClusterImageCatalog-bookworm.yaml
 # - https://github.com/cloudnative-pg/plugin-barman-cloud/releases/download/v0.9.0/manifest.yaml
 
 helmCharts:
