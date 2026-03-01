@@ -69,11 +69,6 @@ global:
     # pages:
     #   name: pages.gitlab.apps.iaas.wcooke.me
     # ssh: gitlab.apps.iaas.wcooke.me
-  hpa:
-    cpu:
-      targetAverageValue: 700m
-    maxReplicas: 3
-    maxUnavailable: 2
   ingress:
     annotations:
       cert-manager.io/cluster-issuer: iaas-wcooke-me
