@@ -858,6 +858,7 @@ data:
               "value": "prometheus"
             },
             "includeAll": false,
+            "label": "Datasource",
             "name": "DS_PROMETHEUS",
             "options": [],
             "query": "prometheus",
