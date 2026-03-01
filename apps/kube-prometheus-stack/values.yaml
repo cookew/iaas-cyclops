@@ -72,9 +72,9 @@ prometheus:
     - /
     pathType: Prefix
     tls:
-    - secretName: prometheus-ingress-cert
-      hosts:
+    - hosts:
       - prometheus.apps.iaas.wcooke.me
+      secretName: prometheus-ingress-cert
   prometheusSpec:
     enableAdminAPI: true
     enableOTLPReceiver: true
@@ -128,8 +128,8 @@ prometheusOperator:
         duration: 960h
       enabled: true
       issuerRef:
-        name: iaas-wcooke-me
         kind: ClusterIssuer
+        name: iaas-wcooke-me
   kubeletEndpointsEnabled: false
   kubeletEndpointSliceEnabled: true
   kubeletService:
