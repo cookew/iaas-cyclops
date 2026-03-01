@@ -65,7 +65,10 @@ spec:
     requests:
       cpu: 1
       memory: 1Gi
-  # scheduling:
+  scheduling:
+    affinity:
+      podAntiAffinity:
+        topologyKey: kubernetes.io/hostname
   #   affinity:
   #     nodeAffinity:
   #       requiredDuringSchedulingIgnoredDuringExecution:

@@ -6,7 +6,7 @@ upgradeCheck:
 global:
   affinity:
     podAntiAffinity:
-      topologyKey: "kubernetes.io/hostname"
+      topologyKey: kubernetes.io/hostname
   antiAffinity: soft
   appConfig:
     ciSecureFiles:
