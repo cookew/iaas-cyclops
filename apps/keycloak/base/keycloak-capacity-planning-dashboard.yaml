@@ -847,7 +847,7 @@ data:
           "type": "timeseries"
         }
       ],
-      "refresh": "",
+      "refresh": "5s",
       "schemaVersion": 42,
       "tags": [],
       "templating": {
