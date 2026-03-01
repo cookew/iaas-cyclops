@@ -65,6 +65,7 @@ spec:
     tlsSecret: keycloak-ingress-cert
   instances: 2
   networkPolicy:
+    enabled: false
     management:
     - namespaceSelector:
         matchLabels:
