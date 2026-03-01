@@ -14,10 +14,10 @@ spec:
   - resource:
       name: cpu
       target:
-        averageUtilization: 95
+        averageUtilization: 90
         type: Utilization
     type: Resource
-  minReplicas: 2
+  minReplicas: 3
   scaleTargetRef:
     apiVersion: k8s.keycloak.org/v2alpha1
     kind: Keycloak
