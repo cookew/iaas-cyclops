@@ -7,20 +7,14 @@ global:
   affinity:
     podAntiAffinity:
       topologyKey: "kubernetes.io/hostname"
-      # preferredDuringSchedulingIgnoredDuringExecution:
-      # - podAffinityTerm:
-      #   topologyKey: kubernetes.io/hostname
-      #   weight: 1
   antiAffinity: soft
   appConfig:
     ciSecureFiles:
       enabled: true
     dependencyProxy:
       enabled: true
-    defaultColorMode: 2
-    # defaultSyntaxHighlightingTheme: 4
-    # defaultTheme: 2
-    # enableImpersonation: true
+    enableImpersonation: true
+    enableSeatLink: false
     enableUsagePing: false
     # ldap.preventSignin: true
     object_store:
@@ -45,6 +39,7 @@ global:
       - secret: gitlab-oidc
     terraformState:
       enabled: true
+    usernameChangingEnabled: false
   certificates:
     customCAs:
     - configMap: gitlab-ca-bundle
@@ -136,7 +131,7 @@ gitlab:
       annotations:
         forecastle.stakater.com/appName: GitLab
         forecastle.stakater.com/expose: "true"
-        forecastle.stakater.com/group: Kubernetes
+        forecastle.stakater.com/group: Apps
         forecastle.stakater.com/icon: https://gitlab.apps.iaas.wcooke.me/-/pwa-icons/logo-192.png
         forecastle.stakater.com/network-restricted: "true"
       tls:
