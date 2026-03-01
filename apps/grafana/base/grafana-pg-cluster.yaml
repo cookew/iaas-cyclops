@@ -28,7 +28,7 @@ spec:
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ClusterImageCatalog
-    major: 17
+    major: 18
     name: postgresql-standard-trixie
   # imageName: ghcr.io/cloudnative-pg/postgresql:17
   # imagePullPolicy: IfNotPresent
