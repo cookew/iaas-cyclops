@@ -26,16 +26,10 @@ spec:
   # enablePDB: true
   # enableSuperuserAccess: false
   imageCatalogRef:
-    # apiGroup: postgresql.cnpg.io
-    # kind: ClusterImageCatalog
-    # major: 17
-    # name: postgresql
     apiGroup: postgresql.cnpg.io
     kind: ClusterImageCatalog
     name: postgresql-standard-trixie
     major: 18
-  # imageName: ghcr.io/cloudnative-pg/postgresql:17
-  # imagePullPolicy: IfNotPresent
   instances: 3
   monitoring:
     enablePodMonitor: true
