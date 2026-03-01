@@ -853,6 +853,19 @@ data:
       "templating": {
         "list": [
           {
+            "current": {
+              "text": "Datasource",
+              "value": "prometheus"
+            },
+            "includeAll": false,
+            "name": "DS_PROMETHEUS",
+            "options": [],
+            "query": "prometheus",
+            "refresh": 1,
+            "regex": "",
+            "type": "datasource"
+          },
+          {
             "current": {},
             "datasource": {
               "type": "prometheus",
@@ -889,7 +902,8 @@ data:
             "refresh": 1,
             "regex": "",
             "type": "query"
-          }
+          },
+
         ]
       },
       "time": {
