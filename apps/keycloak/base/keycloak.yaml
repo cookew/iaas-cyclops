@@ -3,6 +3,9 @@ kind: Keycloak
 metadata:
   name: keycloak
 spec:
+  additionalOptions:
+    - name: metrics-enabled
+      value: "true"
   bootstrapAdmin:
     user:
       secret: keycloak-user
