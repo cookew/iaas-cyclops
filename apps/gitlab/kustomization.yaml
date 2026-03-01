@@ -28,7 +28,6 @@ resources:
 - sealed-secrets/gitlab-valkey-password.yaml
 
 helmCharts:
-# - includeCRDs: true
 - name: gitlab
   namespace: gitlab
   releaseName: gitlab
