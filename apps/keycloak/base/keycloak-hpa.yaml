@@ -3,7 +3,6 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: keycloak-hpa
-  namespace: keycloak
 spec:
   # behavior:
   #   scaleDown:
