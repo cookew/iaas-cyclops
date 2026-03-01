@@ -17,7 +17,7 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 80
+        averageUtilization: 90
   minReplicas: 2
   scaleTargetRef:
     apiVersion: k8s.keycloak.org/v2alpha1
