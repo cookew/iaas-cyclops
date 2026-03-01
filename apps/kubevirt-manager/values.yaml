@@ -52,7 +52,7 @@ ingress:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
     forecastle.stakater.com/appName: KubeVirt Manager
     forecastle.stakater.com/expose: "true"
-    forecastle.stakater.com/group: Kubernetes
+    forecastle.stakater.com/group: Apps
     forecastle.stakater.com/icon: https://kubevirt.apps.iaas.wcooke.me/assets/logo-transparent.png
     forecastle.stakater.com/network-restricted: "true"
   tls: true

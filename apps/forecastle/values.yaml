@@ -7,7 +7,7 @@ forecastle:
       matchNames: []
     title: IaaS Apps
     customApps:
-    - group: Kubernetes
+    - group: Apps
       icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
       name: Keycloak Account
       networkRestricted: true
