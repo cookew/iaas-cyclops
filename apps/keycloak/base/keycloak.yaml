@@ -17,7 +17,7 @@ spec:
       name: keycloak-pg-cluster-app
     vendor: postgres
   env:
-  - name: http-metrics-histograms-enabled
+  - name: KC_HTTP_METRICS_HISTOGRAMS_ENABLED
     value: "true"
   features:
     enabled:
