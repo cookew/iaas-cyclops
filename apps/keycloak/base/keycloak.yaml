@@ -16,6 +16,9 @@ spec:
       key: username
       name: keycloak-pg-cluster-app
     vendor: postgres
+  env:
+  - name: http-metrics-histograms-enabled
+    value: "true"
   features:
     enabled:
     - docker
