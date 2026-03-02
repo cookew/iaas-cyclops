@@ -38,9 +38,9 @@ spec:
   #   isWALArchiver: true
   #   parameters:
   #     barmanObjectName: keycloak-pg
-  postgresql:
-    parameters:
-      shared_buffers: 4096MB
+  # postgresql:
+  #   parameters:
+  #     shared_buffers: 4096MB
   primaryUpdateMethod: switchover
   storage:
     resizeInUseVolumes: true
