@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nvme-exporter
+  namespace: nvme-exporter
+spec:
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: nvme-exporter
+  template:
+    metadata:
+      labels:
+        app: nvme-exporter
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: exporter
+        image: nginx
+        livenessProbe:
+          httpGet:
+            port: 80
+            path: /healthz
+          initialDelaySeconds: 3
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            port: 80
+            path: /healthz
+          initialDelaySeconds: 1
+          periodSeconds: 1
+        resources:
+          limits:
+            memory: "100Mi"
+            cpu: "50m"
+          requests:
+            memory: "10Mi"
+            cpu: "1m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d
+        - name: stats
+          mountPath: /usr/share/nginx/html
+      - name: collector
+        image: quay.io/edward_cooke/nvme-exporter-collector:latest
+        env:
+        - name: INTERVAL
+          value: "15"
+        - name: LOOP_FOREVER
+          value: "true"
+        - name: DESTINATION
+          value: "/stats/metrics"
+        livenessProbe:
+          exec:
+            command:
+            - "/usr/bin/pgrep"
+            - "-f"
+            - "/bin/bash /collect.sh"
+          initialDelaySeconds: 3
+          periodSeconds: 10
+        startupProbe:
+          exec:
+            command:
+            - "/usr/bin/pgrep"
+            - "-f"
+            - "/bin/bash /collect.sh"
+          initialDelaySeconds: 1
+          periodSeconds: 1
+        resources:
+          limits:
+            memory: "100Mi"
+            cpu: "500m"
+          requests:
+            memory: "10Mi"
+            cpu: "1m"
+        securityContext:
+          privileged: true
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: stats
+          mountPath: /stats
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 5
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+          items:
+          - key: default.conf
+            path: default.conf
+      - name: stats
+        emptyDir:
+          medium: Memory

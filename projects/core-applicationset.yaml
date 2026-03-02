@@ -97,6 +97,7 @@ spec:
       - name: kubevirt-manager
       - name: loki
       - name: neuvector
+      - name: nvme-exporter
       - name: ollama
       # - name: pulp
       #   serverSideApply: "true"

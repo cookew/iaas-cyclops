@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nvme-exporter
+  namespace: nvme-exporter
+  labels:
+    app: nvme-exporter
+spec:
+  selector:
+    app: nvme-exporter
+  ports:
+  - name: metrics
+    port: 80
+    targetPort: 80

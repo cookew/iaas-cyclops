@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: nvme-exporter
+  namespace: nvme-exporter
+  labels:
+    app: nvme-exporter
+spec:
+  selector:
+    matchLabels:
+      app: nvme-exporter
+  endpoints:
+  - port: metrics
+    path: /metrics
+    interval: 15s
+    relabelings:
+    - action: replace
+      sourceLabels:
+      - __meta_kubernetes_pod_node_name
+      targetLabel: instance
