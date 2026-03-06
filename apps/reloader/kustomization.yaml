@@ -9,4 +9,4 @@ helmCharts:
   releaseName: reloader
   repo: https://stakater.github.io/stakater-charts
   valuesFile: values.yaml
-  version: 2.2.8
+  version: 2.2.9
