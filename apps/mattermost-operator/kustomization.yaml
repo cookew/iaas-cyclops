@@ -10,4 +10,4 @@ helmCharts:
   releaseName: mattermost-operator
   repo: https://helm.mattermost.com
   valuesFile: values.yaml
-  version: 1.25.4
+  version: 1.0.4
