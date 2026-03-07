@@ -87,13 +87,13 @@ spec:
       - name: forecastle
       - name: github-arc
         serverSideApply: "true"
-      - name: gitlab
+      # - name: gitlab
       # - name: gitlab-runners
       - name: grafana
       - name: harbor
       - name: headlamp
       - name: holmesgpt
-      - name: jupyterhub
+      # - name: jupyterhub
       - name: kubevirt-manager
       - name: loki
       - name: neuvector
@@ -106,8 +106,8 @@ spec:
       - name: tempo
       - name: whoami
 
-      - name: mattermost-operator
-      - name: mattermost
+      # - name: mattermost-operator
+      # - name: mattermost
 
       # - name: argo-workflows
       #   serverSideApply: "true"
