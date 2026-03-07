@@ -97,7 +97,7 @@ spec:
       - name: loki
       - name: mattermost-operator
       - name: mattermost
-      - name: neuvector
+      # - name: neuvector
       - name: nvme-exporter
       - name: ollama
       - name: pyroscope
