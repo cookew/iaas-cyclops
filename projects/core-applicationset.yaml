@@ -80,30 +80,30 @@ spec:
         syncWave: -30
 
       - name: alloy
-      - name: capi-operator
-      - name: cyberchef
-      - name: drawio
+      # - name: capi-operator
+      # - name: cyberchef
+      # - name: drawio
       - name: fluent-bit
       - name: forecastle
       - name: github-arc
         serverSideApply: "true"
-      - name: gitlab
+      # - name: gitlab
       - name: grafana
-      - name: harbor
+      # - name: harbor
       - name: headlamp
-      - name: holmesgpt
-      - name: jupyterhub
+      # - name: holmesgpt
+      # - name: jupyterhub
       - name: kubevirt-manager
       - name: loki
-      - name: mattermost-operator
-      - name: mattermost
+      # - name: mattermost-operator
+      # - name: mattermost
       # - name: neuvector
       - name: nvme-exporter
-      - name: ollama
-      - name: pyroscope
+      # - name: ollama
+      # - name: pyroscope
       - name: reloader
-      - name: tempo
-      - name: whoami
+      # - name: tempo
+      # - name: whoami
 
       # - name: argo-workflows
       #   serverSideApply: "true"
