@@ -79,39 +79,39 @@ spec:
         serverSideApply: "true"
         syncWave: -30
 
-      - name: alloy
-      - name: capi-operator
-      - name: cyberchef
-      - name: drawio
-      - name: fluent-bit
+      # - name: alloy
+      # - name: capi-operator
+      # - name: cyberchef
+      # - name: drawio
+      # - name: fluent-bit
       - name: forecastle
-      - name: github-arc
-        serverSideApply: "true"
-      # - name: gitlab
-      # - name: gitlab-runners
-      - name: grafana
-      - name: harbor
-      - name: headlamp
-      - name: holmesgpt
-      # - name: jupyterhub
-      - name: kubevirt-manager
-      - name: loki
-      - name: neuvector
-      - name: nvme-exporter
-      - name: ollama
-      # - name: pulp
+      # - name: github-arc
       #   serverSideApply: "true"
-      - name: pyroscope
-      - name: reloader
-      - name: tempo
-      - name: whoami
-
+      # - name: gitlab
+      - name: grafana
+      # - name: harbor
+      - name: headlamp
+      # - name: holmesgpt
+      # - name: jupyterhub
+      # - name: kubevirt-manager
+      - name: loki
       # - name: mattermost-operator
       # - name: mattermost
+      # - name: neuvector
+      # - name: nvme-exporter
+      # - name: ollama
+      # - name: pulp
+      #   serverSideApply: "true"
+      # - name: pyroscope
+      # - name: reloader
+      # - name: tempo
+      # - name: whoami
+
 
       # - name: argo-workflows
       #   serverSideApply: "true"
       # - name: github-arc-runners
+      # - name: gitlab-runners
       # - name: keda
       #   replace: "true"
       # - name: kubescape
