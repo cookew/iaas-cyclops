@@ -64,9 +64,9 @@ spec:
         createNamespace: "true"
         syncWave: -50
 
-      - name: kubevirt-network
-        createNamespace: "false"
-        syncWave: -40
+      # - name: kubevirt-network
+      #   createNamespace: "false"
+      #   syncWave: -40
       - name: cloudnative-pg
         serverSideApply: "true"
         syncWave: -40
