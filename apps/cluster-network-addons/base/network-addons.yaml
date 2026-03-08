@@ -3,7 +3,7 @@ kind: NetworkAddonsConfig
 metadata:
   name: cluster
 spec:
-  imagePullPolicy: IfNotPresent
+  # imagePullPolicy: IfNotPresent
   kubeMacPool: {}
   # kubeSecondaryDNS: {}
   kubevirtIpamController: {}
