@@ -7,7 +7,7 @@ cephClusterSpec:
       mgr/dashboard/ALERTMANAGER_API_SSL_VERIFY: "true"
       mgr/dashboard/GRAFANA_API_PASSWORD: ceph_dashboard
       mgr/dashboard/GRAFANA_API_SSL_VERIFY: "false"
-      mgr/dashboard/GRAFANA_API_URL: http://grafana.grafana.svc.cluster.local
+      mgr/dashboard/GRAFANA_API_URL: http://grafana.grafana.svc
       mgr/dashboard/GRAFANA_API_USERNAME: ceph_dashboard
       mgr/dashboard/GRAFANA_FRONTEND_API_URL: https://grafana.apps.iaas.wcooke.me
       mgr/dashboard/GRAFANA_UPDATE_DASHBOARDS: "true"
