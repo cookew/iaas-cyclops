@@ -1,3 +1,9 @@
+# https://github.com/cilium/cilium/blob/main/install/kubernetes/cilium/values.yaml
+
+bandwidthManager:
+  bbr: true
+  enabled: true
+
 bgpControlPlane:
   enabled: true
 
@@ -167,6 +173,5 @@ prometheus:
 
 rollOutCiliumPods: true
 
-bandwidthManager:
-  bbr: true
-  enabled: true
+socketLB:
+  hostNamespaceOnly: true
