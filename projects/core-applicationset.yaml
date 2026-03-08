@@ -85,8 +85,8 @@ spec:
       # - name: drawio
       # - name: fluent-bit
       - name: forecastle
-      # - name: github-arc
-      #   serverSideApply: "true"
+      - name: github-arc
+        serverSideApply: "true"
       # - name: gitlab
       # - name: grafana
       # - name: harbor
@@ -101,7 +101,7 @@ spec:
       # - name: nvme-exporter
       # - name: ollama
       # - name: pyroscope
-      # - name: reloader
+      - name: reloader
       # - name: tempo
       # - name: whoami
 

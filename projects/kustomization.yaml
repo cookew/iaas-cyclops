@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
 - core-applicationset.yaml
 - core-appproject.yaml
-# - core-apps/cdi.yaml
+- core-apps/cdi.yaml
 
-# - cyclops-k8s-project.yaml
-# - cyclops-k8s-appproject.yaml
+- cyclops-k8s-project.yaml
+- cyclops-k8s-appproject.yaml

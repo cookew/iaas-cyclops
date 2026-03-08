@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: istio-system
+
+# resources:
+# -
+
+helmCharts:
+- name: kiali-server
+  # includeCRDs: true
+  namespace: istio-system
+  releaseName: kiali-server
+  repo: https://kiali.org/helm-charts
+  valuesFile: kiali-values.yaml
+  version: 2.22.0
