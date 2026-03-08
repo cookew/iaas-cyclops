@@ -75,9 +75,9 @@ spec:
 
       - name: keycloak
         syncWave: -30
-      - name: kube-prometheus-stack
-        serverSideApply: "true"
-        syncWave: -30
+      # - name: kube-prometheus-stack
+      #   serverSideApply: "true"
+      #   syncWave: -30
 
       # - name: alloy
       # - name: capi-operator
@@ -88,7 +88,7 @@ spec:
       # - name: github-arc
       #   serverSideApply: "true"
       # - name: gitlab
-      - name: grafana
+      # - name: grafana
       # - name: harbor
       # - name: headlamp
       # - name: holmesgpt
@@ -98,7 +98,7 @@ spec:
       # - name: mattermost-operator
       # - name: mattermost
       # - name: neuvector
-      - name: nvme-exporter
+      # - name: nvme-exporter
       # - name: ollama
       # - name: pyroscope
       # - name: reloader
