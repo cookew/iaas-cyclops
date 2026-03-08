@@ -23,7 +23,7 @@ patches:
   patch: |-
     - op: remove
       path: /spec/preserveUnknownFields
-
+      value: preserveUnknownFields
 
 # - target:
 #     group: apps
