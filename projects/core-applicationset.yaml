@@ -85,15 +85,15 @@ spec:
       # - name: drawio
       # - name: fluent-bit
       - name: forecastle
-      - name: github-arc
-        serverSideApply: "true"
+      # - name: github-arc
+      #   serverSideApply: "true"
       # - name: gitlab
       - name: grafana
       # - name: harbor
-      - name: headlamp
+      # - name: headlamp
       # - name: holmesgpt
       # - name: jupyterhub
-      - name: kubevirt-manager
+      # - name: kubevirt-manager
       # - name: loki
       # - name: mattermost-operator
       # - name: mattermost
@@ -101,7 +101,7 @@ spec:
       - name: nvme-exporter
       # - name: ollama
       # - name: pyroscope
-      - name: reloader
+      # - name: reloader
       # - name: tempo
       # - name: whoami
 
