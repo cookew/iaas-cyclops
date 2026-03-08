@@ -79,11 +79,11 @@ spec:
         serverSideApply: "true"
         syncWave: -30
 
-      - name: alloy
+      # - name: alloy
       # - name: capi-operator
       # - name: cyberchef
       # - name: drawio
-      - name: fluent-bit
+      # - name: fluent-bit
       - name: forecastle
       - name: github-arc
         serverSideApply: "true"
@@ -94,7 +94,7 @@ spec:
       # - name: holmesgpt
       # - name: jupyterhub
       - name: kubevirt-manager
-      - name: loki
+      # - name: loki
       # - name: mattermost-operator
       # - name: mattermost
       # - name: neuvector
