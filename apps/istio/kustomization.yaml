@@ -7,11 +7,11 @@ resources:
 - base/kiali-keycloak-client.yaml
 - sealed-secrets/istio-kiali-keycloak-client.yaml
 
-# helmCharts:
-# - name: kiali-server
-#   # includeCRDs: true
-#   namespace: istio-system
-#   releaseName: kiali-server
-#   repo: https://kiali.org/helm-charts
-#   valuesFile: kiali-values.yaml
-#   version: 2.22.0
+helmCharts:
+- name: kiali-server
+  # includeCRDs: true
+  namespace: istio-system
+  releaseName: kiali-server
+  repo: https://kiali.org/helm-charts
+  valuesFile: kiali-values.yaml
+  version: 2.22.0
