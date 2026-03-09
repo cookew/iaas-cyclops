@@ -9,6 +9,34 @@ resources:
 - sealed-secrets/istio-kiali-keycloak-client.yaml
 
 helmCharts:
+- name: base
+  # includeCRDs: true
+  namespace: istio-system
+  releaseName: base
+  repo: https://istio-release.storage.googleapis.com/charts
+  # valuesFile: base-values.yaml
+  # version:
+- name: istiod
+  # includeCRDs: true
+  namespace: istio-system
+  releaseName: istiod
+  repo: https://istio-release.storage.googleapis.com/charts
+  valuesFile: istiod-values.yaml
+  # version:
+- name: istio-cni
+  # includeCRDs: true
+  namespace: istio-system
+  releaseName: cni
+  repo: https://istio-release.storage.googleapis.com/charts
+  valuesFile: cni-values.yaml
+  # version:
+- name: ztunnel
+  # includeCRDs: true
+  namespace: istio-system
+  releaseName: ztunnel
+  repo: https://istio-release.storage.googleapis.com/charts
+  # valuesFile: ztunnel-values.yaml
+  # version:
 - name: kiali-server
   # includeCRDs: true
   namespace: istio-system

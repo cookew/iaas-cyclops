@@ -1,0 +1,3 @@
+# https://github.com/istio/istio/blob/master/manifests/charts/istio-control/istio-discovery/values.yaml
+
+profile: ambient
