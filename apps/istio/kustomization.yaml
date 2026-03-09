@@ -23,10 +23,10 @@ helmCharts:
   repo: https://istio-release.storage.googleapis.com/charts
   valuesFile: istiod-values.yaml
   # version:
-- name: istio-cni
+- name: cni
   # includeCRDs: true
   namespace: istio-system
-  releaseName: cni
+  releaseName: istio-cni
   repo: https://istio-release.storage.googleapis.com/charts
   valuesFile: cni-values.yaml
   # version:
