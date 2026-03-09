@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: kiali-grafana
+  namespace: istio-system
+spec:
+  encryptedData:
+    password: AgBmkUGBIJcZTaf/VhmawZAsY95n+gKdykBTI11MD0E8T6YwJZbjQ1k8DdLW1qnesrcxiqEjHkMKM9E8cj+/fI4UcviTorSMV+CXjdo5YLsDq6jLI3DWT5TkNkV20f5KSs758tDx4KcRzR1McWn0uNyg21JapYVPk2uCANgApRNkpTQJC2W/RfGShHc/oXRax8hKGYNWJ5m9X+Kabxx4gv1qmvnJVUu53ZkW8MSZZ3eNaSBqRlyTxzz5PPc/ovYT8N0wx+u+uY1JWCjI35wdfFmNOveUFcDjXb+eqFKWpHUQ2biiYo1CTlsP0GanuCOfMOYA+Fk5JT74UfppOhddwKXqwfKgQts2XdhsYyiCWMEl/n7QiOiNs8ddlBS7ECEtBQPHxdqYvHpI0px8xpMBNiPZTkpBxTvznIGZPVvSZZZZ3q8IcF6fQtHqvq+kMcziwC841ZSQ3JayeJKdReLde6oyyIBGo6Xpzw7ZPRQoDjd/bIwqN5N4DVkJfJdWgFtO+JBrhHMwMl7CXMTv2ht1PECnFtOGsRjKkRHaOhairHRrLq5rz3ei/G4/r2XGPgRMrpr+Vn89r0Kg4piF6ROtrHt8Gn5ameRXF84fGCzYyVzlRMdGgtjxh1wYKnFKgctZQN5t6+IbdDNwjcA0CNZYgJLXNNffE+3ptU3pCLuC//aBVEV5kaGYl/uMn/7lMq6xTgJvN33dquI+CqD0w2fRIqfEUiLkh6CD
+  template:
+    metadata:
+      name: kiali-grafana
+      namespace: istio-system
+    type: stringData

@@ -5,6 +5,7 @@ namespace: istio-system
 
 resources:
 - base/kiali-keycloak-client.yaml
+- sealed-secrets/istio-kiali-grafana.yaml
 - sealed-secrets/istio-kiali-keycloak-client.yaml
 
 helmCharts:
