@@ -32,13 +32,16 @@ additional_display_details:
   title: API Documentation
 
 auth:
-  strategy: "openid"
+  strategy: openid
   openid:
-    client_id: "kiali"
+    client_id: kiali
     disable_rbac: true
-    issuer_uri: "https://accounts.google.com"
-    scopes: ["openid", "email"]
-    username_claim: "email"
+    # insecure_skip_verify_tls: true
+    issuer_uri: https://keycloak.apps.iaas.wcooke.me
+    scopes:
+    - openid
+    - email
+    username_claim: preferred_username
 
 chat_ai:
   default_provider: ""

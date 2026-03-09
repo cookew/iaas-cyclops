@@ -92,6 +92,8 @@ spec:
       # - name: harbor
       # - name: headlamp
       # - name: holmesgpt
+      - name: istio
+        namespace: istio-system
       # - name: jupyterhub
       # - name: kubevirt-manager
       # - name: loki

@@ -80,6 +80,22 @@ spec:
 apiVersion: trust.cert-manager.io/v1alpha1
 kind: Bundle
 metadata:
+  name: kiali-cabundle
+spec:
+  sources:
+  - secret:
+      name: iaas-wcooke-me
+      key: tls.crt
+  target:
+    configMap:
+      key: openid-server-ca.crt
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: istio-system
+---
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
   name: gitlab-ca-bundle
 spec:
   sources:
