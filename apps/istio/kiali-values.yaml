@@ -164,7 +164,6 @@ external_services:
       use_kiali_token: false
       username: kiali
     # health_check_url: ""
-
 #   istio:
 #     root_namespace: ""
 
@@ -181,11 +180,11 @@ external_services:
 # login_token:
 #   signing_key: ""
 
-# server:
-#   port: 20001
+server:
+  port: ""
 #   #node_port:
 #   observability:
 #     metrics:
 #       enabled: true
 #       port: 9090
-#   web_root: ""
+  web_root: https://kiali.apps.iaas.wcooke.me
