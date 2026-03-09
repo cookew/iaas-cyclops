@@ -166,6 +166,9 @@ external_services:
     # health_check_url: ""
 #   istio:
 #     root_namespace: ""
+  # https://kiali.io/docs/configuration/p8s-jaeger-grafana/prometheus/
+  prometheus:
+    url: http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc:9090
 
 # identity: {}
 #   #cert_file:
@@ -187,4 +190,4 @@ server:
 #     metrics:
 #       enabled: true
 #       port: 9090
-  web_root: https://kiali.apps.iaas.wcooke.me/
+  web_root: /
