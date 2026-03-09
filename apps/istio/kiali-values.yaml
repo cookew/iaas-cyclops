@@ -187,4 +187,4 @@ server:
 #     metrics:
 #       enabled: true
 #       port: 9090
-  web_root: https://kiali.apps.iaas.wcooke.me
+  web_root: /
