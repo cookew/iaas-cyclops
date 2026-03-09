@@ -181,7 +181,7 @@ external_services:
 #   signing_key: ""
 
 server:
-  port: ""
+  port: "443"
 #   #node_port:
 #   observability:
 #     metrics:
