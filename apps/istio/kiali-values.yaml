@@ -19,17 +19,17 @@ additional_display_details:
   title: API Documentation
 
 auth:
-  # strategy: anonymous
-  strategy: openid
-  openid:
-    client_id: kiali
-    disable_rbac: true
-    insecure_skip_verify_tls: true
-    issuer_uri: https://keycloak.apps.iaas.wcooke.me
-    scopes:
-    - openid
-    - email
-    username_claim: preferred_username
+  strategy: anonymous
+  # strategy: openid
+  # openid:
+  #   client_id: kiali
+  #   disable_rbac: true
+  #   insecure_skip_verify_tls: true
+  #   issuer_uri: https://keycloak.apps.iaas.wcooke.me
+  #   scopes:
+  #   - openid
+  #   - email
+  #   username_claim: preferred_username
 
 # chat_ai:
 #   default_provider: ""
