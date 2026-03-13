@@ -76,7 +76,7 @@ ingress:
     forecastle.stakater.com/appName: Kasm
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Apps
-    forecastle.stakater.com/icon: https://kasm.apps.iaas.wcooke.me/assets/logo.png
+    forecastle.stakater.com/icon: https://kasm.apps.iaas.wcooke.me/img/favicon.png
     forecastle.stakater.com/network-restricted: "true"
   labels: {}
 
