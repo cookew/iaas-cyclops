@@ -72,7 +72,7 @@ ingress:
   # Most likely the hostname above will be enough, but in the event more hosts are needed, this is an array
   #
   annotations:
-    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    # cert-manager.io/cluster-issuer: iaas-wcooke-me
     forecastle.stakater.com/appName: Kasm
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Apps
