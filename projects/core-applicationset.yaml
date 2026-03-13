@@ -85,8 +85,8 @@ spec:
       # - name: drawio
       # - name: fluent-bit
       - name: forecastle
-      - name: github-arc
-        serverSideApply: "true"
+      # - name: github-arc
+      #   serverSideApply: "true"
       # - name: gitlab
       - name: grafana
       # - name: harbor
