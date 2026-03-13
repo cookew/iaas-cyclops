@@ -64,7 +64,7 @@ ingress:
   # ingress.backendProtocol -- The backend protocol to for the Ingress to communicate with the Kasm proxy service.
   # Valid values: http or https
   #
-  backendProtocol: https
+  backendProtocol: http
   # ingress.ingressClassName -- Define the ingress Class to use for your Kasm ingress
   #
   ingressClassName: cilium
