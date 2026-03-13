@@ -196,7 +196,7 @@ database:
     # database.storage.pvcSize -- Set the size of the PVC to attach to your Kubernetes-hosted Database server. The default
     # size is 8Gi. Just supply the integer value of the PVC size in GB you wish to use.
     #
-    pvcSize: 8Gi
+    pvcSize: 8
     # database.storage.retentionPolicy -- Configure how the DB volume should be retained or deleted throughout the DB's lifecycle
     #
     retentionPolicy:
