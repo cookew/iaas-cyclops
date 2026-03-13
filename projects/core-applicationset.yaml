@@ -141,7 +141,7 @@ spec:
       syncPolicy:
         automated:
           allowEmpty: true
-          enabled: true
+          enabled: false
           prune: false
           selfHeal: false
         syncOptions:
