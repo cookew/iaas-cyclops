@@ -95,7 +95,7 @@ spec:
       - name: istio
         namespace: istio-system
       # - name: jupyterhub
-      - name: kasm
+      # - name: kasm
       # - name: kubevirt-manager
       # - name: loki
       # - name: mattermost-operator
