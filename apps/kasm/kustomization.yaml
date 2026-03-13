@@ -5,6 +5,9 @@ namespace: kasm
 
 # resources:
 
+helmGlobals:
+  chartHome: mycharts
+
 helmCharts:
 - name: kasm
   # includeCRDs: true
