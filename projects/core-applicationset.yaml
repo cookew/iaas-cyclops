@@ -88,7 +88,7 @@ spec:
       # - name: github-arc
       #   serverSideApply: "true"
       # - name: gitlab
-      - name: grafana
+      # - name: grafana
       # - name: harbor
       # - name: headlamp
       # - name: holmesgpt
