@@ -1,3 +1,5 @@
+# https://github.com/rook/rook/blob/master/deploy/charts/rook-ceph/values.yaml
+
 csi:
   # csiAddons:
   #   enabled: true

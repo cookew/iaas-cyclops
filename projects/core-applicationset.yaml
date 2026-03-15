@@ -13,7 +13,7 @@ spec:
       - createNamespace: "false"
         name: prometheus-operator-crds
         namespace: kube-prometheus-stack
-        serverSideApply: "true"
+        # serverSideApply: "true"
         syncWave: -100
       - createNamespace: "false"
         name: metrics-server
@@ -38,12 +38,12 @@ spec:
         syncWave: -80
 
       - name: argocd
-        serverSideApply: "true"
+        # serverSideApply: "true"
         syncWave: -70
       - name: cilium
         createNamespace: "false"
         namespace: kube-system
-        serverSideApply: "true"
+        # serverSideApply: "true"
         syncWave: -70
       - name: external-snapshotter
         syncWave: -70
@@ -53,7 +53,7 @@ spec:
       - name: crossplane
         syncWave: -60
       - name: rook-ceph
-        serverSideApply: "true"
+        # serverSideApply: "true"
         syncWave: -60
 
       - name: crossplane-keycloak-provider
@@ -68,7 +68,7 @@ spec:
         createNamespace: "false"
         syncWave: -40
       - name: cloudnative-pg
-        serverSideApply: "true"
+        # serverSideApply: "true"
         syncWave: -40
       - name: crossplane-keycloak-realms
         syncWave: -40
@@ -92,10 +92,9 @@ spec:
       # - name: harbor
       # - name: headlamp
       # - name: holmesgpt
-      - name: istio
-        namespace: istio-system
+      # - name: istio
+      #   namespace: istio-system
       # - name: jupyterhub
-      # - name: kasm
       # - name: kubevirt-manager
       # - name: loki
       # - name: mattermost-operator
@@ -104,7 +103,7 @@ spec:
       # - name: nvme-exporter
       # - name: ollama
       # - name: pyroscope
-      - name: reloader
+      # - name: reloader
       # - name: tempo
       # - name: whoami
 
@@ -116,8 +115,6 @@ spec:
       #   replace: "true"
       # - name: kubescape
       # - name: kubevirt-templates
-      # - name: pulp
-      #   serverSideApply: "true"
 
   template:
     metadata:
@@ -147,4 +144,4 @@ spec:
         syncOptions:
         - CreateNamespace={{ dig "createNamespace" "true" . }}
         - Replace={{ dig "replace" "false" . }}
-        - ServerSideApply={{ dig "serverSideApply" "false" . }}
+        - ServerSideApply={{ dig "serverSideApply" "true" . }}
