@@ -52,9 +52,9 @@ spec:
       #   syncWave: -60
       # - name: crossplane
       #   syncWave: -60
-      # - name: rook-ceph
-      #   # serverSideApply: "true"
-      #   syncWave: -60
+      - name: rook-ceph
+        # serverSideApply: "true"
+        syncWave: -60
 
       # - name: crossplane-keycloak-provider
       #   syncWave: -50
