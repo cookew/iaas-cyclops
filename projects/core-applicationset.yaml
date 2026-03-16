@@ -45,21 +45,21 @@ spec:
         namespace: kube-system
         # serverSideApply: "true"
         syncWave: -70
-      - name: external-snapshotter
-        syncWave: -70
+      # - name: external-snapshotter
+      #   syncWave: -70
 
-      - name: cluster-network-addons
-        syncWave: -60
+      # - name: cluster-network-addons
+      #   syncWave: -60
       - name: crossplane
         syncWave: -60
-      - name: rook-ceph
-        # serverSideApply: "true"
-        syncWave: -60
+      # - name: rook-ceph
+      #   # serverSideApply: "true"
+      #   syncWave: -60
 
       - name: crossplane-keycloak-provider
         syncWave: -50
-      - name: kubevirt
-        syncWave: -50
+      # - name: kubevirt
+      #   syncWave: -50
       # - name: rook-ceph-cluster
       #   createNamespace: "true"
       #   syncWave: -50
