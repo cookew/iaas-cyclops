@@ -45,8 +45,8 @@ spec:
         namespace: kube-system
         # serverSideApply: "true"
         syncWave: -70
-      # - name: external-snapshotter
-      #   syncWave: -70
+      - name: external-snapshotter
+        syncWave: -70
 
       # - name: cluster-network-addons
       #   syncWave: -60
