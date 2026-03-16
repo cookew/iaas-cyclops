@@ -112,54 +112,54 @@ cephClusterSpec:
       devices:
       - name: /dev/disk/by-path/pci-0000:16:00.0-nvme-1
         config:
-          crushRoot: nvme
-          deviceClass: nvme
+          crushRoot: ssd
+          deviceClass: ssd
       - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
         config:
-          crushRoot: nvme
-          deviceClass: nvme
+          crushRoot: ssd
+          deviceClass: ssd
       - name: /dev/disk/by-path/pci-0000:34:00.0-nvme-1
         config:
-          crushRoot: nvme-u2
+          crushRoot: nvme
           deviceClass: nvme
     - name: amd64-2
       devices:
       - name: /dev/disk/by-path/pci-0000:16:00.0-nvme-1
         config:
-          crushRoot: nvme
-          deviceClass: nvme
+          crushRoot: ssd
+          deviceClass: ssd
       - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
         config:
-          crushRoot: nvme
-          deviceClass: nvme
+          crushRoot: ssd
+          deviceClass: ssd
       - name: /dev/disk/by-path/pci-0000:34:00.0-nvme-1
         config:
-          crushRoot: nvme-u2
+          crushRoot: nvme
           deviceClass: nvme
     - name: amd64-3
       devices:
       - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
         config:
-          crushRoot: nvme-u2
+          crushRoot: nvme
           deviceClass: nvme
       - name: /dev/disk/by-path/pci-0000:b3:00.0-nvme-1
         config:
-          crushRoot: nvme
-          deviceClass: nvme
+          crushRoot: ssd
+          deviceClass: ssd
       - name: /dev/disk/by-path/pci-0000:b4:00.0-nvme-1
         config:
-          crushRoot: nvme
-          deviceClass: nvme
+          crushRoot: ssd
+          deviceClass: ssd
     - name: amd64-4
       devices:
       - name: /dev/disk/by-path/pci-0000:06:00.0-nvme-1
         config:
-          crushRoot: nvme
-          deviceClass: nvme
+          crushRoot: ssd
+          deviceClass: ssd
       - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
         config:
-          crushRoot: nvme
-          deviceClass: nvme
+          crushRoot: ssd
+          deviceClass: ssd
       # - name: /dev/disk/by-path/
       #   config:
       #     crushRoot: nvme-u2
@@ -273,7 +273,7 @@ cephECBlockPools:
       erasureCoded:
         dataChunks: 2
         codingChunks: 1
-      deviceClass: nvme
+      deviceClass: ssd
     enableRBDStats: true
     # parameters:
     #   # Enable this with ceph tentacle, v20
@@ -294,6 +294,7 @@ cephECBlockPools:
     mounter: rbd
     name: ceph-block
     reclaimPolicy: Delete
+
 - name: ceph-block-fast
   spec:
     metadataPool:
@@ -304,7 +305,7 @@ cephECBlockPools:
       erasureCoded:
         dataChunks: 2
         codingChunks: 1
-      deviceClass: nvme-u2
+      deviceClass: nvme
     enableRBDStats: true
     # parameters:
     #   # Enable this with ceph tentacle, v20
