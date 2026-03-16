@@ -273,6 +273,38 @@ cephECBlockPools:
       erasureCoded:
         dataChunks: 2
         codingChunks: 1
+      deviceClass: nvme
+    enableRBDStats: true
+    # parameters:
+    #   # Enable this with ceph tentacle, v20
+    #   allow_ec_optimizations: "true"
+
+  parameters:
+    clusterID: rook-ceph-cluster
+    imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
+    imageFormat: "2"
+
+  storageClass:
+    allowVolumeExpansion: true
+    # annotations:
+    #   storageclass.kubevirt.io/is-default-virt-class: "true"
+    enabled: true
+    isDefault: false
+    mapOptions: "krbd:rxbounce"
+    mounter: rbd
+    name: ceph-block
+    reclaimPolicy: Delete
+- name: ceph-block-fast
+  spec:
+    metadataPool:
+      replicated:
+        size: 2
+    dataPool:
+      failureDomain: host
+      erasureCoded:
+        dataChunks: 2
+        codingChunks: 1
+      deviceClass: nvme-u2
     enableRBDStats: true
     # parameters:
     #   # Enable this with ceph tentacle, v20
@@ -291,7 +323,7 @@ cephECBlockPools:
     isDefault: false
     mapOptions: "krbd:rxbounce"
     mounter: rbd
-    name: ceph-block
+    name: ceph-block-fast
     reclaimPolicy: Delete
 
 cephObjectStores:
