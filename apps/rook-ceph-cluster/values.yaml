@@ -295,7 +295,7 @@ cephECBlockPools:
     name: ceph-block
     reclaimPolicy: Delete
 
-- name: ceph-block-fast
+- name: ceph-block-nvme
   spec:
     metadataPool:
       replicated:
@@ -324,7 +324,7 @@ cephECBlockPools:
     isDefault: false
     mapOptions: "krbd:rxbounce"
     mounter: rbd
-    name: ceph-block-fast
+    name: ceph-block-nvme
     reclaimPolicy: Delete
 
 cephObjectStores:
