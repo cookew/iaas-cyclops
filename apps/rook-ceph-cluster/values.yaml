@@ -264,7 +264,7 @@ cephFileSystems:
     dataPools:
     - deviceClass: nvme
       failureDomain: host
-      name: data0-nvme
+      name: data0
       replicated:
         size: 3
     metadataServer:
@@ -298,7 +298,7 @@ cephFileSystems:
     labels: {}
     mountOptions: []
     name: ceph-filesystem-nvme
-    pool: data0-nvme
+    pool: data0
     reclaimPolicy: Delete
     parameters:
       csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
