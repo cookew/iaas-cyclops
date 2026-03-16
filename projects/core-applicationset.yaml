@@ -60,9 +60,9 @@ spec:
       #   syncWave: -50
       # - name: kubevirt
       #   syncWave: -50
-      # - name: rook-ceph-cluster
-      #   createNamespace: "true"
-      #   syncWave: -50
+      - name: rook-ceph-cluster
+        createNamespace: "true"
+        syncWave: -50
 
       # - name: kubevirt-network
       #   createNamespace: "false"
