@@ -258,13 +258,15 @@ cephFileSystems:
 - name: ceph-filesystem-nvme
   spec:
     metadataPool:
+      deviceClass: nvme
       replicated:
         size: 3
     dataPools:
-      - failureDomain: host
-        name: data0-nvme
-        replicated:
-          size: 3
+    - deviceClass: nvme
+      failureDomain: host
+      name: data0-nvme
+      replicated:
+        size: 3
     metadataServer:
       activeCount: 1
       activeStandby: true
@@ -318,6 +320,7 @@ cephECBlockPools:
 - name: ceph-block
   spec:
     metadataPool:
+      deviceClass: ssd
       replicated:
         size: 2
     dataPool:
@@ -350,6 +353,7 @@ cephECBlockPools:
 - name: ceph-block-nvme
   spec:
     metadataPool:
+      deviceClass: nvme
       replicated:
         size: 2
     dataPool:
