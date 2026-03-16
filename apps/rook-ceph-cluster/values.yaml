@@ -105,6 +105,65 @@ cephClusterSpec:
     #     memory: "50Mi"
   storage:
     nearFullRatio: 0.67
+    useAllNodes: false
+    useAllDevices: false
+    nodes:
+    - name: amd64-1
+      devices:
+      - name: /dev/disk/by-path/pci-0000:16:00.0-nvme-1
+        config:
+          crushRoot: nvme
+          deviceClass: nvme
+      - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
+        config:
+          crushRoot: nvme
+          deviceClass: nvme
+      - name: /dev/disk/by-path/pci-0000:34:00.0-nvme-1
+        config:
+          crushRoot: nvme-u2
+          deviceClass: nvme
+    - name: amd64-2
+      devices:
+      - name: /dev/disk/by-path/pci-0000:16:00.0-nvme-1
+        config:
+          crushRoot: nvme
+          deviceClass: nvme
+      - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
+        config:
+          crushRoot: nvme
+          deviceClass: nvme
+      - name: /dev/disk/by-path/pci-0000:34:00.0-nvme-1
+        config:
+          crushRoot: nvme-u2
+          deviceClass: nvme
+    - name: amd64-3
+      devices:
+      - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
+        config:
+          crushRoot: nvme-u2
+          deviceClass: nvme
+      - name: /dev/disk/by-path/pci-0000:b3:00.0-nvme-1
+        config:
+          crushRoot: nvme
+          deviceClass: nvme
+      - name: /dev/disk/by-path/pci-0000:b4:00.0-nvme-1
+        config:
+          crushRoot: nvme
+          deviceClass: nvme
+    - name: amd64-4
+      devices:
+      - name: /dev/disk/by-path/pci-0000:06:00.0-nvme-1
+        config:
+          crushRoot: nvme
+          deviceClass: nvme
+      - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
+        config:
+          crushRoot: nvme
+          deviceClass: nvme
+      # - name: /dev/disk/by-path/
+      #   config:
+      #     crushRoot: nvme-u2
+      #     deviceClass: nvme
   upgradeOSDRequiresHealthyPGs: true
 
 ingress:
