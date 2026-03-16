@@ -70,8 +70,8 @@ spec:
       # - name: cloudnative-pg
       #   # serverSideApply: "true"
       #   syncWave: -40
-      - name: crossplane-keycloak-realms
-        syncWave: -40
+      # - name: crossplane-keycloak-realms
+      #   syncWave: -40
 
       # - name: keycloak
         # syncWave: -30
