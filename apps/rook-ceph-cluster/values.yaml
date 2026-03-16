@@ -255,6 +255,58 @@ cephFileSystems:
       csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
       csi.storage.k8s.io/fstype: ext4
     volumeBindingMode: Immediate
+- name: ceph-filesystem-nvme
+  spec:
+    metadataPool:
+      replicated:
+        size: 3
+    dataPools:
+      - failureDomain: host
+        name: data0-nvme
+        replicated:
+          size: 3
+    metadataServer:
+      activeCount: 1
+      activeStandby: true
+      resources:
+        limits:
+          memory: 4Gi
+          cpu: 2000m
+        requests:
+          cpu: 1000m
+          memory: 4Gi
+      priorityClassName: system-cluster-critical
+      placement:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - rook-ceph-mds
+              topologyKey: kubernetes.io/hostname
+  storageClass:
+    allowVolumeExpansion: true
+    annotations: {}
+    enabled: true
+    isDefault: true
+    labels: {}
+    mountOptions: []
+    name: ceph-filesystem-nvme
+    pool: data0-nvme
+    reclaimPolicy: Delete
+    parameters:
+      csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+      csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+      csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+      csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
+      csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+      csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
+      csi.storage.k8s.io/fstype: ext4
+    volumeBindingMode: Immediate
 
 cephBlockPoolsVolumeSnapshotClass:
   enabled: true
