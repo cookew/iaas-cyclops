@@ -4,7 +4,7 @@ This is a mirror of my of git repository I use with [ArgoCD](https://argoproj.gi
 
 # Deploy
 
-1. kustomize build --enable-helm --helm-command ~/bin/helm3 deploy/ | kubectl apply --force-conflicts --server-side -f -
+1. kustomize build --enable-helm deploy/ | kubectl apply --server-side -f -
 2. Re-encrypt the sealed secrets, update the git repo
 
 # Sealed Secrets
