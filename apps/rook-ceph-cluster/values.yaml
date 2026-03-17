@@ -389,6 +389,7 @@ cephObjectStores:
     allowUsersInNamespaces:
     - "*"
     dataPool:
+      deviceClass: ssd
       erasureCoded:
         dataChunks: 2
         codingChunks: 1
@@ -429,6 +430,7 @@ cephObjectStores:
       - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc.cluster.local
       - s3.apps.iaas.wcooke.me
     metadataPool:
+      deviceClass: ssd
       failureDomain: host
       replicated:
         size: 3
