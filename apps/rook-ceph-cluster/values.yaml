@@ -431,7 +431,7 @@ cephObjectStores:
       - s3.apps.iaas.wcooke.me
     metadataPool:
       deviceClass: ssd
-      erasureCoded: {}
+      erasureCoded: nil
       failureDomain: host
       replicated:
         size: 3
