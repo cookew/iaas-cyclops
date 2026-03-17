@@ -128,7 +128,7 @@ cephClusterSpec:
       - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
         config:
           deviceClass: ssd
-      - name: /dev/disk/by-path/pci-0000:34:00.0-nvme-1
+      - name: /dev/disk/by-path/pci-0000:ac:00.0-nvme-1
         config:
           crushRoot: nvme
           deviceClass: nvme
@@ -201,10 +201,10 @@ cephFileSystems:
       replicated:
         size: 3
     dataPools:
-      - failureDomain: host
-        name: data0
-        replicated:
-          size: 3
+    - failureDomain: host
+      name: data0
+      replicated:
+        size: 3
     metadataServer:
       activeCount: 1
       activeStandby: true
