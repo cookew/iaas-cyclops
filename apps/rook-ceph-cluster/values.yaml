@@ -333,12 +333,10 @@ cephECBlockPools:
     # parameters:
     #   # Enable this with ceph tentacle, v20
     #   allow_ec_optimizations: "true"
-
   parameters:
     clusterID: rook-ceph-cluster
     imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
     imageFormat: "2"
-
   storageClass:
     allowVolumeExpansion: true
     # annotations:
@@ -366,12 +364,10 @@ cephECBlockPools:
     # parameters:
     #   # Enable this with ceph tentacle, v20
     #   allow_ec_optimizations: "true"
-
   parameters:
     clusterID: rook-ceph-cluster
     imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
     imageFormat: "2"
-
   storageClass:
     allowVolumeExpansion: true
     annotations:
