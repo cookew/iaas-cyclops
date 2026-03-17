@@ -435,8 +435,8 @@ cephObjectStores:
         dataChunks: 2
         codingChunks: 1
       failureDomain: host
-      replicated:
-        size: 3
+      # replicated:
+      #   size: 3
     preservePoolsOnDelete: false
   # ingress:
   #   annotations:
