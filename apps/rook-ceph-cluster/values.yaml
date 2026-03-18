@@ -346,11 +346,11 @@ cephECBlockPools:
       replicated:
         size: 2
     dataPool:
-      failureDomain: host
+      deviceClass: nvme
       erasureCoded:
         dataChunks: 2
         codingChunks: 1
-      deviceClass: nvme
+      failureDomain: host
     enableRBDStats: true
     # parameters:
     #   # Enable this with ceph tentacle, v20
