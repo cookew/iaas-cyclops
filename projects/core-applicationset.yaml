@@ -99,7 +99,6 @@ spec:
       - name: loki
       - name: mattermost-operator
       - name: mattermost
-      - name: neuvector
       - name: nvme-exporter
       - name: ollama
       - name: pyroscope
@@ -115,6 +114,7 @@ spec:
       #   replace: "true"
       # - name: kubescape
       # - name: kubevirt-templates
+      # - name: neuvector
 
   template:
     metadata:
