@@ -96,8 +96,6 @@ spec:
       - name: jupyterhub
       - name: kubevirt-manager
       - name: loki
-      - name: mattermost-operator
-      - name: mattermost
       - name: nvme-exporter
       - name: ollama
       - name: pyroscope
@@ -114,6 +112,8 @@ spec:
       #   replace: "true"
       # - name: kubescape
       # - name: kubevirt-templates
+      # - name: mattermost-operator
+      # - name: mattermost
       # - name: neuvector
 
   template:
