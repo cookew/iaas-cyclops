@@ -87,12 +87,12 @@ spec:
       - name: forecastle
       - name: github-arc
       #   serverSideApply: "true"
-      - name: gitlab
+      # - name: gitlab
       - name: grafana
       - name: harbor
       - name: headlamp
-      - name: istio
-        namespace: istio-system
+      # - name: istio
+      #   namespace: istio-system
       - name: kubevirt-manager
       - name: loki
       - name: nvme-exporter
