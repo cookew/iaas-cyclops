@@ -91,7 +91,6 @@ spec:
       - name: grafana
       - name: harbor
       - name: headlamp
-      - name: holmesgpt
       - name: istio
         namespace: istio-system
       - name: jupyterhub
@@ -110,6 +109,7 @@ spec:
       # #   serverSideApply: "true"
       # - name: github-arc-runners
       # - name: gitlab-runners
+      # - name: holmesgpt
       # - name: keda
       #   replace: "true"
       # - name: kubescape
