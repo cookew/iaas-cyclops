@@ -93,11 +93,9 @@ spec:
       - name: headlamp
       - name: istio
         namespace: istio-system
-      - name: jupyterhub
       - name: kubevirt-manager
       - name: loki
       - name: nvme-exporter
-      - name: ollama
       - name: pyroscope
       - name: reloader
       - name: tempo
@@ -108,6 +106,7 @@ spec:
       # - name: github-arc-runners
       # - name: gitlab-runners
       # - name: holmesgpt
+      # - name: jupyterhub
       # - name: keda
       #   replace: "true"
       # - name: kubescape
@@ -115,6 +114,7 @@ spec:
       # - name: mattermost-operator
       # - name: mattermost
       # - name: neuvector
+      # - name: ollama
 
   template:
     metadata:
