@@ -48,67 +48,67 @@ spec:
       - name: external-snapshotter
         syncWave: -70
 
-      # - name: cluster-network-addons
-      #   syncWave: -60
-      # - name: crossplane
-      #   syncWave: -60
+      - name: cluster-network-addons
+        syncWave: -60
+      - name: crossplane
+        syncWave: -60
       - name: rook-ceph
         # serverSideApply: "true"
         syncWave: -60
 
-      # - name: crossplane-keycloak-provider
-      #   syncWave: -50
-      # - name: kubevirt
-      #   syncWave: -50
+      - name: crossplane-keycloak-provider
+        syncWave: -50
+      - name: kubevirt
+        syncWave: -50
       - name: rook-ceph-cluster
         createNamespace: "true"
         syncWave: -50
 
-      # - name: kubevirt-network
-      #   createNamespace: "false"
-      #   syncWave: -40
-      # - name: cloudnative-pg
-      #   # serverSideApply: "true"
-      #   syncWave: -40
-      # - name: crossplane-keycloak-realms
-      #   syncWave: -40
+      - name: kubevirt-network
+        createNamespace: "false"
+        syncWave: -40
+      - name: cloudnative-pg
+        # serverSideApply: "true"
+        syncWave: -40
+      - name: crossplane-keycloak-realms
+        syncWave: -40
 
-      # - name: keycloak
-      #   syncWave: -30
-      # - name: kube-prometheus-stack
-      #   # serverSideApply: "true"
-      #   syncWave: -30
+      - name: keycloak
+        syncWave: -30
+      - name: kube-prometheus-stack
+        # serverSideApply: "true"
+        syncWave: -30
 
-      # - name: alloy
-      # - name: capi-operator
-      # - name: cyberchef
-      # - name: drawio
-      # - name: fluent-bit
+      - name: alloy
+      - name: capi-operator
+      - name: cyberchef
+      - name: drawio
+      - name: fluent-bit
       - name: forecastle
-      # - name: github-arc
+      - name: github-arc
       #   serverSideApply: "true"
-      # - name: gitlab
-      # - name: grafana
-      # - name: harbor
-      # - name: headlamp
-      # - name: holmesgpt
-      # - name: istio
-      #   namespace: istio-system
-      # - name: jupyterhub
-      # - name: kubevirt-manager
-      # - name: loki
-      # - name: mattermost-operator
-      # - name: mattermost
-      # - name: neuvector
-      # - name: nvme-exporter
-      # - name: ollama
-      # - name: pyroscope
-      # - name: reloader
-      # - name: tempo
-      # - name: whoami
+      - name: gitlab
+      - name: grafana
+      - name: harbor
+      - name: headlamp
+      - name: holmesgpt
+      - name: istio
+        namespace: istio-system
+      - name: jupyterhub
+      - name: kubevirt-manager
+      - name: loki
+      - name: mattermost-operator
+      - name: mattermost
+      - name: neuvector
+      - name: nvme-exporter
+      - name: ollama
+      - name: pyroscope
+      - name: reloader
+      - name: tempo
+      - name: whoami
 
       # - name: argo-workflows
-      #   serverSideApply: "true"
+      # #   serverSideApply: "true"
       # - name: github-arc-runners
       # - name: gitlab-runners
       # - name: keda
