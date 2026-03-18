@@ -13,7 +13,6 @@ spec:
       - createNamespace: "false"
         name: prometheus-operator-crds
         namespace: kube-prometheus-stack
-        # serverSideApply: "true"
         syncWave: -100
       - createNamespace: "false"
         name: metrics-server
@@ -38,12 +37,10 @@ spec:
         syncWave: -80
 
       - name: argocd
-        # serverSideApply: "true"
         syncWave: -70
       - name: cilium
         createNamespace: "false"
         namespace: kube-system
-        # serverSideApply: "true"
         syncWave: -70
       - name: external-snapshotter
         syncWave: -70
@@ -53,7 +50,6 @@ spec:
       - name: crossplane
         syncWave: -60
       - name: rook-ceph
-        # serverSideApply: "true"
         syncWave: -60
 
       - name: crossplane-keycloak-provider
@@ -68,7 +64,6 @@ spec:
         createNamespace: "false"
         syncWave: -40
       - name: cloudnative-pg
-        # serverSideApply: "true"
         syncWave: -40
       - name: crossplane-keycloak-realms
         syncWave: -40
@@ -76,7 +71,6 @@ spec:
       - name: keycloak
         syncWave: -30
       - name: kube-prometheus-stack
-        # serverSideApply: "true"
         syncWave: -30
 
       - name: alloy
@@ -86,13 +80,9 @@ spec:
       - name: fluent-bit
       - name: forecastle
       - name: github-arc
-      #   serverSideApply: "true"
-      # - name: gitlab
       - name: grafana
       - name: harbor
       - name: headlamp
-      # - name: istio
-      #   namespace: istio-system
       - name: kubevirt-manager
       - name: loki
       - name: nvme-exporter
@@ -104,8 +94,11 @@ spec:
       # - name: argo-workflows
       # #   serverSideApply: "true"
       # - name: github-arc-runners
+      # - name: gitlab
       # - name: gitlab-runners
       # - name: holmesgpt
+      # - name: istio
+      #   namespace: istio-system
       # - name: jupyterhub
       # - name: keda
       #   replace: "true"
