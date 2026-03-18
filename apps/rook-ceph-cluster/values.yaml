@@ -246,7 +246,7 @@ cephFileSystems:
       csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
       csi.storage.k8s.io/fstype: ext4
     volumeBindingMode: Immediate
-- name: ceph-filesystem-nvme
+- name: cyclops-fs
   spec:
     metadataPool:
       deviceClass: nvme
@@ -288,7 +288,7 @@ cephFileSystems:
     isDefault: true
     labels: {}
     mountOptions: []
-    name: ceph-filesystem-nvme
+    name: cyclops-fs
     pool: data0
     reclaimPolicy: Delete
     parameters:
@@ -339,7 +339,7 @@ cephECBlockPools:
     name: ceph-block
     reclaimPolicy: Delete
 
-- name: ceph-block-nvme
+- name: cyclops-block
   spec:
     metadataPool:
       deviceClass: nvme
@@ -367,7 +367,7 @@ cephECBlockPools:
     isDefault: false
     mapOptions: "krbd:rxbounce"
     mounter: rbd
-    name: ceph-block-nvme
+    name: cyclops-block
     reclaimPolicy: Delete
 
 # cephObjectStores:
