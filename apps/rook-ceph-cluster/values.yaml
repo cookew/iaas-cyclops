@@ -118,7 +118,6 @@ cephClusterSpec:
           deviceClass: ssd
       - name: /dev/disk/by-path/pci-0000:ac:00.0-nvme-1
         config:
-          # crushRoot: nvme
           deviceClass: nvme
     - name: amd64-2
       devices:
@@ -130,13 +129,11 @@ cephClusterSpec:
           deviceClass: ssd
       - name: /dev/disk/by-path/pci-0000:ac:00.0-nvme-1
         config:
-          # crushRoot: nvme
           deviceClass: nvme
     - name: amd64-3
       devices:
       - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
         config:
-          # crushRoot: nvme
           deviceClass: nvme
       - name: /dev/disk/by-path/pci-0000:b3:00.0-nvme-1
         config:
