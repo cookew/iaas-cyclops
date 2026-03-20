@@ -152,9 +152,9 @@ cephClusterSpec:
       - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
         config:
           deviceClass: ssd
-      # - name: /dev/disk/by-path/
-      #   config:
-      #     deviceClass: nvme
+      - name: /dev/disk/by-path/pci-0000:bs:00.0-nvme-1
+        config:
+          deviceClass: nvme
   upgradeOSDRequiresHealthyPGs: true
 
 ingress:
