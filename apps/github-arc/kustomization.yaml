@@ -10,4 +10,4 @@ helmCharts:
   releaseName: gha-runner-scale-set-controller
   repo: oci://ghcr.io/actions/actions-runner-controller-charts
   valuesFile: values.yaml
-  version: 0.13.1
+  version: 0.14.0
