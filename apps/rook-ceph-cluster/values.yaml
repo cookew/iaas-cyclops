@@ -125,8 +125,8 @@ cephClusterSpec:
         config:
           deviceClass: ssd
       - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
-        # config:
-        #   deviceClass: ssd
+        config:
+          deviceClass: ssd
       - name: /dev/disk/by-path/pci-0000:ac:00.0-nvme-1
         config:
           deviceClass: nvme
