@@ -4,8 +4,22 @@ This is a mirror of my of git repository I use with [ArgoCD](https://argoproj.gi
 
 # Deploy
 
-1. kustomize build --enable-helm deploy/ | kubectl apply --server-side -f -
-2. Re-encrypt the sealed secrets, update the git repo
+1. Deploy manifests.
+   ```
+   kustomize build --enable-helm deploy/ | kubectl apply --server-side -f -
+   ```
+1. Re-encrypt the sealed secrets, update the git repo.
+1. Re-deploy manifests.
+   ```
+   kustomize build --enable-helm deploy/ | kubectl apply --server-side -f -
+   ```
+1. Update ceph minimum placement groups, if needed.
+   ```
+   # Determin if there is a problem
+   kubectl -n rook-ceph-cluster describe cephobjectstore
+   # Fix pg_num_min
+   kubectl -n rook-ceph-cluster exec deploy/rook-ceph-tools -- ceph osd pool set .rgw.root pg_num_min 8
+   ```
 
 # Sealed Secrets
 
@@ -16,9 +30,26 @@ Sealed secrets are used for the cert-manager cluster CA cert and key, and for th
 
 # Login info
 
+ArgoCD
+* Username: admin
+* Password:
+  ```
+  kubectl -n argocd get secrets argocd-secret -o go-template='{{index .data "admin.password" | base64decode}}'
+  ```
+
 Ceph
 * Username: admin
 * Password:
   ```
-  kubectl -n rook-ceph-cluster get secrets rook-ceph-dashboard-password --template={{.data.password}} | base64 -d
+   kubectl -n rook-ceph-cluster get secrets rook-ceph-dashboard-password -o go-template='{{index .data "password" | base64decode}}'
+  ```
+
+Keycloak
+* Username:
+  ```
+  kubectl -n keycloak get secrets keycloak-user -o go-template='{{index .data "username" | base64decode}}'
+  ```
+* Password:
+  ```
+  kubectl -n keycloak get secrets keycloak-user -o go-template='{{index .data "password" | base64decode}}'
   ```

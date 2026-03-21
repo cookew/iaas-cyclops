@@ -1,6 +1,10 @@
+---
 apiVersion: user.keycloak.crossplane.io/v1alpha1
 kind: User
 metadata:
+  labels:
+    keycloak/realm: iaas
+    keycloak/group: super-users
   name: william
 spec:
   forProvider:
@@ -24,6 +28,9 @@ spec:
 apiVersion: user.keycloak.crossplane.io/v1alpha1
 kind: User
 metadata:
+  labels:
+    keycloak/realm: iaas
+    keycloak/group: super-users
   name: edward
 spec:
   forProvider:
@@ -41,5 +48,36 @@ spec:
     realmIdRef:
       name: iaas
     username: edward
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: super-users
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: super-users
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: user.keycloak.crossplane.io/v1alpha1
+kind: Groups
+metadata:
+  name: super-users
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdsRefs:
+    - name: super-users
+    realmIdRef:
+      name: iaas
+    userIdSelector:
+      matchLabels:
+        keycloak/realm: iaas
+        keycloak/group: super-users
   providerConfigRef:
     name: keycloak-provider-config
