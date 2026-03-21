@@ -116,9 +116,9 @@ cephClusterSpec:
       - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
         config:
           deviceClass: ssd
-      # - name: /dev/disk/by-path/pci-0000:ac:00.0-nvme-1
-      #   config:
-      #     deviceClass: nvme
+      - name: /dev/disk/by-path/pci-0000:ac:00.0-nvme-1
+        config:
+          deviceClass: ssd # nvme
     - name: amd64-2
       devices:
       - name: /dev/disk/by-path/pci-0000:16:00.0-nvme-1
@@ -129,12 +129,12 @@ cephClusterSpec:
           deviceClass: ssd
       # - name: /dev/disk/by-path/pci-0000:ac:00.0-nvme-1
       #   config:
-      #     deviceClass: nvme
+      #     deviceClass: ssd # nvme
     - name: amd64-3
       devices:
       # - name: /dev/disk/by-path/pci-0000:17:00.0-nvme-1
       #   config:
-      #     deviceClass: nvme
+      #     deviceClass: ssd # nvme
       - name: /dev/disk/by-path/pci-0000:b3:00.0-nvme-1
         config:
           deviceClass: ssd
