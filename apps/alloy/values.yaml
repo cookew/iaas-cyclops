@@ -267,7 +267,9 @@ controller:
   type: statefulset
 
   volumeClaimTemplates:
-  - metadata:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
       name: storage
     spec:
       accessModes: [ "ReadWriteOnce" ]

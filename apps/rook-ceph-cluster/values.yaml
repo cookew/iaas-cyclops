@@ -193,12 +193,14 @@ cephBlockPools: []
 cephFileSystems:
 - name: ceph-filesystem
   spec:
-    metadataPool:
+    dataPools:
+    - deviceClass: ssd
+      failureDomain: host
+      name: data0
       replicated:
         size: 3
-    dataPools:
-    - failureDomain: host
-      name: data0
+    metadataPool:
+      deviceClass: ssd
       replicated:
         size: 3
     metadataServer:
@@ -320,11 +322,11 @@ cephECBlockPools:
 - name: ceph-block
   spec:
     metadataPool:
-      # deviceClass: ssd
+      deviceClass: ssd
       replicated:
         size: 2
     dataPool:
-      # deviceClass: ssd
+      deviceClass: ssd
       erasureCoded:
         dataChunks: 2
         codingChunks: 1
@@ -385,7 +387,7 @@ cephObjectStores:
     allowUsersInNamespaces:
     - "*"
     dataPool:
-      # deviceClass: ssd
+      deviceClass: ssd
       erasureCoded:
         dataChunks: 2
         codingChunks: 1
@@ -426,7 +428,7 @@ cephObjectStores:
       - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc.cluster.local
       - s3.apps.iaas.wcooke.me
     metadataPool:
-      # deviceClass: ssd
+      deviceClass: ssd
       failureDomain: host
       replicated:
         size: 3

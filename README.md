@@ -13,3 +13,12 @@ Sealed secrets are used for the cert-manager cluster CA cert and key, and for th
 
 * /apps/argocd/sealedsecrets
 * /apps/cert-manager-certs/sealedsecrets
+
+# Login info
+
+Ceph
+* Username: admin
+* Password:
+  ```
+  kubectl -n rook-ceph-cluster get secrets rook-ceph-dashboard-password --template={{.data.password}} | base64 -d
+  ```
