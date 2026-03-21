@@ -243,60 +243,60 @@ cephFileSystems:
       csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
       csi.storage.k8s.io/fstype: ext4
     volumeBindingMode: Immediate
-- name: cyclops-fs
-  spec:
-    metadataPool:
-      deviceClass: nvme
-      replicated:
-        size: 3
-    dataPools:
-    - deviceClass: nvme
-      failureDomain: host
-      name: data0
-      replicated:
-        size: 3
-    metadataServer:
-      activeCount: 1
-      activeStandby: true
-      resources:
-        limits:
-          memory: 4Gi
-          cpu: 2000m
-        requests:
-          cpu: 1000m
-          memory: 4Gi
-      priorityClassName: system-cluster-critical
-      placement:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - rook-ceph-mds
-              topologyKey: kubernetes.io/hostname
-  storageClass:
-    allowVolumeExpansion: true
-    annotations: {}
-    enabled: true
-    isDefault: true
-    labels: {}
-    mountOptions: []
-    name: cyclops-fs
-    pool: data0
-    reclaimPolicy: Delete
-    parameters:
-      csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
-      csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
-      csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
-      csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
-      csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
-      csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
-      csi.storage.k8s.io/fstype: ext4
-    volumeBindingMode: Immediate
+# - name: cyclops-fs
+#   spec:
+#     metadataPool:
+#       deviceClass: nvme
+#       replicated:
+#         size: 3
+#     dataPools:
+#     - deviceClass: nvme
+#       failureDomain: host
+#       name: data0
+#       replicated:
+#         size: 3
+#     metadataServer:
+#       activeCount: 1
+#       activeStandby: true
+#       resources:
+#         limits:
+#           memory: 4Gi
+#           cpu: 2000m
+#         requests:
+#           cpu: 1000m
+#           memory: 4Gi
+#       priorityClassName: system-cluster-critical
+#       placement:
+#         podAntiAffinity:
+#           preferredDuringSchedulingIgnoredDuringExecution:
+#           - weight: 100
+#             podAffinityTerm:
+#               labelSelector:
+#                 matchExpressions:
+#                 - key: app
+#                   operator: In
+#                   values:
+#                   - rook-ceph-mds
+#               topologyKey: kubernetes.io/hostname
+#   storageClass:
+#     allowVolumeExpansion: true
+#     annotations: {}
+#     enabled: true
+#     isDefault: true
+#     labels: {}
+#     mountOptions: []
+#     name: cyclops-fs
+#     pool: data0
+#     reclaimPolicy: Delete
+#     parameters:
+#       csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+#       csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+#       csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+#       csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
+#       csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+#       csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
+#       csi.storage.k8s.io/fstype: ext4
+#     volumeBindingMode: Immediate
 
 cephBlockPoolsVolumeSnapshotClass:
   enabled: true
@@ -336,36 +336,36 @@ cephECBlockPools:
     name: ceph-block
     reclaimPolicy: Delete
 
-- name: cyclops-block
-  spec:
-    metadataPool:
-      deviceClass: nvme
-      replicated:
-        size: 2
-    dataPool:
-      deviceClass: nvme
-      erasureCoded:
-        dataChunks: 2
-        codingChunks: 1
-      failureDomain: host
-    enableRBDStats: true
-    # parameters:
-    #   # Enable this with ceph tentacle, v20
-    #   allow_ec_optimizations: "true"
-  parameters:
-    clusterID: rook-ceph-cluster
-    imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
-    imageFormat: "2"
-  storageClass:
-    allowVolumeExpansion: true
-    annotations:
-      storageclass.kubevirt.io/is-default-virt-class: "true"
-    enabled: true
-    isDefault: false
-    mapOptions: "krbd:rxbounce"
-    mounter: rbd
-    name: cyclops-block
-    reclaimPolicy: Delete
+# - name: cyclops-block
+#   spec:
+#     metadataPool:
+#       deviceClass: nvme
+#       replicated:
+#         size: 2
+#     dataPool:
+#       deviceClass: nvme
+#       erasureCoded:
+#         dataChunks: 2
+#         codingChunks: 1
+#       failureDomain: host
+#     enableRBDStats: true
+#     # parameters:
+#     #   # Enable this with ceph tentacle, v20
+#     #   allow_ec_optimizations: "true"
+#   parameters:
+#     clusterID: rook-ceph-cluster
+#     imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
+#     imageFormat: "2"
+#   storageClass:
+#     allowVolumeExpansion: true
+#     annotations:
+#       storageclass.kubevirt.io/is-default-virt-class: "true"
+#     enabled: true
+#     isDefault: false
+#     mapOptions: "krbd:rxbounce"
+#     mounter: rbd
+#     name: cyclops-block
+#     reclaimPolicy: Delete
 
 cephObjectStores:
 - name: ceph-objectstore
