@@ -247,14 +247,14 @@ cephFileSystems:
     volumeBindingMode: Immediate
 # - name: cyclops-fs
 #   spec:
-#     metadataPool:
-#       deviceClass: nvme
-#       replicated:
-#         size: 3
 #     dataPools:
 #     - deviceClass: nvme
 #       failureDomain: host
 #       name: data0
+#       replicated:
+#         size: 3
+#     metadataPool:
+#       deviceClass: nvme
 #       replicated:
 #         size: 3
 #     metadataServer:
@@ -321,10 +321,6 @@ cephFileSystemVolumeSnapshotClass:
 cephECBlockPools:
 - name: ceph-block
   spec:
-    metadataPool:
-      deviceClass: ssd
-      replicated:
-        size: 2
     dataPool:
       deviceClass: ssd
       erasureCoded:
@@ -335,6 +331,10 @@ cephECBlockPools:
     # parameters:
     #   # Enable this with ceph tentacle, v20
     #   allow_ec_optimizations: "true"
+    metadataPool:
+      deviceClass: ssd
+      replicated:
+        size: 3
   parameters:
     clusterID: rook-ceph-cluster
     imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
@@ -352,10 +352,6 @@ cephECBlockPools:
 
 # - name: cyclops-block
 #   spec:
-#     metadataPool:
-#       deviceClass: nvme
-#       replicated:
-#         size: 2
 #     dataPool:
 #       deviceClass: nvme
 #       erasureCoded:
@@ -363,6 +359,10 @@ cephECBlockPools:
 #         codingChunks: 1
 #       failureDomain: host
 #     enableRBDStats: true
+#     metadataPool:
+#       deviceClass: nvme
+#       replicated:
+#         size: 3
 #     # parameters:
 #     #   # Enable this with ceph tentacle, v20
 #     #   allow_ec_optimizations: "true"
