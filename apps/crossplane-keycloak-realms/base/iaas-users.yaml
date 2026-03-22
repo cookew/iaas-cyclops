@@ -65,7 +65,7 @@ metadata:
 spec:
   deletionPolicy: Delete
   forProvider:
-    groupIdRefs:
+    groupIdsRefs:
     - name: super-users
     realmIdRef:
       name: iaas
@@ -81,7 +81,7 @@ metadata:
 spec:
   deletionPolicy: Delete
   forProvider:
-    groupIdRefs:
+    groupIdsRefs:
     - name: super-users
     realmIdRef:
       name: iaas
