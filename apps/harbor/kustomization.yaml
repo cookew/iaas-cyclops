@@ -7,13 +7,13 @@ resources:
 - base/certificates.yaml
 - base/harbor-keycloak-client.yaml
 - base/harbor-pg-cluster.yaml
-- base/harbor-valkey-certificate.yaml
+# - base/harbor-valkey-certificate.yaml
 - base/objectbucketclaim.yaml
 - sealed-secrets/harbor-admin-password.yaml
 - sealed-secrets/harbor-core-config.yaml
 - sealed-secrets/harbor-encryption-key.yaml
 - sealed-secrets/harbor-keycloak-client.yaml
-- sealed-secrets/harbor-valkey-password.yaml
+# - sealed-secrets/harbor-valkey-password.yaml
 
 patches:
 - path: patches/harbor-jobservice-pvc.yaml
@@ -28,9 +28,9 @@ helmCharts:
   repo: https://helm.goharbor.io
   valuesFile: values.yaml
   version: 1.18.3
-- name: valkey
-  namespace: harbor
-  releaseName: valkey
-  repo: https://valkey.io/valkey-helm
-  valuesFile: valkey-values.yaml
-  version: 0.9.3
+# - name: valkey
+#   namespace: harbor
+#   releaseName: valkey
+#   repo: https://valkey.io/valkey-helm
+#   valuesFile: valkey-values.yaml
+#   version: 0.9.3
