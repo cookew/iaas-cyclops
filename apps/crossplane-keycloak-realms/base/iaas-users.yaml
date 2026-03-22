@@ -61,7 +61,7 @@ spec:
 apiVersion: user.keycloak.crossplane.io/v1alpha1
 kind: Groups
 metadata:
-  name: super-users
+  name: william-super-users
 spec:
   deletionPolicy: Delete
   forProvider:
@@ -77,7 +77,7 @@ spec:
 apiVersion: user.keycloak.crossplane.io/v1alpha1
 kind: Groups
 metadata:
-  name: super-users
+  name: edward-super-users
 spec:
   deletionPolicy: Delete
   forProvider:
