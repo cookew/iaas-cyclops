@@ -1,3 +1,5 @@
+# https://github.com/valkey-io/valkey-helm/blob/main/valkey/values.yaml
+
 serviceAccount:
   create: false
 
