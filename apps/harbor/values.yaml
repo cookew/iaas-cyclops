@@ -146,8 +146,8 @@ redis:
     # Once `tlsOptions.enable` set as true, tls/ssl connection will be used for redis
     # Please set the `caBundleSecretName` in this configuration file which conatins redis server rootCA if it is self-signed.
     # The secret must contain keys named "ca.crt" which will be injected into the trust store
-    # tlsOptions:
-    #   enable: false
+    tlsOptions:
+      enable: true
     # username field can be an empty string, and it will be authenticated against the default user
     # username: ""
     # If using existingSecret, the key must be REDIS_PASSWORD
