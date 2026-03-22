@@ -33,6 +33,9 @@ kind: Role
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  labels:
+    keycloak/realm: iaas
+    keycloak/group-admins: ""
   name: harbor-admin
 spec:
   deletionPolicy: Delete
@@ -65,9 +68,6 @@ kind: Roles
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-  labels:
-    keycloak/realm: iaas
-    keycloak/group-admins: ""
   name: harbor-admin
 spec:
   deletionPolicy: Delete
