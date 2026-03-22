@@ -89,6 +89,9 @@ spec:
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Group
 metadata:
+  labels:
+    keycloak/realm: iaas
+    keycloak/group: super-users
   name: grafana-server-admins
 spec:
   deletionPolicy: Delete
