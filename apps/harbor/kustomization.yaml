@@ -21,16 +21,16 @@ patches:
     kind: PersistentVolumeClaim
     name: harbor-jobservice
 
-# helmCharts:
-# # - name: harbor
-# #   namespace: harbor
-# #   releaseName: harbor
-# #   repo: https://helm.goharbor.io
-# #   valuesFile: values.yaml
-# #   version: 1.18.3
-# - name: valkey
+helmCharts:
+# - name: harbor
 #   namespace: harbor
-#   releaseName: valkey
-#   repo: https://valkey.io/valkey-helm
-#   valuesFile: valkey-values.yaml
-#   version: 0.9.3
+#   releaseName: harbor
+#   repo: https://helm.goharbor.io
+#   valuesFile: values.yaml
+#   version: 1.18.3
+- name: valkey
+  namespace: harbor
+  releaseName: valkey
+  repo: https://valkey.io/valkey-helm
+  valuesFile: valkey-values.yaml
+  version: 0.9.3
