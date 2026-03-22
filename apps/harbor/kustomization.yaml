@@ -12,6 +12,13 @@ resources:
 - sealed-secrets/harbor-core-config.yaml
 - sealed-secrets/harbor-encryption-key.yaml
 - sealed-secrets/harbor-keycloak-client.yaml
+- sealed-secrets/harbor-valkey-password.yaml
+
+patches:
+- path: patches/harbor-jobservice-pvc.yaml
+  target:
+    kind: PersistentVolumeClaim
+    name: harbor-jobservice
 
 helmCharts:
 - name: harbor
@@ -20,9 +27,9 @@ helmCharts:
   repo: https://helm.goharbor.io
   valuesFile: values.yaml
   version: 1.18.3
-
-patches:
-- path: patches/harbor-jobservice-pvc.yaml
-  target:
-    kind: PersistentVolumeClaim
-    name: harbor-jobservice
+- name: valkey
+  namespace: gitlab
+  releaseName: valkey
+  repo: https://valkey.io/valkey-helm
+  valuesFile: valkey-values.yaml
+  version: 0.9.3
