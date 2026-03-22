@@ -31,8 +31,8 @@ persistence:
     database:
       storageClass: ceph-filesystem
       size: 5Gi
-    redis:
-      storageClass: ceph-filesystem
+    # redis:
+    #   storageClass: ceph-filesystem
     trivy:
       storageClass: ceph-filesystem
       size: 5Gi
@@ -148,7 +148,6 @@ redis:
     # The secret must contain keys named "ca.crt" which will be injected into the trust store
     tlsOptions:
       enable: true
-      caBundleSecretName: harbor-valkey-certificate
     harborDatabaseIndex: "6"
     cacheLayerDatabaseIndex: "7"
     # username field can be an empty string, and it will be authenticated against the default user
