@@ -7,6 +7,7 @@ resources:
 - base/certificates.yaml
 - base/harbor-keycloak-client.yaml
 - base/harbor-pg-cluster.yaml
+- base/harbor-valkey-certificate.yaml
 - base/objectbucketclaim.yaml
 - sealed-secrets/harbor-admin-password.yaml
 - sealed-secrets/harbor-core-config.yaml

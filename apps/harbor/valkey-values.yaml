@@ -53,6 +53,7 @@ auth:
   aclUsers:
     default:
       permissions: "~* &* +@all"
+      passwordKey: REDIS_PASSWORD
   # Example:
   # default:
   #   permissions: "~* &* +@all"
@@ -104,13 +105,13 @@ replica:
 
 tls:
   # Enable TLS
-  enabled: false
+  enabled: true
   # Name of the Secret containing TLS keys (required)
-  existingSecret: ""
+  existingSecret: harbor-valkey-certificate
   # Secret key name containing server public certificate
-  serverPublicKey: server.crt
+  serverPublicKey: tls.crt
   # Secret key name containing server private key
-  serverKey: server.key
+  serverKey: tls.key
   # Secret key name containing Certificate Authority public certificate
   caPublicKey: ca.crt
   # Secret key name containing DH parameters (optional)
