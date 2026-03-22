@@ -4,6 +4,10 @@
 replicaCount: 2
 
 config:
+
+  # Probably remove this in any version of the helm chart after 0.40.1
+  sessionTTL: null
+
   inCluster: true
   oidc:
     secret:
