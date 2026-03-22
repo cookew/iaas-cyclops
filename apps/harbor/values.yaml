@@ -31,8 +31,8 @@ persistence:
     database:
       storageClass: ceph-filesystem
       size: 5Gi
-    # redis:
-    #   storageClass: ceph-filesystem
+    redis:
+      storageClass: ceph-filesystem
     trivy:
       storageClass: ceph-filesystem
       size: 5Gi
