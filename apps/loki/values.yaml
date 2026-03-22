@@ -10,7 +10,7 @@ chunksCache:
     storageClass: ceph-filesystem
 
 compactor:
-  replicas: 2
+  replicas: 1
   # persistence:
   #   enabled: true
   #   claims:
