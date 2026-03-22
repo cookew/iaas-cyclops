@@ -104,6 +104,6 @@ spec:
     roleIdsSelector:
       matchLabels:
         keycloak/realm: iaas
-        keycloak/group: admins
+        keycloak/group-admins: ""
   providerConfigRef:
     name: keycloak-provider-config
