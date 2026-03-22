@@ -107,7 +107,7 @@ replica:
 
 tls:
   # Enable TLS
-  enabled: true
+  enabled: false
   # Name of the Secret containing TLS keys (required)
   existingSecret: harbor-valkey-certificate
   # Secret key name containing server public certificate
