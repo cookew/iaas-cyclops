@@ -6,5 +6,5 @@ resources:
 - core-appproject.yaml
 - core-apps/cdi.yaml
 
-# - cyclops-k8s-project.yaml
-# - cyclops-k8s-appproject.yaml
+- cyclops-k8s-project.yaml
+- cyclops-k8s-appproject.yaml
