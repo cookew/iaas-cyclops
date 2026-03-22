@@ -57,39 +57,39 @@ spec:
 #       name: iaas
 #   providerConfigRef:
 #     name: keycloak-provider-config
-# ---
-# apiVersion: user.keycloak.crossplane.io/v1alpha1
-# kind: Groups
-# metadata:
-#   name: super-users
-# spec:
-#   deletionPolicy: Delete
-#   forProvider:
-#     groupIdsSelector:
-#       matchLabels:
-#         keycloak/realm: iaas
-#         keycloak/group: admins
-#     realmIdRef:
-#       name: iaas
-#     userIdRef:
-#       name: william
-#   providerConfigRef:
-#     name: keycloak-provider-config
 ---
-apiVersion: group.keycloak.crossplane.io/v1alpha1
-kind: Roles
+apiVersion: user.keycloak.crossplane.io/v1alpha1
+kind: Groups
 metadata:
-  name: super-users-admins
+  name: super-users
 spec:
   deletionPolicy: Delete
   forProvider:
-    groupIdRef:
-      name: super-users
-    realmIdRef:
-      name: iaas
-    realmIdSelector:
+    groupIdsSelector:
       matchLabels:
         keycloak/realm: iaas
         keycloak/group: admins
+    realmIdRef:
+      name: iaas
+    userIdRef:
+      name: william
   providerConfigRef:
     name: keycloak-provider-config
+# ---
+# apiVersion: group.keycloak.crossplane.io/v1alpha1
+# kind: Roles
+# metadata:
+#   name: super-users-admins
+# spec:
+#   deletionPolicy: Delete
+#   forProvider:
+#     groupIdRef:
+#       name: super-users
+#     realmIdRef:
+#       name: iaas
+#     realmIdSelector:
+#       matchLabels:
+#         keycloak/realm: iaas
+#         keycloak/group: admins
+#   providerConfigRef:
+#     name: keycloak-provider-config
