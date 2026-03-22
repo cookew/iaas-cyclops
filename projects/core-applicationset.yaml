@@ -73,23 +73,23 @@ spec:
       - name: kube-prometheus-stack
         syncWave: -30
 
-      # - name: alloy
-      # - name: capi-operator
-      # - name: cyberchef
-      # - name: drawio
+      - name: alloy
+      - name: capi-operator
+      - name: cyberchef
+      - name: drawio
       - name: fluent-bit
       - name: forecastle
       - name: github-arc
       - name: grafana
-      # - name: harbor
-      # - name: headlamp
+      - name: harbor
+      - name: headlamp
       - name: kubevirt-manager
       - name: loki
       - name: nvme-exporter
-      # - name: pyroscope
+      - name: pyroscope
       - name: reloader
-      # - name: tempo
-      # - name: whoami
+      - name: tempo
+      - name: whoami
 
       # - name: argo-workflows
       # #   serverSideApply: "true"
