@@ -95,10 +95,10 @@ replica:
   minReplicasMaxLag: 10
 
   persistence:
+    accessModes:
+    - ReadWriteOnce
     size: 2Gi
     storageClass: ceph-filesystem
-    accessModes:
-      - ReadWriteOnce
 
   # PersistentVolumeClaim retention policy for StatefulSet
   # Controls when PVCs are deleted (requires Kubernetes 1.23+)
