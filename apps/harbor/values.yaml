@@ -148,9 +148,7 @@ redis:
     # The secret must contain keys named "ca.crt" which will be injected into the trust store
     tlsOptions:
       enable: false
-    harborDatabaseIndex: "6"
-    cacheLayerDatabaseIndex: "7"
     # username field can be an empty string, and it will be authenticated against the default user
-    username:
+    username: ""
     # If using existingSecret, the key must be REDIS_PASSWORD
     existingSecret: harbor-valkey-password
