@@ -28,6 +28,9 @@ spec:
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
 metadata:
+  labels:
+    keycloak/realm: iaas
+    keycloak/group-admins: ""
   name: kubernetes-admin
 spec:
   deletionPolicy: Delete

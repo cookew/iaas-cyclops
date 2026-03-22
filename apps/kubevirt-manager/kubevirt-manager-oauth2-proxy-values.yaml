@@ -102,6 +102,9 @@ extraObjects:
   metadata:
     annotations:
       argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    labels:
+      keycloak/realm: iaas
+      keycloak/group-admins: ""
     name: kubevirt-manager-admin
   spec:
     deletionPolicy: Delete
@@ -132,9 +135,6 @@ extraObjects:
   metadata:
     annotations:
       argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    labels:
-      keycloak/realm: iaas
-      keycloak/group-admins: ""
     name: kubevirt-manager-roles
   spec:
     deletionPolicy: Delete
