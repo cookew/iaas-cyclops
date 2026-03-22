@@ -151,4 +151,4 @@ redis:
     # username field can be an empty string, and it will be authenticated against the default user
     # username: ""
     # If using existingSecret, the key must be REDIS_PASSWORD
-    existingSecret: harbor-valkey-password
+    # existingSecret: harbor-valkey-password
