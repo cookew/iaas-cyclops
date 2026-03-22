@@ -29,7 +29,7 @@ helmCharts:
   valuesFile: values.yaml
   version: 1.18.3
 - name: valkey
-  namespace: gitlab
+  namespace: harbor
   releaseName: valkey
   repo: https://valkey.io/valkey-helm
   valuesFile: valkey-values.yaml
