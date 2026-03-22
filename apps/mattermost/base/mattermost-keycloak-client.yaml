@@ -80,6 +80,9 @@ spec:
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
 metadata:
+  labels:
+    keycloak/realm: iaas
+    keycloak/group-admins: ""
   name: mattermost-admin
 spec:
   deletionPolicy: Delete

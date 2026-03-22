@@ -104,7 +104,7 @@ extraObjects:
       argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     labels:
       keycloak/realm: iaas
-      keycloak/group: admins
+      keycloak/group-admins: ""
     name: hubble-admin
   spec:
     deletionPolicy: Delete

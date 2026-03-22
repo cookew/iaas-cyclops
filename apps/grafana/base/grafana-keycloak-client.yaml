@@ -29,6 +29,9 @@ spec:
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
 metadata:
+  labels:
+    keycloak/realm: iaas
+    keycloak/group-admins: ""
   name: grafana-server-admin
 spec:
   deletionPolicy: Delete
@@ -74,6 +77,9 @@ spec:
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
 metadata:
+  labels:
+    keycloak/realm: iaas
+    keycloak/group-users: ""
   name: grafana-viewer
 spec:
   deletionPolicy: Delete
