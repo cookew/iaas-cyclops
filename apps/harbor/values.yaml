@@ -139,16 +139,16 @@ redis:
     # addr for redis+sentinel: <host_sentinel1>:<port_sentinel1>,<host_sentinel2>:<port_sentinel2>,<host_sentinel3>:<port_sentinel3>
     addr: valkey.harbor.svc:6379
     # The name of the set of Redis instances to monitor, it must be set to support redis+sentinel
-    sentinelMasterSet: ""
+    # sentinelMasterSet: ""
     # TLS configuration for redis connection
     # only server-authentication is supported, mTLS for redis connection is not supported
     # tls connection will be disable by default
     # Once `tlsOptions.enable` set as true, tls/ssl connection will be used for redis
     # Please set the `caBundleSecretName` in this configuration file which conatins redis server rootCA if it is self-signed.
     # The secret must contain keys named "ca.crt" which will be injected into the trust store
-    tlsOptions:
-      enable: false
+    # tlsOptions:
+    #   enable: false
     # username field can be an empty string, and it will be authenticated against the default user
-    username: ""
+    # username: ""
     # If using existingSecret, the key must be REDIS_PASSWORD
     existingSecret: harbor-valkey-password
