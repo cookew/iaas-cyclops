@@ -84,10 +84,10 @@ ingester:
 loki:
   auth_enabled: false
   compactor:
-    # compaction_interval: 10m
+    compaction_interval: 10m
     delete_request_store: filesystem
-    # retention_delete_delay: 2h
-    # retention_delete_worker_count: 150
+    retention_delete_delay: 2h
+    retention_delete_worker_count: 150
     retention_enabled: true
     working_directory: /tmp/loki/retention
   limits_config:
