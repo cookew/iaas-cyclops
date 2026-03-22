@@ -44,6 +44,7 @@ grafana.ini:
     email_attribute_path: email
     enabled: true
     # groups_attribute_path: groups
+    jwk_set_url: "https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/certs"
     login_attribute_path: preferred_username
     name_attribute_path: name
     name: Keycloak
