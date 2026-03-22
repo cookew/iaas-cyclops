@@ -22,12 +22,12 @@ patches:
     name: harbor-jobservice
 
 helmCharts:
-- name: harbor
-  namespace: harbor
-  releaseName: harbor
-  repo: https://helm.goharbor.io
-  valuesFile: values.yaml
-  version: 1.18.3
+# - name: harbor
+#   namespace: harbor
+#   releaseName: harbor
+#   repo: https://helm.goharbor.io
+#   valuesFile: values.yaml
+#   version: 1.18.3
 - name: valkey
   namespace: harbor
   releaseName: valkey
