@@ -15,10 +15,14 @@ This is a mirror of my of git repository I use with [ArgoCD](https://argoproj.gi
    ```
 1. Update ceph minimum placement groups, if needed.
    ```
-   # Determin if there is a problem
+   # Determine if there is a problem
    kubectl -n rook-ceph-cluster describe cephobjectstore
    # Fix pg_num_min
    kubectl -n rook-ceph-cluster exec deploy/rook-ceph-tools -- ceph osd pool set .rgw.root pg_num_min 8
+   ```
+1. Delete the super-user group to auto-add admin roles from various apps to the group.
+   ```
+   kubectl delete roles.group.keycloak.crossplane.io super-users
    ```
 
 # Sealed Secrets
