@@ -145,7 +145,8 @@ loki:
   ingester:
     # Chunk settings
     chunk_idle_period: 30m
-    chunk_target_size: 1572864  # 1.5 MB
+    # chunk_target_size: 1572864  # 1.5 MB
+    chunk_target_size: 5242880
     chunk_encoding: snappy
     max_chunk_age: 2h
     # WAL settings
