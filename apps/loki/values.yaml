@@ -99,25 +99,25 @@ loki:
   limits_config:
     # https://grafana.com/docs/loki/latest/configure/bp-configure/
     # Rate limits
-    # ingestion_burst_size_mb: 20
-    # ingestion_rate_mb: 10
-    # ingestion_rate_strategy: global
+    ingestion_burst_size_mb: 20
+    ingestion_rate_mb: 10
+    ingestion_rate_strategy: global
     # per_stream_rate_limit: 3MB
     # per_stream_rate_limit_burst: 15MB
     # Stream limits
     # max_global_streams_per_user: 10000
-    # max_streams_per_user: 0
+    max_streams_per_user: 0
     # Validation
     # max_label_name_length: 1024
     # max_label_names_per_series: 15
     # max_label_value_length: 2048
     # max_line_size: 256KB
-    # max_line_size_truncate: false
+    max_line_size_truncate: false
     # Time constraints
-    # creation_grace_period: 10m
-    # reject_old_samples: true
-    # reject_old_samples_max_age: 168h  # 7 days
-    # unordered_writes: true
+    creation_grace_period: 10m
+    reject_old_samples: true
+    reject_old_samples_max_age: 168h  # 7 days
+    unordered_writes: true
 
     allow_structured_metadata: true
     max_chunks_per_query: 20000000
