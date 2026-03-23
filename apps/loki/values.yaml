@@ -134,7 +134,7 @@ loki:
     # per_stream_rate_limit_burst: 200MB
     # per_stream_rate_limit: 100MB
     query_timeout: 5m
-    retention_period: 1h
+    retention_period: 6h
     tsdb_precompute_chunks: true
     volume_enabled: true
     shard_streams:
