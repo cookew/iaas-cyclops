@@ -68,14 +68,14 @@ hubble:
     dashboards:
       enabled: true
     enabled:
-    - dns
+    # - dns
     - drop
-    - flow
-    - flows-to-world
+    # - flow
+    # - flows-to-world
     - httpV2
-    - icmp
-    - kafka
-    - port-distribution
+    # - icmp
+    # - kafka
+    # - port-distribution
     # - tcp
     # post cluster init
     serviceMonitor:
