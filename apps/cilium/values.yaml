@@ -67,13 +67,13 @@ hubble:
     # post cluster init
     dashboards:
       enabled: true
-    # enabled:
-    # - dns
-    # - drop
-    # - flow
+    enabled:
+    - dns
+    - drop
+    - flow
     # - flows-to-world
     # - httpV2
-    # - icmp
+    - icmp
     # - kafka
     # - port-distribution
     # - tcp
@@ -152,8 +152,8 @@ kubeProxyReplacement: true
 logOptions:
   format: json
 
-monitor:
-  enabled: true
+# monitor:
+#   enabled: true
 
 operator:
   replicas: 3
