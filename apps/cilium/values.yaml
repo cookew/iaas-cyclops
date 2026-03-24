@@ -76,7 +76,7 @@ hubble:
     - icmp
     - kafka
     - port-distribution
-    - tcp
+    # - tcp
     # post cluster init
     serviceMonitor:
       enabled: true
