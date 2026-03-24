@@ -67,12 +67,12 @@ hubble:
     # post cluster init
     dashboards:
       enabled: true
-    enabled:
+    # enabled:
     # - dns
-    - drop
+    # - drop
     # - flow
     # - flows-to-world
-    - httpV2
+    # - httpV2
     # - icmp
     # - kafka
     # - port-distribution
