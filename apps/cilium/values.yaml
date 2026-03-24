@@ -71,12 +71,12 @@ hubble:
     - dns
     - drop
     - flow
-    # - flows-to-world
-    # - httpV2
+    - flows-to-world
+    - httpV2
     - icmp
-    # - kafka
-    # - port-distribution
-    # - tcp
+    - kafka
+    - port-distribution
+    - tcp
     # post cluster init
     serviceMonitor:
       enabled: true
