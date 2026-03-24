@@ -84,7 +84,7 @@ spec:
       - name: harbor
       - name: headlamp
       - name: kubevirt-manager
-      - name: loki
+      # - name: loki
       - name: nvme-exporter
       - name: pyroscope
       - name: reloader
