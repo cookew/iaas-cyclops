@@ -86,9 +86,6 @@ config:
 dashboards:
   enabled: true
 
-prometheusRule:
-  enabled: true
-
 resources:
   limits:
     cpu: 250m
@@ -102,3 +99,7 @@ securityContext:
 
 serviceMonitor:
   enabled: true
+
+tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    effect: NoSchedule
