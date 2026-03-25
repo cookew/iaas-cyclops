@@ -202,8 +202,8 @@ loki:
         secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
 
 monitoring:
-  dashboards:
-    enabled: true
+  # dashboards:
+  #   enabled: true
   rules:
     enabled: true
   serviceMonitor:
