@@ -134,11 +134,11 @@ loki:
     # per_stream_rate_limit_burst: 200MB
     # per_stream_rate_limit: 100MB
     query_timeout: 5m
-    retention_period: 6h
+    retention_period: 48h
     retention_stream:
-      - selector: '{detected_level="debug"}'
+      - period: 24h
         priority: 1
-        period: 3h
+        selector: '{detected_level="debug"}'
 
     tsdb_precompute_chunks: true
     volume_enabled: true
