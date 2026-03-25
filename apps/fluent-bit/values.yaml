@@ -2,74 +2,91 @@ config:
   # https://docs.fluentbit.io/manual/pipeline/outputs/loki
   inputs: |
     [INPUT]
-        Name tail
-        Path /var/log/containers/*.log
-        multiline.parser docker, cri
-        Tag kube.*
-        Mem_Buf_Limit 32MB
-        Skip_Long_Lines On
-        Buffer_Chunk_Size 64KB
-        Buffer_Max_Size 128KB
+      Name tail
+      Path /var/log/containers/*.log
+      multiline.parser docker, cri
+      Tag kube.*
+      Mem_Buf_Limit 32MB
+      Skip_Long_Lines On
+      Buffer_Chunk_Size 64KB
+      Buffer_Max_Size 128KB
 
     [INPUT]
-        Name systemd
-        Tag host.*
-        Systemd_Filter _SYSTEMD_UNIT=kubelet.service
-        Read_From_Tail On
+      Name systemd
+      Tag host.*
+      Systemd_Filter _SYSTEMD_UNIT=kubelet.service
+      Read_From_Tail On
 
   filters: |
     [FILTER]
-        Name kubernetes
-        Match kube.*
-        Merge_Log On
-        Keep_Log Off
-        K8S-Logging.Parser On
-        K8S-Logging.Exclude On
-        Buffer_Size 256KB
+      Name kubernetes
+      Match kube.*
+      Merge_Log On
+      Keep_Log Off
+      K8S-Logging.Parser On
+      K8S-Logging.Exclude On
+      Buffer_Size 256KB
 
     # [FILTER]
-    #     name         nest
-    #     match        kube.*
-    #     operation    lift
-    #     nested_under kubernetes
-    #     add_prefix   kubernetes_
+    #   name         nest
+    #   match        kube.*
+    #   operation    lift
+    #   nested_under kubernetes
+    #   add_prefix   kubernetes_
 
     # [FILTER]
-    #     name         nest
-    #     match        kube.*
-    #     operation    lift
-    #     nested_under kubernetes_annotations
-    #     add_prefix   kubernetes_annotations_
+    #   name         nest
+    #   match        kube.*
+    #   operation    lift
+    #   nested_under kubernetes_annotations
+    #   add_prefix   kubernetes_annotations_
 
     # [FILTER]
-    #     Name                modify
-    #     Match               kube.*
-    #     Remove              kubernetes_annotations_k8s.ovn.org/pod-networks
-    #     Remove              kubernetes_annotations_k8s.v1.cni.cncf.io/network-status
+    #   Name                modify
+    #   Match               kube.*
+    #   Remove              kubernetes_annotations_k8s.ovn.org/pod-networks
+    #   Remove              kubernetes_annotations_k8s.v1.cni.cncf.io/network-status
 
   outputs: |
     [OUTPUT]
-        auto_kubernetes_labels on
-        # bearer_token
-        host loki-distributor.loki.svc
-        # http_user loki
-        # http_passwd loki
-        labels cluster=iaas, namespace=$kubernetes['namespace_name'], source=kubernetes
-        match *
-        name loki
-        # tls on
+      auto_kubernetes_labels on
+      # bearer_token
+      host loki-distributor.loki.svc
+      # http_user loki
+      # http_passwd loki
+      labels cluster=iaas, namespace=$kubernetes['namespace_name'], source=kubernetes
+      match *
+      name loki
+      # tls on
     # [OUTPUT]
-    #     auto_kubernetes_labels on
-    #     # bearer_token
-    #     host alloy.alloy.svc
-    #     # http_user loki
-    #     # http_passwd loki
-    #     labels cluster=iaas, namespace=$kubernetes['namespace_name'], source=kubernetes
-    #     match *
-    #     name loki
-    #     # tls on
+    #   auto_kubernetes_labels on
+    #   # bearer_token
+    #   host alloy.alloy.svc
+    #   # http_user loki
+    #   # http_passwd loki
+    #   labels cluster=iaas, namespace=$kubernetes['namespace_name'], source=kubernetes
+    #   match *
+    #   name loki
+    #   # tls on
+
+  service: |
+    [SERVICE]
+      Daemon Off
+      Flush {{ .Values.flush }}
+      Log_Level {{ .Values.logLevel }}
+      Parsers_File /fluent-bit/etc/parsers.conf
+      Parsers_File /fluent-bit/etc/conf/custom_parsers.conf
+      HTTP_Server On
+      HTTP_Listen 0.0.0.0
+      HTTP_Port {{ .Values.metricsPort }}
+      Health_Check On
+      storage.type memory
+      storage.max_chunks_up 1024
 
 dashboards:
+  enabled: true
+
+prometheusRule:
   enabled: true
 
 resources:
