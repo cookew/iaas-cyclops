@@ -136,9 +136,9 @@ loki:
     query_timeout: 5m
     retention_period: 48h
     retention_stream:
-      - period: 24h
-        priority: 1
-        selector: '{detected_level="debug"}'
+    - period: 24h
+      priority: 1
+      selector: '{detected_level="debug"}'
 
     tsdb_precompute_chunks: true
     volume_enabled: true

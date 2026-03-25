@@ -106,6 +106,8 @@ alloy:
       // End Kubernetes Metrics
 
 
+      // Maybe replace with:
+      //   https://grafana.com/docs/alloy/latest/reference/components/otelcol/otelcol.receiver.syslog/
       // Syslog listeners
       loki.source.syslog "local" {
         listener {
