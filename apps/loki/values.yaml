@@ -253,8 +253,8 @@ read:
 resultsCache:
   persistence:
     enabled: true
-    storageSize: 10G
     storageClass: ceph-filesystem
+    storageSize: 10G
 
 ruler:
   maxUnavailable: 2

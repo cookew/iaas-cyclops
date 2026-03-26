@@ -14,4 +14,4 @@ helmCharts:
   releaseName: jupyterhub
   repo: https://hub.jupyter.org/helm-chart
   valuesFile: values.yaml
-  version: 4.3.2
+  version: 4.3.3

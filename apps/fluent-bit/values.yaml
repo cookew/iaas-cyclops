@@ -58,6 +58,7 @@ config:
       match *
       name loki
       # tls on
+
     # [OUTPUT]
     #   auto_kubernetes_labels on
     #   # bearer_token
@@ -101,5 +102,5 @@ serviceMonitor:
   enabled: true
 
 tolerations:
-  - key: node-role.kubernetes.io/control-plane
-    effect: NoSchedule
+- key: node-role.kubernetes.io/control-plane
+  effect: NoSchedule
