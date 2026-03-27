@@ -138,7 +138,7 @@ loki:
     retention_stream:
     - period: 24h
       priority: 1
-      selector: '{detected_level="debug"}'
+      selector: '{level="debug"}'
 
     tsdb_precompute_chunks: true
     volume_enabled: true
