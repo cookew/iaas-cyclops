@@ -7,7 +7,7 @@ csi:
   enableLiveness: true
   enableMetadata: true
   enableOMAPGenerator: true
-  # logLevel: INFO
+  logLevel: INFO
   nfs:
     enabled: true
   # pluginNodeAffinity: node-role.kubernetes.io/control-plane=""
