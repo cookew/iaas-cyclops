@@ -180,6 +180,7 @@ loki:
       store: tsdb
   server:
     grpc_server_max_recv_msg_size: 104857600 # 100MB
+    grpc_server_max_send_msg_size: 104857600 # 100MB
   storage:
     bucketNames:
       admin: loki
