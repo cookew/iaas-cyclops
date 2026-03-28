@@ -74,22 +74,22 @@ spec:
         syncWave: -30
 
       - name: alloy
-      # - name: capi-operator
-      # - name: cyberchef
-      # - name: drawio
+      - name: capi-operator
+      - name: cyberchef
+      - name: drawio
       - name: fluent-bit
       - name: forecastle
-      # - name: github-arc
+      - name: github-arc
       - name: grafana
-      # - name: harbor
-      # - name: headlamp
-      # - name: kubevirt-manager
+      - name: harbor
+      - name: headlamp
+      - name: kubevirt-manager
       - name: loki
       - name: nvme-exporter
-      # - name: pyroscope
-      # - name: reloader
-      # - name: tempo
-      # - name: whoami
+      - name: pyroscope
+      - name: reloader
+      - name: tempo
+      - name: whoami
 
       # - name: argo-workflows
       # #   serverSideApply: "true"
@@ -132,8 +132,8 @@ spec:
         automated:
           allowEmpty: true
           enabled: true
-          prune: false
-          selfHeal: false
+          prune: true
+          selfHeal: true
         syncOptions:
         - CreateNamespace={{ dig "createNamespace" "true" . }}
         - Replace={{ dig "replace" "false" . }}
