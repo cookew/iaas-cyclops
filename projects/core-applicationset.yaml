@@ -54,15 +54,15 @@ spec:
 
       - name: crossplane-keycloak-provider
         syncWave: -50
-      - name: kubevirt
-        syncWave: -50
+      # - name: kubevirt
+      #   syncWave: -50
       - name: rook-ceph-cluster
         createNamespace: "true"
         syncWave: -50
 
-      - name: kubevirt-network
-        createNamespace: "false"
-        syncWave: -40
+      # - name: kubevirt-network
+      #   createNamespace: "false"
+      #   syncWave: -40
       - name: cloudnative-pg
         syncWave: -40
       - name: crossplane-keycloak-realms
@@ -74,22 +74,22 @@ spec:
         syncWave: -30
 
       - name: alloy
-      - name: capi-operator
-      - name: cyberchef
-      - name: drawio
+      # - name: capi-operator
+      # - name: cyberchef
+      # - name: drawio
       - name: fluent-bit
       - name: forecastle
-      - name: github-arc
+      # - name: github-arc
       - name: grafana
-      - name: harbor
-      - name: headlamp
-      - name: kubevirt-manager
+      # - name: harbor
+      # - name: headlamp
+      # - name: kubevirt-manager
       - name: loki
       - name: nvme-exporter
-      - name: pyroscope
-      - name: reloader
-      - name: tempo
-      - name: whoami
+      # - name: pyroscope
+      # - name: reloader
+      # - name: tempo
+      # - name: whoami
 
       # - name: argo-workflows
       # #   serverSideApply: "true"
