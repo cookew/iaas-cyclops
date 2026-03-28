@@ -44,7 +44,7 @@ spec:
       - MigrationPriorityQueue
       - PodSecondaryInterfaceNamingUpgrade
       # Remove this for 1.8
-      - MultiArchitecture
+      # - MultiArchitecture
     # permittedHostDevices:
     #   usb:
     #   - resourceName: "zwave"
