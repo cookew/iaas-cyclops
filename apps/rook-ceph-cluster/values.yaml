@@ -341,8 +341,8 @@ cephECBlockPools:
     imageFormat: "2"
   storageClass:
     allowVolumeExpansion: true
-    annotations:
-      storageclass.kubevirt.io/is-default-virt-class: "true"
+    # annotations:
+    #   storageclass.kubevirt.io/is-default-virt-class: "true"
     enabled: true
     isDefault: false
     mapOptions: "krbd:rxbounce"
