@@ -19,11 +19,6 @@ extraSecretMounts:
   optional: false
   secretName: grafana-keycloak-client
   readOnly: true
-# - name: grafana-renderer
-#   mountPath: /grafana-renderer
-#   optional: false
-#   secretName: grafana-renderer
-#   readOnly: true
 
 grafana.ini:
   analytics:
@@ -74,10 +69,6 @@ grafana.ini:
     url: https://grafana.net
   news:
     news_feed_enabled: false
-  # rendering:
-  #   callback_url: http://renderer.grafana.svc:8081/callback
-  #   server_url: http://renderer.grafana.svc:8081/render
-  #   renderer_token: "$__file{/grafana-renderer/renderer_token}"
   security:
     allow_embedding: true
     content_security_policy: true
