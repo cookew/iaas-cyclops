@@ -16,4 +16,4 @@ helmCharts:
   releaseName: loki
   repo: https://grafana-community.github.io/helm-charts
   valuesFile: values.yaml
-  version: 9.3.5
+  version: 9.3.6
