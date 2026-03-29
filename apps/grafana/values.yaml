@@ -60,6 +60,7 @@ grafana.ini:
   auth.security:
     protected_roles: server_admins
   feature_toggles:
+    grafanaAdvisor: true
     provisioning: true
     kubernetesClientDashboardsFolders: true
     kubernetesDashboards: true # use k8s from browser
