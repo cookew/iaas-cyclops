@@ -19,6 +19,11 @@ extraSecretMounts:
   optional: false
   secretName: grafana-keycloak-client
   readOnly: true
+# - name: grafana-renderer
+#   mountPath: /grafana-renderer
+#   optional: false
+#   secretName: grafana-renderer
+#   readOnly: true
 
 grafana.ini:
   analytics:
@@ -33,6 +38,8 @@ grafana.ini:
     password: "$__file{/grafana-pg-cluster-app/password}"
     type: postgres
     user: "$__file{/grafana-pg-cluster-app/user}"
+  auth.anonymous:
+    hide_version: true
   auth.generic_oauth:
     allow_assign_grafana_admin: true
     allow_sign_up: true
@@ -67,10 +74,17 @@ grafana.ini:
     url: https://grafana.net
   news:
     news_feed_enabled: false
+  # rendering:
+  #   callback_url: http://renderer.grafana.svc:8081/callback
+  #   server_url: http://renderer.grafana.svc:8081/render
+  #   renderer_token: "$__file{/grafana-renderer/renderer_token}"
   security:
     allow_embedding: true
+    content_security_policy: true
+    cookie_samesite: strict
   server:
     root_url: https://grafana.apps.iaas.wcooke.me
+    enforce_domain: true
 
 ingress:
   annotations:
@@ -88,6 +102,12 @@ ingress:
   - hosts:
     - grafana.apps.iaas.wcooke.me
     secretName: grafana-ingress-tls
+
+imageRenderer:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+  revisionHistoryLimit: 1
 
 initChownData:
   resources:
