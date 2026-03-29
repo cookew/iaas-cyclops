@@ -68,7 +68,7 @@ hubble:
     dashboards:
       enabled: true
     enabled:
-    - dns
+    - dns:query
     - drop
     - flow
     - flows-to-world
