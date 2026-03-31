@@ -31,7 +31,7 @@ workload:
 
 replicaCount: 2
 
-revisionHistoryLimit: 1
+revisionHistoryLimit: 0
 
 serviceAccount:
   enable: false
@@ -138,8 +138,10 @@ extraEnvVars:
     value: 'https://open-webui.apps.iaas.wcooke.me'
   - name: S3_ADDRESSING_STYLE
     value: path
-  - name: REQUESTS_VERIFY
-    value: "False"
+  # - name: REQUESTS_VERIFY
+  #   value: "False"
+  - name: SSL_CERT_FILE
+    value: /cacerts/ca-bundle.pem
   # - name: DATABASE_TYPE
   #   value: postgresql
   # - name: DATABASE_USER
