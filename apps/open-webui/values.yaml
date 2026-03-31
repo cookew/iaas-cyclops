@@ -146,7 +146,10 @@ extraEnvVars:
     value: "True"
   - name: AWS_CA_BUNDLE
     value: /cacerts/ca-bundle.pem
-
+  - name: CORS_ALLOW_ORIGIN
+    value: 'https://open-webui.apps.iaas.wcooke.me'
+  - name: S3_ADDRESSING_STYLE
+    value: path
   # - name: DATABASE_TYPE
   #   value: postgresql
   # - name: DATABASE_USER
