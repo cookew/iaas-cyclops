@@ -1,7 +1,7 @@
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
 metadata:
-  name: open-webui-registry-bucket
+  name: open-webui-bucket
 spec:
   bucketName: open-webui
   # generateBucketName: hello
