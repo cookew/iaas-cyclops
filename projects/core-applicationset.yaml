@@ -86,6 +86,7 @@ spec:
       - name: kubevirt-manager
       - name: loki
       - name: nvme-exporter
+      - name: ollama
       - name: open-webui
       - name: pyroscope
       - name: reloader
@@ -108,7 +109,6 @@ spec:
       # - name: mattermost-operator
       # - name: mattermost
       # - name: neuvector
-      # - name: ollama
 
   template:
     metadata:
