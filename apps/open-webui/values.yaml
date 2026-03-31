@@ -137,12 +137,12 @@ extraEnvVars:
   - name: S3_ADDRESSING_STYLE
     value: path
 
+  - name: SSL_CERT_FILE
+    value: /etc/ssl/certs/ca-certificates.crt
   # - name: AWS_CA_BUNDLE
-  #   value: /cacerts/ca-bundle.pem
+  #   value: /etc/ssl/certs/ca-certificates.crt
   # - name: REQUESTS_VERIFY
   #   value: "False"
-  # - name: SSL_CERT_FILE
-  #   value: /cacerts/ca-bundle.pem
 
   # - name: DATABASE_TYPE
   #   value: postgresql
