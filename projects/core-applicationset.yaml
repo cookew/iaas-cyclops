@@ -86,6 +86,7 @@ spec:
       - name: kubevirt-manager
       - name: loki
       - name: nvme-exporter
+      - name: open-webui
       - name: pyroscope
       - name: reloader
       - name: tempo

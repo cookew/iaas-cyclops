@@ -1,0 +1,118 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  name: open-webui
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    accessType: confidential
+    baseUrl: /
+    clientId: open-webui
+    clientSecretSecretRef:
+      key: client-secret
+      name: open-webui-keycloak-client
+      namespace: open-webui
+    directAccessGrantsEnabled: true
+    name: Open WebUI
+    pkceCodeChallengeMethod: S256
+    realmIdRef:
+      name: iaas
+    rootUrl: https://open-webui.apps.iaas.wcooke.me
+    standardFlowEnabled: true
+    # validPostLogoutRedirectUris:
+    # - /login
+    validRedirectUris:
+    - /oauth/oidc/callback
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: open-webui-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: open-webui
+    name: open-webui-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  labels:
+    keycloak/realm: iaas
+    keycloak/group-users: ""
+  name: open-webui-user
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: open-webui
+    name: open-webui-user
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: open-webui-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: open-webui-admins
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: open-webui-users
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: open-webui-users
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: open-webui-admins-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: open-webui-admins
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: open-webui-admin
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: open-webui-users-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: open-webui-users
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: open-webui-user
+  providerConfigRef:
+    name: keycloak-provider-config
