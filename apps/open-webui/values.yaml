@@ -106,7 +106,7 @@ persistence:
   # -- If using multiple replicas, you must update accessModes to ReadWriteMany
   # @section -- Persistence configuration
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   # -- Storage class of the Open WebUI PVC
   # @section -- Persistence configuration
   storageClass: ""
@@ -116,40 +116,15 @@ persistence:
   # -- Additional annotations to add to the PVC
   # @section -- Persistence configuration
   annotations: {}
-  # -- Sets the storage provider, availables values are `local`, `s3`, `gcs` or `azure`
-  # @section -- Persistence configuration
-  provider: local
+  provider: s3
   s3:
-    # -- Sets the access key ID for S3 storage
-    # @section -- Amazon S3 Storage configuration
-    accessKey: ""
-    # -- Sets the secret access key for S3 storage (ignored if secretKeyExistingSecret is set)
-    # @section -- Amazon S3 Storage configuration
-    secretKey: ""
-    # -- Set the secret access key for S3 storage from existing k8s secret
-    # @section -- Amazon S3 Storage configuration
-    accessKeyExistingSecret: ""
-    # -- Set the secret access key for S3 storage from existing k8s secret key
-    # @section -- Amazon S3 Storage configuration
-    accessKeyExistingAccessKey: ""
-    # -- Set the secret key for S3 storage from existing k8s secret
-    # @section -- Amazon S3 Storage configuration
-    secretKeyExistingSecret: ""
-    # -- Set the secret key for S3 storage from existing k8s secret key
-    # @section -- Amazon S3 Storage configuration
-    secretKeyExistingSecretKey: ""
-    # -- Sets the endpoint url for S3 storage
-    # @section -- Amazon S3 Storage configuration
-    endpointUrl: ""
-    # -- Sets the region name for S3 storage
-    # @section -- Amazon S3 Storage configuration
-    region: ""
-    # -- Sets the bucket name for S3 storage
-    # @section -- Amazon S3 Storage configuration
-    bucket: ""
-    # -- Sets the key prefix for a S3 object
-    # @section -- Amazon S3 Storage configuration
-    keyPrefix: ""
+    accessKeyExistingSecret: open-webui-bucket
+    accessKeyExistingAccessKey: AWS_ACCESS_KEY_ID
+    secretKeyExistingSecret: open-webui-bucket
+    secretKeyExistingSecretKey: AWS_SECRET_ACCESS_KEY
+    endpointUrl: rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc:443
+    region: us-east-1
+    bucket: open-webui
 
 # -- Enables the use of OpenAI APIs
 # @section -- OpenAI API configuration

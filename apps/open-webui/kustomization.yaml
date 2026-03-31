@@ -5,6 +5,7 @@ namespace: open-webui
 
 resources:
 - base/open-webui-keycloak-client.yaml
+- base/open-webui-objectbucketclaim.yaml
 - base/open-webui-pg-cluster.yaml
 - sealed-secrets/open-webui-keycloak-client.yaml
 
