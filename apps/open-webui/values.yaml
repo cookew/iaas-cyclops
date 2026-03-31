@@ -144,6 +144,8 @@ extraEnvVars:
         key: fqdn-uri
   - name: DATABASE_ENABLE_SESSION_SHARING
     value: "True"
+  - name: AWS_CA_BUNDLE
+    value: /cacerts/ca-bundle.pem
 
   # - name: DATABASE_TYPE
   #   value: postgresql
@@ -185,28 +187,15 @@ extraEnvFrom: []
   # - secretRef:
   #     name: my-secret
 
-# -- Configure runtime class
-# ref: <https://kubernetes.io/docs/concepts/containers/runtime-class/>
-runtimeClassName: ""
-
-# -- Configure container volume mounts
-# ref: <https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/>
 volumeMounts:
-  initContainer: []
-  # - name: ""
-  #   mountPath: ""
-  container: []
-  # - name: ""
-  #   mountPath: ""
+  container:
+  - name: cabundle
+    mountPath: /cacerts
 
-# -- Configure pod volumes
-# ref: <https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/>
-volumes: []
-# - name: ""
-#   configMap:
-#     name: ""
-# - name: ""
-#   emptyDir: {}
+volumes:
+- name: cabundle
+  secret:
+    secretName: tm-ca-bundle-secret
 
 sso:
   enabled: true
