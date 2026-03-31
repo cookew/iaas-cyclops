@@ -222,7 +222,7 @@ sso:
   roleManagement:
     # -- The claim that contains the roles (can be nested, e.g., user.roles)
     # @section -- Role management configuration
-    rolesClaim: roles
+    rolesClaim: resource_access.open-webui.roles
     allowedRoles: open-webui-user
     # -- Comma-separated list of roles allowed to log in as admin (receive open webui role admin)
     # @section -- Role management configuration
