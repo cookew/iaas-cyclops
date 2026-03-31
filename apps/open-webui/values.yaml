@@ -44,7 +44,7 @@ ingress:
     forecastle.stakater.com/appName: Open WebUI
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Apps
-    forecastle.stakater.com/icon: https://open-webui.apps.iaas.wcooke.me/images/logo.png
+    forecastle.stakater.com/icon: https://open-webui.apps.iaas.wcooke.me/static/favicon.svg
     forecastle.stakater.com/network-restricted: "true"
   host: open-webui.apps.iaas.wcooke.me
   tls: true
