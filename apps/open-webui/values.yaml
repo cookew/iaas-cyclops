@@ -141,8 +141,8 @@ extraEnvVars:
     value: /etc/ssl/certs/ca-certificates.crt
   # - name: AWS_CA_BUNDLE
   #   value: /etc/ssl/certs/ca-certificates.crt
-  # - name: REQUESTS_VERIFY
-  #   value: "False"
+  - name: REQUESTS_VERIFY
+    value: "False"
 
   # - name: DATABASE_TYPE
   #   value: postgresql
