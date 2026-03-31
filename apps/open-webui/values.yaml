@@ -132,16 +132,18 @@ extraEnvVars:
         key: fqdn-uri
   - name: DATABASE_ENABLE_SESSION_SHARING
     value: "True"
-  - name: AWS_CA_BUNDLE
-    value: /cacerts/ca-bundle.pem
   - name: CORS_ALLOW_ORIGIN
     value: 'https://open-webui.apps.iaas.wcooke.me'
   - name: S3_ADDRESSING_STYLE
     value: path
-  - name: REQUESTS_VERIFY
-    value: "False"
-  - name: SSL_CERT_FILE
-    value: /cacerts/ca-bundle.pem
+
+  # - name: AWS_CA_BUNDLE
+  #   value: /cacerts/ca-bundle.pem
+  # - name: REQUESTS_VERIFY
+  #   value: "False"
+  # - name: SSL_CERT_FILE
+  #   value: /cacerts/ca-bundle.pem
+
   # - name: DATABASE_TYPE
   #   value: postgresql
   # - name: DATABASE_USER
@@ -172,13 +174,53 @@ extraEnvVars:
 
 volumeMounts:
   container:
-  - name: cabundle
-    mountPath: /cacerts
+  - mountPath: /etc/ssl/certs/ca-certificates.crt
+    name: new-ca-certificates
+    readOnly: true
+    subPath: ca-certificates.crt
 
 volumes:
-- name: cabundle
-  secret:
-    secretName: tm-ca-bundle-secret
+- configMap:
+    defaultMode: 420
+    name: tm-ca-bundle
+  name: ca
+- emptyDir:
+    medium: Memory
+    sizeLimit: 5Mi
+  name: new-ca-certificates
+- configMap:
+    defaultMode: 420
+    name: tm-ca-bundle
+  name: private-ca-certificates
+
+extraInitContainers:
+- args:
+  - |
+    echo Certificates in /private-ca-certificates:
+    ls -al /private-ca-certificates
+    echo Existing CA certificates in /etc/ssl/certs:
+    ls -al /etc/ssl/certs/
+    echo Combining CA certificates
+    for cert in /etc/ssl/certs/*.{0,pem} /private-ca-certificates/*
+    do
+      echo "Adding cert: $cert"
+      cat "${cert}" >> /new-ca-certificates/ca-certificates.crt
+      echo "" >> /new-ca-certificates/ca-certificates.crt
+    done
+    echo New CA certificates file:
+    ls -al /new-ca-certificates
+  command: ["/usr/bin/bash", "-c"]
+  image: ghcr.io/open-webui/open-webui:0.8.12
+  name: ca-certificate-fixer
+  # securityContext:
+  #   runAsUser: 0
+  volumeMounts:
+  - mountPath: /new-ca-certificates
+    name: new-ca-certificates
+    readOnly: false
+  - mountPath: /private-ca-certificates
+    name: private-ca-certificates
+    readOnly: true
 
 sso:
   enabled: true
