@@ -19,7 +19,7 @@ spec:
     - key: app.kubernetes.io/component
       operator: In
       values:
-        - query-frontend
+      - distributor
     matchLabels:
       app.kubernetes.io/name: loki
   policyTypes:
@@ -46,7 +46,7 @@ spec:
     - key: app.kubernetes.io/component
       operator: In
       values:
-        - query-frontend
+      - distributor
     matchLabels:
       app.kubernetes.io/name: loki
   policyTypes:
@@ -73,7 +73,7 @@ spec:
     - key: app.kubernetes.io/component
       operator: In
       values:
-        - query-frontend
+      - query-frontend
     matchLabels:
       app.kubernetes.io/name: loki
   policyTypes:
