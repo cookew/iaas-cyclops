@@ -247,10 +247,10 @@ loki:
     gateway:
       enabled: true
 
-# test:
-#   enabled: false
-# lokiCanary:
-#   enabled: false
+test:
+  enabled: false
+lokiCanary:
+  enabled: false
 
 monitoring:
   dashboards:
