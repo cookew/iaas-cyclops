@@ -79,7 +79,7 @@ replica:
   # IMPORTANT: When auth.enabled is true, this user MUST be defined in auth.aclUsers.
   # The chart requires this to retrieve the password for replica authentication.
   # The user must have appropriate replication permissions: +psync +replconf +ping
-  replicationUser: "default"
+  replicationUser: default
 
   # Replication settings
   # Use diskless replication (sync directly from memory) vs disk-based
@@ -128,7 +128,7 @@ affinity:
       weight: 1
 
 # Valkey logging level: debug, verbose, notice, warning
-valkeyLogLevel: "info"
+valkeyLogLevel: info
 
 # Environment variables to inject into Valkey container
 env: {}

@@ -66,13 +66,17 @@ gateway:
     port: 8080
 
 global:
+  extraEnv:
+  - name: VALKEY_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: loki-valkey-password
+        key: default
   extraEnvFrom:
   - configMapRef:
       name: loki-bucket
   - secretRef:
       name: loki-bucket
-  - secretRef:
-      name: loki-valkey-password
   extraArgs:
   - -config.expand-env=true
 
@@ -198,7 +202,7 @@ loki:
           expiration: 1h
           idle_timeout: 5m
           max_connection_age: 5m
-          password: "${default}"
+          password: "${VALKEY_PASSWORD}"
           # tls_enabled: true
           # tls_insecure_skip_verify: true
           username: default
