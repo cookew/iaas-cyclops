@@ -66,12 +66,12 @@ gateway:
     port: 8080
 
 global:
-  extraEnv:
-  - name: VALKEY_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: loki-valkey-password
-        key: default
+  # extraEnv:
+  # - name: VALKEY_PASSWORD
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: loki-valkey-password
+  #       key: default
   extraEnvFrom:
   - configMapRef:
       name: loki-bucket
