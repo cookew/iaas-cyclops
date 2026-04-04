@@ -3,19 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: alloy
 spec:
-  policyTypes:
-  - Ingress
-  podSelector:
-    matchExpressions:
-    - key: app.kubernetes.io/component
-      operator: In
-      values:
-        - gateway
-        - read
-        - write
-        - single-binary
-    matchLabels:
-      app.kubernetes.io/name: loki
   ingress:
   - from:
     - namespaceSelector:
@@ -27,25 +14,25 @@ spec:
     ports:
     - port: http-metrics
       protocol: TCP
+  podSelector:
+    matchExpressions:
+    - key: app.kubernetes.io/component
+      operator: In
+      values:
+        - gateway
+        - read
+        - write
+        - single-binary
+    matchLabels:
+      app.kubernetes.io/name: loki
+  policyTypes:
+  - Ingress
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: fluent-bit
 spec:
-  policyTypes:
-  - Ingress
-  podSelector:
-    matchExpressions:
-    - key: app.kubernetes.io/component
-      operator: In
-      values:
-        - gateway
-        - read
-        - write
-        - single-binary
-    matchLabels:
-      app.kubernetes.io/name: loki
   ingress:
   - from:
     - namespaceSelector:
@@ -57,3 +44,46 @@ spec:
     ports:
     - port: http-metrics
       protocol: TCP
+  podSelector:
+    matchExpressions:
+    - key: app.kubernetes.io/component
+      operator: In
+      values:
+        - gateway
+        - read
+        - write
+        - single-binary
+    matchLabels:
+      app.kubernetes.io/name: loki
+  policyTypes:
+  - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: grafana
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          app.kubernetes.io/name: grafana
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: grafana
+    ports:
+    - port: http-metrics
+      protocol: TCP
+  podSelector:
+    matchExpressions:
+    - key: app.kubernetes.io/component
+      operator: In
+      values:
+        - gateway
+        - read
+        - write
+        - single-binary
+    matchLabels:
+      app.kubernetes.io/name: loki
+  policyTypes:
+  - Ingress
