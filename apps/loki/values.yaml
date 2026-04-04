@@ -193,19 +193,17 @@ loki:
   query_range:
     results_cache:
       cache:
-        # embedded_cache:
-        #   enabled: true
-        #   max_size_mb: 500
-        #   ttl: 1h
-        redis:
-          endpoint: valkey.loki.svc:6379
-          expiration: 1h
-          idle_timeout: 5m
-          max_connection_age: 5m
-          password: "${VALKEY_PASSWORD}"
-          # tls_enabled: true
-          # tls_insecure_skip_verify: true
-          username: default
+        embedded_cache:
+          enabled: true
+          max_size_mb: 500
+          ttl: 1h
+        # redis:
+        #   endpoint: valkey.loki.svc:6379
+        #   expiration: 1h
+        #   password: "${VALKEY_PASSWORD}"
+        #   # tls_enabled: true
+        #   # tls_insecure_skip_verify: true
+        #   username: default
     # cache_results: true
     # cache_instant_metric_results: true
   schemaConfig:
