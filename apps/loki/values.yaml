@@ -320,5 +320,9 @@ ruler:
   replicas: 3
   sidecar: true
 
+serviceAccount:
+  create: false
+  automountServiceAccountToken: false
+
 write:
   replicas: 0
