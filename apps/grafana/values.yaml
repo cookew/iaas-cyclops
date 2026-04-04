@@ -138,7 +138,6 @@ sidecar:
     enabled: true
     extraMounts:
     - name: ca-certificates
-      optional: false
       mountPath: /etc/ssl/certs/ca-certificates.crt
       readOnly: true
       subPath: ca-certificates.crt
