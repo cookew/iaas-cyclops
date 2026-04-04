@@ -1,4 +1,4 @@
-# https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
+# https://github.com/grafana-community/helm-charts/blob/main/charts/loki/values.yaml
 
 backend:
    replicas: 0
@@ -24,8 +24,11 @@ compactor:
 deploymentMode: Distributed
 
 distributor:
-  maxUnavailable: 2
-  replicas: 3
+  maxUnavailable: 1
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
 
 gateway:
   basicAuth:
@@ -62,6 +65,8 @@ global:
       name: loki-bucket
   - secretRef:
       name: loki-bucket
+  - secretRef:
+      name: loki-valkey-password
   extraArgs:
   - -config.expand-env=true
 
@@ -88,6 +93,8 @@ ingester:
      enabled: false
 
 loki:
+  analytics:
+    reporting_enabled: false
   auth_enabled: false
   compactor:
     compaction_interval: 10m
@@ -121,6 +128,7 @@ loki:
     unordered_writes: true
 
     allow_structured_metadata: true
+    max_cache_freshness_per_query: 10m
     max_chunks_per_query: 20000000
     max_concurrent_tail_requests: 100
     max_entries_limit_per_query: 100000
@@ -133,13 +141,16 @@ loki:
     max_query_series: 10000
     per_stream_rate_limit_burst: 150MB
     per_stream_rate_limit: 30MB
-    query_timeout: 5m
+    query_timeout: 300s
     retention_period: 48h
     retention_stream:
     - period: 24h
       priority: 1
       selector: '{level="debug"}'
-
+    - period: 24h
+      priority: 2
+      selector: '{detected_level="debug"}'
+    split_queries_by_interval: 15m
     tsdb_precompute_chunks: true
     volume_enabled: true
     shard_streams:
@@ -166,10 +177,21 @@ loki:
   query_range:
     results_cache:
       cache:
-        embedded_cache:
-          enabled: true
-          max_size_mb: 500
-          ttl: 1h
+        # embedded_cache:
+        #   enabled: true
+        #   max_size_mb: 500
+        #   ttl: 1h
+        redis:
+          endpoint: valkey.gitlab.svc:6379
+          expiration: 1h
+          idle_timeout: 5m
+          max_connection_age: 5m
+          password: "${default}"
+          # tls_enabled: true
+          # tls_insecure_skip_verify: true
+          username: default
+    cache_results: true
+    cache_instant_metric_results: true
   schemaConfig:
     configs:
     - from: 2026-01-01
@@ -206,6 +228,10 @@ loki:
           insecure_skip_verify: true
         s3ForcePathStyle: true
         secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
+  ui:
+    enabled: true
+    gateway:
+      enabled: true
 
 monitoring:
   dashboards:
@@ -237,12 +263,19 @@ patternIngester:
   replicas: 3
 
 querier:
-  maxUnavailable: 2
-  replicas: 3
+  maxUnavailable: 1
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
 
 queryFrontend:
-  maxUnavailable: 2
-  replicas: 3
+  maxUnavailable: 1
+  maxUnavailable: 1
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
 
 queryScheduler:
   maxUnavailable: 2

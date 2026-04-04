@@ -5,10 +5,7 @@ namespace: loki
 
 resources:
 - base/objectbucketclaim.yaml
-
-# patches:
-# - path: patches/distributor-deployment.yaml
-# - path: patches/loki-cm.yaml
+- sealed-secrets/loki-valkey-password.yaml
 
 helmCharts:
 - name: loki
@@ -16,4 +13,10 @@ helmCharts:
   releaseName: loki
   repo: https://grafana-community.github.io/helm-charts
   valuesFile: values.yaml
-  version: 9.4.5
+  version: 9.5.1
+- name: valkey
+  namespace: gitlab
+  releaseName: valkey
+  repo: https://valkey.io/valkey-helm
+  valuesFile: valkey-values.yaml
+  version: 0.9.3
