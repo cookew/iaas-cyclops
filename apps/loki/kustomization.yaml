@@ -15,7 +15,7 @@ helmCharts:
   valuesFile: values.yaml
   version: 9.5.4
 - name: valkey
-  namespace: gitlab
+  namespace: loki
   releaseName: valkey
   repo: https://valkey.io/valkey-helm
   valuesFile: valkey-values.yaml
