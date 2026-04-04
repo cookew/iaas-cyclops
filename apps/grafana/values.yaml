@@ -1,12 +1,12 @@
 admin:
   existingSecret: grafana-admin
 
-extraConfigmapMounts:
-- name: ca-bundle
-  configMap: tm-ca-bundle
-  mountPath: /ca-bundle
-  optional: false
-  readOnly: true
+# extraConfigmapMounts:
+# - name: ca-bundle
+#   configMap: tm-ca-bundle
+#   mountPath: /ca-bundle
+#   optional: false
+#   readOnly: true
 
 extraSecretMounts:
 - name: grafana-pg-cluster-app
