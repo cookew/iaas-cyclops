@@ -20,7 +20,7 @@ spec:
   - configMap:
       name: kube-root-ca.crt
       key: ca.crt
-  - secret:
+  - configMap:
       name: root-ca-cert
       key: root-ca.crt
   - secret:
