@@ -242,10 +242,6 @@ loki:
           insecure_skip_verify: true
         s3ForcePathStyle: true
         secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
-  ui:
-    enabled: true
-    gateway:
-      enabled: true
 
 test:
   enabled: false
