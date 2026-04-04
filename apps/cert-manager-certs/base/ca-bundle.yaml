@@ -17,6 +17,9 @@ metadata:
   name: tm-ca-bundle-secret
 spec:
   sources:
+  - configMap:
+      name: kube-root-ca.crt
+      key: ca.crt
   - secret:
       name: iaas-wcooke-me
       key: tls.crt
