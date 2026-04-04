@@ -24,13 +24,18 @@ compactor:
 deploymentMode: Distributed
 
 distributor:
-  maxUnavailable: 1
   autoscaling:
     enabled: true
     minReplicas: 2
-    maxReplicas: 5
+    maxReplicas:
+  podDisruptionBudget:
+    maxUnavailable: 1
 
 gateway:
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas:
   basicAuth:
     enabled: false
     # -- Existing basic auth secret to use. Must contain '.htpasswd'
@@ -55,7 +60,8 @@ gateway:
     - hosts:
       - loki.apps.iaas.wcooke.me
       secretName: loki-gateway-ingress-certs
-  replicas: 3
+  podDisruptionBudget:
+    maxUnavailable: 1
   service:
     port: 8080
 
@@ -71,7 +77,8 @@ global:
   - -config.expand-env=true
 
 indexGateway:
-  maxUnavailable: 2
+  podDisruptionBudget:
+    maxUnavailable: 2
   replicas: 3
   # persistence:
   #   enabled: true
@@ -247,7 +254,6 @@ overridesExporter:
   replicas: 3
 
 patternIngester:
-  maxUnavailable: 2
   persistence:
     claims:
     - name: data
@@ -260,25 +266,29 @@ patternIngester:
     size: 1Gi
     storageClass: ceph-filesystem
     whenDeleted: Delete
+  podDisruptionBudget:
+    maxUnavailable: 2
   replicas: 3
 
 querier:
-  maxUnavailable: 1
   autoscaling:
     enabled: true
     minReplicas: 2
     maxReplicas: 5
+  podDisruptionBudget:
+    maxUnavailable: 1
 
 queryFrontend:
-  maxUnavailable: 1
-  maxUnavailable: 1
   autoscaling:
     enabled: true
     minReplicas: 2
     maxReplicas: 5
+  podDisruptionBudget:
+    maxUnavailable: 1
 
 queryScheduler:
-  maxUnavailable: 2
+  podDisruptionBudget:
+    maxUnavailable: 2
   replicas: 3
 
 read:
@@ -291,11 +301,13 @@ resultsCache:
     storageSize: 10G
 
 ruler:
-  maxUnavailable: 2
   # persistence:
   #   enabled: true
   #   storageClass: ceph-filesystem
+  podDisruptionBudget:
+    maxUnavailable: 2
   replicas: 3
+  sidecar: true
 
 write:
   replicas: 0
