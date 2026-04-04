@@ -27,7 +27,7 @@ distributor:
   autoscaling:
     enabled: true
     minReplicas: 2
-    maxReplicas:
+    maxReplicas: 4
   podDisruptionBudget:
     maxUnavailable: 1
 
@@ -35,7 +35,7 @@ gateway:
   autoscaling:
     enabled: true
     minReplicas: 2
-    maxReplicas:
+    maxReplicas: 4
   basicAuth:
     enabled: false
     # -- Existing basic auth secret to use. Must contain '.htpasswd'
@@ -275,7 +275,7 @@ querier:
   autoscaling:
     enabled: true
     minReplicas: 2
-    maxReplicas: 5
+    maxReplicas: 4
   podDisruptionBudget:
     maxUnavailable: 1
 
@@ -283,7 +283,7 @@ queryFrontend:
   autoscaling:
     enabled: true
     minReplicas: 2
-    maxReplicas: 5
+    maxReplicas: 4
   podDisruptionBudget:
     maxUnavailable: 1
 
