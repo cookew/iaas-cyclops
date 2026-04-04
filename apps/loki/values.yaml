@@ -194,7 +194,7 @@ loki:
         #   max_size_mb: 500
         #   ttl: 1h
         redis:
-          endpoint: valkey.gitlab.svc:6379
+          endpoint: valkey.loki.svc:6379
           expiration: 1h
           idle_timeout: 5m
           max_connection_age: 5m
