@@ -206,8 +206,8 @@ loki:
           # tls_enabled: true
           # tls_insecure_skip_verify: true
           username: default
-    cache_results: true
-    cache_instant_metric_results: true
+    # cache_results: true
+    # cache_instant_metric_results: true
   schemaConfig:
     configs:
     - from: 2026-01-01
