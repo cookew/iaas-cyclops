@@ -245,6 +245,9 @@ loki:
     gateway:
       enabled: true
 
+lokiCanary:
+  enabled: false
+
 monitoring:
   dashboards:
     enabled: true
