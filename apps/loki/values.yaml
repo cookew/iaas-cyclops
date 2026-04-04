@@ -78,7 +78,7 @@ global:
 
 indexGateway:
   podDisruptionBudget:
-    maxUnavailable: 2
+    maxUnavailable: 1
   replicas: 3
   # persistence:
   #   enabled: true
@@ -86,6 +86,10 @@ indexGateway:
   #   whenDeleted: Delete
 
 ingester:
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 4
   # persistence:
   #   enabled: true
   #   claims:
@@ -95,7 +99,8 @@ ingester:
   #       size: 10Gi
   #       storageClass: ceph-filesystem
   #   whenDeleted: Delete
-  replicas: 3 # To ensure data durability with replication
+  podDisruptionBudget:
+    maxUnavailable: 1
   zoneAwareReplication:
      enabled: false
 
