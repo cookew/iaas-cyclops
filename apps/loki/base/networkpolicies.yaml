@@ -1,0 +1,59 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: alloy
+spec:
+  policyTypes:
+  - Ingress
+  podSelector:
+    matchExpressions:
+    - key: app.kubernetes.io/component
+      operator: In
+      values:
+        - gateway
+        - read
+        - write
+        - single-binary
+    matchLabels:
+      app.kubernetes.io/name: loki
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          app.kubernetes.io/name: alloy
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: alloy
+    ports:
+    - port: http-metrics
+      protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: fluent-bit
+spec:
+  policyTypes:
+  - Ingress
+  podSelector:
+    matchExpressions:
+    - key: app.kubernetes.io/component
+      operator: In
+      values:
+        - gateway
+        - read
+        - write
+        - single-binary
+    matchLabels:
+      app.kubernetes.io/name: loki
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          app.kubernetes.io/name: fluent-bit
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: fluent-bit
+    ports:
+    - port: http-metrics
+      protocol: TCP

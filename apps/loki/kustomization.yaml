@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: loki
 
 resources:
+- base/networkpolicies.yaml
 - base/objectbucketclaim.yaml
 # - sealed-secrets/loki-valkey-password.yaml
 

@@ -1,3 +1,5 @@
+# https://github.com/grafana-community/helm-charts/blob/main/charts/grafana/values.yaml
+
 admin:
   existingSecret: grafana-admin
 

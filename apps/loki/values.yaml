@@ -256,6 +256,32 @@ monitoring:
   serviceMonitor:
     enabled: true
 
+networkPolicy:
+  enabled: true
+  metrics:
+    podSelector:
+      matchLabels:
+        app.kubernetes.io/name: prometheus
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: kube-prometheus-stack
+  ingress:
+    podSelector: {}
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: kube-system
+  alertmanager:
+    port: 9093
+    podSelector:
+      matchLabels:
+        app.kubernetes.io/name: alertmanager
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: kube-prometheus-stack
+  externalStorage:
+    ports:
+    - 443
+
 overridesExporter:
   enabled: true
   podDisruptionBudget:
