@@ -108,9 +108,9 @@ ingress:
 
 imageRenderer:
   enabled: true
+  revisionHistoryLimit: 0
   serviceMonitor:
     enabled: true
-  revisionHistoryLimit: 1
 
 initChownData:
   resources:
@@ -133,6 +133,8 @@ resources:
   requests:
     cpu: 250m
     memory: 128Mi
+
+revisionHistoryLimit: 0
 
 serviceMonitorSelector:
   enabled: true
