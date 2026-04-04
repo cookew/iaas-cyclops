@@ -142,4 +142,3 @@ sidecar:
   plugins:
     enabled: true
     searchNamespace: ALL
-  skipTlsVerify: true
