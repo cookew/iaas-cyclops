@@ -19,10 +19,7 @@ spec:
     - key: app.kubernetes.io/component
       operator: In
       values:
-        - gateway
-        - read
-        - write
-        - single-binary
+        - query-frontend
     matchLabels:
       app.kubernetes.io/name: loki
   policyTypes:
@@ -49,10 +46,7 @@ spec:
     - key: app.kubernetes.io/component
       operator: In
       values:
-        - gateway
-        - read
-        - write
-        - single-binary
+        - query-frontend
     matchLabels:
       app.kubernetes.io/name: loki
   policyTypes:
@@ -79,10 +73,7 @@ spec:
     - key: app.kubernetes.io/component
       operator: In
       values:
-        - gateway
-        - read
-        - write
-        - single-binary
+        - query-frontend
     matchLabels:
       app.kubernetes.io/name: loki
   policyTypes:
