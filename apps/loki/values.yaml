@@ -250,7 +250,8 @@ monitoring:
 
 overridesExporter:
   enabled: true
-  maxUnavailable: 2
+  podDisruptionBudget:
+    maxUnavailable: 1
   replicas: 3
 
 patternIngester:
@@ -267,7 +268,7 @@ patternIngester:
     storageClass: ceph-filesystem
     whenDeleted: Delete
   podDisruptionBudget:
-    maxUnavailable: 2
+    maxUnavailable: 1
   replicas: 3
 
 querier:
@@ -288,7 +289,7 @@ queryFrontend:
 
 queryScheduler:
   podDisruptionBudget:
-    maxUnavailable: 2
+    maxUnavailable: 1
   replicas: 3
 
 read:
@@ -305,7 +306,7 @@ ruler:
   #   enabled: true
   #   storageClass: ceph-filesystem
   podDisruptionBudget:
-    maxUnavailable: 2
+    maxUnavailable: 1
   replicas: 3
   sidecar: true
 
