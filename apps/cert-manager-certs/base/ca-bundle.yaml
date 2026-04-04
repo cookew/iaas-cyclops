@@ -21,6 +21,9 @@ spec:
       name: kube-root-ca.crt
       key: ca.crt
   - secret:
+      name: root-ca-cert
+      key: root-ca.crt
+  - secret:
       name: iaas-wcooke-me
       key: tls.crt
   target:
