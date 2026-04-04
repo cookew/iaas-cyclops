@@ -21,11 +21,11 @@ extraSecretMounts:
   readOnly: true
 
 extraVolumes:
-  - name: ca-certificates
-    configMap:
-      name: ca-all
-      items:
-      - key: ca-certificates.crt
+- name: ca-certificates
+  configMap:
+    name: ca-all
+    items:
+    - key: ca-certificates.crt
 
 grafana.ini:
   analytics:
