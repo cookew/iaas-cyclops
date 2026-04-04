@@ -20,6 +20,10 @@ extraSecretMounts:
   secretName: grafana-keycloak-client
   readOnly: true
 
+extraVolumeMounts:
+- name: ca-certificates
+  mountPath: /etc/ssl/certs
+
 extraVolumes:
 - name: ca-certificates
   configMap:
@@ -139,38 +143,28 @@ sidecar:
     extraMounts:
     - name: ca-certificates
       mountPath: /etc/ssl/certs/ca-certificates.crt
-      readOnly: true
-      subPath: ca-certificates.crt
     searchNamespace: ALL
   dashboards:
     enabled: true
     extraMounts:
     - name: ca-certificates
       mountPath: /etc/ssl/certs
-      # readOnly: true
-      # subPath: ca-certificates.crt
     searchNamespace: ALL
   datasources:
     enabled: true
     extraMounts:
     - name: ca-certificates
       mountPath: /etc/ssl/certs
-      # readOnly: true
-      # subPath: ca-certificates.crt
     searchNamespace: ALL
   notifiers:
     enabled: true
     extraMounts:
     - name: ca-certificates
       mountPath: /etc/ssl/certs
-      # readOnly: true
-      # subPath: ca-certificates.crt
     searchNamespace: ALL
   plugins:
     enabled: true
     extraMounts:
     - name: ca-certificates
       mountPath: /etc/ssl/certs
-      # readOnly: true
-      # subPath: ca-certificates.crt
     searchNamespace: ALL
