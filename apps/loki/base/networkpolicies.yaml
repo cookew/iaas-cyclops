@@ -123,15 +123,13 @@ spec:
 #   name: to-kubernetes-api-server
 # spec:
 #   egress:
-#   - ports: []
-#     to: []
-#   #   # - port: 443
-#   #   #   protocol: TCP
-#   #   # - port: 6443
-#   #   #   protocol: TCP
-#   #   - port: 6444
-#   #     protocol: TCP
-#   #   to:
+#   - ports:
+#     - port: 6444
+#       protocol: TCP
+#     to:
+#     - ipBlock:
+#         cidr: 10.240.0.0/16
+#     # to:
 #   #   - ipBlock:
 #   #       cidr: 10.42.41.51/32
 #   #   - ipBlock:

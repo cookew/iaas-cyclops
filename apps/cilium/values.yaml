@@ -166,6 +166,8 @@ operator:
 pmtuDiscovery:
   enabled: true
 
+policyCIDRMatchMode: nodes
+
 prometheus:
   enabled: true
   serviceMonitor:
