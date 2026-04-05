@@ -133,13 +133,14 @@ spec:
     to:
     - ipBlock:
         cidr: 10.240.0.1/32
-  - ports:
-    - port: 443
-      protocol: TCP
-    - port: 6443
-      protocol: TCP
-    - port: 6444
-      protocol: TCP
+  -
+    # ports:
+    # - port: 443
+    #   protocol: TCP
+    # - port: 6443
+    #   protocol: TCP
+    # - port: 6444
+    #   protocol: TCP
     to:
     - podSelector:
         matchLabels:
