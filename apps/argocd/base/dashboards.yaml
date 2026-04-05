@@ -2,10 +2,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: argocd-dashboard
-  namespace: argocd
   labels:
     grafana_dashboard: "1"
+  name: argocd-dashboard
 data:
 # I modified refresh to 5s
   argocd.json: |-
