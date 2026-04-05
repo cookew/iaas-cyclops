@@ -10,6 +10,8 @@ spec:
     - ports:
       - port: "443"
         protocol: TCP
+      - port: "6444"
+        protocol: TCP
   endpointSelector:
     matchExpressions:
     - key: allow-access-cluster-services
