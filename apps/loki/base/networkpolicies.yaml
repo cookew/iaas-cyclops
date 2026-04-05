@@ -95,23 +95,24 @@ metadata:
   name: loki-storage
 spec:
   egress:
-  - to:
+  - ports:
+    - port: http
+      protocol: TCP
+    - port: https
+      protocol: TCP
+    to:
     - podSelector:
         matchLabels:
           app: rook-ceph-rgw
       namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: rook-ceph-cluster
-    ports:
-    - port: http
-      protocol: TCP
-    - port: https
-      protocol: TCP
   podSelector:
     matchExpressions:
     - key: app.kubernetes.io/component
       operator: In
       values:
+      - index-gateway
       - ingester
   policyTypes:
   - Egress
