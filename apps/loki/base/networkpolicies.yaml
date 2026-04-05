@@ -133,12 +133,12 @@ spec:
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: kube-system
-    - ipBlock:
-        cidr: 10.42.41.51/32
-    - ipBlock:
-        cidr: 10.42.41.52/32
-    - ipBlock:
-        cidr: 10.42.41.53/32
+    # - ipBlock:
+    #     cidr: 10.42.41.51/32
+    # - ipBlock:
+    #     cidr: 10.42.41.52/32
+    # - ipBlock:
+    #     cidr: 10.42.41.53/32
   podSelector:
     matchExpressions:
     - key: app.kubernetes.io/component
