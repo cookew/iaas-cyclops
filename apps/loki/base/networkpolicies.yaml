@@ -88,3 +88,30 @@ spec:
       app.kubernetes.io/name: loki
   policyTypes:
   - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: loki-storage
+spec:
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: rook-ceph-rgw
+      namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: rook-ceph-cluster
+    ports:
+    - port: http
+      protocol: TCP
+    - port: https
+      protocol: TCP
+  podSelector:
+    matchExpressions:
+    - key: app.kubernetes.io/component
+      operator: In
+      values:
+      - ingester
+  policyTypes:
+  - Egress
