@@ -124,6 +124,8 @@ metadata:
 spec:
   egress:
   - ports:
+    - port: 443
+      protocol: TCP
     - port: 6444
       protocol: TCP
     to:
@@ -140,12 +142,10 @@ spec:
     - ipBlock:
         cidr: 10.42.41.53/32
   podSelector:
-    # matchExpressions:
-    # - key: app.kubernetes.io/component
-    #   operator: In
-    #   values:
-    #   - ruler
-    matchLabels:
-      app.kubernetes.io/component: ruler
+    matchExpressions:
+    - key: app.kubernetes.io/component
+      operator: In
+      values:
+      - ruler
   policyTypes:
   - Egress
