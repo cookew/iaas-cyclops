@@ -116,42 +116,43 @@ spec:
       - ruler
   policyTypes:
   - Egress
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: to-kubernetes-api-server
-spec:
-  egress: []
-  # - ports:
-  #   # - port: 443
-  #   #   protocol: TCP
-  #   # - port: 6443
-  #   #   protocol: TCP
-  #   - port: 6444
-  #     protocol: TCP
-  #   to:
-  #   - ipBlock:
-  #       cidr: 10.42.41.51/32
-  #   - ipBlock:
-  #       cidr: 10.42.41.52/32
-  #   - ipBlock:
-  #       cidr: 10.42.41.53/32
-  # - ports:
-  #   - port: 6444
-  #     protocol: TCP
-  #   to:
-  #   - podSelector:
-  #       matchLabels:
-  #         component: kube-apiserver
-  #   - namespaceSelector:
-  #       matchLabels:
-  #         kubernetes.io/metadata.name: kube-system
-  podSelector:
-    matchExpressions:
-    - key: app.kubernetes.io/component
-      operator: In
-      values:
-      - ruler
-  policyTypes:
-  - Egress
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: NetworkPolicy
+# metadata:
+#   name: to-kubernetes-api-server
+# spec:
+#   egress:
+#   - ports: []
+#     to: []
+#   #   # - port: 443
+#   #   #   protocol: TCP
+#   #   # - port: 6443
+#   #   #   protocol: TCP
+#   #   - port: 6444
+#   #     protocol: TCP
+#   #   to:
+#   #   - ipBlock:
+#   #       cidr: 10.42.41.51/32
+#   #   - ipBlock:
+#   #       cidr: 10.42.41.52/32
+#   #   - ipBlock:
+#   #       cidr: 10.42.41.53/32
+#   # - ports:
+#   #   - port: 6444
+#   #     protocol: TCP
+#   #   to:
+#   #   - podSelector:
+#   #       matchLabels:
+#   #         component: kube-apiserver
+#   #   - namespaceSelector:
+#   #       matchLabels:
+#   #         kubernetes.io/metadata.name: kube-system
+#   podSelector:
+#     matchExpressions:
+#     - key: app.kubernetes.io/component
+#       operator: In
+#       values:
+#       - ruler
+#   policyTypes:
+#   - Egress
