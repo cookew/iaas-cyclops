@@ -123,7 +123,7 @@ metadata:
   name: to-kubernetes-api-server
 spec:
   egress:
-  - {}
+  # - {}
   # - ports:
   #   - port: 443
   #     protocol: TCP
@@ -134,27 +134,27 @@ spec:
   #   to:
   #   - ipBlock:
   #       cidr: 10.240.0.1/32
-  # -
-    # ports:
+  -
+    ports:
     # - port: 443
     #   protocol: TCP
     # - port: 6443
     #   protocol: TCP
-    # - port: 6444
-    #   protocol: TCP
-    # to:
+    - port: 6444
+      protocol: TCP
+    to:
     # - podSelector:
     #     matchLabels:
     #       component: kube-apiserver
     #   namespaceSelector:
     #     matchLabels:
     #       kubernetes.io/metadata.name: kube-system
-    # - ipBlock:
-    #     cidr: 10.42.41.51/32
-    # - ipBlock:
-    #     cidr: 10.42.41.52/32
-    # - ipBlock:
-    #     cidr: 10.42.41.53/32
+    - ipBlock:
+        cidr: 10.42.41.51/32
+    - ipBlock:
+        cidr: 10.42.41.52/32
+    - ipBlock:
+        cidr: 10.42.41.53/32
   podSelector:
     matchExpressions:
     - key: app.kubernetes.io/component
