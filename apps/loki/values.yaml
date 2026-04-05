@@ -278,9 +278,9 @@ networkPolicy:
     namespaceSelector:
       matchLabels:
         kubernetes.io/metadata.name: kube-prometheus-stack
-  externalStorage:
-    ports:
-    - 443
+  # externalStorage:
+  #   ports:
+  #   - 443
 
 overridesExporter:
   enabled: true
