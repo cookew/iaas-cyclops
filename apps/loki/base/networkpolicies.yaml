@@ -129,6 +129,10 @@ spec:
     to:
     - ipBlock:
         cidr: 10.240.0.1/32
+  - ports:
+    - port: 6444
+      protocol: TCP
+    to:
     - ipBlock:
         cidr: 10.42.41.51/32
     - ipBlock:
