@@ -96,9 +96,7 @@ metadata:
 spec:
   egress:
   - ports:
-    - port: http
-      protocol: TCP
-    - port: https
+    - port: 443
       protocol: TCP
     to:
     - podSelector:
@@ -112,7 +110,9 @@ spec:
     - key: app.kubernetes.io/component
       operator: In
       values:
+      - compactor
       - index-gateway
       - ingester
+      - ruler
   policyTypes:
   - Egress
