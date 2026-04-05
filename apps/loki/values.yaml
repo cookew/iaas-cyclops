@@ -66,6 +66,8 @@ gateway:
     port: 8080
 
 global:
+  extraArgs:
+  - -config.expand-env=true
   # extraEnv:
   # - name: VALKEY_PASSWORD
   #   valueFrom:
@@ -77,8 +79,6 @@ global:
       name: loki-bucket
   - secretRef:
       name: loki-bucket
-  extraArgs:
-  - -config.expand-env=true
 
 indexGateway:
   podDisruptionBudget:
