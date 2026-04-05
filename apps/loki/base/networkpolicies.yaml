@@ -140,10 +140,12 @@ spec:
     - ipBlock:
         cidr: 10.42.41.53/32
   podSelector:
-    matchExpressions:
-    - key: app.kubernetes.io/component
-      operator: In
-      values:
-      - ruler
+    # matchExpressions:
+    # - key: app.kubernetes.io/component
+    #   operator: In
+    #   values:
+    #   - ruler
+    matchLabels:
+      app.kubernetes.io/component: ruler
   policyTypes:
   - Egress
