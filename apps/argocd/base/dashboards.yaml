@@ -7,7 +7,7 @@ metadata:
   name: argocd-dashboard
 data:
 # I modified refresh to 5s
-  argocd.json: |-
+  argocd.json: |
     {
       "annotations": {
         "list": [

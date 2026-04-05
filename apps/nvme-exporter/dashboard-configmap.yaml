@@ -5,7 +5,7 @@ metadata:
   labels:
     grafana_dashboard: "1"
 data:
-  nvme-exporter.json: |-
+  nvme-exporter.json: |
     {
       "annotations": {
         "list": [

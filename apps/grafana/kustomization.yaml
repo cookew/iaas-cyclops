@@ -5,8 +5,10 @@ namespace: grafana
 
 resources:
 - base/ceph-datasource.yaml
+- base/docker-registry-dashboard.yaml
 - base/grafana-keycloak-client.yaml
 - base/grafana-pg-cluster.yaml
+- base/haproxy-dashboard.yaml
 - base/loki-datasource.yaml
 - base/pyroscope-datasource.yaml
 - base/tempo-datasource.yaml
