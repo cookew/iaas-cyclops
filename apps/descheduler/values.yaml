@@ -81,5 +81,8 @@ deschedulerPolicy:
             - RemovePodsViolatingNodeAffinity
             - RemovePodsViolatingInterPodAntiAffinity
 
+serviceAccount:
+  automountServiceAccountToken: true
+
 serviceMonitor:
   enabled: true
