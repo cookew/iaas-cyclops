@@ -5,10 +5,6 @@ namespace: descheduler
 
 # https://github.com/kubernetes-sigs/descheduler/blob/release-1.35/README.md
 
-# resources:
-# - https://github.com/kubernetes-sigs/descheduler/kubernetes/deployment?ref=release-1.35
-
-
 helmCharts:
 - name: descheduler
   namespace: descheduler
@@ -16,4 +12,3 @@ helmCharts:
   repo: https://kubernetes-sigs.github.io/descheduler
   valuesFile: values.yaml
   version: 0.35.1
-
