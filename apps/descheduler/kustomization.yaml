@@ -15,5 +15,5 @@ helmCharts:
   releaseName: descheduler
   repo: https://kubernetes-sigs.github.io/descheduler
   valuesFile: values.yaml
-  version: "1.35"
+  version: 0.35.0
 
