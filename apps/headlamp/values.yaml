@@ -167,9 +167,9 @@ pluginsManager:
     - name: knative
       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_knative
       version: 0.2.0-alpha
-    - name: rook
-      source: https://artifacthub.io/packages/headlamp/headlamp-rook/headlamp-rook-plugin
-      version: 1.0.0
+    # - name: rook
+    #   source: https://artifacthub.io/packages/headlamp/headlamp-rook/headlamp-rook-plugin
+    #   version: 1.0.0
     - name: strimzi
       source: https://artifacthub.io/packages/headlamp/strimzi-headlamp/headlamp_strimzi
       version: 0.3.9
