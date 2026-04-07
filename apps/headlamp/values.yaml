@@ -142,7 +142,7 @@ pluginsManager:
       version: 0.0.1-beta7
     - name: ai-assistant
       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_ai_assistant
-      version: 0.1.0-alpha
+      version: 0.2.0-alpha
     - name: envoy-gateway
       source: https://artifacthub.io/packages/headlamp/headlamp-envoy-gateway/envoy-gateway
       version: 0.3.0
@@ -166,16 +166,22 @@ pluginsManager:
       version: 0.1.1-beta
     - name: knative
       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_knative
-      version: 0.1.0-alpha
+      version: 0.2.0-alpha
     - name: rook
       source: https://artifacthub.io/packages/headlamp/headlamp-rook/headlamp-rook-plugin
-      version: 0.2.8
+      version: 1.0.0
     - name: strimzi
       source: https://artifacthub.io/packages/headlamp/strimzi-headlamp/headlamp_strimzi
       version: 0.3.9
     # - name: sealed-secrets
     #   source: https://artifacthub.io/packages/headlamp/headlamp-sealed-secrets/headlamp-sealed-secrets
-    #   version: 0.36.1
+    #   version: 0.24.1
+    - name: istio
+      source: https://artifacthub.io/packages/headlamp/headlamp-istio-plugin/headlamp_istio
+      version: 0.2.0
+    - name: crossview
+      source: https://artifacthub.io/packages/headlamp/crossview-headlamp/crossview-headlamp
+      version: 0.1.4
     installOptions:
       parallel: true
       maxConcurrent: 2
