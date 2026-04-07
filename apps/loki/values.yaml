@@ -190,6 +190,8 @@ loki:
 
   pattern_ingester:
     enabled: true
+  podDisruptionBudget:
+    maxUnavailable: 1
   query_range:
     results_cache:
       cache:
