@@ -9,6 +9,7 @@ resources:
 - base/alloy-client-client-cert.yaml
 - base/alloy-client-ingress.yaml
 - base/alloy-ingress.yaml
+- base/networkpolicies.yaml
 - sealed-secrets/alloy-client-credentials.yaml
 
 helmCharts:
