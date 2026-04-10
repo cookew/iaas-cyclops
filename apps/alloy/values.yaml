@@ -265,6 +265,8 @@ controller:
 
   replicas: 3
 
+  revisionHistoryLimit: 0
+
   # Must be one of 'daemonset', 'deployment', or 'statefulset'.
   type: statefulset
 

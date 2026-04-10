@@ -177,7 +177,7 @@ rollOutCiliumPods: true
 
 routingMode: native
 ipv4NativeRoutingCIDR: 10.244.0.0/16
-MTU: 8970
+MTU: 8900
 
 socketLB:
   hostNamespaceOnly: true

@@ -1,0 +1,192 @@
+# https://github.com/grafana/alloy/tree/main/operations/helm/charts/alloy
+
+alloy:
+  configMap:
+    content: |-
+      logging {
+        format = "json"
+        level  = "info"
+      }
+
+      livedebugging {
+        enabled = false
+      }
+
+
+
+
+      // Kubernetes Metrics
+      /*
+      discovery.kubernetes "pods" {
+          role = "pod"
+      }
+
+      discovery.kubernetes "nodes" {
+          role = "node"
+      }
+
+      discovery.kubernetes "services" {
+          role = "service"
+      }
+
+      discovery.kubernetes "endpointslices" {
+          role = "endpointslice"
+      }
+
+      discovery.kubernetes "ingresses" {
+          role = "ingress"
+      }
+
+      prometheus.scrape "kubernetes_nodes" {
+        clustering {
+            enabled = true
+        }
+        targets    = discovery.kubernetes.nodes.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.scrape "kubernetes_pods" {
+        clustering {
+            enabled = true
+        }
+        targets    = discovery.kubernetes.pods.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.scrape "kubernetes_services" {
+        clustering {
+            enabled = true
+        }
+        targets    = discovery.kubernetes.services.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.scrape "kubernetes_endpointslices" {
+        clustering {
+            enabled = true
+        }
+        targets    = discovery.kubernetes.endpointslices.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.scrape "kubernetes_ingresses" {
+        clustering {
+            enabled = true
+        }
+        targets    = discovery.kubernetes.ingresses.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.operator.servicemonitors "kube_cluster" {
+        clustering {
+            enabled = true
+        }
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+      */
+      // End Kubernetes Metrics
+
+
+
+
+      // Backend storage
+      prometheus.remote_write "prometheus" {
+        endpoint {
+          url = "http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc:9090/api/v1/write"
+        }
+      }
+
+      loki.write "loki" {
+        endpoint {
+          url = "http://loki-distributor.loki.svc:3100/loki/api/v1/push"
+        }
+      }
+      // End backend storage
+
+
+
+
+  enableReporting: false
+
+  envFrom: []
+
+  extraArgs: []
+
+  extraEnv: []
+
+  extraPorts:
+  - name: alloy-client
+    port: 4400
+    targetPort: 4400
+
+  listenAddr: 127.0.0.1
+
+  # -- Scheme is needed for readiness probes. If enabling tls in your configs, set to "HTTPS"
+  listenScheme: HTTP
+
+  mounts:
+    extra:
+    - mountPath: /storage
+      name: storage
+    - name: client-ca-cert
+      mountPath: "/client-ca-cert"
+      readOnly: true
+    varlog: false
+
+  resources:
+    requests:
+      cpu: 333m
+
+  storagePath: /storage
+
+controller:
+  revisionHistoryLimit: 0
+
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/disk-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/pid-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node.kubernetes.io/unschedulable
+    operator: Exists
+
+  # Must be one of 'daemonset', 'deployment', or 'statefulset'.
+  type: daemonset
+
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: ceph-filesystem
+
+  volumes:
+    extra:
+    - name: client-ca-cert
+      secret:
+        secretName: alloy-client-ca-cert
+
+crds:
+  create: false
+
+serviceMonitor:
+  enabled: true
