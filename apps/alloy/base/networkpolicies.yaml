@@ -150,6 +150,27 @@ spec:
   - Egress
   # - Ingress
 ---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: to-kubernetes-api-server
+spec:
+  egress:
+  - ports:
+    - port: 6444
+      protocol: TCP
+    to:
+    - ipBlock:
+        cidr: 10.0.0.0/8
+  podSelector:
+    matchExpressions:
+    - key: app.kubernetes.io/component
+      operator: In
+      values:
+      - ruler
+  policyTypes:
+  - Egress
+---
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
