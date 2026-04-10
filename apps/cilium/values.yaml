@@ -175,5 +175,7 @@ prometheus:
 
 rollOutCiliumPods: true
 
+routingMode: native
+
 socketLB:
   hostNamespaceOnly: true
