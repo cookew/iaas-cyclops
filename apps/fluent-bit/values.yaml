@@ -72,7 +72,7 @@ config:
       host loki-distributor.loki.svc
       # http_user loki
       # http_passwd loki
-      labels cluster=iaas, namespace=$kubernetes['namespace_name'], source=kubernetes, service_name=$kubernetes['pod_name']
+      labels cluster=iaas, namespace=$kubernetes['namespace_name'], source=kubernetes, service_name=$kubernetes['container_name']
       match *
       name loki
       # tls on
