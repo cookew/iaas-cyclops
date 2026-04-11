@@ -30,7 +30,7 @@ config:
     [FILTER]
       Name         modify
       Match        *
-      Remove       pod_template_hash, controller_revision_hash
+      Remove       pod_template_hash controller_revision_hash
 
     # [FILTER]
     #   name         nest
