@@ -27,12 +27,11 @@ config:
       K8S-Logging.Exclude On
       Buffer_Size 256KB
 
-    [FILTER]
-      Name         modify
-      Match        *
-      Remove       pod_template_hash
-      Remove       controller_revision_hash
-      Remove       pod_template_generation
+    # [FILTER]
+    #   Name         modify
+    #   Match        *
+    #   Remove       pod_template_hash
+    #   Remove       controller_revision_hash
 
     # [FILTER]
     #   name         nest
@@ -65,6 +64,7 @@ config:
       match *
       name loki
       # tls on
+      Remove_keys  pod_template_generation, pod_template_hash, controller_revision_hash
 
     # [OUTPUT]
     #   auto_kubernetes_labels on
