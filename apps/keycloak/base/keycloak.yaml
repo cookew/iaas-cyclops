@@ -10,8 +10,8 @@ spec:
     value: "true"
   # - name: tracing-enabled
   #   value: "false"
-  - name: truststore-paths
-    value: /certs
+  # - name: truststore-paths
+  #   value: /certs
   bootstrapAdmin:
     user:
       secret: keycloak-user
