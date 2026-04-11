@@ -23,17 +23,18 @@ config:
       Name                kubernetes
       Match               kube.*
       Merge_Log           On
-      # Keep_Log            Off
+      Keep_Log            Off
       K8S-Logging.Parser  On
-      # K8S-Logging.Exclude On
-      # Buffer_Size         256KB
+      K8S-Logging.Exclude On
+      Buffer_Size         256KB
       Kube_Meta_Cache_TTL 300s
 
-    # [FILTER]
-    #   Name         modify
-    #   Match        *
-    #   Remove       pod_template_hash
-    #   Remove       controller_revision_hash
+    [FILTER]
+      Name         modify
+      Match        *
+      Remove       controller_revision_hash
+      Remove       pod_template_generation
+      Remove       pod_template_hash
 
     # [FILTER]
     #   name         nest
