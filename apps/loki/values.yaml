@@ -76,9 +76,9 @@ global:
   #       key: default
   extraEnvFrom:
   - configMapRef:
-      name: loki-bucket
+      name: loki-bucket1
   - secretRef:
-      name: loki-bucket
+      name: loki-bucket1
 
 indexGateway:
   podDisruptionBudget:
