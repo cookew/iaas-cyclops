@@ -3,39 +3,39 @@ config:
   inputs: |
     [INPUT]
       Name tail
-      Path              /var/log/containers/*.log
-      multiline.parser  cri
-      Tag               kube.*
-      Mem_Buf_Limit     10MB
-      Skip_Long_Lines   On
       # Buffer_Chunk_Size 64KB
       Buffer_Max_Size   512KB
       DB                /var/log/flb_kube.db
       DB.locking        true
+      Mem_Buf_Limit     10MB
+      multiline.parser  cri
+      Path              /var/log/containers/*.log
+      Skip_Long_Lines   On
+      Tag               kube.*
 
     # [INPUT]
     #   Name systemd
-    #   Tag host.*
-    #   Systemd_Filter _SYSTEMD_UNIT=kubelet.service
     #   Read_From_Tail On
+    #   Systemd_Filter _SYSTEMD_UNIT=kubelet.service
+    #   Tag host.*
 
   filters: |
     [FILTER]
       Name                kubernetes
+      Buffer_Size         32KB
+      Keep_Log            Off
       Match               kube.*
       Merge_Log           On
-      Keep_Log            Off
       K8S-Logging.Exclude On
       K8S-Logging.Parser  On
-      Buffer_Size         32KB
       Kube_Meta_Cache_TTL 300s
 
-    [FILTER]
-      Name         modify
-      Match        kube.*
-      Remove       controller_revision_hash
-      Remove       pod_template_generation
-      Remove       pod_template_hash
+    # [FILTER]
+    #   Name         modify
+    #   Match        kube.*
+    #   Remove       controller_revision_hash
+    #   Remove       pod_template_generation
+    #   Remove       pod_template_hash
 
     # Filter: Exclude health check logs (they are too noisy)
     # [FILTER]
@@ -72,7 +72,7 @@ config:
       host loki-distributor.loki.svc
       # http_user loki
       # http_passwd loki
-      labels cluster=iaas, namespace=$kubernetes['namespace_name'], source=kubernetes, service_name=$kubernetes['container_name']
+      labels cluster=iaas, namespace=$kubernetes['namespace_name'], service_name=$kubernetes['container_name'], source=kubernetes
       match *
       name loki
       # tls on
