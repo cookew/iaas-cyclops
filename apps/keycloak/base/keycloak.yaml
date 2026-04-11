@@ -1,6 +1,6 @@
 # https://www.keycloak.org/operator/advanced-configuration
 
-apiVersion: k8s.keycloak.org/v2beta1
+apiVersion: k8s.keycloak.org/v2alpha1
 kind: Keycloak
 metadata:
   name: keycloak
@@ -8,10 +8,10 @@ spec:
   additionalOptions:
   - name: metrics-enabled
     value: "true"
-  - name: tracing-enabled
-    value: "false"
-  # - name: truststore-paths
-  #   value: /certs
+  # - name: tracing-enabled
+  #   value: "false"
+  - name: truststore-paths
+    value: /certs
   bootstrapAdmin:
     user:
       secret: keycloak-user
@@ -50,7 +50,7 @@ spec:
     # strict: false
   http:
     tlsSecret: keycloak-certificate
-  image: registry.wcooke.me:5000/keycloak/keycloak-fips:26.6.0-fips
+  image: registry.wcooke.me:5000/keycloak/keycloak-fips:26.5.7-fips
   ingress:
     annotations:
       cert-manager.io/cluster-issuer: iaas-wcooke-me

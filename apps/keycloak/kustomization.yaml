@@ -13,9 +13,9 @@ resources:
 - base/keycloak-pg-cluster.yaml
 - base/keycloak-troubleshooting-dashboard.yaml
 - sealed-secrets/keycloak-user.yaml
-- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.6.0/kubernetes/keycloaks.k8s.keycloak.org-v1.yml
-- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.6.0/kubernetes/keycloakrealmimports.k8s.keycloak.org-v1.yml
-- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.6.0/kubernetes/kubernetes.yml
+- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.7/kubernetes/keycloaks.k8s.keycloak.org-v1.yml
+- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.7/kubernetes/keycloakrealmimports.k8s.keycloak.org-v1.yml
+- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.5.7/kubernetes/kubernetes.yml
 
 patches:
 - path: patches/keycloak-operator-deployment.yaml
