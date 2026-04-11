@@ -8,6 +8,8 @@ spec:
   additionalOptions:
   - name: metrics-enabled
     value: "true"
+  - name: tracing-enabled
+    value: "false"
   # - name: truststore-paths
   #   value: /certs
   bootstrapAdmin:
