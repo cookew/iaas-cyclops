@@ -28,8 +28,8 @@ config:
       Buffer_Size 256KB
 
     [FILTER]
-      name         remove_labels
-      match        *
+      Name         remove_labels
+      Match        *
       Remove       pod_template_hash
 
     # [FILTER]
