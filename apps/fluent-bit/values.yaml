@@ -22,7 +22,7 @@ config:
   filters: |
     [FILTER]
       Name                kubernetes
-      Buffer_Size         32KB
+      Buffer_Size         64KB
       Keep_Log            Off
       Match               kube.*
       Merge_Log           On
