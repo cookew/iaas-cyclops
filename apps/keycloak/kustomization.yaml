@@ -4,22 +4,22 @@ kind: Kustomization
 namespace: keycloak
 
 resources:
-# - base/keycloak.yaml
+- base/keycloak.yaml
 - base/keycloak-capacity-planning-dashboard.yaml
 - base/keycloak-certificate.yaml
-# - base/keycloak-hpa.yaml
-# - base/keycloak-ingress.yaml
-## - base/keycloak-metrics-servicemonitor.yaml
+- base/keycloak-hpa.yaml
+- base/keycloak-ingress.yaml
+# - base/keycloak-metrics-servicemonitor.yaml
 - base/keycloak-pg-cluster.yaml
 - base/keycloak-troubleshooting-dashboard.yaml
 - sealed-secrets/keycloak-user.yaml
-# - https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.6.0/kubernetes/keycloaks.k8s.keycloak.org-v1.yml
-# - https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.6.0/kubernetes/keycloakrealmimports.k8s.keycloak.org-v1.yml
-# - https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.6.0/kubernetes/kubernetes.yml
+- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.6.0/kubernetes/keycloaks.k8s.keycloak.org-v1.yml
+- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.6.0/kubernetes/keycloakrealmimports.k8s.keycloak.org-v1.yml
+- https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/26.6.0/kubernetes/kubernetes.yml
 
-# patches:
-# - path: patches/keycloak-operator-deployment.yaml
-#   target:
-#     kind: Deployment
-#     name: keycloak-operator
-#     version: v1
+patches:
+- path: patches/keycloak-operator-deployment.yaml
+  target:
+    kind: Deployment
+    name: keycloak-operator
+    version: v1
