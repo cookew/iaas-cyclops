@@ -27,6 +27,11 @@ config:
       K8S-Logging.Exclude On
       Buffer_Size 256KB
 
+    [FILTER]
+      name         remove_labels
+      match        *
+      Remove       pod_template_hash
+
     # [FILTER]
     #   name         nest
     #   match        kube.*
