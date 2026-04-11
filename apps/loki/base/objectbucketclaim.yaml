@@ -3,8 +3,8 @@ kind: ObjectBucketClaim
 metadata:
   name: loki-bucket
 spec:
-  bucketName: loki
+  bucketName: loki1
   storageClassName: ceph-bucket
   additionalConfig:
-    maxObjects: "1000000"
+    maxObjects: "2000000"
     maxSize: "150G"

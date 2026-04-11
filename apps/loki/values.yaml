@@ -222,9 +222,9 @@ loki:
     grpc_server_max_send_msg_size: 104857600 # 100MB
   storage:
     bucketNames:
-      admin: loki
-      chunks: loki
-      ruler: loki
+      admin: loki1
+      chunks: loki1
+      ruler: loki1
     type: s3
     s3:
       access_key_id: "${AWS_ACCESS_KEY_ID}"
