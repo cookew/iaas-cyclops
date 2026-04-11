@@ -1,6 +1,6 @@
 # https://www.keycloak.org/operator/advanced-configuration
 
-apiVersion: k8s.keycloak.org/v2alpha1
+apiVersion: k8s.keycloak.org/v2beta1
 kind: Keycloak
 metadata:
   name: keycloak
@@ -48,7 +48,7 @@ spec:
     # strict: false
   http:
     tlsSecret: keycloak-certificate
-  image: registry.wcooke.me:5000/keycloak/keycloak-fips:26.5.7-fips
+  image: registry.wcooke.me:5000/keycloak/keycloak-fips:26.6.0-fips
   ingress:
     annotations:
       cert-manager.io/cluster-issuer: iaas-wcooke-me

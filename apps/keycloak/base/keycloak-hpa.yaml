@@ -17,7 +17,7 @@ spec:
         averageUtilization: 90
         type: Utilization
     type: Resource
-  minReplicas: 3
+  minReplicas: 2
   scaleTargetRef:
     apiVersion: k8s.keycloak.org/v2alpha1
     kind: Keycloak
