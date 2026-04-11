@@ -6,11 +6,12 @@ config:
       Path              /var/log/containers/*.log
       multiline.parser  cri
       Tag               kube.*
-      Mem_Buf_Limit     32MB
+      Mem_Buf_Limit     10MB
       Skip_Long_Lines   On
       # Buffer_Chunk_Size 64KB
-      # Buffer_Max_Size   128KB
-      # DB                /var/log/flb_kube.db
+      Buffer_Max_Size   512KB
+      DB                /var/log/flb_kube.db
+      DB.locking        true
 
     # [INPUT]
     #   Name systemd
@@ -24,17 +25,25 @@ config:
       Match               kube.*
       Merge_Log           On
       Keep_Log            Off
-      K8S-Logging.Parser  On
       K8S-Logging.Exclude On
-      Buffer_Size         256KB
+      K8S-Logging.Parser  On
+      Buffer_Size         32KB
       Kube_Meta_Cache_TTL 300s
 
     [FILTER]
       Name         modify
-      Match        *
+      Match        kube.*
       Remove       controller_revision_hash
       Remove       pod_template_generation
       Remove       pod_template_hash
+
+    # Filter: Exclude health check logs (they are too noisy)
+    # [FILTER]
+    #   Name          grep
+    #   Match         kube.*
+    #   # Exclude lines containing health check paths
+    #   Exclude       log /healthz|/readyz|/livez/
+
 
     # [FILTER]
     #   name         nest
@@ -58,7 +67,7 @@ config:
 
   outputs: |
     [OUTPUT]
-      auto_kubernetes_labels on
+      # auto_kubernetes_labels on
       # bearer_token
       host loki-distributor.loki.svc
       # http_user loki
@@ -67,18 +76,7 @@ config:
       match *
       name loki
       # tls on
-      Remove_keys  pod_template_generation, pod_template_hash, controller_revision_hash
-
-    # [OUTPUT]
-    #   auto_kubernetes_labels on
-    #   # bearer_token
-    #   host alloy.alloy.svc
-    #   # http_user loki
-    #   # http_passwd loki
-    #   labels cluster=iaas, namespace=$kubernetes['namespace_name'], source=kubernetes
-    #   match *
-    #   name loki
-    #   # tls on
+      # Remove_keys  pod_template_generation, pod_template_hash, controller_revision_hash
 
   service: |
     [SERVICE]
