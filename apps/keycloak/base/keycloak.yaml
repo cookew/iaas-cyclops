@@ -1,13 +1,15 @@
 # https://www.keycloak.org/operator/advanced-configuration
 
-apiVersion: k8s.keycloak.org/v2alpha1
+apiVersion: k8s.keycloak.org/v2beta1
 kind: Keycloak
 metadata:
   name: keycloak
 spec:
   additionalOptions:
-    - name: metrics-enabled
-      value: "true"
+  - name: metrics-enabled
+    value: "true"
+  # - name: truststore-paths
+  #   value: /certs
   bootstrapAdmin:
     user:
       secret: keycloak-user
@@ -87,3 +89,20 @@ spec:
     enabled: true
     interval: 10s
   # startOptimized: true
+  truststores:
+    certs:
+      configMap:
+        name: tm-ca-bundle
+  update:
+    strategy: Auto
+  # unsupported:
+  #   podTemplate:
+  #     spec:
+  #       volumeMounts:
+  #       - name: certs
+  #         mountPath: /certs
+  #         readOnly: true
+  #       volumes:
+  #       - name: certs
+  #         configMap:
+  #           name: tm-ca-bundle
