@@ -51,6 +51,8 @@ kubeProxy:
   enabled: false
 
 nodeExporter:
+  enabled: false
+  forceDeployDashboards: true
   operatingSystems:
     aix:
       enabled: false
