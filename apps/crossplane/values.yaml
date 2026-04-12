@@ -1,6 +1,6 @@
 # replicas: 1
 
-revisionHistoryLimit: 1
+revisionHistoryLimit: 0
 
 # provider:
 #   # -- A list of Provider packages to install.
@@ -18,7 +18,7 @@ revisionHistoryLimit: 1
 
 rbacManager:
   # replicas: 1
-  revisionHistoryLimit: 1
+  revisionHistoryLimit: 0
 
 metrics:
   enabled: true
