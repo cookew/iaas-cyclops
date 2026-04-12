@@ -103,21 +103,11 @@ prometheus:
     # shards: 1
     resources:
       limits:
-        cpu: 2000m
+        cpu: 4000m
         memory: 8Gi
       requests:
         cpu: 200m
         memory: 4Gi
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          accessModes: ["ReadWriteMany"]
-          storageClassName: ceph-filesystem
-          resources:
-            requests:
-              storage: 150Gi
-    tsdb:
-      outOfOrderTimeWindow: 5s
     # podMonitorSelectorNilUsesHelmValues: false
     podMonitorSelector:
       matchExpressions:
@@ -203,7 +193,16 @@ prometheus:
         - def
       # matchLabels:
       #   vifmvuticvbcvmle: "abcd123098sdlfkj"
-
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteMany"]
+          storageClassName: ceph-filesystem
+          resources:
+            requests:
+              storage: 150Gi
+    tsdb:
+      outOfOrderTimeWindow: 5s
 
 prometheus-node-exporter:
   hostNetwork: true
