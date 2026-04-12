@@ -239,7 +239,8 @@ alloy:
     port: 4400
     targetPort: 4400
 
-  # -- Scheme is needed for readiness probes. If enabling tls in your configs, set to "HTTPS"
+  # listenAddr: 127.0.0.1
+
   listenScheme: HTTP
 
   mounts:
@@ -249,6 +250,7 @@ alloy:
     - name: client-ca-cert
       mountPath: "/client-ca-cert"
       readOnly: true
+    varlog: false
 
   resources:
     requests:
@@ -266,6 +268,28 @@ controller:
   replicas: 3
 
   revisionHistoryLimit: 0
+
+  # tolerations:
+  # - effect: NoSchedule
+  #   key: node-role.kubernetes.io/control-plane
+  # - effect: NoExecute
+  #   key: node.kubernetes.io/not-ready
+  #   operator: Exists
+  # - effect: NoExecute
+  #   key: node.kubernetes.io/unreachable
+  #   operator: Exists
+  # - effect: NoSchedule
+  #   key: node.kubernetes.io/disk-pressure
+  #   operator: Exists
+  # - effect: NoSchedule
+  #   key: node.kubernetes.io/memory-pressure
+  #   operator: Exists
+  # - effect: NoSchedule
+  #   key: node.kubernetes.io/pid-pressure
+  #   operator: Exists
+  # - effect: NoSchedule
+  #   key: node.kubernetes.io/unschedulable
+  #   operator: Exists
 
   # Must be one of 'daemonset', 'deployment', or 'statefulset'.
   type: statefulset
@@ -287,6 +311,9 @@ controller:
     - name: client-ca-cert
       secret:
         secretName: alloy-client-ca-cert
+
+crds:
+  create: false
 
 serviceMonitor:
   enabled: true

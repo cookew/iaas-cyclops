@@ -16,7 +16,6 @@ alloy:
 
 
       // Kubernetes Metrics
-      /*
       discovery.kubernetes "pods" {
           role = "pod"
       }
@@ -83,7 +82,6 @@ alloy:
         }
         forward_to = [prometheus.remote_write.prometheus.receiver]
       }
-      */
       // End Kubernetes Metrics
 
 
@@ -95,16 +93,14 @@ alloy:
           url = "http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc:9090/api/v1/write"
         }
       }
-
-      loki.write "loki" {
-        endpoint {
-          url = "http://loki-distributor.loki.svc:3100/loki/api/v1/push"
-        }
-      }
       // End backend storage
 
 
 
+
+  clustering:
+    enabled: true
+    name: kube-cluster
 
   enableReporting: false
 
@@ -114,14 +110,13 @@ alloy:
 
   extraEnv: []
 
-  extraPorts:
-  - name: alloy-client
-    port: 4400
-    targetPort: 4400
+  # extraPorts:
+  # - name: alloy-client
+  #   port: 4400
+  #   targetPort: 4400
 
-  listenAddr: 127.0.0.1
+  # listenAddr: 127.0.0.1
 
-  # -- Scheme is needed for readiness probes. If enabling tls in your configs, set to "HTTPS"
   listenScheme: HTTP
 
   mounts:
@@ -140,32 +135,40 @@ alloy:
   storagePath: /storage
 
 controller:
+  enableStatefulSetAutoDeletePVC: true
+
+  podDisruptionBudget:
+    enabled: true
+    maxUnavailable: 2
+
+  replicas: 3
+
   revisionHistoryLimit: 0
 
-  tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/control-plane
-  - effect: NoExecute
-    key: node.kubernetes.io/not-ready
-    operator: Exists
-  - effect: NoExecute
-    key: node.kubernetes.io/unreachable
-    operator: Exists
-  - effect: NoSchedule
-    key: node.kubernetes.io/disk-pressure
-    operator: Exists
-  - effect: NoSchedule
-    key: node.kubernetes.io/memory-pressure
-    operator: Exists
-  - effect: NoSchedule
-    key: node.kubernetes.io/pid-pressure
-    operator: Exists
-  - effect: NoSchedule
-    key: node.kubernetes.io/unschedulable
-    operator: Exists
+  # tolerations:
+  # - effect: NoSchedule
+  #   key: node-role.kubernetes.io/control-plane
+  # - effect: NoExecute
+  #   key: node.kubernetes.io/not-ready
+  #   operator: Exists
+  # - effect: NoExecute
+  #   key: node.kubernetes.io/unreachable
+  #   operator: Exists
+  # - effect: NoSchedule
+  #   key: node.kubernetes.io/disk-pressure
+  #   operator: Exists
+  # - effect: NoSchedule
+  #   key: node.kubernetes.io/memory-pressure
+  #   operator: Exists
+  # - effect: NoSchedule
+  #   key: node.kubernetes.io/pid-pressure
+  #   operator: Exists
+  # - effect: NoSchedule
+  #   key: node.kubernetes.io/unschedulable
+  #   operator: Exists
 
   # Must be one of 'daemonset', 'deployment', or 'statefulset'.
-  type: daemonset
+  type: statefulset
 
   volumeClaimTemplates:
   - apiVersion: v1

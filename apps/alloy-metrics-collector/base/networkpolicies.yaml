@@ -1,0 +1,204 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: dns
+spec:
+  egress:
+  - ports:
+    - port: 53
+      protocol: TCP
+    - port: 53
+      protocol: UDP
+    to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: alloy
+      app.kubernetes.io/name: alloy
+  policyTypes:
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: prometheus-service-monitor
+spec:
+  ingress:
+  - ports:
+    - port: 12345
+      protocol: TCP
+    from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-prometheus-stack
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/instance: kube-prometheus-stack-prometheus
+          app.kubernetes.io/managed-by: prometheus-operator
+          app.kubernetes.io/name: prometheus
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: alloy
+      app.kubernetes.io/name: alloy
+  policyTypes:
+  - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: alloy-to-alloy
+spec:
+  egress:
+  - ports:
+    - port: 12345
+      protocol: TCP
+    to:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/instance: alloy
+          app.kubernetes.io/name: alloy
+  ingress:
+  - ports:
+    - port: 12345
+      protocol: TCP
+    from:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/instance: alloy
+          app.kubernetes.io/name: alloy
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: alloy
+      app.kubernetes.io/name: alloy
+  policyTypes:
+  - Egress
+  - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: backends
+spec:
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: loki
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/component: distributor
+          app.kubernetes.io/instance: loki
+          app.kubernetes.io/name: loki
+    ports:
+    - port: 3100
+      protocol: TCP
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-prometheus-stack
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: prometheus
+          operator.prometheus.io/name: kube-prometheus-stack-prometheus
+    ports:
+    - port: 9090
+      protocol: TCP
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: tempo
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/component: distributor
+          app.kubernetes.io/instance: tempo
+          app.kubernetes.io/name: tempo
+    ports:
+    - port: 4317
+      protocol: TCP
+  # ingress:
+  # - from:
+  #   - namespaceSelector:
+  #       matchLabels:
+  #         kubernetes.io/metadata.name: kube-system
+  #     podSelector:
+  #       matchLabels:
+  #         app.kubernetes.io/name: cilium-agent
+  #         app.kubernetes.io/part-of: cilium
+  #   ports:
+  #   - port: 4400
+  #     protocol: TCP
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: alloy
+      app.kubernetes.io/name: alloy
+  policyTypes:
+  - Egress
+  # - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: to-kubernetes-api-server
+spec:
+  egress:
+  - ports:
+    - port: 6444
+      protocol: TCP
+    to:
+    - ipBlock:
+        cidr: 10.0.0.0/8
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: alloy
+      app.kubernetes.io/name: alloy
+  policyTypes:
+  - Egress
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: external
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/instance: alloy
+      app.kubernetes.io/name: alloy
+  ingress:
+  - fromEntities:
+    - ingress
+    toPorts:
+    - ports:
+      - port: "4400"
+        protocol: TCP
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: dashboard
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/instance: alloy
+      app.kubernetes.io/name: alloy
+  ingress:
+  - fromEntities:
+    - ingress
+    toPorts:
+    - ports:
+      - port: "12345"
+        protocol: TCP
