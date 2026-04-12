@@ -52,6 +52,7 @@ kubeProxy:
 
 kubeStateMetrics:
   revisionHistoryLimit: 0
+revisionHistoryLimit: 0
 
 nodeExporter:
   enabled: false
