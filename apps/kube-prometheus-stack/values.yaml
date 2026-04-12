@@ -187,6 +187,7 @@ prometheusOperator:
     deployment:
       enabled: true
       # replicas: 2
+      revisionHistoryLimit: 0
     certManager:
       admissionCert:
         duration: 960h
@@ -198,3 +199,4 @@ prometheusOperator:
   kubeletEndpointSliceEnabled: true
   kubeletService:
     enabled: true
+  revisionHistoryLimit: 0
