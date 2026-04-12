@@ -1,0 +1,198 @@
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+
+alertmanager:
+  alertmanagerSpec:
+    logFormat: json
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Delete
+      whenScaled: Retain
+    replicas: 1
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteMany"]
+          resources:
+            requests:
+              storage: 10Gi
+          storageClassName: ceph-filesystem
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+      forecastle.stakater.com/appName: Alertmanager
+      forecastle.stakater.com/expose: "true"
+      forecastle.stakater.com/group: Observability
+      forecastle.stakater.com/icon: https://alertmanager.apps.iaas.wcooke.me/favicon.ico
+      forecastle.stakater.com/network-restricted: "true"
+    enabled: false
+    hosts:
+    - alertmanager.apps.iaas.wcooke.me
+    ingressClassName: cilium
+    paths:
+    - /
+    pathType: Prefix
+    tls:
+    - secretName: alertmanager-ingress-cert
+      hosts:
+      - alertmanager.apps.iaas.wcooke.me
+
+crds:
+  enabled: false
+
+defaultRules:
+  rules:
+    kubeProxy: false
+
+grafana:
+  enabled: false
+  forceDeployDashboards: true
+  forceDeployDatasources: true
+
+kubeProxy:
+  enabled: false
+
+nodeExporter:
+  operatingSystems:
+    aix:
+      enabled: false
+    darwin:
+      enabled: false
+
+prometheus:
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+      forecastle.stakater.com/appName: Prometheus
+      forecastle.stakater.com/expose: "true"
+      forecastle.stakater.com/group: Observability
+      forecastle.stakater.com/icon: https://prometheus.apps.iaas.wcooke.me/favicon.svg
+      forecastle.stakater.com/network-restricted: "true"
+    enabled: false
+    hosts:
+    - prometheus.apps.iaas.wcooke.me
+    ingressClassName: cilium
+    paths:
+    - /
+    pathType: Prefix
+    tls:
+    - hosts:
+      - prometheus.apps.iaas.wcooke.me
+      secretName: prometheus-ingress-cert
+  prometheusSpec:
+    enableAdminAPI: true
+    enableOTLPReceiver: true
+    enableRemoteWriteReceiver: true
+    externalUrl: https://prometheus.apps.iaas.wcooke.me
+    logFormat: json
+    otlp: {}
+      # promoteResourceAttributes: []
+      # keepIdentifyingResourceAttributes: false
+      # translationStrategy: NoUTF8EscapingWithSuffixes
+      # convertHistogramsToNHCB: false
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Delete
+      whenScaled: Retain
+    remoteWriteDashboards: true
+    # replicas: 2
+    retention: 1y
+    retentionSize: 125GiB
+    # shards: 1
+    resources:
+      limits:
+        cpu: 2000m
+        memory: 8Gi
+      requests:
+        cpu: 200m
+        memory: 4Gi
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteMany"]
+          storageClassName: ceph-filesystem
+          resources:
+            requests:
+              storage: 150Gi
+    tsdb:
+      outOfOrderTimeWindow: 5s
+    podMonitorSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    podMonitorNamespaceSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    probeSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    probeNamespaceSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    ruleSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    ruleNamespaceSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    scrapeConfigNamespaceSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    scrapeConfigSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    serviceMonitorSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+    serviceMonitorNamespaceSelector:
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
+
+prometheus-node-exporter:
+  hostNetwork: true
+  # prometheus:
+  #   podMonitor:
+  #     enabled: true
+
+prometheusOperator:
+  admissionWebhooks:
+    deployment:
+      enabled: true
+      # replicas: 2
+    certManager:
+      admissionCert:
+        duration: 960h
+      enabled: true
+      issuerRef:
+        kind: ClusterIssuer
+        name: iaas-wcooke-me
+  kubeletEndpointsEnabled: false
+  kubeletEndpointSliceEnabled: true
+  kubeletService:
+    enabled: true
