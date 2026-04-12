@@ -118,66 +118,92 @@ prometheus:
               storage: 150Gi
     tsdb:
       outOfOrderTimeWindow: 5s
+    podMonitorSelectorNilUsesHelmValues: false
     podMonitorSelector:
-      matchExpressions:
-      - key: xyz
-        operator: NotIn
-        values:
-        - def
+      # matchExpressions:
+      # - key: xyz
+      #   operator: NotIn
+      #   values:
+      #   - def
+      matchLabels:
+        vifmvuticvbcvmle: "abcd123098sdlfkj"
     podMonitorNamespaceSelector:
-      matchExpressions:
-      - key: xyz
-        operator: NotIn
-        values:
-        - def
+      # matchExpressions:
+      # - key: xyz
+      #   operator: NotIn
+      #   values:
+      #   - def
+      matchLabels:
+        vifmvuticvbcvmle: "abcd123098sdlfkj"
+    probeSelectorNilUsesHelmValues: false
     probeSelector:
-      matchExpressions:
-      - key: xyz
-        operator: NotIn
-        values:
-        - def
+      # matchExpressions:
+      # - key: xyz
+      #   operator: NotIn
+      #   values:
+      #   - def
+      matchLabels:
+        vifmvuticvbcvmle: "abcd123098sdlfkj"
     probeNamespaceSelector:
-      matchExpressions:
-      - key: xyz
-        operator: NotIn
-        values:
-        - def
+      # matchExpressions:
+      # - key: xyz
+      #   operator: NotIn
+      #   values:
+      #   - def
+      matchLabels:
+        vifmvuticvbcvmle: "abcd123098sdlfkj"
+    ruleSelectorNilUsesHelmValues: false
     ruleSelector:
-      matchExpressions:
-      - key: xyz
-        operator: NotIn
-        values:
-        - def
+      # matchExpressions:
+      # - key: xyz
+      #   operator: NotIn
+      #   values:
+      #   - def
+      matchLabels:
+        vifmvuticvbcvmle: "abcd123098sdlfkj"
     ruleNamespaceSelector:
-      matchExpressions:
-      - key: xyz
-        operator: NotIn
-        values:
-        - def
+      # matchExpressions:
+      # - key: xyz
+      #   operator: NotIn
+      #   values:
+      #   - def
+      matchLabels:
+        vifmvuticvbcvmle: "abcd123098sdlfkj"
     scrapeConfigNamespaceSelector:
-      matchExpressions:
-      - key: xyz
-        operator: NotIn
-        values:
-        - def
+      # matchExpressions:
+      # - key: xyz
+      #   operator: NotIn
+      #   values:
+      #   - def
+      matchLabels:
+        vifmvuticvbcvmle: "abcd123098sdlfkj"
+    scrapeConfigSelectorNilUsesHelmValues: true
     scrapeConfigSelector:
-      matchExpressions:
-      - key: xyz
-        operator: NotIn
-        values:
-        - def
+      # matchExpressions:
+      # - key: xyz
+      #   operator: NotIn
+      #   values:
+      #   - def
+      matchLabels:
+        vifmvuticvbcvmle: "abcd123098sdlfkj"
+    serviceMonitorSelectorNilUsesHelmValues: false
     serviceMonitorSelector:
-      matchExpressions:
-      - key: xyz
-        operator: NotIn
-        values:
-        - def
+      # matchExpressions:
+      # - key: xyz
+      #   operator: NotIn
+      #   values:
+      #   - def
+      matchLabels:
+        vifmvuticvbcvmle: "abcd123098sdlfkj"
     serviceMonitorNamespaceSelector:
-      matchExpressions:
-      - key: xyz
-        operator: NotIn
-        values:
-        - def
+      # matchExpressions:
+      # - key: xyz
+      #   operator: NotIn
+      #   values:
+      #   - def
+      matchLabels:
+        vifmvuticvbcvmle: "abcd123098sdlfkj"
+
 
 prometheus-node-exporter:
   hostNetwork: true
