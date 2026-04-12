@@ -42,9 +42,6 @@ defaultRules:
   rules:
     kubeProxy: false
 
-global:
-  revisionHistoryLimit: 0
-
 grafana:
   enabled: false
   forceDeployDashboards: true
@@ -226,8 +223,8 @@ prometheusOperator:
       issuerRef:
         kind: ClusterIssuer
         name: iaas-wcooke-me
-  kubeletEndpointsEnabled: false
-  kubeletEndpointSliceEnabled: true
+  # kubeletEndpointsEnabled: false
+  # kubeletEndpointSliceEnabled: true
   kubeletService:
     enabled: true
   revisionHistoryLimit: 0
