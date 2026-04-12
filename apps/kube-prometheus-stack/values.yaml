@@ -42,6 +42,9 @@ defaultRules:
   rules:
     kubeProxy: false
 
+global:
+  revisionHistoryLimit: 0
+
 grafana:
   enabled: false
   forceDeployDashboards: true
@@ -52,7 +55,6 @@ kubeProxy:
 
 kubeStateMetrics:
   revisionHistoryLimit: 0
-revisionHistoryLimit: 0
 
 nodeExporter:
   enabled: false
