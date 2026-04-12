@@ -50,6 +50,9 @@ grafana:
 kubeProxy:
   enabled: false
 
+kubeStateMetrics:
+  revisionHistoryLimit: 0
+
 nodeExporter:
   enabled: false
   forceDeployDashboards: true
