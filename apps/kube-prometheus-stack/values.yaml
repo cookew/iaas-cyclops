@@ -105,10 +105,10 @@ prometheus:
     resources:
       limits:
         cpu: 4000m
-        memory: 8Gi
+        memory: 12Gi
       requests:
         cpu: 200m
-        memory: 4Gi
+        memory: 6Gi
     podMonitorSelectorNilUsesHelmValues: false
     podMonitorSelector:
       # matchExpressions:
