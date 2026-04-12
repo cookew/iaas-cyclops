@@ -134,8 +134,8 @@ spec:
         automated:
           allowEmpty: true
           enabled: true
-          prune: false
-          selfHeal: false
+          prune: true
+          selfHeal: true
         syncOptions:
         - CreateNamespace={{ dig "createNamespace" "true" . }}
         - Replace={{ dig "replace" "false" . }}
