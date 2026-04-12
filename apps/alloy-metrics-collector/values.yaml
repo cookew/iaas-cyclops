@@ -16,17 +16,9 @@ alloy:
 
 
       // Kubernetes Metrics
-      discovery.kubernetes "pods" {
-          role = "pod"
-      }
-
-      discovery.kubernetes "nodes" {
-          role = "node"
-      }
-
-      discovery.kubernetes "services" {
-          role = "service"
-      }
+      // discovery.kubernetes "endpoints" {
+      //     role = "endpoint"
+      // }
 
       discovery.kubernetes "endpointslices" {
           role = "endpointslice"
@@ -36,50 +28,62 @@ alloy:
           role = "ingress"
       }
 
-      prometheus.scrape "kubernetes_nodes" {
-        clustering {
-            enabled = true
-        }
-        targets    = discovery.kubernetes.nodes.targets
-        forward_to = [prometheus.remote_write.prometheus.receiver]
+      discovery.kubernetes "nodes" {
+          role = "node"
       }
 
-      prometheus.scrape "kubernetes_pods" {
-        clustering {
-            enabled = true
-        }
-        targets    = discovery.kubernetes.pods.targets
-        forward_to = [prometheus.remote_write.prometheus.receiver]
+      discovery.kubernetes "pods" {
+          role = "pod"
       }
 
-      prometheus.scrape "kubernetes_services" {
-        clustering {
-            enabled = true
-        }
-        targets    = discovery.kubernetes.services.targets
-        forward_to = [prometheus.remote_write.prometheus.receiver]
+      discovery.kubernetes "services" {
+          role = "service"
       }
 
-      prometheus.scrape "kubernetes_endpointslices" {
-        clustering {
-            enabled = true
-        }
+      // prometheus.scrape "endpoints" {
+      //   targets    = discovery.kubernetes.endpoints.targets
+      //   forward_to = [prometheus.remote_write.prometheus.receiver]
+      // }
+
+      prometheus.scrape "endpointslices" {
         targets    = discovery.kubernetes.endpointslices.targets
         forward_to = [prometheus.remote_write.prometheus.receiver]
       }
 
-      prometheus.scrape "kubernetes_ingresses" {
-        clustering {
-            enabled = true
-        }
+      prometheus.scrape "ingresses" {
         targets    = discovery.kubernetes.ingresses.targets
         forward_to = [prometheus.remote_write.prometheus.receiver]
       }
 
-      prometheus.operator.servicemonitors "kube_cluster" {
-        clustering {
-            enabled = true
-        }
+      prometheus.scrape "nodes" {
+        targets    = discovery.kubernetes.nodes.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.scrape "pods" {
+        targets    = discovery.kubernetes.pods.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.scrape "services" {
+        targets    = discovery.kubernetes.services.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.operator.podmonitors "pods" {
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      prometheus.operator.probes "probes" {
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      // This is experimental
+      // prometheus.operator.scrapeconfigs "scrapeconfigs" {
+        // forward_to = [prometheus.remote_write.prometheus.receiver]
+      // }
+
+      prometheus.operator.servicemonitors "servicemonitors" {
         forward_to = [prometheus.remote_write.prometheus.receiver]
       }
       // End Kubernetes Metrics
@@ -123,9 +127,9 @@ alloy:
     extra:
     - mountPath: /storage
       name: storage
-    - name: client-ca-cert
-      mountPath: "/client-ca-cert"
-      readOnly: true
+    # - name: client-ca-cert
+    #   mountPath: "/client-ca-cert"
+    #   readOnly: true
     varlog: false
 
   resources:
@@ -182,11 +186,11 @@ controller:
           storage: 10Gi
       storageClassName: ceph-filesystem
 
-  volumes:
-    extra:
-    - name: client-ca-cert
-      secret:
-        secretName: alloy-client-ca-cert
+  # volumes:
+  #   extra:
+  #   - name: client-ca-cert
+  #     secret:
+  #       secretName: alloy-client-ca-cert
 
 crds:
   create: false

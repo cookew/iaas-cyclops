@@ -51,6 +51,7 @@ kubeProxy:
   enabled: false
 
 kubeStateMetrics:
+  enabled: false
   revisionHistoryLimit: 0
 
 nodeExporter:

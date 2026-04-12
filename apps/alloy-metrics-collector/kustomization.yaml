@@ -1,16 +1,23 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: alloy-metrics
+namespace: alloy-metrics-collector
 
 resources:
-- base/networkpolicies.yaml
-- sealed-secrets/alloy-client-credentials.yaml
+- base/alloy-metrics-ingress.yaml
+# - base/networkpolicies.yaml
+# - sealed-secrets/alloy-metrics-client-credentials.yaml
 
 helmCharts:
 - name: alloy
-  namespace: alloy-metrics
-  releaseName: alloy
+  namespace: alloy-metrics-collector
+  releaseName: alloy-metrics-collector
   repo: https://grafana.github.io/helm-charts
   valuesFile: values.yaml
   version: 1.7.0
+- name: kube-state-metrics
+  namespace: alloy-metrics-collector
+  releaseName: kube-state-metrics
+  repo: https://prometheus-community.github.io/helm-charts
+  valuesFile: kube-state-metrics-values.yaml
+  version: 7.2.2
