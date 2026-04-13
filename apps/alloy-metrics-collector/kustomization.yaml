@@ -13,8 +13,14 @@ helmCharts:
   namespace: alloy-metrics-collector
   releaseName: alloy-metrics-collector
   repo: https://grafana.github.io/helm-charts
-  valuesFile: values.yaml
+  valuesFile: alloy-metrics-collector-values.yaml
   version: 1.7.0
+# - name: alloy
+#   namespace: alloy-metrics-collector
+#   releaseName: alloy-prometheus-rules
+#   repo: https://grafana.github.io/helm-charts
+#   valuesFile: alloy-prometheus-rules-values.yaml
+#   version: 1.7.0
 - name: kube-state-metrics
   namespace: alloy-metrics-collector
   releaseName: kube-state-metrics
