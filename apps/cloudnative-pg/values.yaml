@@ -1,3 +1,5 @@
+# https://github.com/cloudnative-pg/charts/tree/main/charts/cloudnative-pg
+
 replicaCount: 2
 
 # image:
