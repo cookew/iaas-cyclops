@@ -65,11 +65,11 @@ spec:
     tlsSecret: keycloak-ingress-cert
   # Comment instances if using the HPA
   # instances: 2
-  networkPolicy:
-    management:
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: kube-prometheus-stack
+  # networkPolicy:
+  #   management:
+  #   - namespaceSelector:
+  #       matchLabels:
+  #         kubernetes.io/metadata.name: kube-prometheus-stack
   proxy:
     headers: xforwarded # double check your reverse proxy sets and overwrites the X-Forwarded-* headers
   resources:
