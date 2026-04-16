@@ -35,8 +35,6 @@ spec:
   instances: 3
   monitoring:
     enablePodMonitor: true
-    tls:
-      enabled: false
   # plugins:
   # - name: barman-cloud.cloudnative-pg.io
   #   isWALArchiver: true
