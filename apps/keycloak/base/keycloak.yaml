@@ -87,9 +87,9 @@ spec:
         - weight: 100
           podAffinityTerm:
             topologyKey: kubernetes.io/hostname
-  serviceMonitor:
-    enabled: true
-    interval: 10s
+  # serviceMonitor:
+  #   enabled: true
+  #   interval: 10s
   # startOptimized: true
   truststores:
     certs:
