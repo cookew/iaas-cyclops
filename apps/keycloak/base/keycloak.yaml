@@ -39,9 +39,9 @@ spec:
     - docker
     - client-auth-federated
     - fips
-    - ipa-tuura-federation
-    - kerberos
-    - kubernetes-service-accounts
+    # - ipa-tuura-federation
+    # - kerberos
+    # - kubernetes-service-accounts
     - passkeys
     - spiffe
   hostname:
