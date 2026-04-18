@@ -37,13 +37,13 @@ spec:
   features:
     enabled:
     - docker
-    - client-auth-federated
+    # - client-auth-federated
     - fips
     # - ipa-tuura-federation
     # - kerberos
     # - kubernetes-service-accounts
     - passkeys
-    - spiffe
+    # - spiffe
   hostname:
     # admin: https://keycloak.apps.iaas.wcooke.me/admin
     hostname: https://keycloak.apps.iaas.wcooke.me
