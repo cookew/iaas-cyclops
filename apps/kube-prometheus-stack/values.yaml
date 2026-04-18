@@ -51,12 +51,9 @@ kubeProxy:
   enabled: false
 
 kubeStateMetrics:
-  enabled: false
   revisionHistoryLimit: 0
 
 nodeExporter:
-  enabled: false
-  forceDeployDashboards: true
   operatingSystems:
     aix:
       enabled: false
@@ -109,91 +106,66 @@ prometheus:
       requests:
         cpu: 200m
         memory: 6Gi
-    podMonitorSelectorNilUsesHelmValues: false
     podMonitorSelector:
-      # matchExpressions:
-      # - key: xyz
-      #   operator: NotIn
-      #   values:
-      #   - def
-      matchLabels:
-        vifmvuticvbcvmle: "abcd123098sdlfkj"
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
     podMonitorNamespaceSelector:
-      # matchExpressions:
-      # - key: xyz
-      #   operator: NotIn
-      #   values:
-      #   - def
-      matchLabels:
-        vifmvuticvbcvmle: "abcd123098sdlfkj"
-    probeSelectorNilUsesHelmValues: false
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
     probeSelector:
-      # matchExpressions:
-      # - key: xyz
-      #   operator: NotIn
-      #   values:
-      #   - def
-      matchLabels:
-        vifmvuticvbcvmle: "abcd123098sdlfkj"
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
     probeNamespaceSelector:
-      # matchExpressions:
-      # - key: xyz
-      #   operator: NotIn
-      #   values:
-      #   - def
-      matchLabels:
-        vifmvuticvbcvmle: "abcd123098sdlfkj"
-    ruleSelectorNilUsesHelmValues: false
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
     ruleSelector:
-      # matchExpressions:
-      # - key: xyz
-      #   operator: NotIn
-      #   values:
-      #   - def
-      matchLabels:
-        vifmvuticvbcvmle: "abcd123098sdlfkj"
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
     ruleNamespaceSelector:
-      # matchExpressions:
-      # - key: xyz
-      #   operator: NotIn
-      #   values:
-      #   - def
-      matchLabels:
-        vifmvuticvbcvmle: "abcd123098sdlfkj"
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
     scrapeConfigNamespaceSelector:
-      # matchExpressions:
-      # - key: xyz
-      #   operator: NotIn
-      #   values:
-      #   - def
-      matchLabels:
-        vifmvuticvbcvmle: "abcd123098sdlfkj"
-    scrapeConfigSelectorNilUsesHelmValues: true
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
     scrapeConfigSelector:
-      # matchExpressions:
-      # - key: xyz
-      #   operator: NotIn
-      #   values:
-      #   - def
-      matchLabels:
-        vifmvuticvbcvmle: "abcd123098sdlfkj"
-    serviceMonitorSelectorNilUsesHelmValues: false
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
     serviceMonitorSelector:
-      # matchExpressions:
-      # - key: xyz
-      #   operator: NotIn
-      #   values:
-      #   - def
-      matchLabels:
-        vifmvuticvbcvmle: "abcd123098sdlfkj"
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
     serviceMonitorNamespaceSelector:
-      # matchExpressions:
-      # - key: xyz
-      #   operator: NotIn
-      #   values:
-      #   - def
-      matchLabels:
-        vifmvuticvbcvmle: "abcd123098sdlfkj"
+      matchExpressions:
+      - key: xyz
+        operator: NotIn
+        values:
+        - def
     storageSpec:
       volumeClaimTemplate:
         spec:
@@ -224,6 +196,6 @@ prometheusOperator:
       issuerRef:
         kind: ClusterIssuer
         name: iaas-wcooke-me
-  # kubeletService:
-  #   enabled: true
+  kubeletService:
+    enabled: true
   revisionHistoryLimit: 0
