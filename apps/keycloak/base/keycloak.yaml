@@ -5,9 +5,9 @@ kind: Keycloak
 metadata:
   name: keycloak
 spec:
-  additionalOptions:
-  - name: metrics-enabled
-    value: "true"
+  # additionalOptions:
+  # - name: metrics-enabled
+  #   value: "true"
   # - name: tracing-enabled
   #   value: "false"
   # - name: truststore-paths
@@ -25,15 +25,15 @@ spec:
       key: username
       name: keycloak-pg-cluster-app
     vendor: postgres
-  env:
-  - name: KC_METRICS_ENABLED
-    value: "true"
-  - name: KC_CACHE_METRICS_HISTOGRAMS_ENABLED
-    value: "true"
-  - name: KC_HTTP_METRICS_HISTOGRAMS_ENABLED
-    value: "true"
-  - name: KC_EVENT_METRICS_USER_ENABLED
-    value: "true"
+  # env:
+  # - name: KC_METRICS_ENABLED
+  #   value: "true"
+  # - name: KC_CACHE_METRICS_HISTOGRAMS_ENABLED
+  #   value: "true"
+  # - name: KC_HTTP_METRICS_HISTOGRAMS_ENABLED
+  #   value: "true"
+  # - name: KC_EVENT_METRICS_USER_ENABLED
+  #   value: "true"
   features:
     enabled:
     - docker
@@ -64,7 +64,7 @@ spec:
     enabled: false
     tlsSecret: keycloak-ingress-cert
   # Comment instances if using the HPA
-  instances: 2
+  # instances: 2
   # networkPolicy:
   #   management:
   #   - namespaceSelector:
@@ -87,9 +87,9 @@ spec:
         - weight: 100
           podAffinityTerm:
             topologyKey: kubernetes.io/hostname
-  # serviceMonitor:
-  #   enabled: true
-  #   interval: 10s
+  serviceMonitor:
+    enabled: true
+    interval: 10s
   # startOptimized: true
   truststores:
     certs:
