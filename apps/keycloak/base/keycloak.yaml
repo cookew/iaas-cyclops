@@ -91,10 +91,10 @@ spec:
     enabled: true
     interval: 10s
   # startOptimized: true
-  truststores:
-    certs:
-      configMap:
-        name: tm-ca-bundle
+  # truststores:
+  #   certs:
+  #     configMap:
+  #       name: tm-ca-bundle
   update:
     strategy: Auto
   # unsupported:
