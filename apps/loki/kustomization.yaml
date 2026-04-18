@@ -14,7 +14,7 @@ helmCharts:
   releaseName: loki
   repo: https://grafana-community.github.io/helm-charts
   valuesFile: values.yaml
-  version: 12.0.0
+  version: 13.0.3
 # - name: valkey
 #   namespace: loki
 #   releaseName: valkey
