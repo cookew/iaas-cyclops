@@ -50,7 +50,7 @@ spec:
     # strict: false
   http:
     tlsSecret: keycloak-certificate
-  image: registry.wcooke.me:5000/keycloak/keycloak-fips@sha256:f111af157ad5b71a39cf42d8c2bd449b40570c05825c0f1bade57b5ec65acfd6
+  image: registry.wcooke.me:5000/keycloak/keycloak-fips@sha256:ccbf123f60602a0a48b7288e638698dd06c9e99d0985df2c4a99bdfac045f569
   ingress:
     annotations:
       cert-manager.io/cluster-issuer: iaas-wcooke-me
