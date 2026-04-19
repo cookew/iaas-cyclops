@@ -68,8 +68,8 @@ spec:
       - name: crossplane-keycloak-realms
         syncWave: -40
 
-      # - name: keycloak
-      #   syncWave: -30
+      - name: keycloak
+        syncWave: -30
       - name: kube-prometheus-stack
         syncWave: -30
 
