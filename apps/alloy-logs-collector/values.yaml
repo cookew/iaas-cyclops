@@ -107,24 +107,18 @@ controller:
 
   volumes:
     extra:
-      - apiVersion: v1
-        kind: PersistentVolumeClaim
-        metadata:
-          name: storage
-        spec:
-          accessModes: [ "ReadWriteOnce" ]
-          resources:
-            requests:
-              storage: 10Gi
-          storageClassName: ceph-filesystem
-
-  volumeClaimTemplates:
-
-  volumes:
-    extra:
     - name: client-ca-cert
       secret:
         secretName: alloy-client-ca-cert
+    - name: storage
+      ephemeral:
+        volumeClaimTemplate:
+          spec:
+            accessModes: [ "ReadWriteOnce" ]
+            resources:
+              requests:
+                storage: 10Gi
+            storageClassName: ceph-filesystem
 
 crds:
   create: false
