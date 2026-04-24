@@ -5,7 +5,7 @@ namespace: alloy-logs-collector
 
 resources:
 - base/networkpolicies.yaml
-- sealed-secrets/alloy-client-credentials.yaml
+- sealed-secrets/alloy-logs-collector-client-credentials.yaml
 
 helmCharts:
 - name: alloy
