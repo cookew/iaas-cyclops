@@ -79,7 +79,7 @@ spec:
       - name: cyberchef
       - name: descheduler
       - name: drawio
-      - name: fluent-bit
+      # - name: fluent-bit
       - name: forecastle
       - name: github-arc
       - name: grafana
