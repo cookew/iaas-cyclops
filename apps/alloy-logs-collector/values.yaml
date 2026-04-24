@@ -56,8 +56,8 @@ alloy:
 
   mounts:
     extra:
-    - mountPath: /storage
-      name: storage
+    # - mountPath: /storage
+    #   name: storage
     - name: client-ca-cert
       mountPath: "/client-ca-cert"
       readOnly: true
