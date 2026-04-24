@@ -3,9 +3,9 @@ kind: Kustomization
 
 namespace: alloy-logs-collector
 
-# resources:
-# - base/networkpolicies.yaml
-# - sealed-secrets/alloy-logs-client-credentials.yaml
+resources:
+- base/networkpolicies.yaml
+- sealed-secrets/alloy-logs-client-credentials.yaml
 
 helmCharts:
 - name: alloy
