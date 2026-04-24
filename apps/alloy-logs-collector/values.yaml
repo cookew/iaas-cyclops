@@ -56,8 +56,8 @@ alloy:
 
   mounts:
     extra:
-    # - mountPath: /storage
-    #   name: storage
+    - mountPath: /storage
+      name: storage
     - name: client-ca-cert
       mountPath: "/client-ca-cert"
       readOnly: true
@@ -105,17 +105,20 @@ controller:
   # Must be one of 'daemonset', 'deployment', or 'statefulset'.
   type: daemonset
 
+  volumes:
+    extra:
+      - apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: storage
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          resources:
+            requests:
+              storage: 10Gi
+          storageClassName: ceph-filesystem
+
   volumeClaimTemplates:
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: storage
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 10Gi
-      storageClassName: ceph-filesystem
 
   volumes:
     extra:
