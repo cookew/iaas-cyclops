@@ -74,7 +74,7 @@ spec:
         syncWave: -30
 
       - name: alloy
-      - name: alloy-logs-collector
+      # - name: alloy-logs-collector
       - name: capi-operator
       - name: cyberchef
       - name: descheduler
