@@ -34,8 +34,8 @@ spec:
   #   value: "true"
   # - name: KC_EVENT_METRICS_USER_ENABLED
   #   value: "true"
-  features:
-    enabled:
+  # features:
+    # enabled:
     # - docker
     # - client-auth-federated
     # - fips
@@ -44,7 +44,6 @@ spec:
     # - kubernetes-service-accounts
     # - passkeys
     # - spiffe
-    - token-exchange
   hostname:
     # admin: https://keycloak.apps.iaas.wcooke.me/admin
     hostname: https://keycloak.apps.iaas.wcooke.me
