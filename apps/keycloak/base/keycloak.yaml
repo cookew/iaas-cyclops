@@ -34,15 +34,15 @@ spec:
   #   value: "true"
   # - name: KC_EVENT_METRICS_USER_ENABLED
   #   value: "true"
-  features:
-    enabled:
-    - docker
+  # features:
+    # enabled:
+    # - docker
     # - client-auth-federated
-    - fips
+    # - fips
     # - ipa-tuura-federation
     # - kerberos
     # - kubernetes-service-accounts
-    - passkeys
+    # - passkeys
     # - spiffe
   hostname:
     # admin: https://keycloak.apps.iaas.wcooke.me/admin
@@ -50,7 +50,7 @@ spec:
     # strict: false
   http:
     tlsSecret: keycloak-certificate
-  image: registry.wcooke.me:5000/keycloak/keycloak-fips@sha256:a6a25d0fcd878a7a66388ab5695bd1093a6a713090992ff1ffdd9a3d91f6f633
+  image: registry.wcooke.me:5000/keycloak/keycloak-fips@sha256:028d2a00629f1e1e0d5df6579b0f01f14c7509e16027bea17a6165ec86948b2d
   ingress:
     annotations:
       cert-manager.io/cluster-issuer: iaas-wcooke-me
