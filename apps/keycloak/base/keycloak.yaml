@@ -72,7 +72,7 @@ spec:
   #         kubernetes.io/metadata.name: kube-prometheus-stack
   proxy:
     headers: xforwarded # double check your reverse proxy sets and overwrites the X-Forwarded-* headers
-  # resources:
+  resources:
     limits:
       cpu: 2
     # requests:
