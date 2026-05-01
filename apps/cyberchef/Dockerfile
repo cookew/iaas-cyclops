@@ -1,4 +1,4 @@
-FROM node:18-alpine AS builder
+FROM node:24-alpine AS builder
 
 ARG VERSION
 
@@ -21,6 +21,6 @@ RUN npm run postinstall
 RUN npm run build
 
 
-FROM nginxinc/nginx-unprivileged:alpine AS app
+FROM nginxinc/nginx-unprivileged:stable-alpine AS app
 
 COPY --from=builder /app/build/prod /usr/share/nginx/html/
