@@ -73,8 +73,8 @@ spec:
   proxy:
     headers: xforwarded # double check your reverse proxy sets and overwrites the X-Forwarded-* headers
   # resources:
-  #   limits:
-  #     cpu: 1
+    limits:
+      cpu: 2
     # requests:
     #   cpu: 4
     #   memory: 12Gi
@@ -85,14 +85,14 @@ spec:
         - weight: 100
           podAffinityTerm:
             topologyKey: kubernetes.io/hostname
-  # serviceMonitor:
-  #   enabled: true
-  #   interval: 10s
+  serviceMonitor:
+    enabled: true
+    interval: 10s
   # startOptimized: true
-  # truststores:
-  #   certs:
-  #     configMap:
-  #       name: tm-ca-bundle
+  truststores:
+    certs:
+      configMap:
+        name: tm-ca-bundle
   # update:
   #   strategy: Auto
   # unsupported:
