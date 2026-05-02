@@ -8,7 +8,7 @@ forecastle:
     title: IaaS Apps
     customApps:
     - group: Apps
-      icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
+      icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/favicon.svg
       name: Keycloak Account
       networkRestricted: true
       properties:
