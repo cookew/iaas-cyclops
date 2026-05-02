@@ -233,7 +233,8 @@ sso:
     clientExistingSecret: open-webui-keycloak-client
     clientIdExistingSecretKey: client-id
     clientExistingSecretKey: client-secret
-    providerUrl: https://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration
+    # providerUrl: https://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration
+    providerUrl: https://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known
     providerName: Keycloak
     scopes: openid email profile
   roleManagement:
