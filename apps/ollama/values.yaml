@@ -24,6 +24,7 @@ ollama:
     - llama2
     - llama4
     - mistral
+    - mistral-medium-3.5
 
     # -- List of models to load in memory at container startup
     # run:
@@ -34,6 +35,7 @@ ollama:
     - llama2
     - llama4
     - mistral
+    - mistral-medium-3.5
 
     # -- List of models to create at container startup, there are two options
     # 1. Create a raw model
@@ -83,7 +85,7 @@ persistentVolume:
   accessModes:
   - ReadWriteOnce
   enabled: true
-  size: 100Gi
+  size: 150Gi
   storageClass: ceph-filesystem
 
 replicaCount: 1
