@@ -52,8 +52,8 @@ spec:
       - name: rook-ceph
         syncWave: -60
 
-      - name: crossplane-keycloak-provider
-        syncWave: -50
+      # - name: crossplane-keycloak-provider
+      #   syncWave: -50
       - name: kubevirt
         syncWave: -50
       - name: rook-ceph-cluster
