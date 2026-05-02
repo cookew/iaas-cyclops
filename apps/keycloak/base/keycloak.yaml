@@ -84,6 +84,12 @@ spec:
         preferredDuringSchedulingIgnoredDuringExecution:
         - weight: 100
           podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - keycloak
             topologyKey: kubernetes.io/hostname
   serviceMonitor:
     enabled: true
