@@ -57,7 +57,7 @@ spec:
       forecastle.stakater.com/appName: Keycloak
       forecastle.stakater.com/expose: "true"
       forecastle.stakater.com/group: Kubernetes
-      forecastle.stakater.com/icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/logo.svg
+      forecastle.stakater.com/icon: https://keycloak.apps.iaas.wcooke.me/resources/w2ekr/admin/keycloak.v2/favicon.svg
       forecastle.stakater.com/network-restricted: "true"
       ingress.cilium.io/tls-passthrough: enabled
     className: cilium
