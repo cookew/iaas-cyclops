@@ -153,6 +153,15 @@ extraEnvVars:
   - name: OAUTH_CODE_CHALLENGE_METHOD
     value: S256
 
+  - name: ENABLE_COMMUNITY_SHARING
+    value: "False"
+
+  - name: WEBUI_SESSION_COOKIE_SAME_SITE
+    value: strict
+  - name: WEBUI_SESSION_COOKIE_SECURE
+    value: "True"
+
+
   # - name: DATABASE_TYPE
   #   value: postgresql
   # - name: DATABASE_USER
