@@ -149,6 +149,9 @@ extraEnvVars:
   - name: OPENID_REDIRECT_URI
     value: https://open-webui.apps.iaas.wcooke.me/oauth/oidc/callback
 
+  - name: OAUTH_CODE_CHALLENGE_METHOD
+    value: S256
+
   # - name: DATABASE_TYPE
   #   value: postgresql
   # - name: DATABASE_USER
