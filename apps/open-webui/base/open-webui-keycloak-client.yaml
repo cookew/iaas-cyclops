@@ -30,6 +30,9 @@ apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
 metadata:
   name: open-webui-admin
+  labels:
+    keycloak/realm: iaas
+    keycloak/group-admins: ""
 spec:
   deletionPolicy: Delete
   forProvider:
