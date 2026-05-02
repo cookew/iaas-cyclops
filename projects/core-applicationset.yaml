@@ -65,8 +65,8 @@ spec:
         syncWave: -40
       - name: cloudnative-pg
         syncWave: -40
-      - name: crossplane-keycloak-realms
-        syncWave: -40
+      # - name: crossplane-keycloak-realms
+      #   syncWave: -40
 
       - name: keycloak
         syncWave: -30
