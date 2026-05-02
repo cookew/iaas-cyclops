@@ -47,8 +47,8 @@ spec:
 
       - name: cluster-network-addons
         syncWave: -60
-      - name: crossplane
-        syncWave: -60
+      # - name: crossplane
+      #   syncWave: -60
       - name: rook-ceph
         syncWave: -60
 
