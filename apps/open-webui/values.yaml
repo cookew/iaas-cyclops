@@ -5,7 +5,8 @@ ollama:
 
 # -- A list of Ollama API endpoints. These can be added in lieu of automatically installing the Ollama Helm chart, or in addition to it.
 # @section -- External Tools configuration
-ollamaUrls: []
+ollamaUrls:
+- http://ollama.ollama.svc:11434
 
 tika:
   enabled: true
