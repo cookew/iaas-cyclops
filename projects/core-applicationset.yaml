@@ -76,24 +76,24 @@ spec:
       # - name: alloy
       # - name: alloy-logs-collector
       # - name: capi-operator
-      # - name: cyberchef
+      - name: cyberchef
       - name: descheduler
-      # - name: drawio
+      - name: drawio
       # - name: fluent-bit
       - name: forecastle
       - name: github-arc
       - name: grafana
-      # - name: harbor
-      # - name: headlamp
-      # - name: kubevirt-manager
+      - name: harbor
+      - name: headlamp
+      - name: kubevirt-manager
       - name: loki
       - name: nvme-exporter
-      # - name: ollama
-      # - name: open-webui
+      - name: ollama
+      - name: open-webui
       # - name: pyroscope
       - name: reloader
       # - name: tempo
-      # - name: whoami
+      - name: whoami
 
       # - name: argo-workflows
       # #   serverSideApply: "true"
