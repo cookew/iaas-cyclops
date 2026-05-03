@@ -78,7 +78,7 @@ global:
   - configMapRef:
       name: loki-bucket1
   - secretRef:
-      name: loki-bucket1
+      name: loki-bucket
 
 indexGateway:
   podDisruptionBudget:
