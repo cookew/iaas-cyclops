@@ -8,7 +8,7 @@ resources:
 - base/docker-registry-dashboard.yaml
 - base/grafana-keycloak-client.yaml
 - base/grafana-pg-cluster.yaml
-- base/grafana-valkey-certificate.yaml
+# - base/grafana-valkey-certificate.yaml
 - base/haproxy-dashboard.yaml
 - base/loki-datasource.yaml
 - base/pyroscope-datasource.yaml
