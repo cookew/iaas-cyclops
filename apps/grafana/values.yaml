@@ -106,10 +106,10 @@ grafana.ini:
     ha_engine_password: "$__file{/grafana-valkey-password/REDIS_PASSWORD}"
   news:
     news_feed_enabled: false
-  remote_cache:
-    connstr: redis
-    redis: network=tcp,addr=valkey.grafana.svc:6379,pool_size=100,db=0,password=$__file{/grafana-valkey-password/REDIS_PASSWORD},ssl=false
-    type: redis
+  # remote_cache:
+  #   connstr: redis
+  #   redis: network=tcp,addr=valkey.grafana.svc:6379,pool_size=100,db=0,password=$__file{/grafana-valkey-password/REDIS_PASSWORD},ssl=false
+  #   type: redis
   security:
     allow_embedding: true
     content_security_policy: true
