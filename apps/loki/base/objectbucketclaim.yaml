@@ -1,9 +1,9 @@
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
 metadata:
-  name: loki-bucket1
+  name: loki-bucket
 spec:
-  bucketName: loki1
+  bucketName: loki
   storageClassName: ceph-bucket
   additionalConfig:
     maxObjects: "2000000"
