@@ -128,10 +128,10 @@ grafana.ini:
     plugin_admin_enabled: false
     # preinstall_auto_update: false
     # public_key_retrieval_disabled: true
-  remote_cache:
-    connstr: addr=valkey.grafana.svc:6379,pool_size=100,db=0,password=$__file{/grafana-valkey-password/REDIS_PASSWORD},ssl=false
-    encryption: true
-    type: redis
+  # remote_cache:
+  #   connstr: addr=valkey.grafana.svc:6379,pool_size=100,db=0,password=$__file{/grafana-valkey-password/REDIS_PASSWORD},ssl=false
+  #   encryption: true
+  #   type: redis
   security:
     allow_embedding: true
     content_security_policy: true
