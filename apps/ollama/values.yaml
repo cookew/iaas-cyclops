@@ -79,7 +79,8 @@ ingress:
     - ollama.apps.iaas.wcooke.me
     secretName: ollama-tls
 
-nodeSelector: {}
+nodeSelector:
+  cpu-model.node.kubevirt.io/SandyBridge: "true"
 
 persistentVolume:
   accessModes:
