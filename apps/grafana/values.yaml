@@ -44,6 +44,10 @@ extraVolumes:
     # - key: ca-certificates.crt
 
 grafana.ini:
+  alerting:
+    ha_redis_address: valkey.grafana.svc:6379
+    ha_redis_password: "$__file{/grafana-valkey-password/REDIS_PASSWORD}"
+    # ha_redis_db: 0
   analytics:
     enabled: false
     check_for_plugin_updates: false
@@ -91,6 +95,13 @@ grafana.ini:
     password: "$__file{/grafana-pg-cluster-app/password}"
     type: postgres
     user: "$__file{/grafana-pg-cluster-app/user}"
+  external_image_storage.s3:
+    access_key: "$__file{/grafana-grafana-external-image/AWS_ACCESS_KEY_ID}"
+    bucket: grafana-external-image
+    bucket_url: https://rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc
+    path_style_access: true
+    region: us-east-1
+    secret_key: "$__file{/grafana-grafana-external-image/AWS_SECRET_ACCESS_KEY}"
   feature_toggles:
     grafanaAdvisor: true
     provisioning: true
@@ -100,16 +111,22 @@ grafana.ini:
     grafanaAPIServerEnsureKubectlAccess: true
   grafana_net:
     url: https://grafana.net
+  help:
+    enabled: false
   live:
     ha_engine: redis
     ha_engine_address: valkey.grafana.svc:6379
     ha_engine_password: "$__file{/grafana-valkey-password/REDIS_PASSWORD}"
   news:
     news_feed_enabled: false
-  # remote_cache:
-  #   connstr: redis
-  #   redis: network=tcp,addr=valkey.grafana.svc:6379,pool_size=100,db=0,password=$__file{/grafana-valkey-password/REDIS_PASSWORD},ssl=false
-  #   type: redis
+  plugins:
+    plugin_admin_enabled: false
+    # preinstall_auto_update: false
+    # public_key_retrieval_disabled: true
+  remote_cache:
+    connstr: redis=network=tcp,addr=valkey.grafana.svc:6379,pool_size=100,db=0,password=$__file{/grafana-valkey-password/REDIS_PASSWORD},ssl=false
+    encryption: true
+    type: redis
   security:
     allow_embedding: true
     content_security_policy: true
@@ -122,8 +139,9 @@ grafana.ini:
     strict_transport_security_preload: true
     secret_key: "$__file{/grafana-secret-key/secret_key}"
   server:
-    root_url: https://grafana.apps.iaas.wcooke.me
     enforce_domain: true
+    root_url: https://grafana.apps.iaas.wcooke.me
+    min_tls_version: "1.3"
   snapshots:
     enabled: false
 
@@ -159,7 +177,6 @@ initChownData:
       cpu: 50m
       memory: 16Mi
 
-
 livenessProbe:
   httpGet:
     path: /api/health
@@ -170,7 +187,6 @@ livenessProbe:
   initialDelaySeconds: 60
   timeoutSeconds: 30
   failureThreshold: 10
-
 
 # plugins:
 # - grafana-lokioperational-app
