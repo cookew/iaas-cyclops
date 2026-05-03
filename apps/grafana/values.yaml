@@ -26,6 +26,11 @@ extraSecretMounts:
   optional: false
   secretName: grafana-secret-key
   readOnly: true
+- name: grafana-valkey-password
+  mountPath: /grafana-valkey-password
+  optional: false
+  secretName: grafana-valkey-password
+  readOnly: true
 
 extraVolumeMounts:
 - name: ca-certificates
@@ -97,8 +102,8 @@ grafana.ini:
     url: https://grafana.net
   live:
     ha_engine: redis
-    ha_engine_address: redis:6379
-    ha_engine_password: "$__file{/grafana-secret-key/redis_password}"
+    ha_engine_address: valkey.grafana.svc:6379
+    ha_engine_password: "$__file{/grafana-valkey-password/REDIS_PASSWORD}"
   news:
     news_feed_enabled: false
   security:
