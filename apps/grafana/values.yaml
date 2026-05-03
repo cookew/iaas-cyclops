@@ -107,7 +107,8 @@ grafana.ini:
   news:
     news_feed_enabled: false
   remote_cache:
-    connstr: network=tcp,addr=valkey.grafana.svc:6379,pool_size=100,db=0,password=$__file{/grafana-valkey-password/REDIS_PASSWORD},ssl=false
+    connstr: redis
+    redis: network=tcp,addr=valkey.grafana.svc:6379,pool_size=100,db=0,password=$__file{/grafana-valkey-password/REDIS_PASSWORD},ssl=false
     type: redis
   security:
     allow_embedding: true
