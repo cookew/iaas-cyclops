@@ -31,6 +31,11 @@ extraSecretMounts:
   optional: false
   secretName: grafana-valkey-password
   readOnly: true
+- name: grafana-external-image
+  mountPath: /grafana-external-image
+  optional: false
+  secretName: grafana-external-image-bucket
+  readOnly: true
 
 extraVolumeMounts:
 - name: ca-certificates
@@ -96,12 +101,12 @@ grafana.ini:
     type: postgres
     user: "$__file{/grafana-pg-cluster-app/user}"
   external_image_storage.s3:
-    access_key: "$__file{/grafana-grafana-external-image/AWS_ACCESS_KEY_ID}"
+    access_key: "$__file{/grafana-external-image/AWS_ACCESS_KEY_ID}"
     bucket: grafana-external-image
     bucket_url: https://rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster.svc
     path_style_access: true
     region: us-east-1
-    secret_key: "$__file{/grafana-grafana-external-image/AWS_SECRET_ACCESS_KEY}"
+    secret_key: "$__file{/grafana-external-image/AWS_SECRET_ACCESS_KEY}"
   feature_toggles:
     grafanaAdvisor: true
     provisioning: true
