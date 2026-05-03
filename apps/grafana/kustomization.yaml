@@ -14,6 +14,7 @@ resources:
 - base/tempo-datasource.yaml
 - sealed-secrets/grafana-admin.yaml
 - sealed-secrets/grafana-keycloak-client.yaml
+- sealed-secrets/grafana-seacret-key.yaml
 
 helmCharts:
 - name: grafana
