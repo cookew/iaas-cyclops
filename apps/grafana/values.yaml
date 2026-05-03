@@ -146,7 +146,7 @@ grafana.ini:
   server:
     enforce_domain: true
     root_url: https://grafana.apps.iaas.wcooke.me
-    min_tls_version: "1.3"
+    # min_tls_version: "1.3"
   snapshots:
     enabled: false
 
