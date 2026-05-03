@@ -106,6 +106,9 @@ grafana.ini:
     ha_engine_password: "$__file{/grafana-valkey-password/REDIS_PASSWORD}"
   news:
     news_feed_enabled: false
+  remote_cache:
+    connstr: network=tcp,addr=valkey.grafana.svc:6379,pool_size=100,db=0,password=$__file{/grafana-valkey-password/REDIS_PASSWORD},ssl=false
+    type: redis
   security:
     allow_embedding: true
     content_security_policy: true
@@ -154,6 +157,19 @@ initChownData:
     requests:
       cpu: 50m
       memory: 16Mi
+
+
+livenessProbe:
+  httpGet:
+    path: /api/health
+    port: grafana
+  httpHeaders:
+  - name: Host
+    value: grafana.apps.iaas.wcooke.me
+  initialDelaySeconds: 60
+  timeoutSeconds: 30
+  failureThreshold: 10
+
 
 # plugins:
 # - grafana-lokioperational-app
