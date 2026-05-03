@@ -163,9 +163,9 @@ livenessProbe:
   httpGet:
     path: /api/health
     port: grafana
-  httpHeaders:
-  - name: Host
-    value: grafana.apps.iaas.wcooke.me
+    httpHeaders:
+    - name: Host
+      value: grafana.apps.iaas.wcooke.me
   initialDelaySeconds: 60
   timeoutSeconds: 30
   failureThreshold: 10
