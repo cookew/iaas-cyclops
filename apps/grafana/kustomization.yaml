@@ -8,6 +8,7 @@ resources:
 - base/docker-registry-dashboard.yaml
 - base/grafana-keycloak-client.yaml
 - base/grafana-pg-cluster.yaml
+- base/grafana-valkey-certificate.yaml
 - base/haproxy-dashboard.yaml
 - base/loki-datasource.yaml
 - base/pyroscope-datasource.yaml
@@ -15,6 +16,7 @@ resources:
 - sealed-secrets/grafana-admin.yaml
 - sealed-secrets/grafana-keycloak-client.yaml
 - sealed-secrets/grafana-secret-key.yaml
+- sealed-secrets/grafana-valkey-password.yaml
 
 helmCharts:
 - name: grafana
@@ -23,3 +25,9 @@ helmCharts:
   repo: https://grafana-community.github.io/helm-charts
   valuesFile: values.yaml
   version: 11.6.1
+- name: valkey
+  namespace: grafana
+  releaseName: valkey
+  repo: https://valkey.io/valkey-helm
+  valuesFile: valkey-values.yaml
+  version: 0.9.4

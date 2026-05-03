@@ -72,7 +72,7 @@ grafana.ini:
     role_attribute_path: contains(resource_access.grafana.roles[*], 'grafana-server-admin') && 'GrafanaAdmin' || contains(resource_access.grafana.roles[*], 'grafana-admin') && 'Admin' || contains(resource_access.grafana.roles[*], 'grafana-editor') && 'Editor' || contains(resource_access.grafana.roles[*], 'grafana-viewer') && 'Viewer'
     role_attribute_strict: true
     scopes: openid email profile offline_access roles
-    signout_redirect_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/logout?post_logout_redirect_uri=https%3A%2F%2Fgrafana.apps.iaas.wcooke.me%2Flogin
+    signout_redirect_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/logout?post_logout_redirect_uri=https%3A%2F%2Fforecastle.apps.iaas.wcooke.me
     # tls_client_ca: /ca-bundle/ca-bundle.pem
     token_url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
     use_pkce: true
@@ -95,6 +95,10 @@ grafana.ini:
     grafanaAPIServerEnsureKubectlAccess: true
   grafana_net:
     url: https://grafana.net
+  live:
+    ha_engine: redis
+    ha_engine_address: redis:6379
+    ha_engine_password: "$__file{/grafana-secret-key/redis_password}"
   news:
     news_feed_enabled: false
   security:
