@@ -15,6 +15,9 @@ cephClusterSpec:
       mgr/dashboard/GRAFANA_UPDATE_DASHBOARDS: "true"
     mon:
       mon_allow_pool_delete: "true"
+    client.rgw:
+      rgw_gc_max_concurrent_io: "1000"
+      rgw_gc_max_trim_chunk: "1024"
 #  cephConfigFromSecret:
 #    mgr:
 #      mgr/dashboard/GRAFANA_API_PASSWORD:
