@@ -86,7 +86,7 @@ spec:
       - name: harbor
       - name: headlamp
       - name: kubevirt-manager
-      # - name: loki
+      - name: loki
       - name: nvme-exporter
       - name: ollama
       - name: open-webui
