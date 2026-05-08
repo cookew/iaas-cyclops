@@ -27,7 +27,7 @@ helmCharts:
   releaseName: harbor
   repo: https://helm.goharbor.io
   valuesFile: values.yaml
-  version: 1.18.3
+  version: 1.19.0
 # - name: valkey
 #   namespace: harbor
 #   releaseName: valkey
