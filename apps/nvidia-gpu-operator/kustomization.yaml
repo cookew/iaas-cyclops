@@ -11,5 +11,5 @@ helmCharts:
   namespace: nvidia-gpu-operator
   releaseName: nvidia-gpu-operator
   repo: https://helm.ngc.nvidia.com/nvidia
-  version: v1.0.0-devel
   valuesFile: values.yaml
+  version: v26.3.1
