@@ -17,12 +17,12 @@ global:
     enableSeatLink: false
     enableUsagePing: false
     # https://docs.gitlab.com/charts/charts/globals/#kas-settings
-    gitlab_kas:
-      enabled: true
-      externalUrl: wss://custom-kas-url.wcooke.me
-      internalUrl: grpc://custom-internal-url
-      key: kas
-      secret: gitlab-kas
+    # gitlab_kas:
+    #   enabled: true
+    #   externalUrl: wss://custom-kas-url.wcooke.me
+    #   internalUrl: grpc://custom-internal-url
+    #   key: kas
+    #   secret: gitlab-kas
     # https://docs.gitlab.com/charts/charts/globals/#knowledge-graph-settings
     # knowledgeGraph:
     #   enabled: false
@@ -32,11 +32,11 @@ global:
     #   grpcEndpoint:
     # ldap.preventSignin: true
     object_store:
-      enabled: false
-      # proxy_download: true
-      # connection:
-      #   secret: gitlab-connection
-      #   key: connection
+      enabled: true
+      proxy_download: true
+      connection:
+        secret: gitlab-connection
+        key: connection
     omniauth:
       allowSingleSignOn: true
       autoLinkUsers: true
@@ -86,6 +86,7 @@ global:
     # ssh: gitlab.apps.iaas.wcooke.me
   image:
     pullPolicy: Always
+    # tagSuffix: -fips
   ingress:
     annotations:
       cert-manager.io/cluster-issuer: iaas-wcooke-me
@@ -146,8 +147,8 @@ certmanager:
 
 gitlab:
   # https://docs.gitlab.com/charts/charts/gitlab/toolbox/#configuration
-  toolbox:
-    enabled: false
+  # toolbox:
+  #   enabled: false
     # backups:
     #   objectStorage:
     #     enabled: false
