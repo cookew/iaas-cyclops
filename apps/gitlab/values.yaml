@@ -1,4 +1,4 @@
-# https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/Chart.yaml?ref_type=heads
+# https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/values.yaml?ref_type=heads
 
 upgradeCheck:
   enabled: false
@@ -16,9 +16,23 @@ global:
     enableImpersonation: true
     enableSeatLink: false
     enableUsagePing: false
+    # https://docs.gitlab.com/charts/charts/globals/#kas-settings
+    gitlab_kas:
+      enabled: true
+      externalUrl: wss://custom-kas-url.wcooke.me
+      internalUrl: grpc://custom-internal-url
+      key: kas
+      secret: gitlab-kas
+    # https://docs.gitlab.com/charts/charts/globals/#knowledge-graph-settings
+    # knowledgeGraph:
+    #   enabled: false
+    #   jwtSecret:
+    #     secret:
+    #     key:
+    #   grpcEndpoint:
     # ldap.preventSignin: true
     object_store:
-      enabled: true
+      enabled: false
       proxy_download: true
       connection:
         secret: gitlab-connection
@@ -37,6 +51,7 @@ global:
       - organization
       providers:
       - secret: gitlab-oidc
+    # praefect:
     terraformState:
       enabled: true
     usernameChangingEnabled: false
@@ -53,6 +68,10 @@ global:
     display_name: WCooke GitLab
     from: cookewe@gmail.com
     reply_to: cookewe@gmail.com
+  extraEnv:
+    # https://gitlab.com/gitlab-org/cloud-native/gitlab-logger
+    GITLAB_LOGGER_TRUNCATE_LOGS: "true"
+    GITLAB_LOGGER_JSON: "true"
   hosts:
     domain: gitlab.apps.iaas.wcooke.me
     https: true
@@ -65,6 +84,8 @@ global:
     # pages:
     #   name: pages.gitlab.apps.iaas.wcooke.me
     # ssh: gitlab.apps.iaas.wcooke.me
+  image:
+    pullPolicy: Always
   ingress:
     annotations:
       cert-manager.io/cluster-issuer: iaas-wcooke-me
@@ -124,6 +145,8 @@ certmanager:
     create: false
 
 gitlab:
+  # https://docs.gitlab.com/charts/charts/gitlab/toolbox/#configuration
+  toolbox:
   webservice:
     extraEnv:
       SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
