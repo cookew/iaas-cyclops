@@ -111,8 +111,8 @@ nodeSelector:
 #   # to avoid unnecessary IP allocation for daemon pods.
 #   # enableHostNetwork: false
 
-# gfd:
-#   enabled: false
+gfd:
+  enabled: true
 #   nameOverride: gpu-feature-discovery
 #   namespaceOverride: ""
 #   noTimestamp: null
