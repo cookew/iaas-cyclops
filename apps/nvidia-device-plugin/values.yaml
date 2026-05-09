@@ -62,8 +62,8 @@
 # securityContext: {}
 
 # resources: {}
-nodeSelector:
-  cpu-model.node.kubevirt.io/SandyBridge: "true"
+# nodeSelector:
+#   cpu-model.node.kubevirt.io/SandyBridge: "true"
 
 # affinity:
 #   nodeAffinity:
