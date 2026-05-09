@@ -11,6 +11,11 @@ ollamaUrls:
 tika:
   enabled: true
 
+terminals:
+  # -- Enable the terminals subchart (operator + orchestrator)
+  # @section -- External Tools configuration
+  enabled: false
+
 websocket:
   # -- Override the Redis URL for websocket communication. If empty, automatically generates URL based on release name. Template: `redis://[:<password>@]<hostname>:<port>/<db>`
   # @section -- Websocket configuration
@@ -137,30 +142,32 @@ extraEnvVars:
     value: 'https://open-webui.apps.iaas.wcooke.me'
   - name: S3_ADDRESSING_STYLE
     value: path
-
   - name: SSL_CERT_FILE
     value: /etc/ssl/certs/ca-certificates.crt
-  # - name: AWS_CA_BUNDLE
-  #   value: /etc/ssl/certs/ca-certificates.crt
   - name: REQUESTS_VERIFY
     value: "False"
-
   - name: ENABLE_OAUTH_SIGNUP
     value: "true"
   - name: OPENID_REDIRECT_URI
     value: https://open-webui.apps.iaas.wcooke.me/oauth/oidc/callback
-
   - name: OAUTH_CODE_CHALLENGE_METHOD
     value: S256
-
-  - name: ENABLE_COMMUNITY_SHARING
-    value: "False"
-
+  # - name: ENABLE_COMMUNITY_SHARING
+  #   value: "False"
   - name: WEBUI_SESSION_COOKIE_SAME_SITE
     value: strict
   - name: WEBUI_SESSION_COOKIE_SECURE
     value: "True"
-
+  - name: ENABLE_DIRECT_CONNECTIONS
+    value: "True"
+  - name: AUDIT_LOG_LEVEL
+    value: METADATA
+  - name: USER_PERMISSIONS_FEATURES_API_KEYS
+    value: "True"
+  - name: DEFAULT_USER_ROLE
+    value: user
+  - name: ENABLE_OAUTH_BACKCHANNEL_LOGOUT
+    value: "True"
 
   # - name: DATABASE_TYPE
   #   value: postgresql
@@ -198,62 +205,23 @@ volumeMounts:
     subPath: ca-certificates.crt
 
 volumes:
-# - configMap:
-#     defaultMode: 420
-#     name: tm-ca-bundle
-#   name: ca
 - configMap:
     defaultMode: 420
     name: ca-all
   name: ca
-# - emptyDir:
-#     medium: Memory
-#     sizeLimit: 5Mi
-#   name: new-ca-certificates
-# - configMap:
-#     defaultMode: 420
-#     name: tm-ca-bundle
-#   name: private-ca-certificates
-
-# extraInitContainers:
-# - args:
-#   - |
-#     echo Certificates in /private-ca-certificates:
-#     ls -al /private-ca-certificates
-#     echo Existing CA certificates in /etc/ssl/certs:
-#     ls -al /etc/ssl/certs/
-#     echo Combining CA certificates
-#     for cert in /etc/ssl/certs/*.{0,pem} /private-ca-certificates/*
-#     do
-#       echo "Adding cert: $cert"
-#       cat "${cert}" >> /new-ca-certificates/ca-certificates.crt
-#       echo "" >> /new-ca-certificates/ca-certificates.crt
-#     done
-#     echo New CA certificates file:
-#     ls -al /new-ca-certificates
-#   command: ["/usr/bin/bash", "-c"]
-#   image: ghcr.io/open-webui/open-webui:0.8.12
-#   name: ca-certificate-fixer
-#   volumeMounts:
-#   - mountPath: /new-ca-certificates
-#     name: new-ca-certificates
-#     readOnly: false
-#   - mountPath: /private-ca-certificates
-#     name: private-ca-certificates
-#     readOnly: true
 
 sso:
   enabled: true
   enableRoleManagement: true
   oidc:
-    enabled: true
     clientExistingSecret: open-webui-keycloak-client
-    clientIdExistingSecretKey: client-id
     clientExistingSecretKey: client-secret
-    providerUrl: https://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration
+    clientIdExistingSecretKey: client-id
+    enabled: true
     providerName: Keycloak
+    providerUrl: https://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration
     scopes: openid email profile
   roleManagement:
-    rolesClaim: resource_access.open-webui.roles
-    allowedRoles: open-webui-user
     adminRoles: open-webui-admin
+    allowedRoles: open-webui-user,open-webui-admin
+    rolesClaim: resource_access.open-webui.roles
