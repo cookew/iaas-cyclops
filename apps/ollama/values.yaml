@@ -23,10 +23,11 @@ ollama:
     #  - mistral
     pull:
     - codellama
-    - llama2
     - llama4
     - mistral
     - mistral-medium-3.5
+    # - codellama:70b
+    - gemma4:31b-it-q8_0
 
     # -- List of models to load in memory at container startup
     # run:
@@ -34,10 +35,11 @@ ollama:
     #  - mistral
     run:
     - codellama
-    - llama2
     - llama4
     - mistral
     - mistral-medium-3.5
+    # - codellama:70b
+    - gemma4:31b-it-q8_0
 
     # -- List of models to create at container startup, there are two options
     # 1. Create a raw model
