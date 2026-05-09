@@ -146,7 +146,7 @@ certmanager:
 
 gitlab:
   # https://docs.gitlab.com/charts/charts/gitlab/toolbox/#configuration
-  toolbox:
+  # toolbox:
   webservice:
     extraEnv:
       SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
