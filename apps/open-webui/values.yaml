@@ -170,6 +170,12 @@ extraEnvVars:
     value: "True"
   - name: LOG_FORMAT
     value: json
+  - name: ENABLE_QUERIES_CACHE
+    value: "True"
+  - name: RAG_SYSTEM_CONTEXT
+    value: "True"
+  - name: AUDIO_STT_ENGINE
+    value: webapi
 
   # - name: DATABASE_TYPE
   #   value: postgresql
