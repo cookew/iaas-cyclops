@@ -90,7 +90,7 @@ persistentVolume:
   accessModes:
   - ReadWriteOnce
   enabled: true
-  size: 175Gi
+  size: 200Gi
   storageClass: ceph-filesystem
 
 replicaCount: 1
