@@ -67,7 +67,7 @@
 #   plugin:
 #     env: []
 
-# operator:
+operator:
 #   repository: nvcr.io/nvidia
 #   image: gpu-operator
 #   # If version is not specified, then default is to use chart.AppVersion
@@ -78,7 +78,7 @@
 #   runtimeClass: nvidia
 #   use_ocp_driver_toolkit: false
 #   # cleanup CRD on chart un-install
-#   cleanupCRD: false
+  cleanupCRD: true
 #   # upgrade CRD on chart upgrade, requires --disable-openapi-validation flag
 #   # to be passed during helm upgrade.
 #   upgradeCRD: true

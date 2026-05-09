@@ -7,7 +7,8 @@ namespace: nvidia-gpu-operator
 # - base/ingress.yaml
 
 helmCharts:
-- name: gpu-operator
+- includeCRDs: true
+  name: gpu-operator
   namespace: nvidia-gpu-operator
   releaseName: nvidia-gpu-operator
   repo: https://helm.ngc.nvidia.com/nvidia
