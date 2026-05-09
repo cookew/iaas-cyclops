@@ -98,7 +98,7 @@ spec:
       # - name: argo-workflows
       # #   serverSideApply: "true"
       # - name: github-arc-runners
-      # - name: gitlab
+      - name: gitlab
       # - name: gitlab-runners
       # - name: holmesgpt
       # - name: istio
