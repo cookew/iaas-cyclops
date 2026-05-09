@@ -4,7 +4,7 @@ ollama:
   port: 11434
 
   gpu:
-    enabled: false
+    enabled: true
     draEnabled: false
     draDriverClass: gpu.nvidia.com
     draExistingClaimTemplate: ""
