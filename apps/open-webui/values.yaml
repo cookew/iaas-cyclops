@@ -168,6 +168,8 @@ extraEnvVars:
     value: user
   - name: ENABLE_OAUTH_BACKCHANNEL_LOGOUT
     value: "True"
+  - name: LOG_FORMAT
+    value: json
 
   # - name: DATABASE_TYPE
   #   value: postgresql
@@ -196,6 +198,10 @@ extraEnvVars:
   #     secretKeyRef:
   #       name: open-webui-pg-cluster-app
   #       key: dbname
+
+commonEnvVars:
+- name: RAG_EMBEDDING_ENGINE
+  value: ollama
 
 volumeMounts:
   container:
