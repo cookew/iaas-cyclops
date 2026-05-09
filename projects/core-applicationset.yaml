@@ -111,7 +111,7 @@ spec:
       # - name: mattermost-operator
       # - name: mattermost
       # - name: neuvector
-      - name: nvidia-device-plugin
+      - name: nvidia-gpu-operator
 
   template:
     metadata:
