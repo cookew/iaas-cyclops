@@ -33,10 +33,10 @@ global:
     # ldap.preventSignin: true
     object_store:
       enabled: false
-      proxy_download: true
-      connection:
-        secret: gitlab-connection
-        key: connection
+      # proxy_download: true
+      # connection:
+      #   secret: gitlab-connection
+      #   key: connection
     omniauth:
       allowSingleSignOn: true
       autoLinkUsers: true
