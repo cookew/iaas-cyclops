@@ -3,10 +3,5 @@ kind: Kustomization
 
 namespace: nfd
 
-helmCharts:
-- name: nfd
-  namespace: nfd
-  releaseName: nfd
-  repo: https://
-  version: 1.2.3
-  valuesFile: values.yaml
+resources:
+- https://github.com/kubernetes-sigs/node-feature-discovery/deployment/overlays/default?ref=v0.18.3
