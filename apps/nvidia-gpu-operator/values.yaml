@@ -11,7 +11,7 @@
 #   enabled: false
 
 cdi:
-  enabled: false
+  # enabled: true
   nriPluginEnabled: true
 
 # sandboxWorkloads:
