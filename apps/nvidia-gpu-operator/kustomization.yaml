@@ -5,6 +5,7 @@ namespace: nvidia-gpu-operator
 
 resources:
 - base/nvidia-dcgm-dashboard.yaml
+- base/nvidia-dcgm-exporter-dashboard.yaml
 
 helmCharts:
 - includeCRDs: true
