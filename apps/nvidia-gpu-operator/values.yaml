@@ -121,10 +121,10 @@ operator:
       relabelings:
       - sourceLabels:
         - __meta_kubernetes_pod_node_name
-      #   regex: (.*)
-      #   targetLabel: instance
-      #   replacement: $1
-      #   action: replace
+        regex: (.*)
+        targetLabel: instance
+        replacement: $1
+        action: replace
 
 # mig:
 #   strategy: single
