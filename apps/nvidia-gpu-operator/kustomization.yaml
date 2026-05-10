@@ -3,8 +3,8 @@ kind: Kustomization
 
 namespace: nvidia-gpu-operator
 
-# resources:
-# - base/ingress.yaml
+resources:
+- base/nvidia-dcgm-dashboard.yaml
 
 helmCharts:
 - includeCRDs: true
