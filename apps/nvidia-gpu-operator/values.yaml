@@ -4,15 +4,15 @@
 #   openshift: false
 
 # nfd:
-#   enabled: true
-#   nodefeaturerules: false
+#   enabled: false
+#   nodefeaturerules: true
 
 # psa:
 #   enabled: false
 
-# cdi:
-#   enabled: true
-#   nriPluginEnabled: false
+cdi:
+  enabled: false
+  nriPluginEnabled: true
 
 # sandboxWorkloads:
 #   enabled: false
