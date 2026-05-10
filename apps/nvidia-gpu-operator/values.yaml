@@ -113,18 +113,18 @@ operator:
 #     requests:
 #       cpu: 200m
 #       memory: 100Mi
-#   # metrics:
-#   #   serviceMonitor:
-#   #     interval: 15s
-#   #     honorLabels: false
-#   #     additionalLabels: {}
-#   #     relabelings: []
-#   #     # - sourceLabels:
-#   #     #     - __meta_kubernetes_pod_node_name
-#   #     #   regex: (.*)
-#   #     #   targetLabel: instance
-#   #     #   replacement: $1
-#   #     #   action: replace
+  metrics:
+    serviceMonitor:
+      interval: 15s
+      honorLabels: false
+      additionalLabels: {}
+      relabelings: []
+      # - sourceLabels:
+      #     - __meta_kubernetes_pod_node_name
+      #   regex: (.*)
+      #   targetLabel: instance
+      #   replacement: $1
+      #   action: replace
 
 # mig:
 #   strategy: single
@@ -310,8 +310,8 @@ driver:
 #   #   directory: /var/lib/dcgm-exporter/job-mapping
 #   service:
 #     internalTrafficPolicy: Cluster
-#   serviceMonitor:
-#     enabled: false
+  serviceMonitor:
+    enabled: true
 #     interval: 15s
 #     scrapeTimeout: 10s
 #     honorLabels: false
