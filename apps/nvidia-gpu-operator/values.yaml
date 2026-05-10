@@ -292,7 +292,7 @@ driver:
 #   resources: {}
 #   hostNetwork: false
 
-# dcgmExporter:
+dcgmExporter:
 #   enabled: true
 #   annotations: {}
 #   repository: nvcr.io/nvidia/k8s
