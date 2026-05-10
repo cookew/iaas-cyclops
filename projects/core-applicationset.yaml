@@ -82,23 +82,24 @@ spec:
       # - name: fluent-bit
       - name: forecastle
       - name: github-arc
+      - name: gitlab
       - name: grafana
       - name: harbor
       - name: headlamp
       - name: kubevirt-manager
       - name: loki
+      - name: nvidia-gpu-operator
       - name: nvme-exporter
       - name: ollama
       - name: open-webui
+      - name: openbao
       # - name: pyroscope
       - name: reloader
       # - name: tempo
       - name: whoami
 
       # - name: argo-workflows
-      # #   serverSideApply: "true"
       # - name: github-arc-runners
-      - name: gitlab
       # - name: gitlab-runners
       # - name: holmesgpt
       # - name: istio
@@ -111,7 +112,6 @@ spec:
       # - name: mattermost-operator
       # - name: mattermost
       # - name: neuvector
-      - name: nvidia-gpu-operator
 
   template:
     metadata:
