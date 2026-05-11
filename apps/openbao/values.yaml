@@ -55,6 +55,14 @@ server:
   logLevel: info
   logFormat: json
 
+  # Used to define commands to run after the pod is ready.
+  # This can be used to automate processes such as initialization
+  # or bootstrapping auth methods.
+  postStart: []
+  # - /bin/sh
+  # - -c
+  # - /openbao/userconfig/myscript/run.sh
+
   # Ingress allows ingress services to be created to allow external access
   # from Kubernetes to access OpenBao pods.
   # If deployment is on OpenShift, the following block is ignored.
