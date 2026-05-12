@@ -98,7 +98,7 @@ spec:
   truststores:
     certs:
       configMap:
-        name: ca-bundle
+        name: ca-all
   # update:
   #   strategy: Auto
   # unsupported:
