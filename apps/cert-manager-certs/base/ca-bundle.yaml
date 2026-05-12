@@ -40,6 +40,9 @@ spec:
       name: kube-root-ca.crt
       key: ca.crt
   - configMap:
+      name: cookes.io-ca.crt
+      key: ca.crt
+  - configMap:
       name: root-ca-cert
       key: root-ca.crt
   - secret:
