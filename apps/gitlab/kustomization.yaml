@@ -28,12 +28,13 @@ resources:
 - sealed-secrets/gitlab-valkey-password.yaml
 
 helmCharts:
+  # https://gitlab.com/gitlab-org/charts/gitlab
 - name: gitlab
   namespace: gitlab
   releaseName: gitlab
   repo: https://charts.gitlab.io
   valuesFile: values.yaml
-  version: 9.11.2
+  version: 9.11.4
 - name: valkey
   namespace: gitlab
   releaseName: valkey
