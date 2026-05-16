@@ -41,6 +41,7 @@ global:
       allowSingleSignOn: true
       autoLinkUsers: true
       autoSignInWithProvider: openid_connect
+      blockAutoCreatedUsers: false
       enabled: true
       syncProfileFromProvider: true
       syncProfileAttributes:
