@@ -38,22 +38,29 @@ ArgoCD
 * Username: admin
 * Password:
   ```
-  kubectl -n argocd get secrets argocd-secret -o go-template='{{index .data "admin.password" | base64decode}}'
+  kubectl -n argocd get secrets argocd-secret -o go-template='{{index .data "admin.password" | base64decode | printf "%s\n"}}'
   ```
 
 Ceph
 * Username: admin
 * Password:
   ```
-   kubectl -n rook-ceph-cluster get secrets rook-ceph-dashboard-password -o go-template='{{index .data "password" | base64decode}}'
+   kubectl -n rook-ceph-cluster get secrets rook-ceph-dashboard-password -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
+  ```
+
+GitLab
+* Username: root
+* Password:
+  ```
+   kubectl -n gitlab get secrets gitlab-gitlab-initial-root-password -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
   ```
 
 Keycloak
 * Username:
   ```
-  kubectl -n keycloak get secrets keycloak-user -o go-template='{{index .data "username" | base64decode}}'
+  kubectl -n keycloak get secrets keycloak-user -o go-template='{{index .data "username" | base64decode | printf "%s\n"}}'
   ```
 * Password:
   ```
-  kubectl -n keycloak get secrets keycloak-user -o go-template='{{index .data "password" | base64decode}}'
+  kubectl -n keycloak get secrets keycloak-user -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
   ```

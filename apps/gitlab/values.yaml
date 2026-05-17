@@ -45,10 +45,10 @@ global:
       enabled: true
       syncProfileFromProvider: true
       syncProfileAttributes:
-      - name
       - email
       - job_title
       - location
+      - name
       - organization
       providers:
       - secret: gitlab-oidc
