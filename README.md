@@ -45,15 +45,16 @@ Ceph
 * Username: admin
 * Password:
   ```
-   kubectl -n rook-ceph-cluster get secrets rook-ceph-dashboard-password -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
+  kubectl -n rook-ceph-cluster get secrets rook-ceph-dashboard-password -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
   ```
 
 GitLab
 * Username: root
 * Password:
   ```
-   kubectl -n gitlab get secrets gitlab-gitlab-initial-root-password -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
+  kubectl -n gitlab get secrets gitlab-gitlab-initial-root-password -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
   ```
+* Use this URL to login as root to assign your user admin priviledges. https://gitlab.apps.iaas.wcooke.me/users/sign_in?auto_sign_in=false
 
 Keycloak
 * Username:
