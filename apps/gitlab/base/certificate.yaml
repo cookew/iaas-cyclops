@@ -8,6 +8,7 @@ spec:
   - "gitlab.apps.iaas.wcooke.me"
   - "*.gitlab.apps.iaas.wcooke.me"
   - "*.pages.gitlab.apps.iaas.wcooke.me"
+  - "*.web-ide.gitlab.apps.iaas.wcooke.me"
   duration: 960h
   isCA: false
   issuerRef:
