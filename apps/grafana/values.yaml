@@ -178,8 +178,8 @@ imageRenderer:
           kubernetes.io/metadata.name: kube-prometheus-stack
       podSelector:
         matchLabels:
-          instance: kube-prometheus-stack-prometheus
-          name: prometheus
+          app.kubernetes.io/instance: kube-prometheus-stack-prometheus
+          app.kubernetes.io/name: prometheus
   revisionHistoryLimit: 0
   serviceMonitor:
     enabled: true
