@@ -171,6 +171,15 @@ ingress:
 
 imageRenderer:
   enabled: true
+  networkPolicy:
+    extraIngressSelectors:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-prometheus-stack
+      podSelector:
+        matchLabels:
+          instance: kube-prometheus-stack-prometheus
+          name: prometheus
   revisionHistoryLimit: 0
   serviceMonitor:
     enabled: true
@@ -185,6 +194,7 @@ initChownData:
       memory: 16Mi
 
 livenessProbe:
+  failureThreshold: 10
   httpGet:
     path: /api/health
     port: grafana
@@ -193,7 +203,6 @@ livenessProbe:
       value: grafana.apps.iaas.wcooke.me
   initialDelaySeconds: 60
   timeoutSeconds: 30
-  failureThreshold: 10
 
 # plugins:
 # - grafana-lokioperational-app
