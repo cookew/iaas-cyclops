@@ -25,9 +25,6 @@ compactor:
 
 deploymentMode: Distributed
 
-defaults:
-  revisionHistoryLimit: 0
-
 distributor:
   autoscaling:
     enabled: true
@@ -223,6 +220,7 @@ loki:
         #   username: default
     # cache_results: true
     # cache_instant_metric_results: true
+  revisionHistoryLimit: 0
   schemaConfig:
     configs:
     - from: 2026-01-01
@@ -264,6 +262,7 @@ test:
   enabled: false
 lokiCanary:
   enabled: false
+  revisionHistoryLimit: 0
 
 memcached:
   serviceAccount:
