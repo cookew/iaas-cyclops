@@ -10,7 +10,6 @@ chunksCache:
     storageClass: ceph-filesystem
 
 compactor:
-  replicas: 1
   # persistence:
   #   enabled: true
   #   claims:
@@ -20,6 +19,9 @@ compactor:
   #       size: 10Gi
   #       storageClass: ceph-filesystem
   #   whenDeleted: Delete
+  replicas: 1
+  serviceAccount:
+    automountServiceAccountToken: false
 
 deploymentMode: Distributed
 
@@ -33,6 +35,8 @@ distributor:
     maxReplicas: 4
   podDisruptionBudget:
     maxUnavailable: 1
+  serviceAccount:
+    automountServiceAccountToken: false
 
 gateway:
   autoscaling:
@@ -69,6 +73,7 @@ gateway:
     port: 8080
 
 global:
+  automountServiceAccountToken: false
   extraArgs:
   - -config.expand-env=true
   # extraEnv:
@@ -82,6 +87,8 @@ global:
       name: loki-bucket
   - secretRef:
       name: loki-bucket
+  serviceAccount:
+    create: false
 
 indexGateway:
   podDisruptionBudget:
@@ -91,6 +98,8 @@ indexGateway:
   #   enabled: true
   #   storageClass: ceph-filesystem
   #   whenDeleted: Delete
+  serviceAccount:
+    automountServiceAccountToken: false
 
 ingester:
   autoscaling:
@@ -108,6 +117,8 @@ ingester:
   #   whenDeleted: Delete
   podDisruptionBudget:
     maxUnavailable: 1
+  serviceAccount:
+    automountServiceAccountToken: false
   zoneAwareReplication:
      enabled: false
 
@@ -254,6 +265,10 @@ test:
 lokiCanary:
   enabled: false
 
+memcached:
+  serviceAccount:
+    create: false
+
 monitoring:
   dashboards:
     enabled: true
@@ -293,6 +308,8 @@ overridesExporter:
   podDisruptionBudget:
     maxUnavailable: 1
   replicas: 3
+  serviceAccount:
+    automountServiceAccountToken: false
 
 patternIngester:
   persistence:
@@ -310,6 +327,8 @@ patternIngester:
   podDisruptionBudget:
     maxUnavailable: 1
   replicas: 3
+  serviceAccount:
+    automountServiceAccountToken: false
 
 querier:
   autoscaling:
@@ -318,6 +337,8 @@ querier:
     maxReplicas: 4
   podDisruptionBudget:
     maxUnavailable: 1
+  serviceAccount:
+    automountServiceAccountToken: false
 
 queryFrontend:
   autoscaling:
@@ -331,6 +352,8 @@ queryScheduler:
   podDisruptionBudget:
     maxUnavailable: 1
   replicas: 3
+  serviceAccount:
+    automountServiceAccountToken: false
 
 read:
    replicas: 0
@@ -348,6 +371,8 @@ ruler:
   podDisruptionBudget:
     maxUnavailable: 1
   replicas: 3
+  serviceAccount:
+    automountServiceAccountToken: false
   sidecar: true
 
 serviceAccount:
