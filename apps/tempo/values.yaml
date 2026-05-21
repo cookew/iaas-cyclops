@@ -1,15 +1,18 @@
-global:
-  extraEnvFrom:
-  - configMapRef:
-      name: tempo-bucket
-  - secretRef:
-      name: tempo-bucket
+# https://github.com/grafana-community/helm-charts/blob/main/charts/tempo-distributed/values.yaml
+
+backendWorker:
+  autoscaling:
+    enabled: true
+    hpa:
+      enabled: true
 
 compactor:
+  autoscaling:
+    enabled: true
+    hpa:
+      enabled: true
   extraArgs:
   - -config.expand-env=true
-  maxUnavailable: 2
-  replicas: 3
   config:
     compaction:
       # -- Duration to keep blocks
@@ -36,19 +39,28 @@ compactor:
       compaction_cycle: 30s
 
 distributor:
-  maxUnavailable: 2
-  replicas: 3
+  autoscaling:
+    enabled: false
 
 gateway:
+  autoscaling:
+    enabled: true
+    minReplicas: 2
   enabled: true
-  maxUnavailable: 2
-  replicas: 3
+
+global:
+  extraEnvFrom:
+  - configMapRef:
+      name: tempo-bucket
+  - secretRef:
+      name: tempo-bucket
 
 ingester:
+  autoscaling:
+    enabled: true
   extraArgs:
   - -config.expand-env=true
-  maxUnavailable: 2
-  replicas: 3
+  maxUnavailable: 1
 
 ingress:
   enabled: false
@@ -89,83 +101,6 @@ metaMonitoring:
   serviceMonitor:
     enabled: true
 
-multitenancyEnabled: false
-
-querier:
-  replicas: 3
-  extraArgs:
-  - -config.expand-env=true
-
-queryFrontend:
-  extraArgs:
-  - -config.expand-env=true
-  maxUnavailable: 2
-  replicas: 3
-  query:
-    enabled: true
-#   ingress:
-#     enabled: true
-#     ingressClassName: cilium
-#     annotations:
-#       cert-manager.io/cluster-issuer: iaas-wcooke-me
-#       forecastle.stakater.com/appName: Tempo Query
-#       forecastle.stakater.com/expose: "true"
-#       forecastle.stakater.com/group: Observability
-#       forecastle.stakater.com/icon: https://query.tempo.apps.iaas.wcooke.me/favicon.ico
-#       forecastle.stakater.com/network-restricted: "true"
-#     hosts:
-#       - host: query.tempo.apps.iaas.wcooke.me
-#         paths:
-#           - path: /
-#             pathType: Prefix
-#     tls:
-#       - secretName: tempo-query-cert
-#         hosts:
-#           - query.tempo.apps.iaas.wcooke.me
-
-prometheusRule:
-  enabled: true
-  groups:
-  - name: loki-rules
-    rules:
-      - record: job:loki_request_duration_seconds_bucket:sum_rate
-        expr: sum(rate(loki_request_duration_seconds_bucket[1m])) by (le, job)
-      - record: job_route:loki_request_duration_seconds_bucket:sum_rate
-        expr: sum(rate(loki_request_duration_seconds_bucket[1m])) by (le, job, route)
-      - record: node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate
-        expr: sum(rate(container_cpu_usage_seconds_total[1m])) by (node, namespace, pod, container)
-
-reportingEnabled: false
-
-server:
-  logFormat: json
-
-storage:
-  trace:
-    backend: s3
-    s3:
-      bucket: "${BUCKET_NAME}"
-      endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
-      access_key: "${AWS_ACCESS_KEY_ID}"
-      secret_key: "${AWS_SECRET_ACCESS_KEY}"
-      tls_insecure_skip_verify: true
-      forcepathstyle: true
-      # enable_dual_stack: true
-  admin:
-    backend: s3
-
-tempo:
-  revisionHistoryLimit: 0
-  structuredConfig:
-    stream_over_http_enabled: true
-
-rbac:
-  # -- Specifies whether RBAC manifests should be created
-  create: false
-  # -- Specifies whether a PodSecurityPolicy should be created
-  pspEnabled: false
-
-# Configuration for the metrics-generator
 metricsGenerator:
   enabled: true
   kind: Deployment
@@ -230,24 +165,92 @@ metricsGenerator:
       path: /var/tempo/traces
     metrics_ingestion_time_range_slack: 30s
 
+multitenancyEnabled: false
+
+prometheusRule:
+  enabled: true
+  groups:
+  - name: loki-rules
+    rules:
+      - record: job:loki_request_duration_seconds_bucket:sum_rate
+        expr: sum(rate(loki_request_duration_seconds_bucket[1m])) by (le, job)
+      - record: job_route:loki_request_duration_seconds_bucket:sum_rate
+        expr: sum(rate(loki_request_duration_seconds_bucket[1m])) by (le, job, route)
+      - record: node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate
+        expr: sum(rate(container_cpu_usage_seconds_total[1m])) by (node, namespace, pod, container)
+
+querier:
+  autoscaling:
+    enabled: true
+  extraArgs:
+  - -config.expand-env=true
+
+queryFrontend:
+  autoscaling:
+    enabled: true
+  extraArgs:
+  - -config.expand-env=true
+  query:
+    enabled: true
+#   ingress:
+#     enabled: true
+#     ingressClassName: cilium
+#     annotations:
+#       cert-manager.io/cluster-issuer: iaas-wcooke-me
+#       forecastle.stakater.com/appName: Tempo Query
+#       forecastle.stakater.com/expose: "true"
+#       forecastle.stakater.com/group: Observability
+#       forecastle.stakater.com/icon: https://query.tempo.apps.iaas.wcooke.me/favicon.ico
+#       forecastle.stakater.com/network-restricted: "true"
+#     hosts:
+#       - host: query.tempo.apps.iaas.wcooke.me
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#     tls:
+#       - secretName: tempo-query-cert
+#         hosts:
+#           - query.tempo.apps.iaas.wcooke.me
+
+rbac:
+  # -- Specifies whether RBAC manifests should be created
+  create: false
+  # -- Specifies whether a PodSecurityPolicy should be created
+  pspEnabled: false
+
+reportingEnabled: false
+
+server:
+  logFormat: json
+
+serviceAccount:
+  create: false
+
+storage:
+  admin:
+    backend: s3
+  trace:
+    backend: s3
+    s3:
+      bucket: "${BUCKET_NAME}"
+      endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
+      access_key: "${AWS_ACCESS_KEY_ID}"
+      secret_key: "${AWS_SECRET_ACCESS_KEY}"
+      tls_insecure_skip_verify: true
+      forcepathstyle: true
+      # enable_dual_stack: true
+
+tempo:
+  revisionHistoryLimit: 0
+  structuredConfig:
+    stream_over_http_enabled: true
+
 traces:
   otlp:
-    http:
-      # -- Enable Tempo to ingest Open Telemetry HTTP traces
-      enabled: true
-      # -- HTTP receiver advanced config
-      receiverConfig: {}
     grpc:
-      # -- Enable Tempo to ingest Open Telemetry GRPC traces
       enabled: true
-      # -- GRPC receiver advanced config
-      receiverConfig: {}
-      # -- Default OTLP gRPC port
       port: 4317
-  opencensus:
-    # -- Enable Tempo to ingest Open Census traces
-    enabled: false
-    # -- Open Census receiver config
-    receiverConfig: {}
-  # -- Enable Tempo to ingest traces from Kafka. Reference: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/kafkareceiver
-  kafka: {}
+      receiverConfig: {}
+    http:
+      enabled: true
+      receiverConfig: {}
