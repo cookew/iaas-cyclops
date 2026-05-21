@@ -1,3 +1,5 @@
+# https://github.com/crossplane/crossplane/blob/main/cluster/charts/crossplane/values.yaml
+
 # replicas: 1
 
 revisionHistoryLimit: 0
