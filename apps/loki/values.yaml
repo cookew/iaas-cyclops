@@ -93,7 +93,7 @@ global:
 indexGateway:
   podDisruptionBudget:
     maxUnavailable: 1
-  replicas: 3
+  replicas: 2
   # persistence:
   #   enabled: true
   #   storageClass: ceph-filesystem
@@ -307,7 +307,7 @@ overridesExporter:
   enabled: true
   podDisruptionBudget:
     maxUnavailable: 1
-  replicas: 3
+  replicas: 2
   serviceAccount:
     automountServiceAccountToken: false
 
@@ -326,7 +326,7 @@ patternIngester:
     whenDeleted: Delete
   podDisruptionBudget:
     maxUnavailable: 1
-  replicas: 3
+  replicas: 2
   serviceAccount:
     automountServiceAccountToken: false
 
@@ -351,7 +351,7 @@ queryFrontend:
 queryScheduler:
   podDisruptionBudget:
     maxUnavailable: 1
-  replicas: 3
+  replicas: 2
   serviceAccount:
     automountServiceAccountToken: false
 
@@ -370,7 +370,7 @@ ruler:
   #   storageClass: ceph-filesystem
   podDisruptionBudget:
     maxUnavailable: 1
-  replicas: 3
+  replicas: 2
   serviceAccount:
     automountServiceAccountToken: false
   sidecar: true
