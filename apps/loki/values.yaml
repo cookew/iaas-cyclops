@@ -68,6 +68,8 @@ gateway:
     maxUnavailable: 1
   service:
     port: 8080
+  serviceAccount:
+    create: false
 
 global:
   automountServiceAccountToken: false
