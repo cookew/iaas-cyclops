@@ -315,6 +315,7 @@ overridesExporter:
     automountServiceAccountToken: false
 
 patternIngester:
+  enabled: true
   persistence:
     claims:
     - name: data
