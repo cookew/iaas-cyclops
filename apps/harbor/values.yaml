@@ -37,7 +37,6 @@ persistence:
       storageClass: ceph-filesystem
       size: 5Gi
   imageChartStorage:
-    # false is default, don't know if it needs to change
     disableredirect: true
     # not set by default, might need to be changed. Key in secret needs to be ca.crt
     caBundleSecretName: tm-harbor-ca-bundle

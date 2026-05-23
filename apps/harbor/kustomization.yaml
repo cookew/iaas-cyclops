@@ -15,11 +15,11 @@ resources:
 - sealed-secrets/harbor-keycloak-client.yaml
 # - sealed-secrets/harbor-valkey-password.yaml
 
-patches:
-- path: patches/harbor-jobservice-pvc.yaml
-  target:
-    kind: PersistentVolumeClaim
-    name: harbor-jobservice
+# patches:
+# - path: patches/harbor-jobservice-pvc.yaml
+#   target:
+#     kind: PersistentVolumeClaim
+#     name: harbor-jobservice
 
 helmCharts:
 - name: harbor
