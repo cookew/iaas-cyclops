@@ -28,6 +28,25 @@ spec:
   providerConfigRef:
     name: keycloak-provider-config
 ---
+apiVersion: client.keycloak.crossplane.io/v1alpha1
+kind: ProtocolMapper
+metadata:
+  name: harbor-role-mapper
+spec:
+  forProvider:
+    clientIdRef:
+      name: harbor
+    config:
+      claim.name: "roles"
+      jsonType.label: "String"
+      id.token.claim: "true"
+    name: role-mapper
+    protocolMapper: oidc-usermodel-realm-role-mapper
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
 metadata:

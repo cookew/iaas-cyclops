@@ -20,6 +20,7 @@ spec:
           containers:
           - name: package-runtime
             args:
+            - --enable-external-secret-stores
             - --max-reconcile-rate=1
             env:
             - name: CA_BUNDLE_PATH
