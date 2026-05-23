@@ -37,10 +37,11 @@ spec:
     clientIdRef:
       name: harbor
     config:
-      claim.name: "roles"
-      jsonType.label: "String"
+      claim.name: client_roles
+      jsonType.label: String
       id.token.claim: "true"
     name: role-mapper
+    protocol: openid-connect
     protocolMapper: oidc-usermodel-realm-role-mapper
     realmIdRef:
       name: iaas
