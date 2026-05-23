@@ -306,9 +306,9 @@ networkPolicy:
 
 overridesExporter:
   enabled: true
-  podDisruptionBudget:
-    maxUnavailable: 1
-  replicas: 2
+  # podDisruptionBudget:
+  #   maxUnavailable: 1
+  # replicas: 2
   serviceAccount:
     automountServiceAccountToken: false
 
