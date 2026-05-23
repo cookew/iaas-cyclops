@@ -5,6 +5,7 @@ namespace: openbao
 
 resources:
 - base/openbao-agent-objectbucketclaim.yaml
+- sealed-secrets/openbao-seal-key.yaml
 
 helmCharts:
 - includeCRDs: true

@@ -9,42 +9,15 @@ global:
     enable: false
 
   serverTelemetry:
-    # -- Enable integration with the Prometheus Operator
-    # See the top level serverTelemetry section below before enabling this feature.
-    prometheusOperator: false
+    prometheusOperator: true
 
 injector:
-  replicas: 1
-
-  # -- If true, will enable a node exporter metrics endpoint at /metrics.
   metrics:
     enabled: true
-
-  # -- Configures the log format of the injector. Supported log formats: "standard", "json".
   logFormat: "json"
-
-  certs:
-    # secretName is the name of the secret that has the TLS certificate and
-    # private key to serve the injector webhook. If this is null, then the
-    # injector will default to its automatic management mode that will assign
-    # a service account to the injector to generate its own certificates.
-    secretName: null
-
-    # caBundle is a base64-encoded PEM-encoded certificate bundle for the CA
-    # that signed the TLS certificate that the webhook serves. This must be set
-    # if secretName is non-null unless an external service like cert-manager is
-    # keeping the caBundle updated.
-    caBundle: ""
-
-    # certName and keyName are the names of the files within the secret for
-    # the TLS cert and private key, respectively. These have reasonable
-    # defaults but can be customized if necessary.
-    certName: tls.crt
-    keyName: tls.key
-
   podDisruptionBudget:
     maxUnavailable: 1
-
+  replicas: 1
   strategy: |
     rollingUpdate:
       maxSurge: 25%
@@ -52,21 +25,53 @@ injector:
     type: RollingUpdate
 
 server:
-  logLevel: info
-  logFormat: json
+  auditStorage:
+    enabled: true
+    storageClass: ceph-filesystem
+  dataStorage:
+    storageClass: ceph-filesystem
+  ha:
+    enabled: true
+    raft:
+      config: |
+        api_addr = "https://openbao.apps.iaas.wcooke.me"
+        cluster_name = "iaas-openbao"
+        ui = true
 
-  # Used to define commands to run after the pod is ready.
-  # This can be used to automate processes such as initialization
-  # or bootstrapping auth methods.
-  postStart: []
-  # - /bin/sh
-  # - -c
-  # - /openbao/userconfig/myscript/run.sh
+        audit "file" "to-stdout" {
+          description = "This audit device should never fail."
+          options {
+            file_path = "/dev/stdout"
+            log_raw = "false"
+          }
+        }
 
-  # Ingress allows ingress services to be created to allow external access
-  # from Kubernetes to access OpenBao pods.
-  # If deployment is on OpenShift, the following block is ignored.
-  # In order to expose the service, use the route section below
+        listener "tcp" {
+          tls_disable = 1
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+          telemetry {
+            unauthenticated_metrics_access = true
+          }
+        }
+
+        seal "static" {
+          current_key_id = "20260510-1"
+          current_key = "file:///openbao/secrets/seal-key"
+        }
+
+        service_registration "kubernetes" {}
+
+        storage "raft" {
+          path = "/openbao/data"
+        }
+
+        telemetry {
+          prometheus_retention_time = "30s"
+          disable_hostname = true
+        }
+      enabled: true
+      setNodeId: true
   ingress:
     activeService: true
     annotations:
@@ -77,56 +82,38 @@ server:
       forecastle.stakater.com/icon: https://openbao.apps.iaas.wcooke.me/ui/favicon.svg
       forecastle.stakater.com/network-restricted: "true"
     enabled: true
-    ingressClassName: cilium-ingress
-    pathType: Prefix
     hosts:
     - host: openbao.apps.iaas.wcooke.me
-      # paths: []
-    ## Extra paths to prepend to the host configuration. This is useful when working with annotation based services.
-    # extraPaths: []
-    # - path: /*
-    #   backend:
-    #     service:
-    #       name: ssl-redirect
-    #       port:
-    #         number: use-annotation
+    ingressClassName: cilium-ingress
+    pathType: Prefix
     tls:
     - secretName: openbao-ingress-tls
       hosts:
       - openbao.apps.iaas.wcooke.me
+  logLevel: info
+  logFormat: json
+  updateStrategyType: "RollingUpdate"
+  volumes:
+  - name: seal-key
+    secret:
+      secretName: seal-key
+  volumeMounts:
+  - name: seal-key
+    mountPath: /openbao/secrets/seal-key
+    subPath: seal-key
 
-  # This configures the OpenBao Statefulset to create a PVC for data
-  # storage when using the file or raft backend storage engines.
-  # See https://openbao.org/docs/configuration/storage to know more
-  dataStorage:
-    storageClass: ceph-filesystem
-
-  auditStorage:
+serverTelemetry:
+  grafanaDashboard:
     enabled: true
-    storageClass: ceph-filesystem
-
-  # Run OpenBao in "HA" mode. There are no storage requirements unless the audit log
-  # persistence is required.  In HA mode OpenBao will configure itself to use Consul
-  # for its storage backend.  The default configuration provided will work the Consul
-  # Helm project by default.  It is possible to manually configure OpenBao to use a
-  # different HA backend.
-  ha:
+  prometheusRules:
     enabled: true
-
-    raft:
-      enabled: true
-      # Set the Node Raft ID to the name of the pod
-      setNodeId: true
+  serviceMonitor:
+    enabled: true
 
 ui:
+  activeOpenbaoPodOnly: true
   enabled: true
   publishNotReadyAddresses: true
-  activeOpenbaoPodOnly: true
-
-  # Extra annotations to attach to the ui service
-  # This can either be YAML or a YAML-formatted multi-line templated string map
-  # of the annotations to apply to the ui service
-  annotations: {}
 
 # openbao-csi-provider
 csi:
@@ -167,16 +154,16 @@ csi:
 
 snapshotAgent:
   enabled: false
-  s3CredentialsSecret: "openbao-agent-bucket"
+  s3CredentialsSecret: openbao-agent-bucket
 
   config:
-    s3Host: "s3.eu-east-1.amazonaws.com"
-    s3Bucket: "openbao-snapshots"
-    s3Uri: "s3://openbao-snapshots"
+    baoAuthPath: kubernetes
+    baoRole: snapshot
+    s3Bucket: openbao-snapshots
+    s3cmdExtraFlag: -v
     s3ExpireDays: "14"
-    s3cmdExtraFlag: "-v"
-    baoAuthPath: "kubernetes"
-    baoRole: "snapshot"
+    s3Host: s3.eu-east-1.amazonaws.com
+    s3Uri: s3://openbao-snapshots
 
   # -- Map of extra environment variables to set in the snapshot-agent cronjob
   extraEnvironmentVars: {}
