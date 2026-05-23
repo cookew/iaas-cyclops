@@ -27,6 +27,27 @@ spec:
     - /*
   providerConfigRef:
     name: keycloak-provider-config
+# ---
+# apiVersion: client.keycloak.crossplane.io/v1alpha1
+# kind: ProtocolMapper
+# metadata:
+#   name: harbor-role-mapper
+# spec:
+#   forProvider:
+#     clientIdRef:
+#       name: harbor
+#     config:
+#       claim.name: client_roles
+#       id.token.claim: "true"
+#       jsonType.label: String
+#       multivalued: "true"
+#     name: role-mapper
+#     protocol: openid-connect
+#     protocolMapper: oidc-usermodel-realm-role-mapper
+#     realmIdRef:
+#       name: iaas
+#   providerConfigRef:
+#     name: keycloak-provider-config
 ---
 apiVersion: client.keycloak.crossplane.io/v1alpha1
 kind: ProtocolMapper
@@ -38,12 +59,13 @@ spec:
       name: harbor
     config:
       claim.name: client_roles
+      client_id_for_role_mappings: harbor
       id.token.claim: "true"
       jsonType.label: String
       multivalued: "true"
     name: role-mapper
     protocol: openid-connect
-    protocolMapper: oidc-usermodel-realm-role-mapper
+    protocolMapper: oidc-usermodel-client-role-mapper
     realmIdRef:
       name: iaas
   providerConfigRef:
