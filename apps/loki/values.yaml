@@ -305,6 +305,7 @@ networkPolicy:
   #   - 443
 
 overridesExporter:
+  annotations: {}
   enabled: true
   labels: {}
   podDisruptionBudget:
