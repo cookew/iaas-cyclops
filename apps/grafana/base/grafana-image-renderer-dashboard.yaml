@@ -1857,9 +1857,9 @@ data:
       },
       "timepicker": {},
       "timezone": "browser",
-      "title": "grafana-image-renderer",
+      "title": "Grafana Image Renderer",
       "uid": "grafana-image-renderer",
       "version": 12,
       "gnetId": 12203,
-      "description": "Monitor your grafana-image-renderer deployment."
+      "description": "Monitor your Grafana Image Renderer deployment."
     }

@@ -7,11 +7,11 @@ resources:
 - base/ceph-datasource.yaml
 - base/docker-registry-dashboard.yaml
 - base/grafana-external-image-objectbucketclaim.yaml
+- base/grafana-image-renderer-dashboard.yaml
 - base/grafana-keycloak-client.yaml
 - base/grafana-pg-cluster.yaml
 # - base/grafana-valkey-certificate.yaml
 - base/haproxy-dashboard.yaml
-- base/image-renderer-dashboard.yaml
 - base/loki-datasource.yaml
 - base/pyroscope-datasource.yaml
 - base/tempo-datasource.yaml
