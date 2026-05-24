@@ -27,10 +27,10 @@ This is a mirror of my of git repository I use with [ArgoCD](https://argoproj.gi
 
 # Sealed Secrets
 
-Sealed secrets are used for the cert-manager cluster CA cert and key, and for the Argo SSH key. The sealed secrets should be placed in those app's sealed secret directory.
+Sealed secrets are used for the cert-manager cluster CA cert and key, and for the Argo SSH key. The sealed secrets should be placed in those app's sealed-secrets directory.
 
-* /apps/argocd/sealedsecrets
-* /apps/cert-manager-certs/sealedsecrets
+* /apps/argocd/sealed-secrets
+* /apps/cert-manager-certs/sealed-secrets
 
 # Login info
 
