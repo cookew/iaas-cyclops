@@ -97,14 +97,14 @@ server:
   - name: seal-key
     secret:
       secretName: seal-key
-  volumeMounts:
-  - name: seal-key
-    mountPath: /openbao/secrets/seal-key
-    subPath: seal-key
   - configMap:
       defaultMode: 420
       name: ca-all
     name: ca
+  volumeMounts:
+  - name: seal-key
+    mountPath: /openbao/secrets/seal-key
+    subPath: seal-key
   - mountPath: /etc/ssl/certs/ca-certificates.crt
     name: ca
     readOnly: true
