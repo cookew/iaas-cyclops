@@ -2,7 +2,7 @@
 
 global:
   # -- TLS for end-to-end encrypted transport
-  tlsDisable: true
+  # tlsDisable: true
 
   # -- Create PodSecurityPolicy for pods
   psp:
