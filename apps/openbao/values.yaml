@@ -84,7 +84,7 @@ server:
     enabled: true
     hosts:
     - host: openbao.apps.iaas.wcooke.me
-    ingressClassName: cilium-ingress
+    ingressClassName: cilium
     pathType: Prefix
     tls:
     - secretName: openbao-ingress-tls
