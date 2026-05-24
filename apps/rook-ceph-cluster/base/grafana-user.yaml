@@ -7,6 +7,7 @@ spec:
     login: ceph-dashboard
     name: ceph-dashboard
     passwordSecretRef:
+      email: ceph-dashboard
       key: password
       name: grafana-ceph-dashboard-user
       namespace: rook-ceph-cluster
