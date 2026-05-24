@@ -4,4 +4,6 @@ kind: Kustomization
 namespace: crossplane-provider-grafana
 
 resources:
-- base/provider-grafana.yaml
+- base/grafana-provider-config.yaml
+- base/grafana-provider.yaml
+- sealed-secrets/crossplane-grafana-credentials.yaml
