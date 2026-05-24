@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: image-renderer-dashboard
+  name: grafana-image-renderer-dashboard
   labels:
     grafana_dashboard: "1"
 data:
-  image-renderer-dashboard.json: |
+  grafana-image-renderer-dashboard.json: |
     {
       "annotations": {
         "list": [
