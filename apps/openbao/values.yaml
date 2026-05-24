@@ -101,6 +101,14 @@ server:
   - name: seal-key
     mountPath: /openbao/secrets/seal-key
     subPath: seal-key
+  - configMap:
+      defaultMode: 420
+      name: ca-all
+    name: ca
+  - mountPath: /etc/ssl/certs/ca-certificates.crt
+    name: ca
+    readOnly: true
+    subPath: ca-certificates.crt
 
 serverTelemetry:
   grafanaDashboard:
