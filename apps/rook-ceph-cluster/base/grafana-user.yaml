@@ -9,5 +9,6 @@ spec:
     passwordSecretRef:
       key: password
       name: grafana-ceph-dashboard-user
+      namespace: rook-ceph-cluster
   providerConfigRef:
     name: provider-grafana
