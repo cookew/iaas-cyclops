@@ -12,4 +12,4 @@ spec:
       name: grafana-ceph-dashboard-user
       namespace: rook-ceph-cluster
   providerConfigRef:
-    name: provider-grafana
+    name: provider-grafana-config
