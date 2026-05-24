@@ -7,8 +7,10 @@ namespace: rook-ceph-cluster
 
 resources:
 # - base/dashboards.yaml
+- base/grafana-user.yaml
 - base/ingress.yaml
 - base/objectstore-certificate.yaml
+- sealed-secrets/rook-ceph-cluster-grafana-ceph-dashboard-user.yaml
 
 helmCharts:
 - name: rook-ceph-cluster

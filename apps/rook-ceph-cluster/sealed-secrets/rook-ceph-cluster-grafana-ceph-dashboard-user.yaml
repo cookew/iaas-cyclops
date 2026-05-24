@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: grafana-ceph-dashboard-user
+  namespace: rook-ceph-cluster
+spec:
+  encryptedData:
+    password: AgDv9BBQS0NMkurmP78sG/gkgQ2CcVkrXtQ40AF0/xt+zunLA7iSD87Ia9UKf6W3jE8vP2y9ZMhPITN4u41JQwcY7TCrjb/BwhlgyModzgP0X7SZSastIseuv/+43+Rk8WDvFq8Y0FRPZEsIUMkhv0zZQlpIkKYz8hKkgOXrNWmNo9wiI2juB4UdSDSMXPd8EtxfUKZafmPiP9pCkhqeMEEI0RJSJvn3gu3+1wSSmuCp0AIqsK1GcFFPdajjGXfY5Fyk3CI+MqLB38Q8ScU2bEAX2Uh43mUucQqIB3KrkWYEhbfY/dQBLkYAituiZb8AvQPJP8alDTPcRlEDC/EiFyo/5WcHZmMwwE9x99VQD6n0RqcHNPxUoQ17JIKDdTXe03sXnj823giTGCRz080JFU8RzM+VMZ+6n/LnUMYtx6LrMpurKs5BtjlyhReLv/HjqmyjDp0SqYD8FuIbbsYyEnAiauoPHTuXoda//MV6hq2JQ2rueFahFjs26hzQP4iyl9ZQ9slO+uyq3kcon58gKRYSGTqMdFZbENg244JQLXfU705t+ArO215DOSZPN/HJBLWC/GDBvHT4LZGoO3wVI0F6ORwPcUhBICxBLcjv0rHtY6mFYE4xhjpoLbyXkBd3zbESgjnAaBm49DE61PZTN+HUCisblFRTqS1Vh0V/jvrds4DCGJ1HMZylXKM2nTuKkzYuX7+KZjh2HS77syA/wGo8i9EgnQ+z73bCUk20ogGB6hAyAhI5cGa/qcUy/g==
+  template:
+    metadata:
+      name: grafana-ceph-dashboard-user
+      namespace: rook-ceph-cluster
+    type: stringData

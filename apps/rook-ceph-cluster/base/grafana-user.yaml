@@ -4,8 +4,8 @@ metadata:
   name: ceph_dashboard
 spec:
   forProvider:
-    login: ceph_dashboard
-    name: ceph_dashboard
+    login: ceph_dashboardabcd
+    name: ceph_dashboardabcd
     passwordSecretRef:
       key: password
       name: grafana-ceph-dashboard-user
