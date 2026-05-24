@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: grafana-image-renderer-token
+  namespace: grafana
+spec:
+  encryptedData:
+    token: AgCwKcW04GqMjo3JIrlc4xeLPQcWD0sTfwWJjXvMxa8rwwv4H3+/GVWphQwLUbLGEuTHAPJ3aXfrLOcGOP2MWv3y7wCQYxlYlVIlK4ktfTEvq2UfZTUinhXfCaNOoB0VXrRjX+B9UWMiTDdzOVz5j88ZeZIDA/7uamFoe3XGKDMYSz45glFNlJj2zLdBhVyRssTguL1usi5ESzkiAi1fyq+ew0MMjVf41tSOIjSuv0S18lneN9RGbEBX3983ecAGoDWutuzY8TlXQ3LwpiP3uS4V1l08rgGIwgPeZFxVrXkRTz9R3qWitnkmuUTkx++76Gu4dVK9P7OTSnl2w74Ve2Rr++x+736IPObiXB8YfCAkNXAw1VS7ge0NcojrC1FrJs1ma8VBpGnzgyqffmHPaSyAKlkFhTeGbueYxZcS4MSkZJPhCdnSToIdDblOv9lxTTonpvPgjPDJF9/nyAWulo07sUIrIlr+g4aib42MJdfkwTYLWfWar3uqOAyUPyTsUsZRKq+8oNg3kQ6OlABCQsVtx+SxHF98TIg9eCcrr0Q76NwhZL+66y4XEYq8lxT5Wu2/jPVNUL8/btKcBcfwlj+QYVfdlKEN7U0rVRZCxUv5+HvLBd0DPESz0LQ2/+Qw2QGiQB4akEtEONJ6RCr/i/vZnzwrOsTmcDUuNjEFgN50+481vouwimR+S+OLT+uAsDMpEshlmI5LYU6RZb7IfuVI56jri1QTTKdX/Uc+XkbtfqW1ztA+c+Ny88PD6A==
+  template:
+    metadata:
+      name: grafana-image-renderer-token
+      namespace: grafana
+    type: stringData

@@ -15,6 +15,7 @@ resources:
 - base/pyroscope-datasource.yaml
 - base/tempo-datasource.yaml
 - sealed-secrets/grafana-admin.yaml
+- sealed-secrets/grafana-image-renderer-token.yaml
 - sealed-secrets/grafana-keycloak-client.yaml
 - sealed-secrets/grafana-secret-key.yaml
 - sealed-secrets/grafana-valkey-password.yaml
