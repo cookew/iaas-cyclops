@@ -1,0 +1,13 @@
+apiVersion: oss.grafana.crossplane.io/v1alpha1
+kind: User
+metadata:
+  name: ceph_dashboard
+spec:
+  forProvider:
+    login: ceph_dashboard
+    name: ceph_dashboard
+    passwordSecretRef:
+      key: password
+      name: grafana-ceph-dashboard-user
+  providerConfigRef:
+    name: provider-grafana

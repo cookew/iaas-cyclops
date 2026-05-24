@@ -54,6 +54,8 @@ spec:
 
       - name: crossplane-keycloak-provider
         syncWave: -50
+      - name: crossplane-provider-grafana
+        syncWave: -50
       - name: kubevirt
         syncWave: -50
       - name: rook-ceph-cluster
@@ -64,6 +66,8 @@ spec:
         createNamespace: "false"
         syncWave: -40
       - name: cloudnative-pg
+        syncWave: -40
+      - name: crossplane-grafana
         syncWave: -40
       - name: crossplane-keycloak-realms
         syncWave: -40
