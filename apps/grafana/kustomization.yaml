@@ -11,6 +11,7 @@ resources:
 - base/grafana-pg-cluster.yaml
 # - base/grafana-valkey-certificate.yaml
 - base/haproxy-dashboard.yaml
+- base/image-renderer-dashboard.yaml
 - base/loki-datasource.yaml
 - base/pyroscope-datasource.yaml
 - base/tempo-datasource.yaml

@@ -3,6 +3,12 @@
 admin:
   existingSecret: grafana-admin
 
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPU: "60"
+
 # extraConfigmapMounts:
 # - name: ca-bundle
 #   configMap: tm-ca-bundle
@@ -210,7 +216,7 @@ livenessProbe:
 # plugins:
 # - grafana-lokioperational-app
 
-replicas: 2
+# replicas: 2
 
 resources:
   limits:
