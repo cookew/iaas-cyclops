@@ -7,10 +7,10 @@ cephClusterSpec:
     mgr:
       mgr/dashboard/ALERTMANAGER_API_HOST: http://kube-prometheus-stack-alertmanager.kube-prometheus-stack.svc:9093
       mgr/dashboard/ALERTMANAGER_API_SSL_VERIFY: "true"
-      mgr/dashboard/GRAFANA_API_PASSWORD: 1Ceph_dashboard*
+      # mgr/dashboard/GRAFANA_API_PASSWORD:
       mgr/dashboard/GRAFANA_API_SSL_VERIFY: "false"
       mgr/dashboard/GRAFANA_API_URL: http://grafana.grafana.svc
-      mgr/dashboard/GRAFANA_API_USERNAME: ceph_dashboard
+      mgr/dashboard/GRAFANA_API_USERNAME: ceph-dashboard
       mgr/dashboard/GRAFANA_FRONTEND_API_URL: https://grafana.apps.iaas.wcooke.me
       mgr/dashboard/GRAFANA_UPDATE_DASHBOARDS: "true"
     mon:
@@ -18,11 +18,11 @@ cephClusterSpec:
     client.rgw:
       rgw_gc_max_concurrent_io: "1000"
       rgw_gc_max_trim_chunk: "1024"
-#  cephConfigFromSecret:
-#    mgr:
-#      mgr/dashboard/GRAFANA_API_PASSWORD:
-#        name: grafana-api-credential # name of the Kubernetes secret
-#        key: password                # key of the secret value in Kubernetes secret.Data map[string]string
+  cephConfigFromSecret:
+    mgr:
+      mgr/dashboard/GRAFANA_API_PASSWORD:
+        key: password                     # key of the secret value in Kubernetes secret.Data map[string]string
+        name: grafana-ceph-dashboard-user # name of the Kubernetes secret
   crashCollector:
     disable: true
   dashboard:
