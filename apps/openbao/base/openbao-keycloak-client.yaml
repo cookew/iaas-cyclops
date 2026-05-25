@@ -1,0 +1,123 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  name: openbao
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    accessType: confidential
+    baseUrl: /
+    clientId: openbao
+    clientSecretSecretRef:
+      key: client-secret
+      name: openbao-keycloak-client
+      namespace: openbao
+    directAccessGrantsEnabled: true
+    name: OpenBAO
+    pkceCodeChallengeMethod: S256
+    realmIdRef:
+      name: iaas
+    rootUrl: https://openbao.apps.iaas.wcooke.me
+    standardFlowEnabled: true
+    # validPostLogoutRedirectUris:
+    # - /login
+    validRedirectUris:
+    - /oidc/callback
+    - /ui/vault/auth/oidc/oidc/callback
+    - /v1/auth/oidc/*
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: openbao-admin
+  labels:
+    keycloak/realm: iaas
+    keycloak/group-admins: ""
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: openbao
+    name: openbao-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  labels:
+    keycloak/realm: iaas
+    keycloak/group-users: ""
+  name: openbao-user
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: openbao
+    name: openbao-user
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: openbao-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: openbao-admins
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: openbao-users
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: openbao-users
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: openbao-admins-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: openbao-admins
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: openbao-admin
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: openbao-users-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: openbao-users
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: openbao-user
+  providerConfigRef:
+    name: keycloak-provider-config
