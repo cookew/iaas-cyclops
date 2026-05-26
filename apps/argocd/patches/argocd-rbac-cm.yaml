@@ -3,11 +3,11 @@ kind: ConfigMap
 metadata:
   name: argocd-rbac-cm
 data:
+  policy.csv: ""
   policy.default: role:admin
   scopes: '[groups]'
-  policy.csv: ""
-#    policy.default: role:readonly
-#    scopes: '[roles,upn]'
-#    policy.csv: |
-#      g, "admin", role:admin
-#      g, "user", role:readonly
+  # policy.csv: |
+  #   g, argocd-admin, role:admin
+  #   g, argocd-user, role:readonly
+  # policy.default: role:readonly
+  # scopes: '[roles,upn]'
