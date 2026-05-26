@@ -1,0 +1,20 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: argocd-keycloak-client
+  namespace: argocd
+spec:
+  encryptedData:
+    clientSecret: AgDEPLYVgf6lJGA6lOe4hkntKS36/955arxJkq8a1CUdij/BvgcgYEzEyF25CRmR41+CGr/opzCS2Zf/IGMrocaB9EGBp4Bq0YVJ9iUpp/pvXawLxyuUPrKTiT3LfN2ICqn+1SO+Ubze+KJuKJzwsziN65xv7SaGLPUWs7nReyCvoT/o7pQBKEpfLtH/IeYhHkTXy/83SiMBdpamjo3xNRusp+ksgRkauJv2MXrzWbcBU8kOD2qN9azup0LnW58gRI/S2klU96XnULyU/dGZq+pxgqcQkOPbPwTSI7AeqoBDcN84KaktHWkk8Dafj+ZzyrlmjhqD0FZRNdLReAIdVJl9steW1s7yYQf5SqdOZzBUQULVNwHoVIGuOyUyFmE7NtoZ6as3KfGFcISGTSAHSe4QXmcF0A1u4Or6lglAAwXP0VxWXEsgXew874Hvb0o7qWYUuUlWzK6Mt8ejoCiFhVYYjep+wURHVtf6F90piQNQ9pkXh2ke6HQ24dMiMlE7ME2UBsByzI5qiYnibHNjkQrsyGU5vlAeO5S02JcF61owVXEIG9zlOJsubzBhgZ4M21xLivH+wTLLi8p62GPcfNC3HgMO3i5HV7CtaSsPic8rLY1ea9vqhJscD1b3nEKMbKnEZbOnV3cqygEHSNlhn1nvmqILvmNDMc0YC428LhbhSL1RmlNMMVWYCLmzBQgpYol/N7WRDa22Kf+I5dv7D6KZnCtfWRwfqswSEfThb2l9QCwQM6XMyZAmn5x0Tw==
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/managed: "true"
+        sealedsecrets.bitnami.com/patch: "true"
+      labels:
+        app.kubernetes.io/name: argocd-keycloak-client
+        app.kubernetes.io/part-of: argocd
+      name: argocd-keycloak-client
+      namespace: argocd
+    type: stringData

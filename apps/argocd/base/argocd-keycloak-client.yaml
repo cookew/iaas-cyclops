@@ -11,8 +11,8 @@ spec:
     baseUrl: /
     clientId: argocd
     clientSecretSecretRef:
-      key: oidc.keycloak.clientSecret
-      name: argocd-secret
+      key: clientSecret
+      name: argocd-keycloak-client
       namespace: argocd
     directAccessGrantsEnabled: true
     name: ArgoCD

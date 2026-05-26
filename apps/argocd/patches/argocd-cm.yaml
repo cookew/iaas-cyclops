@@ -20,7 +20,7 @@ data:
     name: Keycloak
     issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
     clientID: argocd
-    clientSecret: $oidc.keycloak.clientSecret
+    clientSecret: $oidc:clientSecret
     enablePKCEAuthentication: true
     refreshTokenThreshold: 2m
     requestedScopes:

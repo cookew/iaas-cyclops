@@ -13,6 +13,7 @@ resources:
 - base/ingress.yaml
 - base/namespace.yaml
 - base/servicemonitor.yaml
+- sealed-secrets/argocd-keycloak-client.yaml
 - sealed-secrets/argocd-secret.yaml
 - sealed-secrets/argocd-iaas-cyclops-k8s-repo-creds.yaml
 - sealed-secrets/argocd-iaas-cyclops-repo-creds.yaml
