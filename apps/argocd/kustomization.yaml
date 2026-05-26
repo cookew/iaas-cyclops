@@ -5,6 +5,7 @@ namespace: argocd
 
 resources:
 - base/argocd-dex-server-tls.yaml
+- base/argocd-keycloak-client.yaml
 - base/argocd-redis-ha-proxy-service-monitor.yaml
 - base/argocd-repo-server-tls.yaml
 - base/argocd-server-tls.yaml
