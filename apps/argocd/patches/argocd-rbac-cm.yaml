@@ -5,7 +5,7 @@ metadata:
 data:
   # policy.csv: ""
   policy.default: role:admin
-  scopes: '[groups]'
+  # scopes: '[groups]'
   policy.csv: |
     g, argocd-admin, role:admin
   #   g, argocd-user, role:readonly

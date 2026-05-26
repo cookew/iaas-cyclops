@@ -27,8 +27,8 @@ data:
     - openid
     - profile
     - email
-    - groups
     - offline_access
+  #   - groups
   #   requestedIDTokenClaims:
   #     groups:
   #       essential: true
