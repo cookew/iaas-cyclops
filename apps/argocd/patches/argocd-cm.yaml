@@ -32,7 +32,7 @@ data:
   #   requestedIDTokenClaims:
   #     groups:
   #       essential: true
-  # oidc.tls.insecure.skip.verify: "true"
+  oidc.tls.insecure.skip.verify: "true"
   # https://argo-cd.readthedocs.io/en/stable/user-guide/status-badge/
   statusbadge.enabled: "true"
   url: https://argocd.apps.iaas.wcooke.me
