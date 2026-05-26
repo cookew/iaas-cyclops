@@ -8,6 +8,6 @@ data:
   # scopes: '[groups]'
   policy.csv: |
     g, argocd-admin, role:admin
-  #   g, argocd-user, role:readonly
+    g, argocd-user, role:readonly
   # policy.default: role:readonly
   # scopes: '[roles,upn]'
