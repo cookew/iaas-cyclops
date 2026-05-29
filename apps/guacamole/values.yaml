@@ -12,6 +12,7 @@ guacamole:
     value: "true"
   - name: QUICKCONNECT_ENABLED
     value: "true"
+  dbType: postgresql
 
 proxy:
   # -- Enable Tomcat RemoteIpValve for reverse proxy
