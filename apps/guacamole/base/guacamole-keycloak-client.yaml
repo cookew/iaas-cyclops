@@ -15,6 +15,7 @@ spec:
       name: guacamole-keycloak-client
       namespace: guacamole
     directAccessGrantsEnabled: true
+    implicitFlowEnabled: true
     name: Guacamole
     # pkceCodeChallengeMethod: S256
     realmIdRef:
