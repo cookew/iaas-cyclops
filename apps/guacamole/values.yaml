@@ -5,7 +5,7 @@ guacamole:
   # - name: GUACAMOLE_HOME
   #   value: /etc/guacamole
   - name: EXTENSION_PRIORITY
-    value: openid
+    value: "*, openid"
   - name: RESTRICT_ENABLED
     value: "true"
   - name: RECORDING_ENABLED
@@ -31,7 +31,7 @@ oidc:
   issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
   clientId: guacamole
   # -- Redirect URI (auto-detected from ingress if empty)
-  redirectUri: ""
+  redirectUri: https://guacamole.apps.iaas.wcooke.me
   scope: openid email profile
   usernameClaim: preferred_username
   groupsClaim: client_roles
