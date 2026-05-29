@@ -44,11 +44,11 @@ totp:
 database:
   type: postgresql
   external:
-    host: harbor-pg-cluster-rw
+    host: guacamole-pg-cluster-rw.guacamole.svc
     port: 5432
     name: guacamole
     username: guacamole
-    existingSecret: harbor-pg-cluster-app
+    existingSecret: guacamole-pg-cluster-app
     existingSecretPasswordKey: password
 
 initDb:
