@@ -26,9 +26,9 @@ proxy:
 
 oidc:
   enabled: true
-  authorizationEndpoint: https://keycloak.example.com/realms/iaas/protocol/openid-connect/auth
-  jwksEndpoint: https://keycloak.example.com/realms/iaas/protocol/openid-connect/certs
-  issuer: https://keycloak.example.com/realms/iaas
+  authorizationEndpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
+  jwksEndpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/certs
+  issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
   clientId: guacamole
   # -- Redirect URI (auto-detected from ingress if empty)
   redirectUri: ""
