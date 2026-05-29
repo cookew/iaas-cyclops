@@ -4,8 +4,6 @@ guacamole:
   extraEnv:
   # - name: GUACAMOLE_HOME
   #   value: /etc/guacamole
-  - name: OPENID_GROUPS_CLAIM_TYPE
-    value: resource_access.guacamole..roles
   - name: EXTENSION_PRIORITY
     value: openid
   - name: RESTRICT_ENABLED
@@ -35,7 +33,7 @@ oidc:
   redirectUri: ""
   scope: openid email profile
   usernameClaim: preferred_username
-  groupsClaim: groups
+  groupsClaim: resource_access.guacamole..roles
   allowedClockSkew: 30
   maxTokenValidity: 300
 
