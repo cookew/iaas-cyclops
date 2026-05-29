@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: guacamole
 
 resources:
+- base/guacamole-keycloak-client.yaml
 - base/guacamole-pg-cluster.yaml
 
 helmCharts:
