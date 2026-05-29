@@ -86,6 +86,7 @@ spec:
       - name: github-arc
       - name: gitlab
       - name: grafana
+      - name: guacamole
       - name: harbor
       - name: headlamp
       - name: kubevirt-manager

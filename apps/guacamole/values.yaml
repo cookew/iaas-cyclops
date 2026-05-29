@@ -1,0 +1,153 @@
+guacamole:
+  # -- Web application context path (use "ROOT" to serve at /)
+  contextPath: ROOT
+  extraEnv:
+  # - name: GUACAMOLE_HOME
+  #   value: /etc/guacamole
+  - name: OPENID_GROUPS_CLAIM_TYPE
+    value: resource_access.guacamole..roles
+  - name: EXTENSION_PRIORITY
+    value: openid
+  - name: RESTRICT_ENABLED
+    value: "true"
+  - name: RECORDING_ENABLED
+    value: "true"
+  - name: QUICKCONNECT_ENABLED
+    value: "true"
+
+proxy:
+  # -- Enable Tomcat RemoteIpValve for reverse proxy
+  enabled: true
+  # -- Trusted proxy IP regex
+  allowedIpsRegex: ""
+  # -- Header for client IP
+  ipHeader: X-Forwarded-For
+  # -- Header for protocol
+  protocolHeader: X-Forwarded-Proto
+
+oidc:
+  enabled: true
+  authorizationEndpoint: https://keycloak.example.com/realms/iaas/protocol/openid-connect/auth
+  jwksEndpoint: https://keycloak.example.com/realms/iaas/protocol/openid-connect/certs
+  issuer: https://keycloak.example.com/realms/iaas
+  clientId: guacamole
+  # -- Redirect URI (auto-detected from ingress if empty)
+  redirectUri: ""
+  scope: openid email profile
+  usernameClaim: preferred_username
+  groupsClaim: groups
+  allowedClockSkew: 30
+  maxTokenValidity: 300
+
+totp:
+  enabled: false
+
+database:
+  type: postgresql
+  external:
+    host: harbor-pg-cluster-rw
+    port: 5432
+    name: guacamole
+    username: guacamole
+    existingSecret: harbor-pg-cluster-app
+    existingSecretPasswordKey: password
+
+initDb:
+  # -- Run a Job to initialize the database schema on install
+  enabled: true
+  # -- Resources for the init job
+  resources: {}
+
+serviceAccount:
+  create: false
+  name: ""
+  annotations: {}
+
+ingress:
+  enabled: true
+  ingressClassName: cilium
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Guacamole
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Apps
+    forecastle.stakater.com/icon: https://guacamole.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/network-restricted: "true"
+    forecastle.stakater.com/url: https://guacamole.apps.iaas.wcooke.me
+  hosts:
+  - host: guacamole.apps.iaas.wcooke.me
+    paths:
+      - path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+      - guacamole.apps.iaas.wcooke.me
+    secretName: guacamole-tls
+
+resources: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+affinity: {}
+
+terminationGracePeriodSeconds: 30
+
+backup:
+  # -- Enable built-in backup CronJob (database dump + S3 upload)
+  enabled: false
+  # -- Backup schedule in Cron format
+  schedule: "0 2 * * *"
+  # -- Suspend backup execution
+  suspend: false
+  # -- CronJob concurrency policy
+  concurrencyPolicy: Forbid
+  # -- Successful job history retained
+  successfulJobsHistoryLimit: 3
+  # -- Failed job history retained
+  failedJobsHistoryLimit: 3
+  # -- Job backoff limit
+  backoffLimit: 1
+  # -- Prefix for backup archive names
+  archivePrefix: guacamole
+  # -- Resources for backup containers
+  resources: {}
+  images:
+    uploader:
+      repository: docker.io/helmforge/mc
+      tag: "1.0.0"
+      pullPolicy: IfNotPresent
+    postgresql:
+      repository: docker.io/library/postgres
+      tag: "17.5-bookworm"
+      pullPolicy: IfNotPresent
+    mysql:
+      repository: docker.io/library/mysql
+      tag: "8.4"
+      pullPolicy: IfNotPresent
+  s3:
+    # -- S3-compatible endpoint URL
+    endpoint: ""
+    # -- Target bucket name
+    bucket: ""
+    # -- Optional prefix inside the bucket
+    prefix: guacamole
+    # -- Create bucket if not exists
+    createBucketIfNotExists: true
+    # -- Existing secret containing access-key and secret-key
+    existingSecret: ""
+    existingSecretAccessKeyKey: access-key
+    existingSecretSecretKeyKey: secret-key
+    # -- Inline access key
+    accessKey: ""
+    # -- Inline secret key
+    secretKey: ""
+
+extraVolumes: []
+extraVolumeMounts: []
+
+extraManifests: []
+
+postgresql:
+  enabled: false
