@@ -34,7 +34,7 @@ oidc:
   redirectUri: ""
   scope: openid email profile
   usernameClaim: preferred_username
-  groupsClaim: resource_access.guacamole..roles
+  groupsClaim: client_roles
   allowedClockSkew: 30
   maxTokenValidity: 300
 
