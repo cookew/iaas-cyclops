@@ -143,8 +143,17 @@ backup:
     # -- Inline secret key
     secretKey: ""
 
-extraVolumes: []
-extraVolumeMounts: []
+extraVolumes:
+- configMap:
+    defaultMode: 420
+    name: ca-all
+  name: ca
+
+extraVolumeMounts:
+- mountPath: /etc/ssl/certs/ca-certificates.crt
+  name: ca
+  readOnly: true
+  subPath: ca-certificates.crt
 
 extraManifests: []
 
