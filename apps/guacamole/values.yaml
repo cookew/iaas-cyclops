@@ -22,6 +22,8 @@ guacamole:
   #       optional: false
   - name: OPENID_ALLOW_UNVERIFIED_USERS
     value: "true"
+  - name: USE_SYSTEM_CA_CERTS
+    value: "true"
   dbType: postgresql
 
 proxy:
