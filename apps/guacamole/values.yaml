@@ -12,7 +12,7 @@ guacamole:
   - name: RECORDING_ENABLED
     value: "true"
   - name: QUICKCONNECT_ENABLED
-    value: "true"
+    value: "false"
   - name: POSTGRESQL_DEFAULT_MAX_CONNECTIONS
     value: "1"
   - name: POSTGRESQL_DEFAULT_MAX_CONNECTIONS_PER_USER
@@ -20,6 +20,22 @@ guacamole:
   - name: POSTGRESQL_AUTO_CREATE_ACCOUNTS
     value: "false"
   - name: POSTGRESQL_ENFORCE_ACCESS_WINDOWS_FOR_ACTIVE_SESSIONS
+    value: "true"
+  - name: POSTGRESQL_USER_PASSWORD_MIN_AGE
+    value: "1"
+  - name: POSTGRESQL_USER_PASSWORD_MAX_AGE
+    value: "90"
+  - name: POSTGRESQL_USER_PASSWORD_HISTORY_SIZE
+    value: "15"
+  - name: POSTGRESQL_USER_PASSWORD_MIN_LENGTH
+    value: "15"
+  - name: POSTGRESQL_USER_PASSWORD_REQUIRE_MULTIPLE_CASE
+    value: "true"
+  - name: POSTGRESQL_USER_PASSWORD_REQUIRE_SYMBOL
+    value: "true"
+  - name: POSTGRESQL_USER_PASSWORD_REQUIRE_DIGIT
+    value: "true"
+  - name: POSTGRESQL_USER_PASSWORD_PROHIBIT_USERNAME
     value: "true"
 
 proxy:
@@ -156,6 +172,9 @@ extraVolumes:
     defaultMode: 420
     name: ca-all
   name: ca
+- name: guacamole-recordings
+  persistentVolumeClaim:
+    claimName: guacamole-recordings
 
 extraVolumeMounts:
 - mountPath: /etc/ssl/certs/ca-certificates.crt
@@ -166,6 +185,8 @@ extraVolumeMounts:
   name: ca
   readOnly: true
   subPath: ca-certificates.jks
+- mountPath: /var/lib/guacamole/recordings
+  name: guacamole-recordings
 
 extraManifests: []
 
