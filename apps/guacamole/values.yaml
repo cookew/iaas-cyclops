@@ -1,3 +1,5 @@
+# https://github.com/helmforgedev/charts/blob/main/charts/guacamole/values.yaml
+
 guacamole:
   # -- Web application context path (use "ROOT" to serve at /)
   contextPath: ROOT
@@ -12,6 +14,12 @@ guacamole:
     value: "true"
   - name: QUICKCONNECT_ENABLED
     value: "true"
+  - name: OPENID_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        key: client-secret
+        name: guacamole-keycloak-client
+        optional: false
   dbType: postgresql
 
 proxy:
