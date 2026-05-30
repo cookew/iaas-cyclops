@@ -9,12 +9,15 @@ spec:
   forProvider:
     accessType: confidential
     baseUrl: /
+    clientAuthenticatorType: client-jwt
     clientId: guacamole
-    clientSecretSecretRef:
-      key: client-secret
-      name: guacamole-keycloak-client
-      namespace: guacamole
+    # clientSecretSecretRef:
+    #   key: client-secret
+    #   name: guacamole-keycloak-client
+    #   namespace: guacamole
     directAccessGrantsEnabled: true
+    extra_config:
+      attributes.token.endpoint.auth.signing.alg: RS256
     implicitFlowEnabled: true
     name: Guacamole
     # pkceCodeChallengeMethod: S256

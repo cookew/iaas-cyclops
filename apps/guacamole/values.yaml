@@ -70,7 +70,7 @@ ingress:
     forecastle.stakater.com/appName: Guacamole
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Apps
-    forecastle.stakater.com/icon: https://guacamole.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/icon: https://guacamole.apps.iaas.wcooke.me/images/guac-tricolor.svg
     forecastle.stakater.com/network-restricted: "true"
     forecastle.stakater.com/url: https://guacamole.apps.iaas.wcooke.me
   hosts:
