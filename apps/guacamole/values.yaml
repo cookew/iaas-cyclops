@@ -5,7 +5,7 @@ guacamole:
   # - name: GUACAMOLE_HOME
   #   value: /etc/guacamole
   - name: EXTENSION_PRIORITY
-    value: "*, openid"
+    value: openid
   - name: RESTRICT_ENABLED
     value: "true"
   - name: RECORDING_ENABLED
