@@ -20,10 +20,10 @@ guacamole:
   #       key: client-secret
   #       name: guacamole-keycloak-client
   #       optional: false
-  - name: OPENID_ALLOW_UNVERIFIED_USERS
-    value: "true"
-  - name: USE_SYSTEM_CA_CERTS
-    value: "true"
+  # - name: OPENID_ALLOW_UNVERIFIED_USERS
+  #   value: "true"
+  # - name: USE_SYSTEM_CA_CERTS
+  #   value: "true"
   dbType: postgresql
 
 proxy:
@@ -166,6 +166,10 @@ extraVolumeMounts:
   name: ca
   readOnly: true
   subPath: ca-certificates.crt
+- mountPath: /opt/java/openjdk/lib/security/cacerts
+  name: ca
+  readOnly: true
+  subPath: ca-certificates.jks
 
 extraManifests: []
 
