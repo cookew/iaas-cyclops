@@ -46,7 +46,7 @@ oidc:
   redirectUri: https://guacamole.apps.iaas.wcooke.me
   scope: openid email profile
   usernameClaim: preferred_username
-  groupsClaim: client_roles
+  groupsClaim: groups
   allowedClockSkew: 30
   maxTokenValidity: 300
 
