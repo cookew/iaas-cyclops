@@ -14,9 +14,3 @@ helmCharts:
   repo: https://repo.helmforge.dev
   valuesFile: values.yaml
   version: 1.4.7
-# - name: valkey
-#   namespace: harbor
-#   releaseName: valkey
-#   repo: https://valkey.io/valkey-helm
-#   valuesFile: valkey-values.yaml
-#   version: 0.9.4
