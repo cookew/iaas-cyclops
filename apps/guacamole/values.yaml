@@ -109,10 +109,10 @@ ingress:
 
 resources: {}
 
-podSecurityContext: {}
-
-securityContext:
+podSecurityContext:
   fsGroup: 1000
+
+securityContext: {}
 
 affinity: {}
 
