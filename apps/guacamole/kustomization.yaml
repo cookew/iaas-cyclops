@@ -6,6 +6,7 @@ namespace: guacamole
 resources:
 - base/guacamole-keycloak-client.yaml
 - base/guacamole-pg-cluster.yaml
+- sealed-secrets/guacamole-keycloak-client.yaml
 
 helmCharts:
 - name: guacamole
