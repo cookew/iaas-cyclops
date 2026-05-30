@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: guacamole-keycloak-client
+  namespace: guacamole
+spec:
+  encryptedData:
+    client-secret: AgClfN8CC9XT++uvV5U3nEb6MAxHZHymWmQDDnwwRu+eDuJc3jf8Na0UcD5QfqI+nuxleRlxult/8hjJfqczU91L0FTRhWnexZTR+jZT53cd/4XzMpcXbvb7omQ1JZF6tgDEHneKRubvtEDRBeAIe+nXIp+QHpUfZ8UfTvmFlT4JPScbCPV2lXchWglpxf/Ks0u0+exVdntL7AnUeFIbi09+ylmOtq4kT7GwQPi/9UeJfLQwGjR+ItQdBYTJ6HQec/8NlwhxVmreSrVdw6N8MmELVITIwxhYcj6kEBaQgnYWnp1qwIim6GAN/dt/P7cvNzHVEYyiOfvppBEk38KPbmtRvtKIgJIPXP9LlipQKuVXkfEdMbzuDkppJiqXLrAUnpqm5HYt9RQW28+SAIcrCEGfv/ivLY0W3BH750o+q8539nyOiwJkJpKxKXnWGxEs9QvJ2/to4bF56oK1vKeT0Y7YmbseWmjm1uvvRpD+47Cd83CtiJ5ik/J09+6mmthhRPhWoyTvOiOXb8klJ3u1jUi0IyjpNy6E1EuWvHI5LqoQIIJSODQWQWPQQYer4WUUb6O0yGYl0hpHKicuSqFsM8VISW+FXIR974WGg5wlDg0VPsZ4wiqrNuZ1u3fB02pHbv+dtKWtQfXctSeE7xAU9MWd9W2JNpUlCZeGEmkiud4OYZSKKFbt/zpDwIhja4OFYp4jwnlB/OXLH0FcByGdGxxl22UyEFxr3V0uTodl5KCyQfv9gfgox1yKQrspyA==
+  template:
+    metadata:
+      name: guacamole-keycloak-client
+      namespace: guacamole
+    type: stringData
