@@ -7,7 +7,7 @@ metadata:
 spec:
   deletionPolicy: Delete
   forProvider:
-    accessType: confidential
+    # accessType: confidential
     baseUrl: /
     # clientAuthenticatorType: client-jwt
     clientId: guacamole
@@ -15,16 +15,16 @@ spec:
       key: client-secret
       name: guacamole-keycloak-client
       namespace: guacamole
-    directAccessGrantsEnabled: true
+    # directAccessGrantsEnabled: true
     # extraConfig:
     #   attributes.token.endpoint.auth.signing.alg: RS256
-    # implicitFlowEnabled: true
+    implicitFlowEnabled: true
     name: Guacamole
     # pkceCodeChallengeMethod: S256
     realmIdRef:
       name: iaas
     rootUrl: https://guacamole.apps.iaas.wcooke.me
-    standardFlowEnabled: true
+    # standardFlowEnabled: true
     # validPostLogoutRedirectUris:
     # - /oauth2/sign_out
     validRedirectUris:

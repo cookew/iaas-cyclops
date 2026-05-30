@@ -3,9 +3,8 @@
 guacamole:
   # -- Web application context path (use "ROOT" to serve at /)
   contextPath: ROOT
+  dbType: postgresql
   extraEnv:
-  # - name: GUACAMOLE_HOME
-  #   value: /etc/guacamole
   - name: EXTENSION_PRIORITY
     value: "*, openid"
   - name: RESTRICT_ENABLED
@@ -14,17 +13,6 @@ guacamole:
     value: "true"
   - name: QUICKCONNECT_ENABLED
     value: "true"
-  # - name: OPENID_CLIENT_SECRET
-  #   valueFrom:
-  #     secretKeyRef:
-  #       key: client-secret
-  #       name: guacamole-keycloak-client
-  #       optional: false
-  # - name: OPENID_ALLOW_UNVERIFIED_USERS
-  #   value: "true"
-  # - name: USE_SYSTEM_CA_CERTS
-  #   value: "true"
-  dbType: postgresql
 
 proxy:
   # -- Enable Tomcat RemoteIpValve for reverse proxy
@@ -41,12 +29,12 @@ oidc:
   authorizationEndpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
   jwksEndpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/certs
   issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
-  clientId: guacamole1
+  clientId: guacamole
   # -- Redirect URI (auto-detected from ingress if empty)
   redirectUri: https://guacamole.apps.iaas.wcooke.me
   scope: openid email profile
   usernameClaim: preferred_username
-  groupsClaim: groups
+  groupsClaim: client_roles
   allowedClockSkew: 30
   maxTokenValidity: 300
 
