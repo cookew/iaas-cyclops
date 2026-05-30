@@ -14,12 +14,12 @@ guacamole:
     value: "true"
   - name: QUICKCONNECT_ENABLED
     value: "true"
-  - name: OPENID_CLIENT_SECRET
-    valueFrom:
-      secretKeyRef:
-        key: client-secret
-        name: guacamole-keycloak-client
-        optional: false
+  # - name: OPENID_CLIENT_SECRET
+  #   valueFrom:
+  #     secretKeyRef:
+  #       key: client-secret
+  #       name: guacamole-keycloak-client
+  #       optional: false
   - name: OPENID_ALLOW_UNVERIFIED_USERS
     value: "true"
   dbType: postgresql
@@ -39,7 +39,7 @@ oidc:
   authorizationEndpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
   jwksEndpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/certs
   issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
-  clientId: guacamole
+  clientId: guacamole1
   # -- Redirect URI (auto-detected from ingress if empty)
   redirectUri: https://guacamole.apps.iaas.wcooke.me
   scope: openid email profile
