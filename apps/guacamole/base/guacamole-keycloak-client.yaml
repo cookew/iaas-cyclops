@@ -16,7 +16,7 @@ spec:
       name: iaas
     rootUrl: https://guacamole.apps.iaas.wcooke.me
     validRedirectUris:
-    - /
+    - /*
   providerConfigRef:
     name: keycloak-provider-config
 ---
