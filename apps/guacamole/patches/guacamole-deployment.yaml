@@ -8,3 +8,7 @@
   value:
   - mountPath: /var/lib/guacamole/recordings
     name: guacamole-recordings
+  - mountPath: /etc/ssl/certs/ca-certificates.crt
+    name: ca
+    readOnly: true
+    subPath: ca-certificates.crt
