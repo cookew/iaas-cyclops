@@ -110,7 +110,7 @@ ingress:
 resources: {}
 
 podSecurityContext:
-  fsGroup: 1000
+  fsGroup: 1001
 
 securityContext: {}
 
