@@ -16,7 +16,7 @@ spec:
     #   name: guacamole-keycloak-client
     #   namespace: guacamole
     directAccessGrantsEnabled: true
-    extra_config:
+    extraConfig:
       attributes.token.endpoint.auth.signing.alg: RS256
     implicitFlowEnabled: true
     name: Guacamole
