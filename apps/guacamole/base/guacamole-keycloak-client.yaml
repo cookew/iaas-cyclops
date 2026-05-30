@@ -15,7 +15,7 @@ spec:
       key: client-secret
       name: guacamole-keycloak-client
       namespace: guacamole
-    # directAccessGrantsEnabled: true
+    directAccessGrantsEnabled: false
     # extraConfig:
     #   attributes.token.endpoint.auth.signing.alg: RS256
     implicitFlowEnabled: true
@@ -24,7 +24,7 @@ spec:
     realmIdRef:
       name: iaas
     rootUrl: https://guacamole.apps.iaas.wcooke.me
-    # standardFlowEnabled: true
+    standardFlowEnabled: false
     # validPostLogoutRedirectUris:
     # - /oauth2/sign_out
     validRedirectUris:
