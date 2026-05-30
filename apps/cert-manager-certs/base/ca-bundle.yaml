@@ -53,6 +53,11 @@ spec:
       key: ca-certificates.crt
     secret:
       key: ca-certificates.crt
+    additionalFormats:
+      jks:
+        key: "ca-certificates.jks"
+      pkcs12:
+        key: "ca-certificates.p12"
 ---
 apiVersion: trust.cert-manager.io/v1alpha1
 kind: Bundle
