@@ -82,7 +82,7 @@ initDb:
   resources: {}
 
 serviceAccount:
-  create: false
+  create: true
   name: ""
   annotations: {}
 
