@@ -29,12 +29,13 @@ resources:
 
 helmCharts:
   # https://gitlab.com/gitlab-org/charts/gitlab
+  # https://gitlab.com/gitlab-org/charts/gitlab/-/blob/9-11-stable/Chart.yaml?ref_type=heads#L4
 - name: gitlab
   namespace: gitlab
   releaseName: gitlab
   repo: https://charts.gitlab.io
   valuesFile: values.yaml
-  version: 9.11.4
+  version: 9.11.5
 - name: valkey
   namespace: gitlab
   releaseName: valkey
