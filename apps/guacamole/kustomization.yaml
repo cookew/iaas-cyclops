@@ -7,6 +7,7 @@ resources:
 - base/guacamole-keycloak-client.yaml
 - base/guacamole-pg-cluster.yaml
 - base/guacamole-recordings-pvc.yaml
+# - base/guacamole-serviceaccount-role.yaml
 
 helmCharts:
 - name: guacamole

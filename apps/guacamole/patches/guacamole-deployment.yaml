@@ -10,9 +10,9 @@
     readOnly: true
     subPath: ca-certificates.crt
 
-- op: add
-  path: /spec/template/spec/serviceAccountName
-  value: guacamole-guacamole
+# - op: add
+#   path: /spec/template/spec/serviceAccountName
+#   value: guacamole-guacamole
 
 - op: add
   path: /spec/revisionHistoryLimit

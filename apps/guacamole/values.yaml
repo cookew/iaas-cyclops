@@ -63,9 +63,6 @@ oidc:
   allowedClockSkew: 30
   maxTokenValidity: 300
 
-totp:
-  enabled: false
-
 database:
   type: postgresql
   external:
@@ -83,7 +80,7 @@ initDb:
   resources: {}
 
 serviceAccount:
-  create: true
+  create: false
   name: ""
   annotations: {}
 
@@ -117,57 +114,7 @@ securityContext: {}
 
 affinity: {}
 
-terminationGracePeriodSeconds: 30
-
-backup:
-  # -- Enable built-in backup CronJob (database dump + S3 upload)
-  enabled: false
-  # -- Backup schedule in Cron format
-  schedule: "0 2 * * *"
-  # -- Suspend backup execution
-  suspend: false
-  # -- CronJob concurrency policy
-  concurrencyPolicy: Forbid
-  # -- Successful job history retained
-  successfulJobsHistoryLimit: 3
-  # -- Failed job history retained
-  failedJobsHistoryLimit: 3
-  # -- Job backoff limit
-  backoffLimit: 1
-  # -- Prefix for backup archive names
-  archivePrefix: guacamole
-  # -- Resources for backup containers
-  resources: {}
-  images:
-    uploader:
-      repository: docker.io/helmforge/mc
-      tag: "1.0.0"
-      pullPolicy: IfNotPresent
-    postgresql:
-      repository: docker.io/library/postgres
-      tag: "17.5-bookworm"
-      pullPolicy: IfNotPresent
-    mysql:
-      repository: docker.io/library/mysql
-      tag: "8.4"
-      pullPolicy: IfNotPresent
-  s3:
-    # -- S3-compatible endpoint URL
-    endpoint: ""
-    # -- Target bucket name
-    bucket: ""
-    # -- Optional prefix inside the bucket
-    prefix: guacamole
-    # -- Create bucket if not exists
-    createBucketIfNotExists: true
-    # -- Existing secret containing access-key and secret-key
-    existingSecret: ""
-    existingSecretAccessKeyKey: access-key
-    existingSecretSecretKeyKey: secret-key
-    # -- Inline access key
-    accessKey: ""
-    # -- Inline secret key
-    secretKey: ""
+terminationGracePeriodSeconds: 5
 
 extraVolumes:
 - configMap:
@@ -189,8 +136,6 @@ extraVolumeMounts:
   subPath: ca-certificates.jks
 - mountPath: /var/lib/guacamole/recordings
   name: guacamole-recordings
-
-extraManifests: []
 
 postgresql:
   enabled: false
