@@ -13,8 +13,8 @@ guacamole:
     value: "true"
   - name: QUICKCONNECT_ENABLED
     value: "false"
-  - name: POSTGRESQL_DEFAULT_MAX_CONNECTIONS
-    value: "1"
+  # - name: POSTGRESQL_DEFAULT_MAX_CONNECTIONS
+  #   value: "1"
   - name: POSTGRESQL_DEFAULT_MAX_CONNECTIONS_PER_USER
     value: "5"
   - name: POSTGRESQL_AUTO_CREATE_ACCOUNTS
