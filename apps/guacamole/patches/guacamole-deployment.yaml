@@ -1,7 +1,4 @@
 # https://argo-workflows.readthedocs.io/en/latest/high-availability/#argo-server
-- op: add
-  path: /spec/replicas
-  value: 1
 
 - op: add
   path: /spec/template/spec/containers/1/volumeMounts
@@ -12,3 +9,11 @@
     name: ca
     readOnly: true
     subPath: ca-certificates.crt
+
+- op: add
+  path: /spec/template/spec/serviceAccountName
+  value: guacamole-guacamole
+
+- op: add
+  path: /spec/revisionHistoryLimit
+  value: 0
