@@ -321,6 +321,6 @@ rbac:
 serviceMonitor:
   enabled: true
 
-serviceAccount:
-  create: false
-  automountServiceAccountToken: false
+# serviceAccount:
+#   create: false
+#   automountServiceAccountToken: false
