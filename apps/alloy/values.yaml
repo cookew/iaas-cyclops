@@ -318,8 +318,10 @@ controller:
 crds:
   create: false
 
-# rbac:
-#   create: false
+rbac:
+  # create: false
+  namespaces:
+  - alloy
 
 serviceMonitor:
   enabled: true
