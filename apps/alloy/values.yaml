@@ -318,8 +318,8 @@ controller:
 crds:
   create: false
 
-rbac:
-  create: false
+# rbac:
+#   create: false
 
 serviceMonitor:
   enabled: true
