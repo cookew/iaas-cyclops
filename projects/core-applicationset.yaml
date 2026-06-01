@@ -75,8 +75,8 @@ spec:
       - name: kube-prometheus-stack
         syncWave: -30
 
-      # - name: alloy
-      # - name: alloy-logs-collector
+      - name: alloy
+      - name: alloy-logs
       # - name: capi-operator
       - name: cyberchef
       - name: descheduler
