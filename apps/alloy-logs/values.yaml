@@ -86,9 +86,9 @@ alloy:
       // End backend storage
 
 
-  # clustering:
-  #   enabled: true
-  #   name: kube-cluster
+  clustering:
+    enabled: true
+    name: cluster-logs
 
   enableReporting: false
 
