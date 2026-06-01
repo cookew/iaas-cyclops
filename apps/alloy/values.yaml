@@ -261,6 +261,9 @@ alloy:
 controller:
   enableStatefulSetAutoDeletePVC: true
 
+  extraAnnotations:
+    reloader.stakater.com/auto: "true"
+
   podDisruptionBudget:
     enabled: true
     maxUnavailable: 2
