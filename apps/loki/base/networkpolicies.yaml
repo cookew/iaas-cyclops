@@ -47,7 +47,7 @@ spec:
           kubernetes.io/metadata.name: alloy-logs
       podSelector:
         matchLabels:
-          app.kubernetes.io/name: alloy-logs
+          app.kubernetes.io/name: alloy
     ports:
     - port: http-metrics
       protocol: TCP
