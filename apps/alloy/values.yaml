@@ -320,3 +320,7 @@ rbac:
 
 serviceMonitor:
   enabled: true
+
+serviceAccount:
+  create: false
+  automountServiceAccountToken: false
