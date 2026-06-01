@@ -107,17 +107,17 @@ alloy:
 
   listenScheme: HTTP
 
-  mounts:
-    extra:
-    - mountPath: /storage
-      name: storage
-    varlog: true
+  # mounts:
+  #   extra:
+  #   - mountPath: /storage
+  #     name: storage
+  #   varlog: true
 
   resources:
     requests:
       cpu: 333m
 
-  storagePath: /storage
+  # storagePath: /storage
 
 controller:
   enableStatefulSetAutoDeletePVC: true
@@ -155,17 +155,17 @@ controller:
   # Must be one of 'daemonset', 'deployment', or 'statefulset'.
   type: daemonset
 
-  volumes:
-    extra:
-    - name: storage
-      ephemeral:
-        volumeClaimTemplate:
-          spec:
-            accessModes: [ "ReadWriteOnce" ]
-            resources:
-              requests:
-                storage: 10Gi
-            storageClassName: ceph-filesystem
+  # volumes:
+  #   extra:
+  #   - name: storage
+  #     ephemeral:
+  #       volumeClaimTemplate:
+  #         spec:
+  #           accessModes: [ "ReadWriteOnce" ]
+  #           resources:
+  #             requests:
+  #               storage: 10Gi
+  #           storageClassName: ceph-filesystem
 
 crds:
   create: false
