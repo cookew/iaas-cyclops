@@ -5,7 +5,7 @@ namespace: alloy-logs
 
 resources:
 - base/alloy-logs-ingress.yaml
-- base/alloy-logs-networkpolicies.yaml
+# - base/alloy-logs-networkpolicies.yaml
 
 helmCharts:
 - name: alloy
