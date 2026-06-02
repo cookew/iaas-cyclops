@@ -78,9 +78,8 @@ spec:
       - name: alloy
       - name: alloy-logs
       # - name: capi-operator
-      - name: cyberchef
+      - name: crossplane-opentofu-provider
       - name: descheduler
-      - name: drawio
       # - name: fluent-bit
       - name: forecastle
       - name: github-arc
@@ -88,22 +87,18 @@ spec:
       - name: grafana
       - name: guacamole
       - name: harbor
-      - name: headlamp
-      - name: kubevirt-manager
       - name: loki
       - name: nvidia-gpu-operator
       - name: nvme-exporter
-      - name: ollama
-      - name: open-webui
-      - name: openbao
-      # - name: pyroscope
       - name: reloader
-      # - name: tempo
-      - name: whoami
+      # - name: whoami
 
       # - name: argo-workflows
+      # - name: cyberchef
+      # - name: drawio
       # - name: github-arc-runners
       # - name: gitlab-runners
+      # - name: headlamp
       # - name: holmesgpt
       # - name: istio
       #   namespace: istio-system
@@ -111,11 +106,16 @@ spec:
       # - name: keda
       #   replace: "true"
       # - name: kubescape
+      # - name: kubevirt-manager
       # - name: kubevirt-templates
       # - name: mattermost-operator
       # - name: mattermost
       # - name: neuvector
-      - name: crossplane-opentofu-provider
+      # - name: ollama
+      # - name: open-webui
+      # - name: openbao
+      # - name: pyroscope
+      # - name: tempo
 
   template:
     metadata:
