@@ -220,8 +220,8 @@ livenessProbe:
 
 resources:
   limits:
-    cpu: 1000m
-    memory: 384Mi
+    cpu: 2000m
+    memory: 1Gi
   requests:
     cpu: 250m
     memory: 128Mi
