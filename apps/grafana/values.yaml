@@ -218,13 +218,13 @@ livenessProbe:
 
 # replicas: 2
 
-resources:
-  limits:
-    cpu: 2000m
-    memory: 2Gi
-  requests:
-    cpu: 250m
-    memory: 128Mi
+# resources:
+#   limits:
+#     cpu: 2000m
+#     memory: 2Gi
+#   requests:
+#     cpu: 250m
+#     memory: 128Mi
 
 revisionHistoryLimit: 0
 
