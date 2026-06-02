@@ -78,13 +78,10 @@ spec:
       - name: alloy
       - name: alloy-logs
       - name: forecastle
-      - name: github-arc
-      - name: gitlab
       - name: grafana
       - name: loki
       - name: nvme-exporter
       - name: reloader
-      # - name: whoami
 
       # - name: argo-workflows
       # - name: capi-operator
@@ -93,7 +90,9 @@ spec:
       # - name: descheduler
       # - name: drawio
       # - name: fluent-bit
+      # - name: github-arc
       # - name: github-arc-runners
+      # - name: gitlab
       # - name: gitlab-runners
       # - name: guacamole
       # - name: harbor
@@ -116,6 +115,7 @@ spec:
       # - name: openbao
       # - name: pyroscope
       # - name: tempo
+      # - name: whoami
 
   template:
     metadata:
