@@ -211,7 +211,7 @@ loki:
       cache:
         embedded_cache:
           enabled: true
-          max_size_mb: 500
+          max_size_mb: 1024
           ttl: 1h
         # redis:
         #   endpoint: valkey.loki.svc:6379
