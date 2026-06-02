@@ -81,7 +81,6 @@ spec:
       - name: grafana
       - name: loki
       - name: nvme-exporter
-      - name: reloader
 
       # - name: argo-workflows
       # - name: capi-operator
@@ -114,6 +113,7 @@ spec:
       # - name: open-webui
       # - name: openbao
       # - name: pyroscope
+      # - name: reloader
       # - name: tempo
       # - name: whoami
 
