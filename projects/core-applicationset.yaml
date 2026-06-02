@@ -77,27 +77,26 @@ spec:
 
       - name: alloy
       - name: alloy-logs
-      # - name: capi-operator
-      - name: crossplane-opentofu-provider
-      - name: descheduler
-      # - name: fluent-bit
       - name: forecastle
       - name: github-arc
       - name: gitlab
       - name: grafana
-      - name: guacamole
-      - name: harbor
       - name: loki
-      - name: nvidia-gpu-operator
       - name: nvme-exporter
       - name: reloader
       # - name: whoami
 
       # - name: argo-workflows
+      # - name: capi-operator
+      # - name: crossplane-opentofu-provider
       # - name: cyberchef
+      # - name: descheduler
       # - name: drawio
+      # - name: fluent-bit
       # - name: github-arc-runners
       # - name: gitlab-runners
+      # - name: guacamole
+      # - name: harbor
       # - name: headlamp
       # - name: holmesgpt
       # - name: istio
@@ -111,6 +110,7 @@ spec:
       # - name: mattermost-operator
       # - name: mattermost
       # - name: neuvector
+      # - name: nvidia-gpu-operator
       # - name: ollama
       # - name: open-webui
       # - name: openbao
