@@ -207,6 +207,8 @@ loki:
   podDisruptionBudget:
     maxUnavailable: 1
   query_range:
+    cache_results: true
+    cache_instant_metric_results: true
     results_cache:
       cache:
         embedded_cache:
@@ -220,8 +222,6 @@ loki:
         #   # tls_enabled: true
         #   # tls_insecure_skip_verify: true
         #   username: default
-    cache_results: true
-    cache_instant_metric_results: true
   revisionHistoryLimit: 0
   schemaConfig:
     configs:
