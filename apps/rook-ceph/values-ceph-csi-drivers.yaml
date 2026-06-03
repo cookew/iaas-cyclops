@@ -1,0 +1,96 @@
+# https://github.com/ceph/ceph-csi-operator/blob/main/deploy/charts/ceph-csi-drivers/values.yaml
+
+cephConnections:
+    rbdMirrorDaemonCount: 1
+
+operatorConfig:
+  driverSpecDefaults:
+    log:
+      rotation:
+        maxFiles: 1
+        maxLogSize: "100Mi"
+    # -- Flag to enable fencing (default: false)
+    enableFencing: false
+    # -- Snapshot policy (options: none, volumeGroupSnapshot, volumeSnapshot) (default: "none")
+    snapshotPolicy: "none"
+    # -- Flag to generate OMap info (default: false)
+    generateOMapInfo: false
+    encryption:
+      configMapRef:
+        # -- Name of the ConfigMap for encryption settings (default: "")
+        name: ""
+    # -- Flag to deploy CSI Addons (default: false)
+    deployCsiAddons: false
+
+drivers:
+  # RBD driver configuration
+  rbd:
+    log:
+      rotation:
+        maxFiles: 1
+        maxLogSize: "100Mi"
+    # -- Flag to enable fencing (default: false)
+    enableFencing: false
+    # -- Snapshot policy (options: none, volumeGroupSnapshot, volumeSnapshot) (default: "none")
+    snapshotPolicy: "none"
+    # -- Flag to generate OMap info (default: false)
+    generateOMapInfo: false
+    encryption:
+      configMapRef:
+        # -- Name of the ConfigMap for encryption settings (default: "")
+        name: ""
+    # -- Flag to deploy CSI Addons (default: false)
+    deployCsiAddons: false
+  nvmeof:
+    log:
+      rotation:
+        maxFiles: 1
+        maxLogSize: "100Mi"
+    # -- Flag to enable fencing (default: false)
+    enableFencing: false
+    # -- Snapshot policy (options: none, volumeGroupSnapshot, volumeSnapshot) (default: "none")
+    snapshotPolicy: "none"
+    # -- Flag to generate OMap info (default: false)
+    generateOMapInfo: false
+    encryption:
+      configMapRef:
+        # -- Name of the ConfigMap for encryption settings (default: "")
+        name: ""
+    # -- Flag to deploy CSI Addons (default: false)
+    deployCsiAddons: false
+  cephfs:
+    log:
+      rotation:
+        maxFiles: 1
+        maxLogSize: "100Mi"
+    # -- Flag to enable fencing (default: false)
+    enableFencing: false
+    # -- Snapshot policy (options: none, volumeGroupSnapshot, volumeSnapshot) (default: "volumeSnapshot")
+    snapshotPolicy: "volumeSnapshot"
+    # -- Flag to generate OMap info (default: false)
+    generateOMapInfo: false
+    encryption:
+      configMapRef:
+        # -- Name of the ConfigMap for encryption settings (default: "")
+        name: ""
+    # -- Flag to deploy CSI Addons (default: false)
+    deployCsiAddons: false
+  nfs:
+    name: "nfs.csi.ceph.com"
+    log:
+      verbosity: 0
+      rotation:
+        maxFiles: 1
+        maxLogSize: "100Mi"
+    # -- Flag to enable fencing (default: false)
+    enableFencing: false
+    # -- Snapshot policy (options: none, volumeGroupSnapshot, volumeSnapshot) (default: "volumeSnapshot")
+    snapshotPolicy: "volumeSnapshot"
+    # -- Flag to generate OMap info (default: false)
+    generateOMapInfo: false
+    encryption:
+      configMapRef:
+        # -- Name of the ConfigMap for encryption settings (default: "")
+        name: ""
+    # -- Flag to deploy CSI Addons (default: false)
+    deployCsiAddons: false
