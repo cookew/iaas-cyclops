@@ -180,7 +180,8 @@ loki:
     - period: 24h
       priority: 2
       selector: '{detected_level="debug"}'
-    split_queries_by_interval: 15m
+    # split_queries_by_interval: 15m
+    tsdb_max_query_parallelism: 16
     tsdb_precompute_chunks: true
     volume_enabled: true
     shard_streams:
