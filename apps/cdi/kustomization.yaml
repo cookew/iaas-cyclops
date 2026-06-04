@@ -8,5 +8,5 @@ patches:
 - path: patches/remove-namespace.yaml
 
 resources:
-- https://github.com/kubevirt/containerized-data-importer/releases/download/v1.64.0/cdi-operator.yaml
-- https://github.com/kubevirt/containerized-data-importer/releases/download/v1.64.0/cdi-cr.yaml
+- https://github.com/kubevirt/containerized-data-importer/releases/download/v1.65.0/cdi-operator.yaml
+- https://github.com/kubevirt/containerized-data-importer/releases/download/v1.65.0/cdi-cr.yaml
