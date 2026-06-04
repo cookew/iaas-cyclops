@@ -82,32 +82,19 @@ spec:
       - name: loki
       - name: nvme-exporter
 
-      # - name: argo-workflows
-      # - name: capi-operator
       # - name: crossplane-provider-opentofu
       # - name: cyberchef
       # - name: descheduler
       # - name: drawio
-      # - name: fluent-bit
       # - name: github-arc
-      # - name: github-arc-runners
       # - name: gitlab
-      # - name: gitlab-runners
       # - name: guacamole
       # - name: harbor
       # - name: headlamp
-      # - name: holmesgpt
-      # - name: istio
-      #   namespace: istio-system
       # - name: jupyterhub
-      # - name: keda
-      #   replace: "true"
-      # - name: kubescape
       # - name: kubevirt-manager
-      # - name: kubevirt-templates
       # - name: mattermost-operator
       # - name: mattermost
-      # - name: neuvector
       # - name: nvidia-gpu-operator
       # - name: ollama
       # - name: open-webui
@@ -116,6 +103,19 @@ spec:
       # - name: reloader
       # - name: tempo
       # - name: whoami
+
+      # These are in testing
+      # - name: argo-workflows
+      # - name: capi-operator
+      # - name: fluent-bit
+      # - name: github-arc-runners
+      # - name: gitlab-runners
+      # - name: holmesgpt
+      # - name: istio
+      #   namespace: istio-system
+      # - name: kubescape
+      # - name: kubevirt-templates
+      # - name: neuvector
 
   template:
     metadata:
