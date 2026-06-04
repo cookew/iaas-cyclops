@@ -71,21 +71,21 @@ spec:
       name: iaas
   providerConfigRef:
     name: keycloak-provider-config
----
-apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
-kind: ClientScope
-metadata:
-  name: groups
-spec:
-  deletionPolicy: Delete
-  forProvider:
-    description: "OpenID Connect scope: include user groups in tokens"
-    includeInTokenScope: true
-    name: groups
-    realmIdRef:
-      name: iaas
-  providerConfigRef:
-    name: keycloak-provider-config
+# ---
+# apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+# kind: ClientScope
+# metadata:
+#   name: groups
+# spec:
+#   deletionPolicy: Delete
+#   forProvider:
+#     description: "OpenID Connect scope: include user groups in tokens"
+#     includeInTokenScope: true
+#     name: groups
+#     realmIdRef:
+#       name: iaas
+#   providerConfigRef:
+#     name: keycloak-provider-config
 # ---
 # apiVersion: realm.keycloak.crossplane.io/v1alpha1
 # kind: OptionalClientScopes
