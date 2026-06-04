@@ -7,11 +7,12 @@ resources:
 - sealed-secrets/gitlab-runner-token.yaml
 
 # https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/Chart.yaml?ref_type=heads
+# https://gitlab.com/gitlab-org/charts/gitlab-runner/-/tree/0-88-stable?ref_type=heads
 helmCharts:
 - includeCRDs: true
   name: gitlab-runner
   namespace: gitlab-runners
   releaseName: gitlab-runner
   repo: https://charts.gitlab.io
-  version: 0.80.0
+  version: 0.88.3
   valuesFile: values.yaml
