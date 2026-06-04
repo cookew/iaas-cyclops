@@ -84,7 +84,7 @@ spec:
 
       # - name: argo-workflows
       # - name: capi-operator
-      # - name: crossplane-opentofu-provider
+      # - name: crossplane-provider-opentofu
       # - name: cyberchef
       # - name: descheduler
       # - name: drawio
