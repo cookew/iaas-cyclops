@@ -27,7 +27,7 @@ cephClusterSpec:
     disable: true
   dashboard:
     # port: 8443
-    prometheusEndpoint: http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc:9090
+    # prometheusEndpoint: http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc:9090
     # prometheusEndpoint: http://prometheus-operated.kube-prometheus-stack.svc:9090
     #prometheusEndpoint: http://mimir-distributed-nginx.mimir-distributed.svc/prometheus
     #prometheusEndpointSSLVerify: true
@@ -60,7 +60,7 @@ cephClusterSpec:
     osd:
       limits:
         memory: 8Gi
-        cpu: 4
+        cpu: 2
       requests:
         cpu: 2
         memory: 8Gi
@@ -212,7 +212,6 @@ cephFileSystems:
       resources:
         limits:
           memory: 4Gi
-          cpu: 2000m
         requests:
           cpu: 1000m
           memory: 4Gi
@@ -242,6 +241,8 @@ cephFileSystems:
     parameters:
       csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
       csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+      csi.storage.k8s.io/controller-publish-secret-name: rook-csi-cephfs-provisioner
+      csi.storage.k8s.io/controller-publish-secret-namespace: "{{ .Release.Namespace }}"
       csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
       csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
       csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
@@ -266,7 +267,6 @@ cephFileSystems:
       resources:
         limits:
           memory: 4Gi
-          cpu: 2000m
         requests:
           cpu: 1000m
           memory: 4Gi
@@ -296,6 +296,8 @@ cephFileSystems:
     parameters:
       csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
       csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+      csi.storage.k8s.io/controller-publish-secret-name: rook-csi-cephfs-provisioner
+      csi.storage.k8s.io/controller-publish-secret-namespace: "{{ .Release.Namespace }}"
       csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
       csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
       csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
@@ -416,7 +418,6 @@ cephObjectStores:
       resources:
         limits:
           cpu: 2000m
-          memory: 4Gi
         requests:
           cpu: 1000m
           memory: 1Gi
