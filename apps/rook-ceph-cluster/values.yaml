@@ -506,6 +506,7 @@ cephObjectStores:
         useTls: true
       dnsNames:
       - rook-ceph-rgw-cyclops-s3.rook-ceph-cluster.svc.cluster.local
+      - rook-ceph-rgw-cyclops-s3.rook-ceph-cluster.svc
       - cyclops-s3.apps.iaas.wcooke.me
     metadataPool:
       deviceClass: ssd
