@@ -35,10 +35,8 @@ distributor:
   resources:
     limits:
       cpu: 210m
-      memory: 840Mi
     requests:
       cpu: 70m
-      memory: 280Mi
   serviceAccount:
     automountServiceAccountToken: false
 
@@ -58,10 +56,8 @@ gateway:
   resources:
     limits:
       cpu: 30m
-      memory: 75Mi
     requests:
       cpu: 10m
-      memory: 32Mi
   service:
     port: 8080
   serviceAccount:
@@ -113,6 +109,11 @@ ingester:
   #   whenDeleted: Delete
   podDisruptionBudget:
     maxUnavailable: 1
+  resources:
+    limits:
+      cpu: 150m
+    requests:
+      cpu: 50m
   serviceAccount:
     automountServiceAccountToken: false
   zoneAwareReplication:
@@ -181,9 +182,9 @@ loki:
     - period: 24h
       priority: 3
       selector: '{priority_keyword="debug"}'
-    # - period: 24h
-    #   priority: 4
-    #   selector: '{priority=7}'
+    - period: 24h
+      priority: 4
+      selector: '{priority="7"}'
     shard_streams:
       enabled: true
       # desired_rate: 2097152 # 2MiB
@@ -354,10 +355,8 @@ querier:
   resources:
     limits:
       cpu: 75m
-      memory: 336Mi
     requests:
       cpu: 25m
-      memory: 112Mi
   serviceAccount:
     automountServiceAccountToken: false
 
@@ -371,10 +370,8 @@ queryFrontend:
   resources:
     limits:
       cpu: 45m
-      memory: 246Mi
     requests:
       cpu: 15m
-      memory: 82Mi
 
 queryScheduler:
   podDisruptionBudget:
