@@ -163,6 +163,9 @@ loki:
     - period: 24h
       priority: 2
       selector: '{detected_level="debug"}'
+    - period: 24h
+      priority: 3
+      selector: '{priority_keyword="debug"}'
     shard_streams:
       enabled: true
       # desired_rate: 2097152 # 2MiB
@@ -350,7 +353,7 @@ queryScheduler:
     automountServiceAccountToken: false
 
 read:
-   replicas: 0
+  replicas: 0
 
 resultsCache:
   persistence:
