@@ -462,7 +462,7 @@ cephObjectStores:
   # zone:
   #   name: zone-a
 
-- name: cyclops-objectstore
+- name: cyclops-s3
   spec:
     allowUsersInNamespaces:
     - "*"
