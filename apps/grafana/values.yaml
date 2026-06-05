@@ -6,8 +6,9 @@ admin:
 autoscaling:
   enabled: true
   minReplicas: 2
-  maxReplicas: 5
+  maxReplicas: 4
   targetCPU: "60"
+  targetMemory: "60"
 
 # extraConfigmapMounts:
 # - name: ca-bundle
@@ -178,6 +179,7 @@ ingress:
 imageRenderer:
   autoscaling:
     enabled: true
+    targetMemory: "60"
   enabled: true
   existingSecret: grafana-image-renderer-token
   networkPolicy:
@@ -189,6 +191,13 @@ imageRenderer:
         matchLabels:
           app.kubernetes.io/instance: kube-prometheus-stack-prometheus
           app.kubernetes.io/name: prometheus
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 512Mi
+    requests:
+      cpu: 10m
+      memory: 16Mi
   revisionHistoryLimit: 0
   serviceMonitor:
     enabled: true
@@ -218,13 +227,13 @@ livenessProbe:
 
 # replicas: 2
 
-# resources:
-#   limits:
-#     cpu: 1000m
-#     memory: 2Gi
-#   requests:
-#     cpu: 250m
-#     memory: 128Mi
+resources:
+  limits:
+    cpu: 1000m
+    memory: 4Gi
+  requests:
+    cpu: 250m
+    memory: 1Gi
 
 revisionHistoryLimit: 0
 
