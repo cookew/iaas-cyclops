@@ -51,6 +51,12 @@ gateway:
     existingSecret: null
   ingress:
     enabled: false
+  metrics:
+    resources:
+      limits:
+        cpu: 30m
+      requests:
+        cpu: 10m
   podDisruptionBudget:
     maxUnavailable: 1
   resources:
