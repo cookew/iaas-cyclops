@@ -6,6 +6,7 @@ namespace: rook-ceph-cluster
 # patches:
 
 resources:
+- base/cyclops-s3-certificate.yaml
 # - base/dashboards.yaml
 - base/grafana-user.yaml
 - base/ingress.yaml
