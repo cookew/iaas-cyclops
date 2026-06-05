@@ -7,7 +7,7 @@ chunksCache:
   persistence:
     enabled: true
     storageSize: 10G
-    storageClass: ceph-filesystem
+    storageClass: cyclops-filesystem
 
 compactor:
   # persistence:
@@ -17,7 +17,7 @@ compactor:
   #       accessModes:
   #         - ReadWriteOnce
   #       size: 10Gi
-  #       storageClass: ceph-filesystem
+  #       storageClass: cyclops-filesystem
   #   whenDeleted: Delete
   replicas: 1
   serviceAccount:
@@ -77,7 +77,7 @@ indexGateway:
   replicas: 2
   # persistence:
   #   enabled: true
-  #   storageClass: ceph-filesystem
+  #   storageClass: cyclops-filesystem
   #   whenDeleted: Delete
   serviceAccount:
     automountServiceAccountToken: false
@@ -94,7 +94,7 @@ ingester:
   #       accessModes:
   #         - ReadWriteOnce
   #       size: 10Gi
-  #       storageClass: ceph-filesystem
+  #       storageClass: cyclops-filesystem
   #   whenDeleted: Delete
   podDisruptionBudget:
     maxUnavailable: 1
@@ -313,11 +313,11 @@ patternIngester:
       accessModes:
       - ReadWriteOnce
       size: 1Gi
-      storageClass: ceph-filesystem
+      storageClass: cyclops-filesystem
     enabled: true
     enableStatefulSetAutoDeletePVC: true
     size: 1Gi
-    storageClass: ceph-filesystem
+    storageClass: cyclops-filesystem
     whenDeleted: Delete
   podDisruptionBudget:
     maxUnavailable: 1
@@ -356,13 +356,13 @@ read:
 resultsCache:
   persistence:
     enabled: true
-    storageClass: ceph-filesystem
+    storageClass: cyclops-filesystem
     storageSize: 10G
 
 ruler:
   # persistence:
   #   enabled: true
-  #   storageClass: ceph-filesystem
+  #   storageClass: cyclops-filesystem
   podDisruptionBudget:
     maxUnavailable: 1
   replicas: 2
