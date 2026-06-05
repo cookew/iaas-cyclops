@@ -241,6 +241,13 @@ serviceMonitorSelector:
   enabled: true
 
 sidecar:
+  resources:
+    limits:
+      cpu: 100m
+      memory: 150Mi
+    requests:
+      cpu: 10m
+      memory: 75Mi
   alerts:
     enabled: true
     extraMounts:
