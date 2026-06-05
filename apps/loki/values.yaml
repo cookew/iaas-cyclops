@@ -34,9 +34,9 @@ distributor:
     maxUnavailable: 1
   resources:
     limits:
-      cpu: 210m
+      cpu: 300m
     requests:
-      cpu: 70m
+      cpu: 100m
   serviceAccount:
     automountServiceAccountToken: false
 
@@ -111,9 +111,9 @@ ingester:
     maxUnavailable: 1
   resources:
     limits:
-      cpu: 150m
+      cpu: 300m
     requests:
-      cpu: 50m
+      cpu: 100m
   serviceAccount:
     automountServiceAccountToken: false
   zoneAwareReplication:
@@ -354,9 +354,9 @@ querier:
     maxUnavailable: 1
   resources:
     limits:
-      cpu: 75m
+      cpu: 300m
     requests:
-      cpu: 25m
+      cpu: 100m
   serviceAccount:
     automountServiceAccountToken: false
 
