@@ -398,9 +398,8 @@ cephObjectStores:
         codingChunks: 1
       failureDomain: host
       parameters:
+        allow_ec_optimizations: "true"
         bulk: "true"
-        # Enable this with ceph tentacle, v20
-        # allow_ec_optimizations: "true"
     gateway:
       # annotations:
       # caBundleRef: ca-bundle-secret
@@ -463,7 +462,7 @@ cephObjectStores:
   # zone:
   #   name: zone-a
 
-- name: cyclops-s3
+- name: cyclops-objectstore
   spec:
     allowUsersInNamespaces:
     - "*"
@@ -474,9 +473,8 @@ cephObjectStores:
         codingChunks: 1
       failureDomain: host
       parameters:
+        allow_ec_optimizations: "true"
         bulk: "true"
-        # Enable this with ceph tentacle, v20
-        # allow_ec_optimizations: "true"
     gateway:
       # annotations:
       # caBundleRef: ca-bundle-secret
