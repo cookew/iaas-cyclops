@@ -45,25 +45,7 @@ gateway:
     # -- Existing basic auth secret to use. Must contain '.htpasswd'
     existingSecret: null
   ingress:
-    annotations:
-      cert-manager.io/cluster-issuer: iaas-wcooke-me
-      # forecastle.stakater.com/appName: Loki
-      # forecastle.stakater.com/expose: "true"
-      # forecastle.stakater.com/group: Observability
-      # # forecastle.stakater.com/icon: https://loki.apps.iaas.wcooke.me/
-      # forecastle.stakater.com/network-restricted: "true"
-      # forecastle.stakater.com/url: https://loki.apps.iaas.wcooke.me/ui/
     enabled: false
-    ingressClassName: cilium
-    hosts:
-    - host: loki.apps.iaas.wcooke.me
-      paths:
-      - path: /
-        pathType: Prefix
-    tls:
-    - hosts:
-      - loki.apps.iaas.wcooke.me
-      secretName: loki-gateway-ingress-certs
   podDisruptionBudget:
     maxUnavailable: 1
   service:
@@ -135,8 +117,8 @@ loki:
   limits_config:
     # https://grafana.com/docs/loki/latest/configure/bp-configure/
     # Rate limits
-    ingestion_burst_size_mb: 20
-    ingestion_rate_mb: 10
+    # ingestion_burst_size_mb: 20
+    # ingestion_rate_mb: 10
     ingestion_rate_strategy: global
     # per_stream_rate_limit: 3MB
     # per_stream_rate_limit_burst: 15MB
@@ -158,6 +140,8 @@ loki:
 
     allow_structured_metadata: true
     discover_log_levels: true
+    ingestion_burst_size_mb: 100
+    ingestion_rate_mb: 50
     max_cache_freshness_per_query: 10m
     max_chunks_per_query: 20000000
     max_concurrent_tail_requests: 100
@@ -169,8 +153,8 @@ loki:
     # max_line_size: 512KB
     max_query_length: 0 # 0s
     max_query_series: 10000
-    per_stream_rate_limit_burst: 150MB
-    per_stream_rate_limit: 30MB
+    per_stream_rate_limit_burst: 200MB
+    per_stream_rate_limit: 100MB
     query_timeout: 300s
     retention_period: 48h
     retention_stream:
@@ -180,13 +164,13 @@ loki:
     - period: 24h
       priority: 2
       selector: '{detected_level="debug"}'
-    # split_queries_by_interval: 15m
-    tsdb_max_query_parallelism: 64
-    tsdb_precompute_chunks: true
-    volume_enabled: true
     shard_streams:
       enabled: true
       # desired_rate: 2097152 # 2MiB
+    # split_queries_by_interval: 15m
+    # tsdb_max_query_parallelism: 64
+    tsdb_precompute_chunks: true
+    volume_enabled: true
 
   # https://grafana.com/docs/loki/latest/configure/bp-configure/
   ingester:
@@ -205,11 +189,13 @@ loki:
 
   pattern_ingester:
     enabled: true
+
   podDisruptionBudget:
     maxUnavailable: 1
+
   query_range:
-    cache_results: true
     cache_instant_metric_results: true
+    cache_results: true
     results_cache:
       cache:
         embedded_cache:
@@ -223,7 +209,9 @@ loki:
         #   # tls_enabled: true
         #   # tls_insecure_skip_verify: true
         #   username: default
+
   revisionHistoryLimit: 0
+
   schemaConfig:
     configs:
     - from: 2026-01-01
@@ -232,23 +220,16 @@ loki:
       object_store: s3
       schema: v13
       store: tsdb
+
   server:
     grpc_server_max_recv_msg_size: 104857600 # 100MB
     grpc_server_max_send_msg_size: 104857600 # 100MB
+
   storage:
     bucketNames:
       admin: loki
       chunks: loki
       ruler: loki
-    type: s3
-    s3:
-      access_key_id: "${AWS_ACCESS_KEY_ID}"
-      bucketnames: "${BUCKET_NAME}"
-      endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
-      http_config:
-        insecure_skip_verify: true
-      s3ForcePathStyle: true
-      secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
     object_store:
       storage_prefix: os
       type: s3
@@ -260,6 +241,15 @@ loki:
           insecure_skip_verify: true
         s3ForcePathStyle: true
         secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
+    s3:
+      access_key_id: "${AWS_ACCESS_KEY_ID}"
+      bucketnames: "${BUCKET_NAME}"
+      endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
+      http_config:
+        insecure_skip_verify: true
+      s3ForcePathStyle: true
+      secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
+    type: s3
 
 test:
   enabled: false
