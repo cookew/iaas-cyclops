@@ -117,7 +117,7 @@ ingester:
     maxUnavailable: 1
   resources:
     limits:
-      cpu: 300m
+      cpu: 1000m
     requests:
       cpu: 100m
   serviceAccount:
