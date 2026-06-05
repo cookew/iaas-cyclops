@@ -140,6 +140,7 @@ spec:
       - compactor
       - index-gateway
       - ingester
+      - querier
       - ruler
   policyTypes:
   - Egress
