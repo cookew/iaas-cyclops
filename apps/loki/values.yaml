@@ -30,6 +30,7 @@ distributor:
     enabled: true
     minReplicas: 2
     maxReplicas: 4
+  kind: StatefulSet
   podDisruptionBudget:
     maxUnavailable: 1
   resources:
@@ -318,6 +319,7 @@ networkPolicy:
 overridesExporter:
   annotations: {}
   enabled: true
+  kind: StatefulSet
   labels: {}
   podDisruptionBudget:
     maxUnavailable: 1
@@ -350,6 +352,7 @@ querier:
     enabled: true
     minReplicas: 2
     maxReplicas: 4
+  kind: StatefulSet
   podDisruptionBudget:
     maxUnavailable: 1
   resources:
@@ -365,6 +368,7 @@ queryFrontend:
     enabled: true
     minReplicas: 2
     maxReplicas: 4
+  kind: StatefulSet
   podDisruptionBudget:
     maxUnavailable: 1
   resources:
