@@ -40,7 +40,7 @@ drivers:
         # -- Name of the ConfigMap for encryption settings (default: "")
         name: ""
     # -- Flag to deploy CSI Addons (default: false)
-    deployCsiAddons: true
+    deployCsiAddons: false
   nvmeof:
     log:
       rotation:
