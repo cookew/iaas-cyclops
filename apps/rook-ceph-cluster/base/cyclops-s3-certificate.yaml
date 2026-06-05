@@ -1,0 +1,23 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cyclops-s3-certificate
+spec:
+  commonName: cyclops-s3.apps.iaas.wcooke.me
+  dnsNames:
+  - "*.cyclops-s3.apps.iaas.wcooke.me"
+  - cyclops-s3.apps.iaas.wcooke.me
+  - rook-ceph-rgw-cyclops-s3.rook-ceph-cluster.svc.cluster.local
+  - rook-ceph-rgw-cyclops-s3.rook-ceph-cluster.svc.cluster
+  - rook-ceph-rgw-cyclops-s3.rook-ceph-cluster.svc
+  - rook-ceph-rgw-cyclops-s3.rook-ceph-cluster
+  - rook-ceph-rgw-cyclops-s3
+  duration: 960h
+  isCA: false
+  issuerRef:
+    kind: ClusterIssuer
+    name: iaas-wcooke-me
+  secretName: cyclops-s3-certificate
+  usages:
+  - server auth
+  - client auth
