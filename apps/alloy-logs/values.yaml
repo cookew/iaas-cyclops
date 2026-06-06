@@ -64,6 +64,7 @@ alloy:
         forward_to = [loki.process.pod_logs.receiver]
       }
       loki.process "pod_logs" {
+        stage.luhn {}
         stage.static_labels {
           values = {
             cluster = sys.env("CLUSTER_NAME"),
