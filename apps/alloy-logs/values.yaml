@@ -24,41 +24,39 @@ alloy:
           source_labels = ["__meta_kubernetes_namespace"]
           target_label = "namespace"
         }
-
         rule {
           source_labels = ["__meta_kubernetes_pod_name"]
           target_label = "pod"
         }
-
         rule {
           source_labels = ["__meta_kubernetes_pod_container_name"]
           target_label = "container"
         }
-
         rule {
           source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_name"]
           target_label = "app"
         }
-
         rule {
           source_labels = ["__meta_kubernetes_namespace", "__meta_kubernetes_pod_container_name"]
           separator = "/"
           replacement = "$1"
           target_label = "job"
         }
-
         rule {
           source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
           separator = "/"
           replacement = "/var/log/pods/*$1/*.log"
           target_label = "__path__"
         }
-
         rule {
           source_labels = ["__meta_kubernetes_pod_container_id"]
           target_label = "container_runtime"
           regex = "^(\\S+):\\/\\/.+$"
           replacement = "$1"
+        }
+        rule {
+          action = "labeldrop"
+          regex  = "^exporter"
         }
       }
       loki.source.kubernetes "pod_logs" {
