@@ -121,6 +121,7 @@ alloy:
       // Send //
       //////////
       loki.process "cleanup" {
+        stage.decolorize {}
         stage.label_drop {
           values = [ "exporter" ]
         }

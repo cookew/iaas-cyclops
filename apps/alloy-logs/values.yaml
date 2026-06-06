@@ -61,9 +61,9 @@ alloy:
       }
       loki.source.kubernetes "pod_logs" {
         targets    = discovery.relabel.pod_logs.output
-        forward_to = [loki.process.pod_logs.receiver]
+        forward_to = [loki.process.cleanup.receiver]
       }
-      loki.process "pod_logs" {
+      loki.process "cleanup" {
         stage.luhn {}
         stage.static_labels {
           values = {
