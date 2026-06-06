@@ -80,7 +80,7 @@ alloy:
         */
         // include_metadata = true
         output {
-          logs    = [loki.process.cleanup.receiver]
+          logs    = [otelcol.processor.batch.default.input]
           metrics = [otelcol.processor.batch.default.input]
           traces  = [otelcol.processor.batch.default.input]
         }
@@ -94,20 +94,13 @@ alloy:
       // Post process and batch //
       ////////////////////////////
 
-      loki.process "cleanup" {
-        stage.label_drop {
-          values = [ "exporter" ]
-        }
-        stage.luhn {}
-        forward_to = [otelcol.receiver.loki.default.receiver]
-      }
-      otelcol.receiver.loki "default" {
-        output {
-          logs    = [otelcol.processor.batch.default.input]
-          metrics = [otelcol.processor.batch.default.input]
-          traces  = [otelcol.processor.batch.default.input]
-        }
-      }
+      //otelcol.receiver.loki "default" {
+      //  output {
+      //    logs    = [otelcol.processor.batch.default.input]
+      //    metrics = [otelcol.processor.batch.default.input]
+      //    traces  = [otelcol.processor.batch.default.input]
+      //  }
+      //}
       otelcol.processor.batch "default" {
         output {
           logs    = [otelcol.exporter.loki.loki.input]
@@ -115,11 +108,11 @@ alloy:
           traces  = [otelcol.exporter.otlp.tempo.input]
         }
       }
+      otelcol.exporter.loki "loki" {
+        forward_to = [loki.process.cleanup.receiver]
+      }
       otelcol.exporter.prometheus "prometheus" {
         forward_to = [prometheus.remote_write.prometheus.receiver]
-      }
-      otelcol.exporter.loki "loki" {
-        forward_to = [loki.write.loki.receiver]
       }
 
 
@@ -127,7 +120,13 @@ alloy:
       //////////
       // Send //
       //////////
-
+      loki.process "cleanup" {
+        stage.label_drop {
+          values = [ "exporter" ]
+        }
+        stage.luhn {}
+        forward_to = [loki.write.loki.receiver]
+      }
       loki.write "loki" {
         endpoint {
           url = "http://loki-distributor.loki.svc:3100/loki/api/v1/push"
