@@ -95,7 +95,7 @@ alloy:
       ////////////////////////////
 
       loki.process "cleanup" {
-        stage.labeldrop {
+        stage.label_drop {
           values = [ "exporter" ]
         }
         stage.luhn {}
