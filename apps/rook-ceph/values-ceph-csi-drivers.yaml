@@ -8,7 +8,7 @@ operatorConfig:
     log:
       rotation:
         maxFiles: 1
-        maxLogSize: "100Mi"
+        maxLogSize: "100M"
     # -- Flag to enable fencing (default: false)
     enableFencing: false
     # -- Snapshot policy (options: none, volumeGroupSnapshot, volumeSnapshot) (default: "none")
@@ -29,7 +29,7 @@ drivers:
     log:
       rotation:
         maxFiles: 1
-        maxLogSize: "100Mi"
+        maxLogSize: "100M"
     # -- Flag to enable fencing (default: false)
     enableFencing: false
     # -- Snapshot policy (options: none, volumeGroupSnapshot, volumeSnapshot) (default: "none")
@@ -46,7 +46,7 @@ drivers:
     log:
       rotation:
         maxFiles: 1
-        maxLogSize: "100Mi"
+        maxLogSize: "100M"
     # -- Flag to enable fencing (default: false)
     enableFencing: false
     # -- Snapshot policy (options: none, volumeGroupSnapshot, volumeSnapshot) (default: "none")
@@ -64,7 +64,7 @@ drivers:
     log:
       rotation:
         maxFiles: 1
-        maxLogSize: "100Mi"
+        maxLogSize: "100M"
     # -- Flag to enable fencing (default: false)
     enableFencing: false
     # -- Snapshot policy (options: none, volumeGroupSnapshot, volumeSnapshot) (default: "volumeSnapshot")
@@ -83,7 +83,7 @@ drivers:
       verbosity: 0
       rotation:
         maxFiles: 1
-        maxLogSize: "100Mi"
+        maxLogSize: "100M"
     # -- Flag to enable fencing (default: false)
     enableFencing: false
     # -- Snapshot policy (options: none, volumeGroupSnapshot, volumeSnapshot) (default: "volumeSnapshot")
