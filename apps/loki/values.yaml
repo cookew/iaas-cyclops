@@ -306,6 +306,9 @@ networkPolicy:
     podSelector:
       matchLabels:
         app.kubernetes.io/name: alertmanager
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: kube-prometheus-stack
   enabled: true
   # externalStorage:
   #   ports:
@@ -315,9 +318,6 @@ networkPolicy:
     namespaceSelector:
       matchLabels:
         kubernetes.io/metadata.name: kube-system
-    namespaceSelector:
-      matchLabels:
-        kubernetes.io/metadata.name: kube-prometheus-stack
   metrics:
     podSelector:
       matchLabels:
