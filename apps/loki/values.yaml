@@ -352,12 +352,9 @@ patternIngester:
     automountServiceAccountToken: false
 
 querier:
-  autoscaling:
-    enabled: true
-    minReplicas: 10
-    maxReplicas: 12
   podDisruptionBudget:
     maxUnavailable: 1
+  replicas: 3
   resources:
     limits:
       cpu: 1000m
