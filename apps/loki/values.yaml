@@ -22,8 +22,8 @@ compactor:
   #   whenDeleted: Delete
   replicas: 1
   resources:
-    limits:
-      cpu: 2000m
+    # limits:
+    #   cpu: 2000m
     requests:
       cpu: 10m
   serviceAccount:
@@ -36,8 +36,8 @@ distributor:
     maxUnavailable: 1
   replicas: 4
   resources:
-    limits:
-      cpu: 2000m
+    # limits:
+    #   cpu: 2000m
     requests:
       cpu: 100m
   serviceAccount:
@@ -52,16 +52,16 @@ gateway:
     enabled: false
   metrics:
     resources:
-      limits:
-        cpu: 30m
+      # limits:
+      #   cpu: 30m
       requests:
         cpu: 10m
   podDisruptionBudget:
     maxUnavailable: 1
   replicas: 3
   resources:
-    limits:
-      cpu: 1000m
+    # limits:
+    #   cpu: 1000m
     requests:
       cpu: 10m
   service:
@@ -97,8 +97,8 @@ indexGateway:
     maxUnavailable: 1
   replicas: 4
   resources:
-    limits:
-      cpu: 2000m
+    # limits:
+    #   cpu: 2000m
     requests:
       cpu: 100m
   serviceAccount:
@@ -118,8 +118,8 @@ ingester:
     maxUnavailable: 1
   replicas: 4
   resources:
-    limits:
-      cpu: 3000m
+    # limits:
+    #   cpu: 3000m
     requests:
       cpu: 250m
   serviceAccount:
@@ -358,8 +358,8 @@ querier:
     maxUnavailable: 1
   replicas: 3
   resources:
-    limits:
-      cpu: 2500m
+    # limits:
+    #   cpu: 2500m
     requests:
       cpu: 100m
   serviceAccount:
@@ -370,8 +370,8 @@ queryFrontend:
     maxUnavailable: 1
   replicas: 2
   resources:
-    limits:
-      cpu: 500m
+    # limits:
+    #   cpu: 500m
     requests:
       cpu: 15m
 
@@ -382,8 +382,8 @@ queryScheduler:
   serviceAccount:
     automountServiceAccountToken: false
   resources:
-    limits:
-      cpu: 500m
+    # limits:
+    #   cpu: 500m
     requests:
       cpu: 25m
 
