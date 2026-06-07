@@ -357,7 +357,7 @@ querier:
   replicas: 3
   resources:
     limits:
-      cpu: 1000m
+      cpu: 3333m
     requests:
       cpu: 100m
   serviceAccount:
