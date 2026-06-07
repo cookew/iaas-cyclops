@@ -222,6 +222,9 @@ loki:
   podDisruptionBudget:
     maxUnavailable: 1
 
+  querier:
+    max_concurrent: 8
+
   query_range:
     cache_instant_metric_results: true
     cache_results: true
