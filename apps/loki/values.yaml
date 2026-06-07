@@ -223,7 +223,7 @@ loki:
     maxUnavailable: 1
 
   querier:
-    max_concurrent: 8
+    max_concurrent: 12
 
   query_range:
     cache_instant_metric_results: true
