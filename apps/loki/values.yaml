@@ -44,10 +44,6 @@ distributor:
     automountServiceAccountToken: false
 
 gateway:
-  autoscaling:
-    enabled: true
-    minReplicas: 2
-    maxReplicas: 4
   basicAuth:
     enabled: false
     # -- Existing basic auth secret to use. Must contain '.htpasswd'
@@ -62,9 +58,10 @@ gateway:
         cpu: 10m
   podDisruptionBudget:
     maxUnavailable: 1
+  replicas: 3
   resources:
     limits:
-      cpu: 30m
+      cpu: 1000m
     requests:
       cpu: 10m
   service:
@@ -108,10 +105,6 @@ indexGateway:
     automountServiceAccountToken: false
 
 ingester:
-  autoscaling:
-    enabled: true
-    minReplicas: 2
-    maxReplicas: 4
   # persistence:
   #   enabled: true
   #   claims:
@@ -123,6 +116,7 @@ ingester:
   #   whenDeleted: Delete
   podDisruptionBudget:
     maxUnavailable: 1
+  replicas: 4
   resources:
     limits:
       cpu: 3000m
@@ -372,10 +366,6 @@ querier:
     automountServiceAccountToken: false
 
 queryFrontend:
-  # autoscaling:
-  #   enabled: true
-  #   minReplicas: 2
-  #   maxReplicas: 4
   podDisruptionBudget:
     maxUnavailable: 1
   replicas: 2
