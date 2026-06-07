@@ -1169,7 +1169,7 @@ data:
         ]
       },
       "timezone": "browser",
-      "title": "NVMe Exporter1",
+      "title": "NVMe Exporter",
       "version": 2,
       "uid": "nvme-exporter",
       "id": 963525900877824
