@@ -54,6 +54,8 @@ kubeStateMetrics:
   revisionHistoryLimit: 0
 
 nodeExporter:
+  enabled: false
+  forceDeployDashboards: true
   operatingSystems:
     aix:
       enabled: false
