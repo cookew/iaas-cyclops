@@ -1,4 +1,5 @@
 # https://github.com/grafana-community/helm-charts/blob/main/charts/loki/values.yaml
+# https://grafana.com/docs/loki/latest/setup/size/
 
 backend:
    replicas: 0
@@ -20,21 +21,23 @@ compactor:
   #       storageClass: cyclops-fs
   #   whenDeleted: Delete
   replicas: 1
+  resources:
+    limits:
+      cpu: 2000m
+    requests:
+      cpu: 10m
   serviceAccount:
     automountServiceAccountToken: false
 
 deploymentMode: Distributed
 
 distributor:
-  autoscaling:
-    enabled: true
-    minReplicas: 2
-    maxReplicas: 4
   podDisruptionBudget:
     maxUnavailable: 1
+  replicas: 4
   resources:
     limits:
-      cpu: 1000m
+      cpu: 2000m
     requests:
       cpu: 100m
   serviceAccount:
@@ -89,13 +92,18 @@ global:
     create: false
 
 indexGateway:
-  podDisruptionBudget:
-    maxUnavailable: 1
-  replicas: 2
   # persistence:
   #   enabled: true
   #   storageClass: cyclops-fs
   #   whenDeleted: Delete
+  podDisruptionBudget:
+    maxUnavailable: 1
+  replicas: 4
+  resources:
+    limits:
+      cpu: 500m
+    requests:
+      cpu: 100m
   serviceAccount:
     automountServiceAccountToken: false
 
@@ -117,9 +125,9 @@ ingester:
     maxUnavailable: 1
   resources:
     limits:
-      cpu: 2000m
+      cpu: 3000m
     requests:
-      cpu: 100m
+      cpu: 250m
   serviceAccount:
     automountServiceAccountToken: false
   zoneAwareReplication:
@@ -357,22 +365,23 @@ querier:
   replicas: 3
   resources:
     limits:
-      cpu: 3333m
+      cpu: 2500m
     requests:
       cpu: 100m
   serviceAccount:
     automountServiceAccountToken: false
 
 queryFrontend:
-  autoscaling:
-    enabled: true
-    minReplicas: 2
-    maxReplicas: 4
-    podDisruptionBudget:
+  # autoscaling:
+  #   enabled: true
+  #   minReplicas: 2
+  #   maxReplicas: 4
+  podDisruptionBudget:
     maxUnavailable: 1
+  replicas: 2
   resources:
     limits:
-      cpu: 1000m
+      cpu: 500m
     requests:
       cpu: 15m
 
@@ -382,6 +391,11 @@ queryScheduler:
   replicas: 2
   serviceAccount:
     automountServiceAccountToken: false
+  resources:
+    limits:
+      cpu: 500m
+    requests:
+      cpu: 25m
 
 read:
   replicas: 0
