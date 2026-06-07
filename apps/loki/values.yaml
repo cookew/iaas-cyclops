@@ -168,7 +168,7 @@ loki:
     ingestion_rate_mb: 50 # 4
     # max_cache_freshness_per_query: 10m # 10m
     # max_chunks_per_query: 2000000 # 2000000
-    max_concurrent_tail_requests: 20 # 10
+    max_concurrent_tail_requests: 50 # 10
     # max_entries_limit_per_query: 5000 # 5000
     # max_global_streams_per_user: 5000 # 5000
     # max_label_name_length: 10240 # 1024
@@ -223,7 +223,7 @@ loki:
     maxUnavailable: 1
 
   querier:
-    max_concurrent: 12
+    max_concurrent: 16
 
   query_range:
     cache_instant_metric_results: true
