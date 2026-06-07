@@ -34,7 +34,7 @@ distributor:
     maxUnavailable: 1
   resources:
     limits:
-      cpu: 300m
+      cpu: 1000m
     requests:
       cpu: 100m
   serviceAccount:
@@ -354,13 +354,13 @@ patternIngester:
 querier:
   autoscaling:
     enabled: true
-    minReplicas: 2
-    maxReplicas: 4
+    minReplicas: 10
+    maxReplicas: 12
   podDisruptionBudget:
     maxUnavailable: 1
   resources:
     limits:
-      cpu: 300m
+      cpu: 1000m
     requests:
       cpu: 100m
   serviceAccount:
@@ -375,7 +375,7 @@ queryFrontend:
     maxUnavailable: 1
   resources:
     limits:
-      cpu: 45m
+      cpu: 1000m
     requests:
       cpu: 15m
 
