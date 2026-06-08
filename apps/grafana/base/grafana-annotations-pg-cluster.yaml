@@ -18,11 +18,11 @@ spec:
     topologyKey: kubernetes.io/hostname
   bootstrap:
     initdb:
-      database: grafana
+      database: grafana-annotations
   #     encoding: UTF8
   #     localeCType: C
   #     localeCollate: C
-  #     owner: grafana
+  #     owner: grafana-annotations
   # enablePDB: true
   # enableSuperuserAccess: false
   imageCatalogRef:
