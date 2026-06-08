@@ -122,6 +122,8 @@ grafana.ini:
     password: "$__file{/grafana-pg-cluster-app/password}"
     type: postgres
     user: "$__file{/grafana-pg-cluster-app/user}"
+  date_formats:
+    default_timezone: browser
   external_image_storage.s3:
     access_key: "$__file{/grafana-external-image/AWS_ACCESS_KEY_ID}"
     bucket: grafana-external-image
