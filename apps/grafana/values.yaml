@@ -23,11 +23,11 @@ extraSecretMounts:
   optional: false
   secretName: grafana-pg-cluster-app
   readOnly: true
-- name: grafana-annotations-pg-cluster-app
-  mountPath: /grafana-annotations-pg-cluster-app
-  optional: false
-  secretName: grafana-annotations-pg-cluster-app
-  readOnly: true
+# - name: grafana-annotations-pg-cluster-app
+#   mountPath: /grafana-annotations-pg-cluster-app
+#   optional: false
+#   secretName: grafana-annotations-pg-cluster-app
+#   readOnly: true
 - name: grafana-keycloak-client
   mountPath: /grafana-keycloak-client
   optional: false
@@ -77,10 +77,10 @@ grafana.ini:
     check_for_updates: false
     feedback_links_enabled: false
     reporting_enabled: false
-  annotations.app_platform:
-    enabled: true
-    postgres_connection_string: "$__file{/grafana-annotations-pg-cluster-app/uri}"
-    store_backend: postgres
+  # annotations.app_platform:
+  #   enabled: true
+  #   postgres_connection_string: "$__file{/grafana-annotations-pg-cluster-app/uri}"
+  #   store_backend: postgres
   auth:
     disable_login_form: true
     login_maximum_inactive_lifetime_duration: 15m
