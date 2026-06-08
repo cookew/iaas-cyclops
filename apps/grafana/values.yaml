@@ -228,6 +228,7 @@ livenessProbe:
   timeoutSeconds: 30
 
 plugins:
+- grafana-github-datasource
 - grafana-llm-app
 - grafana-lokioperational-app
 
