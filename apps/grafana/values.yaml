@@ -62,8 +62,9 @@ extraVolumes:
 
 grafana.ini:
   alerting:
-    ha_redis_address: valkey.grafana.svc:6379
-    ha_redis_password: "$__file{/grafana-valkey-password/REDIS_PASSWORD}"
+    enabled: false
+    # ha_redis_address: valkey.grafana.svc:6379
+    # ha_redis_password: "$__file{/grafana-valkey-password/REDIS_PASSWORD}"
     # ha_redis_db: 0
   analytics:
     enabled: false
@@ -163,6 +164,14 @@ grafana.ini:
     min_tls_version: "1.3"
   snapshots:
     enabled: false
+  unified_alerting:
+    enabled: true
+    ha_peers: {{ .Release.Name }}-headless:9094
+    ha_listen_address: ${POD_IP}:9094
+    ha_advertise_address: ${POD_IP}:9094
+    rule_version_record_limit: "5"
+
+headlessService: true
 
 ingress:
   annotations:
