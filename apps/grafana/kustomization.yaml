@@ -10,7 +10,7 @@ resources:
 - base/grafana-image-renderer-dashboard.yaml
 - base/grafana-keycloak-client.yaml
 - base/grafana-pg-cluster.yaml
-- base/grafana-plugins-pvc.yaml
+# - base/grafana-plugins-pvc.yaml
 # - base/grafana-valkey-certificate.yaml
 - base/haproxy-dashboard.yaml
 - base/loki-datasource.yaml
