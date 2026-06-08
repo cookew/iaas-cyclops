@@ -283,4 +283,7 @@ sidecar:
     extraMounts:
     - name: ca-certificates
       mountPath: /etc/ssl/certs
+    - name: grafana-plugins
+      mountPath: /var/lib/grafana/plugins
+      readOnly: false
     searchNamespace: ALL
