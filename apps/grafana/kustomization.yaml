@@ -6,6 +6,7 @@ namespace: grafana
 resources:
 - base/ceph-datasource.yaml
 - base/docker-registry-dashboard.yaml
+- base/grafana-annotations-pg-cluster.yaml
 - base/grafana-external-image-objectbucketclaim.yaml
 - base/grafana-image-renderer-dashboard.yaml
 - base/grafana-keycloak-client.yaml
