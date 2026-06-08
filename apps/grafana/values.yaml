@@ -47,6 +47,9 @@ extraSecretMounts:
 extraVolumeMounts:
 - name: ca-certificates
   mountPath: /etc/ssl/certs
+- name: grafana-plugins
+  mountPath: /var/lib/grafana/plugins
+  readOnly: false
 
 extraVolumes:
 - name: ca-certificates
@@ -54,6 +57,8 @@ extraVolumes:
     name: ca-all
     # items:
     # - key: ca-certificates.crt
+- name: grafana-plugins
+  existingClaim: grafana-plugins
 
 grafana.ini:
   alerting:
@@ -222,8 +227,9 @@ livenessProbe:
   initialDelaySeconds: 60
   timeoutSeconds: 30
 
-# plugins:
-# - grafana-lokioperational-app
+plugins:
+- grafana-llm-app
+- grafana-lokioperational-app
 
 # replicas: 2
 
