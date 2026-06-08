@@ -173,6 +173,8 @@ grafana.ini:
     min_tls_version: "1.3"
   snapshots:
     enabled: false
+  support_bundles:
+    enabled: false
   unified_alerting:
     enabled: true
     ha_advertise_address: ${POD_IP}:9094
