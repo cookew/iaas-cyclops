@@ -58,6 +58,9 @@ alloy:
         forward_to = [loki.process.cleanup.receiver]
       }
       loki.process "cleanup" {
+        stage.label_drop {
+          values = [ "instance" ]
+        }
         stage.luhn {}
         stage.static_labels {
           values = {
