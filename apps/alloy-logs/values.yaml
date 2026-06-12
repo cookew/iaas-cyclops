@@ -59,7 +59,7 @@ alloy:
       }
       loki.process "cleanup" {
         stage.label_drop {
-          values = [ "instance" ]
+          values = [ "instance", "job" ]
         }
         stage.luhn {}
         stage.static_labels {
