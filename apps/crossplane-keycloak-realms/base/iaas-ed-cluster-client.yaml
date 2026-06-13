@@ -1,0 +1,59 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  name: ed-cluster
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    accessType: confidential
+    clientAuthenticatorType: federated-jwt
+    clientId: ed-cluster
+    extraConfig:
+      jwt.credential.certificate: MIIEozCCAosCBgGeGgMQDDANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDDAp0ZXN0Y2xpZW50MB4XDTI2MDUxMjAyMjYwOFoXDTI5MDUxMjAyMjc0OFowFTETMBEGA1UEAwwKdGVzdGNsaWVudDCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAJd2cvvGr4Bn1rXBysdSj6+doWzT3eGYyfWI4wUQc6wOzQZTrc58qPwyzKKNzix8fz8076lWNWAXGtOiDytUAW/lQN1hB04NE2ckZ3kd9vA0luoK/OOEjeY7TOkS2qs4at4y8+sSbKj6T3yGspxhmiNl3T48Y+uORC/R9QEvKwBP1tZ0U+DoampLMl/gW8+ELq4PT2KaEM9Wj9RIeaDGlwPnF0OHs1G7mPygVg1peTfKhrsU6ntNEMNBjYJd5yPOkAWq/8FCt4YmpzecVswuHnnD7+/y9eeBAbu+IZobL2T2vylXEJdIBq5DnAPaIKCN38PjIHYmBsqAodp6x0tHn/q9YGmleYbjfxADezcOTuahzrcYTSKqwN7/m2Rcnk+eoi3oC45lsZfj1yRozNTNYhdsjKLnGPbB5abY6wWZf0/MeTk7QKDSome9JH7SN7mENxOaFOVOYyJFNFg/lSk9JeaLIdLfxeN49N7TWUdQZsySBgOs0MFV77ilDNPdvdFIxBgH/JpzlPIFJCfeFAAvHVUBMhZDi0yy/JZOtSsTTxyDVeYGGcAu1iIX200h0BkzfZ+NJvZnpvJYyXwTBCwRuIAmVLxrpDrXoZ5yvyqwQrY1fzYQCJ1QTNbdsuIB2P5qWHCsnGCyTIiMnsMk4UTBq7OctIAiW+fRDdkx7WDqp4uVAgMBAAEwDQYJKoZIhvcNAQELBQADggIBAFNRvFrDpKF8ZHlTWwFru7t0nMSA+5G6sEq0aOzo5yNweD4ZW0E2ydw3kCkPATHAV010Y65/HdzY5Xs2cs8tDsZtyBCEFOTzeCxyrTzKPBAIwNH+xh4YV5towVYk4r22/7ElK1WJdxkNVs9LwWRnWImg9Q8JwwC58KspppvdjTjTOaZ7xcGnooP6XZdpqosKgYnfK46O7vQnfqd2x5R5M+Vm/oXy0z8B+1gAt9sqBqpKhCd3Mhjdq58kPmRtfJUmFBsK3eKv/KEC4fZe71xuaCby3DIbu3zkn9bD4xl/FXZeH9gvXlk1bRTZ0lfFN+L6nhN7fBbVLedxqOvY89gNLrsZaKZABtUPsNX+I4Ry7XOxZfdCKFmz7o7uiyAnl/DFIO/BlZnSZg8LnJirnXWC/Ykp5D+snPM6MYhqQfTdUy/yxx9AcCbk+xYgPh5KczEcZ5FL7J78su0KOROAbK71wZb+D+XEUeqGca1TU7luH4fEL3GFJkBnWdj+vaWsFewEXHV2TEUrfIqF717rDcEKZj1DWZBDL21LmwbILCMB3GJgLtwXenjdI3QhDBbnfXqlA2pa0rvz9w7k8Lpi8BFJzSygF7wst3yLk3Fkt3/Wwa3L9FCb3XWYFGzYP4DM6Tjg9zvQMW4eyGM38iP/Oyww9TkfXBoiqXvLRpCiB1lh6JFd
+      jwt.credential.issuer: cookes.io
+      jwt.credential.sub: "system:serviceaccount:test:default"
+    name: ed-cluster
+    realmIdRef:
+      name: iaas
+    serviceAccountsEnabled: true
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: client.keycloak.crossplane.io/v1alpha1
+kind: ProtocolMapper
+metadata:
+  name: ed-cluster-role-mapper
+spec:
+  forProvider:
+    clientIdRef:
+      name: ed-cluster
+    config:
+      access.token.claim: "true"
+      claim.name: client_roles
+      introspection.token.claim: "true"
+      jsonType.label: String
+      multivalued: "true"
+    name: role-mapper
+    protocol: openid-connect
+    protocolMapper: oidc-usermodel-client-role-mapper
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: ClientServiceAccountRole
+metadata:
+  name: ed-cluster-kubernetes-admin-sa-role
+spec:
+  forProvider:
+    clientIdRef:
+      name: kubernetes
+    realmIdRef:
+      name: iaas
+    roleRef:
+      name: kubernetes-admin
+    serviceAccountUserClientIdRef:
+      name: ed-cluster
+  providerConfigRef:
+    name: keycloak-provider-config

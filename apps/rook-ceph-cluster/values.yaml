@@ -92,6 +92,20 @@ cephClusterSpec:
       compression:
         enabled: false
       requireMsgr2: false
+  placement:
+    mon:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - rook-ceph-mon
+            topologyKey: kubernetes.io/hostname
+
   # resources:
     # mgr:
     #   limits:
@@ -270,11 +284,9 @@ cephFileSystems:
           - weight: 100
             podAffinityTerm:
               labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - rook-ceph-mds
+                matchLabels:
+                  app: rook-ceph-mds
+                  rook_file_system: ceph-filesystem
               topologyKey: kubernetes.io/hostname
   storageClass:
     allowVolumeExpansion: true
@@ -325,11 +337,9 @@ cephFileSystems:
           - weight: 100
             podAffinityTerm:
               labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - rook-ceph-mds
+                matchLabels:
+                  app: rook-ceph-mds
+                  rook_file_system: cyclops-fs
               topologyKey: kubernetes.io/hostname
   storageClass:
     allowVolumeExpansion: true
