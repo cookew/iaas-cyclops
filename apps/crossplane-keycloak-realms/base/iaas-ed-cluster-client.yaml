@@ -19,6 +19,26 @@ spec:
   providerConfigRef:
     name: keycloak-provider-config
 ---
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  name: cookes-io-k8s-test-test
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    accessType: confidential
+    clientAuthenticatorType: federated-jwt
+    clientId: cookes-io-k8s-test-test
+    extraConfig:
+      jwt.credential.issuer: cookes.io
+      jwt.credential.sub: "system:serviceaccount:test:test"
+    name: cookes-io-k8s-test-test
+    realmIdRef:
+      name: iaas
+    serviceAccountsEnabled: true
+  providerConfigRef:
+    name: keycloak-provider-config
+---
 apiVersion: client.keycloak.crossplane.io/v1alpha1
 kind: ProtocolMapper
 metadata:
