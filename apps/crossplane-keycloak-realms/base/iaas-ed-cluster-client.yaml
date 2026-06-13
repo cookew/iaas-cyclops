@@ -1,3 +1,16 @@
+apiVersion: identityprovider.keycloak.crossplane.io/v1alpha1
+kind: KubernetesIdentityProvider
+metadata:
+  name: cookes.io
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    alias: cookes.io
+    issuer: https://kubernetes.cookes.io
+    realm: iaas
+  providerConfigRef:
+    name: keycloak-provider-config
+---
 apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
 kind: Client
 metadata:
@@ -44,7 +57,7 @@ spec:
 apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
 kind: ClientServiceAccountRole
 metadata:
-  name: ed-cluster-kubernetes-admin-sa-role
+  name: ed-cluster-sa-role
 spec:
   forProvider:
     clientIdRef:
