@@ -29,7 +29,7 @@ spec:
       authenticatorAttachment: not specified
       avoidSameAuthenticatorRegister: false
       createTimeout: 0
-      # passwordlessPasskeysEnabled: true
+      passwordlessPasskeysEnabled: true
       relyingPartyEntityName: Keycloak
       relyingPartyId: keycloak.apps.iaas.wcooke.me
       requireResidentKey: "Yes"
