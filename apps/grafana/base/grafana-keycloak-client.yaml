@@ -24,7 +24,7 @@ spec:
     validRedirectUris:
     - /login/generic_oauth
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
@@ -42,7 +42,7 @@ spec:
     realmIdRef:
       name: iaas
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
@@ -57,7 +57,7 @@ spec:
     realmIdRef:
       name: iaas
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
@@ -72,7 +72,7 @@ spec:
     realmIdRef:
       name: iaas
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
@@ -90,7 +90,7 @@ spec:
     realmIdRef:
       name: iaas
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Group
@@ -106,7 +106,7 @@ spec:
     realmIdRef:
       name: iaas
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Group
@@ -119,7 +119,7 @@ spec:
     realmIdRef:
       name: iaas
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Group
@@ -132,7 +132,7 @@ spec:
     realmIdRef:
       name: iaas
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Group
@@ -145,7 +145,7 @@ spec:
     realmIdRef:
       name: iaas
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Roles
@@ -161,7 +161,7 @@ spec:
     roleIdsRefs:
     - name: grafana-server-admin
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Roles
@@ -177,7 +177,7 @@ spec:
     roleIdsRefs:
     - name: grafana-admin
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Roles
@@ -193,7 +193,7 @@ spec:
     roleIdsRefs:
     - name: grafana-editor
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Roles
@@ -209,4 +209,4 @@ spec:
     roleIdsRefs:
     - name: grafana-viewer
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas

@@ -3,11 +3,11 @@ kind: ProviderConfig
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-  name: keycloak-provider-config
+  name: keycloak-iaas
 spec:
   credentials:
     secretRef:
       key: credentials
-      name: keycloak-credentials
-      namespace: crossplane-keycloak-provider
+      name: provider-keycloak-credentials
+      namespace: crossplane-provider-keycloak
     source: Secret

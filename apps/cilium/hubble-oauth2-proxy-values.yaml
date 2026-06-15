@@ -96,7 +96,7 @@ extraObjects:
       validRedirectUris:
       - /oauth2/callback
     providerConfigRef:
-      name: keycloak-provider-config
+      name: keycloak-iaas
 - apiVersion: role.keycloak.crossplane.io/v1alpha1
   kind: Role
   metadata:
@@ -115,7 +115,7 @@ extraObjects:
       realmIdRef:
         name: iaas
     providerConfigRef:
-      name: keycloak-provider-config
+      name: keycloak-iaas
 - apiVersion: group.keycloak.crossplane.io/v1alpha1
   kind: Group
   metadata:
@@ -129,7 +129,7 @@ extraObjects:
       realmIdRef:
         name: iaas
     providerConfigRef:
-      name: keycloak-provider-config
+      name: keycloak-iaas
 - apiVersion: group.keycloak.crossplane.io/v1alpha1
   kind: Roles
   metadata:
@@ -146,7 +146,7 @@ extraObjects:
       roleIdsRefs:
       - name: hubble-admin
     providerConfigRef:
-      name: keycloak-provider-config
+      name: keycloak-iaas
 
 extraVolumes:
 - name: oauth2-proxy-certs

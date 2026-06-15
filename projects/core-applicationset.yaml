@@ -52,7 +52,7 @@ spec:
       - name: rook-ceph
         syncWave: -60
 
-      - name: crossplane-keycloak-provider
+      - name: crossplane-provider-keycloak
         syncWave: -50
       - name: crossplane-provider-grafana
         syncWave: -50

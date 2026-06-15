@@ -55,7 +55,7 @@ spec:
       userVerificationRequirement: required
     verifyEmail: false
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: realm.keycloak.crossplane.io/v1alpha1
 kind: RealmEvents
@@ -71,7 +71,7 @@ spec:
     realmIdRef:
       name: iaas
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 # ---
 # apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
 # kind: ClientScope
@@ -86,7 +86,7 @@ spec:
 #     realmIdRef:
 #       name: iaas
 #   providerConfigRef:
-#     name: keycloak-provider-config
+#     name: keycloak-iaas
 # ---
 # apiVersion: realm.keycloak.crossplane.io/v1alpha1
 # kind: OptionalClientScopes
@@ -107,7 +107,7 @@ spec:
 #     realmIdRef:
 #       name: iaas
 #   providerConfigRef:
-#     name: keycloak-provider-config
+#     name: keycloak-iaas
 # ---
 # apiVersion: openidgroup.keycloak.crossplane.io/v1alpha1
 # kind: GroupMembershipProtocolMapper
@@ -127,4 +127,4 @@ spec:
 #     realmIdRef:
 #       name: iaas
 #   providerConfigRef:
-#     name: keycloak-provider-config
+#     name: keycloak-iaas

@@ -19,7 +19,7 @@ spec:
       name: iaas
     username: william
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: user.keycloak.crossplane.io/v1alpha1
 kind: User
@@ -42,7 +42,7 @@ spec:
       name: iaas
     username: edward
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Group
@@ -55,7 +55,7 @@ spec:
     realmIdRef:
       name: iaas
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: user.keycloak.crossplane.io/v1alpha1
 kind: Groups
@@ -71,7 +71,7 @@ spec:
     userIdRef:
       name: william
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: user.keycloak.crossplane.io/v1alpha1
 kind: Groups
@@ -87,7 +87,7 @@ spec:
     userIdRef:
       name: edward
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Roles
@@ -105,4 +105,4 @@ spec:
         keycloak/realm: iaas
         keycloak/group-admins: ""
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas

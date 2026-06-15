@@ -30,7 +30,7 @@ spec:
     # - +
     - '*'
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: role.keycloak.crossplane.io/v1alpha1
 kind: Role
@@ -48,7 +48,7 @@ spec:
     realmIdRef:
       name: iaas
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Group
@@ -61,7 +61,7 @@ spec:
     realmIdRef:
       name: iaas
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
 ---
 apiVersion: group.keycloak.crossplane.io/v1alpha1
 kind: Roles
@@ -77,4 +77,4 @@ spec:
     roleIdsRefs:
     - name: jupyterhub-admin
   providerConfigRef:
-    name: keycloak-provider-config
+    name: keycloak-iaas
