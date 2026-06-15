@@ -492,6 +492,8 @@ cephObjectStores:
     metadataPool:
       deviceClass: ssd
       failureDomain: host
+      parameters:
+        pg_num_min: "1"
       replicated:
         size: 3
     preservePoolsOnDelete: false
@@ -568,6 +570,8 @@ cephObjectStores:
     metadataPool:
       deviceClass: nvme
       failureDomain: host
+      parameters:
+        pg_num_min: "1"
       replicated:
         size: 3
     preservePoolsOnDelete: false
