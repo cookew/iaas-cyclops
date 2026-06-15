@@ -68,7 +68,7 @@ drivers:
     # -- Flag to enable fencing (default: false)
     enableFencing: false
     # -- Snapshot policy (options: none, volumeGroupSnapshot, volumeSnapshot) (default: "volumeSnapshot")
-    snapshotPolicy: "volumeSnapshot"
+    snapshotPolicy: volumeSnapshot
     # -- Flag to generate OMap info (default: false)
     generateOMapInfo: false
     encryption:
@@ -78,7 +78,7 @@ drivers:
     # -- Flag to deploy CSI Addons (default: false)
     deployCsiAddons: false
   nfs:
-    name: "nfs.csi.ceph.com"
+    # name: nfs.csi.ceph.com
     log:
       verbosity: 0
       rotation:
@@ -87,7 +87,7 @@ drivers:
     # -- Flag to enable fencing (default: false)
     enableFencing: false
     # -- Snapshot policy (options: none, volumeGroupSnapshot, volumeSnapshot) (default: "volumeSnapshot")
-    snapshotPolicy: "volumeSnapshot"
+    snapshotPolicy: volumeSnapshot
     # -- Flag to generate OMap info (default: false)
     generateOMapInfo: false
     encryption:
