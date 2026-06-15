@@ -459,7 +459,7 @@ cephObjectStores:
       parameters:
         allow_ec_optimizations: "true"
         bulk: "true"
-        pg_num_min: "8"
+        pg_num: "8"
     gateway:
       # annotations:
       # caBundleRef: ca-bundle-secret
@@ -495,7 +495,7 @@ cephObjectStores:
       enableCrushUpdates: true
       failureDomain: host
       parameters:
-        pg_num_min: "8"
+        pg_num: "8"
       replicated:
         size: 3
     preservePoolsOnDelete: false
@@ -538,7 +538,7 @@ cephObjectStores:
       parameters:
         allow_ec_optimizations: "true"
         bulk: "true"
-        pg_num_min: "8"
+        pg_num: "8"
     gateway:
       # annotations:
       # caBundleRef: ca-bundle-secret
@@ -573,7 +573,7 @@ cephObjectStores:
       deviceClass: nvme
       failureDomain: host
       parameters:
-        pg_num_min: "8"
+        pg_num: "8"
       replicated:
         size: 3
     preservePoolsOnDelete: false
