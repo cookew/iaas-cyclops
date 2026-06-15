@@ -25,7 +25,7 @@ operatorConfig:
 drivers:
   # RBD driver configuration
   rbd:
-    name: rook-ceph.rbd.csi.ceph.com
+    # name: rook-ceph.rbd.csi.ceph.com
     log:
       rotation:
         maxFiles: 1
@@ -60,7 +60,7 @@ drivers:
     # -- Flag to deploy CSI Addons (default: false)
     deployCsiAddons: false
   cephfs:
-    name: rook-ceph.cephfs.csi.ceph.com
+    # name: rook-ceph.cephfs.csi.ceph.com
     log:
       rotation:
         maxFiles: 1
