@@ -451,6 +451,7 @@ cephObjectStores:
     - "*"
     dataPool:
       deviceClass: ssd
+      enableCrushUpdates: true
       erasureCoded:
         dataChunks: 2
         codingChunks: 1
@@ -491,6 +492,7 @@ cephObjectStores:
       - s3.apps.iaas.wcooke.me
     metadataPool:
       deviceClass: ssd
+      enableCrushUpdates: true
       failureDomain: host
       parameters:
         pg_num_min: "1"
