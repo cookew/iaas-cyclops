@@ -458,6 +458,7 @@ cephObjectStores:
       parameters:
         allow_ec_optimizations: "true"
         bulk: "true"
+        pg_num_min: "1"
     gateway:
       # annotations:
       # caBundleRef: ca-bundle-secret
@@ -533,6 +534,7 @@ cephObjectStores:
       parameters:
         allow_ec_optimizations: "true"
         bulk: "true"
+        pg_num_min: "1"
     gateway:
       # annotations:
       # caBundleRef: ca-bundle-secret
