@@ -5,6 +5,10 @@ cephConnections:
 
 operatorConfig:
   driverSpecDefaults:
+    controllerPlugin:
+      priorityClassName: system-cluster-critical
+    imageSet:
+      name: rook-csi-operator-image-set-configmap
     log:
       rotation:
         maxFiles: 1
@@ -21,11 +25,14 @@ operatorConfig:
         name: ""
     # -- Flag to deploy CSI Addons (default: false)
     deployCsiAddons: false
+    nodePlugin:
+      priorityClassName: system-node-critical
+  namespace: rook-ceph
 
 drivers:
   # RBD driver configuration
   rbd:
-    # name: rook-ceph.rbd.csi.ceph.com
+    name: rook-ceph.rbd.csi.ceph.com
     log:
       rotation:
         maxFiles: 1
@@ -43,6 +50,7 @@ drivers:
     # -- Flag to deploy CSI Addons (default: false)
     deployCsiAddons: false
   nvmeof:
+    name: rook-ceph.nvmeof.csi.ceph.com
     log:
       rotation:
         maxFiles: 1
@@ -60,7 +68,7 @@ drivers:
     # -- Flag to deploy CSI Addons (default: false)
     deployCsiAddons: false
   cephfs:
-    # name: rook-ceph.cephfs.csi.ceph.com
+    name: rook-ceph.cephfs.csi.ceph.com
     log:
       rotation:
         maxFiles: 1
@@ -78,7 +86,7 @@ drivers:
     # -- Flag to deploy CSI Addons (default: false)
     deployCsiAddons: false
   nfs:
-    # name: nfs.csi.ceph.com
+    name: rook-ceph.nfs.csi.ceph.com
     log:
       verbosity: 0
       rotation:
