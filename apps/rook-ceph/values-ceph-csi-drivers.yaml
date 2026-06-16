@@ -85,6 +85,7 @@ drivers:
         name: ""
     # -- Flag to deploy CSI Addons (default: false)
     deployCsiAddons: false
+    fsGroupPolicy: File
   nfs:
     name: rook-ceph.nfs.csi.ceph.com
     log:
