@@ -35,4 +35,4 @@ helmCharts:
   releaseName: valkey
   repo: https://valkey.io/valkey-helm
   valuesFile: valkey-values.yaml
-  version: 0.9.4
+  version: 0.10.0
