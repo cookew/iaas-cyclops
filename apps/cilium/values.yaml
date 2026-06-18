@@ -68,15 +68,15 @@ hubble:
     dashboards:
       enabled: true
     enabled:
-    - dns:query
-    - drop
-    - flow
+    - dns:query=true;exemplars=true;destinationEgressContext=workload-name|namespace|namespace;destinationIngressContext=workload-name|namespace;sourceEgressContext=workload-name|namespace;sourceIngressContext=workload-name|namespace;sourceContext=workload-name|namespace;destinationContext=workload-name|namespace;labelsContext=source_ip,source_pod,source_namespace,source_workload,source_workload_kind,source_app,destination_ip,destination_pod,destination_namespace,destination_workload,destination_workload_kind,destination_app,traffic_direction
+    - drop:exemplars=true;destinationEgressContext=workload-name|namespace;destinationIngressContext=workload-name|namespace;sourceEgressContext=workload-name|namespace;sourceIngressContext=workload-name|namespace;sourceContext=workload-name|namespace;destinationContext=workload-name|namespace;labelsContext=source_ip,source_pod,source_namespace,source_workload,source_workload_kind,source_app,destination_ip,destination_pod,destination_namespace,destination_workload,destination_workload_kind,destination_app,traffic_direction
+    - flow:exemplars=true;destinationEgressContext=workload-name|namespace;destinationIngressContext=workload-name|namespace;sourceEgressContext=workload-name|namespace;sourceIngressContext=workload-name|namespace;sourceContext=workload-name|namespace;destinationContext=workload-name|namespace;labelsContext=source_ip,source_pod,source_namespace,source_workload,source_workload_kind,source_app,destination_ip,destination_pod,destination_namespace,destination_workload,destination_workload_kind,destination_app,traffic_direction
     - flows-to-world
     - httpV2
-    - icmp
+    - icmp:exemplars=true;destinationEgressContext=workload-name|namespace;destinationIngressContext=workload-name|namespace;sourceEgressContext=workload-name|namespace;sourceIngressContext=workload-name|namespace;sourceContext=workload-name|namespace;destinationContext=workload-name|namespace;labelsContext=source_ip,source_pod,source_namespace,source_workload,source_workload_kind,source_app,destination_ip,destination_pod,destination_namespace,destination_workload,destination_workload_kind,destination_app,traffic_direction
     - kafka
-    - port-distribution
-    - tcp
+    - port-distribution:exemplars=true;destinationEgressContext=workload-name|namespace;destinationIngressContext=workload-name|namespace;sourceEgressContext=workload-name|namespace;sourceIngressContext=workload-name|namespace;sourceContext=workload-name|namespace;destinationContext=workload-name|namespace;labelsContext=source_ip,source_pod,source_namespace,source_workload,source_workload_kind,source_app,destination_ip,destination_pod,destination_namespace,destination_workload,destination_workload_kind,destination_app,traffic_direction
+    - tcp:exemplars=true;destinationEgressContext=workload-name|namespace;destinationIngressContext=workload-name|namespace;sourceEgressContext=workload-name|namespace;sourceIngressContext=workload-name|namespace;sourceContext=workload-name|namespace;destinationContext=workload-name|namespace;labelsContext=source_ip,source_pod,source_namespace,source_workload,source_workload_kind,source_app,destination_ip,destination_pod,destination_namespace,destination_workload,destination_workload_kind,destination_app,traffic_direction
     # post cluster init
     serviceMonitor:
       enabled: true
