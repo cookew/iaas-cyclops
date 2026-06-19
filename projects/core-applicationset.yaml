@@ -77,19 +77,20 @@ spec:
 
       - name: alloy
       - name: alloy-logs
+      - name: descheduler
       - name: forecastle
+      - name: github-arc
       - name: grafana
+      - name: harbor
       - name: loki
       - name: nvme-exporter
+      - name: reloader
 
       # - name: crossplane-provider-opentofu
       # - name: cyberchef
-      # - name: descheduler
       # - name: drawio
-      # - name: github-arc
       # - name: gitlab
       # - name: guacamole
-      # - name: harbor
       # - name: headlamp
       # - name: jupyterhub
       # - name: kubevirt-manager
@@ -100,7 +101,6 @@ spec:
       # - name: open-webui
       # - name: openbao
       # - name: pyroscope
-      # - name: reloader
       # - name: tempo
       # - name: whoami
 
