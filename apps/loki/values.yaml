@@ -272,6 +272,8 @@ loki:
         secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
         http:
           insecure_skip_verify: true
+        http_config:
+          insecure_skip_verify: true
     s3:
       access_key_id: "${AWS_ACCESS_KEY_ID}"
       endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
