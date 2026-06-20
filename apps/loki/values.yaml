@@ -276,7 +276,7 @@ loki:
       http_config:
         insecure_skip_verify: true
       insecure: true
-        region: us-east-1
+      region: us-east-1
       s3ForcePathStyle: true
       secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
     type: s3
