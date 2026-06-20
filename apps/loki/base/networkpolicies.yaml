@@ -152,6 +152,8 @@ metadata:
 spec:
   egress:
   - ports:
+    - port: 7946
+      protocol: TCP
     - port: 9095
       protocol: TCP
   policyTypes:
