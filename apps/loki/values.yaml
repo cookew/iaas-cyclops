@@ -262,7 +262,7 @@ loki:
       chunks: loki
       ruler: loki
     object_store:
-      storage_prefix: os
+      # storage_prefix: os
       type: s3
       s3:
         access_key_id: "${AWS_ACCESS_KEY_ID}"
