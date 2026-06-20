@@ -267,7 +267,7 @@ loki:
       s3:
         access_key_id: "${AWS_ACCESS_KEY_ID}"
         endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
-        insecure: true
+        # insecure: true
         region: us-east-1
         secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
         http:
@@ -277,7 +277,7 @@ loki:
       endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
       http_config:
         insecure_skip_verify: true
-      insecure: true
+      # insecure: true
       region: us-east-1
       s3ForcePathStyle: true
       secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
