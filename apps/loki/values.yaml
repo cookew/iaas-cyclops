@@ -266,7 +266,7 @@ loki:
       type: s3
       s3:
         access_key_id: "${AWS_ACCESS_KEY_ID}"
-        bucketnames: "${BUCKET_NAME}"
+        # bucketnames: "${BUCKET_NAME}"
         endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
         # http_config:
         #   insecure_skip_verify: true
@@ -275,7 +275,7 @@ loki:
         secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
     s3:
       access_key_id: "${AWS_ACCESS_KEY_ID}"
-      bucketnames: "${BUCKET_NAME}"
+      # bucketnames: "${BUCKET_NAME}"
       endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
       http_config:
         insecure_skip_verify: true
