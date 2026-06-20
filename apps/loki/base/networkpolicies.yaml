@@ -154,15 +154,6 @@ spec:
   - ports:
     - port: 9095
       protocol: TCP
-    to:
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: loki
-  ingress:
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: loki
   policyTypes:
   - Egress
   - Ingress
