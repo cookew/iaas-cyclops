@@ -282,7 +282,7 @@ loki:
       s3ForcePathStyle: true
       secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
     type: s3
-    use_thanos_objstore: false
+    use_thanos_objstore: true
 
 test:
   enabled: false
