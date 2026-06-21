@@ -278,27 +278,17 @@ loki:
       chunks: loki
       ruler: loki
     object_store:
-      # storage_prefix: os
-      type: s3
       s3:
         access_key_id: "${AWS_ACCESS_KEY_ID}"
         endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
-        # insecure: true
         region: us-east-1
         secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
-        # http:
-          # insecure_skip_verify: true
-          # tls_ca_path: /cacerts/ca-certificates.crt
-    s3:
-      access_key_id: "${AWS_ACCESS_KEY_ID}"
-      endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
-      # http_config:
-      #   insecure_skip_verify: true
-      # insecure: true
-      region: us-east-1
-      s3ForcePathStyle: true
-      secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
-    type: s3
+    # s3:
+    #   access_key_id: "${AWS_ACCESS_KEY_ID}"
+    #   endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
+    #   region: us-east-1
+    #   s3ForcePathStyle: true
+    #   secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
     use_thanos_objstore: true
 
 test:
