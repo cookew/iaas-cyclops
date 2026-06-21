@@ -28,6 +28,14 @@ compactor:
       cpu: 10m
   serviceAccount:
     automountServiceAccountToken: false
+  extraVolumeMounts:
+  - name: cacerts
+    mountPath: /cacerts
+    readOnly: true
+  extraVolumes:
+  - name: cacerts
+    secret:
+      secretName: ca-all
 
 deploymentMode: Distributed
 
@@ -271,9 +279,8 @@ loki:
         region: us-east-1
         secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
         http:
-          insecure_skip_verify: true
-        http_config:
-          insecure_skip_verify: true
+          # insecure_skip_verify: true
+          tls_ca_path: /cacerts/ca-bundle.pem
     s3:
       access_key_id: "${AWS_ACCESS_KEY_ID}"
       endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
