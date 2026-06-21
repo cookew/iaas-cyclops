@@ -93,10 +93,6 @@ global:
       name: loki-bucket
   - secretRef:
       name: loki-bucket
-  serviceAccount:
-    create: false
-
-indexGateway:
   extraVolumeMounts:
   - name: cacerts
     mountPath: /etc/ssl/certs
@@ -105,6 +101,10 @@ indexGateway:
   - name: cacerts
     configMap:
       name: ca-all
+  serviceAccount:
+    create: false
+
+indexGateway:
   # persistence:
   #   enabled: true
   #   storageClass: cyclops-fs
@@ -419,14 +419,6 @@ resultsCache:
     storageSize: 10G
 
 ruler:
-  extraVolumeMounts:
-  - name: cacerts
-    mountPath: /etc/ssl/certs
-    readOnly: true
-  extraVolumes:
-  - name: cacerts
-    configMap:
-      name: ca-all
   # persistence:
   #   enabled: true
   #   storageClass: cyclops-fs
