@@ -35,7 +35,7 @@ compactor:
   extraVolumes:
   - name: cacerts
     configMap:
-      name: tm-ca-bundle
+      name: ca-all
 
 deploymentMode: Distributed
 
