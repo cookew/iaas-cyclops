@@ -11,6 +11,14 @@ chunksCache:
     storageSize: 10G
 
 compactor:
+  extraVolumeMounts:
+  - name: cacerts
+    mountPath: /etc/ssl/certs
+    readOnly: true
+  extraVolumes:
+  - name: cacerts
+    configMap:
+      name: ca-all
   # persistence:
   #   enabled: true
   #   claims:
@@ -28,14 +36,6 @@ compactor:
       cpu: 10m
   serviceAccount:
     automountServiceAccountToken: false
-  extraVolumeMounts:
-  - name: cacerts
-    mountPath: /etc/ssl/certs
-    readOnly: true
-  extraVolumes:
-  - name: cacerts
-    configMap:
-      name: ca-all
 
 deploymentMode: Distributed
 
@@ -97,6 +97,14 @@ global:
     create: false
 
 indexGateway:
+  extraVolumeMounts:
+  - name: cacerts
+    mountPath: /etc/ssl/certs
+    readOnly: true
+  extraVolumes:
+  - name: cacerts
+    configMap:
+      name: ca-all
   # persistence:
   #   enabled: true
   #   storageClass: cyclops-fs
