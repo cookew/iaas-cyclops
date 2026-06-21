@@ -280,7 +280,7 @@ loki:
         secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
         http:
           # insecure_skip_verify: true
-          tls_ca_path: /cacerts/ca-bundle.pem
+          tls_ca_path: /cacerts/ca-certificates.crt
     s3:
       access_key_id: "${AWS_ACCESS_KEY_ID}"
       endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
