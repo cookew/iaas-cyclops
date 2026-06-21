@@ -30,7 +30,7 @@ compactor:
     automountServiceAccountToken: false
   extraVolumeMounts:
   - name: cacerts
-    mountPath: /cacerts
+    mountPath: /etc/ssl/certs
     readOnly: true
   extraVolumes:
   - name: cacerts
@@ -278,14 +278,14 @@ loki:
         # insecure: true
         region: us-east-1
         secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
-        http:
+        # http:
           # insecure_skip_verify: true
-          tls_ca_path: /cacerts/ca-certificates.crt
+          # tls_ca_path: /cacerts/ca-certificates.crt
     s3:
       access_key_id: "${AWS_ACCESS_KEY_ID}"
       endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
-      http_config:
-        insecure_skip_verify: true
+      # http_config:
+      #   insecure_skip_verify: true
       # insecure: true
       region: us-east-1
       s3ForcePathStyle: true
