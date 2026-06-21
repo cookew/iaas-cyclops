@@ -34,8 +34,8 @@ compactor:
     readOnly: true
   extraVolumes:
   - name: cacerts
-    secret:
-      secretName: ca-all
+    configMap:
+      name: tm-ca-certs
 
 deploymentMode: Distributed
 
