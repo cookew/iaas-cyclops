@@ -48,6 +48,10 @@ alloy:
           regex = "^(\\S+):\\/\\/.+$"
           replacement = "$1"
         }
+        rule {
+          action = "labeldrop"
+          regex  = "^exporter"
+        }
       }
       loki.source.kubernetes "pod_logs" {
         targets    = discovery.relabel.pod_logs.output
@@ -55,7 +59,7 @@ alloy:
       }
       loki.process "cleanup" {
         stage.label_drop {
-          values = [ "instance", "job", "exporter" ]
+          values = [ "instance", "job" ]
         }
         stage.luhn {}
         stage.static_labels {
@@ -65,11 +69,11 @@ alloy:
         }
         stage.structured_metadata {
           values = {
+            app = "",
+            container = "",
+            container_runtime = "",
             namespace = "",
             pod = "",
-            container = "",
-            app = "",
-            container_runtime = "",
           }
         }
 
