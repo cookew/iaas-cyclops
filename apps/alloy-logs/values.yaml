@@ -5,7 +5,7 @@ alloy:
     content: |-
       logging {
         format = "json"
-        level  = "info"
+        level  = "warn"
       }
 
       livedebugging {
