@@ -122,8 +122,8 @@ controller:
     reloader.stakater.com/auto: "true"
 
   podDisruptionBudget:
-    enabled: false
-    # maxUnavailable: 2
+    enabled: true
+    maxUnavailable: 3
 
   # replicas: 3
 
