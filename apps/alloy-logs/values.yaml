@@ -71,7 +71,7 @@ alloy:
           values = {
             app = "",
             cluster = "",
-            container = "",
+            // container = "",
             container_runtime = "",
             namespace = "",
             pod = "",
