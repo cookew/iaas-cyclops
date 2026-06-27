@@ -133,7 +133,7 @@ alloy:
       }
 
       otelcol.processor.attributes "loki" {
-        actions {
+        action {
           key = "exporter"
           action = "delete"
         }
