@@ -143,7 +143,7 @@ alloy:
       }
       otelcol.exporter.otlp "loki" {
         client {
-          endpoint = "loki.loki.svc:3100"
+          endpoint = "loki-distributor.loki.svc:3100"
         }
       }
 
