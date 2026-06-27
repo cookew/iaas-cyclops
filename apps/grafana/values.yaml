@@ -215,6 +215,7 @@ imageRenderer:
     XDG_CONFIG_HOME: /tmp/.chromium
     XDG_CACHE_HOME: /tmp/.chromium
     API_SILENCE_REQUEST_LOG_PATH: /healthz,/metrics
+    LOG_FORMAT: json
   existingSecret: grafana-image-renderer-token
   networkPolicy:
     extraIngressSelectors:
