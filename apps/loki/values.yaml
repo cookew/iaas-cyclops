@@ -216,12 +216,12 @@ loki:
     # tsdb_max_query_parallelism: 64
     tsdb_precompute_chunks: true # false
     # volume_enabled: true # true
-    # otlp_config:
-    #   resource_attributes:
-    #     attributes_config:
-    #     - action: structured_metadata
-    #       attributes:
-    #       - service_name_extracted
+    otlp_config:
+      resource_attributes:
+        attributes_config:
+        - action: structured_metadata
+          attributes:
+          - service
     #       - service_name
     #       - hostname
 
