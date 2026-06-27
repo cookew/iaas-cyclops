@@ -278,6 +278,7 @@ serviceMonitorSelector:
   enabled: true
 
 sidecar:
+  logLevel: WARN
   resources:
     limits:
       cpu: 100m
