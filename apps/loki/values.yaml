@@ -217,7 +217,7 @@ loki:
     tsdb_precompute_chunks: true # false
     # volume_enabled: true # true
     otlp_config:
-      resource_attributes:
+      log_attributes:
         attributes_config:
         - action: structured_metadata
           attributes:
