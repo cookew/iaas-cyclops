@@ -90,7 +90,8 @@ alloy:
 
       otelcol.processor.batch "default" {
         output {
-          logs    = [otelcol.exporter.loki.loki.input]
+      //    logs    = [otelcol.processor.attributes.input]
+          logs    = [otelcol.exporter.otlp.loki.input]
           metrics = [otelcol.exporter.prometheus.prometheus.input]
           traces  = [otelcol.exporter.otlp.tempo.input]
         }
@@ -128,6 +129,19 @@ alloy:
       otelcol.exporter.otlp "tempo" {
         client {
           endpoint = "tempo-distributor.tempo.svc:4317"
+        }
+      }
+
+      otelcol.processor.attributes "loki" {
+        actions {
+          key = "exporter"
+          action = "delete"
+        }
+        forward = [otelcol.exporter.otlp.loki]
+      }
+      otelcol.exporter.otlp "loki" {
+        client {
+          endpoint = "loki.loki.svc:3100"
         }
       }
 
