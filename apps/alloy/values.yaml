@@ -137,7 +137,9 @@ alloy:
           key = "exporter"
           action = "delete"
         }
-        forward_to = [otelcol.exporter.otlp.loki]
+        output {
+          logs = [otelcol.exporter.otlp.loki]
+        }
       }
       otelcol.exporter.otlp "loki" {
         client {
