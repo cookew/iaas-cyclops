@@ -218,12 +218,11 @@ loki:
     # volume_enabled: true # true
     otlp_config:
       log_attributes:
-        attributes_config:
-        - action: structured_metadata
-          attributes:
-          - service
-          - service_name
-          - hostname
+      - action: structured_metadata
+        attributes:
+        - service
+        - service_name
+        - hostname
 
   # https://grafana.com/docs/loki/latest/configure/bp-configure/
   ingester:
