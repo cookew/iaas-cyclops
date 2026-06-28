@@ -224,6 +224,11 @@ loki:
     #     - service
     #     - service_name
     #     - service.name
+      resource_attributes:
+        attributes_config:
+        - action: structured_metadata
+          attributes:
+          - hostname
 
   # https://grafana.com/docs/loki/latest/configure/bp-configure/
   ingester:
