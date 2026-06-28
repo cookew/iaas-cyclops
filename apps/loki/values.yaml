@@ -216,14 +216,14 @@ loki:
     # tsdb_max_query_parallelism: 64
     tsdb_precompute_chunks: true # false
     volume_enabled: true # true
-    # otlp_config:
-    #   log_attributes:
-    #   - action: structured_metadata
-    #     attributes:
+    otlp_config:
+      log_attributes:
+      - action: structured_metadata
+        attributes:
+        - hostname
     #     - service
     #     - service_name
     #     - service.name
-    #     - hostname
 
   # https://grafana.com/docs/loki/latest/configure/bp-configure/
   ingester:
