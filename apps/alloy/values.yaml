@@ -76,7 +76,7 @@ alloy:
         */
         // include_metadata = true
         output {
-          logs    = [otelcol.processor.transform.loki.input]
+          logs    = [otelcol.processor.batch.default.input]
           metrics = [otelcol.processor.batch.default.input]
           traces  = [otelcol.processor.batch.default.input]
         }
@@ -84,18 +84,27 @@ alloy:
       // End OpenTelemetry Receivers
 
 
-      otelcol.processor.transform "loki" {
-          error_mode = "propagate"
-          log_statements {
-              context = "log"
-              statements = [
-                  `set(resource.attributes["service_name"], log.attributes["service.name"])`,
-              ]
-          }
-          output {
-              logs = [otelcol.processor.batch.default.input]
-          }
-      }
+      // otelcol.processor.transform "loki" {
+      //   error_mode = "propagate"
+      //   log_statements {
+      //     context = "log"
+      //     statements = [
+      //       // Parse JSON body into attributes
+      //       `parse_json(body, "parsed")`,
+      //       // Promote each parsed field to attributes
+      //       `set(attributes[key], value) where (key, value) in parsed`,
+      //       `merge_maps(resource.attributes, ParseJSON(body), "upsert") where IsMatch(body, "^\\{")`,
+      //       `set(resource.attributes["hostname"], log.attributes["hostname"])`,
+      //       `delete_key(log.attributes, "hostname")`,
+      //       `set(resource.attributes["service.name"], log.attributes["service.name"])`,
+      //       `delete_key(log.attributes, "service.name")`,
+      //       `delete_matching_keys(log.attributes, ".*")`,
+      //     ]
+      //   }
+      //   output {
+      //     logs = [otelcol.processor.batch.default.input]
+      //   }
+      // }
 
 
       ///////////
@@ -109,9 +118,9 @@ alloy:
           traces  = [otelcol.exporter.otlp.tempo.input]
         }
       }
-      otelcol.exporter.loki "loki" {
-        forward_to = [loki.process.cleanup.receiver]
-      }
+      // otelcol.exporter.loki "loki" {
+      //   forward_to = [loki.process.cleanup.receiver]
+      // }
       otelcol.exporter.prometheus "prometheus" {
         forward_to = [prometheus.remote_write.prometheus.receiver]
       }
@@ -121,19 +130,19 @@ alloy:
       // Post process and Send //
       ///////////////////////////
 
-      loki.process "cleanup" {
-        stage.decolorize {}
-        stage.label_drop {
-          values = [ "exporter" ]
-        }
-        stage.luhn {}
-        forward_to = [loki.write.loki.receiver]
-      }
-      loki.write "loki" {
-        endpoint {
-          url = "http://loki-distributor.loki.svc:3100/loki/api/v1/push"
-        }
-      }
+      // loki.process "cleanup" {
+      //   stage.decolorize {}
+      //   stage.label_drop {
+      //     values = [ "exporter" ]
+      //   }
+      //   stage.luhn {}
+      //   forward_to = [loki.write.loki.receiver]
+      // }
+      // loki.write "loki" {
+      //   endpoint {
+      //     url = "http://loki-distributor.loki.svc:3100/loki/api/v1/push"
+      //   }
+      // }
       prometheus.remote_write "prometheus" {
         endpoint {
           url = "http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc:9090/api/v1/write"
