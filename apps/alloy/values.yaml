@@ -20,18 +20,18 @@ alloy:
       // Syslog Receivers
       // Maybe replace with:
       //   https://grafana.com/docs/alloy/latest/reference/components/otelcol/otelcol.receiver.syslog/
-      loki.source.syslog "local" {
-        listener {
-          address  = "0.0.0.0:5100"
-          labels   = {component = "loki.source.syslog", protocol = "tcp"}
-        }
-        listener {
-          address  = "0.0.0.0:5100"
-          protocol = "udp"
-          labels   = {component = "loki.source.syslog", protocol = "udp"}
-        }
-        forward_to = [loki.process.cleanup.receiver]
-      }
+      // loki.source.syslog "local" {
+      //   listener {
+      //     address  = "0.0.0.0:5100"
+      //     labels   = {component = "loki.source.syslog", protocol = "tcp"}
+      //   }
+      //   listener {
+      //     address  = "0.0.0.0:5100"
+      //     protocol = "udp"
+      //     labels   = {component = "loki.source.syslog", protocol = "udp"}
+      //   }
+      //   forward_to = [loki.process.cleanup.receiver]
+      // }
       // End Syslog Receivers
 
 
