@@ -217,16 +217,16 @@ loki:
     tsdb_precompute_chunks: true # false
     volume_enabled: true # true
     otlp_config:
-      log_attributes:
-      - action: structured_metadata
-        attributes:
-        - hostname
-    #     - service
-    #     - service_name
-    #     - service.name
+      # log_attributes:
+      # - action: structured_metadata
+      #   attributes:
+      #   - hostname
+      #   - service
+      #   - service_name
+      #   - service.name
       resource_attributes:
         attributes_config:
-        - action: structured_metadata
+        - action: index_label
           attributes:
           - hostname
 
