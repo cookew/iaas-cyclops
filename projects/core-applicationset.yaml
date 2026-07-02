@@ -77,32 +77,32 @@ spec:
 
       - name: alloy
       - name: alloy-logs
+      - name: crossplane-provider-opentofu
+      - name: cyberchef
+      - name: drawio
       - name: descheduler
       - name: forecastle
       - name: github-arc
+      - name: gitlab
+      - name: guacamole
       - name: grafana
       - name: harbor
+      - name: headlamp
+      - name: jupyterhub
+      - name: kubevirt-manager
       - name: loki
+      - name: mattermost-operator
+      - name: mattermost
+      - name: nvidia-gpu-operator
       - name: nvme-exporter
+      - name: ollama
+      - name: open-webui
+      - name: pyroscope
       - name: reloader
+      - name: tempo
+      - name: whoami
 
-      # - name: crossplane-provider-opentofu
-      # - name: cyberchef
-      # - name: drawio
-      # - name: gitlab
-      # - name: guacamole
-      # - name: headlamp
-      # - name: jupyterhub
-      # - name: kubevirt-manager
-      # - name: mattermost-operator
-      # - name: mattermost
-      # - name: nvidia-gpu-operator
-      # - name: ollama
-      # - name: open-webui
       # - name: openbao
-      # - name: pyroscope
-      # - name: tempo
-      # - name: whoami
 
       # These are in testing
       # - name: argo-workflows
