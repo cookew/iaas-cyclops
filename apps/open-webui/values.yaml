@@ -194,8 +194,8 @@ extraEnvVars:
   - name: WEB_SECRET_KEY
     valueFrom:
       secretKeyRef:
-        key: open-webui-web-secret-key
-        name: WEB_SECRET_KEY
+        key: WEB_SECRET_KEY
+        name: open-webui-web-secret-key
 
   # - name: DATABASE_TYPE
   #   value: postgresql
