@@ -4,10 +4,8 @@ kind: Kustomization
 namespace: terminals
 
 resources:
-- base/terminals-keycloak-client.yaml
-- base/terminals-objectbucketclaim.yaml
-- base/terminals-pg-cluster.yaml
-- sealed-secrets/terminals-keycloak-client.yaml
+# - base/terminals-pg-cluster.yaml
+- sealed-secrets/terminals-api-key.yaml
 
 helmCharts:
 - name: terminals

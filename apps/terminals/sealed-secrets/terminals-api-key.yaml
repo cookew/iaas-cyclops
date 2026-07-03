@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: terminals-api-key
+  namespace: terminals
+spec:
+  encryptedData:
+    api-key: AgAzo/6AoI0j3YHGpgWdDVFAadp4YO8eCVTOd3Z9szMQ8M6pLgVWNHepDvU1lt/duIuARa2imvtYGSKXdY8qvWWGZkka+uZ6nVsgj01CRLDL8LJRLhzy8GsM3HN5u8wuKO1INPazTSTxKd1yqKYgMFbsy4xAvRvhnAdwQ42+6JKu7pZCz10jIFPwABVW5nD/XmEeBWnLkwGbKKwZ4N4bsAmGMnUNXBTC1kZTYRfIeATwOm9oEdCAfYp3iqwGgNoRcn+v8C+LFhHm3YMVWeu2kLfLRsTwhBrlErJreg8dzuWxuVBq4JExCIDihnvK3nYrh+HZAC9TdlaRjoM24FrcyJxWotqyD7YAJKWo7vnCmdc1CoLMJVv/EUpHQd8HqTNeEbr8S06hHhXHu/4K6nI9FLWTCTdi93yRx9tCYrTt0Se8eo3pdQo3h6WDUdUBX9OdIcCakaK8CMyB/lh74LtdottyTg6edO7yb2Uqb3rUob7UsocYDlTPZ/4uIEJtPuSVa9cRzKFWs1T4xONx2MczGS869FRX5saeQ9SKwrdAC4SZtqDxfJjb4BLbwM/uRVQcTl6b+gL5RHditJ/X6G0e//rqGUI+++a9ViuQL5x3fN1Dx8Ylah/FlB+zKZOYGD+9CiN4wc6ai7jUngMFhBz3TkMURYFWmChTKvKWM3vI5xskajWvlr2KdBerHMnFem8+5wQy3bJFGW0BuwPaOJKTUtlPYvdvcPtf/Z28Pr1ixUq/lNG4rTSlMnU8
+  template:
+    metadata:
+      name: terminals-api-key
+      namespace: terminals
+    type: stringData
