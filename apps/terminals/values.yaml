@@ -60,16 +60,16 @@ networkPolicy:
     ingress: []
 
 operator:
-  containerSecurityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-      - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: false  # upstream image runs as root; set true only with a non-root image
-    runAsUser: 65534
-    seccompProfile:
-      type: RuntimeDefault
+  # containerSecurityContext:
+  #   allowPrivilegeEscalation: false
+  #   capabilities:
+  #     drop:
+  #     - ALL
+  #   readOnlyRootFilesystem: true
+  #   runAsNonRoot: false  # upstream image runs as root; set true only with a non-root image
+  #   runAsUser: 65534
+  #   seccompProfile:
+  #     type: RuntimeDefault
   podSecurityContext:
     runAsNonRoot: true  # verify image supports non-root before enabling
     runAsUser: 65534
