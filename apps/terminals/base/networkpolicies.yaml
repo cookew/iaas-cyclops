@@ -25,7 +25,7 @@ spec:
         matchLabels:
           app.kubernetes.io/component: open-webui
           app.kubernetes.io/instance: open-webui
-          name: open-webui
+          app.kubernetes.io/name: open-webui
   podSelector:
     matchLabels:
       app.kubernetes.io/component: orchestrator
