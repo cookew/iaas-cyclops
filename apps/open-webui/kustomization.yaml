@@ -9,6 +9,7 @@ resources:
 - base/open-webui-pg-cluster.yaml
 - sealed-secrets/open-webui-keycloak-client.yaml
 - sealed-secrets/open-webui-terminals-api-key.yaml
+- sealed-secrests/open-webui-web-secret-key.yaml
 
 helmCharts:
 - name: open-webui
