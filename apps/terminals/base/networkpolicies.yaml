@@ -37,25 +37,15 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: orchestrator-to-terminal
+  name: allow-all-intra-namespace
 spec:
+  egress:
+  - to:
+    - podSelector: {}
   ingress:
-  - ports:
-    - port: 8000
-      protocol: TCP
-    from:
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: terminals
-      podSelector:
-        matchLabels:
-          app.kubernetes.io/component: orchestrator
-          app.kubernetes.io/instance: terminals
-          app.kubernetes.io/name: terminals-orchestrator
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/part-of: open-terminal
-      app.kubernetes.io/name: open-terminal
+    - from:
+        - podSelector: {}
+  podSelector: {}
   policyTypes:
+  - Egress
   - Ingress
----
