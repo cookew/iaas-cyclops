@@ -29,6 +29,7 @@ ollama:
     - mistral
     - mistral-medium-3.5
     - qwen3.5:9b
+    - qwen3.5:27b
 
     # -- List of models to load in memory at container startup
     # run:
@@ -42,6 +43,7 @@ ollama:
     - mistral
     - mistral-medium-3.5
     - qwen3.5:9b
+    - qwen3.5:27b
 
     # -- List of models to create at container startup, there are two options
     # 1. Create a raw model
