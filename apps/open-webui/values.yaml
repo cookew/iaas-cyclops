@@ -190,7 +190,7 @@ extraEnvVars:
   - name: ENABLE_COMMUNITY_SHARING
     value: "False"
   - name: DEFAULT_MODEL_PARAMS
-    value: '{"function_calling": "native"}'
+    value: '{"function_calling": "native", "num_ctx": 5000}'
   - name: WEBUI_SECRET_KEY
     valueFrom:
       secretKeyRef:
