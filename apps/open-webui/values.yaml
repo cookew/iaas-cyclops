@@ -185,6 +185,11 @@ extraEnvVars:
   - name: TERMINAL_SERVER_CONNECTIONS
     value: '[{"id":"terminals","name":"Terminals","enabled":true,"url":"http://terminals-orchestrator.terminals.svc:8080","key":"$(TERMINALS_API_KEY)","auth_type":"bearer","config":{"access_grants":[{"principal_type":"user","principal_id":"*","permission":"read"}]}}]'
 
+  - name: ENABLE_EVALUATION_ARENA_MODELS
+    value: "False"
+  - name: ENABLE_COMMUNITY_SHARING
+    value: "False"
+
   # - name: DATABASE_TYPE
   #   value: postgresql
   # - name: DATABASE_USER
