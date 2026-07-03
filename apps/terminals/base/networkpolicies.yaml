@@ -7,3 +7,29 @@ spec:
   policyTypes:
   - Ingress
   - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: open-webui-to-orchestrator
+spec:
+  ingress:
+  - ports:
+    - port: 8080
+      protocol: TCP
+    from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: open-webui
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/component: open-webui
+          app.kubernetes.io/instance: open-webui
+          name: open-webui
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: orchestrator
+      app.kubernetes.io/instance: terminals
+      app.kubernetes.io/name: terminals-orchestrator
+  policyTypes:
+  - Ingress
