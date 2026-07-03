@@ -9,6 +9,7 @@ resources:
 
 helmCharts:
 - name: terminals
+  includeCRDs: true
   namespace: terminals
   releaseName: terminals
   repo: https://helm.openwebui.com
