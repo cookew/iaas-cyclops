@@ -93,10 +93,6 @@ orchestrator:
   #   runAsUser: 65534
   #   fsGroup: 65534
   replicaCount: 1
-  service:
-    containerPort: 8080
-    port: 8080
-    type: ClusterIP
   terminalImage: ghcr.io/open-webui/open-terminal:latest
   terminalImagePullPolicy: IfNotPresent
 
