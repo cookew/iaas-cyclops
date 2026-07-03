@@ -191,11 +191,11 @@ extraEnvVars:
     value: "False"
   - name: DEFAULT_MODEL_PARAMS
     value: '{"function_calling": "native"}'
-  - name: WEB_SECRET_KEY
+  - name: WEBUI_SECRET_KEY
     valueFrom:
       secretKeyRef:
-        key: WEB_SECRET_KEY
-        name: open-webui-web-secret-key
+        key: WEBUI_SECRET_KEY
+        name: open-webui-webui-secret-key
 
   # - name: DATABASE_TYPE
   #   value: postgresql
