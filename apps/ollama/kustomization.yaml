@@ -13,3 +13,9 @@ helmCharts:
   repo: https://helm.otwld.com/
   valuesFile: values.yaml
   version: 1.64.0
+- name: ollama
+  namespace: ollama
+  releaseName: ollama-light
+  repo: https://helm.otwld.com/
+  valuesFile: values-light.yaml
+  version: 1.64.0

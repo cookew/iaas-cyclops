@@ -1,0 +1,65 @@
+# https://github.com/otwld/ollama-helm/blob/main/values.yaml
+
+ollama:
+  port: 11434
+
+  gpu:
+    enabled: false
+    draEnabled: false
+    mig:
+      enabled: false
+
+  models:
+    pull:
+    - mistral
+
+    run:
+    - mistral
+
+    clean: true
+
+  insecure: false
+
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    # forecastle.stakater.com/appName: Ollama
+    # forecastle.stakater.com/expose: "true"
+    # forecastle.stakater.com/group: Apps
+    # # forecastle.stakater.com/icon: https://ollama.apps.iaas.wcooke.me/assets/images/logo.png
+    # forecastle.stakater.com/network-restricted: "true"
+  className: cilium
+  enabled: true
+  hosts:
+  - host: ollama-light.apps.iaas.wcooke.me
+    paths:
+    - path: /
+      pathType: Prefix
+  tls:
+  - hosts:
+    - ollama-light.apps.iaas.wcooke.me
+    secretName: ollama-light-tls
+
+nodeSelector:
+  kubernetes.io/hostname: amd64
+
+persistentVolume:
+  accessModes:
+  - ReadWriteOnce
+  enabled: true
+  size: 50Gi
+  storageClass: ceph-filesystem
+
+replicaCount: 1
+
+resources:
+  limits: {}
+    # cpu: 4000m
+    # memory: 8192Mi
+  requests:
+    cpu: 1200m
+    memory: 32Gi
+
+serviceAccount:
+  automount: false
+  create: false
