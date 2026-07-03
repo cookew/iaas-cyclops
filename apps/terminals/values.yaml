@@ -1,0 +1,70 @@
+# https://github.com/open-webui/helm-charts/blob/main/charts/terminals/values.yaml
+
+# -- Enable or disable the terminals subchart
+enabled: false
+
+existingSecret: terminals-api-key
+
+networkPolicy:
+  enabled: true
+  terminalPodSelector:
+    app.kubernetes.io/component: terminal
+  operator:
+    # -- Custom egress rules for the operator pod
+    egress: []
+  orchestrator:
+    # -- Custom ingress rules for the orchestrator pod
+    ingress: []
+    # -- Custom egress rules for the orchestrator pod
+    egress: []
+  terminals:
+    # -- Custom ingress rules for terminal pods
+    ingress: []
+    # -- Custom egress rules for terminal pods
+    egress: []
+
+operator:
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: false  # upstream image runs as root; set true only with a non-root image
+    runAsUser: 65534
+    seccompProfile:
+      type: RuntimeDefault
+  podSecurityContext:
+    runAsNonRoot: true  # verify image supports non-root before enabling
+    runAsUser: 65534
+    fsGroup: 65534
+  replicaCount: 2
+
+orchestrator:
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: false
+    runAsNonRoot: false  # upstream image runs as root; set true only with a non-root image
+    runAsUser: 65534
+    seccompProfile:
+      type: RuntimeDefault
+  idleTimeoutMinutes: 30
+  podSecurityContext:
+    runAsNonRoot: true  # verify image supports non-root before enabling
+    runAsUser: 65534
+    fsGroup: 65534
+  replicaCount: 2
+  service:
+    containerPort: 8080
+    port: 8080
+    type: ClusterIP
+  terminalImage: ghcr.io/open-webui/open-terminal:latest
+  terminalImagePullPolicy: IfNotPresent
+
+terminalDefaults:
+  persistence:
+    size: 1Gi
+    storageClass: ceph-filesystem

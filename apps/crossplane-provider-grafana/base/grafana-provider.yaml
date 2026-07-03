@@ -3,4 +3,4 @@ kind: Provider
 metadata:
   name: provider-grafana
 spec:
-  package: xpkg.upbound.io/grafana/provider-grafana:v2.12.0
+  package: xpkg.upbound.io/grafana/provider-grafana:v2.13.0

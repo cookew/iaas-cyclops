@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: terminals
+
+resources:
+- base/terminals-keycloak-client.yaml
+- base/terminals-objectbucketclaim.yaml
+- base/terminals-pg-cluster.yaml
+- sealed-secrets/terminals-keycloak-client.yaml
+
+helmCharts:
+- name: terminals
+  namespace: terminals
+  releaseName: terminals
+  repo: https://helm.openwebui.com
+  version: 15.2.0
+  valuesFile: values.yaml
