@@ -12,5 +12,5 @@ helmCharts:
   namespace: terminals
   releaseName: terminals
   repo: https://helm.openwebui.com
-  version: 15.2.0
+  version: 0.5.0
   valuesFile: values.yaml
