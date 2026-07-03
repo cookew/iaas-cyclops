@@ -177,6 +177,14 @@ extraEnvVars:
   - name: AUDIO_STT_ENGINE
     value: webapi
 
+  - name: TERMINALS_API_KEY
+    valueFrom:
+      secretKeyRef:
+        key: api-key
+        name: terminals-api-key
+  - name: TERMINAL_SERVER_CONNECTIONS
+    value: '[{"id":"terminals","name":"Terminals","enabled":true,"url":"http://terminals-orchestrator.terminas.svc:8080","key":"$(TERMINALS_API_KEY)","auth_type":"bearer","config":{"access_grants":[{"principal_type":"user","principal_id":"*","permission":"read"}]}}]'
+
   # - name: DATABASE_TYPE
   #   value: postgresql
   # - name: DATABASE_USER

@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: open-webui-terminals-api-key
+  namespace: open-webui
+spec:
+  encryptedData:
+    api-key: AgAsnVNpK2aNlG5cXUgYlXQvNTnmR1gqxJofyTBYnBwE1q57/93p3+eUL9lUwzWptLcWvvJhXqblSTxLKxvUltQ/9gt1SyWpGF7K5YXdu7f+u12EnNvK6cyYh/ARbELId27TkDFqGjBYbvTVxDKAwAmDMliUBz/W9SYSCDjYJd2oPKNYBGjyeV/o09Q0o0YfRc7hdbN2m+FVjHs+8pVnYPnlYQZ8e8/vE5jJsFFKQ4jLRT/gdop0p9QLgf2D4WlPTr4WGSlA2GrbrLF7pwMmRHD4IHuCDLQRCC3VFiwcjuXBvc9ACKxywbN6NbP1dKbwlGkuIvREkcnfwcdirmcZZKItN2ub6vaODN/WFF1NM1vkvBKumiNbQE/vjUVQRnziY8irMiQ8ch63EqkWs+JiqY5nzQCnePi6Und9Nvhg70KtZfM1MLzB0TD4YHBaqhvhpwcvtLseNze6rUEXMhlMlsN5aX3/ox1cZPw1tkHggfplYWy1IqOipoidxcZziaQTVGgTpgjhJ/x98qmzfhm9Z6x88Kl+s/Zk8cYTTP2Hw8HEXxYRc4omqdEDb72gBnGLgdqKLIELvGExeBKntXqqhHC39J3OfJWAZhKs3qms0x9x3rbzw1hwEp0Oy1nltDLfAe/N8wu5uhphyM2Hs7FvESgplYTwooOR2sQ6mPkhuKSNRGFfxYtEiKChi0Edct24VUQ2vsVT2CNbZQBYmos4j9/Qxh2Ia3xTph96sYXdrM+7QoPSd7t1hHEe
+  template:
+    metadata:
+      name: open-webui-terminals-api-key
+      namespace: open-webui
+    type: stringData
