@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: terminals
 
 resources:
-# - base/terminals-pg-cluster.yaml
+- base/networkpolicies.yaml
 - sealed-secrets/terminals-api-key.yaml
 
 helmCharts:
