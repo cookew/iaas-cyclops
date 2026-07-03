@@ -41,7 +41,7 @@ ingress:
     secretName: ollama-light-tls
 
 nodeSelector:
-  kubernetes.io/hostname: amd64
+  kubernetes.io/hostname: amd64-2
 
 persistentVolume:
   accessModes:
