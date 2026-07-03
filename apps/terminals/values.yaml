@@ -70,10 +70,10 @@ operator:
   #   runAsUser: 65534
   #   seccompProfile:
   #     type: RuntimeDefault
-  podSecurityContext:
-    runAsNonRoot: true  # verify image supports non-root before enabling
-    runAsUser: 65534
-    fsGroup: 65534
+  # podSecurityContext:
+  #   runAsNonRoot: true  # verify image supports non-root before enabling
+  #   runAsUser: 65534
+  #   fsGroup: 65534
   replicaCount: 1
 
 orchestrator:
