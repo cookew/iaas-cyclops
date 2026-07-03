@@ -88,6 +88,7 @@ ingress:
     secretName: ollama-tls
 
 nodeSelector:
+  kubernetes.io/hostname: amd64-1
   cpu-model.node.kubevirt.io/SandyBridge: "true"
 
 persistentVolume:

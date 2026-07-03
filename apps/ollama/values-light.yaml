@@ -4,10 +4,16 @@ ollama:
   port: 11434
 
   gpu:
-    enabled: false
+    enabled: true
     draEnabled: false
+    draDriverClass: gpu.nvidia.com
+    draExistingClaimTemplate: ""
+    type: nvidia
+    number: 1
+    nvidiaResource: nvidia.com/gpu
     mig:
       enabled: false
+      devices: {}
 
   models:
     pull:
@@ -15,6 +21,8 @@ ollama:
 
     run:
     - mistral
+
+    create: []
 
     clean: true
 
@@ -42,6 +50,7 @@ ingress:
 
 nodeSelector:
   kubernetes.io/hostname: amd64-2
+  cpu-model.node.kubevirt.io/SandyBridge: "true"
 
 persistentVolume:
   accessModes:
