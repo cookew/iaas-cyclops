@@ -189,6 +189,8 @@ extraEnvVars:
     value: "False"
   - name: ENABLE_COMMUNITY_SHARING
     value: "False"
+  - name: DEFAULT_MODEL_PARAMS
+    value: '{"function_calling": "native"}'
 
   # - name: DATABASE_TYPE
   #   value: postgresql
