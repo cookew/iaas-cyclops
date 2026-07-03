@@ -75,6 +75,7 @@ operator:
   #   runAsUser: 65534
   #   fsGroup: 65534
   replicaCount: 1
+  resources: {}
 
 orchestrator:
   # containerSecurityContext:
