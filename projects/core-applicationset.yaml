@@ -116,7 +116,7 @@ spec:
       #   namespace: istio-system
       # - name: kubescape
       # - name: kubevirt-templates
-      # - name: neuvector
+      - name: neuvector
 
   template:
     metadata:
