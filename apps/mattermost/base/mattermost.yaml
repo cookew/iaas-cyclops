@@ -640,7 +640,7 @@ spec:
     nodeSelector:
       kubernetes.io/arch: amd64
   # size: 100users
-  version: 11.8.2
+  version: 11.8.3
   volumeMounts:
   - mountPath: /certs
     name: certificates
