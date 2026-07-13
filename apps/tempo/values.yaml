@@ -55,12 +55,16 @@ global:
   - secretRef:
       name: tempo-bucket
 
-ingester:
-  autoscaling:
-    enabled: true
-  extraArgs:
-  - -config.expand-env=true
-  maxUnavailable: 1
+ingest:
+  kafka:
+    address: kafka.kafka.svc:9092
+
+# ingester:
+#   autoscaling:
+#     enabled: true
+#   extraArgs:
+#   - -config.expand-env=true
+#   maxUnavailable: 1
 
 ingress:
   enabled: false
@@ -160,9 +164,6 @@ metricsGenerator:
       # -- A list of remote write endpoints.
       # -- https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write
       remote_write: []
-    # -- Used by the local blocks processor to store a wal for traces.
-    traces_storage:
-      path: /var/tempo/traces
     metrics_ingestion_time_range_slack: 30s
 
 multitenancyEnabled: false
