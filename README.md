@@ -68,6 +68,7 @@ GitLab
     kubectl -n gitlab get secrets gitlab-gitlab-initial-root-password -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
     ```
 
+<!-- markdownlint-disable-next-line no-bare-urls -->
 * Use this URL to login as root to assign your user admin priviledges. https://gitlab.apps.iaas.wcooke.me/users/sign_in?auto_sign_in=false
 
 Keycloak
