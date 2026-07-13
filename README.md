@@ -1,67 +1,85 @@
-# About
+# Kubernetes Deployment
 
 This is a mirror of my of git repository I use with [ArgoCD](https://argoproj.github.io/cd/) for deploying my Kubernetes cluster cluster that was originally deployed with [ansible-kubernetes](https://github.com/cyclops-k8s/ansible-kubernetes).
 
-# Deploy
+## Deploy
 
 1. Deploy manifests.
-   ```
-   kustomize build --enable-helm deploy/ | kubectl apply --server-side -f -
-   ```
+
+    ```bash
+    kustomize build --enable-helm deploy/ | kubectl apply --server-side -f -
+    ```
+
 1. Re-encrypt the sealed secrets, update the git repo.
 1. Re-deploy manifests.
-   ```
-   kustomize build --enable-helm deploy/ | kubectl apply --server-side -f -
-   ```
-1. Update ceph minimum placement groups, if needed.
-   ```
-   # Determine if there is a problem
-   kubectl -n rook-ceph-cluster describe cephobjectstore
-   # Fix pg_num_min
-   kubectl -n rook-ceph-cluster exec deploy/rook-ceph-tools -- ceph osd pool set .rgw.root pg_num_min 8
-   ```
-1. Delete the super-user group to auto-add admin roles from various apps to the group.
-   ```
-   kubectl delete roles.group.keycloak.crossplane.io super-users
-   ```
 
-# Sealed Secrets
+    ```bash
+    kustomize build --enable-helm deploy/ | kubectl apply --server-side -f -
+    ```
+
+1. Update ceph minimum placement groups, if needed.
+
+    ```bash
+    # Determine if there is a problem
+    kubectl -n rook-ceph-cluster describe cephobjectstore
+    # Fix pg_num_min
+    kubectl -n rook-ceph-cluster exec deploy/rook-ceph-tools -- ceph osd pool set .rgw.root pg_num_min 8
+    ```
+
+1. Delete the super-user group to auto-add admin roles from various apps to the group.
+
+    ```bash
+    kubectl delete roles.group.keycloak.crossplane.io super-users
+    ```
+
+## Sealed Secrets
 
 Sealed secrets are used for the cert-manager cluster CA cert and key, and for the Argo SSH key. The sealed secrets should be placed in those app's sealed-secrets directory.
 
 * /apps/argocd/sealed-secrets
 * /apps/cert-manager-certs/sealed-secrets
 
-# Login info
+## Login info
 
 ArgoCD
+
 * Username: admin
 * Password:
-  ```
-  kubectl -n argocd get secrets argocd-secret -o go-template='{{index .data "admin.password" | base64decode | printf "%s\n"}}'
-  ```
+
+    ```bash
+    kubectl -n argocd get secrets argocd-secret -o go-template='{{index .data "admin.password" | base64decode | printf "%s\n"}}'
+    ```
 
 Ceph
+
 * Username: admin
 * Password:
-  ```
-  kubectl -n rook-ceph-cluster get secrets rook-ceph-dashboard-password -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
-  ```
+
+    ```bash
+    kubectl -n rook-ceph-cluster get secrets rook-ceph-dashboard-password -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
+    ```
 
 GitLab
+
 * Username: root
 * Password:
-  ```
-  kubectl -n gitlab get secrets gitlab-gitlab-initial-root-password -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
-  ```
+
+    ```bash
+    kubectl -n gitlab get secrets gitlab-gitlab-initial-root-password -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
+    ```
+
 * Use this URL to login as root to assign your user admin priviledges. https://gitlab.apps.iaas.wcooke.me/users/sign_in?auto_sign_in=false
 
 Keycloak
+
 * Username:
-  ```
-  kubectl -n keycloak get secrets keycloak-user -o go-template='{{index .data "username" | base64decode | printf "%s\n"}}'
-  ```
+
+    ```bash
+    kubectl -n keycloak get secrets keycloak-user -o go-template='{{index .data "username" | base64decode | printf "%s\n"}}'
+    ```
+
 * Password:
-  ```
-  kubectl -n keycloak get secrets keycloak-user -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
-  ```
+
+    ```bash
+    kubectl -n keycloak get secrets keycloak-user -o go-template='{{index .data "password" | base64decode | printf "%s\n"}}'
+    ```
