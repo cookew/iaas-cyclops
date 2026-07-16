@@ -21,18 +21,18 @@ webhook:
   # caBundle is the PEM-encoded CA trust bundle for the webhook certificate. Only required if manageCerts is false and certManagerCert is null.
   caBundle: Cg==
   # certManagerCert is the name of the cert-manager certificate to use with the webhook.
-  certManagerCert: null
+  certManagerCert: eck-operator-webhook-cert
   # certsDir is the directory to mount the certificates.
   certsDir: "/tmp/k8s-webhook-server/serving-certs"
   # manageCerts determines whether the operator manages the webhook certificates automatically.
-  manageCerts: true
+  manageCerts: false
   # objectSelector corresponds to the objectSelector property of the webhook.
   # Setting this restricts the webhook to act only on objects that match the selector.
   objectSelector: {}
   # port is the port that the validating webhook binds to.
   port: 9443
   # secret specifies the Kubernetes secret to be mounted into the path designated by the certsDir value to be used for webhook certificates.
-  certsSecret: ""
+  certsSecret: eck-operator-webhook-cert
 
 # dnsConfig defines the DNS configuration for the operator pod.
 # Check https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config for more details.
