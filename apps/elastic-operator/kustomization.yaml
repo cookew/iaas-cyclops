@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+- name: elastic-operator
+  includeCRDs: true
+  namespace: elastic-operator
+  releaseName: elastic-operator
+  repo: https://helm.elastic.co
+  valuesFile: values.yaml
+  version: 2.1.1
