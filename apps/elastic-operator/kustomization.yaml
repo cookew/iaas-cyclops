@@ -2,10 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 helmCharts:
-- name: elastic-operator
+- name: eck-operator
   includeCRDs: true
-  namespace: elastic-operator
-  releaseName: elastic-operator
+  namespace: eck-operator
+  releaseName: eck-operator
   repo: https://helm.elastic.co
   valuesFile: values.yaml
   version: 3.4.1

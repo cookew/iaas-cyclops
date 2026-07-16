@@ -81,7 +81,7 @@ spec:
       - name: cyberchef
       - name: drawio
       - name: descheduler
-      - name: elastic-operator
+      - name: eck-operator
       - name: forecastle
       - name: github-arc
       - name: gitlab
