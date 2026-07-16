@@ -8,4 +8,4 @@ helmCharts:
   releaseName: elastic-operator
   repo: https://helm.elastic.co
   valuesFile: values.yaml
-  version: 2.1.1
+  version: 3.4.1
