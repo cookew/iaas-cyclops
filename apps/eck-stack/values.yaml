@@ -8,11 +8,11 @@ eck-apm-server:
   monitoring:
     logs:
       elasticsearchRefs:
-      - name: elasticsearch
+      - name: eck-monitoring
         namespace: eck-monitoring
     metrics:
       elasticsearchRefs:
-      - name: elasticsearch
+      - name: eck-monitoring
         namespace: eck-monitoring
 
 eck-autoops-agent-policy:
@@ -25,15 +25,15 @@ eck-elasticsearch:
   # auth:
   #   disableElasticUser: true
   enabled: true
-  fullnameOverride: elasticsearch
+  fullnameOverride: eck-stack
   monitoring:
     logs:
       elasticsearchRefs:
-      - name: elasticsearch
+      - name: eck-monitoring
         namespace: eck-monitoring
     metrics:
       elasticsearchRefs:
-      - name: elasticsearch
+      - name: eck-monitoring
         namespace: eck-monitoring
   nodeSets:
   - config:
@@ -114,11 +114,11 @@ eck-fleet-server:
   monitoring:
     logs:
       elasticsearchRefs:
-      - name: elasticsearch
+      - name: eck-monitoring
         namespace: eck-monitoring
     metrics:
       elasticsearchRefs:
-      - name: elasticsearch
+      - name: eck-monitoring
         namespace: eck-monitoring
   revisionHistoryLimit: 1
 
@@ -160,7 +160,7 @@ eck-kibana:
       maxSessions: 5
   count: 2
   elasticsearchRef:
-    name: elasticsearch
+    name: eck-stack
   enabled: true
   # ref: https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-stack-monitoring.html
   ingress:
@@ -185,11 +185,11 @@ eck-kibana:
   monitoring:
     logs:
       elasticsearchRefs:
-      - name: elasticsearch
+      - name: eck-monitoring
         namespace: eck-monitoring
     metrics:
       elasticsearchRefs:
-      - name: elasticsearch
+      - name: eck-monitoring
         namespace: eck-monitoring
   podTemplate:
     spec:
@@ -218,14 +218,16 @@ eck-kibana:
 
 eck-logstash:
   enabled: true
+  elasticsearchRef:
+    name: eck-stack
   monitoring:
     logs:
       elasticsearchRefs:
-      - name: elasticsearch
+      - name: eck-monitoring
         namespace: eck-monitoring
     metrics:
       elasticsearchRefs:
-      - name: elasticsearch
+      - name: eck-monitoring
         namespace: eck-monitoring
 
 eck-package-registry:
@@ -233,9 +235,9 @@ eck-package-registry:
   monitoring:
     logs:
       elasticsearchRefs:
-      - name: elasticsearch
+      - name: eck-monitoring
         namespace: eck-monitoring
     metrics:
       elasticsearchRefs:
-      - name: elasticsearch
+      - name: eck-monitoring
         namespace: eck-monitoring

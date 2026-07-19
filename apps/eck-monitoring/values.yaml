@@ -14,7 +14,7 @@ eck-beats:
 
 eck-elasticsearch:
   enabled: true
-  fullnameOverride: elasticsearch
+  fullnameOverride: eck-monitoring
 
 eck-fleet-server:
   enabled: false
@@ -32,7 +32,7 @@ eck-kibana:
       maxSessions: 5
   count: 2
   elasticsearchRef:
-    name: elasticsearch
+    name: eck-monitoring
   enabled: true
   # ref: https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-stack-monitoring.html
   ingress:
@@ -86,6 +86,8 @@ eck-kibana:
 
 eck-logstash:
   enabled: true
+  elasticsearchRef:
+    name: eck-monitoring
 
 eck-package-registry:
   enabled: true
