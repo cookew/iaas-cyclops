@@ -55,10 +55,6 @@ eck-kibana:
       enabled: true
       secretName: kibana-ingress-tls
   monitoring: {}
-    # metrics:
-    #   elasticsearchRefs:
-    #   - name: elasticsearch
-    #     namespace: eck-monitoring
     # logs:
     #   elasticsearchRefs:
     #   - name: elasticsearch
@@ -71,6 +67,9 @@ eck-kibana:
           secretName: kibana-http-certificate
       containers:
       - name: kibana
+        environment:
+        - name: TELEMETRY_ENABLED
+          value: "false"
         resources:
           limits:
             cpu: 2

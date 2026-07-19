@@ -6,11 +6,11 @@ eck-agent:
 eck-apm-server:
   enabled: true
   monitoring:
-    metrics:
+    logs:
       elasticsearchRefs:
       - name: elasticsearch
         namespace: eck-monitoring
-    logs:
+    metrics:
       elasticsearchRefs:
       - name: elasticsearch
         namespace: eck-monitoring
@@ -22,17 +22,86 @@ eck-beats:
   enabled: false
 
 eck-elasticsearch:
+  # auth:
+  #   disableElasticUser: true
   enabled: true
   fullnameOverride: elasticsearch
   monitoring:
-    metrics:
-      elasticsearchRefs:
-      - name: elasticsearch
-        namespace: eck-monitoring
     logs:
       elasticsearchRefs:
       - name: elasticsearch
         namespace: eck-monitoring
+    metrics:
+      elasticsearchRefs:
+      - name: elasticsearch
+        namespace: eck-monitoring
+  nodeSets:
+  - config:
+      node.roles:
+      - master
+      xpack.security.fips_mode.enabled: true
+    count: 3
+    name: master
+    # podTemplate:
+    # volumeClaimTemplates:
+  - config:
+      node.roles:
+      - data_hot
+      - data_content
+      xpack.security.fips_mode.enabled: true
+    count: 2
+    name: data_hot
+    # podTemplate:
+    # volumeClaimTemplates:
+  - config:
+      node.roles:
+      - data_warm
+      xpack.security.fips_mode.enabled: true
+    count: 2
+    name: data_warm
+    # podTemplate:
+    # volumeClaimTemplates:
+  - config:
+      node.roles:
+      - data_cold
+      xpack.security.fips_mode.enabled: true
+    count: 2
+    name: data_cold
+    # podTemplate:
+    # volumeClaimTemplates:
+  - config:
+      node.roles:
+      - data_frozen
+      xpack.security.fips_mode.enabled: true
+    count: 2
+    name: data_frozen
+    # podTemplate:
+    # volumeClaimTemplates:
+  - config:
+      node.roles:
+      - ingest
+      - transform
+      xpack.security.fips_mode.enabled: true
+    count: 2
+    name: ingest
+    # podTemplate:
+    # volumeClaimTemplates:
+  - config:
+      node.roles:
+      - ml
+      xpack.security.fips_mode.enabled: true
+    count: 2
+    name: ml
+    # podTemplate:
+    # volumeClaimTemplates:
+  - config:
+      node.roles:
+      - remote_cluster_client
+      xpack.security.fips_mode.enabled: true
+    count: 2
+    name: remote_cluster_client
+    # podTemplate:
+    # volumeClaimTemplates:
 
 eck-fleet-server:
   enabled: true
@@ -43,11 +112,11 @@ eck-fleet-server:
         serviceAccountName: fleet-server
         automountServiceAccountToken: true
   monitoring:
-    metrics:
+    logs:
       elasticsearchRefs:
       - name: elasticsearch
         namespace: eck-monitoring
-    logs:
+    metrics:
       elasticsearchRefs:
       - name: elasticsearch
         namespace: eck-monitoring
@@ -60,6 +129,31 @@ eck-kibana:
     server.securityResponseHeaders.strictTransportSecurity: "max-age=31536000"
     server.ssl.certificate: /kibana-http-certs/tls.crt
     server.ssl.key: /kibana-http-certs/tls.key
+    xpack.security.authc.providers:
+      oidc.keycloak:
+        order: 0
+        realm: keycloak
+        accessAgreement:
+          message: |
+            * Ah ah ah, you didn't say the magic word!
+    # basic.basic1:
+    #   order: 1
+    xpack.security.authc.realms.oidc.keycloak:
+      claims.groups: "<example-url>/claims/groups"
+      claims.principal: sub
+      op.authorization_endpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
+      op.endsession_endpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/logout
+      op.issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
+      op.jwkset_path: oidc/jwkset.json
+      op.token_endpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
+      op.userinfo_endpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
+      order: 2
+      rp.client_id: eck-stack
+      rp.post_logout_redirect_uri: https://kibana.apps.iaas.wcooke.me//security/logged_out
+      rp.redirect_uri: https://kibana.apps.iaas.wcooke.me/api/security/oidc/callback
+      rp.response_type: code
+      # ssl.certificate_authorities: ["/oidc/company-ca.pem"]
+    # xpack.security.fips_mode.enabled: true
     xpack.security.session.idleTimeout: "15m"
     xpack.security.session.lifespan: "1d"
     xpack.security.session.concurrentSessions:
@@ -89,11 +183,11 @@ eck-kibana:
       enabled: true
       secretName: kibana-ingress-tls
   monitoring:
-    metrics:
+    logs:
       elasticsearchRefs:
       - name: elasticsearch
         namespace: eck-monitoring
-    logs:
+    metrics:
       elasticsearchRefs:
       - name: elasticsearch
         namespace: eck-monitoring
@@ -105,6 +199,9 @@ eck-kibana:
           secretName: kibana-http-certificate
       containers:
       - name: kibana
+        environment:
+        - name: TELEMETRY_ENABLED
+          value: "false"
         resources:
           limits:
             cpu: 2
@@ -122,11 +219,11 @@ eck-kibana:
 eck-logstash:
   enabled: true
   monitoring:
-    metrics:
+    logs:
       elasticsearchRefs:
       - name: elasticsearch
         namespace: eck-monitoring
-    logs:
+    metrics:
       elasticsearchRefs:
       - name: elasticsearch
         namespace: eck-monitoring
@@ -134,11 +231,11 @@ eck-logstash:
 eck-package-registry:
   enabled: true
   monitoring:
-    metrics:
+    logs:
       elasticsearchRefs:
       - name: elasticsearch
         namespace: eck-monitoring
-    logs:
+    metrics:
       elasticsearchRefs:
       - name: elasticsearch
         namespace: eck-monitoring
