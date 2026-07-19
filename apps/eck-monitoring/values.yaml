@@ -16,8 +16,9 @@ eck-elasticsearch:
   enabled: true
   fullnameOverride: eck-monitoring
   nodeSets:
-  - config:
-      # xpack.security.fips_mode.enabled: true
+  -
+  #  config:
+  #     xpack.security.fips_mode.enabled: true
     count: 3
     name: default
 
