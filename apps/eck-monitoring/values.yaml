@@ -49,7 +49,7 @@ eck-kibana:
       forecastle.stakater.com/appName: Monitoring Kibana
       forecastle.stakater.com/expose: "true"
       forecastle.stakater.com/group: Apps
-      forecastle.stakater.com/icon: https://monitoring-kibana.apps.iaas.wcooke.me/logo.png
+      forecastle.stakater.com/icon: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSIgZGF0YS10eXBlPSJsb2dvRWxhc3RpYyIgdmlld0JveD0iMCAwIDMyIDMyIiBjbGFzcz0iZXVpSWNvbiBjc3MtYXpyeDdjLWV1aUljb24tbCIgcm9sZT0iaW1nIiBkYXRhLXRlc3Qtc3Viaj0iZ2xvYmFsTG9hZGluZ0luZGljYXRvci1oaWRkZW4iIGFyaWEtbGFiZWw9IkVsYXN0aWMgTG9nbyI+PHBhdGggZmlsbD0iIzBCNjRERCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuMiIgZD0iTTI3LjU2NSAxMS4yNDJjNS4xIDEuOTQgNC44NzIgOS4zOTYtLjI0NSAxMS4xMjdsLS4xNjIuMDU1LS4xNjctLjAzOS01LjI4LTEuMjM4LS4yNjgtLjA2My0uMTI3LS4yNDQtMS40LTIuNjktLjIxNy0uNDE3LjM1Mi0uMzEgNi45MDQtNi4wNy4yNzItLjI0LjMzOC4xM1oiPjwvcGF0aD48cGF0aCBmaWxsPSIjOUFEQzMwIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMS4yIiBkPSJtMjIuMDQ3IDIxLjIzOSA0LjggMS4xMjUuMzE2LjA3NC4xMS4zMDQuMDY2LjE5Yy42MjMgMS45NjQtLjI2IDMuNzgtMS42NTIgNC43OTctMS40MzQgMS4wNDgtMy41MSAxLjMyLTUuMTgyLjAyMmwtLjI5LS4yMjUuMDY5LS4zNjEgMS4wMzctNS40NTQuMTE3LS42MTUuNjEuMTQzWiI+PC9wYXRoPjxwYXRoIGZpbGw9IiMxQkE5RjUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjIiIGQ9Im01LjAxIDkuNjMgNS4yNjcgMS4yNTUuMjgzLjA2Ny4xMjIuMjY0IDEuMjM1IDIuNjUuMTg3LjQtLjMyOC4yOTgtNi43MzMgNi4xLS4yNzIuMjQ4LS4zNDUtLjEzMkMxLjkzOSAxOS44My43MiAxNy40NTYuNzUyIDE1LjE1M2MuMDMyLTIuMzA4IDEuMzIxLTQuNjQ0IDMuOTMyLTUuNTA4bC4xNjItLjA1NC4xNjUuMDM5WiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNGMDRFOTgiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjIiIGQ9Ik02LjI4MSA0LjMyYzEuNDE2LTEuMDggMy40OC0xLjM4NyA1LjIyMi0uMDY5bC4yOTcuMjI2LS4wNy4zNjYtMS4wNTMgNS40NzQtLjExOC42MTUtLjYwOS0uMTQ0LTQuOC0xLjEzNy0uMzE2LS4wNzUtLjExLS4zMDZjLS43MDktMS45NjcuMTQ5LTMuODc2IDEuNTU3LTQuOTVaIj48L3BhdGg+PHBhdGggZmlsbD0iIzAyQkNCNyIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuMiIgZD0ibTEyLjQ2NiAxNC40MzMgNy4wMyAzLjIxMS4xODguMDg2LjA5NS4xODMgMS41NTUgMi45ODUuMDk2LjE4NC0uMDQuMjA2LTEuMTY1IDYuMTAxLS4wMjQuMTIyLS4wNjguMTAzYy0yLjY4IDMuOTU4LTYuOTAyIDQuNzEtMTAuMjY4IDMuMjYtMy4zNTYtMS40NDctNS44MzQtNS4wNy01LjEyNi05LjczNmwuMDMzLS4yMS4xNTgtLjE0NCA2Ljg4NC02LjI1LjI5My0uMjY1LjM2LjE2NFoiPjwvcGF0aD48cGF0aCBmaWxsPSIjRkVDNTE0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMS4yIiBkPSJNMTEuODkyIDQuNDFDMTQuNDM4LjY3NiAxOC43NDEuMTA1IDIyLjEzNCAxLjU0YzMuMzkyIDEuNDMzIDUuOTkgNC45MiA1LjEwMiA5LjM2MmwtLjAzOS4yLS4xNTMuMTMzLTcuMDY2IDYuMjEzLS4yOTMuMjU4LS4zNTMtLjE2My03LjAwMi0zLjIxLS4yMDEtLjA5My0uMDk0LS4yLTEuMzgtMi45ODgtLjA4MS0uMTc3LjAzNy0uMTlMMTEuOCA0LjYzM2wuMDIzLS4xMjEuMDctLjEwMloiPjwvcGF0aD48L3N2Zz4=
       forecastle.stakater.com/network-restricted: "true"
       ingress.cilium.io/tls-passthrough: enabled
     className: cilium
@@ -64,12 +64,12 @@ eck-kibana:
   monitoring: {}
     # metrics:
     #   elasticsearchRefs:
-    #   - name: monitoring
-    #     namespace: observability
+    #   - name: elasticsearch
+    #     namespace: eck-monitoring
     # logs:
     #   elasticsearchRefs:
-    #   - name: monitoring
-    #     namespace: observability
+    #   - name: elasticsearch
+    #     namespace: eck-monitoring
   podTemplate:
     spec:
       volumes:
