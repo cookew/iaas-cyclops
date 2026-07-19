@@ -39,7 +39,7 @@ eck-elasticsearch:
   - config:
       node.roles:
       - master
-      xpack.security.fips_mode.enabled: true
+      # xpack.security.fips_mode.enabled: true
     count: 3
     name: master
     # podTemplate:
@@ -48,7 +48,7 @@ eck-elasticsearch:
       node.roles:
       - data_hot
       - data_content
-      xpack.security.fips_mode.enabled: true
+      # xpack.security.fips_mode.enabled: true
     count: 2
     name: data_hot
     # podTemplate:
@@ -56,7 +56,7 @@ eck-elasticsearch:
   - config:
       node.roles:
       - data_warm
-      xpack.security.fips_mode.enabled: true
+      # xpack.security.fips_mode.enabled: true
     count: 2
     name: data_warm
     # podTemplate:
@@ -64,7 +64,7 @@ eck-elasticsearch:
   - config:
       node.roles:
       - data_cold
-      xpack.security.fips_mode.enabled: true
+      # xpack.security.fips_mode.enabled: true
     count: 2
     name: data_cold
     # podTemplate:
@@ -72,7 +72,7 @@ eck-elasticsearch:
   - config:
       node.roles:
       - data_frozen
-      xpack.security.fips_mode.enabled: true
+      # xpack.security.fips_mode.enabled: true
     count: 2
     name: data_frozen
     # podTemplate:
@@ -81,7 +81,7 @@ eck-elasticsearch:
       node.roles:
       - ingest
       - transform
-      xpack.security.fips_mode.enabled: true
+      # xpack.security.fips_mode.enabled: true
     count: 2
     name: ingest
     # podTemplate:
@@ -89,7 +89,7 @@ eck-elasticsearch:
   - config:
       node.roles:
       - ml
-      xpack.security.fips_mode.enabled: true
+      # xpack.security.fips_mode.enabled: true
     count: 2
     name: ml
     # podTemplate:
@@ -97,7 +97,7 @@ eck-elasticsearch:
   - config:
       node.roles:
       - remote_cluster_client
-      xpack.security.fips_mode.enabled: true
+      # xpack.security.fips_mode.enabled: true
     count: 2
     name: remote_cluster_client
     # podTemplate:
