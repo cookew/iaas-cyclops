@@ -1,17 +1,18 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: eck-operator-webhook-cert
+  name: kibana-http-certificate
 spec:
-  commonName: eck-operator-webhook-cert
+  commonName: kibana-http-certificate
   dnsNames:
-    - elastic-webhook-server.eck-operator.svc
+    - kibana.apps.iaas.wcooke.me
+    - kibana.eck-stack.svc
   duration: 960h
   isCA: false
   issuerRef:
     kind: ClusterIssuer
     name: iaas-wcooke-me
-  secretName: eck-operator-webhook-cert
+  secretName: kibana-http-certificate
   usages:
   - client auth
   - server auth

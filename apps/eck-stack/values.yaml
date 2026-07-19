@@ -27,7 +27,14 @@ eck-fleet-server:
   revisionHistoryLimit: 1
 
 eck-kibana:
-  config: null
+  config:
+    csp.strict: true
+    server.securityResponseHeaders.disableEmbedding: true
+    server.securityResponseHeaders.strictTransportSecurity: "max-age=31536000"
+    xpack.security.session.idleTimeout: "15m"
+    xpack.security.session.lifespan: "1d"
+    xpack.security.session.concurrentSessions:
+      maxSessions: 5
   elasticsearchRef:
     name: elasticsearch
   enabled: true
@@ -60,6 +67,18 @@ eck-kibana:
     #   elasticsearchRefs:
     #   - name: monitoring
     #     namespace: observability
+  podTemplate:
+    spec:
+      volumes:
+      - name: kibana-http-certs
+        secret:
+          secretName: kibana-http-certificate
+      containers:
+      - name: kibana
+        volumeMounts:
+        - name: kibana-http-certs
+          mountPath: /kibana-http-certs
+          readOnly: true
   revisionHistoryLimit: 1
   secureSettings: []
 
