@@ -115,6 +115,8 @@ eck-fleet-server:
       spec:
         serviceAccountName: fleet-server
         automountServiceAccountToken: true
+  kibanaRef:
+    name: eck-kibana
   elasticsearchRefs:
   - name: eck-stack
   monitoring:
