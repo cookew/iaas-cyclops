@@ -56,7 +56,7 @@ eck-elasticsearch:
     # volumeClaimTemplates:
   - config:
       node.roles:
-      - data-warm
+      - data_warm
       # xpack.security.fips_mode.enabled: true
     count: 2
     name: data-warm
