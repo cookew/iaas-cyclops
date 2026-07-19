@@ -130,29 +130,29 @@ eck-kibana:
     server.securityResponseHeaders.strictTransportSecurity: "max-age=31536000"
     server.ssl.certificate: /kibana-http-certs/tls.crt
     server.ssl.key: /kibana-http-certs/tls.key
-    xpack.security.authc.providers:
-      oidc.keycloak:
-        order: 0
-        realm: keycloak
-        accessAgreement:
-          message: |
-            * Ah ah ah, you didn't say the magic word!
+    # xpack.security.authc.providers:
+    #   oidc.keycloak:
+    #     order: 0
+    #     realm: keycloak
+    #     accessAgreement:
+    #       message: |
+    #         * Ah ah ah, you didn't say the magic word!
     # basic.basic1:
     #   order: 1
-    xpack.security.authc.realms.oidc.keycloak:
-      claims.groups: "<example-url>/claims/groups"
-      claims.principal: sub
-      op.authorization_endpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
-      op.endsession_endpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/logout
-      op.issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
-      op.jwkset_path: oidc/jwkset.json
-      op.token_endpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
-      op.userinfo_endpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
-      order: 2
-      rp.client_id: eck-stack
-      rp.post_logout_redirect_uri: https://kibana.apps.iaas.wcooke.me//security/logged_out
-      rp.redirect_uri: https://kibana.apps.iaas.wcooke.me/api/security/oidc/callback
-      rp.response_type: code
+    # xpack.security.authc.realms.oidc.keycloak:
+    #   claims.groups: "<example-url>/claims/groups"
+    #   claims.principal: sub
+    #   op.authorization_endpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
+    #   op.endsession_endpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/logout
+    #   op.issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
+    #   op.jwkset_path: oidc/jwkset.json
+    #   op.token_endpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
+    #   op.userinfo_endpoint: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
+    #   order: 2
+    #   rp.client_id: eck-stack
+    #   rp.post_logout_redirect_uri: https://kibana.apps.iaas.wcooke.me//security/logged_out
+    #   rp.redirect_uri: https://kibana.apps.iaas.wcooke.me/api/security/oidc/callback
+    #   rp.response_type: code
       # ssl.certificate_authorities: ["/oidc/company-ca.pem"]
     # xpack.security.fips_mode.enabled: true
     xpack.security.session.idleTimeout: "15m"
