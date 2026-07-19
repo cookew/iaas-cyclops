@@ -59,7 +59,7 @@ eck-elasticsearch:
       - data-warm
       # xpack.security.fips_mode.enabled: true
     count: 2
-    name: data_warm
+    name: data-warm
     # podTemplate:
     # volumeClaimTemplates:
   - config:
