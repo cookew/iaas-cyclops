@@ -5,6 +5,8 @@ eck-agent:
 
 eck-apm-server:
   enabled: true
+  elasticsearchRefs:
+  - name: eck-stack
   monitoring:
     logs:
       elasticsearchRefs:
@@ -114,9 +116,6 @@ eck-fleet-server:
         automountServiceAccountToken: true
   elasticsearchRefs:
   - name: eck-stack
-  # kibanaRef:
-  #   name: eck-stack
-  #   namespace: eck-stack
   monitoring:
     logs:
       elasticsearchRefs:
