@@ -1,16 +1,20 @@
 # https://github.com/elastic/cloud-on-k8s/blob/main/deploy/eck-stack/values.yaml
 
+eck-agent:
+  enabled: false
+
+eck-apm-server:
+  enabled: true
+
+eck-autoops-agent-policy:
+  enabled: false
+
+eck-beats:
+  enabled: false
+
 eck-elasticsearch:
   enabled: true
   fullnameOverride: elasticsearch
-
-eck-kibana:
-  enabled: true
-  elasticsearchRef:
-    name: elasticsearch
-
-eck-agent:
-  enabled: false
 
 eck-fleet-server:
   enabled: true
@@ -22,17 +26,44 @@ eck-fleet-server:
         automountServiceAccountToken: true
   revisionHistoryLimit: 1
 
-eck-beats:
-  enabled: false
+eck-kibana:
+  config: null
+  elasticsearchRef:
+    name: elasticsearch
+  enabled: true
+  # ref: https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-stack-monitoring.html
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+      forecastle.stakater.com/appName: Kibana
+      forecastle.stakater.com/expose: "true"
+      forecastle.stakater.com/group: Apps
+      forecastle.stakater.com/icon: https://kibana.apps.iaas.wcooke.me/logo.png
+      forecastle.stakater.com/network-restricted: "true"
+    className: cilium
+    hosts:
+      - host: kibana.apps.iaas.wcooke.me
+        path: /
+    labels: {}
+    pathType: ImplementationSpecific
+    tls:
+      enabled: true
+      secretName: kibana-ingress-tls
+  monitoring: {}
+    # metrics:
+    #   elasticsearchRefs:
+    #   - name: monitoring
+    #     namespace: observability
+    # logs:
+    #   elasticsearchRefs:
+    #   - name: monitoring
+    #     namespace: observability
+  revisionHistoryLimit: 1
+  secureSettings: []
 
 eck-logstash:
   enabled: true
-
-eck-apm-server:
-  enabled: true
-
-eck-autoops-agent-policy:
-  enabled: false
 
 eck-package-registry:
   enabled: true
