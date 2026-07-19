@@ -41,6 +41,7 @@ eck-kibana:
       forecastle.stakater.com/group: Apps
       forecastle.stakater.com/icon: https://kibana.apps.iaas.wcooke.me/logo.png
       forecastle.stakater.com/network-restricted: "true"
+      ingress.cilium.io/tls-passthrough: enabled
     className: cilium
     hosts:
       - host: kibana.apps.iaas.wcooke.me
