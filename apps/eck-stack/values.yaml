@@ -31,6 +31,8 @@ eck-kibana:
     csp.strict: true
     server.securityResponseHeaders.disableEmbedding: true
     server.securityResponseHeaders.strictTransportSecurity: "max-age=31536000"
+    server.ssl.certificate: /kibana-http-certs/tls.crt
+    server.ssl.key: /kibana-http-certs/tls.key
     xpack.security.session.idleTimeout: "15m"
     xpack.security.session.lifespan: "1d"
     xpack.security.session.concurrentSessions:
