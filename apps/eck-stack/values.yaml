@@ -39,6 +39,7 @@ eck-elasticsearch:
   - config:
       node.roles:
       - master
+      - remote_cluster_client
       # xpack.security.fips_mode.enabled: true
     count: 3
     name: master
@@ -80,7 +81,6 @@ eck-elasticsearch:
   - config:
       node.roles:
       - ingest
-      - transform
       # xpack.security.fips_mode.enabled: true
     count: 2
     name: ingest
@@ -96,10 +96,11 @@ eck-elasticsearch:
     # volumeClaimTemplates:
   - config:
       node.roles:
+      - transform
       - remote_cluster_client
       # xpack.security.fips_mode.enabled: true
     count: 2
-    name: remote_cluster_client
+    name: transform
     # podTemplate:
     # volumeClaimTemplates:
 

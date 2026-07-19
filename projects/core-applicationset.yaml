@@ -83,7 +83,7 @@ spec:
       - name: descheduler
       - name: eck-monitoring
       - name: eck-operator
-      # - name: eck-stack
+      - name: eck-stack
       - name: forecastle
       - name: github-arc
       - name: gitlab
