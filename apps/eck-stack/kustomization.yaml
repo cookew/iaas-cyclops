@@ -6,7 +6,6 @@ resources:
 
 helmCharts:
 - name: eck-stack
-  includeCRDs: false
   namespace: eck-stack
   releaseName: eck-stack
   repo: https://helm.elastic.co

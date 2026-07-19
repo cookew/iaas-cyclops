@@ -5,6 +5,15 @@ eck-agent:
 
 eck-apm-server:
   enabled: true
+  monitoring:
+    metrics:
+      elasticsearchRefs:
+      - name: elasticsearch
+        namespace: eck-monitoring
+    logs:
+      elasticsearchRefs:
+      - name: elasticsearch
+        namespace: eck-monitoring
 
 eck-autoops-agent-policy:
   enabled: false
@@ -15,6 +24,15 @@ eck-beats:
 eck-elasticsearch:
   enabled: true
   fullnameOverride: elasticsearch
+  monitoring:
+    metrics:
+      elasticsearchRefs:
+      - name: elasticsearch
+        namespace: eck-monitoring
+    logs:
+      elasticsearchRefs:
+      - name: elasticsearch
+        namespace: eck-monitoring
 
 eck-fleet-server:
   enabled: true
@@ -24,6 +42,15 @@ eck-fleet-server:
       spec:
         serviceAccountName: fleet-server
         automountServiceAccountToken: true
+  monitoring:
+    metrics:
+      elasticsearchRefs:
+      - name: elasticsearch
+        namespace: eck-monitoring
+    logs:
+      elasticsearchRefs:
+      - name: elasticsearch
+        namespace: eck-monitoring
   revisionHistoryLimit: 1
 
 eck-kibana:
@@ -94,6 +121,24 @@ eck-kibana:
 
 eck-logstash:
   enabled: true
+  monitoring:
+    metrics:
+      elasticsearchRefs:
+      - name: elasticsearch
+        namespace: eck-monitoring
+    logs:
+      elasticsearchRefs:
+      - name: elasticsearch
+        namespace: eck-monitoring
 
 eck-package-registry:
   enabled: true
+  monitoring:
+    metrics:
+      elasticsearchRefs:
+      - name: elasticsearch
+        namespace: eck-monitoring
+    logs:
+      elasticsearchRefs:
+      - name: elasticsearch
+        namespace: eck-monitoring
