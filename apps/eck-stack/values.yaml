@@ -32,7 +32,7 @@ eck-apm-server:
   enabled: true
 
 eck-autoops-agent-policy:
-  enabled: true
+  enabled: false
 
 eck-package-registry:
   enabled: true
