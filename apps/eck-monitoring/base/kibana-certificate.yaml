@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kibana-http-certificate
+spec:
+  commonName: kibana-http-certificate
+  dnsNames:
+    - monitoring-kibana.apps.iaas.wcooke.me
+    - monitoring-kibana.eck-monitoring.svc
+  duration: 960h
+  isCA: false
+  issuerRef:
+    kind: ClusterIssuer
+    name: iaas-wcooke-me
+  secretName: kibana-http-certificate
+  usages:
+  - client auth
+  - server auth

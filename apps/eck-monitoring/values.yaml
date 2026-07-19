@@ -46,30 +46,30 @@ eck-kibana:
     enabled: true
     annotations:
       cert-manager.io/cluster-issuer: iaas-wcooke-me
-      forecastle.stakater.com/appName: Kibana
+      forecastle.stakater.com/appName: Monitoring Kibana
       forecastle.stakater.com/expose: "true"
       forecastle.stakater.com/group: Apps
-      forecastle.stakater.com/icon: https://kibana.apps.iaas.wcooke.me/logo.png
+      forecastle.stakater.com/icon: https://monitoring-kibana.apps.iaas.wcooke.me/logo.png
       forecastle.stakater.com/network-restricted: "true"
       ingress.cilium.io/tls-passthrough: enabled
     className: cilium
     hosts:
-      - host: kibana.apps.iaas.wcooke.me
+      - host: monitoring-kibana.apps.iaas.wcooke.me
         path: /
     labels: {}
     pathType: ImplementationSpecific
     tls:
       enabled: true
       secretName: kibana-ingress-tls
-  monitoring:
-    metrics:
-      elasticsearchRefs:
-      - name: elasticsearch
-        namespace: eck-monitoring
-    logs:
-      elasticsearchRefs:
-      - name: elasticsearch
-        namespace: eck-monitoring
+  monitoring: {}
+    # metrics:
+    #   elasticsearchRefs:
+    #   - name: monitoring
+    #     namespace: observability
+    # logs:
+    #   elasticsearchRefs:
+    #   - name: monitoring
+    #     namespace: observability
   podTemplate:
     spec:
       volumes:
