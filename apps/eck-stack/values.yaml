@@ -17,7 +17,14 @@ eck-elasticsearch:
   fullnameOverride: elasticsearch
 
 eck-fleet-server:
-  enabled: false
+  enabled: true
+  deployment:
+    replicas: 2
+    podTemplate:
+      spec:
+        serviceAccountName: fleet-server
+        automountServiceAccountToken: true
+  revisionHistoryLimit: 1
 
 eck-kibana:
   config:
