@@ -1,5 +1,7 @@
 # https://github.com/elastic/cloud-on-k8s/blob/main/deploy/eck-operator/values.yaml
 
+replicaCount: 2
+
 image:
   fips: true
 

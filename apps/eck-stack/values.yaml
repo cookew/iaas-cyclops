@@ -1,0 +1,31 @@
+# https://github.com/elastic/cloud-on-k8s/blob/main/deploy/eck-stack/values.yaml
+
+eck-elasticsearch:
+  enabled: true
+  fullnameOverride: elasticsearch
+
+eck-kibana:
+  enabled: true
+  elasticsearchRef:
+    name: elasticsearch
+
+eck-agent:
+  enabled: false
+
+eck-fleet-server:
+  enabled: true
+
+eck-beats:
+  enabled: false
+
+eck-logstash:
+  enabled: true
+
+eck-apm-server:
+  enabled: true
+
+eck-autoops-agent-policy:
+  enabled: true
+
+eck-package-registry:
+  enabled: true

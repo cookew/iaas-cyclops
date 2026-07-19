@@ -82,6 +82,7 @@ spec:
       - name: drawio
       - name: descheduler
       - name: eck-operator
+      - name: eck-stack
       - name: forecastle
       - name: github-arc
       - name: gitlab
