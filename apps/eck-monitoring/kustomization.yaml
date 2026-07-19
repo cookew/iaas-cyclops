@@ -5,10 +5,9 @@ resources:
 - base/kibana-certificate.yaml
 
 helmCharts:
-- name: eck-monitoring
-  includeCRDs: true
+- name: eck-stack
   namespace: eck-monitoring
-  releaseName: eck-stack
+  releaseName: eck-monitoring
   repo: https://helm.elastic.co
   valuesFile: values.yaml
   version: 0.19.1
