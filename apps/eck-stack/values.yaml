@@ -51,12 +51,12 @@ eck-elasticsearch:
       - data_content
       # xpack.security.fips_mode.enabled: true
     count: 2
-    name: data_hot
+    name: data-hot
     # podTemplate:
     # volumeClaimTemplates:
   - config:
       node.roles:
-      - data_warm
+      - data-warm
       # xpack.security.fips_mode.enabled: true
     count: 2
     name: data_warm
@@ -67,7 +67,7 @@ eck-elasticsearch:
       - data_cold
       # xpack.security.fips_mode.enabled: true
     count: 2
-    name: data_cold
+    name: data-cold
     # podTemplate:
     # volumeClaimTemplates:
   - config:
@@ -75,7 +75,7 @@ eck-elasticsearch:
       - data_frozen
       # xpack.security.fips_mode.enabled: true
     count: 2
-    name: data_frozen
+    name: data-frozen
     # podTemplate:
     # volumeClaimTemplates:
   - config:
