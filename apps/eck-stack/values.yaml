@@ -61,6 +61,7 @@ eck-elasticsearch:
       node.roles:
       - data_hot
       - data_content
+      - remote_cluster_client
       # xpack.security.fips_mode.enabled: true
     count: 2
     name: data-hot
@@ -129,6 +130,7 @@ eck-elasticsearch:
   - config:
       node.roles:
       - ingest
+      - remote_cluster_client
       # xpack.security.fips_mode.enabled: true
     count: 2
     name: ingest
@@ -273,7 +275,6 @@ eck-kibana:
     hosts:
       - host: kibana.apps.iaas.wcooke.me
         path: /
-    labels: {}
     pathType: ImplementationSpecific
     tls:
       enabled: true
@@ -310,7 +311,6 @@ eck-kibana:
           mountPath: /kibana-http-certs
           readOnly: true
   revisionHistoryLimit: 0
-  secureSettings: []
 
 eck-logstash:
   enabled: true
