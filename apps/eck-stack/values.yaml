@@ -47,7 +47,16 @@ eck-elasticsearch:
     count: 3
     name: master
     # podTemplate:
-    # volumeClaimTemplates:
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: cyclops-fs
   - config:
       node.roles:
       - data_hot
@@ -56,7 +65,16 @@ eck-elasticsearch:
     count: 2
     name: data-hot
     # podTemplate:
-    # volumeClaimTemplates:
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: cyclops-fs
   - config:
       node.roles:
       - data_warm
@@ -64,7 +82,16 @@ eck-elasticsearch:
     count: 2
     name: data-warm
     # podTemplate:
-    # volumeClaimTemplates:
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: cyclops-fs
   - config:
       node.roles:
       - data_cold
@@ -72,7 +99,16 @@ eck-elasticsearch:
     count: 2
     name: data-cold
     # podTemplate:
-    # volumeClaimTemplates:
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: cyclops-fs
   - config:
       node.roles:
       - data_frozen
@@ -80,7 +116,16 @@ eck-elasticsearch:
     count: 2
     name: data-frozen
     # podTemplate:
-    # volumeClaimTemplates:
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: cyclops-fs
   - config:
       node.roles:
       - ingest
@@ -88,7 +133,16 @@ eck-elasticsearch:
     count: 2
     name: ingest
     # podTemplate:
-    # volumeClaimTemplates:
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: cyclops-fs
   - config:
       node.roles:
       - ml
@@ -96,7 +150,16 @@ eck-elasticsearch:
     count: 2
     name: ml
     # podTemplate:
-    # volumeClaimTemplates:
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: cyclops-fs
   - config:
       node.roles:
       - transform
@@ -105,7 +168,32 @@ eck-elasticsearch:
     count: 2
     name: transform
     # podTemplate:
-    # volumeClaimTemplates:
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: cyclops-fs
+  - config:
+      node.roles: []
+      # xpack.security.fips_mode.enabled: true
+    count: 2
+    name: coordinating
+    # podTemplate:
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: cyclops-fs
 
 eck-fleet-server:
   enabled: true
