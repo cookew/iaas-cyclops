@@ -294,6 +294,10 @@ eck-kibana:
       - name: kibana-http-certs
         secret:
           secretName: kibana-http-certificate
+      - configMap:
+          defaultMode: 420
+          name: ca-all
+        name: ca
       containers:
       - name: kibana
         environment:
@@ -310,6 +314,17 @@ eck-kibana:
         - name: kibana-http-certs
           mountPath: /kibana-http-certs
           readOnly: true
+      # - name: filebeat
+      #   volumeMounts:
+      #   - name: kibana-http-certs
+      #     mountPath: /kibana-http-certs
+      #     readOnly: true
+      - name: metricbeat
+        volumeMounts:
+        - mountPath: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+          name: ca
+          readOnly: true
+          subPath: ca-certificates.crt
   revisionHistoryLimit: 0
 
 eck-logstash:

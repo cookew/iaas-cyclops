@@ -94,7 +94,6 @@ eck-kibana:
           mountPath: /kibana-http-certs
           readOnly: true
   revisionHistoryLimit: 0
-  secureSettings: []
 
 eck-logstash:
   enabled: true
