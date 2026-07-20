@@ -21,6 +21,16 @@ eck-elasticsearch:
   #     xpack.security.fips_mode.enabled: true
     count: 3
     name: default
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: cyclops-fs
 
 eck-fleet-server:
   enabled: false
