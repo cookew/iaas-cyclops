@@ -330,7 +330,7 @@ eck-kibana:
         - name: kibana-http-certs
           mountPath: /kibana-http-certs
           readOnly: true
-          subPath: ca.crt
+          # subPath: ca.crt
   revisionHistoryLimit: 0
 
 eck-logstash:
