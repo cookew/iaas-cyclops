@@ -320,11 +320,17 @@ eck-kibana:
       #     mountPath: /kibana-http-certs
       #     readOnly: true
       - name: metricbeat
+        args:
+          - -c
+          - /etc/metricbeat-config/metricbeat.yml
+          - -e
+          - -E
+          - metricbeat.modules.0.ssl.certificate_authorities=['/kibana-http-certs/ca.crt']
         volumeMounts:
-        - mountPath: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
-          name: ca
+        - name: kibana-http-certs
+          mountPath: /kibana-http-certs
           readOnly: true
-          subPath: ca-certificates.crt
+          subPath: ca.crt
   revisionHistoryLimit: 0
 
 eck-logstash:
