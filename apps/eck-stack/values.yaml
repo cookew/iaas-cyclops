@@ -314,6 +314,7 @@ eck-kibana:
 
 eck-logstash:
   enabled: true
+  count: 2
   elasticsearchRef:
     clusterName: eck-stack
     name: eck-stack
@@ -327,6 +328,16 @@ eck-logstash:
       - name: eck-monitoring
         namespace: eck-monitoring
   revisionHistoryLimit: 0
+  volumeClaimTemplates:
+  - metadata:
+      name: logstash-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: cyclops-fs
 
 eck-package-registry:
   enabled: true

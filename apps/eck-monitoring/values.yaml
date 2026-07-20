@@ -71,10 +71,6 @@ eck-kibana:
       enabled: true
       secretName: kibana-ingress-tls
   monitoring: {}
-    # logs:
-    #   elasticsearchRefs:
-    #   - name: elasticsearch
-    #     namespace: eck-monitoring
   podTemplate:
     spec:
       volumes:
@@ -104,6 +100,7 @@ eck-logstash:
   enabled: true
   elasticsearchRef:
     name: eck-monitoring
+  revisionHistoryLimit: 0
 
 eck-package-registry:
   enabled: true
