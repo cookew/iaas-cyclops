@@ -315,6 +315,7 @@ eck-kibana:
 eck-logstash:
   enabled: true
   elasticsearchRef:
+    clusterName: eck-stack
     name: eck-stack
   monitoring:
     logs:
@@ -325,6 +326,7 @@ eck-logstash:
       elasticsearchRefs:
       - name: eck-monitoring
         namespace: eck-monitoring
+  revisionHistoryLimit: 0
 
 eck-package-registry:
   enabled: true
