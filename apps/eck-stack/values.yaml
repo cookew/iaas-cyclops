@@ -314,6 +314,8 @@ eck-kibana:
 
 eck-logstash:
   enabled: true
+  config:
+    monitoring.cluster_uuid: -xuGCwxlTw2VHIbuz1C70g
   count: 2
   elasticsearchRef:
     clusterName: eck-stack
