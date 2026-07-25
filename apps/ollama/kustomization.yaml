@@ -12,7 +12,7 @@ helmCharts:
   releaseName: ollama
   repo: https://helm.otwld.com/
   valuesFile: values.yaml
-  version: 1.66.0
+  version: 1.69.0
 - name: ollama
   namespace: ollama
   releaseName: ollama-light
