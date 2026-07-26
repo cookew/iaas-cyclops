@@ -91,6 +91,10 @@ nodeSelector:
   kubernetes.io/hostname: amd64-1
   cpu-model.node.kubevirt.io/SandyBridge: "true"
 
+extraEnv:
+- name: OLLAMA_ORIGINS
+  value: "*"
+
 persistentVolume:
   accessModes:
   - ReadWriteOnce
