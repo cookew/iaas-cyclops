@@ -1,66 +1,28 @@
 # https://headlamp.dev/docs/latest/installation/in-cluster/
 # https://github.com/kubernetes-sigs/headlamp/blob/main/charts/headlamp/values.yaml
 
-replicaCount: 2
+replicaCount: 1
 
 config:
-
-  # Probably remove this in any version of the helm chart after 0.40.1
-  sessionTTL: null
-
   inCluster: true
   oidc:
     secret:
       create: false
-
-    # -- OIDC client ID
-    #clientID: headlamp
-    # -- OIDC client secret
-    #clientSecret: ""
-    # -- OIDC issuer URL
-    #issuerURL: https://keycloak.apps.iaas.wcooke.me/realms/test
-    # -- OIDC scopes to be used
-    #scopes: email,profile
-    # -- OIDC callback URL
-    #callbackURL: https://headlamp.apps.iaas.wcooke.me/oidc-callback
-
-    # # -- OIDC client to be used during token validation
-    # validatorClientID: ""
-    # # -- OIDC Issuer URL to be used during token validation
-    # validatorIssuerURL: ""
-    # # -- Use 'access_token' instead of 'id_token' when authenticating using OIDC
-    # useAccessToken: false
-    # # -- Use PKCE (Proof Key for Code Exchange) for enhanced security in OIDC flow
-    # usePKCE: false
-
     externalSecret:
       enabled: true
       name: headlamp-oidc-client
-
-    # -- URL to fetch additional user info for the /me endpoint.
-    # For oauth2proxy /oauth2/userinfo can be used. Empty and it will not be used.
     meUserInfoURL: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
-
-  # -- directory to look for plugins
-  pluginsDir: /headlamp/plugins
-  enableHelm: false
   watchPlugins: true
-  # tlsCertPath: "/headlamp-cert/headlamp-ca.crt"
-  # tlsKeyPath: "/headlamp-cert/headlamp-tls.key"
-  # Extra arguments that can be given to the container. See charts/headlamp/README.md for more information.
-  extraArgs: []
 
-# -- An optional list of environment variables
 env:
-# - name: OIDC_USE_PKCE
-#   value: "true"
+- name: OIDC_CLIENT_ID
+  value: kubernetes
 - name: OIDC_ISSUER_URL
   value: https://keycloak.apps.iaas.wcooke.me/realms/iaas
-- name: OIDC_CLIENT_ID
-  # value: headlamp
-  value: kubernetes
 - name: OIDC_SCOPES
   value: profile
+# - name: OIDC_USE_PKCE
+#   value: "true"
 - name: HEADLAMP_CONFIG_OIDC_CA_FILE
   value: /certs/ca-bundle.pem
 # - name: HEADLAMP_CONFIG_ME_USERNAME_PATH
@@ -72,29 +34,22 @@ volumeMounts:
 - mountPath: /certs
   name: ca-certificates
   readOnly: true
-# - name: plugins
-#   mountPath: /headlamp/plugins
 
 volumes:
 - name: ca-certificates
   configMap:
     name: tm-ca-bundle
-# - name: plugins
-#   ephemeral:
-#     volumeClaimTemplate:
-#       spec:
-#         accessModes: [ "ReadWriteOnce" ]
-#         storageClassName: ceph-filesystem
-#         resources:
-#           requests:
-#             storage: 1Gi
+
+persistentVolumeClaim:
+  enabled: true
+  accessModes: ReadWriteMany
+  size: 10Gi
+  storageClassName: ceph-filesystem
+  volumeMode: Filesystem
 
 ingress:
   annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
-    # nginx.ingress.kubernetes.io/backend-protocol: https
-    # nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-    # external-dns.alpha.kubernetes.io/hostname: argocd.apps.iaas.wcooke.me
     forecastle.stakater.com/appName: Headlamp
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Kubernetes
@@ -112,26 +67,8 @@ ingress:
       - headlamp.apps.iaas.wcooke.me
     secretName: chart-example-tls
 
-resources:
-  {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-
-# Plugin Manager Sidecar Container Configuration
 pluginsManager:
-  # -- Enable plugin manager
   enabled: true
-  # -- Plugin configuration file name
-  configFile: "plugin.yml"
-  # -- Plugin configuration content in YAML format. This is required if plugins.enabled is true.
   configContent:  |
     plugins:
     - name: cert-manager
@@ -185,20 +122,3 @@ pluginsManager:
     installOptions:
       parallel: true
       maxConcurrent: 2
-  # -- Base node image to use
-  baseImage: node:lts-alpine
-  # -- Headlamp plugin package version to install
-  version: latest
-  # -- Plugin manager env variable configuration
-  # env:
-  # - name: HTTPS_PROXY
-  #   value: "proxy.example.com:8080"
-  # -- Specify resrouces
-  # resources:
-  #   requests:
-  #     cpu: "500m"
-  #     memory: "2048Mi"
-  #   limits:
-  #     cpu: "1000m"
-  #     memory: "4096Mi"
-  # If omitted, the plugin manager will inherit the global securityContext
