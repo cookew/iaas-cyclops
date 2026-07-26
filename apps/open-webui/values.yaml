@@ -140,7 +140,7 @@ extraEnvVars:
   - name: DATABASE_ENABLE_SESSION_SHARING
     value: "True"
   - name: CORS_ALLOW_ORIGIN
-    value: "https://*.apps.iaas.wcooke.me"
+    value: "https://open-webui.apps.iaas.wcooke.me;https://headlamp.apps.iaas.wcooke.me"
   - name: S3_ADDRESSING_STYLE
     value: path
   - name: SSL_CERT_FILE
