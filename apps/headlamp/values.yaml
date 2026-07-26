@@ -42,7 +42,8 @@ volumes:
 
 persistentVolumeClaim:
   enabled: true
-  accessModes: ReadWriteMany
+  accessModes:
+  - ReadWriteMany
   size: 10Gi
   storageClassName: ceph-filesystem
   volumeMode: Filesystem
