@@ -30,6 +30,9 @@ env:
 # - name: OIDC_CALLBACK_URL
 #   value: https://headlamp.apps.iaas.wcooke.me/oidc-callback
 
+deploymentAnnotations:
+  reloader.stakater.com/auto: "true"
+
 volumeMounts:
 - mountPath: /certs
   name: ca-certificates
