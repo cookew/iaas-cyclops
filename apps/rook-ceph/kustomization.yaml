@@ -14,7 +14,7 @@ helmCharts:
   releaseName: rook-ceph
   repo: https://charts.rook.io/release
   valuesFile: values.yaml
-  version: v1.20.2
+  version: v1.20.3
 - name: ceph-csi-drivers
   includeCRDs: true
   namespace: rook-ceph
