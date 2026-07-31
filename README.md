@@ -70,6 +70,27 @@ GitLab
 
 * Use this URL to login as root to assign your user admin priviledges. <https://gitlab.apps.iaas.wcooke.me/users/sign_in?auto_sign_in=false>
 
+Guacamole
+
+The username and password need to be changed after deployment. These are hard-coded and not set in a secret.
+
+* Username: guacadmin
+* Password: guacadmin
+
+Steps for setup:
+
+* Set the ```EXTENSION_PRIORITY``` environment variable to ```"*, openid"``` in the values.yaml file.
+* Redeploy the app.
+* Log in as guacadmin
+* Create a different admin user account.
+* Assign the new admin account a password.
+* Assign all the permissions to the admin user.
+* Add the guacamole-admin group.
+* Assign all the permissions to the guacamole-admin group.
+* Set the ```EXTENSION_PRIORITY``` environment variable to ```"openid"``` in the values.yaml file.
+* Redeploy the app.
+* Log in with a user that has the guacamole-admin role in Keycloak.
+
 Keycloak
 
 * Username:
