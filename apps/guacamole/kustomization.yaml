@@ -15,7 +15,7 @@ helmCharts:
   releaseName: guacamole
   repo: https://repo.helmforge.dev
   valuesFile: values.yaml
-  version: 1.4.7
+  version: 1.5.0
 
 patches:
 - path: patches/guacamole-deployment.yaml
