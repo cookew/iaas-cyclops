@@ -23,7 +23,7 @@ ingress:
     forecastle.stakater.com/appName: Crossview
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Kubernetes
-    forecastle.stakater.com/icon: https://crossview.apps.iaas.wcooke.me/assets/images/logo.png
+    forecastle.stakater.com/icon: https://crossview.apps.iaas.wcooke.me/images/cross-view-logo-sidebar.svg
     forecastle.stakater.com/network-restricted: "true"
   hosts:
   - host: crossview.apps.iaas.wcooke.me
@@ -57,10 +57,10 @@ config:
   ref: ""
   database:
     enabled: true
-    host: ""
+    host: crossview-pg-cluster-rw
     port: 5432
     database: crossview
-    username: postgres
+    username: crossview
     ssl:
         mode: disable
         rootCert: ""
