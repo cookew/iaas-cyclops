@@ -9,15 +9,12 @@ spec:
       # Feature gates are defined here
       # https://github.com/kubevirt/kubevirt/blob/main/pkg/virt-config/featuregate/active.go
       featureGates:
-      - ExpandDisks
       - CPUManager
       - ExperimentalIgnitionSupport
       - HypervStrictCheck
       - Sidecar
       - HostDevices
       - Snapshot
-      - VMExport
-      - HotplugVolumes
       - HostDisk
       - UtilityVolumes
       - DownwardMetrics
@@ -26,7 +23,6 @@ spec:
       - WorkloadEncryptionTDX
       - VSOCK
       - KubevirtSeccompProfile
-      - PersistentReservation
       - AlignCPUs
       - NodeRestriction
       - ImageVolume
@@ -35,16 +31,32 @@ spec:
       - EnableVirtioFsStorageVolumes
       - GPUsWithDRA
       - HostDevicesWithDRA
+      - PCINUMAAwareTopology
+      - NetworkDevicesWithDRA
       - DecentralizedLiveMigration
       - ObjectGraph
       - DeclarativeHotplugVolumes
-      - VideoConfig
-      - PanicDevices
-      - PasstIPStackMigration
-      - MigrationPriorityQueue
+      - PasstBinding
+      - ConfigurableHypervisor
       - PodSecondaryInterfaceNamingUpgrade
-      # Remove this for 1.8
-      # - MultiArchitecture
+      - ExternalNetResourceInjection
+      - RebootPolicy
+      - Template
+      - VmiMemoryOverheadReport
+      - ContainerPathVolumes
+      - ReservedOverheadMemlock
+      - OptOutRoleAggregation
+      - VGPULiveMigration
+      - VMStatsCollector
+      - OCIExport
+      - Plugins
+      - GraceIOVirtualization
+      - IOMMUFD
+      - FirmwareAutoSelection
+      - MigrationStallDetection
+      - MigrationDowntimeTuning
+      - CrossArchitectureVirtualization
+      - PortRangesSpec
     # permittedHostDevices:
     #   usb:
     #   - resourceName: "zwave"
