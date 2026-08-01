@@ -30,7 +30,6 @@ prometheus:
 
 replicaCount: 2
 
-
 strategy:
   type: RollingUpdate
   rollingUpdate:
