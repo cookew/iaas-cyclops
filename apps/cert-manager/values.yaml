@@ -27,7 +27,7 @@ prometheus:
 
 replicaCount: 2
 
-revisionHistoryLimit: 0
+revisionHistoryLimit: 1
 
 strategy:
   type: RollingUpdate
