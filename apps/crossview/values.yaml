@@ -56,7 +56,7 @@ database:
 config:
   ref: ""
   database:
-    enabled: true
+    enabled: false
     host: crossview-pg-cluster-rw
     port: 5432
     database: crossview
