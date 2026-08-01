@@ -21,6 +21,6 @@ RUN npm run postinstall
 RUN npm run build
 
 
-FROM nginxinc/nginx-unprivileged:stable-alpine AS app
+FROM docker.io/nginxinc/nginx-unprivileged:stable-alpine AS app
 
 COPY --from=builder /app/build/prod /usr/share/nginx/html/

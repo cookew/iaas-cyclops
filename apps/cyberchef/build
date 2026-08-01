@@ -1,11 +1,13 @@
-#!/usr/bin/bash -e
+#!/bin/bash
+
+set -e
 
 REGISTRY=registry.wcooke.me:5000
 REPO=cyberchef
-VERSION=11.2.0
+VERSION=11.3.0
 
-docker buildx prune --all --force
-docker build -t ${REGISTRY}/${REPO}:${VERSION} .
-docker image push ${REGISTRY}/${REPO}:${VERSION}
+podman buildx prune --all --force
+podman build -t ${REGISTRY}/${REPO}:${VERSION} .
+podman image push ${REGISTRY}/${REPO}:${VERSION}
 
 sed -i "s@- image: ${REGISTRY}/${REPO}:.*@- image: ${REGISTRY}/${REPO}:${VERSION}@g" base/deployment.yaml
