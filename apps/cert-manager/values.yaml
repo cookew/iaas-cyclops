@@ -16,6 +16,9 @@ crds:
 
 enableCertificateOwnerRef: true
 
+global:
+  revisionHistoryLimit: 0
+
 podDisruptionBudget:
   enabled: true
   minAvailable: 1
@@ -27,7 +30,6 @@ prometheus:
 
 replicaCount: 2
 
-revisionHistoryLimit: 1
 
 strategy:
   type: RollingUpdate
