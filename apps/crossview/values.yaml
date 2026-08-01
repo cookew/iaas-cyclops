@@ -1,0 +1,143 @@
+# https://github.com/crossplane-contrib/crossview/blob/main/helm/crossview/values.yaml
+
+global:
+  createNamespace: false
+
+app:
+  replicas: 2
+  extraEnv: []
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 250m
+  limits:
+    memory: 1Gi
+    cpu: 1000m
+
+ingress:
+  enabled: true
+  className: cilium
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Crossview
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Kubernetes
+    forecastle.stakater.com/icon: https://crossview.apps.iaas.wcooke.me/assets/images/logo.png
+    forecastle.stakater.com/network-restricted: "true"
+  hosts:
+  - host: crossview.apps.iaas.wcooke.me
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  tls:
+  - secretName: crossview-tls
+    hosts:
+    - crossview.apps.iaas.wcooke.me
+
+database:
+  enabled: true
+  image:
+    repository: postgres
+    tag: "latest"
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+  persistence:
+    enabled: true
+    size: 10Gi
+    accessMode: ReadWriteOnce
+    storageClass: ""
+
+config:
+  ref: ""
+  database:
+    enabled: true
+    host: ""
+    port: 5432
+    database: crossview
+    username: postgres
+    ssl:
+        mode: disable
+        rootCert: ""
+        cert: ""
+        key: ""
+  server:
+    port: 3001
+    auth:
+      mode: session
+      trustedHeader: X-Auth-User
+      createUsers: true
+      defaultRole: viewer
+    log:
+      level: info
+    cors:
+      # Public root URL of this Crossview instance (no trailing slash).
+      # IMPORTANT: Change this to your actual ingress host in production.
+      # This value is used as the post-SSO-login redirect destination. If left
+      # as localhost, users will be redirected to localhost after SSO authentication.
+      origin: https://crossview.apps.iaas.wcooke.me
+      credentials: true
+    session:
+      cookie:
+        secure: false
+        httpOnly: true
+        maxAge: 86400000
+
+  sso:
+    oidc:
+      enabled: true
+      issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
+      clientId: crossview
+      authorizationURL: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
+      tokenURL: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
+      userInfoURL: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
+      callbackURL: https://crossview.apps.iaas.wcooke.me/api/auth/oidc/callback
+      scope: openid profile email
+      usernameAttribute: preferred_username
+      emailAttribute: email
+      firstNameAttribute: given_name
+      lastNameAttribute: family_name
+
+  vite:
+    server:
+      proxy:
+        api:
+          target: http://localhost:3001
+          changeOrigin: true
+
+secrets:
+  adminUsername:
+    secretKeyRef:
+      name: crossview-secrets
+      key: admin-username
+  adminPassword:
+    secretKeyRef:
+      name: crossview-secrets
+      key: admin-password
+  dbPassword:
+    secretKeyRef:
+      name: crossview-pg-cluster-app
+      key: password
+  sessionSecret:
+    secretKeyRef:
+      name: crossview-secrets
+      key: session-secret
+  OIDCClientSecret:
+    secretKeyRef:
+      name: crossview-keycloak-client
+      key: client-secret
+
+serviceAccount:
+  create: true
+
+rbac:
+  create: true
+  clusterRole:
+    name: crossview-role
+  clusterRoleBinding:
+    name: crossview-binding

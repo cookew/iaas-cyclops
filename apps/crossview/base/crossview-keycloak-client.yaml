@@ -1,0 +1,71 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  name: crossview
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    accessType: confidential
+    baseUrl: /
+    clientId: crossview
+    clientSecretSecretRef:
+      key: client-secret
+      name: crossview-keycloak-client
+      namespace: crossview
+    directAccessGrantsEnabled: true
+    name: Crossview
+    pkceCodeChallengeMethod: S256
+    realmIdRef:
+      name: iaas
+    rootUrl: https://crossview.apps.iaas.wcooke.me
+    standardFlowEnabled: true
+    validPostLogoutRedirectUris:
+    - /
+    validRedirectUris:
+    - /api/auth/oidc/callback
+  providerConfigRef:
+    name: keycloak-iaas
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: crossview-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: crossview
+    name: crossview-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-iaas
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: crossview-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: crossview-admins
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-iaas
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  name: crossview-admins-roles
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: crossview-admins
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: crossview-admin
+  providerConfigRef:
+    name: keycloak-iaas

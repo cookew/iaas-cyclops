@@ -78,6 +78,7 @@ spec:
       - name: alloy
       - name: alloy-logs
       - name: crossplane-provider-opentofu
+      - name: crossview
       - name: cyberchef
       - name: drawio
       - name: descheduler
