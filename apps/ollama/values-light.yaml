@@ -17,10 +17,10 @@ ollama:
 
   models:
     pull:
-    - mistral
+    - mistral:7b
 
     run:
-    - mistral
+    - mistral:7b
 
     create: []
 

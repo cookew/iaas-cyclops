@@ -22,28 +22,36 @@ ollama:
     #  - llama2
     #  - mistral
     pull:
-    - codellama
+    - codellama:7b
     # - codellama:70b
-    - gemma4:31b-it-q8_0
-    - llama4
-    - mistral
-    - mistral-medium-3.5
-    - qwen3.5:9b
-    - qwen3.5:27b
+    - gemma4:e4b-mlx
+    # - gemma4:e4b
+    # - gemma4:31b-it-q8_0
+    # - llama4:16x17b
+    - mistral:7b
+    # - mistral-medium-3.5
+    - qwen3.5:4b
+    # - qwen3.5:9b
+    # - qwen3.5:27b
+    - qwen3-vl:8b
 
     # -- List of models to load in memory at container startup
     # run:
     #  - llama2
     #  - mistral
     run:
-    - codellama
+    - codellama:7b
     # - codellama:70b
-    - gemma4:31b-it-q8_0
-    - llama4
-    - mistral
-    - mistral-medium-3.5
-    - qwen3.5:9b
-    - qwen3.5:27b
+    - gemma4:e4b-mlx
+    # - gemma4:e4b
+    # - gemma4:31b-it-q8_0
+    # - llama4:16x17b
+    - mistral:7b
+    # - mistral-medium-3.5
+    - qwen3.5:4b
+    # - qwen3.5:9b
+    # - qwen3.5:27b
+    - qwen3-vl:8b
 
     # -- List of models to create at container startup, there are two options
     # 1. Create a raw model
