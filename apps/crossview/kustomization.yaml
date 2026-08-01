@@ -6,6 +6,7 @@ namespace: crossview
 resources:
 - base/crossview-keycloak-client.yaml
 - base/crossview-pg-cluster.yaml
+- sealed-secrets/crossview-keycloak-client.yaml
 - sealed-secrets/crossview-secrets.yaml
 
 helmCharts:
