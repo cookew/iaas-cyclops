@@ -59,6 +59,7 @@ metadata:
 spec:
   cruiseControl:
     metricsConfig:
+      # type: strimziMetricsReporter
       type: jmxPrometheusExporter
       valueFrom:
         configMapKeyRef:
@@ -113,12 +114,12 @@ spec:
       type: internal
     metadataVersion: 4.3-IV0
     metricsConfig:
-      # type: strimziMetricsReporter
-      type: jmxPrometheusExporter
-      valueFrom:
-        configMapKeyRef:
-          name: tempo-kafka-metrics
-          key: kafka-metrics.yaml
+      type: strimziMetricsReporter
+      # type: jmxPrometheusExporter
+      # valueFrom:
+      #   configMapKeyRef:
+      #     name: tempo-kafka-metrics
+      #     key: kafka-metrics.yaml
     # template:
     #   initContainer:
     #     securityContext:

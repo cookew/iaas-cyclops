@@ -22,6 +22,9 @@ spec:
   - ref: config
     repoURL: git@github.com:cookew/iaas-cyclops.git
     targetRevision: main
+  - path: apps/strimzi
+    repoURL: git@github.com:cookew/iaas-cyclops.git
+    targetRevision: main
   syncPolicy:
     automated:
       allowEmpty: true
