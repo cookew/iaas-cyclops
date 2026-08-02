@@ -3,6 +3,10 @@
 dashboards:
   enabled: true
 
+extraEnvs:
+- name: STRIMZI_POD_SECURITY_PROVIDER_CLASS
+  value: restricted
+
 podDisruptionBudget:
   enabled: false
 
