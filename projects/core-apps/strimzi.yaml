@@ -15,14 +15,16 @@ spec:
   #   jqPathExpressions:
   #   - .spec.versions[] | select(.name == "v1alpha1")
   project: core
-  sources:
-  - chart: strimzi-cluster-operator
+  revisionHistoryLimit: 0
+  source:
+    # chart: strimzi-cluster-operator
     helm:
       skipCrds: false
       valueFiles:
       - $config/values.yaml
-    repoURL: quay.io/strimzi-helm
+    repoURL: quay.io/strimzi-helm/strimzi-cluster-operator
     targetRevision: 1.1.0
+  sources:
   - path: /apps/strimzi
     ref: config
     repoURL: git@github.com:cookew/iaas-cyclops.git
