@@ -39,10 +39,6 @@ config:
   server:
     port: 3001
     cors:
-      # Public root URL of this Crossview instance (no trailing slash).
-      # IMPORTANT: Change this to your actual ingress host in production.
-      # This value is used as the post-SSO-login redirect destination. If left
-      # as localhost, users will be redirected to localhost after SSO authentication.
       origin: https://crossview.apps.iaas.wcooke.me
       credentials: true
     session:
