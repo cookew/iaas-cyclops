@@ -16,11 +16,12 @@ spec:
   #   - .spec.versions[] | select(.name == "v1alpha1")
   project: core
   sources:
-  - helm:
+  - chart: strimzi-cluster-operator
+    helm:
       skipCrds: false
       valueFiles:
       - $config/values.yaml
-    repoURL: quay.io/strimzi-helm/strimzi-kafka-operator
+    repoURL: quay.io/strimzi-helm
     targetRevision: 1.1.0
   - path: /apps/strimzi
     ref: config
