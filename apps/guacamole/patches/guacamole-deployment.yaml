@@ -1,5 +1,3 @@
-# https://argo-workflows.readthedocs.io/en/latest/high-availability/#argo-server
-
 - op: add
   path: /spec/template/spec/containers/1/volumeMounts
   value:

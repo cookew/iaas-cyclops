@@ -16,3 +16,10 @@ helmCharts:
   repo: https://crossplane-contrib.github.io/crossview
   valuesFile: values.yaml
   version: 4.5.0
+
+patches:
+- path: patches/crossview-deployment.yaml
+  target:
+    kind: Deployment
+    name: crossview
+    version: v1
