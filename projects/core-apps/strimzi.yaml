@@ -16,8 +16,7 @@ spec:
   #   - .spec.versions[] | select(.name == "v1alpha1")
   project: core
   sources:
-  - chart: strimzi-cluster-operator
-    helm:
+  - helm:
       skipCrds: false
       valueFiles:
       - $config/values.yaml
