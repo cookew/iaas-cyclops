@@ -9,11 +9,6 @@ spec:
   destination:
     name: in-cluster
     namespace: strimzi
-  # ignoreDifferences:
-  # - group: apiextensions.k8s.io
-  #   kind: CustomResourceDefinition
-  #   jqPathExpressions:
-  #   - .spec.versions[] | select(.name == "v1alpha1")
   project: core
   revisionHistoryLimit: 0
   sources:
