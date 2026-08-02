@@ -29,7 +29,7 @@ ingress:
   - host: crossview.apps.iaas.wcooke.me
     paths:
     - path: /
-      pathType: ImplementationSpecific
+      pathType: Prefix
   tls:
   - secretName: crossview-tls
     hosts:
