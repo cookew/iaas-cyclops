@@ -68,6 +68,8 @@ spec:
     topicOperator: {}
     userOperator: {}
   kafka:
+    authorization:
+      type: simple
     config:
       default.replication.factor: 3
       min.insync.replicas: 2
