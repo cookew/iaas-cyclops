@@ -56,9 +56,9 @@ config:
       enabled: true
       issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
       clientId: crossview
-      authorizationURL: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
-      tokenURL: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
-      userInfoURL: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
+      # authorizationURL: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/auth
+      # tokenURL: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/token
+      # userInfoURL: https://keycloak.apps.iaas.wcooke.me/realms/iaas/protocol/openid-connect/userinfo
       callbackURL: https://crossview.apps.iaas.wcooke.me/api/auth/oidc/callback
       scope: openid profile email
       usernameAttribute: preferred_username
