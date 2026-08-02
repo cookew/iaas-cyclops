@@ -1,0 +1,41 @@
+# https://github.com/strimzi/strimzi-kafka-operator/blob/main/helm-charts/helm3/strimzi-kafka-operator/values.yaml
+
+dashboards:
+  enabled: true
+
+podDisruptionBudget:
+  enabled: false
+
+replicas: 1
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+
+watchAnyNamespace: true
+
+# Create clusterroles that extend existing clusterroles to interact with strimzi crds
+# Ref: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles
+# createAggregateRoles: false
+
+# operatorNetworkPolicy:
+#   enabled: false
+#   ingress:
+#   - ports:
+#     - protocol: TCP
+#       port: http
+#   egress:
+#   - {}
+
+# resources:
+#   limits:
+#     memory: 384Mi
+#     cpu: 1000m
+#   requests:
+#     memory: 384Mi
+#     cpu: 200m

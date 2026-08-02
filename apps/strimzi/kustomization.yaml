@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: strimzi
+
+# resources:
+
+helmCharts:
+- name: strimzi-cluster-operator
+  includeCRDs: true
+  namespace: strimzi
+  releaseName: strimzi
+  repo: oci://quay.io/strimzi-helm/strimzi-kafka-operator
+  valuesFile: values.yaml
+  version: 1.1.0
