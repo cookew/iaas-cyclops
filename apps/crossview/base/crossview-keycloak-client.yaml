@@ -14,7 +14,7 @@ spec:
       namespace: crossview
     directAccessGrantsEnabled: true
     name: Crossview
-    pkceCodeChallengeMethod: S256
+    # pkceCodeChallengeMethod: S256
     realmIdRef:
       name: iaas
     rootUrl: https://crossview.apps.iaas.wcooke.me
