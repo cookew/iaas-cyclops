@@ -1,0 +1,22 @@
+# https://github.com/strimzi/strimzi-kafka-operator/blob/1.1.0/examples/kafka-access/kafka-access-with-user.yaml
+
+# The operator will look up the Kafka instance specified and
+# create a secret with the details to connect to the listener specified.
+# It will also look up the KafkaUser specified and check it has the correct
+# authentication mechanism to connect to the listener. If so it will add the
+# user credentials to the secret it creates.
+# If no listener is specified it will choose one based on the user authentication.
+apiVersion: access.strimzi.io/v1alpha1
+kind: KafkaAccess
+metadata:
+  name: tempo-kafka-access
+spec:
+  kafka:
+    listener: tls
+    name: tempo-kafka
+    namespace: kafka
+  user:
+    apiGroup: kafka.strimzi.io
+    kind: KafkaUser
+    name: tempo-user
+    namespace: kafka

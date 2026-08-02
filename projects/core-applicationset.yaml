@@ -93,6 +93,7 @@ spec:
       - name: harbor
       - name: headlamp
       - name: jupyterhub
+      - name: kafka
       - name: kubevirt-manager
       - name: loki
       - name: mattermost-operator

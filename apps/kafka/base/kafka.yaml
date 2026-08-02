@@ -6,13 +6,13 @@ metadata:
   name: tempo-controller
 spec:
   replicas: 3
-  # resources:
-  #   requests:
-  #     memory: 8Gi
-  #     cpu: 2
-  #   limits:
-  #     memory: 4Gi
-  #     cpu: 1
+  resources:
+    limits:
+      cpu: 2
+      memory: 4Gi
+    requests:
+      cpu: 100m
+      memory: 1Gi
   roles:
   - controller
   storage:
@@ -33,13 +33,13 @@ metadata:
   name: tempo-broker
 spec:
   replicas: 3
-  # resources:
-  #   requests:
-  #     memory: 8Gi
-  #     cpu: 2
-  #   limits:
-  #     memory: 4Gi
-  #     cpu: 1
+  resources:
+    limits:
+      cpu: 4
+      memory: 16Gi
+    requests:
+      cpu: 500m
+      memory: 2Gi
   roles:
   - broker
   storage:
@@ -59,7 +59,6 @@ metadata:
 spec:
   cruiseControl:
     metricsConfig:
-      # type: strimziMetricsReporter
       type: jmxPrometheusExporter
       valueFrom:
         configMapKeyRef:
@@ -68,34 +67,6 @@ spec:
   entityOperator:
     topicOperator: {}
     userOperator: {}
-    # template:
-    #   tlsSidecarContainer:
-    #     securityContext:
-    #       allowPrivilegeEscalation: false
-    #       capabilities:
-    #         drop:
-    #         - ALL
-    #       runAsNonRoot: true
-    #       seccompProfile:
-    #         type: RuntimeDefault
-    #   topicOperatorContainer:
-    #     securityContext:
-    #       allowPrivilegeEscalation: false
-    #       capabilities:
-    #         drop:
-    #         - ALL
-    #       runAsNonRoot: true
-    #       seccompProfile:
-    #         type: RuntimeDefault
-    #   userOperatorContainer:
-    #     securityContext:
-    #       allowPrivilegeEscalation: false
-    #       capabilities:
-    #         drop:
-    #         - ALL
-    #       runAsNonRoot: true
-    #       seccompProfile:
-    #         type: RuntimeDefault
   kafka:
     config:
       default.replication.factor: 3
@@ -114,31 +85,12 @@ spec:
       type: internal
     metadataVersion: 4.3-IV0
     metricsConfig:
-      type: strimziMetricsReporter
-      # type: jmxPrometheusExporter
-      # valueFrom:
-      #   configMapKeyRef:
-      #     name: tempo-kafka-metrics
-      #     key: kafka-metrics.yaml
-    # template:
-    #   initContainer:
-    #     securityContext:
-    #       allowPrivilegeEscalation: false
-    #       capabilities:
-    #         drop:
-    #         - ALL
-    #       runAsNonRoot: true
-    #       seccompProfile:
-    #         type: RuntimeDefault
-    #   kafkaContainer:
-    #     securityContext:
-    #       allowPrivilegeEscalation: false
-    #       capabilities:
-    #         drop:
-    #         - ALL
-    #       runAsNonRoot: true
-    #       seccompProfile:
-    #         type: RuntimeDefault
+      # type: strimziMetricsReporter
+      type: jmxPrometheusExporter
+      valueFrom:
+        configMapKeyRef:
+          name: tempo-kafka-metrics
+          key: kafka-metrics.yaml
     version: 4.3.0
   kafkaExporter:
     topicRegex: ".*"
