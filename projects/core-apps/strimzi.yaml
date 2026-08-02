@@ -17,15 +17,14 @@ spec:
   project: core
   revisionHistoryLimit: 0
   source:
-    # chart: strimzi-cluster-operator
     helm:
       skipCrds: false
       valueFiles:
       - $config/values.yaml
-    repoURL: quay.io/strimzi-helm/strimzi-cluster-operator
+    repoURL: quay.io/strimzi-helm/strimzi-kafka-operator
     targetRevision: 1.1.0
   sources:
-  - path: /apps/strimzi
+  - path: apps/strimzi
     ref: config
     repoURL: git@github.com:cookew/iaas-cyclops.git
     targetRevision: main
