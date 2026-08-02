@@ -5,15 +5,6 @@ global:
 
 app:
   replicas: 2
-  extraEnv: []
-
-resources:
-  requests:
-    memory: 256Mi
-    cpu: 250m
-  limits:
-    memory: 1Gi
-    cpu: 1000m
 
 ingress:
   enabled: true
@@ -39,7 +30,6 @@ database:
   enabled: false
 
 config:
-  ref: ""
   database:
     enabled: true
     host: crossview-pg-cluster-rw
@@ -48,13 +38,6 @@ config:
     username: crossview
   server:
     port: 3001
-    auth:
-      mode: session
-      trustedHeader: X-Auth-User
-      createUsers: true
-      defaultRole: viewer
-    log:
-      level: info
     cors:
       # Public root URL of this Crossview instance (no trailing slash).
       # IMPORTANT: Change this to your actual ingress host in production.
@@ -64,7 +47,7 @@ config:
       credentials: true
     session:
       cookie:
-        secure: false
+        secure: true
         httpOnly: true
         maxAge: 86400000
 
