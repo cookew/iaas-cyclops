@@ -103,7 +103,6 @@ spec:
       - name: open-webui
       - name: pyroscope
       - name: reloader
-      - name: strimzi
       - name: tempo
       - name: terminals
       - name: whoami
