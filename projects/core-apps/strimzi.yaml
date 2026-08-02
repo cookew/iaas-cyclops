@@ -15,8 +15,16 @@ spec:
   #   jqPathExpressions:
   #   - .spec.versions[] | select(.name == "v1alpha1")
   project: core
-  source:
-    path: apps/strimzi
+  sources:
+  - repoURL: oci://quay.io/strimzi-helm/strimzi-kafka-operator
+    targetRevision: 1.1.0
+    chart: strimzi-cluster-operator
+    helm:
+      skipCrds: false
+      valueFiles:
+      - $config/values.yaml
+  - path: apps/strimzi
+    ref: config
     repoURL: git@github.com:cookew/iaas-cyclops.git
     targetRevision: main
   syncPolicy:
