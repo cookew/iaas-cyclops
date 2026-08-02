@@ -10,6 +10,7 @@ resources:
 - base/argocd-repo-server-tls.yaml
 - base/argocd-server-tls.yaml
 - base/dashboards.yaml
+- base/disable-default-project.yaml
 - base/ingress.yaml
 - base/namespace.yaml
 - base/servicemonitor.yaml
