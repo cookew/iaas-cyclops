@@ -16,16 +16,15 @@ spec:
   #   - .spec.versions[] | select(.name == "v1alpha1")
   project: core
   revisionHistoryLimit: 0
-  source:
+  sources:
+  - chart: strimzi-kafka-operator
     helm:
       skipCrds: false
       valueFiles:
-      - $config/values.yaml
-    repoURL: quay.io/strimzi-helm/strimzi-kafka-operator
+      - $config/apps/strimzi/values.yaml
+    repoURL: quay.io/strimzi-helm
     targetRevision: 1.1.0
-  sources:
-  - path: apps/strimzi
-    ref: config
+  - ref: config
     repoURL: git@github.com:cookew/iaas-cyclops.git
     targetRevision: main
   syncPolicy:

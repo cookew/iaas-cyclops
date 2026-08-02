@@ -6,7 +6,7 @@ dashboards:
 podDisruptionBudget:
   enabled: false
 
-replicas: 1
+replicas: 2
 
 securityContext:
   allowPrivilegeEscalation: false
