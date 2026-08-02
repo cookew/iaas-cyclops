@@ -47,14 +47,15 @@ data:
         - Project
       clusters:
         - "*"
+  # https://argo-cd.readthedocs.io/en/stable/operator-manual/deep_links/
   resource.links: |
-    - url: https://grafana.apps.iaas.wcooke.me/d/6581e46e4e5c7ba40a07646395ef7b23/kubernetes-compute-resources-pod?from=now-1h&to=now&timezone=utc&var-datasource=default&var-namespace={{.resource.metadata.namespace}}&var-type=$__all&orgId=1&var-cluster=&var-pod={{.resource.metadata.name}}&refresh=10s
+    - url: https://grafana.apps.iaas.wcooke.me/d/6581e46e4e5c7ba40a07646395ef7b23/kubernetes-compute-resources-pod?from=now-1h&to=now&timezone=utc&var-datasource=default&var-namespace={{ .resource.metadata.namespace }}&var-type=$__all&orgId=1&var-cluster=&var-pod={{ .resource.metadata.name }}&refresh=10s
       title: Pod Metrics
       if: resource.kind == "Pod"
-    - url: https://grafana.apps.iaas.wcooke.me/a/grafana-lokiexplore-app/explore/service/{{.resource.metadata.ownerReferences.0.name}}/logs?from=now-15m&to=now&var-ds=loki&var-filters=service_name%7C%3D%7C{{.resource.metadata.ownerReferences.0.name}}&patterns=%5B%5D&var-fields=&var-levels=&var-metadata=namespace%7C%3D%7C{{.resource.metadata.namespace}}&var-metadata=pod%7C%3D%7C{{.resource.metadata.name}}&var-patterns=&var-lineFilterV2=&var-lineFilters=&timezone=browser&var-lineFormat=&var-jsonFields=&var-all-fields=namespace%7C%3D%7C{{.resource.metadata.namespace}}&var-all-fields=pod%7C%3D%7C{{.resource.metadata.name}}&urlColumns=%5B%5D&visualizationType=%22logs%22&displayedFields=%5B%5D&userDisplayedFields=false&sortOrder=%22Descending%22&wrapLogMessage=false&prettifyLogMessage=false&refresh=10s
+    - url: https://grafana.apps.iaas.wcooke.me/a/grafana-lokiexplore-app/explore/service/{{ index .resource.metadata.labels "app.kubernetes.io/name" }}/logs?from=now-15m&to=now&var-ds=loki&var-filters=service_name%7C%3D%7C{{ index .resource.metadata.labels "app.kubernetes.io/name" }}&patterns=%5B%5D&var-fields=&var-levels=&var-metadata=namespace%7C%3D%7C{{ .resource.metadata.namespace }}&var-metadata=pod%7C%3D%7C{{ .resource.metadata.name }}&var-patterns=&var-lineFilterV2=&var-lineFilters=&timezone=browser&var-lineFormat=&var-jsonFields=&var-all-fields=namespace%7C%3D%7C{{ .resource.metadata.namespace }}&var-all-fields=pod%7C%3D%7C{{ .resource.metadata.name }}&urlColumns=%5B%5D&visualizationType=%22logs%22&displayedFields=%5B%5D&userDisplayedFields=false&sortOrder=%22Descending%22&wrapLogMessage=false&prettifyLogMessage=false&refresh=10s
       title: Pod Logs
       if: resource.kind == "Pod"
-    - url: https://grafana.apps.iaas.wcooke.me/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?from=now-1h&to=now&timezone=utc&var-datasource=default&var-namespace={{.resource.metadata.name}}&orgId=1&var-cluster=&var-type=$__all&refresh=10s
+    - url: https://grafana.apps.iaas.wcooke.me/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?from=now-1h&to=now&timezone=utc&var-datasource=default&var-namespace={{ .resource.metadata.name }}&orgId=1&var-cluster=&var-type=$__all&refresh=10s
       title: Namespace Workloads Metrics
       if: resource.kind == "Namespace"
   # https://argo-cd.readthedocs.io/en/stable/user-guide/status-badge/
