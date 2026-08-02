@@ -104,3 +104,6 @@ rbac:
     name: crossview-role
   clusterRoleBinding:
     name: crossview-binding
+
+podAnnotations:
+  reloader.stakater.com/auto: "true"
