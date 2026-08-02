@@ -11,7 +11,7 @@
     name: ca
 
 - op: add
-  path: /spec/template/spec/containers/1/volumeMounts
+  path: /spec/template/spec/containers/0/volumeMounts
   value:
   - mountPath: /etc/ssl/certs/ca-certificates.crt
     name: ca
