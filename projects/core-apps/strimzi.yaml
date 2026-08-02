@@ -21,9 +21,9 @@ spec:
       skipCrds: false
       valueFiles:
       - $config/values.yaml
-    repoURL: oci://quay.io/strimzi-helm/strimzi-kafka-operator
+    repoURL: quay.io/strimzi-helm/strimzi-kafka-operator
     targetRevision: 1.1.0
-  - path: apps/strimzi
+  - path: /apps/strimzi
     ref: config
     repoURL: git@github.com:cookew/iaas-cyclops.git
     targetRevision: main
