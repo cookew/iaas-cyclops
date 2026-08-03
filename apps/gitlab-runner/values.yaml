@@ -1,0 +1,93 @@
+# https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/values.yaml?ref_type=heads
+
+concurrent: 6
+
+gitlabUrl: https://gitlab.com
+# gitlabUrl: https://gitlab.wcooke.me
+# gitlabUrl: http://gitlab-webservice-default.gitlab-system.svc:8080
+
+livenessProbe:
+  initialDelaySeconds: 20
+  periodSeconds: 20
+  successThreshold: 1
+  failureThreshold: 10
+  terminationGracePeriodSeconds: 30
+
+readinessProbe:
+  initialDelaySeconds: 20
+  periodSeconds: 20
+  successThreshold: 1
+  failureThreshold: 10
+
+logFormat: json
+
+metrics:
+  enabled: true
+  podMonitor:
+    enabled: true
+
+name: wc-cyclops-runners
+
+rbac:
+  create: true
+
+replicas: 1
+
+revisionHistoryLimit: 0
+
+runners:
+  config: |
+    [[runners]]
+      environment = ['DOCKER_HOST=tcp://localhost:2376', 'DOCKER_DRIVER=overlay2', 'DOCKER_TLS_CERTDIR=/certs', 'DOCKER_TLS_VERIFY=1', 'DOCKER_CERT_PATH=/certs/client' ]
+      request_concurrency = 3
+      limit = 6
+
+      [runners.kubernetes]
+        namespace = "cyclops-gitlab-runners"
+        namespace_overwrite_allowed = "cyclops-gitlab-runners"
+        image = "ubuntu:26.04"
+        privileged = true
+        wait_for_services_timeout = 120
+
+
+      [[runners.kubernetes.services]]
+        name = "docker:dind"
+        alias = "dind"
+
+      [[runners.kubernetes.volumes.config_map]]
+        name = "cookes-ca-all"
+        mount_path = "/etc/ssl/certs/ca-certificates.crt"
+        sub_path = "ca-certificates.crt"
+        [runners.kubernetes.volumes.config_map.items]
+          "ca-bundle.crt" = "ca-certificates.crt"
+
+      [[runners.kubernetes.volumes.pvc]]
+        name = "gitlab-cache"
+        mount_path = "/cache"
+        mount_propagation = "None"
+
+      [[runners.kubernetes.volumes.empty_dir]]
+        name = "dind-certs"
+        mount_path = "/certs"
+        medium = "Memory"
+
+  secret: gitlab-runner-token
+
+serviceAccount:
+  create: true
+  name: gitlab-runner
+
+service:
+  enabled: true
+
+terminationGracePeriodSeconds: 5
+
+volumeMounts:
+- name: ca-bundle
+  mountPath: /etc/ssl/certs/ca-certificates.crt
+  subPath: ca-certificates.crt
+
+volumes:
+- name: ca-all
+  configMap:
+    name: ca-all

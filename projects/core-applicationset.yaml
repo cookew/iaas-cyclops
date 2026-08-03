@@ -88,6 +88,7 @@ spec:
       - name: forecastle
       - name: github-arc
       - name: gitlab
+      - name: gitlab-runner
       - name: guacamole
       - name: grafana
       - name: harbor
@@ -115,7 +116,6 @@ spec:
       # - name: capi-operator
       # - name: fluent-bit
       # - name: github-arc-runners
-      # - name: gitlab-runners
       # - name: holmesgpt
       # - name: istio
       #   namespace: istio-system

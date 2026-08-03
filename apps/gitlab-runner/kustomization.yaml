@@ -1,18 +1,17 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: gitlab-runners
+namespace: gitlab-runner
 
 resources:
 - sealed-secrets/gitlab-runner-token.yaml
 
 # https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/Chart.yaml?ref_type=heads
-# https://gitlab.com/gitlab-org/charts/gitlab-runner/-/tree/0-88-stable?ref_type=heads
 helmCharts:
 - includeCRDs: true
   name: gitlab-runner
-  namespace: gitlab-runners
+  namespace: gitlab-runner
   releaseName: gitlab-runner
   repo: https://charts.gitlab.io
-  version: 0.88.3
+  version: 0.91.0
   valuesFile: values.yaml
