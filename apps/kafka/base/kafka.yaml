@@ -78,13 +78,36 @@ spec:
       transaction.state.log.replication.factor: 3
     listeners:
     - name: plain
+      # networkPolicyPeers:
+      #   - podSelector:
+      #       matchLabels:
+      #         app: kafka-client
       port: 9092
       tls: false
       type: internal
     - name: tls
+      # networkPolicyPeers:
+      #   - podSelector:
+      #       matchLabels:
+      #         app: kafka-client
       port: 9093
       tls: true
       type: internal
+    # - name: external-lb
+    #   authentication:
+    #     type: tls
+    #   bootstrap:
+    #   brokers:
+    #   configuration:
+    #     brokerCertChainAndKey:
+    #       secretName: tempo-kafka-external-brokers-ca
+    #       certificate: tls.crt
+    #       key: tls.key
+    #     class: cilium
+    #     externalTrafficPolicy: Local
+    #   port: 9094
+    #   type: loadbalancer
+    #   tls: true
     metadataVersion: 4.3-IV0
     metricsConfig:
       # type: strimziMetricsReporter
