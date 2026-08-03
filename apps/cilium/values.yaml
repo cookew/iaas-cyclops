@@ -28,7 +28,6 @@ devices:
 
 encryption:
   enabled: true
-  nodeEncryption: true
   type: wireguard
 
 envoy:
