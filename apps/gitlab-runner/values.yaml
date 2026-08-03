@@ -55,11 +55,11 @@ runners:
         alias = "dind"
 
       [[runners.kubernetes.volumes.config_map]]
-        name = "cookes-ca-all"
+        name = "ca-all"
         mount_path = "/etc/ssl/certs/ca-certificates.crt"
         sub_path = "ca-certificates.crt"
         [runners.kubernetes.volumes.config_map.items]
-          "ca-bundle.crt" = "ca-certificates.crt"
+          "ca-certificates.crt" = "ca-certificates.crt"
 
       [[runners.kubernetes.volumes.pvc]]
         name = "gitlab-cache"
@@ -83,7 +83,7 @@ service:
 terminationGracePeriodSeconds: 5
 
 volumeMounts:
-- name: ca-bundle
+- name: ca-all
   mountPath: /etc/ssl/certs/ca-certificates.crt
   subPath: ca-certificates.crt
 
