@@ -9,14 +9,14 @@
 apiVersion: access.strimzi.io/v1alpha1
 kind: KafkaAccess
 metadata:
-  name: tempo-kafka-access
+  name: tempo
 spec:
   kafka:
     listener: tls
-    name: tempo-kafka
-    namespace: kafka
+    name: tempo
+    namespace: tempo-kafka
   user:
     apiGroup: kafka.strimzi.io
     kind: KafkaUser
-    name: tempo-user
+    name: tempo
     namespace: kafka
