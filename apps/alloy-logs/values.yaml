@@ -81,9 +81,9 @@ alloy:
             pod = "",
           }
         }
-        # stage.label_keep {
-        #   values = [ "hostname", "service_name" ]
-        # }
+        // stage.label_keep {
+        //   values = [ "hostname", "service_name" ]
+        // }
 
         forward_to = [loki.write.loki.receiver]
       }
