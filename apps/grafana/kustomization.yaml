@@ -29,7 +29,7 @@ helmCharts:
   releaseName: grafana
   repo: https://grafana-community.github.io/helm-charts
   valuesFile: values.yaml
-  version: 12.10.3
+  version: 12.10.4
 - name: valkey
   namespace: grafana
   releaseName: valkey
