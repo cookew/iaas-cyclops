@@ -192,6 +192,8 @@ loki:
     # max_line_size: 512KB
     max_query_length: 0 # 30d1h
     # max_query_series: 500 # 500
+    max_structured_metadata_entries_count: 256
+    max_structured_metadata_size: 128KB
     per_stream_rate_limit_burst: 200MB # 15MB
     per_stream_rate_limit: 100MB # 3MB
     query_timeout: 300s # 1m
