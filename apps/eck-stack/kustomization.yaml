@@ -10,4 +10,4 @@ helmCharts:
   releaseName: eck-stack
   repo: https://helm.elastic.co
   valuesFile: values.yaml
-  version: 0.19.1
+  version: 0.20.0
