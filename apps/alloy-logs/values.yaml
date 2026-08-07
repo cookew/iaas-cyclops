@@ -73,6 +73,7 @@ alloy:
         }
         stage.structured_metadata {
           values = {
+            hostname = "",
             app = "",
             cluster = "",
             // container = "",
