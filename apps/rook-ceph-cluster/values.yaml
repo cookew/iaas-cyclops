@@ -575,7 +575,7 @@ cephObjectStores:
               - key: rook_object_store
                 operator: In
                 values:
-                - ceph-objectstore
+                - cyclops-s3
             topologyKey: kubernetes.io/hostname
       port: 80
       priorityClassName: system-cluster-critical
