@@ -73,7 +73,6 @@ alloy:
         }
         stage.structured_metadata {
           values = {
-            hostname = "",
             app = "",
             cluster = "",
             // container = "",
@@ -81,6 +80,9 @@ alloy:
             namespace = "",
             pod = "",
           }
+        }
+        stage.label_keep {
+          values = [ "hostname", "service_name" ]
         }
 
         forward_to = [loki.write.loki.receiver]
