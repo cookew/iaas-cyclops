@@ -471,20 +471,20 @@ cephObjectStores:
           requests:
             cpu: 100m
             memory: 40Mi
-      placement:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - rook-ceph-rgw
-              - key: rook_object_store
-                operator: In
-                values:
-                - ceph-objectstore
-            topologyKey: kubernetes.io/hostname
+      # placement:
+      #   podAntiAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #     - labelSelector:
+      #         matchExpressions:
+      #         - key: app
+      #           operator: In
+      #           values:
+      #           - rook-ceph-rgw
+      #         - key: rook_object_store
+      #           operator: In
+      #           values:
+      #           - ceph-objectstore
+      #       topologyKey: kubernetes.io/hostname
       port: 80
       priorityClassName: system-cluster-critical
       resources:
@@ -563,20 +563,20 @@ cephObjectStores:
           requests:
             cpu: 100m
             memory: 40Mi
-      placement:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - rook-ceph-rgw
-              - key: rook_object_store
-                operator: In
-                values:
-                - cyclops-s3
-            topologyKey: kubernetes.io/hostname
+      # placement:
+      #   podAntiAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #     - labelSelector:
+      #         matchExpressions:
+      #         - key: app
+      #           operator: In
+      #           values:
+      #           - rook-ceph-rgw
+      #         - key: rook_object_store
+      #           operator: In
+      #           values:
+      #           - cyclops-s3
+      #       topologyKey: kubernetes.io/hostname
       port: 80
       priorityClassName: system-cluster-critical
       resources:
