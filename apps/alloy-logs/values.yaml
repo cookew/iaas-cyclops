@@ -21,6 +21,10 @@ alloy:
         targets = discovery.kubernetes.pods.targets
 
         rule {
+          source_labels = ["__spec_nodename"]
+          target_label = "hostname"
+        }
+        rule {
           source_labels = ["__meta_kubernetes_namespace"]
           target_label = "namespace"
         }
