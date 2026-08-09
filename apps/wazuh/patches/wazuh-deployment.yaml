@@ -13,7 +13,7 @@
 - op: add
   path: /spec/template/spec/containers/0/volumeMounts/-
   value:
-    mountPath: /etc/ssl/certs/ca-certificates.crt
+    mountPath: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
     name: ca
     readOnly: true
     subPath: ca-certificates.crt
