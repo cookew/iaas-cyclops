@@ -1,9 +1,6 @@
 autoreload:
   enabled: true
 
-cert-manager:
-  enabled: true
-
 indexer:
   env:
     OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g -Dlog4j2.formatMsgNoLookups=true"
