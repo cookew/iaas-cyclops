@@ -15,7 +15,8 @@ indexer:
   ## @param indexer.cred.password Value of the password for the admin user.
   ## @param indexer.cred.passwordHash Hash of the password for the admin user.
   cred:
-    existingSecret: wazuh-indexer-credentials
+    # existingSecret: wazuh-indexer-credentials
+    password: ""
 
   # job:
   #   annotations:
@@ -38,8 +39,9 @@ dashboard:
   ## @param dashboard.cred.password Value of the password for the kibanaserver user.
   ## @param dashboard.cred.username Value of the username
   ## @param dashboard.cred.passwordHash Hash of the password
-  # cred:
-  #   existingSecret: wazuh-dashboard-credentials
+  cred:
+    # existingSecret: wazuh-dashboard-credentials
+    password: ""
 
   sso:
     oidc:
@@ -100,14 +102,16 @@ wazuh:
   ## @param wazuh.apiCred.username name of the username.
   ## @param wazuh.apiCred.password password of the user.
   apiCred:
-    existingSecret: wazuh-api-credentials
+    # existingSecret: wazuh-api-credentials
+    password: ""
 
   ## @param wazuh.authd.enabled enable password-based agent registration
   ## @param wazuh.authd.existingSecret name of the existingSecret
   ## @param wazuh.authd.pass password of the authd.
   authd:
     enabled: true
-    existingSecret: wazuh-authd-credentials
+    # existingSecret: wazuh-authd-credentials
+    password: ""
 
   master:
     storageSize: 50Gi
@@ -120,4 +124,5 @@ wazuh:
 
 agent:
   apiCred:
-    existingSecret: wazuh-agent-api-credentials
+    # existingSecret: wazuh-agent-api-credentials
+    password: ""
