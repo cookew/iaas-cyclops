@@ -87,7 +87,7 @@ dashboard:
       forecastle.stakater.com/appName: Wazuh
       forecastle.stakater.com/expose: "true"
       forecastle.stakater.com/group: Apps
-      forecastle.stakater.com/icon: https://wazuh.apps.iaas.wcooke.me/assets/images/logo.png
+      forecastle.stakater.com/icon: https://wazuh.apps.iaas.wcooke.me/ui/favicons/safari-pinned-tab.svg
       forecastle.stakater.com/network-restricted: "true"
     host: wazuh.apps.iaas.wcooke.me
 
