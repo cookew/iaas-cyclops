@@ -45,15 +45,15 @@ dashboard:
     oidc:
       enabled: true
       primary: false
-      url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration
-      logoutUrl: https://forecastle.apps.iaas.wcooke.me
-      baseRedirectUrl: https://wazuh.apps.iaas.wcooke.me
+      url: "https://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration"
+      logoutUrl: "https://forecastle.apps.iaas.wcooke.me"
+      baseRedirectUrl: "https://wazuh.apps.iaas.wcooke.me"
       scope: "openid profile email address phone"
-      issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
+      issuer: "https://keycloak.apps.iaas.wcooke.me/realms/iaas"
       order: 1
-      existingSecret: wazuh-keycloak-client
-      clientIdKey: client-id
-      clientSecretKey: client-secret
+      existingSecret: "wazuh-keycloak-client"
+      clientIdKey: "client-id"
+      clientSecretKey: "client-secret"
       config:
         rolesKey: roles
       roleMappings:
