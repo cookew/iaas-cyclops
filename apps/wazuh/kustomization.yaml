@@ -5,6 +5,10 @@ namespace: wazuh
 
 resources:
 - base/wazuh-keycloak-client.yaml
+- sealed-secrets/wazuh-api-credentials.yaml
+- sealed-secrets/wazuh-authd-credentials.yaml
+- sealed-secrets/wazuh-dashboard-credentials.yaml
+- sealed-secrets/wazuh-indexer-credentials.yaml
 - sealed-secrets/wazuh-keycloak-client.yaml
 
 helmCharts:
