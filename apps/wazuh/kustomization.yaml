@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: wazuh
 
 resources:
+- base/wazuh-dashboard-networkpolicy.yaml
 - base/wazuh-keycloak-client.yaml
 - sealed-secrets/wazuh-api-credentials.yaml
 - sealed-secrets/wazuh-authd-credentials.yaml
