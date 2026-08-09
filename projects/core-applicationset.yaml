@@ -107,6 +107,7 @@ spec:
       - name: tempo
       - name: tempo-kafka
       - name: terminals
+      - name: wazuh
       - name: whoami
 
       # - name: openbao
