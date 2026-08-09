@@ -24,7 +24,7 @@ indexer:
   #     argocd.argoproj.io/hook-delete-policy: HookSucceeded,BeforeHookCreation
 
 dashboard:
-  replicas: 2
+  # replicas: 2
 
   # annotations:
   #   reloader.stakater.com/auto: "true"
@@ -108,10 +108,10 @@ wazuh:
   ## @param wazuh.authd.enabled enable password-based agent registration
   ## @param wazuh.authd.existingSecret name of the existingSecret
   ## @param wazuh.authd.pass password of the authd.
-  authd:
-    enabled: true
-    # existingSecret: wazuh-authd-credentials
-    password: ""
+  # authd:
+  #   enabled: true
+  #   # existingSecret: wazuh-authd-credentials
+  #   password: ""
 
   master:
     storageSize: 50Gi
