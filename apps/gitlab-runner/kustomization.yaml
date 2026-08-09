@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: gitlab-runner
 
 resources:
+- base/gitlab-cache.yaml
 - sealed-secrets/gitlab-runner-token.yaml
 
 # https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/Chart.yaml?ref_type=heads
