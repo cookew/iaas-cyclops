@@ -45,7 +45,7 @@ dashboard:
     oidc:
       enabled: true
       primary: false
-      url: "https://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration"
+      url: "http://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration"
       logoutUrl: "https://forecastle.apps.iaas.wcooke.me"
       baseRedirectUrl: "https://wazuh.apps.iaas.wcooke.me"
       scope: "openid profile email address phone"
@@ -70,7 +70,7 @@ dashboard:
         imageUrl: ""
         showImage: false
       idp:
-        enableSSL: true
+        enableSSL: false
         # pemtrustedcasFilePath: /certs/ca-certificates.crt
 
   ingress:
