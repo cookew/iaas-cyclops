@@ -1,3 +1,5 @@
+# https://github.com/morgoved/wazuh-helm/blob/main/charts/wazuh/values.yaml
+
 autoreload:
   enabled: true
 
