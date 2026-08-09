@@ -71,7 +71,7 @@ dashboard:
         showImage: false
       idp:
         enableSSL: true
-        pemtrustedcasFilePath: /certs/ca-certificates.crt
+        # pemtrustedcasFilePath: /certs/ca-certificates.crt
 
   ingress:
     enabled: true
