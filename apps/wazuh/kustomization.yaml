@@ -25,25 +25,8 @@ patches:
 - path: patches/wazuh-deployment.yaml
   target:
     kind: Deployment
-    # name: wazuh-agent
     version: v1
-# - path: patches/wazuh-deployment.yaml
-#   target:
-#     kind: Deployment
-#     name: wazuh-dashboard
-#     version: v1
 - path: patches/wazuh-statefulset.yaml
   target:
     kind: StatefulSet
-    # name: wazuh-indexer
     version: v1
-# - path: patches/wazuh-statefulset.yaml
-#   target:
-#     kind: StatefulSet
-#     name: wazuh-manager-master
-#     version: v1
-# - path: patches/wazuh-statefulset.yaml
-#   target:
-#     kind: StatefulSet
-#     name: wazuh-manager-worker
-#     version: v1

@@ -25,8 +25,8 @@ indexer:
 dashboard:
   replicas: 2
 
-  annotations:
-    reloader.stakater.com/auto: "true"
+  # annotations:
+  #   reloader.stakater.com/auto: "true"
 
   pdb:
     enabled: true
@@ -93,8 +93,8 @@ wazuh:
   ## @param wazuh.key Defines the key of the wazuh cluster.
   key: "c98b62a9b6169ac5f67dae55ae4a9088"
 
-  env:
-    FILEBEAT_SSL_VERIFICATION_MODE: full
+  # env:
+  #   FILEBEAT_SSL_VERIFICATION_MODE: full
 
   ## @param wazuh.apiCred.existingSecret name of the existingSecret
   ## @param wazuh.apiCred.username name of the username.
@@ -115,7 +115,6 @@ wazuh:
 
   worker:
     replicas: 2
-
     storageSize: 50Gi
     storageClass: ceph-filesystem
 
