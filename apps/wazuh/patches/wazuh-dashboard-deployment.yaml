@@ -3,9 +3,9 @@
   value: 0
 
 - op: add
-  path: /spec/template/spec/volumes
+  path: /spec/template/spec/volumes/-
   value:
-  - configMap:
+    configMap:
       defaultMode: 420
       name: ca-all
     name: ca
