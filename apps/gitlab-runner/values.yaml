@@ -2,9 +2,9 @@
 
 concurrent: 6
 
-gitlabUrl: https://gitlab.com
-# gitlabUrl: https://gitlab.wcooke.me
-# gitlabUrl: http://gitlab-webservice-default.gitlab-system.svc:8080
+# gitlabUrl: https://gitlab.com
+# gitlabUrl: https://gitlab.apps.iaas.wcooke.me
+gitlabUrl: http://gitlab-webservice-default.gitlab:8080
 
 livenessProbe:
   initialDelaySeconds: 20
