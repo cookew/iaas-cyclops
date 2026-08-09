@@ -66,7 +66,7 @@ dashboard:
       extraRoleMappings: {}
       customizeLoginButton:
         enabled: true
-        text: Keycloak
+        text: "Keycloak"
         imageUrl: ""
         showImage: false
       idp:
