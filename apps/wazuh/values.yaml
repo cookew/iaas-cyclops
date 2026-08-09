@@ -14,9 +14,9 @@ indexer:
   ## @param indexer.cred.existingSecret Name of the existingSecret which holds the key "INDEXER_PASSWORD".
   ## @param indexer.cred.password Value of the password for the admin user.
   ## @param indexer.cred.passwordHash Hash of the password for the admin user.
-  cred:
-    # existingSecret: wazuh-indexer-credentials
-    password: ""
+  # cred:
+  #   # existingSecret: wazuh-indexer-credentials
+  #   password: ""
 
   # job:
   #   annotations:
@@ -39,9 +39,9 @@ dashboard:
   ## @param dashboard.cred.password Value of the password for the kibanaserver user.
   ## @param dashboard.cred.username Value of the username
   ## @param dashboard.cred.passwordHash Hash of the password
-  cred:
-    # existingSecret: wazuh-dashboard-credentials
-    password: ""
+  # cred:
+  #   # existingSecret: wazuh-dashboard-credentials
+  #   password: ""
 
   sso:
     oidc:
@@ -93,7 +93,7 @@ dashboard:
 
 wazuh:
   ## @param wazuh.key Defines the key of the wazuh cluster.
-  key: "c98b62a9b6169ac5f67dae55ae4a9088"
+  # key: "c98b62a9b6169ac5f67dae55ae4a9088"
 
   # env:
   #   FILEBEAT_SSL_VERIFICATION_MODE: full
@@ -101,9 +101,9 @@ wazuh:
   ## @param wazuh.apiCred.existingSecret name of the existingSecret
   ## @param wazuh.apiCred.username name of the username.
   ## @param wazuh.apiCred.password password of the user.
-  apiCred:
-    # existingSecret: wazuh-api-credentials
-    password: ""
+  # apiCred:
+  #   # existingSecret: wazuh-api-credentials
+  #   password: ""
 
   ## @param wazuh.authd.enabled enable password-based agent registration
   ## @param wazuh.authd.existingSecret name of the existingSecret
@@ -122,7 +122,7 @@ wazuh:
     storageSize: 50Gi
     storageClass: ceph-filesystem
 
-agent:
-  apiCred:
-    # existingSecret: wazuh-agent-api-credentials
-    password: ""
+# agent:
+#   apiCred:
+#     # existingSecret: wazuh-agent-api-credentials
+#     password: ""
