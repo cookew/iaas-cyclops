@@ -81,12 +81,12 @@ service:
 
 terminationGracePeriodSeconds: 5
 
-volumeMounts:
-- name: ca-all
-  mountPath: /etc/ssl/certs/ca-certificates.crt
-  subPath: ca-certificates.crt
+# volumeMounts:
+# - name: ca-all
+#   mountPath: /etc/ssl/certs/ca-certificates.crt
+#   subPath: ca-certificates.crt
 
-volumes:
-- name: ca-all
-  configMap:
-    name: ca-all
+# volumes:
+# - name: ca-all
+#   configMap:
+#     name: ca-all
