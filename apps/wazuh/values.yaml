@@ -49,7 +49,7 @@ dashboard:
       enabled: true
       primary: false
       url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration
-      logoutUrl: ""
+      logoutUrl: https://forecastle.apps.iaas.wcooke.me
       baseRedirectUrl: https://wazuh.apps.iaas.wcooke.me
       scope: "openid profile email address phone"
       issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
