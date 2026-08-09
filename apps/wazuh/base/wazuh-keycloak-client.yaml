@@ -1,0 +1,82 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: wazuh
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    accessType: confidential
+    baseUrl: /
+    clientId: wazuh
+    clientSecretSecretRef:
+      key: client-secret
+      name: wazuh-keycloak-client
+      namespace: wazuh
+    directAccessGrantsEnabled: true
+    name: Wazuh
+    # pkceCodeChallengeMethod: S256
+    realmIdRef:
+      name: iaas
+    rootUrl: https://wazuh.apps.iaas.wcooke.me
+    standardFlowEnabled: true
+    # validPostLogoutRedirectUris:
+    # - /oauth2/sign_out
+    validRedirectUris:
+    - /*
+  providerConfigRef:
+    name: keycloak-iaas
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  labels:
+    keycloak/realm: iaas
+    keycloak/group-admins: ""
+  name: wazuh-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: wazuh
+    name: wazuh-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-iaas
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: wazuh-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: wazuh-admins
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-iaas
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: wazuh-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: wazuh-admins
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: wazuh-admin
+  providerConfigRef:
+    name: keycloak-iaas

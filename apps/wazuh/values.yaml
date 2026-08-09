@@ -1,0 +1,137 @@
+autoreload:
+  enabled: true
+
+cert-manager:
+  enabled: true
+
+indexer:
+  env:
+    OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g -Dlog4j2.formatMsgNoLookups=true"
+    CLUSTER_NAME: "wazuh"
+    NETWORK_HOST: "0.0.0.0"
+    DISABLE_INSTALL_DEMO_CONFIG: "true"
+
+  storageSize: 50Gi
+  storageClass: ceph-filesystem
+
+  ## @param indexer.cred.existingSecret Name of the existingSecret which holds the key "INDEXER_PASSWORD".
+  ## @param indexer.cred.password Value of the password for the admin user.
+  ## @param indexer.cred.passwordHash Hash of the password for the admin user.
+  cred:
+    existingSecret: ""
+    passwordHash: "$2a$12$zGWIT7wkPKT/zww3bmMyp.KuWXH4RzgxiB91Q8NGFcqpyPy.R2Rcq"
+    password: "WazuhSecretPassword"
+
+  # job:
+  #   annotations:
+  #     argocd.argoproj.io/hook: PostSync
+  #     argocd.argoproj.io/hook-delete-policy: HookSucceeded,BeforeHookCreation
+
+dashboard:
+  replicas: 2
+
+  annotations:
+    reloader.stakater.com/auto: "true"
+
+  pdb:
+    enabled: true
+
+  ## @param dashboard.enable_ssl with this you will be able to access kibana on http port instead of
+  enable_ssl: false
+
+  ## @param dashboard.cred.existingSecret Name of the existingSecret
+  ## @param dashboard.cred.password Value of the password for the kibanaserver user.
+  ## @param dashboard.cred.username Value of the username
+  ## @param dashboard.cred.passwordHash Hash of the password
+  cred:
+    existingSecret: ""
+    username: "kibanaserver"
+    password: "kibanaserver"
+    passwordHash: "$2a$12$7NCZ.l9ntPhou5zNjZIU4uqXNNWMF7SyF6Y6mcjhHTB6Z1eQubHC."
+
+  sso:
+    oidc:
+      enabled: true
+      primary: false
+      url: https://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration
+      logoutUrl: ""
+      baseRedirectUrl: https://wazuh.apps.iaas.wcooke.me
+      scope: "openid profile email address phone"
+      issuer: https://keycloak.apps.iaas.wcooke.me/realms/iaas
+      order: 1
+      existingSecret: wazuh-keycloak-client
+      clientIdKey: client-id
+      clientSecretKey: client-secret
+      config:
+        rolesKey: roles
+      roleMappings:
+        allAccess:
+          backendRoles: []
+        kibanaServer:
+          backendRoles: []
+        kibanaUser:
+          backendRoles: []
+      extraRoleMappings: {}
+      customizeLoginButton:
+        enabled: true
+        text: Keycloak
+        imageUrl: ""
+        showImage: false
+      idp:
+        enableSSL: true
+        pemtrustedcasFilePath: /certs/ca-certificates.crt
+
+  ingress:
+    enabled: true
+    className: cilium
+    tls:
+      - hosts:
+        - wazuh.apps.iaas.wcooke.me
+        secretName: wazuh-ingress
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+      forecastle.stakater.com/appName: Wazuh
+      forecastle.stakater.com/expose: "true"
+      forecastle.stakater.com/group: Apps
+      forecastle.stakater.com/icon: https://wazuh.apps.iaas.wcooke.me/assets/images/logo.png
+      forecastle.stakater.com/network-restricted: "true"
+    host: wazuh.apps.iaas.wcooke.me
+
+wazuh:
+  ## @param wazuh.key Defines the key of the wazuh cluster.
+  key: "c98b62a9b6169ac5f67dae55ae4a9088"
+
+  env:
+    FILEBEAT_SSL_VERIFICATION_MODE: full
+
+  ## @param wazuh.apiCred.existingSecret name of the existingSecret
+  ## @param wazuh.apiCred.username name of the username.
+  ## @param wazuh.apiCred.password password of the user.
+  apiCred:
+    existingSecret: ""
+    username: "wazuh-wui"
+    password: "MyS3cr37P450r.*-"
+
+  ## @param wazuh.authd.enabled enable password-based agent registration
+  ## @param wazuh.authd.existingSecret name of the existingSecret
+  ## @param wazuh.authd.pass password of the authd.
+  authd:
+    enabled: true
+    existingSecret: ""
+    pass: "password"
+
+  master:
+    storageSize: 50Gi
+    storageClass: ceph-filesystem
+
+  worker:
+    replicas: 2
+
+    storageSize: 50Gi
+    storageClass: ceph-filesystem
+
+agent:
+  apiCred:
+    existingSecret: ""
+    username: "wazuh-wui"
+    password: "MyS3cr37P450r.*-"
