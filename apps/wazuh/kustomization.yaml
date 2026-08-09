@@ -13,17 +13,17 @@ resources:
 - sealed-secrets/wazuh-indexer-credentials.yaml
 - sealed-secrets/wazuh-keycloak-client.yaml
 
-# helmCharts:
-# - name: wazuh
-#   namespace: wazuh
-#   releaseName: wazuh
-#   repo: https://morgoved.github.io/wazuh-helm/
-#   valuesFile: values.yaml
-#   version: 2.0.3
+helmCharts:
+- name: wazuh
+  namespace: wazuh
+  releaseName: wazuh
+  repo: https://morgoved.github.io/wazuh-helm/
+  valuesFile: values.yaml
+  version: 2.0.3
 
-# patches:
-# - path: patches/wazuh-dashboard-deployment.yaml
-#   target:
-#     kind: Deployment
-#     name: wazuh-dashboard
-#     version: v1
+patches:
+- path: patches/wazuh-dashboard-deployment.yaml
+  target:
+    kind: Deployment
+    name: wazuh-dashboard
+    version: v1
