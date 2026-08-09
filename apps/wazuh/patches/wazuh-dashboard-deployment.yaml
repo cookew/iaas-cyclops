@@ -13,8 +13,8 @@
 - op: add
   path: /spec/template/spec/containers/0/volumeMounts/-
   value:
-#  - mountPath: /etc/ssl/certs/ca-certificates.crt
-  - mountPath: /certs/ca-certificates.crt
+#    mountPath: /etc/ssl/certs/ca-certificates.crt
+    mountPath: /certs/ca-certificates.crt
     name: ca
     readOnly: true
     subPath: ca-certificates.crt
