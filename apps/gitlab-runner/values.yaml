@@ -26,7 +26,7 @@ metrics:
   podMonitor:
     enabled: true
 
-name: wc-cyclops-runners
+name: wc-iaas-runners
 
 rbac:
   create: true
@@ -43,12 +43,11 @@ runners:
       limit = 6
 
       [runners.kubernetes]
-        namespace = "cyclops-gitlab-runners"
-        namespace_overwrite_allowed = "cyclops-gitlab-runners"
+        namespace = "gitlab-runner"
+        namespace_overwrite_allowed = "gitlab-runner"
         image = "ubuntu:26.04"
         privileged = true
         wait_for_services_timeout = 120
-
 
       [[runners.kubernetes.services]]
         name = "docker:dind"
