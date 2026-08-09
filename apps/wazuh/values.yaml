@@ -38,8 +38,8 @@ dashboard:
   ## @param dashboard.cred.password Value of the password for the kibanaserver user.
   ## @param dashboard.cred.username Value of the username
   ## @param dashboard.cred.passwordHash Hash of the password
-  cred:
-    existingSecret: wazuh-dashboard-credentials
+  # cred:
+  #   existingSecret: wazuh-dashboard-credentials
 
   sso:
     oidc:

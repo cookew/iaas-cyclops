@@ -9,7 +9,7 @@ resources:
 - sealed-secrets/wazuh-agent-api-credentials.yaml
 - sealed-secrets/wazuh-api-credentials.yaml
 - sealed-secrets/wazuh-authd-credentials.yaml
-- sealed-secrets/wazuh-dashboard-credentials.yaml
+# - sealed-secrets/wazuh-dashboard-credentials.yaml
 - sealed-secrets/wazuh-indexer-credentials.yaml
 - sealed-secrets/wazuh-keycloak-client.yaml
 
