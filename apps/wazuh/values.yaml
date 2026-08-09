@@ -43,7 +43,7 @@ dashboard:
 
   sso:
     oidc:
-      enabled: true
+      enabled: false
       primary: false
       url: "http://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration"
       logoutUrl: "https://forecastle.apps.iaas.wcooke.me"
@@ -70,7 +70,7 @@ dashboard:
         imageUrl: ""
         showImage: false
       idp:
-        enableSSL: false
+        enableSSL: true
         # pemtrustedcasFilePath: /certs/ca-certificates.crt
 
   ingress:
