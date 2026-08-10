@@ -53,12 +53,12 @@ runners:
         name = "docker:dind"
         alias = "dind"
 
-      [[runners.kubernetes.volumes.config_map]]
-        name = "ca-all"
-        mount_path = "/etc/ssl/certs/ca-certificates.crt"
-        sub_path = "ca-certificates.crt"
-        [runners.kubernetes.volumes.config_map.items]
-          "ca-certificates.crt" = "ca-certificates.crt"
+      # [[runners.kubernetes.volumes.config_map]]
+      #   name = "ca-all"
+      #   mount_path = "/etc/ssl/certs/ca-certificates.crt"
+      #   sub_path = "ca-certificates.crt"
+      #   [runners.kubernetes.volumes.config_map.items]
+      #     "ca-certificates.crt" = "ca-certificates.crt"
 
       [[runners.kubernetes.volumes.pvc]]
         name = "gitlab-cache"
@@ -81,12 +81,12 @@ service:
 
 terminationGracePeriodSeconds: 5
 
-# volumeMounts:
-# - name: ca-all
-#   mountPath: /etc/ssl/certs/ca-certificates.crt
-#   subPath: ca-certificates.crt
+volumeMounts:
+- name: ca-all
+  mountPath: /etc/ssl/certs/ca-certificates.crt
+  subPath: ca-certificates.crt
 
-# volumes:
-# - name: ca-all
-#   configMap:
-#     name: ca-all
+volumes:
+- name: ca-all
+  configMap:
+    name: ca-all
