@@ -12,10 +12,10 @@ alloy:
         enabled = false
       }
 
-
       // Kubernetes Logs
       discovery.kubernetes "pods" {
-          role = "pod"
+        clustering = true
+        role = "pod"
       }
       discovery.relabel "pod_logs" {
         targets = discovery.kubernetes.pods.targets
@@ -142,7 +142,7 @@ controller:
     enabled: false
     # maxUnavailable: 2
 
-  # replicas: 3
+  replicas: 3
 
   revisionHistoryLimit: 0
 
@@ -169,7 +169,7 @@ controller:
     operator: Exists
 
   # Must be one of 'daemonset', 'deployment', or 'statefulset'.
-  type: daemonset
+  type: deployment
 
   # volumes:
   #   extra:
