@@ -15,6 +15,7 @@ alloy:
       // Kubernetes Logs
       discovery.kubernetes "pods" {
         role = "pod"
+        label = "iaas.wcooke.me/dont-log!=true"
       }
       discovery.relabel "pod_logs" {
         targets = discovery.kubernetes.pods.targets
@@ -36,8 +37,17 @@ alloy:
           target_label = "container"
         }
         rule {
+          source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_name", "__meta_kubernetes_pod_controller_name"]
+          separator = ";"
+          regex = "^;(.+)(-[0-9a-f]*)?$"
+          replacement = "$1"
+          target_label = "service_name"
+        }
+        rule {
           source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_name"]
-          target_label = "app"
+          regex = "^(.+)$"
+          replacement = "$1"
+          target_label = "service_name"
         }
         rule {
           source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
@@ -75,9 +85,8 @@ alloy:
         }
         stage.structured_metadata {
           values = {
-            app = "",
             cluster = "",
-            // container = "",
+            container = "",
             container_runtime = "",
             namespace = "",
             pod = "",
