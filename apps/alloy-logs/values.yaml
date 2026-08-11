@@ -124,11 +124,8 @@ alloy:
 
   mounts:
     extra:
-    - name: storage
-      hostPath:
-        path: /opt/alloy-logs
-    # - mountPath: /storage
-    #   name: storage
+    - mountPath: /storage
+      name: storage
     # varlog: true
 
   resources:
@@ -176,8 +173,11 @@ controller:
   # Must be one of 'daemonset', 'deployment', or 'statefulset'.
   type: daemonset
 
-  # volumes:
-  #   extra:
+  volumes:
+    extra:
+    - name: storage
+      hostPath:
+        path: /opt/alloy-logs
   #   - name: storage
   #     ephemeral:
   #       volumeClaimTemplate:
