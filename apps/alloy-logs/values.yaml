@@ -14,9 +14,6 @@ alloy:
 
       // Kubernetes Logs
       discovery.kubernetes "pods" {
-        clustering {
-          enabled = true
-        }
         role = "pod"
       }
       discovery.relabel "pod_logs" {
@@ -62,6 +59,9 @@ alloy:
       loki.source.kubernetes "pod_logs" {
         targets    = discovery.relabel.pod_logs.output
         forward_to = [loki.process.cleanup.receiver]
+        clustering {
+          enabled = true,
+        }
       }
       loki.process "cleanup" {
         stage.label_drop {
