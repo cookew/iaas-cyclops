@@ -15,7 +15,10 @@ alloy:
       // Kubernetes Logs
       discovery.kubernetes "pods" {
         role = "pod"
-        label = "iaas.wcooke.me/dont-log!=true"
+        selectors {
+          role = "pod"
+          label = "cookes.io/dont-log!=true"
+        }
       }
       discovery.relabel "pod_logs" {
         targets = discovery.kubernetes.pods.targets
