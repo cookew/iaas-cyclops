@@ -60,7 +60,7 @@ alloy:
         targets    = discovery.relabel.pod_logs.output
         forward_to = [loki.process.cleanup.receiver]
         clustering {
-          enabled = true,
+          enabled = true
         }
       }
       loki.process "cleanup" {
@@ -122,17 +122,20 @@ alloy:
 
   listenScheme: HTTP
 
-  # mounts:
-  #   extra:
-  #   - mountPath: /storage
-  #     name: storage
-  #   varlog: true
+  mounts:
+    extra:
+    - name: storage
+      hostPath:
+        path: /opt/alloy-logs
+    # - mountPath: /storage
+    #   name: storage
+    # varlog: true
 
   resources:
     requests:
       cpu: 333m
 
-  # storagePath: /storage
+  storagePath: /storage
 
 controller:
   enableStatefulSetAutoDeletePVC: true
@@ -144,7 +147,7 @@ controller:
     enabled: false
     # maxUnavailable: 2
 
-  replicas: 3
+  # replicas: 3
 
   revisionHistoryLimit: 0
 
@@ -171,7 +174,7 @@ controller:
     operator: Exists
 
   # Must be one of 'daemonset', 'deployment', or 'statefulset'.
-  type: deployment
+  type: daemonset
 
   # volumes:
   #   extra:
