@@ -14,7 +14,9 @@ alloy:
 
       // Kubernetes Logs
       discovery.kubernetes "pods" {
-        clustering.enabled = true
+        clustering {
+          enabled = true
+        }
         role = "pod"
       }
       discovery.relabel "pod_logs" {
