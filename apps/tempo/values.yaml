@@ -57,7 +57,7 @@ global:
 
 ingest:
   kafka:
-    address: kafka.tempo-kafka.svc:9092
+    address: tempo-kafka-brokers.tempo-kafka.svc:9092
 
 # ingester:
 #   autoscaling:
