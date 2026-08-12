@@ -260,6 +260,6 @@ backendScheduler:
   extraArgs:
   - -config.expand-env=true
 
-blockbuilder:
+blockBuilder:
   extraArgs:
   - -config.expand-env=true
