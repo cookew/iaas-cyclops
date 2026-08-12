@@ -255,3 +255,7 @@ traces:
     http:
       enabled: true
       receiverConfig: {}
+
+backendScheduler:
+  extraArgs:
+  - -config.expand-env=true
