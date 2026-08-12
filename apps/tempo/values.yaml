@@ -259,3 +259,7 @@ traces:
 backendScheduler:
   extraArgs:
   - -config.expand-env=true
+
+blockbuilder:
+  extraArgs:
+  - -config.expand-env=true
