@@ -7,10 +7,10 @@ backendWorker:
       enabled: true
 
 compactor:
-  autoscaling:
-    enabled: true
-    hpa:
-      enabled: true
+  # autoscaling:
+  #   enabled: true
+  #   hpa:
+  #     enabled: true
   extraArgs:
   - -config.expand-env=true
   config:
@@ -42,11 +42,11 @@ distributor:
   autoscaling:
     enabled: false
 
-gateway:
-  autoscaling:
-    enabled: true
-    minReplicas: 2
-  enabled: true
+# gateway:
+#   autoscaling:
+#     enabled: true
+#     minReplicas: 2
+#   enabled: true
 
 global:
   extraEnvFrom:
@@ -181,14 +181,14 @@ prometheusRule:
         expr: sum(rate(container_cpu_usage_seconds_total[1m])) by (node, namespace, pod, container)
 
 querier:
-  autoscaling:
-    enabled: true
+  # autoscaling:
+  #   enabled: true
   extraArgs:
   - -config.expand-env=true
 
 queryFrontend:
-  autoscaling:
-    enabled: true
+  # autoscaling:
+  #   enabled: true
   extraArgs:
   - -config.expand-env=true
   query:
