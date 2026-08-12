@@ -189,8 +189,8 @@ querier:
 queryFrontend:
   autoscaling:
     enabled: true
-  # extraArgs:
-  # - -config.expand-env=true
+  extraArgs:
+  - -config.expand-env=true
   query:
     enabled: true
 #   ingress:
