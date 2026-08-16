@@ -109,3 +109,6 @@ config:
   # restrictWatchedResources restricts resource watching (secrets, services and configmaps) to resources carrying the
   # eck.k8s.elastic.co/watched=true label. When false (default), the operator watches all resources cluster-wide.
   restrictWatchedResources: false
+
+global:
+  createOperatorNamespace: false
