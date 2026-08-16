@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: inotify-exporter
+spec:
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: inotify-exporter
+  template:
+    metadata:
+      labels:
+        app: inotify-exporter
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: exporter
+        image: nginx
+        livenessProbe:
+          httpGet:
+            port: 80
+            path: /healthz
+          initialDelaySeconds: 3
+          periodSeconds: 10
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 50m
+            memory: 100Mi
+          requests:
+            cpu: 1m
+            memory: 10Mi
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 2
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d
+        - name: stats
+          mountPath: /usr/share/nginx/html
+      - name: collector
+        command:
+        - /bin/bash
+        - /inotify.sh
+        env:
+        - name: INTERVAL
+          value: "15"
+        - name: LOOP_FOREVER
+          value: "true"
+        - name: DESTINATION
+          value: /stats/metrics
+        - name: HOST_PROC
+          value: /host-proc
+        image: docker.io/library/ubuntu:26.04
+        livenessProbe:
+          exec:
+            command:
+            - /usr/bin/pgrep
+            - -f
+            - /bin/bash /inotify.sh
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          exec:
+            command:
+            - /usr/bin/pgrep
+            - -f
+            - /bin/bash /inotify.sh
+          initialDelaySeconds: 5
+          periodSeconds: 2
+        resources:
+          limits:
+            cpu: 500m
+            memory: 100Mi
+          requests:
+            cpu: 1m
+            memory: 10Mi
+        securityContext:
+          privileged: true
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: stats
+          mountPath: /stats
+        - name: inotify-script
+          mountPath: /inotify.sh
+          subPath: inotify.sh
+        - name: host-proc
+          mountPath: /host-proc
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 5
+      volumes:
+      - name: nginx-config
+        configMap:
+          items:
+          - key: default.conf
+            path: default.conf
+          name: nginx-config
+      - name: stats
+        emptyDir:
+          medium: Memory
+      - name: inotify-script
+        configMap:
+          items:
+          - key: inotify.sh
+            path: inotify.sh
+          name: inotify-exporter
+      - name: host-proc
+        hostPath:
+          path: /proc

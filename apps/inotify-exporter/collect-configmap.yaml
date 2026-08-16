@@ -1,0 +1,151 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inotify-exporter
+data:
+  inotify.sh: |
+    #!/bin/bash
+
+    echo "Starting inotify-exporter..."
+
+    shopt -s extglob
+
+    LOOP_FOREVER=${LOOP_FOREVER:-}
+    DESTINATION=${DESTINATION:-}
+    HOST_PROC=${HOST_PROC:-/proc}
+
+    echo "LOOP_FOREVER=${LOOP_FOREVER}"
+    echo "DESTINATION=${DESTINATION}"
+    echo "HOST_PROC=${HOST_PROC}"
+
+    function get_metric_data() {
+      # Get list of all watches
+      all_watches=$(grep ^inotify "${HOST_PROC}"/[0-9]*/fdinfo/* 2>/dev/null)
+      # echo ${all_watches}
+
+      # Create list of wathes with pids
+      all_watches_pids=$(echo "${all_watches}" | cut -d ':' -f 1 | cut -d '/' -f 3,5 --output-delimiter ' ')
+
+      # Get instances per pid
+      ipp=$(echo "${all_watches_pids}" | uniq | cut -w -f 1 | uniq -c)
+
+      # Get watches per pid
+      wpp=$(echo "${all_watches_pids}" | cut -d ' ' -f 1 | uniq -c)
+
+      #echo $ipp
+      #echo $wpp
+
+      cat << EOF
+    # HELP sysctl_fs_inotify_max_user_instances Upper limit of inotify instances that can be created per real user ID
+    # TYPE sysctl_fs_inotify_max_user_instances gauge
+    sysctl_fs_inotify_max_user_instances $(cat "${HOST_PROC}/sys/fs/inotify/max_user_instances")
+
+    # HELP sysctl_fs_inotify_max_user_instances_current Current inotify instances that are created
+    # TYPE sysctl_fs_inotify_max_user_instances_current gauge
+    sysctl_fs_inotify_max_user_instances_current $(echo "${all_watches_pids}" | cut -d ':' -f 1 | uniq | wc -l)
+
+    # HELP sysctl_fs_inotify_max_user_watches Upper limit of watches that can be created per real user ID
+    # TYPE sysctl_fs_inotify_max_user_watches gauge
+    sysctl_fs_inotify_max_user_watches $(cat "${HOST_PROC}/sys/fs/inotify/max_user_watches")
+
+    # HELP sysctl_fs_inotify_max_user_watches_current Current inotify watches created
+    # TYPE sysctl_fs_inotify_max_user_watches_current gauge
+    sysctl_fs_inotify_max_user_watches_current $(echo "${all_watches_pids}" | wc -l)
+
+    EOF
+
+      real_user_id_to_pid=""
+      while read -r instance
+      do
+        # echo "instance=${instance}"
+        pid=${instance##*( )*([0-9])*( )}
+        #pid=$(echo "${instance}" | awk '{print $2}')
+        # echo "pid=${pid}"
+        real_user_id=$(awk '{print $1}' "${HOST_PROC}/${pid}/uid_map")
+
+        if [ "${real_user_id}" = "" ]
+        then
+          continue
+        fi
+
+        #echo pid=${pid} user_id=${user_id} real_user_id=${real_user_id}
+
+        real_user_id_to_pid+="${real_user_id} ${pid}"$'\n'
+      done <<< "${ipp}"
+
+      #echo "${real_user_id_to_pid}" | awk '{printf "%s\n", $1}' | sort -u
+
+      while read -r real_user_id
+      do
+        if [ "${real_user_id}" = "" ]
+        then
+          continue
+        fi
+
+        user_pids=$(echo "${real_user_id_to_pid}" | grep "${real_user_id}" 2>/dev/null | cut -d ' ' -f 2)
+
+        user_instances=0
+        for user_pid in ${user_pids}
+        do
+          instance=$(echo "${ipp}" | grep " ${user_pid}$")
+          if [ $? ]
+          then
+            # echo "instance=${instance}"
+            if [ "${instance}" != "" ]
+            then
+              user_instances=$(( "${user_instances}" + $(echo "${instance}" | awk '{print $1}') ))
+            fi
+          fi
+        done
+
+        user_watches=0
+        for user_pid in ${user_pids}
+        do
+          watches=$(echo "${wpp}" | grep " ${user_pid}$")
+          if [ $? ]
+          then
+            if [ "${watches}" != "" ]
+            then
+              user_watches=$(( "${user_watches}" + $(echo "${watches}" | awk '{print $1}') ))
+            fi
+          fi
+        done
+
+        real_user_name=$(id -nu "${real_user_id}")
+
+        #echo real_user_id=${real_user_id} real_user_name=${real_user_name} user_instances=${user_instances} user_watches=${user_watches}
+
+        cat << EOF
+    # HELP sysctl_fs_inotify_max_user_instances_user Current user inotify instances that are created
+    # TYPE sysctl_fs_inotify_max_user_instances_user gauge
+    sysctl_fs_inotify_max_user_instances_user{user_id="${real_user_id}",user_name="${real_user_name}"} ${user_instances}
+
+    # HELP sysctl_fs_inotify_max_user_watches_user Current user inotify watches that are created
+    # TYPE sysctl_fs_inotify_max_user_watches_user gauge
+    sysctl_fs_inotify_max_user_watches_user{user_id="${real_user_id}",user_name="${real_user_name}"} ${user_watches}
+
+    EOF
+      done <<< $(echo "${real_user_id_to_pid}" | awk '{printf "%s\n", $1}' | sort -u )
+    }
+
+    function output_metrics() {
+        METRICS="$(get_metric_data)"
+
+        if [[ -z "${DESTINATION}" ]]
+        then
+            echo "${METRICS}"
+        else
+            echo "${METRICS}" > "${DESTINATION}"
+        fi
+    }
+
+    if [[ -n "${LOOP_FOREVER}" ]]
+    then
+        while true
+        do
+            output_metrics
+            sleep "${INTERVAL}"
+        done
+    else
+        output_metrics
+    fi
