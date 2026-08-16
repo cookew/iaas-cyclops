@@ -51,7 +51,7 @@ spec:
       - OCIExport
       - Plugins
       - GraceIOVirtualization
-      - IOMMUFD
+      # - IOMMUFD
       - FirmwareAutoSelection
       - MigrationStallDetection
       - MigrationDowntimeTuning
