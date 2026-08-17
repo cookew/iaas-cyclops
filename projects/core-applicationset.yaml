@@ -93,6 +93,7 @@ spec:
       - name: grafana
       - name: harbor
       - name: headlamp
+      - name: inotify-exporter
       - name: jupyterhub
       - name: kubevirt-manager
       - name: loki
