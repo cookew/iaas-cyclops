@@ -4,7 +4,7 @@ set -e
 
 REGISTRY=registry.wcooke.me:5000
 REPO=cyberchef
-VERSION=11.3.0
+VERSION=11.4.0
 
 podman buildx prune --all --force
 podman build -t ${REGISTRY}/${REPO}:${VERSION} .
