@@ -28,7 +28,7 @@ helmCharts:
   releaseName: cilium
   repo: https://helm.cilium.io/
   valuesFile: values.yaml
-  version: 1.20.0
+  version: 1.20.1
 - name: oauth2-proxy
   namespace: kube-system
   releaseName: hubble-oauth2-proxy
