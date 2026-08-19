@@ -26,6 +26,7 @@ persistence:
       size: 10Gi
     jobservice:
       jobLog:
+        accessMode: ReadWriteMany
         storageClass: ceph-filesystem
         size: 5Gi
     database:
