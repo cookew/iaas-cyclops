@@ -58,7 +58,7 @@ extraArgs:
 
 debug: true
 
-envFrom:
+env:
 - name: MCP_GRAFANA_SERVER_TOKEN
   valueFrom:
     secretKeyRef:
