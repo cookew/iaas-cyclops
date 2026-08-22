@@ -7,8 +7,8 @@ autoscaling:
   enabled: true
   minReplicas: 2
   maxReplicas: 4
-  targetCPU: "60"
-  targetMemory: "60"
+  targetCPU: "80"
+  targetMemory: "80"
 
 # extraConfigmapMounts:
 # - name: ca-bundle
