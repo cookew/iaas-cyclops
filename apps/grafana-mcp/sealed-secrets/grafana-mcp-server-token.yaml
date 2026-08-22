@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: grafana-mcp-server-token
+  namespace: grafana-mcp
+spec:
+  encryptedData:
+    MCP_GRAFANA_SERVER_TOKEN: AgAQ5AtqWT5FqhBHD7HmCA9xoaoVwWg4DsWIXutLHG9Lfp47UkwX5b/jMhOW8yNTJyaHsi4SFuqSPt3ilzQwErY4Iesdd/OJy1FSvkxviu+zmxPQ4sHxJPJbqdcBlKBSfqMP/PssKrJqyhDzBWxp9j1LjPSb1z2hcR/3BKetjszC2Je0kvgGaUQrNY9pkW0XUHi6wyFfF+Mpp73jNKnYS/7dl/VVhz6ykdOoNERDZGJiB5l0TS6oc1RUQ10HO2ysfEggSMQ5FAuF60iel74dQJck+yscLKjUvdiHJDxkqZytIsP7XNPK4esdnOsxpkG8O9PaV/MaHRvVNd8uasCUdq7UPoqDd1uMLgeFqVDI72ufMs/l5uh+3e4V3BWBs9VBF1N/8GtTJYAwWGCUDlLFkNl6ayL83i1ldTaZZyQmZF1jrxb/J9ze8JszXKpPmw1ZSBK7I5B1myu3/nk/YCRal9AI6p9Q8v+SBGaB5DpFb2BqjMpUj91YyqSnbRFBbQnONvjkSghd6QNcNdsaPrImkhW2yiDYJAkPiG+QKJWwkl7KE0b29ktb6NlziVBy0qHbrXU9PbLy3i3hzeXqoWOY3RTlgvBVg4o2TGUoLUix/4pRWBER8yGixTdirL04wMK8gzIFWqRejvSOs6P4RU5mqz57JrKEJeQ/s/t47SqKue4kHDk4M2sWszHW46i10ULCkFUrh4FnTgaITEaCzqaM2MqTj8+izJQ5G6YsaJgZKxw6kqKbK01Lb3/0drw3iw==
+  template:
+    metadata:
+      name: grafana-mcp-server-token
+      namespace: grafana-mcp
+    type: stringData
