@@ -208,7 +208,11 @@ ingress:
 imageRenderer:
   autoscaling:
     enabled: true
+    minReplicas: 2
+    maxReplicas: 4
+    targetCPU: 80
     targetMemory: 80
+
   enabled: true
   env:
     API_SILENCE_REQUEST_LOG_PATH: /healthz,/metrics
