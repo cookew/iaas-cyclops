@@ -91,6 +91,7 @@ spec:
       - name: gitlab-runner
       - name: guacamole
       - name: grafana
+      - name: grafana-mcp
       - name: harbor
       - name: headlamp
       - name: inotify-exporter

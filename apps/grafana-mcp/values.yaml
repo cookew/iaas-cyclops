@@ -1,0 +1,47 @@
+# https://github.com/grafana-community/helm-charts/blob/main/charts/grafana-mcp/values.yaml
+
+replicas: 1
+
+grafana:
+  url: "http://grafana.grafana.svc"
+  apiKeySecret:
+    name: grafana-mcp-token
+    key: token
+
+serviceAccount:
+  create: false
+
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+  hosts:
+  - host: grafana-mcp.iaas.apps.wcooke.me
+    paths:
+    - path: /
+      pathType: Prefix
+  tls:
+  - secretName: grafana-mcp-ingress-tls
+    hosts:
+    - grafana-mcp.iaas.apps.wcooke.me
+
+resources: {}
+  # limits:
+  #   cpu: 500m
+  #   memory: 512Mi
+  # requests:
+  #   cpu: 250m
+  #   memory: 256Mi
+
+automountServiceAccountToken: false
+
+volumeMounts: []
+
+volumes: []
+
+metrics:
+  enabled: true
+
+serviceMonitor:
+  enabled: true

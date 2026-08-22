@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: grafana-mcp
+
+resources:
+- base/grafana-service-account.yaml
+- base/networkpolicies.yaml
+
+helmCharts:
+- name: grafana-mcp
+  namespace: grafana-mcp
+  releaseName: grafana-mcp
+  repo: https://grafana-community.github.io/helm-charts
+  valuesFile: values.yaml
+  version: 0.20.0
