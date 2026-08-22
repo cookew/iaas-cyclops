@@ -57,3 +57,10 @@ extraArgs:
 # - streamable-http
 
 debug: true
+
+envFrom:
+- name: MCP_GRAFANA_SERVER_TOKEN
+  valueFrom:
+    secretRef:
+      name: grafana-mcp-token
+      key: MCP_GRAFANA_SERVER_TOKEN

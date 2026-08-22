@@ -6,6 +6,7 @@ namespace: grafana-mcp
 resources:
 - base/grafana-service-account.yaml
 - base/networkpolicies.yaml
+- sealed-secrets/grafana-mcp-server-auth-token.yaml
 
 helmCharts:
 - name: grafana-mcp
