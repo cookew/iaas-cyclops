@@ -48,3 +48,4 @@ serviceMonitor:
 
 extraArgs:
 - --allowed-hosts=0.0.0.0/0
+- --allowed-origins=*
