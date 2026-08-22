@@ -33,7 +33,7 @@ rbac:
 
 replicas: 1
 
-revisionHistoryLimit: 0
+revisionHistoryLimit: 1
 
 runners:
   config: |
