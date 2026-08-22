@@ -10,10 +10,10 @@ data:
     apiVersion: 1
     datasources:
     - name: Pyroscope
-      editable: true
+      editable: false
       type: grafana-pyroscope-datasource
       uid: pyroscope
       url: http://pyroscope-query-frontend.pyroscope.svc:4040
-      version: 2
+      version: 1
       jsonData:
         minStep: '15s'

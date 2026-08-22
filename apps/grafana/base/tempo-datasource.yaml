@@ -11,11 +11,11 @@ data:
     datasources:
     - name: Tempo
       access: proxy
-      editable: true
+      editable: false
       type: tempo
       uid: tempo
       url: http://tempo-query-frontend.tempo.svc:3200
-      version: 7
+      version: 1
       jsonData:
         nodeGraph:
           enabled: true
