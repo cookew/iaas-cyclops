@@ -51,8 +51,9 @@ extraArgs:
 - "*"
 - --allowed-origins
 - "*"
-- --log-level=debug
-- -t
-- streamable-http
+- --log-level
+- debug
+# - -t
+# - streamable-http
 
 debug: true
