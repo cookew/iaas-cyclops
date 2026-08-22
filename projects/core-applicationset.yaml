@@ -104,9 +104,9 @@ spec:
       - name: nvme-exporter
       - name: ollama
       - name: open-webui
-      - name: pyroscope
+      # - name: pyroscope
       - name: reloader
-      - name: tempo
+      # - name: tempo
       - name: tempo-kafka
       - name: terminals
       - name: wazuh
