@@ -6,7 +6,7 @@ grafana:
   url: "http://grafana.grafana.svc"
   apiKeySecret:
     name: grafana-mcp-token
-    key: token
+    key: attribute.key
 
 serviceAccount:
   create: false
