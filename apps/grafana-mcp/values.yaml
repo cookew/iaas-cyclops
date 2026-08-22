@@ -53,6 +53,8 @@ extraArgs:
 - "*"
 - --log-level
 - debug
+- --server-name
+- grafana-mcp
 # - -t
 # - streamable-http
 
