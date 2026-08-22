@@ -50,6 +50,7 @@ extraArgs:
 - --allowed-hosts=0.0.0.0/0
 - --allowed-origins=*
 - --log-level=debug
-- -t streamable-http
+- -t
+- streamable-http
 
 debug: true
