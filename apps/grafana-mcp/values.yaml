@@ -13,7 +13,7 @@ serviceAccount:
 
 ingress:
   enabled: false
-  className: ""
+  className: cilium
   annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
   hosts:
