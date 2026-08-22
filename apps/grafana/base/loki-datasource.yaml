@@ -14,4 +14,4 @@ data:
       type: loki
       uid: loki
       url: http://loki-query-frontend.loki.svc:3100
-      version: 2
+      version: 1
