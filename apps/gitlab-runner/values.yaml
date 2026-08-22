@@ -43,9 +43,10 @@ runners:
       limit = 6
 
       [runners.kubernetes]
+        image = "ubuntu:26.04"
         namespace = "gitlab-runner"
         namespace_overwrite_allowed = "gitlab-runner"
-        image = "ubuntu:26.04"
+        pod_security_context_read_only_root_filesystem = true
         privileged = true
         wait_for_services_timeout = 120
 
@@ -60,15 +61,25 @@ runners:
         [runners.kubernetes.volumes.config_map.items]
           "ca-certificates.crt" = "ca-certificates.crt"
 
-      [[runners.kubernetes.volumes.pvc]]
-        name = "gitlab-cache"
-        mount_path = "/cache"
-        mount_propagation = "None"
+      [[runners.kubernetes.volumes.empty_dir]]
+        name = "builds-dir"
+        mount_path = "/builds"
+        medium = "Memory"
+
+      [[runners.kubernetes.volumes.empty_dir]]
+        name = "tmp-dir"
+        mount_path = "/tmp"
+        medium = "Memory"
 
       [[runners.kubernetes.volumes.empty_dir]]
         name = "dind-certs"
         mount_path = "/certs"
         medium = "Memory"
+
+      [[runners.kubernetes.volumes.pvc]]
+        name = "gitlab-cache"
+        mount_path = "/cache"
+        mount_propagation = "None"
 
   secret: gitlab-runner-token
 
