@@ -12,7 +12,7 @@ serviceAccount:
   create: false
 
 ingress:
-  enabled: false
+  enabled: true
   className: cilium
   annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
