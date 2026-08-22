@@ -49,5 +49,7 @@ serviceMonitor:
 extraArgs:
 - --allowed-hosts=0.0.0.0/0
 - --allowed-origins=*
-- --debug
 - --log-level=debug
+- -t streamable-http
+
+debug: true
