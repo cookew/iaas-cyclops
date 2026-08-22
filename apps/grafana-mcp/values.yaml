@@ -45,3 +45,6 @@ metrics:
 
 serviceMonitor:
   enabled: true
+
+extraArgs:
+- --allowed-hosts=0.0.0.0/0
