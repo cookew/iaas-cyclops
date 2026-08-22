@@ -14,6 +14,8 @@ affinity:
         topologyKey: kubernetes.io/hostname
 
 config:
+  annotations:
+    reloader.stakater.com/auto: "true"
   existingSecret: hubble-oauth2-proxy
   configFile: |-
     allowed_roles = [ "hubble:hubble-admin" ]
