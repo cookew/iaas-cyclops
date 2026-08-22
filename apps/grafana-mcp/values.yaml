@@ -59,7 +59,7 @@ extraArgs:
 debug: true
 
 envValueFrom:
-- MCP_GRAFANA_SERVER_TOKEN:
-  secretKeyRef:
-    name: grafana-mcp-server-token
-    key: MCP_GRAFANA_SERVER_TOKEN
+  MCP_GRAFANA_SERVER_TOKEN:
+    secretKeyRef:
+      name: grafana-mcp-server-token
+      key: MCP_GRAFANA_SERVER_TOKEN
