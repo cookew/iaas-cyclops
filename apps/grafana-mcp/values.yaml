@@ -53,8 +53,8 @@ extraArgs:
 - "*"
 - --log-level
 - debug
-# - -t
-# - streamable-http
+- -t
+- streamable-http
 
 debug: true
 
