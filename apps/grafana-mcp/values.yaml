@@ -17,14 +17,14 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
   hosts:
-  - host: grafana-mcp.iaas.apps.wcooke.me
+  - host: grafana-mcp.apps.iaas.wcooke.me
     paths:
     - path: /
       pathType: Prefix
   tls:
   - secretName: grafana-mcp-ingress-tls
     hosts:
-    - grafana-mcp.iaas.apps.wcooke.me
+    - grafana-mcp.apps.iaas.wcooke.me
 
 resources: {}
   # limits:
