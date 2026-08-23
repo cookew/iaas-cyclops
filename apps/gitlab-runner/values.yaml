@@ -78,7 +78,7 @@ runners:
       #   medium = "Memory"
 
       [[runners.kubernetes.volumes.pvc]]
-        name = "cache"
+        name = "gitlab-cache"
         mount_path = "/cache"
         mount_propagation = "None"
 
