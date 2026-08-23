@@ -41,6 +41,7 @@ runners:
       # environment = ['DOCKER_HOST=tcp://localhost:2376', 'DOCKER_DRIVER=overlay2', 'DOCKER_TLS_CERTDIR=/certs', 'DOCKER_TLS_VERIFY=1', 'DOCKER_CERT_PATH=/certs/client' ]
       request_concurrency = 3
       limit = 6
+      cache_dir = "/cache"
 
       [runners.kubernetes]
         image = "ubuntu:26.04"
@@ -77,8 +78,8 @@ runners:
       #   medium = "Memory"
 
       [[runners.kubernetes.volumes.pvc]]
-        name = "gitlab-cache"
-        mount_path = "/home/gitlab-runner/cache/"
+        name = "cache"
+        mount_path = "/cache"
         mount_propagation = "None"
 
   secret: gitlab-runner-token
