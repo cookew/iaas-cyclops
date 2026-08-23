@@ -30,6 +30,7 @@ name: wc-iaas-runners
 
 rbac:
   create: true
+  clusterWideAccess: false
   # rules:
   # - resources: ["events"]
   #   verbs: ["list", "watch"]
