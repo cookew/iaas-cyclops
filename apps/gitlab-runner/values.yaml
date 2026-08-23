@@ -38,7 +38,7 @@ revisionHistoryLimit: "0"
 runners:
   config: |
     [[runners]]
-      environment = ['DOCKER_HOST=tcp://localhost:2376', 'DOCKER_DRIVER=overlay2', 'DOCKER_TLS_CERTDIR=/certs', 'DOCKER_TLS_VERIFY=1', 'DOCKER_CERT_PATH=/certs/client' ]
+      # environment = ['DOCKER_HOST=tcp://localhost:2376', 'DOCKER_DRIVER=overlay2', 'DOCKER_TLS_CERTDIR=/certs', 'DOCKER_TLS_VERIFY=1', 'DOCKER_CERT_PATH=/certs/client' ]
       request_concurrency = 3
       limit = 6
 
@@ -50,9 +50,9 @@ runners:
         privileged = true
         wait_for_services_timeout = 120
 
-      [[runners.kubernetes.services]]
-        name = "docker:dind"
-        alias = "dind"
+      # [[runners.kubernetes.services]]
+      #   name = "docker:dind"
+      #   alias = "dind"
 
       [[runners.kubernetes.volumes.config_map]]
         name = "ca-all"
@@ -71,10 +71,10 @@ runners:
         mount_path = "/tmp"
         medium = "Memory"
 
-      [[runners.kubernetes.volumes.empty_dir]]
-        name = "dind-certs"
-        mount_path = "/certs"
-        medium = "Memory"
+      # [[runners.kubernetes.volumes.empty_dir]]
+      #   name = "dind-certs"
+      #   mount_path = "/certs"
+      #   medium = "Memory"
 
       [[runners.kubernetes.volumes.pvc]]
         name = "gitlab-cache"
