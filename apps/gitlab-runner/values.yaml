@@ -64,7 +64,7 @@ runners:
 
       [runners.kubernetes]
         allow_privilege_escalation = false
-        allowed_images = ["*"]
+        # allowed_images = ["*"]
         image = "ubuntu:26.04"
         # image_pull_secrets = ["regcred"]
         namespace = "gitlab-runner"
