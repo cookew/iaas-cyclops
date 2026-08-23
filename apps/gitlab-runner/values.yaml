@@ -70,7 +70,7 @@ runners:
         # namespace = "gitlab-runner"
         # namespace_overwrite_allowed = "gitlab-runner"
         namespace_overwrite_allowed = "gitlab-ci-.*"
-        namespace_per_job = true
+        # namespace_per_job = true
         pod_security_context_read_only_root_filesystem = true
         privileged = false
         # service_account = "gitlab-runner"
