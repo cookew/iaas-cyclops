@@ -78,7 +78,7 @@ runners:
 
       [[runners.kubernetes.volumes.pvc]]
         name = "gitlab-cache"
-        mount_path = "/cache"
+        mount_path = "/home/gitlab-runner/cache/"
         mount_propagation = "None"
 
   secret: gitlab-runner-token
