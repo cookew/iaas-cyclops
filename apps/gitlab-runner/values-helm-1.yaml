@@ -8,7 +8,8 @@ concurrent: 1
 gitlabUrl: http://gitlab-webservice-default.gitlab:8181
 
 image:
-  tag: ubi-fips
+  image: gitlab-org/ci-cd/gitlab-runner-ubi-images/gitlab-runner-ocp
+  tag: v16.11.0
 
 livenessProbe:
   initialDelaySeconds: 20
