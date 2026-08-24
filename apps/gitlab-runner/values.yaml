@@ -65,16 +65,16 @@ runners:
       name = "runner-helm-1"
       request_concurrency = 1
 
-      [runners.kubernetes]
-        allow_privilege_escalation = false
-        # allowed_images = ["*"]
-        image = "ubuntu:26.04"
-        # image_pull_secrets = ["regcred"]
-        namespace = "gitlab-runner-helm-1"
-        pod_security_context_read_only_root_filesystem = true
-        privileged = false
-        # service_account = "gitlab-runner"
-        wait_for_services_timeout = 120
+    [runners.kubernetes]
+      allow_privilege_escalation = false
+      # allowed_images = ["*"]
+      image = "ubuntu:26.04"
+      # image_pull_secrets = ["regcred"]
+      namespace = "gitlab-runner-helm-1"
+      pod_security_context_read_only_root_filesystem = true
+      privileged = false
+      # service_account = "gitlab-runner"
+      wait_for_services_timeout = 120
 
       # [runners.kubernetes.pod_security_context]
       #   fs_group = 1000
@@ -111,23 +111,16 @@ runners:
         mount_path = "/cache"
         mount_propagation = "None"
 
-
-    [[runners]]
-      cache_dir = "/cache"
-      limit = 1
-      name = "runner-helm-2"
-      request_concurrency = 1
-
-      [runners.kubernetes]
-        allow_privilege_escalation = false
-        # allowed_images = ["*"]
-        image = "ubuntu:26.04"
-        # image_pull_secrets = ["regcred"]
-        namespace = "gitlab-runner-helm-2"
-        pod_security_context_read_only_root_filesystem = true
-        privileged = false
-        # service_account = "gitlab-runner"
-        wait_for_services_timeout = 120
+    [runners.kubernetes]
+      allow_privilege_escalation = false
+      # allowed_images = ["*"]
+      image = "ubuntu:26.04"
+      # image_pull_secrets = ["regcred"]
+      namespace = "gitlab-runner-helm-2"
+      pod_security_context_read_only_root_filesystem = true
+      privileged = false
+      # service_account = "gitlab-runner"
+      wait_for_services_timeout = 120
 
       # [runners.kubernetes.pod_security_context]
       #   fs_group = 1000
