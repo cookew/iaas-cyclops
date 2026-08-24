@@ -117,8 +117,11 @@ terminationGracePeriodSeconds: 5
 useTini: true
 
 volumeMounts:
+# - name: ca-all
+#   mountPath: /etc/ssl/certs/ca-certificates.crt
+#   subPath: ca-certificates.crt
 - name: ca-all
-  mountPath: /etc/ssl/certs/ca-certificates.crt
+  mountPath: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
   subPath: ca-certificates.crt
 
 volumes:
