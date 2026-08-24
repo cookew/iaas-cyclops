@@ -113,7 +113,7 @@ service:
 
 terminationGracePeriodSeconds: 5
 
-useTini: true
+# useTini: true
 
 volumeMounts:
 - name: ca-all
