@@ -1,6 +1,6 @@
 # https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/values.yaml?ref_type=heads
 
-concurrent: 6
+concurrent: 2
 
 # gitlabUrl: https://gitlab.com
 # gitlabUrl: https://gitlab.apps.iaas.wcooke.me
@@ -57,42 +57,37 @@ revisionHistoryLimit: "0"
 
 runners:
   config: |
+    concurrent = 2
+
     [[runners]]
-      # environment = ['DOCKER_HOST=tcp://localhost:2376', 'DOCKER_DRIVER=overlay2', 'DOCKER_TLS_CERTDIR=/certs', 'DOCKER_TLS_VERIFY=1', 'DOCKER_CERT_PATH=/certs/client' ]
-      request_concurrency = 3
-      limit = 6
       cache_dir = "/cache"
+      limit = 1
+      name = "runner-helm-1"
+      request_concurrency = 1
 
       [runners.kubernetes]
         allow_privilege_escalation = false
         # allowed_images = ["*"]
         image = "ubuntu:26.04"
         # image_pull_secrets = ["regcred"]
-        # namespace = "gitlab-runner"
-        # namespace_overwrite_allowed = "gitlab-runner"
-        namespace_overwrite_allowed = "gitlab-ci-.*"
-        # namespace_per_job = true
+        namespace = "gitlab-runner-helm-1"
         pod_security_context_read_only_root_filesystem = true
         privileged = false
         # service_account = "gitlab-runner"
         wait_for_services_timeout = 120
 
       # [runners.kubernetes.pod_security_context]
+      #   fs_group = 1000
+      #   run_as_group = 1000
       #   run_as_non_root = true
       #   run_as_user = 1000
-      #   run_as_group = 1000
-      #   fs_group = 1000
       #   supplemental_groups = [1000]
 
       # [runners.kubernetes.build_container_security_context]
       #   run_as_non_root = true
       #   run_as_user = 1000
-      #   [runners.kubernetes.build_container_security_context.capabilities]
-      #     drop = ["ALL"]
-
-      # [[runners.kubernetes.services]]
-      #   name = "docker:dind"
-      #   alias = "dind"
+      # [runners.kubernetes.build_container_security_context.capabilities]
+      #   drop = ["ALL"]
 
       [[runners.kubernetes.volumes.config_map]]
         name = "ca-all"
@@ -111,10 +106,58 @@ runners:
         mount_path = "/tmp"
         medium = "Memory"
 
-      # [[runners.kubernetes.volumes.empty_dir]]
-      #   name = "dind-certs"
-      #   mount_path = "/certs"
-      #   medium = "Memory"
+      [[runners.kubernetes.volumes.pvc]]
+        name = "gitlab-cache"
+        mount_path = "/cache"
+        mount_propagation = "None"
+
+
+    [[runners]]
+      cache_dir = "/cache"
+      limit = 1
+      name = "runner-helm-2"
+      request_concurrency = 1
+
+      [runners.kubernetes]
+        allow_privilege_escalation = false
+        # allowed_images = ["*"]
+        image = "ubuntu:26.04"
+        # image_pull_secrets = ["regcred"]
+        namespace = "gitlab-runner-helm-2"
+        pod_security_context_read_only_root_filesystem = true
+        privileged = false
+        # service_account = "gitlab-runner"
+        wait_for_services_timeout = 120
+
+      # [runners.kubernetes.pod_security_context]
+      #   fs_group = 1000
+      #   run_as_group = 1000
+      #   run_as_non_root = true
+      #   run_as_user = 1000
+      #   supplemental_groups = [1000]
+
+      # [runners.kubernetes.build_container_security_context]
+      #   run_as_non_root = true
+      #   run_as_user = 1000
+      # [runners.kubernetes.build_container_security_context.capabilities]
+      #   drop = ["ALL"]
+
+      [[runners.kubernetes.volumes.config_map]]
+        name = "ca-all"
+        mount_path = "/etc/ssl/certs/ca-certificates.crt"
+        sub_path = "ca-certificates.crt"
+        [runners.kubernetes.volumes.config_map.items]
+          "ca-certificates.crt" = "ca-certificates.crt"
+
+      [[runners.kubernetes.volumes.empty_dir]]
+        name = "builds-dir"
+        mount_path = "/builds"
+        medium = "Memory"
+
+      [[runners.kubernetes.volumes.empty_dir]]
+        name = "tmp-dir"
+        mount_path = "/tmp"
+        medium = "Memory"
 
       [[runners.kubernetes.volumes.pvc]]
         name = "gitlab-cache"

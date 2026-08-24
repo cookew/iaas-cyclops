@@ -5,6 +5,7 @@ namespace: gitlab-runner
 
 resources:
 - base/gitlab-cache.yaml
+- base/namespace.yaml
 - sealed-secrets/gitlab-runner-token.yaml
 
 # https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/Chart.yaml?ref_type=heads
