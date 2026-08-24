@@ -62,8 +62,8 @@ runners:
       wait_for_services_timeout = 120
 
     [runners.kubernetes.pod_security_context]
-    #   fs_group = 1000
-    #   run_as_group = 1000
+      fs_group = 59417
+      run_as_group = 0
       run_as_non_root = true
       run_as_user = 59417
     #   seccomp_profile.type = "RuntimeDefault"
@@ -108,8 +108,8 @@ securityContext:
     runAsUser: 999
 
 serviceAccount:
-  create: true
-  name: gitlab-runner-helm-1
+  create: false
+  # name: gitlab-runner-helm-1
 
 service:
   enabled: true
