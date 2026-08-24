@@ -108,8 +108,8 @@ securityContext:
     runAsUser: 999
 
 serviceAccount:
-  create: false
-  # name: gitlab-runner-helm-2
+  create: true
+  name: gitlab-runner-helm-2
 
 service:
   enabled: true
