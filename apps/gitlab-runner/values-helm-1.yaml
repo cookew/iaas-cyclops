@@ -78,16 +78,10 @@ runners:
 
     [[runners.kubernetes.volumes.config_map]]
       name = "ca-all"
-      mount_path = "/etc/ssl/certs/ca-certificates.crt"
-      sub_path = "ca-certificates.crt"
-
-    [runners.kubernetes.volumes.config_map.items]
-      "ca-certificates.crt" = "ca-certificates.crt"
-
-    [[runners.kubernetes.volumes.config_map]]
-      name = "ca-all"
+      # mount_path = "/etc/ssl/certs/ca-certificates.crt"
       mount_path = "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem"
       sub_path = "ca-certificates.crt"
+      read_only = true
 
     [runners.kubernetes.volumes.config_map.items]
       "ca-certificates.crt" = "ca-certificates.crt"
