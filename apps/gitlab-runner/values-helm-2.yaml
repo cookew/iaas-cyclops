@@ -95,7 +95,7 @@ runners:
 
 serviceAccount:
   create: true
-  name: gitlab-runner
+  name: gitlab-runner-helm-2
 
 service:
   enabled: true
