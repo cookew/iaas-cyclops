@@ -1,10 +1,14 @@
 # https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/values.yaml?ref_type=heads
+# https://docs.gitlab.com/runner/install/kubernetes_helm_chart_configuration/#run-with-non-root-user
 
 concurrent: 1
 
 # gitlabUrl: https://gitlab.com
 # gitlabUrl: https://gitlab.apps.iaas.wcooke.me
 gitlabUrl: http://gitlab-webservice-default.gitlab:8181
+
+image:
+  tag: ubi-fips
 
 livenessProbe:
   initialDelaySeconds: 20
@@ -47,6 +51,7 @@ runners:
     [runners.kubernetes]
       allow_privilege_escalation = false
       # allowed_images = ["*"]
+      helper_image = "registry.gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/gitlab-runner-helper-ocp:x86_64-v16.11.0"
       image = "ubuntu:26.04"
       # image_pull_secrets = ["regcred"]
       namespace = "gitlab-runner-helm-1"
@@ -55,16 +60,18 @@ runners:
       # service_account = "gitlab-runner"
       wait_for_services_timeout = 120
 
-    # [runners.kubernetes.pod_security_context]
+    [runners.kubernetes.pod_security_context]
     #   fs_group = 1000
     #   run_as_group = 1000
-    #   run_as_non_root = true
-    #   run_as_user = 1000
+      run_as_non_root = true
+      run_as_user = 59417
+    #   seccomp_profile.type = "RuntimeDefault"
     #   supplemental_groups = [1000]
 
     # [runners.kubernetes.build_container_security_context]
     #   run_as_non_root = true
     #   run_as_user = 1000
+
     # [runners.kubernetes.build_container_security_context.capabilities]
     #   drop = ["ALL"]
 
@@ -93,6 +100,10 @@ runners:
 
   secret: gitlab-runner-token
 
+securityContext:
+    runAsNonRoot: true
+    runAsUser: 999
+
 serviceAccount:
   create: true
   name: gitlab-runner-helm-1
@@ -101,6 +112,8 @@ service:
   enabled: true
 
 terminationGracePeriodSeconds: 5
+
+useTini: true
 
 volumeMounts:
 - name: ca-all
