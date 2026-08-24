@@ -22,3 +22,9 @@ helmCharts:
   repo: https://charts.gitlab.io
   version: 0.91.0
   valuesFile: values-helm-2.yaml
+- name: gitlab-runner
+  namespace: gitlab-runner
+  releaseName: gitlab-runner-helm-3
+  repo: https://charts.gitlab.io
+  version: 0.91.0
+  valuesFile: values-helm-3.yaml

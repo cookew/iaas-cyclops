@@ -1,0 +1,113 @@
+# https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/values.yaml?ref_type=heads
+
+concurrent: 1
+
+# gitlabUrl: https://gitlab.com
+# gitlabUrl: https://gitlab.apps.iaas.wcooke.me
+gitlabUrl: http://gitlab-webservice-default.gitlab:8181
+
+livenessProbe:
+  initialDelaySeconds: 20
+  periodSeconds: 20
+  successThreshold: 1
+  failureThreshold: 10
+  terminationGracePeriodSeconds: 30
+
+readinessProbe:
+  initialDelaySeconds: 20
+  periodSeconds: 20
+  successThreshold: 1
+  failureThreshold: 10
+
+logFormat: json
+
+metrics:
+  enabled: true
+  podMonitor:
+    enabled: true
+
+name: wc-iaas-runners
+
+rbac:
+  create: true
+  clusterWideAccess: true
+
+replicas: 1
+
+revisionHistoryLimit: "0"
+
+runners:
+  config: |
+    [[runners]]
+      cache_dir = "/cache"
+      limit = 1
+      name = "runner-helm-3"
+      request_concurrency = 1
+
+    [runners.kubernetes]
+      allow_privilege_escalation = false
+      # allowed_images = ["*"]
+      image = "ubuntu:26.04"
+      # image_pull_secrets = ["regcred"]
+      namespace = "gitlab-runner-helm-3"
+      pod_security_context_read_only_root_filesystem = true
+      privileged = false
+      # service_account = "gitlab-runner"
+      wait_for_services_timeout = 120
+
+    # [runners.kubernetes.pod_security_context]
+    #   fs_group = 1000
+    #   run_as_group = 1000
+    #   run_as_non_root = true
+    #   run_as_user = 1000
+    #   supplemental_groups = [1000]
+
+    # [runners.kubernetes.build_container_security_context]
+    #   run_as_non_root = true
+    #   run_as_user = 1000
+    # [runners.kubernetes.build_container_security_context.capabilities]
+    #   drop = ["ALL"]
+
+    [[runners.kubernetes.volumes.config_map]]
+      name = "ca-all"
+      mount_path = "/etc/ssl/certs/ca-certificates.crt"
+      sub_path = "ca-certificates.crt"
+
+    [runners.kubernetes.volumes.config_map.items]
+      "ca-certificates.crt" = "ca-certificates.crt"
+
+    [[runners.kubernetes.volumes.empty_dir]]
+      name = "builds-dir"
+      mount_path = "/builds"
+      medium = "Memory"
+
+    [[runners.kubernetes.volumes.empty_dir]]
+      name = "tmp-dir"
+      mount_path = "/tmp"
+      medium = "Memory"
+
+    [[runners.kubernetes.volumes.pvc]]
+      name = "gitlab-cache"
+      mount_path = "/cache"
+      mount_propagation = "None"
+
+  secret: gitlab-runner-token
+
+serviceAccount:
+  create: true
+  name: gitlab-runner-helm-3
+
+service:
+  enabled: true
+
+terminationGracePeriodSeconds: 5
+
+volumeMounts:
+- name: ca-all
+  mountPath: /etc/ssl/certs/ca-certificates.crt
+  subPath: ca-certificates.crt
+
+volumes:
+- name: ca-all
+  configMap:
+    name: ca-all

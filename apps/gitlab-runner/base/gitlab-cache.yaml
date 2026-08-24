@@ -8,7 +8,7 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 50Gi
+      storage: 10Gi
   storageClassName: cyclops-fs
   volumeMode: Filesystem
 ---
@@ -22,6 +22,20 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 50Gi
+      storage: 10Gi
+  storageClassName: cyclops-fs
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitlab-cache
+  namespace: gitlab-runner-helm-3
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
   storageClassName: cyclops-fs
   volumeMode: Filesystem
