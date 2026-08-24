@@ -10,10 +10,15 @@ resources:
 
 # https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/Chart.yaml?ref_type=heads
 helmCharts:
-- includeCRDs: true
-  name: gitlab-runner
+- name: gitlab-runner
   namespace: gitlab-runner
-  releaseName: gitlab-runner
+  releaseName: gitlab-runner-helm-1
   repo: https://charts.gitlab.io
   version: 0.91.0
-  valuesFile: values.yaml
+  valuesFile: values-helm-1.yaml
+- name: gitlab-runner
+  namespace: gitlab-runner
+  releaseName: gitlab-runner-helm-2
+  repo: https://charts.gitlab.io
+  version: 0.91.0
+  valuesFile: values-helm-2.yaml
