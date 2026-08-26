@@ -15,17 +15,17 @@ helmCharts:
   namespace: gitlab-runner
   releaseName: gitlab-runner-helm-1
   repo: https://charts.gitlab.io
-  version: 0.91.0
+  version: 0.92.0
   valuesFile: values-helm-1.yaml
 - name: gitlab-runner
   namespace: gitlab-runner
   releaseName: gitlab-runner-helm-2
   repo: https://charts.gitlab.io
-  version: 0.91.0
+  version: 0.92.0
   valuesFile: values-helm-2.yaml
 - name: gitlab-runner
   namespace: gitlab-runner
   releaseName: gitlab-runner-helm-3
   repo: https://charts.gitlab.io
-  version: 0.91.0
+  version: 0.92.0
   valuesFile: values-helm-3.yaml
