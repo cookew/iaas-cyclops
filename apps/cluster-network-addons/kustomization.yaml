@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: cluster-network-addons
 
 resources:
-- https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.102.0/network-addons-config.crd.yaml
-- https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.102.0/operator.yaml
+- https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.103.0/network-addons-config.crd.yaml
+- https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.103.0/operator.yaml
 # - https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.101.2/network-addons-config.crd.yaml
 # - https://github.com/kubevirt/cluster-network-addons-operator/releases/download/v0.101.2/operator.yaml
 # - base/cnao-allow-egress-to-cluster-api-https.yaml
