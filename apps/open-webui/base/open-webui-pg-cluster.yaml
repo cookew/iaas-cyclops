@@ -43,11 +43,11 @@ spec:
   primaryUpdateMethod: switchover
   storage:
     resizeInUseVolumes: true
-    size: 1Gi
+    size: 2Gi
     storageClass: ceph-filesystem
   walStorage:
     resizeInUseVolumes: true
-    size: 1Gi
+    size: 2Gi
     storageClass: ceph-filesystem
 # ---
 # apiVersion: barmancloud.cnpg.io/v1
