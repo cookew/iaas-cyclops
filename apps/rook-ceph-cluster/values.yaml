@@ -105,7 +105,6 @@ cephClusterSpec:
                 values:
                 - rook-ceph-mon
             topologyKey: kubernetes.io/hostname
-
   # resources:
     # mgr:
     #   limits:
@@ -168,6 +167,13 @@ cephClusterSpec:
     #   requests:
     #     cpu: "50m"
     #     memory: "50Mi"
+  security:
+    cephx:
+      csi:
+        keyType: aes # required when Kubernetes nodes don't run Linux kernel 7.0+
+      daemon:
+        keyGeneration: 2
+        keyRotationPolicy: KeyGeneration
   storage:
     nearFullRatio: 0.67
     useAllNodes: false
