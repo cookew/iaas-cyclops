@@ -29,7 +29,7 @@ eck-elasticsearch:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 10Gi
+            storage: 20Gi
         storageClassName: cyclops-fs
 
 eck-fleet-server:
