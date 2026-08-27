@@ -81,10 +81,10 @@ cephClusterSpec:
     #prometheusEndpointSSLVerify: true
     ssl: false
     urlPrefix: /
-  mgr:
-    modules:
-    - name: rook
-      enabled: true
+  # mgr:
+  #   modules:
+  #   - name: rook
+  #     enabled: true
   network:
     connections:
       encryption:
