@@ -77,29 +77,29 @@ spec:
 
       - name: alloy
       - name: alloy-logs
-      - name: crossplane-provider-opentofu
-      - name: crossview
+      # - name: crossplane-provider-opentofu
+      # - name: crossview
       - name: cyberchef
       - name: drawio
       - name: descheduler
-      - name: eck-monitoring
+      # - name: eck-monitoring
       - name: eck-operator
-      - name: eck-stack
+      # - name: eck-stack
       - name: forecastle
       - name: github-arc
       - name: gitlab
       - name: gitlab-runner
       - name: guacamole
       - name: grafana
-      - name: grafana-mcp
+      # - name: grafana-mcp
       - name: harbor
       - name: headlamp
       - name: inotify-exporter
-      - name: jupyterhub
+      # - name: jupyterhub
       - name: kubevirt-manager
       - name: loki
       - name: mattermost-operator
-      - name: mattermost
+      # - name: mattermost
       - name: nvidia-gpu-operator
       - name: nvme-exporter
       - name: ollama
@@ -107,9 +107,9 @@ spec:
       # - name: pyroscope
       - name: reloader
       # - name: tempo
-      - name: tempo-kafka
-      - name: terminals
-      - name: wazuh
+      # - name: tempo-kafka
+      # - name: terminals
+      # - name: wazuh
       - name: whoami
 
       # - name: openbao
