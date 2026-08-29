@@ -83,7 +83,7 @@ spec:
       - name: drawio
       - name: descheduler
       # - name: eck-monitoring
-      - name: eck-operator
+      # - name: eck-operator
       # - name: eck-stack
       - name: forecastle
       - name: github-arc
@@ -113,8 +113,6 @@ spec:
       # - name: wazuh
       - name: whoami
 
-      # - name: openbao
-
       # These are in testing
       # - name: argo-workflows
       # - name: capi-operator
@@ -125,6 +123,7 @@ spec:
       #   namespace: istio-system
       # - name: kubescape
       # - name: kubevirt-templates
+      # - name: openbao
 
   template:
     metadata:
