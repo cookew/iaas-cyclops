@@ -9,7 +9,7 @@ gitlabUrl: http://gitlab-webservice-default.gitlab:8181
 
 image:
   image: gitlab-org/ci-cd/gitlab-runner-ubi-images/gitlab-runner-ocp
-  tag: v16.11.0
+  tag: v18.11.4
 
 livenessProbe:
   initialDelaySeconds: 20
