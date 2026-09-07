@@ -131,7 +131,7 @@ global:
       key: default
     enabled: true
     host: valkey.gitlab.svc
-  revisionHistoryLimit: 1
+  revisionHistoryLimit: 0
   serviceAccount:
     enabled: false
     create: true
