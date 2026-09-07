@@ -144,6 +144,8 @@ global:
   time_zone: America/Denver
 
 certmanager:
+  config:
+    enableGatewayAPI: false
   install: false
   installCRDs: false
   rbac:
