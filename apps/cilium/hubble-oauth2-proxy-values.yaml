@@ -70,7 +70,7 @@ extraObjects:
     usages:
     - client auth
     - server auth
-- apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+- apiVersion: openidclient.keycloak.crossplane.io/v1alpha2
   kind: Client
   metadata:
     annotations:

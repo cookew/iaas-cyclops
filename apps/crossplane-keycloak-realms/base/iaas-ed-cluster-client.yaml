@@ -11,7 +11,7 @@ spec:
   providerConfigRef:
     name: keycloak-iaas
 ---
-apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha2
 kind: Client
 metadata:
   name: ed-cluster
@@ -54,7 +54,7 @@ spec:
   providerConfigRef:
     name: keycloak-iaas
 ---
-apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha2
 kind: ClientServiceAccountRole
 metadata:
   name: ed-cluster-sa-role
