@@ -9,7 +9,7 @@ gitlabUrl: http://gitlab-webservice-default.gitlab:8181
 
 image:
   image: gitlab-org/ci-cd/gitlab-runner-ubi-images/gitlab-runner-ocp
-  tag: v18.11.4
+  tag: v19.3.1
 
 livenessProbe:
   initialDelaySeconds: 20
@@ -52,7 +52,7 @@ runners:
     [runners.kubernetes]
       allow_privilege_escalation = false
       # allowed_images = ["*"]
-      helper_image = "registry.gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/gitlab-runner-helper-ocp:x86_64-v18.11.4"
+      helper_image = "registry.gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/gitlab-runner-helper-ocp:x86_64-v19.3.1"
       image = "ubuntu:26.04"
       # image_pull_secrets = ["regcred"]
       namespace = "gitlab-runner-helm-1"
