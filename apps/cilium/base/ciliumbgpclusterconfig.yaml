@@ -12,6 +12,10 @@ spec:
     name: instance-65533
     peers:
     - name: peer-65534
+      # autoDiscovery:
+      #   mode: DefaultGateway
+      #   defaultGateway:
+      #     addressFamily: ipv4
       peerASN: 65534
       peerAddress: 10.42.41.1
       peerConfigRef:

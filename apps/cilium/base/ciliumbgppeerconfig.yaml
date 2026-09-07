@@ -10,3 +10,5 @@ spec:
         advertise: generic
     afi: ipv4
     safi: unicast
+  gracefulRestart:
+    enabled: true
