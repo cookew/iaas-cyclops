@@ -73,6 +73,8 @@ global:
     # https://gitlab.com/gitlab-org/cloud-native/gitlab-logger
     GITLAB_LOGGER_TRUNCATE_LOGS: "true"
     GITLAB_LOGGER_JSON: "true"
+  gatewayApi:
+    configureCertmanager: false
   hosts:
     domain: gitlab.apps.iaas.wcooke.me
     https: true
