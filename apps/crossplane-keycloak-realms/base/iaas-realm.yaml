@@ -1,4 +1,4 @@
-apiVersion: realm.keycloak.crossplane.io/v1alpha1
+apiVersion: realm.keycloak.crossplane.io/v1alpha2
 kind: Realm
 metadata:
   name: iaas
@@ -57,7 +57,7 @@ spec:
   providerConfigRef:
     name: keycloak-iaas
 ---
-apiVersion: realm.keycloak.crossplane.io/v1alpha1
+apiVersion: realm.keycloak.crossplane.io/v1alpha2
 kind: RealmEvents
 metadata:
   name: iaas-events
@@ -73,7 +73,7 @@ spec:
   providerConfigRef:
     name: keycloak-iaas
 # ---
-# apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+# apiVersion: openidclient.keycloak.crossplane.io/v1alpha2
 # kind: ClientScope
 # metadata:
 #   name: groups
@@ -88,7 +88,7 @@ spec:
 #   providerConfigRef:
 #     name: keycloak-iaas
 # ---
-# apiVersion: realm.keycloak.crossplane.io/v1alpha1
+# apiVersion: realm.keycloak.crossplane.io/v1alpha2
 # kind: OptionalClientScopes
 # metadata:
 #   name: realm-optional-client-scopes
