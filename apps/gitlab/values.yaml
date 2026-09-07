@@ -160,11 +160,13 @@ certmanager:
 
 gitlab:
   # https://docs.gitlab.com/charts/charts/gitlab/toolbox/#configuration
-  # toolbox:
+  toolbox:
   #   enabled: false
-    # backups:
-    #   objectStorage:
-    #     enabled: false
+    backups:
+      objectStorage:
+        config:
+          secret: gitlab-connection
+          key: connection
   webservice:
     extraEnv:
       SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
