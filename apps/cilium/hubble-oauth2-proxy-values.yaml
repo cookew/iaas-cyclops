@@ -14,8 +14,6 @@ affinity:
         topologyKey: kubernetes.io/hostname
 
 config:
-  annotations:
-    reloader.stakater.com/auto: "true"
   existingSecret: hubble-oauth2-proxy
   configFile: |-
     allowed_roles = [ "hubble:hubble-admin" ]
@@ -49,6 +47,9 @@ config:
     tls_min_version = "TLS1.3"
     upstreams = [ "http://hubble-ui.kube-system.svc:80/" ]
     whitelist_domains = [ "*.apps.iaas.wcooke.me" ]
+
+deploymentAnnotations:
+  reloader.stakater.com/auto: "true"
 
 extraObjects:
 - apiVersion: cert-manager.io/v1
