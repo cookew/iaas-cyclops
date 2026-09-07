@@ -80,6 +80,7 @@ global:
     GITLAB_LOGGER_JSON: "true"
   gatewayApi:
     configureCertmanager: false
+    enabled: false
   hosts:
     domain: gitlab.apps.iaas.wcooke.me
     https: true
