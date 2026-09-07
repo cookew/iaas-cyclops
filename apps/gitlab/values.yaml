@@ -81,6 +81,7 @@ global:
   gatewayApi:
     configureCertmanager: false
     enabled: false
+    installEnvoy: false
   hosts:
     domain: gitlab.apps.iaas.wcooke.me
     https: true
