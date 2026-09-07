@@ -11,6 +11,9 @@ global:
   appConfig:
     agentPlanContent:
       enabled: true
+    backups:
+      bucket: gitlab-backups
+      tmpBucket: gitlab-backups-tmp
     ciSecureFiles:
       enabled: true
     dependencyProxy:
