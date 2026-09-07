@@ -102,8 +102,8 @@ global:
       enabled: true
       secretName: gitlab-ingress-tls
     class: cilium
-  minio:
-    enabled: false
+  # minio:
+  #   enabled: false
   monitoring:
     enabled: true
   pages:
