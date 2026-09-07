@@ -1,0 +1,247 @@
+# https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/values.yaml?ref_type=heads
+
+upgradeCheck:
+  enabled: false
+
+global:
+  affinity:
+    podAntiAffinity:
+      topologyKey: kubernetes.io/hostname
+  antiAffinity: soft
+  appConfig:
+    ciSecureFiles:
+      enabled: true
+    dependencyProxy:
+      enabled: true
+    enableImpersonation: true
+    enableSeatLink: false
+    enableUsagePing: false
+    # https://docs.gitlab.com/charts/charts/globals/#kas-settings
+    # gitlab_kas:
+    #   enabled: true
+    #   externalUrl: wss://custom-kas-url.wcooke.me
+    #   internalUrl: grpc://custom-internal-url
+    #   key: kas
+    #   secret: gitlab-kas
+    # https://docs.gitlab.com/charts/charts/globals/#knowledge-graph-settings
+    # knowledgeGraph:
+    #   enabled: false
+    #   jwtSecret:
+    #     secret:
+    #     key:
+    #   grpcEndpoint:
+    # ldap.preventSignin: true
+    object_store:
+      enabled: true
+      proxy_download: true
+      connection:
+        secret: gitlab-connection
+        key: connection
+    omniauth:
+      allowSingleSignOn: true
+      autoLinkUsers: true
+      autoSignInWithProvider: openid_connect
+      blockAutoCreatedUsers: false
+      enabled: true
+      syncProfileFromProvider: true
+      syncProfileAttributes:
+      - email
+      - job_title
+      - location
+      - name
+      - organization
+      providers:
+      - secret: gitlab-oidc
+    # praefect:
+    terraformState:
+      enabled: true
+    usernameChangingEnabled: false
+  certificates:
+    customCAs:
+    - configMap: gitlab-ca-bundle
+      keys:
+      - wcooke-root-ca-cert.crt
+    - configMap: tm-ca-bundle
+      keys:
+      - ca-bundle.pem
+  edition: ce
+  email:
+    display_name: WCooke GitLab
+    from: cookewe@gmail.com
+    reply_to: cookewe@gmail.com
+  extraEnv:
+    # https://gitlab.com/gitlab-org/cloud-native/gitlab-logger
+    GITLAB_LOGGER_TRUNCATE_LOGS: "true"
+    GITLAB_LOGGER_JSON: "true"
+  hosts:
+    domain: gitlab.apps.iaas.wcooke.me
+    https: true
+    gitlab:
+      name: gitlab.apps.iaas.wcooke.me
+    # registry:
+    #   name: registry.gitlab.apps.iaas.wcooke.me
+    # kas:
+    #   name: kas.gitlab.apps.iaas.wcooke.me
+    # pages:
+    #   name: pages.gitlab.apps.iaas.wcooke.me
+    # ssh: gitlab.apps.iaas.wcooke.me
+  image:
+    pullPolicy: Always
+    # tagSuffix: -fips
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+    configureCertmanager: false
+    # controller:
+    #   electionID: gitlab-nginx-ingress-leader
+    enabled: true
+    # provider: haproxy
+    tls:
+      enabled: true
+      secretName: gitlab-ingress-tls
+    class: cilium
+  minio:
+    enabled: false
+  monitoring:
+    enabled: true
+  pages:
+    accessControl: true
+    customDomainMode: https
+    enabled: true
+    host: pages.gitlab.apps.iaas.wcooke.me
+  psql:
+    database: gitlab
+    host: gitlab-pg-cluster-rw.gitlab.svc
+    password:
+      secret: gitlab-pg-cluster-app
+      key: password
+    username: gitlab
+  redis:
+    auth:
+      secret: gitlab-valkey-password
+      key: default
+    enabled: true
+    host: valkey.gitlab.svc
+  revisionHistoryLimit: 1
+  serviceAccount:
+    enabled: false
+    create: true
+  shell:
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+    # service:
+    #   type: ClusterIP
+      # loadBalancerIP: 10.42.41.129
+    sshDaemon: gitlab-sshd
+  smtp:
+    enabled: false
+    address: smtp.wcooke.me
+    authentication: ""
+    port: 25
+    tls: false
+  time_zone: America/Denver
+
+certmanager:
+  install: false
+  installCRDs: false
+  rbac:
+    create: false
+
+gitlab:
+  # https://docs.gitlab.com/charts/charts/gitlab/toolbox/#configuration
+  # toolbox:
+  #   enabled: false
+    # backups:
+    #   objectStorage:
+    #     enabled: false
+  webservice:
+    extraEnv:
+      SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+    ingress:
+      annotations:
+        forecastle.stakater.com/appName: GitLab
+        forecastle.stakater.com/expose: "true"
+        forecastle.stakater.com/group: Apps
+        forecastle.stakater.com/icon: https://gitlab.apps.iaas.wcooke.me/-/pwa-icons/logo-192.png
+        forecastle.stakater.com/network-restricted: "true"
+      tls:
+        secretName: gitlab-webservice-tls
+
+gitlab-runner:
+  install: false
+
+# haproxy:
+#   install: true
+
+installCertmanager: false
+
+nginx-ingress:
+  # Disable the deployment of the in-chart NGINX Ingress provider.
+  enabled: false
+
+postgresql:
+  install: false
+
+prometheus:
+  install: false
+
+redis:
+  install: false
+
+registry:
+  # https://docs.gitlab.com/charts/charts/registry/metadata_database/
+  # database:
+  ingress:
+    tls:
+      secretName: gitlab-registry-tls
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  storage:
+    secret: gitlab-registry-connection
+    key: connection
+    redirect:
+      disable: true
+
+# postgresql:
+#   install: false
+
+# https://docs.gitlab.com/charts/charts/globals#configure-postgresql-settings
+# psql:
+#   connectTimeout:
+#   keepalives:
+#   keepalivesIdle:
+#   keepalivesInterval:
+#   keepalivesCount:
+#   tcpUserTimeout:
+#   password: {}
+    # useSecret:
+    # secret:
+    # key:
+    # file:
+  # host: postgresql.hostedsomewhere.else
+  # port: 123
+  # username: gitlab
+  # database: gitlabhq_production
+  # applicationName:
+  # preparedStatements: false
+  # databaseTasks: true
+  # main: {}
+    # host: postgresql.hostedsomewhere.else
+    # port: 123
+    # username: gitlab
+    # database: gitlabhq_production
+    # applicationName:
+    # preparedStatements: false
+    # databaseTasks: true
+  # ci: {}
+    # host: postgresql.hostedsomewhere.else
+    # port: 123
+    # username: gitlab
+    # database: gitlabhq_production_ci
+    # applicationName:
+    # preparedStatements: false
+    # databaseTasks: false
