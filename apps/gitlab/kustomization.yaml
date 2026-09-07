@@ -5,7 +5,10 @@ namespace: gitlab
 
 resources:
 - base/bucket-git-lfs.yaml
+- base/bucket-gitlab-agent-plan-content.yaml
 - base/bucket-gitlab-artifacts.yaml
+- base/bucket-gitlab-backups.yaml
+- base/bucket-gitlab-ci-catalog-bundles.yaml
 - base/bucket-gitlab-ci-secure-files.yaml
 - base/bucket-gitlab-dependency-proxy.yaml
 - base/bucket-gitlab-mr-diffs.yaml

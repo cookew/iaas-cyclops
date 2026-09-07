@@ -9,6 +9,8 @@ global:
       topologyKey: kubernetes.io/hostname
   antiAffinity: soft
   appConfig:
+    agentPlanContent:
+      enabled: true
     ciSecureFiles:
       enabled: true
     dependencyProxy:
