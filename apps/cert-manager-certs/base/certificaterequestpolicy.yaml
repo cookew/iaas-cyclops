@@ -16,7 +16,7 @@ spec:
       - keycloak
       - keycloak-service
       validations:
-      - rule: !self.contains('*')
+      - rule: "!self.contains('*')"
         message: Wildcard certificates are not allowed.
     isCA: false
     usages:
