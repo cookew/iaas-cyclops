@@ -7,6 +7,9 @@ metadata:
   name: iaas-policy
 spec:
   allowed:
+    commonName:
+      values:
+      - "*"
     dnsNames:
       required: false
       values:
