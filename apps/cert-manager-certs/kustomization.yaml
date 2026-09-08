@@ -5,6 +5,7 @@ namespace: cert-manager
 
 resources:
 - base/ca-bundle.yaml
+- base/certificaterequestpolicy.yaml
 - base/clusterissuer.yaml
 - base/clusterrolebinding.yaml
 - base/cookes.io-ca.crt.yaml
