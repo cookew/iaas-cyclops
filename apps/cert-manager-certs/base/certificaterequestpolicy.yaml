@@ -26,7 +26,7 @@ spec:
     - server auth
   constraints:
     minDuration: 1h
-    maxDuration: 960h
+    maxDuration: 90d
     privateKey:
       algorithm: RSA
       minSize: 2048
