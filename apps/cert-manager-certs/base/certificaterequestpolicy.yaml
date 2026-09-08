@@ -15,9 +15,9 @@ spec:
       - "\*.wcooke.me"
       - keycloak
       - keycloak-service
-      validations:
-      - rule: "!self.contains('*')"
-        message: Wildcard certificates are not allowed.
+      # validations:
+      # - rule: "!self.contains('*')"
+      #   message: Wildcard certificates are not allowed.
     isCA: false
     usages:
     - client auth
