@@ -1,0 +1,104 @@
+# https://cert-manager.io/docs/policy/approval/approver-policy/#allowed
+# https://github.com/cert-manager/approver-policy/blob/main/docs/examples/all-options.yaml
+
+apiVersion: policy.cert-manager.io/v1alpha1
+kind: CertificateRequestPolicy
+metadata:
+  name: iaas-policy
+spec:
+  allowed:
+    dnsNames:
+      required: false
+      values:
+      - "\*.svc.cluster.local"
+      - "\*.svc"
+      - "\*.wcooke.me"
+      - keycloak
+      - keycloak-service
+      validations:
+      - rule: !self.contains('*')
+        message: Wildcard certificates are not allowed.
+    isCA: false
+    usages:
+    - client auth
+    - server auth
+  constraints:
+    minDuration: 1h
+    maxDuration: 960h
+    privateKey:
+      algorithm: RSA
+      minSize: 2048
+      maxSize: 4096
+  selector:
+    issuerRef:
+      group: cert-manager.io
+      kind: ClusterIssuer
+      name: iaas-wcooke-me
+---
+# https://github.com/cert-manager/approver-policy/blob/main/docs/examples/default-deny-all.yaml
+
+apiVersion: policy.cert-manager.io/v1alpha1
+kind: CertificateRequestPolicy
+metadata:
+  name: default-deny-all
+spec:
+  allowed:
+    dnsNames:
+      values: []
+      required: true
+  selector:
+    issuerRef: {}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cert-manager-policy:iaas-policy
+rules:
+- apiGroups:
+  - policy.cert-manager.io
+  resources:
+  - certificaterequestpolicies
+  resourceNames:
+  - iaas-policy
+  verbs:
+  - use
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-manager-policy:iaas-policy
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-manager-policy:iaas-policy
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:authenticated
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cert-manager-policy:default-deny-all
+rules:
+- apiGroups:
+  - policy.cert-manager.io
+  resources:
+  - certificaterequestpolicies
+  resourceNames:
+  - default-deny-all
+  verbs:
+  - use
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-manager-policy:default-deny-all
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-manager-policy:default-deny-all
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:authenticated

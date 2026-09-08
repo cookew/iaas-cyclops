@@ -14,6 +14,8 @@ cainjector:
 crds:
   enabled: true
 
+disableAutoApproval: true
+
 enableCertificateOwnerRef: true
 
 global:
