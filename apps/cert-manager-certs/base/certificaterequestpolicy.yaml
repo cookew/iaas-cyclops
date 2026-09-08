@@ -73,7 +73,7 @@ roleRef:
   name: cert-manager-policy:iaas-policy
 subjects:
 - kind: ServiceAccount
-  name: system:serviceaccount:cert-manager:cert-manager
+  name: cert-manager
   namespace: cert-manager
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -100,5 +100,5 @@ roleRef:
   name: cert-manager-policy:default-deny-all
 subjects:
 - kind: ServiceAccount
-  name: system:serviceaccount:cert-manager:cert-manager
+  name: cert-manager
   namespace: cert-manager
