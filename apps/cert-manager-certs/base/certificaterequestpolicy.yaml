@@ -72,9 +72,10 @@ roleRef:
   kind: ClusterRole
   name: cert-manager-policy:iaas-policy
 subjects:
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: system:authenticated
+- apiGroup: v1
+  kind: ServiceAccount
+  name: system:serviceaccount:cert-manager:cert-manager
+  namespace: cert-manager
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -99,6 +100,7 @@ roleRef:
   kind: ClusterRole
   name: cert-manager-policy:default-deny-all
 subjects:
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: system:authenticated
+- apiGroup: v1
+  kind: ServiceAccount
+  name: system:serviceaccount:cert-manager:cert-manager
+  namespace: cert-manager

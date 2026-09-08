@@ -5,11 +5,11 @@ metadata:
 spec:
   commonName: keycloak
   dnsNames:
-    - keycloak
-    - keycloak-service
-    - keycloak-service.keycloak.svc
-    - keycloak-service.keycloak.svc.cluster.local
-    - keycloak.apps.iaas.wcooke.me
+  - keycloak
+  - keycloak-service
+  - keycloak-service.keycloak.svc
+  - keycloak-service.keycloak.svc.cluster.local
+  - keycloak.apps.iaas.wcooke.me
   duration: 960h
   isCA: false
   issuerRef:
