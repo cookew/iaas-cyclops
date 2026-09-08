@@ -197,6 +197,7 @@ ingress:
   - hosts:
     - hubble.apps.iaas.wcooke.me
     secretName: hubble-ingress-cert
+
 initContainers:
   waitForRedis:
     enabled: false

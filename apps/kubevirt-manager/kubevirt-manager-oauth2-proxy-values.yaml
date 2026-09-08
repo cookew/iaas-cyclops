@@ -197,6 +197,7 @@ ingress:
   - hosts:
     - kubevirt.apps.iaas.wcooke.me
     secretName: kubevirt-manager-ingress-cert
+
 initContainers:
   waitForRedis:
     enabled: false
