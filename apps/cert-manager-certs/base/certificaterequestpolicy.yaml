@@ -8,8 +8,7 @@ metadata:
 spec:
   allowed:
     commonName:
-      values:
-      - "*"
+      value: "*"
     dnsNames:
       required: false
       values:
