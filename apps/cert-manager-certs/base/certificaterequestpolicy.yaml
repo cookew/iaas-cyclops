@@ -10,14 +10,14 @@ spec:
     dnsNames:
       required: false
       values:
-      - "\*.svc.cluster.local"
-      - "\*.svc"
-      - "\*.wcooke.me"
+      - "*.svc.cluster.local"
+      - "*.svc"
+      - "*.wcooke.me"
       - keycloak
       - keycloak-service
-      # validations:
-      # - rule: "!self.contains('*')"
-      #   message: Wildcard certificates are not allowed.
+      validations:
+      - rule: "!self.contains('*')"
+        message: Wildcard certificates are not allowed.
     isCA: false
     usages:
     - client auth
