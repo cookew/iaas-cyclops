@@ -16,10 +16,10 @@ affinity:
       podAffinityTerm:
         labelSelector:
           matchExpressions:
-          - key: app.kubernetes.io/name
+          - key: app.kubernetes.io/instance
             operator: In
             values:
-            - alertmanager
+            - kube-prometheus-stack-alertmanager
         topologyKey: kubernetes.io/hostname
 
 config:

@@ -1,16 +1,25 @@
 # https://github.com/oauth2-proxy/manifests/blob/main/helm/oauth2-proxy/values.yaml
 
 affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: app.kubernetes.io/instance
+          operator: In
+          values:
+          - prometheus-oauth2-proxy
+      topologyKey: kubernetes.io/hostname
   podAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
-    - weight: 1
+    - weight: 100
       podAffinityTerm:
         labelSelector:
           matchExpressions:
-          - key: app.kubernetes.io/name
+          - key: app.kubernetes.io/instance
             operator: In
             values:
-            - prometheus
+            - kube-prometheus-stack-prometheus
         topologyKey: kubernetes.io/hostname
 
 config:
