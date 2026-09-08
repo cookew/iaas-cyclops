@@ -72,8 +72,7 @@ roleRef:
   kind: ClusterRole
   name: cert-manager-policy:iaas-policy
 subjects:
-- apiGroup: v1
-  kind: ServiceAccount
+- kind: ServiceAccount
   name: system:serviceaccount:cert-manager:cert-manager
   namespace: cert-manager
 ---
@@ -100,7 +99,6 @@ roleRef:
   kind: ClusterRole
   name: cert-manager-policy:default-deny-all
 subjects:
-- apiGroup: v1
-  kind: ServiceAccount
+- kind: ServiceAccount
   name: system:serviceaccount:cert-manager:cert-manager
   namespace: cert-manager
