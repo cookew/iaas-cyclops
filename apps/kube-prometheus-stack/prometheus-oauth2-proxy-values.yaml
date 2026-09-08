@@ -224,3 +224,4 @@ revisionHistoryLimit: 0
 
 serviceAccount:
   enabled: false
+  automountServiceAccountToken: false

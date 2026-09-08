@@ -59,7 +59,7 @@ gatewayAPI:
   enabled: true
   enableAlpn: true
   enableAppProtocol: true
-  externalTrafficPolicy: Cluster
+  externalTrafficPolicy: Local
 
 hubble:
   metrics:

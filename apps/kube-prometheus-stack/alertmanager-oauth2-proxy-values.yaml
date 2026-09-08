@@ -38,7 +38,7 @@ config:
     reverse_proxy = true
     set_authorization_header = true
     set_xauthrequest = true
-    silence_ping_logging = true
+    # silence_ping_logging = true
     skip_provider_button = true
     ssl_insecure_skip_verify = false
     tls_cert_file = "/certs/tls.crt"
@@ -224,3 +224,4 @@ revisionHistoryLimit: 0
 
 serviceAccount:
   enabled: false
+  automountServiceAccountToken: false
