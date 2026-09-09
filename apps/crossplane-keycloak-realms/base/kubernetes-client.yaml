@@ -17,10 +17,10 @@ spec:
     # pkceCodeChallengeMethod: S256
     realmIdRef:
       name: iaas
-    rootUrl: http://localhost:8000
+    rootUrl: http://127.0.0.1:8000
     standardFlowEnabled: true
     validRedirectUris:
-    - http://localhost:8000
+    - http://127.0.0.1:8000
     - https://headlamp.apps.iaas.wcooke.me/oidc-callback
   providerConfigRef:
     name: keycloak-iaas
