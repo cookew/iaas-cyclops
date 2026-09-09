@@ -14,14 +14,17 @@ spec:
       namespace: crossplane-keycloak-realms
     # directAccessGrantsEnabled: true
     name: Kubernetes
-    # pkceCodeChallengeMethod: S256
+    pkceCodeChallengeMethod: S256
     realmIdRef:
       name: iaas
-    rootUrl: http://127.0.0.1:8000
+    rootUrl: http://localhost:8000
     standardFlowEnabled: true
     validRedirectUris:
-    - http://127.0.0.1:8000
+    - http://localhost:8000
+    - http://localhost:18000
     - https://headlamp.apps.iaas.wcooke.me/oidc-callback
+    webOrigins:
+    - +
   providerConfigRef:
     name: keycloak-iaas
 ---
