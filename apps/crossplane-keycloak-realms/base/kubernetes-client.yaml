@@ -12,7 +12,7 @@ spec:
       key: OIDC_CLIENT_SECRET
       name: kubernetes-oidc-client
       namespace: crossplane-keycloak-realms
-    directAccessGrantsEnabled: true
+    # directAccessGrantsEnabled: true
     name: Kubernetes
     # pkceCodeChallengeMethod: S256
     realmIdRef:
