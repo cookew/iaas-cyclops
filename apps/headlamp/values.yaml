@@ -21,8 +21,8 @@ env:
   value: https://keycloak.apps.iaas.wcooke.me/realms/iaas
 - name: OIDC_SCOPES
   value: profile
-# - name: OIDC_USE_PKCE
-#   value: "true"
+- name: OIDC_USE_PKCE
+  value: "true"
 - name: HEADLAMP_CONFIG_OIDC_CA_FILE
   value: /certs/ca-bundle.pem
 # - name: HEADLAMP_CONFIG_ME_USERNAME_PATH
