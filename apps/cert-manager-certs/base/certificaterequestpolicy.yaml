@@ -12,11 +12,24 @@ spec:
     dnsNames:
       required: false
       values:
-      - "*.svc.cluster.local"
-      - "*.svc"
+      # Exposed domains from Kubernetes
       - "*.wcooke.me"
+      # Kubernetes specific domains
+      - "*.svc.cluster.local"
+      - "*.svc.cluster"
+      - "*.svc"
+      # Cyclops Application specific domains
+      - mattermost
       - keycloak
       - keycloak-service
+      - prom-stack-kube-prometheus-operator
+      - prom-stack-kube-prometheus-operator-webhook
+      # Cluster application specific domains
+      - "*.hubble-relay.cilium.io"
+      - "*.default.hubble-grpc.cilium.io"
+      - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster
+      - rook-ceph-rgw-ceph-objectstore
+      - "" # Harber does not have dnsNames for some reason
       validations:
       - rule: "!self.contains('*')"
         message: Wildcard certificates are not allowed.
@@ -36,25 +49,25 @@ spec:
       group: cert-manager.io
       kind: ClusterIssuer
       name: iaas-wcooke-me
----
-# https://github.com/cert-manager/approver-policy/blob/main/docs/examples/default-deny-all.yaml
+# ---
+# # https://github.com/cert-manager/approver-policy/blob/main/docs/examples/default-deny-all.yaml
 
-apiVersion: policy.cert-manager.io/v1alpha1
-kind: CertificateRequestPolicy
-metadata:
-  name: default-deny-all
-spec:
-  allowed:
-    dnsNames:
-      values: []
-      required: true
-  selector:
-    issuerRef: {}
+# apiVersion: policy.cert-manager.io/v1alpha1
+# kind: CertificateRequestPolicy
+# metadata:
+#   name: default-deny-all
+# spec:
+#   allowed:
+#     dnsNames:
+#       values: []
+#       required: true
+#   selector:
+#     issuerRef: {}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: cert-manager-policy-iaas
+  name: cert-manager-policy:iaas
 rules:
 - apiGroups:
   - policy.cert-manager.io
@@ -62,7 +75,7 @@ rules:
   - certificaterequestpolicies
   resourceNames:
   - iaas-policy
-  - default-deny-all
+  # - default-deny-all
   verbs:
   - use
 ---
@@ -73,8 +86,8 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: cert-manager-policy-iaas
+  name: cert-manager-policy:iaas
 subjects:
-- kind: ServiceAccount
-  name: cert-manager
-  namespace: cert-manager
+- kind: Group
+  name: system:authenticated
+  apiGroup: rbac.authorization.k8s.io
