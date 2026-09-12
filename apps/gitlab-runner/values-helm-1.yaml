@@ -105,10 +105,6 @@ runners:
 
   secret: gitlab-runner-token
 
-sessionServer:
-  enabled: true
-  serviceType: ClusterIP
-
 securityContext:
     runAsNonRoot: true
     runAsUser: 999
@@ -119,6 +115,10 @@ serviceAccount:
 
 service:
   enabled: true
+
+sessionServer:
+  enabled: true
+  serviceType: ClusterIP
 
 terminationGracePeriodSeconds: 5
 
