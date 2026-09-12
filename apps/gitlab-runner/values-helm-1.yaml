@@ -103,6 +103,10 @@ runners:
 
   secret: gitlab-runner-token
 
+sessionServer:
+  enabled: true
+  serviceType: ClusterIP
+
 securityContext:
     runAsNonRoot: true
     runAsUser: 999
