@@ -53,7 +53,7 @@ spec:
 apiVersion: policy.cert-manager.io/v1alpha1
 kind: CertificateRequestPolicy
 metadata:
-  name: iaas-wcooke-me-cnpg-issuers
+  name: iaas-wcooke-me-cnpg-issuer
 spec:
   allowed:
     commonName:
@@ -65,8 +65,8 @@ spec:
     - client auth
     - server auth
   constraints:
-    minDuration: 1h
-    maxDuration: 2160h
+    minDuration: 960h
+    maxDuration: 960h
     privateKey:
       algorithm: RSA
       minSize: 2048
