@@ -60,6 +60,8 @@ spec:
       value: "*"
     dnsNames:
       required: false
+      values:
+      - barman-cloud
     isCA: false
     usages:
     - client auth
