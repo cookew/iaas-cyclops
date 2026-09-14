@@ -11,7 +11,7 @@ bpf:
   lbExternalClusterIP: true
   lbSourceRangeAllTypes: true
   mode: auto
-  tproxy: true
+  # tproxy: true
   vlanBypass: [0]
 
 bpfClockProbe: true
