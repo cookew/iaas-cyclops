@@ -1,3 +1,5 @@
+# https://github.com/cloudnative-pg/charts/blob/main/charts/plugin-barman-cloud/values.yaml
+
 replicaCount: 1
 
 resources: {}
@@ -17,7 +19,7 @@ certificate:
   # -- Specifies whether the server certificate should be created.
   createServerCertificate: true
   # -- The name of the issuer to use for the certificates.
-  issuerName: iaas-wcooke-me
+  issuerName: cloudnative-pg-plugin-barman-cloud
   # -- The duration of the certificates.
   duration: 960h
   # -- The renew before time for the certificates.
