@@ -149,9 +149,9 @@ k8sServicePort: 6443
 
 kubeProxyReplacement: true
 
-loadBalancer:
-  acceleration: best-effort
-  mode: hybrid
+# loadBalancer:
+#   acceleration: best-effort
+#   mode: hybrid
 
 logOptions:
   format: json
