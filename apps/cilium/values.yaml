@@ -8,9 +8,9 @@ bgpControlPlane:
   enabled: true
 
 bpf:
+  datapathMode: auto
   lbExternalClusterIP: true
   lbSourceRangeAllTypes: true
-  mode: auto
   # tproxy: true
   vlanBypass: [0]
 
