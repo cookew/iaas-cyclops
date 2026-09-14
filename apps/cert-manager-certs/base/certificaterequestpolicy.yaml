@@ -76,7 +76,9 @@ spec:
       group: cert-manager.io
       kind: Issuer
       name: cloudnative-pg-plugin-barman-cloud
-      namespace: cloudnative-pg
+    namespace:
+      matchNames:
+      - cloudnative-pg
 # ---
 # # https://github.com/cert-manager/approver-policy/blob/main/docs/examples/default-deny-all.yaml
 
