@@ -139,6 +139,9 @@ headlessService: true
 ingress:
   annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
+    cert-manager.io/duration: 960h
+    cert-manager.io/private-key-size: 4096
+    cert-manager.io/revision-history-limit: 1
     forecastle.stakater.com/appName: Grafana Test
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Observability
