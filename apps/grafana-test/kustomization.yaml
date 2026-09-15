@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: grafana-test
 
 resources:
-- base/grafana-pg-cluster.yaml
+- base/grafana-test-pg-cluster.yaml
 - sealed-secrets/grafana-test-admin.yaml
 - sealed-secrets/grafana-test-keycloak-client.yaml
 - sealed-secrets/grafana-test-secret-key.yaml
