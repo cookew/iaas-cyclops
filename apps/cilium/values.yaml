@@ -11,6 +11,7 @@ bpf:
   datapathMode: auto
   lbExternalClusterIP: true
   lbSourceRangeAllTypes: true
+  masquerade: true
   # tproxy: true
   vlanBypass: [0]
 
