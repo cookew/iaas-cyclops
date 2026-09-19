@@ -18,7 +18,8 @@ resources:
 - sealed-secrets/pulp-valkey.yaml
 
 helmCharts:
-- name: pulp-operator
+- includeCRDs: true
+  name: pulp-operator
   namespace: pulp
   releaseName: pulp
   repo: https://github.com/pulp/pulp-k8s-resources/raw/main/helm-charts/
