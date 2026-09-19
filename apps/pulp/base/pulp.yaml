@@ -33,9 +33,9 @@ spec:
     replicas: 1
   custom_pulp_settings: pulp-settings
   database:
-    db_fields_encryption_secret: pulp-db-fields-encryption
     external_db_secret: external-database
     # postgres_storage_class: ceph-fs
+  db_fields_encryption_secret: pulp-db-fields-encryption
   # file_storage_access_mode: ReadWriteMany
   # file_storage_size: "50Gi"
   # file_storage_storage_class: ceph-fs
