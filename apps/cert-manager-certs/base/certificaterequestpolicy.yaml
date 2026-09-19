@@ -22,8 +22,8 @@ spec:
       - mattermost
       - keycloak
       - keycloak-service
-      - prom-stack-kube-prometheus-operator
-      - prom-stack-kube-prometheus-operator-webhook
+      - kube-prometheus-stack-kube-prometheus-operator
+      - kube-prometheus-stack-kube-prometheus-operator-webhook
       # Cluster application specific domains
       - "*.hubble-relay.cilium.io"
       - "*.default.hubble-grpc.cilium.io"
@@ -40,8 +40,8 @@ spec:
     - key encipherment
     - server auth
   constraints:
-    minDuration: 1h
-    maxDuration: 2160h
+    # minDuration: 1h
+    # maxDuration: 2160h
     privateKey:
       algorithm: RSA
       minSize: 2048
