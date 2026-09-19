@@ -16,7 +16,8 @@ git clone -b "${VERSION}" --depth 1 "${GIT_REPO}"
 
 podman buildx prune --all --force
 podman build --build-arg VERSION=${VERSION} -t ${REGISTRY}/${REPO}:${VERSION} -t ${REGISTRY}/${REPO}:latest .
-podman image push ${REGISTRY}/${REPO}:${VERSION} ${REGISTRY}/${REPO}:latest
+podman image push ${REGISTRY}/${REPO}:${VERSION}
+podman image push ${REGISTRY}/${REPO}:latest
 
 sed -i "s@- image: ${REGISTRY}/${REPO}:.*@- image: ${REGISTRY}/${REPO}:${VERSION}@g" ../base/pulp-ui.yaml
 

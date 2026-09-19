@@ -26,26 +26,28 @@ spec:
       - env:
         - name: API_PROXY
           value: https://pulp.apps.iaas.wcooke.me
+        - name: NODE_ENV
+          value: production
         image: registry.wcooke.me:5000/pulp/pulp-ui:v0.1.24
         imagePullPolicy: IfNotPresent
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 8002
-          initialDelaySeconds: 60
-          periodSeconds: 10
+        # livenessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: 8002
+        #   initialDelaySeconds: 60
+        #   periodSeconds: 10
         name: pulp-ui
         ports:
         - containerPort: 8002
           name: http
           protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 8002
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          failureThreshold: 20
+        # readinessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: 8002
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 10
+        #   failureThreshold: 20
         resources:
           limits:
             cpu: 100m
