@@ -9,6 +9,7 @@ resources:
 - base/pulp-bucket-user.yaml
 - base/pulp-keycloak-client.yaml
 - base/pulp-pg-cluster.yaml
+- base/pulp-ui.yaml
 - sealed-secrets/pulp-admin-password.yaml
 - sealed-secrets/pulp-db-fields-encryption.yaml
 - sealed-secrets/pulp-keycloak-client.yaml

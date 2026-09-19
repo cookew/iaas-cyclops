@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+REGISTRY=registry.wcooke.me:5000/pulp
+REPO=pulp-ui
+VERSION=v0.1.24
+GIT_REPO=https://github.com/pulp/pulp-ui.git
+
+if [ -d pulp-ui ]
+then
+  rm -rf pulp-ui
+fi
+
+git clone -b "${VERSION}" --depth 1 "${GIT_REPO}"
+
+podman buildx prune --all --force
+podman build --build-arg VERSION=${VERSION} -t ${REGISTRY}/${REPO}:${VERSION} -t ${REGISTRY}/${REPO}:latest .
+podman image push ${REGISTRY}/${REPO}:${VERSION} ${REGISTRY}/${REPO}:latest
+
+sed -i "s@- image: ${REGISTRY}/${REPO}:.*@- image: ${REGISTRY}/${REPO}:${VERSION}@g" ../base/pulp-ui.yaml
+
+rm -rf pulp-ui

@@ -1,0 +1,134 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: ui
+    app.kubernetes.io/name: pulp-ui
+    app.kubernetes.io/part-of: pulp
+  name: pulp-ui
+spec:
+  replicas: 2
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: ui
+      app.kubernetes.io/name: pulp-ui
+      app.kubernetes.io/part-of: pulp
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: ui
+        app.kubernetes.io/name: pulp-ui
+        app.kubernetes.io/part-of: pulp
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - env:
+        - name: API_PROXY
+          value: https://pulp.apps.iaas.wcooke.me
+        image: registry.wcooke.me:5000/pulp/pulp-ui:v0.1.24
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8002
+          initialDelaySeconds: 60
+          periodSeconds: 10
+        name: pulp-ui
+        ports:
+        - containerPort: 8002
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8002
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          failureThreshold: 20
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 20m
+            memory: 16Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: false
+        volumeMounts:
+        - mountPath: /etc/ssl/certs/ca-certificates.crt
+          name: ca
+          readOnly: true
+          subPath: ca-certificates.crt
+        # - mountPath: /usr/local/tomcat/logs
+        #   name: logs
+        # - mountPath: /usr/local/tomcat/conf/Catalina/localhost
+        #   name: html
+      nodeSelector:
+        kubernetes.io/os: linux
+      # securityContext:
+      #   fsGroup: 999
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: ca-all
+        name: ca
+      # - emptyDir:
+      #     sizeLimit: 5Mi
+      #   name: html
+      # - emptyDir:
+      #     sizeLimit: 16Mi
+      #   name: logs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: service
+    app.kubernetes.io/name: pulp-ui
+    app.kubernetes.io/part-of: pulp
+  name: pulp-ui
+spec:
+  ports:
+  - name: http
+    port: 8002
+    protocol: TCP
+    targetPort: 8002
+  selector:
+    app.kubernetes.io/component: ui
+    app.kubernetes.io/name: pulp-ui
+    app.kubernetes.io/part-of: pulp
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pulp-ui
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Pulp UI
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Apps
+    forecastle.stakater.com/icon: https://pulp.apps.iaas.wcooke.me/pulp_logo_icon.svg
+    # forecastle.stakater.com/network-restricted: "true"
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: pulp-ui.apps.iaas.wcooke.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: pulp-ui
+            port:
+              number: 8002
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - pulp-ui.apps.iaas.wcooke.me
+    secretName: pulp-ui-server-tls
