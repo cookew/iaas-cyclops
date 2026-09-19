@@ -19,4 +19,4 @@ helmCharts:
   releaseName: cert-manager-approver-policy
   repo: https://charts.jetstack.io
   valuesFile: approver-policy-values.yaml
-  version: v0.27.0
+  version: v0.28.0
