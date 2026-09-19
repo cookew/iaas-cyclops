@@ -33,7 +33,7 @@ spec:
     replicas: 1
   custom_pulp_settings: pulp-settings
   database:
-    external_db_secret: external-database
+    external_db_secret: pulp-pg-cluster
     # postgres_storage_class: ceph-fs
   db_fields_encryption_secret: pulp-db-fields-encryption
   # file_storage_access_mode: ReadWriteMany
