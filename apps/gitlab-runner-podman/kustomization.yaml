@@ -7,11 +7,11 @@ resources:
 - base/podman.yaml
 - sealed-secrets/gitlab-runner-token.yaml
 
-# https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/Chart.yaml?ref_type=heads
+# https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/0-93-stable/Chart.yaml?ref_type=heads
 helmCharts:
 - name: gitlab-runner
   namespace: gitlab-runner-podman
   releaseName: gitlab-runner-podman
   repo: https://charts.gitlab.io
-  version: 0.92.0
+  version: 0.93.0
   valuesFile: values.yaml

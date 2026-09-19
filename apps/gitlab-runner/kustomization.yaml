@@ -9,23 +9,23 @@ resources:
 - base/helm-3.yaml
 - sealed-secrets/gitlab-runner-token.yaml
 
-# https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/Chart.yaml?ref_type=heads
+# https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/0-93-stable/Chart.yaml?ref_type=heads
 helmCharts:
 - name: gitlab-runner
   namespace: gitlab-runner
   releaseName: gitlab-runner-helm-1
   repo: https://charts.gitlab.io
-  version: 0.92.1
+  version: 0.93.0
   valuesFile: values-helm-1.yaml
 - name: gitlab-runner
   namespace: gitlab-runner
   releaseName: gitlab-runner-helm-2
   repo: https://charts.gitlab.io
-  version: 0.92.1
+  version: 0.93.0
   valuesFile: values-helm-2.yaml
 - name: gitlab-runner
   namespace: gitlab-runner
   releaseName: gitlab-runner-helm-3
   repo: https://charts.gitlab.io
-  version: 0.92.1
+  version: 0.93.0
   valuesFile: values-helm-3.yaml
