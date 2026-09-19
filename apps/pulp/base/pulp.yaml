@@ -55,8 +55,8 @@ spec:
   mount_trusted_ca_configmap_key: "ca-all:ca-certificates.crt"
   object_storage_s3_secret: pulp-object-storage
   # sso_secret: pulp-sso-secret
-  telemetry:
-    enabled: true
+  # telemetry:
+  #   enabled: true
   web:
     replicas: 1
   worker:
