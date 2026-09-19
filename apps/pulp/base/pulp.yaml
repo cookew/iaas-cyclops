@@ -84,7 +84,7 @@ data:
   allowed_export_paths: '[ "/tmp" ]'
   allowed_import_paths: '[ "/tmp" ]'
   analytics: "False"
-  ansible_api_hostname: https://pulp.apps.iaas.wcooke.me
-  content_origin: https://pulp.apps.iaas.wcooke.me
-  pypi_api_hostname: https://pulp.apps.iaas.wcooke.me
-  token_server: https://pulp.apps.iaas.wcooke.me/token/
+  ansible_api_hostname: 'https://pulp.apps.iaas.wcooke.me'
+  content_origin: 'https://pulp.apps.iaas.wcooke.me'
+  pypi_api_hostname: 'https://pulp.apps.iaas.wcooke.me'
+  token_server: 'https://pulp.apps.iaas.wcooke.me/token/'
