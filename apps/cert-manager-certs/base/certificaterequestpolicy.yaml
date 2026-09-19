@@ -88,6 +88,30 @@ spec:
     namespace:
       matchNames:
       - cloudnative-pg
+---
+apiVersion: policy.cert-manager.io/v1alpha1
+kind: CertificateRequestPolicy
+metadata:
+  name: cyclops-k8s-issuer
+spec:
+  allowed:
+    commonName:
+      value: "*"
+    isCA: true
+  constraints:
+    maxDuration: 8760h
+    privateKey:
+      algorithm: ECDSA
+      minSize: 256
+      maxSize: 521
+  selector:
+    issuerRef:
+      group: cert-manager.io
+      kind: Issuer
+      name: cyclops-k8s-issuer
+    namespace:
+      matchNames:
+      - cyclops-k8s
 # ---
 # # https://github.com/cert-manager/approver-policy/blob/main/docs/examples/default-deny-all.yaml
 
@@ -115,6 +139,7 @@ rules:
   resourceNames:
   - iaas-wcooke-me
   - iaas-wcooke-me-cnpg-issuer
+  - cyclops-k8s-issuer
   # - default-deny-all
   verbs:
   - use
