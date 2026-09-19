@@ -106,6 +106,7 @@ spec:
       - name: nvme-exporter
       - name: ollama
       - name: open-webui
+      - name: pulp
       # - name: pyroscope
       - name: reloader
       # - name: tempo
