@@ -44,7 +44,7 @@ spec:
     forecastle.stakater.com/appName: Pulp API
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Apps
-    forecastle.stakater.com/icon: https://pulp.apps.iaas.wcooke.me/pulp_logo_icon.svg
+    forecastle.stakater.com/icon: https://pulp-ui.apps.iaas.wcooke.me/fonts/pulp_logo.png
     forecastle.stakater.com/network-restricted: "false"
   ingress_class_name: cilium
   ingress_host: pulp.apps.iaas.wcooke.me

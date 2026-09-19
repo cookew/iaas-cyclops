@@ -50,11 +50,11 @@ spec:
         #   failureThreshold: 20
         resources:
           limits:
-            cpu: 100m
-            memory: 256Mi
+            cpu: 2000m
+            memory: 2Gi
           requests:
-            cpu: 20m
-            memory: 16Mi
+            cpu: 100m
+            memory: 32Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -115,7 +115,7 @@ metadata:
     forecastle.stakater.com/appName: Pulp UI
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Apps
-    forecastle.stakater.com/icon: https://pulp.apps.iaas.wcooke.me/pulp_logo_icon.svg
+    forecastle.stakater.com/icon: https://pulp-ui.apps.iaas.wcooke.me/fonts/pulp_logo.png
     # forecastle.stakater.com/network-restricted: "true"
 spec:
   ingressClassName: cilium
