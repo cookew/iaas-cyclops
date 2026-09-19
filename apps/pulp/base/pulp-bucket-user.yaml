@@ -1,0 +1,15 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: pulp
+spec:
+  clusterNamespace: rook-ceph-cluster
+  displayName: pulp
+  keys:
+  - accessKeyRef:
+      key: accesskey
+      name: s3-access-key-id
+    secretKeyRef:
+      key: secretkey
+      name: s3-secret-access-key
+  store: ceph-objectstore

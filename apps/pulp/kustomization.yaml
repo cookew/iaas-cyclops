@@ -1,0 +1,32 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: pulp
+
+resources:
+- base/pulp.yaml
+- base/pulp-bucket.yaml
+- base/pulp-bucket-user.yaml
+- base/pulp-keycloak-client.yaml
+- base/pulp-pg-cluster.yaml
+- sealed-secrets/pulp-admin-password.yaml
+- sealed-secrets/pulp-db-fields-encryption.yaml
+- sealed-secrets/pulp-keycloak-client.yaml
+- sealed-secrets/pulp-object-storage.yaml
+- sealed-secrets/pulp-pg-cluster-password.yaml
+- sealed-secrets/pulp-pg-cluster.yaml
+- sealed-secrets/pulp-valkey.yaml
+
+helmCharts:
+- name: pulp-operator
+  namespace: pulp
+  releaseName: pulp
+  repo: https://github.com/pulp/pulp-k8s-resources/raw/main/helm-charts/
+  valuesFile: values.yaml
+  version: 0.7.0
+- name: valkey
+  namespace: pulp
+  releaseName: valkey
+  repo: https://valkey.io/valkey-helm
+  valuesFile: valkey-values.yaml
+  version: 0.12.0

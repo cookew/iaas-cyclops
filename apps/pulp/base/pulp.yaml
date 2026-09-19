@@ -1,0 +1,90 @@
+# https://pulpproject.org/pulp-operator/docs/admin/guides/install/helm/
+
+apiVersion: repo-manager.pulpproject.org/v1
+kind: Pulp
+metadata:
+  name: pulp
+spec:
+  admin_password_secret: pulp-admin-password
+  allowed_content_checksums:
+  - sha256
+  - sha384
+  - sha512
+  api:
+    env_vars:
+    - name: PULP_AUTHENTICATION_BACKENDS
+      value: '["social_core.backends.keycloak.KeycloakOAuth2", "django.contrib.auth.backends.ModelBackend"]'
+    - name: PULP_SOCIAL_AUTH_KEYCLOAK_KEY
+      value: pulp
+    - name: PULP_SOCIAL_AUTH_KEYCLOAK_SECRET
+      valueFrom:
+        secretKeyRef:
+          key: client-secret
+          name: pulp-keycloak-client
+    - name: PULP_SOCIAL_AUTH_KEYCLOAK_AUTHORIZATION_URL
+      value: https://keycloak.apps.iaas.wcooke.me/auth/realms/iaas/protocol/openid-connect/auth/
+    - name: PULP_SOCIAL_AUTH_KEYCLOAK_ACCESS_TOKEN_URL
+      value: https://keycloak.apps.iaas.wcooke.me/auth/realms/iaas/protocol/openid-connect/token/
+    replicas: 1
+  cache:
+    enabled: true
+    external_cache_secret: pulp-valkey
+  content:
+    replicas: 1
+  custom_pulp_settings: pulp-settings
+  database:
+    db_fields_encryption_secret: pulp-db-fields-encryption
+    external_db_secret: external-database
+    # postgres_storage_class: ceph-fs
+  # file_storage_access_mode: ReadWriteMany
+  # file_storage_size: "50Gi"
+  # file_storage_storage_class: ceph-fs
+  ingress_annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    forecastle.stakater.com/appName: Pulp
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: Apps
+    forecastle.stakater.com/icon: https://pulp.apps.iaas.wcooke.me/favicon.ico
+    forecastle.stakater.com/network-restricted: "false"
+  ingress_class_name: cilium
+  ingress_host: pulp.apps.iaas.wcooke.me
+  ingress_tls_secret: pulp-ingress-tls
+  ingress_type: ingress
+  is_nginx_ingress: false
+  mount_trusted_ca: true
+  mount_trusted_ca_configmap_key: "ca-all:ca-certificates.crt"
+  object_storage_s3_secret: pulp-object-storage
+  sso_secret: pulp-sso-secret
+  telemetry:
+    enabled: true
+  web:
+    replicas: 1
+  worker:
+    env_vars:
+    - name: PULP_AUTHENTICATION_BACKENDS
+      value: '["social_core.backends.keycloak.KeycloakOAuth2", "django.contrib.auth.backends.ModelBackend"]'
+    - name: PULP_SOCIAL_AUTH_KEYCLOAK_KEY
+      value: pulp
+    - name: PULP_SOCIAL_AUTH_KEYCLOAK_SECRET
+      valueFrom:
+        secretKeyRef:
+          key: client-secret
+          name: pulp-keycloak-client
+    - name: PULP_SOCIAL_AUTH_KEYCLOAK_AUTHORIZATION_URL
+      value: https://keycloak.apps.iaas.wcooke.me/auth/realms/iaas/protocol/openid-connect/auth/
+    - name: PULP_SOCIAL_AUTH_KEYCLOAK_ACCESS_TOKEN_URL
+      value: https://keycloak.apps.iaas.wcooke.me/auth/realms/iaas/protocol/openid-connect/token/
+    replicas: 1
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pulp-settings
+data:
+  allowed_export_paths: '[ "/tmp" ]'
+  allowed_import_paths: '[ "/tmp" ]'
+  analytics: "False"
+  ansible_api_hostname: https://pulp.apps.iaas.wcooke.me
+  content_origin: https://pulp.apps.iaas.wcooke.me
+  pypi_api_hostname: https://pulp.apps.iaas.wcooke.me
+  token_server: https://pulp.apps.iaas.wcooke.me/token/

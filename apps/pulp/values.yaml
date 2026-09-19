@@ -1,0 +1,10 @@
+# https://github.com/pulp/pulp-k8s-resources/blob/main/helm-charts/chart/values.yaml
+
+imagePullSecrets: []
+
+operator:
+  relatedImages:
+    pulp: quay.io/pulp/pulp-minimal:stable
+    pulpWeb: quay.io/pulp/pulp-web:stable
+    redis: docker.io/library/redis:latest
+    postgres: docker.io/library/postgres:13

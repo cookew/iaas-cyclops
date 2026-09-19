@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: pulp-db-fields-encryption
+  namespace: pulp
+spec:
+  encryptedData:
+    database_fields.symmetric.key: AgBt/UkHrgFhSeaQPY2n1z1qWQBd5mL3l0IipmyZzaJVVl/VVA2q0CQhRbh+u0RZDOuzr6TtmQBmCV4NKaB+quPQ4EPyrNZ3qir23u8+E8yt7KBZJhG7y16gUOdYu0v9QkDou7+tSjr8Wy9UrlbxpoAzlpSm3jpRRpPtZzQj8sm+PN7xPAcXY97gghMzy3R6Vij3gqFhANGYMPNNdtwPhYXySan8BZCa8b+EZM1NE0lYDZp2Bp/iuqsPU44VEVqHK9jlS4paBoWaWiUMhY58u2E1Pg9bmj371uKLgvguXrvCvvhLZHIN97BUOZxU60OsmgM2vqTXi6rPcOGG6FgvFTZ8LKGcQAPD1PJhmIcp3NbTZvJjVmPnM0ca9trFu9Zw/PmcqcGaBuy6NKMsNnvA8s+dr9rBnP2/xPLO5pwyAqhC68fCGqh6EAvG7WuJyyFJGMXOs5/1R7u07f1oKM+KMJiSFTrZ7ko7FtC63kCe1Fbhbll+fPUDb9FdnhvycqPWd+a/Yqzgd1pTYp+5p51nMBgWhmxB3QYMZs9bFBRmLrC2B5Qwy7RVjHY5fXCaxwQ1wh5MjQgBYnqaBInWzO27Qm5jyx6OJF25pIpItVSGZhiQmJm45M49PR82XbBBrlmPfQ4nNSjEeHkBvad9iW//qm7HS4a1C2sO9Ks/aBhK3iqfYQeKYbHo4mnQLJAlquavaxp8n7aKWlg5CXrTLd2k3pmX0FhhKSu+4ASuM599ugJ8U4oE0wJxwYqYJX88QQ==
+  template:
+    metadata:
+      name: pulp-db-fields-encryption
+      namespace: pulp
+    type: stringData
