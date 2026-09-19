@@ -34,6 +34,11 @@ spec:
       - rule: "!self.contains('*')"
         message: Wildcard certificates are not allowed.
     isCA: false
+    subject:
+      organizations:
+        required: false
+        values:
+        - Cyclops-k8s
     usages:
     - client auth
     - digital signature
