@@ -23,13 +23,10 @@ dcgmExporter:
       replacement: $1
       action: replace
 
-node-feature-discovery:
-  master:
-    nodeSelector:
-      kubernetes.io/hostname: amd64-1
-  worker:
-    nodeSelector:
-      kubernetes.io/hostname: amd64-1
+# node-feature-discovery:
+#   worker:
+#     nodeSelector:
+#       kubernetes.io/hostname: amd64-1
 
 operator:
   cleanupCRD: true
