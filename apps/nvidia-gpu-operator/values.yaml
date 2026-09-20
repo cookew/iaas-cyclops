@@ -7,7 +7,8 @@ driver:
   enabled: false
   nvidiaDriverCRD:
     nodeSelector:
-      cpu-model.node.kubevirt.io/SandyBridge: "true"
+      # cpu-model.node.kubevirt.io/SandyBridge: "true"
+      kubernetes.io/hostname: amd64-1
   repository: registry.wcooke.me:5000/nvidia
 
 dcgmExporter:
@@ -23,6 +24,9 @@ dcgmExporter:
       action: replace
 
 node-feature-discovery:
+  master:
+    nodeSelector:
+      kubernetes.io/hostname: amd64-1
   worker:
     nodeSelector:
       kubernetes.io/hostname: amd64-1
