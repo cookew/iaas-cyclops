@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: whoami
 
 resources:
-- base/certificate.yaml
+# - base/certificate.yaml
 - base/deployment.yaml
 - base/ingress.yaml
 - base/service.yaml

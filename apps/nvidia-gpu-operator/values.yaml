@@ -551,7 +551,7 @@ dcgmExporter:
 # # Supports use of custom Helm templates
 # extraObjects: []
 
-# node-feature-discovery:
+node-feature-discovery:
 #   priorityClassName: system-node-critical
 #   gc:
 #     enable: true
@@ -559,7 +559,9 @@ dcgmExporter:
 #     serviceAccount:
 #       name: node-feature-discovery
 #       create: false
-#   worker:
+  worker:
+    nodeSelector:
+      kubernetes.io/hostname: amd64-1
 #     serviceAccount:
 #       name: node-feature-discovery
 #       # disable creation to avoid duplicate serviceaccount creation by master spec below

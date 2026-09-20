@@ -5,9 +5,11 @@ namespace: openbao
 
 resources:
 - base/openbao-agent-objectbucketclaim.yaml
+- base/openbao-injector-certificate.yaml
 - base/openbao-keycloak-client.yaml
 - sealed-secrets/openbao-seal-key.yaml
 
+# https://github.com/openbao/openbao-helm
 helmCharts:
 - includeCRDs: true
   name: openbao
@@ -15,4 +17,4 @@ helmCharts:
   releaseName: openbao
   repo: https://openbao.github.io/openbao-helm
   valuesFile: values.yaml
-  version: 0.27.2
+  version: 0.29.5

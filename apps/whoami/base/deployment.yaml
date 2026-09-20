@@ -71,16 +71,16 @@ spec:
             drop:
             - ALL
           readOnlyRootFilesystem: false
-        volumeMounts:
-        - mountPath: /certs
-          name: whoami-cert
-          readOnly: true
+        # volumeMounts:
+        # - mountPath: /certs
+        #   name: whoami-cert
+        #   readOnly: true
       nodeSelector:
         kubernetes.io/os: linux
       securityContext:
         fsGroup: 999
-      volumes:
-      - name: whoami-cert
-        secret:
-          defaultMode: 440
-          secretName: whoami-cert
+      # volumes:
+      # - name: whoami-cert
+      #   secret:
+      #     defaultMode: 440
+      #     secretName: whoami-cert

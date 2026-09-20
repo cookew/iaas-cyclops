@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: openbao-injector-certs
+spec:
+  commonName: openbao-injector
+  dnsNames:
+  - openbao-agent-injector-svc
+  - openbao-agent-injector-svc.openbao
+  - openbao-agent-injector-svc.openbao.svc
+  duration: 960h
+  isCA: false
+  issuerRef:
+    kind: ClusterIssuer
+    name: iaas-wcooke-me
+  secretName: openbao-injector-certs
+  usages:
+  - client auth
+  - server auth
