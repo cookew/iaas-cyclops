@@ -14,4 +14,4 @@ helmCharts:
   releaseName: nvidia-gpu-operator
   repo: https://helm.ngc.nvidia.com/nvidia
   valuesFile: values.yaml
-  version: v26.3.1
+  version: v26.7.0
