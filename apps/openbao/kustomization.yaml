@@ -17,4 +17,4 @@ helmCharts:
   releaseName: openbao
   repo: https://openbao.github.io/openbao-helm
   valuesFile: values.yaml
-  version: 0.29.5
+  version: 0.29.6
