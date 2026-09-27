@@ -39,7 +39,7 @@ helmCharts:
   releaseName: gitlab
   repo: https://charts.gitlab.io
   valuesFile: values.yaml
-  version: 10.4.0
+  version: 10.4.1
 - name: valkey
   namespace: gitlab
   releaseName: valkey
