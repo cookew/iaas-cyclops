@@ -1,0 +1,4 @@
+- op: remove
+  path: /spec/volumeClaimTemplates/0/apiVersion
+- op: remove
+  path: /spec/volumeClaimTemplates/0/kind

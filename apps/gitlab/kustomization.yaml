@@ -46,3 +46,10 @@ helmCharts:
   repo: https://valkey.io/valkey-helm
   valuesFile: valkey-values.yaml
   version: 0.12.0
+
+patches:
+- path: patches/gitaly.yaml
+  target:
+    kind: StatefulSet
+    name: gitlab-gitaly
+    version: v1
