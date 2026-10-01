@@ -77,55 +77,55 @@ spec:
 
       - name: alloy
       - name: alloy-logs
-      # - name: crossplane-provider-opentofu
-      # - name: crossview
       - name: cyberchef
       - name: drawio
       - name: descheduler
-      # - name: eck-monitoring
-      # - name: eck-operator
-      # - name: eck-stack
       - name: forecastle
       - name: github-arc
       - name: gitlab
       - name: gitlab-runner
       - name: guacamole
       - name: grafana
-      # - name: grafana-mcp
       - name: grafana-test
-      # - name: harbor
       - name: headlamp
       - name: inotify-exporter
-      # - name: jupyterhub
       - name: kubevirt-manager
       - name: loki
       - name: mattermost-operator
-      # - name: mattermost
-      # - name: neuvector
       - name: nvidia-gpu-operator
       - name: nvme-exporter
       - name: ollama
       - name: open-webui
       - name: pulp
-      # - name: pyroscope
+      - name: pyroscope
       - name: reloader
-      # - name: tempo
-      # - name: tempo-kafka
-      # - name: terminals
-      # - name: wazuh
+      - name: tempo
+      - name: tempo-kafka
       - name: whoami
 
       # These are in testing
       # - name: argo-workflows
       # - name: capi-operator
+      # - name: crossplane-provider-opentofu
+      # - name: crossview
+      # - name: eck-monitoring
+      # - name: eck-operator
+      # - name: eck-stack
       # - name: fluent-bit
       # - name: github-arc-runners
+      # - name: grafana-mcp
+      # - name: harbor
       # - name: holmesgpt
       # - name: istio
       #   namespace: istio-system
+      # - name: jupyterhub
       # - name: kubescape
       # - name: kubevirt-templates
+      # - name: mattermost
+      # - name: neuvector
       # - name: openbao
+      # - name: terminals
+      # - name: wazuh
 
   template:
     metadata:
