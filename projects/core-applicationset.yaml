@@ -86,7 +86,6 @@ spec:
       - name: gitlab-runner
       - name: guacamole
       - name: grafana
-      - name: grafana-test
       - name: headlamp
       - name: inotify-exporter
       - name: kubevirt-manager
@@ -114,6 +113,7 @@ spec:
       # - name: fluent-bit
       # - name: github-arc-runners
       # - name: grafana-mcp
+      # - name: grafana-test
       # - name: harbor
       # - name: holmesgpt
       # - name: istio
