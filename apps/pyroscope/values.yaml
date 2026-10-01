@@ -76,7 +76,7 @@ pyroscope:
     runAsNonRoot: true
     runAsUser: 1000
   serviceAccount:
-    create: false
+    create: true
   tenantOverrides:
     {}
     # "foo":
