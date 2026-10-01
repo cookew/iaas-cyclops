@@ -15,7 +15,7 @@ resources:
 # - base/grafana-valkey-certificate.yaml
 - base/haproxy-dashboard.yaml
 - base/loki-datasource.yaml
-# - base/pyroscope-datasource.yaml
+- base/pyroscope-datasource.yaml
 # - base/tempo-datasource.yaml
 - sealed-secrets/grafana-admin.yaml
 - sealed-secrets/grafana-image-renderer-token.yaml
