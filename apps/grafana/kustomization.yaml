@@ -16,7 +16,7 @@ resources:
 - base/haproxy-dashboard.yaml
 - base/loki-datasource.yaml
 - base/pyroscope-datasource.yaml
-# - base/tempo-datasource.yaml
+- base/tempo-datasource.yaml
 - sealed-secrets/grafana-admin.yaml
 - sealed-secrets/grafana-image-renderer-token.yaml
 - sealed-secrets/grafana-keycloak-client.yaml
