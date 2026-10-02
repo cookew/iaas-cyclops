@@ -1,10 +1,7 @@
 # https://github.com/grafana-community/helm-charts/blob/main/charts/tempo-distributed/values.yaml
 
 backendWorker:
-  autoscaling:
-    enabled: true
-    hpa:
-      enabled: true
+  replicas: 2
   extraArgs:
   - -config.expand-env=true
 
@@ -237,7 +234,6 @@ storage:
     s3:
       bucket: "${BUCKET_NAME}"
       endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
-      # endpoint: "${BUCKET_HOST}"
       access_key: "${AWS_ACCESS_KEY_ID}"
       secret_key: "${AWS_SECRET_ACCESS_KEY}"
       tls_insecure_skip_verify: true
