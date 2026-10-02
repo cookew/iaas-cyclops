@@ -39,6 +39,10 @@ spec:
       - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster
     isCA: false
     subject:
+      organizationalUnits:
+        required: false
+        values:
+        - '*'
       organizations:
         required: false
         values:
@@ -93,6 +97,10 @@ spec:
       - "*"
     isCA: true
     subject:
+      organizationalUnits:
+        required: false
+        values:
+        - '*'
       organizations:
         required: false
         values:
