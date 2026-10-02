@@ -8,6 +8,7 @@ metadata:
 spec:
   allowed:
     commonName:
+      required: false
       value: "*"
     dnsNames:
       required: false
@@ -37,6 +38,11 @@ spec:
       - rook-ceph-rgw-ceph-objectstore
       - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster
     isCA: false
+    subject:
+      organizations:
+        required: false
+        values:
+        - '*'
     usages:
     - any
     - cert sign
@@ -86,6 +92,11 @@ spec:
       values:
       - "*"
     isCA: true
+    subject:
+      organizations:
+        required: false
+        values:
+        - '*'
     usages:
     - any
     - cert sign
