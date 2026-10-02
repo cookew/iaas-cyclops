@@ -16,8 +16,9 @@ spec:
       - "*.svc.cluster.local"
       - "*.svc.cluster"
       - "*.svc"
-      # Application specific domains
+      # Exposed domains from Kubernetes
       - "*.wcooke.me"
+      # Application specific domains
       - keycloak
       - keycloak-service
       - kube-prometheus-stack-kube-prometheus-operator
@@ -27,9 +28,7 @@ spec:
       - rook-ceph-rgw-ceph-objectstore
       - "*.hubble-relay.cilium.io"
       - "*.default.hubble-grpc.cilium.io"
-      # validations:
-      # - rule: "!self.contains('*')"
-      #   message: Wildcard certificates are not allowed.
+      - ""
     isCA: false
     usages:
     - client auth
@@ -37,8 +36,8 @@ spec:
     - key encipherment
     - server auth
   constraints:
-    # minDuration: 1h
-    # maxDuration: 2160h
+    minDuration: 1h
+    maxDuration: 2160h
     privateKey:
       algorithm: RSA
       minSize: 2048
@@ -52,145 +51,45 @@ spec:
 apiVersion: policy.cert-manager.io/v1alpha1
 kind: CertificateRequestPolicy
 metadata:
-  name: iaas-wcooke-me-cnpg-issuer
+  name: iaas-wcooke-me-namespaced
 spec:
   allowed:
     commonName:
+      required: false
       value: "*"
     dnsNames:
       required: false
       values:
-      - barman-cloud
-      validations:
-      - rule: "!self.contains('*')"
-        message: Wildcard certificates are not allowed.
-    isCA: false
-    usages:
-    - client auth
-    - server auth
-  constraints:
-    minDuration: 960h
-    maxDuration: 960h
-    privateKey:
-      algorithm: RSA
-      minSize: 2048
-      maxSize: 4096
-  selector:
-    issuerRef:
-      group: cert-manager.io
-      kind: Issuer
-      name: cloudnative-pg-plugin-barman-cloud
-    namespace:
-      matchNames:
-      - cloudnative-pg
----
-apiVersion: policy.cert-manager.io/v1alpha1
-kind: CertificateRequestPolicy
-metadata:
-  name: cyclops-k8s-selfsigned-issuer
-spec:
-  allowed:
-    commonName:
-      value: cyclops-assets
-    dnsNames:
-      required: false
-      validations:
-      - rule: "!self.contains('*')"
-        message: Wildcard certificates are not allowed.
+      - "*"
     isCA: true
-  constraints:
-    maxDuration: 8760h
-    privateKey:
-      algorithm: ECDSA
-      minSize: 256
-      maxSize: 256
-  selector:
-    issuerRef:
-      group: cert-manager.io
-      kind: Issuer
-      name: selfsigned-issuer
-    namespace:
-      matchNames:
-      - cyclops-assets
----
-apiVersion: policy.cert-manager.io/v1alpha1
-kind: CertificateRequestPolicy
-metadata:
-  name: cyclops-k8s-issuer
-spec:
-  allowed:
-    commonName:
-      value: "*.cyclops-assets"
-    dnsNames:
-      required: false
-      values:
-      - "*.cyclops-assets"
-      - assets
-      - registry-mirrors
-      - localhost
-      validations:
-      - rule: "!self.contains('*')"
-        message: Wildcard certificates are not allowed.
-    isCA: false
-    subject:
-      organizations:
-        # required: false
-        values:
-        - Cyclops-k8s
     usages:
+    - any
+    - cert sign
     - client auth
+    - code signing
+    - content commitment
+    - crl sign
+    - data encipherment
+    - decipher only
+    - digital signature
+    - email protection
+    - encipher only
+    - ipsec end system
+    - ipsec tunnel
+    - ipsec user
+    - key agreement
+    - key encipherment
+    - microsoft sgc
+    - netscape sgc
+    - ocsp signing
+    - s/mime
     - server auth
-  constraints:
-    privateKey:
-      algorithm: RSA
-      minSize: 2048
-      maxSize: 4096
+    - signing
+    - timestamping
   selector:
     issuerRef:
       group: cert-manager.io
       kind: Issuer
-      name: certificate-authority
-    namespace:
-      matchNames:
-      - cyclops-assets
----
-apiVersion: policy.cert-manager.io/v1alpha1
-kind: CertificateRequestPolicy
-metadata:
-  name: cyclops-k8s-issuer-squid
-spec:
-  allowed:
-    commonName:
-      value: squid.cyclops-assets
-    dnsNames:
-      values:
-      - squid.cyclops-assets
-      - squid
-      - localhost
-      validations:
-      - rule: "!self.contains('*')"
-        message: Wildcard certificates are not allowed.
-    isCA: true
-    subject:
-      organizations:
-        values:
-        - Cyclops-k8s
-    usages:
-    - client auth
-    - server auth
-  constraints:
-    privateKey:
-      algorithm: RSA
-      minSize: 2048
-      maxSize: 4096
-  selector:
-    issuerRef:
-      group: cert-manager.io
-      kind: Issuer
-      name: certificate-authority
-    namespace:
-      matchNames:
-      - cyclops-assets
 # ---
 # # https://github.com/cert-manager/approver-policy/blob/main/docs/examples/default-deny-all.yaml
 
@@ -217,10 +116,7 @@ rules:
   - certificaterequestpolicies
   resourceNames:
   - iaas-wcooke-me
-  - iaas-wcooke-me-cnpg-issuer
-  - cyclops-k8s-selfsigned-issuer
-  - cyclops-k8s-issuer
-  - cyclops-k8s-issuer-squid
+  - iaas-wcooke-me-namespaced
   # - default-deny-all
   verbs:
   - use
