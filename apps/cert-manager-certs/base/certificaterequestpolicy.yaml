@@ -17,18 +17,19 @@ spec:
       - "*.svc.cluster"
       - "*.svc"
       # Exposed domains from Kubernetes
+      - ""
+      - "*.apps.iaas.wcooke.me"
+      - "*.default.hubble-grpc.cilium.io"
+      - "*.hubble-relay.cilium.io"
+      - "*.s3.apps.iaas.wcooke.me"
       - "*.wcooke.me"
-      # Application specific domains
       - keycloak
       - keycloak-service
       - kube-prometheus-stack-kube-prometheus-operator
       - kube-prometheus-stack-kube-prometheus-operator-webhook
       - mattermost
-      - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster
       - rook-ceph-rgw-ceph-objectstore
-      - "*.hubble-relay.cilium.io"
-      - "*.default.hubble-grpc.cilium.io"
-      - ""
+      - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster
     isCA: false
     usages:
     - client auth
