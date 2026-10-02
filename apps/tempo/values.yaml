@@ -5,6 +5,8 @@ backendWorker:
     enabled: true
     hpa:
       enabled: true
+  extraArgs:
+  - -config.expand-env=true
 
 compactor:
   # autoscaling:
@@ -234,8 +236,8 @@ storage:
     backend: s3
     s3:
       bucket: "${BUCKET_NAME}"
-      # endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
-      endpoint: "${BUCKET_HOST}"
+      endpoint: "${BUCKET_HOST}:${BUCKET_PORT}"
+      # endpoint: "${BUCKET_HOST}"
       access_key: "${AWS_ACCESS_KEY_ID}"
       secret_key: "${AWS_SECRET_ACCESS_KEY}"
       tls_insecure_skip_verify: true
