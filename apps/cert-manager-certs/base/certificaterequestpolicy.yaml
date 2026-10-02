@@ -38,10 +38,29 @@ spec:
       - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster
     isCA: false
     usages:
+    - any
+    - cert sign
     - client auth
+    - code signing
+    - content commitment
+    - crl sign
+    - data encipherment
+    - decipher only
     - digital signature
+    - email protection
+    - encipher only
+    - ipsec end system
+    - ipsec tunnel
+    - ipsec user
+    - key agreement
     - key encipherment
+    - microsoft sgc
+    - netscape sgc
+    - ocsp signing
+    - s/mime
     - server auth
+    - signing
+    - timestamping
   constraints:
     minDuration: 1h
     maxDuration: 2160h
