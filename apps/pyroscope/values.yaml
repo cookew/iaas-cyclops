@@ -1,7 +1,10 @@
 # https://github.com/grafana/pyroscope/blob/main/operations/pyroscope/helm/pyroscope/values.yaml
 
 alloy:
-  enabled: false
+  enabled: true
+  # alloy:
+  #   configMap:
+  #     create: false
 
 architecture:
   microservices:
