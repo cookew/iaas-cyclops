@@ -27,6 +27,8 @@ spec:
       - rook-ceph-rgw-ceph-objectstore
       - "*.hubble-relay.cilium.io"
       - "*.default.hubble-grpc.cilium.io"
+      - "*.s3.apps.iaas.wcooke.me"
+      - "*.cyclops-s3.apps.iaas.wcooke.me"
       validations:
       - rule: "!self.contains('*')"
         message: Wildcard certificates are not allowed.
