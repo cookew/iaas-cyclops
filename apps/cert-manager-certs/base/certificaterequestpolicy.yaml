@@ -62,8 +62,6 @@ spec:
     - signing
     - timestamping
   constraints:
-    minDuration: 1h
-    maxDuration: 2160h
     privateKey:
       algorithm: RSA
       minSize: 2048
