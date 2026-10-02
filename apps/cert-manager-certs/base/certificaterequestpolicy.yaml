@@ -19,10 +19,16 @@ spec:
       # Exposed domains from Kubernetes
       - ""
       - "*.apps.iaas.wcooke.me"
+      - "*.cyclops-s3.apps.iaas.wcooke.me"
       - "*.default.hubble-grpc.cilium.io"
       - "*.hubble-relay.cilium.io"
+      - "*.rook-ceph-cluster.svc.cluster.local"
+      - "*.rook-ceph-cluster.svc.cluster"
+      - "*.rook-ceph-cluster.svc"
+      - "*.rook-ceph-cluster"
       - "*.s3.apps.iaas.wcooke.me"
       - "*.wcooke.me"
+      - "rook-ceph-rgw-cyclops-s3"
       - keycloak
       - keycloak-service
       - kube-prometheus-stack-kube-prometheus-operator
