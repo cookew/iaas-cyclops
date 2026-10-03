@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: nifi
+
+resources:
+- base/neuvector-certs.yaml
+- base/neuvector-keycloak-client.yaml
+# - base/neuvector-init-cm.yaml
+- sealed-secrets/neuvector-init.yaml
+- sealed-secrets/neuvector-keycloak-client.yaml

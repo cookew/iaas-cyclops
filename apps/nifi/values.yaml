@@ -1,0 +1,19 @@
+# https://github.com/konpyutaika/nifikop/blob/master/helm/nifikop/values.yaml
+
+vaultAddress: ""
+# vaultSecret containing a `ca.crt` key with the Vault CA Certificate
+vaultSecret: ""
+
+namespaces:
+- nifi-cluster-1
+
+createClusterScopedResources: false
+
+metrics:
+  enabled: true
+
+webhook:
+  tls:
+    certManager:
+      issuerRef:
+        name: nifi-issuer
