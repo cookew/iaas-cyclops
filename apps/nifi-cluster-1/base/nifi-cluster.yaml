@@ -1,0 +1,176 @@
+apiVersion: nifi.konpyutaika.com/v1
+kind: NifiCluster
+metadata:
+  name: nifi-cluster-1
+spec:
+  listenersConfig:
+    internalListeners:
+    - type: https
+      name: https
+      containerPort: 8443
+    - type: cluster
+      name: cluster
+      containerPort: 6007
+    - type: s2s
+      name: s2s
+      containerPort: 10000
+    - type: prometheus
+      name: prometheus
+      containerPort: 9090
+    - type: load-balance
+      name: load-balance
+      containerPort: 6342
+    sslSecrets:
+      tlsSecretName: nifi-tls
+      create: true
+
+  readOnlyConfig:
+    nifiProperties:
+      OverrideConfigs: |
+        nifi.ui.banner.text=Welcome to the Cluster 1 NiFi Cluster
+  # https://konpyutaika.github.io/nifikop/docs/3_manage_nifi/1_manage_clusters/1_deploy_cluster/2_nodes_configuration
+  nodeConfigGroups:
+    default_group:
+      # provenanceStorage allow to specify the maximum amount of data provenance information to store at a time
+      # https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#write-ahead-provenance-repository-properties
+      provenanceStorage: "10 GB"
+      #RunAsUser define the id of the user to run in the Nifi image
+      runAsUser: 1000
+      serviceAccountName: default
+      # resourceRequirements works exactly like Container resources, the user can specify the limit and the requests
+      # through this property
+      # https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+      resourcesRequirements:
+        limits:
+          cpu: "2"
+          memory: 3Gi
+        requests:
+          cpu: "1"
+          memory: 3Gi
+
+      # Set this to true if the instance is a node in a cluster.
+      # https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#basic-cluster-setup
+      isNode: true
+      # Additionnal metadata to merge to the pod associated
+      # podMetadata:
+      #   annotations:
+      #     node-annotation: "node-annotation-value"
+      #   labels:
+      #     node-label: "node-label-value"
+      # Docker image used by the operator to create the node associated
+      # https://hub.docker.com/r/apache/nifi/
+      # image: "apache/nifi:1.11.2"
+      # nodeAffinity can be specified, operator populates this value if new pvc added later to node
+      # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity
+      # nodeAffinity:
+      # imagePullPolicy define the pull policy for NiFi cluster docker image
+      # imagePullPolicy: IfNotPresent
+      # priorityClassName define the name of the priority class to be applied to these nodes
+      # priorityClassName: "example-priority-class-name"
+      # externalVolumeConfigs specifies a list of volume to mount into the main container.
+      # externalVolumeConfigs:
+      #   - name: example-volume
+      #     mountPath: "/opt/nifi/example"
+      #     secret:
+      #       secretName: "raw-controller"
+      # storageConfigs specifies the node related configs
+      storageConfigs:
+      - mountPath: /opt/nifi/nifi-current/logs
+        name: logs
+        reclaimPolicy: Delete
+        pvcSpec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 100Gi
+          storageClassName: cyclopse-fs
+      - mountPath: /opt/nifi/data
+        name: data
+        reclaimPolicy: Delete
+        pvcSpec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 50Gi
+          storageClassName: cyclopse-fs
+      - mountPath: /opt/nifi/extensions
+        name: extensions-repository
+        reclaimPolicy: Delete
+        pvcSpec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
+          storageClassName: cyclopse-fs
+      - mountPath: /opt/nifi/flowfile_repository
+        name: flowfile-repository
+        reclaimPolicy: Delete
+        pvcSpec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 100Gi
+          storageClassName: cyclopse-fs
+      - mountPath: /opt/nifi/nifi-current/conf
+        name: conf
+        reclaimPolicy: Delete
+        pvcSpec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
+          storageClassName: cyclopse-fs
+      - mountPath: /opt/nifi/content_repository
+        name: content-repository
+        reclaimPolicy: Delete
+        pvcSpec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 500Gi
+          storageClassName: cyclopse-fs
+      - mountPath: /opt/nifi/provenance_repository
+        name: provenance-repository
+        reclaimPolicy: Delete
+        pvcSpec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 500Gi
+          storageClassName: cyclopse-fs
+
+
+
+    # high_mem_group:
+    #   # provenanceStorage allow to specify the maximum amount of data provenance information to store at a time
+    #   # https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#write-ahead-provenance-repository-properties
+    #   provenanceStorage: "10 GB"
+    #   #RunAsUser define the id of the user to run in the Nifi image
+    #   # +kubebuilder:validation:Minimum=1
+    #   runAsUser: 1000
+    #   serviceAccountName: default
+    #   # resourceRequirements works exactly like Container resources, the user can specify the limit and the requests
+    #   # through this property
+    #   # https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    #   resourcesRequirements:
+    #     limits:
+    #       cpu: "2"
+    #       memory: 30Gi
+    #     requests:
+    #       cpu: "1"
+    #       memory: 30Gi
+
+  nodes:
+    - id: 1
+      nodeConfigGroup: default_group
+    - id: 2
+      nodeConfigGroup: default_group
+    - id: 3
+      nodeConfigGroup: default_group
