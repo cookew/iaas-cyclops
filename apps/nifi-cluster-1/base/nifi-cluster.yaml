@@ -168,9 +168,9 @@ spec:
     #       memory: 30Gi
 
   nodes:
-    - id: 1
-      nodeConfigGroup: default_group
-    - id: 2
-      nodeConfigGroup: default_group
-    - id: 3
-      nodeConfigGroup: default_group
+  - id: 1
+    nodeConfigGroup: default_group
+  - id: 2
+    nodeConfigGroup: default_group
+  - id: 3
+    nodeConfigGroup: default_group
