@@ -94,7 +94,7 @@ spec:
           resources:
             requests:
               storage: 50Gi
-          storageClassName: cyclopse-fs
+          storageClassName: cyclops-fs
       - mountPath: /opt/nifi/extensions
         name: extensions-repository
         reclaimPolicy: Delete
@@ -104,7 +104,7 @@ spec:
           resources:
             requests:
               storage: 5Gi
-          storageClassName: cyclopse-fs
+          storageClassName: cyclops-fs
       - mountPath: /opt/nifi/flowfile_repository
         name: flowfile-repository
         reclaimPolicy: Delete
@@ -114,7 +114,7 @@ spec:
           resources:
             requests:
               storage: 100Gi
-          storageClassName: cyclopse-fs
+          storageClassName: cyclops-fs
       - mountPath: /opt/nifi/nifi-current/conf
         name: conf
         reclaimPolicy: Delete
@@ -124,7 +124,7 @@ spec:
           resources:
             requests:
               storage: 5Gi
-          storageClassName: cyclopse-fs
+          storageClassName: cyclops-fs
       - mountPath: /opt/nifi/content_repository
         name: content-repository
         reclaimPolicy: Delete
@@ -134,7 +134,7 @@ spec:
           resources:
             requests:
               storage: 500Gi
-          storageClassName: cyclopse-fs
+          storageClassName: cyclops-fs
       - mountPath: /opt/nifi/provenance_repository
         name: provenance-repository
         reclaimPolicy: Delete
@@ -144,7 +144,7 @@ spec:
           resources:
             requests:
               storage: 500Gi
-          storageClassName: cyclopse-fs
+          storageClassName: cyclops-fs
 
 
 
