@@ -135,6 +135,17 @@ spec:
                 requests:
                   storage: 1Gi
               storageClassName: cyclops-fs
+      - mountPath: /opt/nifi/nifi-current/nar_repository
+        name: nar-repository
+        ephemeral:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+              - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+              storageClassName: cyclops-fs
       - mountPath: /opt/nifi/nifi-current/work
         name: work
         ephemeral:
