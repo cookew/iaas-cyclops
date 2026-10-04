@@ -1,0 +1,104 @@
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha2
+kind: Client
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: nifi-cluster
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    # accessType: confidential
+    baseUrl: /
+    clientId: nifi-cluster
+    clientSecretSecretRef:
+      key: client-secret
+      name: nifi-cluster-keycloak-client
+      namespace: nifi
+    directAccessGrantsEnabled: true
+    name: Nifi Cluster
+    # pkceCodeChallengeMethod: S256
+    realmIdRef:
+      name: iaas
+    rootUrl: https://nifi-cluster.apps.iaas.wcooke.me
+    standardFlowEnabled: true
+    # validPostLogoutRedirectUris:
+    # - /oauth2/sign_out
+    validRedirectUris:
+    - /*
+  providerConfigRef:
+    name: keycloak-iaas
+---
+apiVersion: client.keycloak.crossplane.io/v1alpha1
+kind: ProtocolMapper
+metadata:
+  name: nifi-cluster-role-mapper
+spec:
+  forProvider:
+    clientIdRef:
+      name: nifi-cluster
+    config:
+      claim.name: client_roles
+      client_id_for_role_mappings: nifi-cluster
+      id.token.claim: "true"
+      jsonType.label: String
+      multivalued: "true"
+    name: role-mapper
+    protocol: openid-connect
+    protocolMapper: oidc-usermodel-client-role-mapper
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-iaas
+---
+apiVersion: role.keycloak.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  labels:
+    keycloak/realm: iaas
+    keycloak/group-admins: ""
+  name: nifi-cluster-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clientIdRef:
+      name: nifi-cluster
+    name: nifi-cluster-admin
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-iaas
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: nifi-cluster-admins
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: nifi-cluster-admins
+    realmIdRef:
+      name: iaas
+  providerConfigRef:
+    name: keycloak-iaas
+---
+apiVersion: group.keycloak.crossplane.io/v1alpha1
+kind: Roles
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: nifi-cluster-admin
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    groupIdRef:
+      name: nifi-cluster-admins
+    realmIdRef:
+      name: iaas
+    roleIdsRefs:
+    - name: nifi-cluster-admin
+  providerConfigRef:
+    name: keycloak-iaas
