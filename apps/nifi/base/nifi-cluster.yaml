@@ -44,9 +44,9 @@ spec:
 
     nifiProperties:
       overrideConfigs: |
-        nifi.ui.banner.text=Welcome to the NiFi Cluster
+        nifi.ui.banner.text=Welcome to NiFi!
 
-        # nifi.security.user.oidc.additional.scopes
+        nifi.security.user.oidc.additional.scopes=offline_access
         nifi.security.user.oidc.claim.groups=client_roles
         nifi.security.user.oidc.claim.identifying.user=preferred_username
         nifi.security.user.oidc.client.id=nifi-cluster
