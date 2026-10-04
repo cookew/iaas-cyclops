@@ -113,8 +113,8 @@ spec:
       # priorityClassName: "example-priority-class-name"
 
       externalVolumeConfigs:
-      - mountPath: /opt/nifi/nifi-current/work/nar/framework
-        name: framework
+      - mountPath: /opt/nifi/nifi-current/work/jetty
+        name: jetty
         ephemeral:
           volumeClaimTemplate:
             spec:
@@ -124,8 +124,8 @@ spec:
                 requests:
                   storage: 5Gi
               storageClassName: cyclops-fs
-      - mountPath: /opt/nifi/nifi-current/work/nar/extensions
-        name: extensions
+      - mountPath: /opt/nifi/nifi-current/work/nar
+        name: nar
         ephemeral:
           volumeClaimTemplate:
             spec:
@@ -135,7 +135,6 @@ spec:
                 requests:
                   storage: 5Gi
               storageClassName: cyclops-fs
-
       # - name: example-volume
       #   mountPath: "/opt/nifi/example"
       #   secret:
