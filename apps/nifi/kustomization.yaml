@@ -5,3 +5,4 @@ namespace: nifi
 
 resources:
 - base/nifi-cluster.yaml
+- base/role.yaml
