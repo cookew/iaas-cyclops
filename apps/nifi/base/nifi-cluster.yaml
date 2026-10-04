@@ -71,6 +71,16 @@ spec:
       provenanceStorage: "10 GB"
       #RunAsUser define the id of the user to run in the Nifi image
       runAsUser: 1000
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        privileged: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       serviceAccountName: nifi-cluster
       # resourceRequirements works exactly like Container resources, the user can specify the limit and the requests
       # through this property
@@ -202,7 +212,7 @@ spec:
     - -n+1
     - -F
     - /var/log/nifi-app.log
-    image: busybox:1.36
+    image: busybox:latest
     name: app-log
     resources:
       limits:
@@ -219,7 +229,7 @@ spec:
     - -n+1
     - -F
     - /var/log/nifi-bootstrap.log
-    image: busybox:1.36
+    image: busybox:latest
     name: bootstrap-log
     resources:
       limits:
@@ -236,7 +246,7 @@ spec:
     - -n+1
     - -F
     - /var/log/nifi-user.log
-    image: busybox:1.36
+    image: busybox:latest
     name: user-log
     resources:
       limits:
