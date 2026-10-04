@@ -1,7 +1,7 @@
 # https://github.com/konpyutaika/nifikop/blob/master/helm/nifikop/values.yaml
 
-namespaces:
-- nifi-cluster-1
+# namespaces:
+# - nifi-cluster-1
 
 # createClusterScopedResources: false
 
