@@ -114,7 +114,7 @@ spec:
 
       externalVolumeConfigs:
       - mountPath: /opt/nifi/nifi-current/work/nar/framework
-        name: nar-framework
+        name: framework
         ephemeral:
           volumeClaimTemplate:
             spec:
@@ -124,6 +124,18 @@ spec:
                 requests:
                   storage: 5Gi
               storageClassName: cyclops-fs
+      - mountPath: /opt/nifi/nifi-current/work/nar/extensions
+        name: extensions
+        ephemeral:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+              - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 5Gi
+              storageClassName: cyclops-fs
+
       # - name: example-volume
       #   mountPath: "/opt/nifi/example"
       #   secret:
