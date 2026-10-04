@@ -111,13 +111,25 @@ spec:
       # imagePullPolicy: IfNotPresent
       # priorityClassName define the name of the priority class to be applied to these nodes
       # priorityClassName: "example-priority-class-name"
-      # externalVolumeConfigs specifies a list of volume to mount into the main container.
-      # externalVolumeConfigs:
-      #   - name: example-volume
-      #     mountPath: "/opt/nifi/example"
-      #     secret:
-      #       secretName: "raw-controller"
-      # storageConfigs specifies the node related configs
+
+      externalVolumeConfigs:
+      # - mountPath: /opt/nifi/nifi-current/work
+      - mountPath: /asdf
+        name: work
+        ephemeral:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+              - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 5Gi
+              storageClassName: cyclops-fs
+      # - name: example-volume
+      #   mountPath: "/opt/nifi/example"
+      #   secret:
+      #     secretName: "raw-controller"
+
       storageConfigs:
       - mountPath: /opt/nifi/nifi-current/logs
         name: logs
@@ -193,17 +205,6 @@ spec:
             requests:
               # storage: 500Gi
               storage: 50Gi
-          storageClassName: cyclops-fs
-      - mountPath: /opt/nifi/nifi-current/work
-        name: work
-        reclaimPolicy: Delete
-        pvcSpec:
-          accessModes:
-          - ReadWriteOnce
-          resources:
-            requests:
-              # storage: 500Gi
-              storage: 5Gi
           storageClassName: cyclops-fs
 
   nodes:
