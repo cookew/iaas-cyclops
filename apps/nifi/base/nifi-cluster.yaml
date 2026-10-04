@@ -113,7 +113,7 @@ spec:
       # priorityClassName: "example-priority-class-name"
 
       externalVolumeConfigs:
-      - mountPath: /opt/nifi/nifi-current/work/assets
+      - mountPath: /opt/nifi/nifi-current/assets
         name: assets
         ephemeral:
           volumeClaimTemplate:
