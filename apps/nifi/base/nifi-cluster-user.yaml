@@ -63,3 +63,69 @@ spec:
   - type: global
     action: write
     resource: /tenants
+---
+apiVersion: nifi.konpyutaika.com/v1
+kind: NifiUser
+metadata:
+  name: nifi-admin
+spec:
+  # identity field is use to define the user identity on NiFi cluster side,
+  # it use full when the user's name doesn't suite with Kubernetes resource name.
+  identity: nifi-admin
+  # Contains the reference to the NifiCluster with the one the registry client is linked.
+  clusterRef:
+    name: nifi-cluster
+    namespace: nifi
+  # Whether or not the the operator also include a Java keystore format (JKS) with you secret
+  includeJKS: false
+  # Whether or not a certificate will be created for this user.
+  createCert: false
+  # defines the list of access policies that will be granted to the group.
+  accessPolicies:
+  #   # defines the kind of access policy, could be "global" or "component".
+  # # - type: global
+  #   # defines the kind of action that will be granted, could be "read" or "write"
+  #   # action: write
+  #   # resource defines the kind of resource targeted by this access policies, please refer to the following page:
+  #   # https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#access-policies
+  #   # resource: /flow
+  #   # componentType is used if the type is "component", it's allow to define the kind of component on which is the
+  #   # access policy
+  #   # componentType: "process-groups"
+  #   # componentId is used if the type is "component", it's allow to define the id of the component on which is the
+  #   # access policy
+  #   # componentId: ""
+
+  - type: global
+    action: write
+    resource: /controller
+  - type: global
+    action: write
+    resource: /counters
+  - type: global
+    action: write
+    resource: /flow
+  - type: global
+    action: write
+    resource: /parameter-contexts
+  - type: global
+    action: write
+    resource: /policies
+  - type: global
+    action: write
+    resource: /provenance
+  - type: global
+    action: write
+    resource: /proxy
+  - type: global
+    action: write
+    resource: /restricted-components
+  - type: global
+    action: write
+    resource: /site-to-site
+  - type: global
+    action: write
+    resource: /system
+  - type: global
+    action: write
+    resource: /tenants
