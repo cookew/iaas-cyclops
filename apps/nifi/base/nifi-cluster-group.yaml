@@ -1,13 +1,13 @@
 apiVersion: nifi.konpyutaika.com/v1
 kind: NifiUserGroup
 metadata:
-  name: group-test
+  name: admin
 spec:
   clusterRef:
     name: nifi-cluster
     namespace: nifi
   usersRef:
-  - name: cookewe@gmail.com
+  - name: admin
     namespace: nifi
   accessPolicies:
   - type: global
