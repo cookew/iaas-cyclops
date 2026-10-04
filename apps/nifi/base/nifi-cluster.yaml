@@ -35,6 +35,8 @@ spec:
       tlsSecretName: nifi-cluster-tls
 
   readOnlyConfig:
+    bootstrapProperties:
+      nifiJvmMemory: 4g
     nifiProperties:
       overrideConfigs: |
         nifi.ui.banner.text=Welcome to the NiFi Cluster
