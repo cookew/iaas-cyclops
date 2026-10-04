@@ -59,6 +59,8 @@ spec:
         data: nifi.properties
         name: nifi-cluster-override
         namespace: nifi
+      tlsAutoReload:
+        enabled: true
       webProxyHosts:
       - nifi-cluster.apps.iaas.wcooke.me
 

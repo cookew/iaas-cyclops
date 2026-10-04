@@ -25,6 +25,7 @@ spec:
     # - /oauth2/sign_out
     validRedirectUris:
     - /*
+    - https://nifi-cluster.apps.iaas.wcooke.me:443/*
   providerConfigRef:
     name: keycloak-iaas
 ---
