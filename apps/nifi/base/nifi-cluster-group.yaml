@@ -1,13 +1,13 @@
 apiVersion: nifi.konpyutaika.com/v1
 kind: NifiUserGroup
 metadata:
-  name: admin
+  name: nifi-cluster-admin
 spec:
   clusterRef:
     name: nifi-cluster
     namespace: nifi
   usersRef:
-  - name: admin
+  - name: nifi-admin
     namespace: nifi
   accessPolicies:
   - type: global

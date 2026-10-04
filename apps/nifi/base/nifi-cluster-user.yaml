@@ -1,11 +1,11 @@
 apiVersion: nifi.konpyutaika.com/v1
 kind: NifiUser
 metadata:
-  name: admin
+  name: nifi-admin
 spec:
   # identity field is use to define the user identity on NiFi cluster side,
   # it use full when the user's name doesn't suite with Kubernetes resource name.
-  identity: admin@nifi.me
+  identity: nifi-admin
   # Contains the reference to the NifiCluster with the one the registry client is linked.
   clusterRef:
     name: nifi-cluster
