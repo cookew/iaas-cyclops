@@ -7,7 +7,7 @@ metadata:
     forecastle.stakater.com/appName: NiFi Cluster 1
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Apps
-    forecastle.stakater.com/icon: https://nifi-cluster.apps.iaas.wcooke.me/logo.png
+    forecastle.stakater.com/icon: https://nifi-cluster.apps.iaas.wcooke.me/nifi/assets/icons/nifi-drop.svg
     forecastle.stakater.com/network-restricted: "true"
     nginx.org/ssl-services: nifikop
     nginx.org/lb-method: ip_hash
