@@ -113,9 +113,8 @@ spec:
       # priorityClassName: "example-priority-class-name"
 
       externalVolumeConfigs:
-      # - mountPath: /opt/nifi/nifi-current/work
-      - mountPath: /asdf
-        name: work
+      - mountPath: /opt/nifi/nifi-current/work/nar/framework
+        name: nar-framework
         ephemeral:
           volumeClaimTemplate:
             spec:
