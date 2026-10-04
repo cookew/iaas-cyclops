@@ -47,9 +47,19 @@ spec:
         # nifi.security.identity.mapping.transform.dn=NONE
         # nifi.security.identity.mapping.value.dn=$1
 
-  managedAdminUsers:
-  - identity: admin@nifi.me
-    name: admin
+  singleUserConfiguration:
+    enabled: true
+    authorizerEnabled: true
+    secretRef:
+      name: nifi-cluster-credentials
+      namespace: nifi
+    secretKeys:
+      username: username
+      password: password
+
+  # managedAdminUsers:
+  # - identity: admin@nifi.me
+  #   name: nifiadmin
 
   # https://konpyutaika.github.io/nifikop/docs/3_manage_nifi/1_manage_clusters/1_deploy_cluster/2_nodes_configuration
   nodeConfigGroups:
