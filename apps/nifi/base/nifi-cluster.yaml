@@ -84,7 +84,7 @@ spec:
           resources:
             requests:
               storage: 100Gi
-          storageClassName: cyclopse-fs
+          storageClassName: cyclops-fs
       - mountPath: /opt/nifi/data
         name: data
         reclaimPolicy: Delete
