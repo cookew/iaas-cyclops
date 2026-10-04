@@ -261,8 +261,8 @@ spec:
     nodeConfigGroup: default_group
   - id: 2
     nodeConfigGroup: default_group
-  - id: 3
-    nodeConfigGroup: default_group
+  # - id: 3
+  #   nodeConfigGroup: default_group
 
   service:
     headlessEnabled: true
