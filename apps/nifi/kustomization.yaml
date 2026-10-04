@@ -5,6 +5,7 @@ namespace: nifi
 
 resources:
 - base/nifi-cluster.yaml
+- base/nifi-cluster-group.yaml
 - base/nifi-cluster-ingress.yaml
 - base/nifi-cluster-keycloak-cert.yaml
 - base/nifi-cluster-keycloak-client.yaml
