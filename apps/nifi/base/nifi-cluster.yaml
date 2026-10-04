@@ -50,12 +50,12 @@ spec:
         nifi.security.identity.mapping.pattern.dn=CN=([^,]*)(?:, (?:O|OU)=.*)?
         nifi.security.identity.mapping.transform.dn=NONE
         nifi.security.identity.mapping.value.dn=$1
+      overrideSecretConfig:
+        data: nifi.properties
+        name: nifi-cluster-override
+        namespace: nifi
       webProxyHosts:
       - nifi-cluster.apps.iaas.wcooke.me
-    overrideSecretConfig:
-      data: nifi.properties
-      name: nifi-cluster-override
-      namespace: nifi
 
   # singleUserConfiguration:
   #   enabled: true
