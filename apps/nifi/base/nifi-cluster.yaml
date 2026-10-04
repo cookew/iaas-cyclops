@@ -46,11 +46,11 @@ spec:
       overrideConfigs: |
         nifi.ui.banner.text=Welcome to the NiFi Cluster
 
+        # nifi.security.user.oidc.additional.scopes
+        nifi.security.user.oidc.claim.groups=client_roles
+        nifi.security.user.oidc.claim.identifying.user=preferred_username
         nifi.security.user.oidc.client.id=nifi-cluster
         nifi.security.user.oidc.discovery.url=https://keycloak.apps.iaas.wcooke.me/realms/iaas/.well-known/openid-configuration
-        # nifi.security.user.oidc.additional.scopes
-        # nifi.security.user.oidc.claim.identifying.user
-        nifi.security.user.oidc.claim.groups=client_roles
         # nifi.security.user.oidc.truststore.strategy
         nifi.security.identity.mapping.pattern.dn=CN=([^,]*)(?:, (?:O|OU)=.*)?
         nifi.security.identity.mapping.transform.dn=NONE
