@@ -113,8 +113,8 @@ spec:
       # priorityClassName: "example-priority-class-name"
 
       externalVolumeConfigs:
-      - mountPath: /opt/nifi/nifi-current/work/jetty
-        name: jetty
+      - mountPath: /opt/nifi/nifi-current/work/assets
+        name: assets
         ephemeral:
           volumeClaimTemplate:
             spec:
@@ -122,10 +122,10 @@ spec:
               - ReadWriteOnce
               resources:
                 requests:
-                  storage: 5Gi
+                  storage: 1Gi
               storageClassName: cyclops-fs
-      - mountPath: /opt/nifi/nifi-current/work/nar
-        name: nar
+      - mountPath: /opt/nifi/nifi-current/work
+        name: work
         ephemeral:
           volumeClaimTemplate:
             spec:
@@ -133,7 +133,7 @@ spec:
               - ReadWriteOnce
               resources:
                 requests:
-                  storage: 5Gi
+                  storage: 1Gi
               storageClassName: cyclops-fs
       # - name: example-volume
       #   mountPath: "/opt/nifi/example"
