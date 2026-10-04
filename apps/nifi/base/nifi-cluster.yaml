@@ -194,6 +194,17 @@ spec:
               # storage: 500Gi
               storage: 50Gi
           storageClassName: cyclops-fs
+      - mountPath: /opt/nifi/nifi-current/work
+        name: work
+        reclaimPolicy: Delete
+        pvcSpec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              # storage: 500Gi
+              storage: 5Gi
+          storageClassName: cyclops-fs
 
   nodes:
   - id: 1
