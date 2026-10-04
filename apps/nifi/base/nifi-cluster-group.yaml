@@ -6,9 +6,9 @@ spec:
   clusterRef:
     name: nifi-cluster
     namespace: nifi
-  # usersRef:
-  # - name: nifi-admin
-  #   namespace: nifi
+  usersRef:
+  - name: nifi-admin
+    namespace: nifi
   accessPolicies:
   - type: global
     action: write
