@@ -21,7 +21,7 @@ spec:
       name: load-balance
       containerPort: 6342
     sslSecrets:
-      tlsSecretName: nifi-tls
+      # tlsSecretName: nifi-tls
       create: true
 
   readOnlyConfig:

@@ -171,6 +171,6 @@ roleRef:
   kind: Role
   name: nifikop
 subjects:
-  - kind: ServiceAccount
-    name: nifikop
-    namespace: nifi
+- kind: ServiceAccount
+  name: nifikop
+  namespace: nifi
