@@ -54,7 +54,7 @@ spec:
         # nifi.security.user.oidc.truststore.strategy
         nifi.security.identity.mapping.pattern.dn=CN=([^,]*)(?:, (?:O|OU)=.*)?
         nifi.security.identity.mapping.transform.dn=NONE
-        nifi.security.identity.mapping.value.dn=nifi-cluster\.$1
+        nifi.security.identity.mapping.value.dn=$1
       overrideSecretConfig:
         data: nifi.properties
         name: nifi-cluster-override
