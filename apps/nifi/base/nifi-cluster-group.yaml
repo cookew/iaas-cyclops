@@ -6,9 +6,6 @@ spec:
   clusterRef:
     name: nifi-cluster
     namespace: nifi
-  # usersRef:
-  # - name: nifi-cluster.nifi-admin
-  #   namespace: nifi
   accessPolicies:
   - action: read
     resource: /flow

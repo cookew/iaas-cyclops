@@ -10,6 +10,6 @@ resources:
 - base/nifi-cluster-keycloak-cert.yaml
 - base/nifi-cluster-keycloak-client.yaml
 - base/nifi-cluster-role.yaml
-- base/nifi-cluster-user.yaml
+# - base/nifi-cluster-user.yaml
 - base/role.yaml
 - sealed-secrets/nifi-cluster-override.yaml
