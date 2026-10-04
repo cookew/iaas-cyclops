@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: nifi-cluster-keycloak-client
+  namespace: nifi
+spec:
+  encryptedData:
+    client-secret: AgBjOVMR4uT8SW1eSV0rQwkxjaxqB7x1qy5KYIfUks+YR9zUuxeO3cLhbSFR0Ysy2s5Fmmse56h6Yo9g5nKwvaghX62zKgwIRQjrxug6kixylABOIoTCP+jkVGGDh4L+lxK/uC6YiA1MN2sfn3cVPn9DF2iIvu+JH4rJYhjdgOfWsKnpfCfUH28ejLVOx9Koyq4QblIUwgaxyQPpkhnXpRRjzj9ApEEXxPHmf1WEqpe+wyGYHmx2bm3c1rLr5uvA4pOgrSnRGrEFaehgDyhreUDjlghkQKQEyu5xPwwpTGbrSM9reWhEdojvrvWple44K4nmK1Eagt7IH8qMIlkKE8I2ZdEt4h4VoFehfxNgv2mC70xpN74yHC7Jqnnyi/DaRML5ITV9/08vgsMNiPQM02g6PwGtSTyy+gycG0oU8I1eogY2EwaXFRIelPV9ICjq8/Dy+VJrNUKGnmVkJ4WiW+VkT1iHKrJ9efg3oer/raBiUVcga1bg9LdOwlL6T9bsNtij9dzSa51vps0+ZugWKFKyjnWAZ/K25/GxnHFEiszBRe2FHXfviADDEemUlYb/PQsfCp0EtZ7rbIv48ZdUhK01waCnMRJJERcpfZU/OZSWUt1v/DTTdatHJGP4w+R9wf7HWLzPC3r18PC1sC16JOz4duZ2yPcsLwyg+s4H3ofCxqfDv893rhHaeG9gHQHPJyy1ck/rRZLVc60qHtGLm6P1hCJhBfyUVxqJT2Xs1v/pQ9SAytkw9mRpNWSQBQ==
+  template:
+    metadata:
+      name: nifi-cluster-keycloak-client
+      namespace: nifi
+    type: stringData
