@@ -5,8 +5,8 @@
 
 # createClusterScopedResources: false
 
-metrics:
-  enabled: true
+# metrics:
+#   enabled: true
 
 # webhook:
 #   tls:
