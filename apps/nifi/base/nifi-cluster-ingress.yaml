@@ -4,7 +4,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
     ingress.cilium.io/tls-passthrough: enabled
-    forecastle.stakater.com/appName: NiFi Cluster 1
+    forecastle.stakater.com/appName: NiFi Cluster
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Apps
     forecastle.stakater.com/icon: https://nifi-cluster.apps.iaas.wcooke.me/nifi/assets/icons/nifi-drop.svg
