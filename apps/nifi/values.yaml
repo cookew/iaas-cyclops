@@ -7,7 +7,7 @@ vaultSecret: ""
 namespaces:
 - nifi-cluster-1
 
-createClusterScopedResources: false
+# createClusterScopedResources: false
 
 metrics:
   enabled: true
