@@ -12,3 +12,5 @@ resources:
 - base/role.yaml
 - sealed-secrets/nifi-cluster-credentials.yaml
 - sealed-secrets/nifi-cluster-keycloak-client.yaml
+- sealed-secrets/nifi-cluster-override.yaml
+

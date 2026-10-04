@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: nifi-cluster-override
+  namespace: nifi
+spec:
+  encryptedData:
+    nifi.properties: AgBIGes4tmiy2pOsSLzvtGJJAIlw1T3XxoDRaxU1nDIkg5WStCgYxBFghKRYbzjjrgL+cThAjfRHPgwcIFXEu9+zTlG2W5Pj1fM1iy8Qg8RUIpuPezCMS0lUI4egs9Wrsuc3zBS98/BNHFd5nVoFlRJUC8gr+AMZ5A5Dn3bS9+3l0Zke0C0Bey/fuq8zjsyKiyq+4kKttTHw3f2tFzxEIZoBteNjOey4nKnKwbdycuxern9t7UXm0iBS2ac/48bPCbopuk/H8hr5eqJdU0g0iTROOlmrM4UzLwVtQs3W5ZHX1w1d9RLYUG8wJ17spq6rx1ckWx5DnPMkYpjCYBbaNiyNSKJ4IyrFOVdiKOY3g0NjZXPjsZV2TQPCmV28A2f5xGIB5pI9z4xsEJfGhtLufoD2CHrhE5t4pCsSQ3Aoo01YMLYPuZRi0xIGw/IhwqQAhlTgwbN0+LSruUTJXb0lJqxzgObiZF1x+BNCMHPFc5P0a0mqpGxAi/pzjpTeQBIVdoYVG3k6YKa93V7tHWdhBSs8oZ/gbagNJtoORlR4FvrV7GZ3xuFyYHvOfTY1IWae/EWRq8zGothOastpHr2tXxs1Maw2nR4wA3XGwAGDj41qOB7DkJHAvyXp61+ayLGzcQarmfzYQCTACNt+yt+Bud8khuxa/7fTF5y9T+xDL94cp4wWMZJtAFLltep250/lPv3wb0MhAqH5ej5rJwK1bQGlMWpu0Uqh2V67RLCVr8dIKo28PTXIdwtHGA6sUlUi8N/O1fWTlMM43xPy/M0ZDE+iEWlDr8HHvwZel4YKDf4/Qsl1j4acI5+J/diay57Xk2quqnlancsKkHQVTPduzEzFu76/HvgiuIrQ4Mt6pdBqpR/s
+  template:
+    metadata:
+      name: nifi-cluster-override
+      namespace: nifi
+    type: stringData
