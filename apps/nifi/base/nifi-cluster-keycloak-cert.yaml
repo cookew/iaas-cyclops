@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nifi-cluster-keycloak-cert
+spec:
+  commonName: nifi-cluster
+  duration: 960h
+  isCA: false
+  issuerRef:
+    kind: ClusterIssuer
+    name: iaas-wcooke-me
+  secretName: nifi-cluster-keycloak-cert
+  usages:
+  - client auth
+  keystores:
+    jks:
+      create: true
+      passwordSecretRef:
+        name: nifi-cluster-override
+        key: keycloak-cert-keystore-password

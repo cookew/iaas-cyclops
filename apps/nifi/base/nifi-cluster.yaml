@@ -37,6 +37,11 @@ spec:
   readOnlyConfig:
     bootstrapProperties:
       nifiJvmMemory: 4g
+      overrideSecretConfig:
+        data: bootstrap.nifi.properties
+        name: nifi-cluster-override
+        namespace: nifi
+
     nifiProperties:
       overrideConfigs: |
         nifi.ui.banner.text=Welcome to the NiFi Cluster
@@ -165,6 +170,10 @@ spec:
                 requests:
                   storage: 1Gi
               storageClassName: cyclops-fs
+      - mountPath: /opt/nifi/nifi-current/keycloak-truststore
+        name: keycloak-truststore
+        secret:
+          secretName: nifi-cluster-keycloak-cert
       # - name: example-volume
       #   mountPath: "/opt/nifi/example"
       #   secret:

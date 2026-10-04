@@ -11,8 +11,8 @@ spec:
     baseUrl: /
     clientId: nifi-cluster
     clientSecretSecretRef:
-      key: client-secret
-      name: nifi-cluster-keycloak-client
+      key: keycloak-client-secret
+      name: nifi-cluster-override
       namespace: nifi
     # directAccessGrantsEnabled: true
     name: Nifi Cluster
