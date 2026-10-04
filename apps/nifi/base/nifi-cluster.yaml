@@ -124,6 +124,17 @@ spec:
                 requests:
                   storage: 1Gi
               storageClassName: cyclops-fs
+      - mountPath: /opt/nifi/nifi-current/connector_assets
+        name: connector-assets
+        ephemeral:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+              - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+              storageClassName: cyclops-fs
       - mountPath: /opt/nifi/nifi-current/work
         name: work
         ephemeral:
