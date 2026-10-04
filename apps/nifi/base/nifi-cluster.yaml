@@ -3,6 +3,7 @@ kind: NifiCluster
 metadata:
   name: nifi-cluster-1
 spec:
+  clusterManager: kubernetes
   listenersConfig:
     internalListeners:
     - type: https
@@ -28,6 +29,7 @@ spec:
     nifiProperties:
       overrideConfigs: |
         nifi.ui.banner.text=Welcome to the Cluster 1 NiFi Cluster
+
   # https://konpyutaika.github.io/nifikop/docs/3_manage_nifi/1_manage_clusters/1_deploy_cluster/2_nodes_configuration
   nodeConfigGroups:
     default_group:
@@ -36,7 +38,7 @@ spec:
       provenanceStorage: "10 GB"
       #RunAsUser define the id of the user to run in the Nifi image
       runAsUser: 1000
-      serviceAccountName: default
+      serviceAccountName: nifi-cluster
       # resourceRequirements works exactly like Container resources, the user can specify the limit and the requests
       # through this property
       # https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
@@ -47,7 +49,6 @@ spec:
         requests:
           cpu: "2"
           memory: 8Gi
-
       # Set this to true if the instance is a node in a cluster.
       # https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#basic-cluster-setup
       isNode: true
@@ -151,27 +152,6 @@ spec:
               storage: 50Gi
           storageClassName: cyclops-fs
 
-
-
-    # high_mem_group:
-    #   # provenanceStorage allow to specify the maximum amount of data provenance information to store at a time
-    #   # https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#write-ahead-provenance-repository-properties
-    #   provenanceStorage: "10 GB"
-    #   #RunAsUser define the id of the user to run in the Nifi image
-    #   # +kubebuilder:validation:Minimum=1
-    #   runAsUser: 1000
-    #   serviceAccountName: default
-    #   # resourceRequirements works exactly like Container resources, the user can specify the limit and the requests
-    #   # through this property
-    #   # https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
-    #   resourcesRequirements:
-    #     limits:
-    #       cpu: "2"
-    #       memory: 30Gi
-    #     requests:
-    #       cpu: "1"
-    #       memory: 30Gi
-
   nodes:
   - id: 1
     nodeConfigGroup: default_group
@@ -179,3 +159,56 @@ spec:
     nodeConfigGroup: default_group
   - id: 3
     nodeConfigGroup: default_group
+
+  sidecarConfigs:
+  - args:
+    - tail
+    - -n+1
+    - -F
+    - /var/log/nifi-app.log
+    image: busybox:1.36
+    name: app-log
+    resources:
+      limits:
+        cpu: 50m
+        memory: 50Mi
+      requests:
+        cpu: 50m
+        memory: 50Mi
+    volumeMounts:
+    - mountPath: /var/log
+      name: logs
+  - args:
+    - tail
+    - -n+1
+    - -F
+    - /var/log/nifi-bootstrap.log
+    image: busybox:1.36
+    name: bootstrap-log
+    resources:
+      limits:
+        cpu: 50m
+        memory: 50Mi
+      requests:
+        cpu: 50m
+        memory: 50Mi
+    volumeMounts:
+    - mountPath: /var/log
+      name: logs
+  - args:
+    - tail
+    - -n+1
+    - -F
+    - /var/log/nifi-user.log
+    image: busybox:1.36
+    name: user-log
+    resources:
+      limits:
+        cpu: 50m
+        memory: 50Mi
+      requests:
+        cpu: 50m
+        memory: 50Mi
+    volumeMounts:
+    - mountPath: /var/log
+      name: logs

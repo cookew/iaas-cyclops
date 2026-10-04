@@ -5,4 +5,6 @@ namespace: nifi
 
 resources:
 - base/nifi-cluster.yaml
+- base/nifi-cluster-ingress.yaml
+- base/nifi-cluster-role.yaml
 - base/role.yaml
