@@ -7,14 +7,14 @@ metadata:
 spec:
   deletionPolicy: Delete
   forProvider:
-    # accessType: confidential
+    accessType: confidential
     baseUrl: /
     clientId: nifi-cluster
     clientSecretSecretRef:
       key: client-secret
       name: nifi-cluster-keycloak-client
       namespace: nifi
-    directAccessGrantsEnabled: true
+    # directAccessGrantsEnabled: true
     name: Nifi Cluster
     # pkceCodeChallengeMethod: S256
     realmIdRef:
