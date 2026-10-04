@@ -47,6 +47,10 @@ spec:
         required: false
         values:
         - '*'
+    uris:
+      required: false
+      values:
+      - "*"
     usages:
     - any
     - cert sign
@@ -105,6 +109,10 @@ spec:
         required: false
         values:
         - '*'
+    uris:
+      required: false
+      values:
+      - "*"
     usages:
     - any
     - cert sign
