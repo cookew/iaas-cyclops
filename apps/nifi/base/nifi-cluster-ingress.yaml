@@ -6,15 +6,15 @@ metadata:
     forecastle.stakater.com/appName: NiFi Cluster 1
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: Apps
-    forecastle.stakater.com/icon: https://nifi-cluster-1.apps.iaas.wcooke.me/logo.png
+    forecastle.stakater.com/icon: https://nifi-cluster.apps.iaas.wcooke.me/logo.png
     forecastle.stakater.com/network-restricted: "true"
     nginx.org/ssl-services: nifikop
     nginx.org/lb-method: ip_hash
-  name: nifi-cluster-1
+  name: nifi-cluster
 spec:
   ingressClassName: cilium
   rules:
-  - host: nifi-cluster-1.apps.iaas.wcooke.me
+  - host: nifi-cluster.apps.iaas.wcooke.me
     http:
       paths:
       - backend:
@@ -26,5 +26,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - nifi-cluster-1.apps.iaas.wcooke.me
-    secretName: nifi-cluster-1-ingress
+    - nifi-cluster.apps.iaas.wcooke.me
+    secretName: nifi-cluster-ingress
