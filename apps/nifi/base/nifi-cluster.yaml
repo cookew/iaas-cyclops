@@ -42,11 +42,11 @@ spec:
       # https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
       resourcesRequirements:
         limits:
-          cpu: "2"
-          memory: 3Gi
+          cpu: "4"
+          memory: 8Gi
         requests:
-          cpu: "1"
-          memory: 3Gi
+          cpu: "2"
+          memory: 8Gi
 
       # Set this to true if the instance is a node in a cluster.
       # https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#basic-cluster-setup
