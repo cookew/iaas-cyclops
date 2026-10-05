@@ -101,7 +101,7 @@ spec:
       # These are in testing
       - name: mattermost-operator
       # - name: nifi-cluster-1
-      - name: opentelemetry-operator
+      - name: opentelemetry-operator-system
       - name: pulp
       - name: tempo
       - name: tempo-kafka
