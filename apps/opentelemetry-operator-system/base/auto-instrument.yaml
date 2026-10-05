@@ -42,3 +42,25 @@ spec:
   #     value: http,nestjs-core # comma-separated list of the instrumentation package names without the `@opentelemetry/instrumentation-` prefix.
   #   - name: OTEL_NODE_DISABLED_INSTRUMENTATIONS
   #     value: fs,grpc # comma-separated list of the instrumentation package names without the `@opentelemetry/instrumentation-` prefix.
+
+---
+apiVersion: opentelemetry.io/v1alpha1
+kind: Instrumentation
+metadata:
+  name: nginx-instrumentation
+spec:
+  exporter:
+    endpoint: http://alloy.alloy.svc:4317
+  propagators:
+  - tracecontext
+  - baggage
+  sampler:
+    type: parentbased_traceidratio
+    argument: "1"
+  # nodejs:
+  #   env:
+  #   # https://opentelemetry.io/docs/platforms/kubernetes/operator/automatic/#js-excluding-instrumentation-libraries
+  #   - name: OTEL_NODE_ENABLED_INSTRUMENTATIONS
+  #     value: http,nestjs-core # comma-separated list of the instrumentation package names without the `@opentelemetry/instrumentation-` prefix.
+  #   - name: OTEL_NODE_DISABLED_INSTRUMENTATIONS
+  #     value: fs,grpc # comma-separated list of the instrumentation package names without the `@opentelemetry/instrumentation-` prefix.
