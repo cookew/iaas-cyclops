@@ -200,6 +200,12 @@ alloy:
 
   extraPorts:
   - name: alloy-client
+    port: 4317
+    targetPort: 4317
+  - name: alloy-client
+    port: 4318
+    targetPort: 4318
+  - name: alloy-client
     port: 4400
     targetPort: 4400
 
