@@ -2,7 +2,7 @@
 apiVersion: opentelemetry.io/v1alpha1
 kind: Instrumentation
 metadata:
-  name: go-instrumentation
+  name: go-java-python-instrumentation
 spec:
   exporter:
     endpoint: http://alloy.alloy.svc:4318
@@ -35,10 +35,10 @@ spec:
   sampler:
     type: parentbased_traceidratio
     argument: "1"
-  nodejs:
-    env:
-    # https://opentelemetry.io/docs/platforms/kubernetes/operator/automatic/#js-excluding-instrumentation-libraries
-    - name: OTEL_NODE_ENABLED_INSTRUMENTATIONS
-      value: http,nestjs-core # comma-separated list of the instrumentation package names without the `@opentelemetry/instrumentation-` prefix.
-    - name: OTEL_NODE_DISABLED_INSTRUMENTATIONS
-      value: fs,grpc # comma-separated list of the instrumentation package names without the `@opentelemetry/instrumentation-` prefix.
+  # nodejs:
+  #   env:
+  #   # https://opentelemetry.io/docs/platforms/kubernetes/operator/automatic/#js-excluding-instrumentation-libraries
+  #   - name: OTEL_NODE_ENABLED_INSTRUMENTATIONS
+  #     value: http,nestjs-core # comma-separated list of the instrumentation package names without the `@opentelemetry/instrumentation-` prefix.
+  #   - name: OTEL_NODE_DISABLED_INSTRUMENTATIONS
+  #     value: fs,grpc # comma-separated list of the instrumentation package names without the `@opentelemetry/instrumentation-` prefix.
