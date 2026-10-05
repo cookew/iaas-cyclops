@@ -36,7 +36,7 @@ spec:
           value: "8080"
         - name: WHOAMI_NAME
           value: cool-server
-        image: traefik/whoami:v1.11.0
+        image: traefik/whoami:v1.12.0
         imagePullPolicy: IfNotPresent
         # livenessProbe:
         #   httpGet:
