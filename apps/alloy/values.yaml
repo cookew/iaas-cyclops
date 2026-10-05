@@ -199,10 +199,10 @@ alloy:
   extraEnv: []
 
   extraPorts:
-  - name: alloy-client
+  - name: otel-grpc
     port: 4317
     targetPort: 4317
-  - name: alloy-client
+  - name: otel-http
     port: 4318
     targetPort: 4318
   - name: alloy-client
