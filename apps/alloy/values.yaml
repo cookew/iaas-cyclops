@@ -81,7 +81,17 @@ alloy:
           traces  = [otelcol.processor.batch.default.input]
         }
       }
-      otelcol.receiver.otlp "cluster" {
+      otelcol.receiver.otlp "clustergrpc" {
+        grpc {
+          endpoint = "0.0.0.0:4317"
+        }
+        output {
+          logs    = [otelcol.processor.batch.default.input]
+          metrics = [otelcol.processor.batch.default.input]
+          traces  = [otelcol.processor.batch.default.input]
+        }
+      }
+      otelcol.receiver.otlp "clusterhttp" {
         grpc {
           endpoint = "0.0.0.0:4317"
         }
