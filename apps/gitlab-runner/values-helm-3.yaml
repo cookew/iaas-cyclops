@@ -1,5 +1,6 @@
 # https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/values.yaml?ref_type=heads
 # https://docs.gitlab.com/runner/install/kubernetes_helm_chart_configuration/#run-with-non-root-user
+# https://gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/container_registry/1766421?orderBy=PUBLISHED_AT&sort=desc&search%5B%5D=v19.
 
 concurrent: 1
 
