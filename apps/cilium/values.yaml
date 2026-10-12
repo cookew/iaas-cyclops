@@ -25,7 +25,7 @@ dashboards:
   enabled: true
 
 devices:
-- bond0
+- kube-mgmt
 - enp1s0
 - br0
 
