@@ -25,7 +25,7 @@ dashboards:
   enabled: true
 
 devices:
-- br0
+- bond0
 - enp1s0
 
 encryption:
