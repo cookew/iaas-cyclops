@@ -1,0 +1,132 @@
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: bridge.network.kubevirt.io/access
+  name: access
+  namespace: default
+spec:
+  config: |-
+    {
+        "cniVersion": "1.1.0",
+        "name": "access",
+        "type": "bridge",
+        "bridge": "access",
+        "ipam": {},
+        "macspoofchk": true,
+        "preserveDefaultVlan": false
+    }
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: bridge.network.kubevirt.io/kube-ingress
+  name: kube-ingress
+  namespace: default
+spec:
+  config: |-
+    {
+        "cniVersion": "1.1.0",
+        "name": "kube-ingress",
+        "type": "bridge",
+        "bridge": "br0",
+        "ipam": {},
+        "macspoofchk": true,
+        "preserveDefaultVlan": false
+    }
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: bridge.network.kubevirt.io/temp-1
+  name: temp-1
+  namespace: default
+spec:
+  config: |-
+    {
+      "cniVersion": "1.1.0",
+      "name": "temp-1",
+      "type": "bridge",
+      "bridge": "temp-1",
+      "ipam": {},
+      "macspoofchk": true,
+      "preserveDefaultVlan": false
+    }
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: bridge.network.kubevirt.io/temp-2
+  name: temp-2
+  namespace: default
+spec:
+  config: |-
+    {
+      "cniVersion": "1.1.0",
+      "name": "temp-2",
+      "type": "bridge",
+      "bridge": "temp-2",
+      "ipam": {},
+        "macspoofchk": true,
+        "preserveDefaultVlan": false
+    }
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: bridge.network.kubevirt.io/temp-3
+  name: temp-3
+  namespace: default
+spec:
+  config: |-
+    {
+      "cniVersion": "1.1.0",
+      "name": "temp-3",
+      "type": "bridge",
+      "bridge": "temp-3",
+      "ipam": {},
+      "macspoofchk": true,
+      "preserveDefaultVlan": false
+    }
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: bridge.network.kubevirt.io/temp-4
+  name: temp-4
+  namespace: default
+spec:
+  config: |-
+    {
+      "cniVersion": "1.1.0",
+      "name": "temp-4",
+      "type": "bridge",
+      "bridge": "temp-4",
+      "ipam": {},
+      "macspoofchk": true,
+      "preserveDefaultVlan": false
+    }
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: bridge.network.kubevirt.io/temp-5
+  name: temp-5
+  namespace: default
+spec:
+  config: |-
+    {
+      "cniVersion": "1.1.0",
+      "name": "temp-5",
+      "type": "bridge",
+      "bridge": "temp-5",
+      "ipam": {},
+      "macspoofchk": true,
+      "preserveDefaultVlan": false
+    }
