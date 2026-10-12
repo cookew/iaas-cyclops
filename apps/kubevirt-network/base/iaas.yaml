@@ -21,25 +21,6 @@ apiVersion: k8s.cni.cncf.io/v1
 kind: NetworkAttachmentDefinition
 metadata:
   annotations:
-    k8s.v1.cni.cncf.io/resourceName: bridge.network.kubevirt.io/kube-ingress
-  name: kube-ingress
-  namespace: default
-spec:
-  config: |-
-    {
-        "cniVersion": "1.1.0",
-        "name": "kube-ingress",
-        "type": "bridge",
-        "bridge": "br0",
-        "ipam": {},
-        "macspoofchk": true,
-        "preserveDefaultVlan": false
-    }
----
-apiVersion: k8s.cni.cncf.io/v1
-kind: NetworkAttachmentDefinition
-metadata:
-  annotations:
     k8s.v1.cni.cncf.io/resourceName: bridge.network.kubevirt.io/temp-1
   name: temp-1
   namespace: default
