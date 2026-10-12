@@ -77,26 +77,26 @@ spec:
 
       - name: alloy
       - name: alloy-logs
-      # - name: cyberchef
+      - name: cyberchef
       - name: drawio
       - name: descheduler
       - name: forecastle
       - name: github-arc
       - name: gitlab
-      # - name: gitlab-runner
-      # - name: guacamole
+      - name: gitlab-runner
+      - name: guacamole
       - name: grafana
-      # - name: headlamp
+      - name: headlamp
       - name: inotify-exporter
       - name: kubevirt-manager
       - name: loki
-      # - name: nvidia-gpu-operator
+      - name: nvidia-gpu-operator
       - name: nvme-exporter
-      # - name: ollama
+      - name: ollama
       - name: open-webui
-      # - name: pyroscope
+      - name: pyroscope
       - name: reloader
-      # - name: whoami
+      - name: whoami
 
       # These are in testing
       # - name: mattermost-operator
