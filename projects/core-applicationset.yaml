@@ -152,10 +152,10 @@ spec:
         targetRevision: main
       syncPolicy:
         automated:
-          allowEmpty: false
-          enabled: false
-          prune: false
-          selfHeal: false
+          allowEmpty: true
+          enabled: true
+          prune: true
+          selfHeal: true
         syncOptions:
         - CreateNamespace={{ dig "createNamespace" "true" . }}
         - Replace={{ dig "replace" "false" . }}
