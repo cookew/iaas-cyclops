@@ -34,6 +34,7 @@ spec:
       - keycloak-service
       - kube-prometheus-stack-kube-prometheus-operator
       - kube-prometheus-stack-kube-prometheus-operator-webhook
+      - kube-prometheus-stack-operator
       - kube-prometheus-stack-operator-webhook
       - mattermost
       - rook-ceph-rgw-ceph-objectstore
