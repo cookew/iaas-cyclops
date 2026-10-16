@@ -1,6 +1,7 @@
 # https://gitlab.com/gitlab-org/charts/gitlab-runner/-/blob/main/values.yaml?ref_type=heads
 # https://docs.gitlab.com/runner/install/kubernetes_helm_chart_configuration/#run-with-non-root-user
 # https://gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/container_registry/1766421?orderBy=PUBLISHED_AT&sort=desc&search%5B%5D=v19.
+# https://gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/container_registry/1766433?orderBy=PUBLISHED_AT&sort=desc&search%5B%5D=v19.
 
 concurrent: 1
 
@@ -10,7 +11,7 @@ gitlabUrl: http://gitlab-webservice-default.gitlab:8181
 
 image:
   image: gitlab-org/ci-cd/gitlab-runner-ubi-images/gitlab-runner-ocp
-  tag: v19.4.1
+  tag: v19.5.0
 
 livenessProbe:
   initialDelaySeconds: 20
@@ -53,7 +54,7 @@ runners:
     [runners.kubernetes]
       allow_privilege_escalation = false
       # allowed_images = ["*"]
-      helper_image = "registry.gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/gitlab-runner-helper-ocp:x86_64-v19.4.1"
+      helper_image = "registry.gitlab.com/gitlab-org/ci-cd/gitlab-runner-ubi-images/gitlab-runner-helper-ocp:x86_64-v19.5.0"
       image = "ubuntu:26.04"
       # image_pull_secrets = ["regcred"]
       namespace = "gitlab-runner-helm-1"
