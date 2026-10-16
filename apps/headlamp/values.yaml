@@ -6,6 +6,7 @@ replicaCount: 1
 config:
   inCluster: true
   oidc:
+    autoLogin: true
     secret:
       create: false
     externalSecret:
