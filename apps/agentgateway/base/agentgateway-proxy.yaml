@@ -23,6 +23,7 @@ kind: ListenerSet
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: iaas-wcooke-me
+    cert-manager.io/duration: 30d
   name: agentgateway-proxy
 spec:
   parentRef:
