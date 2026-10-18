@@ -12,8 +12,8 @@ cainjector:
     type: RollingUpdate
 
 config:
-  # featureGates:
-  #   ListenerSets: true
+  featureGates:
+    ListenerSets: true
   gatewayAPI:
     enabled: true
     enableListenerSet: true
