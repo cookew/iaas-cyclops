@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: agentgateway
+    namespace: agentgateway-system
   project: core
   revisionHistoryLimit: 0
   sources:
@@ -27,10 +27,10 @@ spec:
   - ref: config
     repoURL: git@github.com:cookew/iaas-cyclops.git
     targetRevision: main
-  # - kustomize: {}
-  #   path: apps/agentgateway
-  #   repoURL: git@github.com:cookew/iaas-cyclops.git
-  #   targetRevision: main
+  - kustomize: {}
+    path: apps/agentgateway
+    repoURL: git@github.com:cookew/iaas-cyclops.git
+    targetRevision: main
   syncPolicy:
     automated:
       allowEmpty: true
