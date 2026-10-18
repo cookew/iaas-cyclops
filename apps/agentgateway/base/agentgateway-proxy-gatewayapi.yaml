@@ -36,6 +36,11 @@ spec:
       namespaces:
         from: Same
     hostname: ai.wcooke.me
+    kinds:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+    - group: agentgateway.dev
+      kind: AgentgatewayModel
     name: https
     port: 443
     protocol: HTTPS
