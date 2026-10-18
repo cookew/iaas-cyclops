@@ -3,6 +3,9 @@ kind: Gateway
 metadata:
   name: agentgateway-proxy
 spec:
+  addresses:
+  - type: IPAddress
+    value: 10.42.41.100
   gatewayClassName: agentgateway
   listeners:
   - allowedRoutes:
