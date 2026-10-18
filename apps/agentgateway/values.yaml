@@ -8,7 +8,7 @@ rbac:
   gatewayNamespaces: []
 
 securityContext:
-- runAsNonRoot: true
+  runAsNonRoot: true
 
 controller:
   replicaCount: 1
