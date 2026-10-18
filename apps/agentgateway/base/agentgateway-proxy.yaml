@@ -5,7 +5,7 @@ metadata:
 spec:
   addresses:
   - type: IPAddress
-    value: 10.42.41.100
+    value: 10.42.41.200
   gatewayClassName: agentgateway
   listeners:
   - allowedRoutes:
