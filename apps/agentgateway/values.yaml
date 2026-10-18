@@ -13,18 +13,14 @@ securityContext:
 controller:
   replicaCount: 1
   revisionHistoryLimit: 0
-  # -- Add extra environment variables to the controller container.
-  # Supports either a direct scalar value:
-  # extraEnv:
-  #   LOG_FORMAT: json
-  # Or Kubernetes valueFrom sources:
   # extraEnv:
   #   API_TOKEN:
   #     valueFrom:
   #       secretKeyRef:
   #         name: agentgateway-secrets
   #         key: apiToken
-  extraEnv: {}
+  extraEnv:
+    LOG_FORMAT: json
   # -- Add extra volume mounts to the controller container.
   extraVolumeMounts: []
   # -- Add extra volumes to the controller pod.
