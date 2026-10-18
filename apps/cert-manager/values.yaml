@@ -11,10 +11,9 @@ cainjector:
       maxUnavailable: 1
     type: RollingUpdate
 
-config:
-  gatewayAPI:
-    enabled: true
-
+# config:
+#   gatewayAPI:
+#     enabled: true
 
 crds:
   enabled: true
