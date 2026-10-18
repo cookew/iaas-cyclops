@@ -1,0 +1,29 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: iaas-wcooke-me
+    # external-dns.alpha.kubernetes.io/hostname: argocd.apps.iaas.wcooke.me
+    forecastle.stakater.com/appName: agentgateway proxy
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/group: AI
+    forecastle.stakater.com/icon: https://agentgateway.apps.iaas.wcooke.me/assets/images/logo.png
+    forecastle.stakater.com/network-restricted: "true"
+  name: agentgateway
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: agentgateway.apps.iaas.wcooke.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: agentgateway-proxy
+            port:
+              number: 15000
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - agentgateway.apps.iaas.wcooke.me
+    secretName: agentgateway-ingress
