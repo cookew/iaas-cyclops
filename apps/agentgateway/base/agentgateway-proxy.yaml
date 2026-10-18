@@ -52,10 +52,6 @@ metadata:
 spec:
   hostnames:
   - ai.wcooke.me
-  matches:
-    - path:
-        type: PathPrefix
-        value: /
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: ListenerSet
@@ -68,3 +64,7 @@ spec:
       name: agentgateway-proxy
       port: 443
       weight: 1
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
