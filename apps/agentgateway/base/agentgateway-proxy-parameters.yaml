@@ -3,5 +3,8 @@ kind: AgentgatewayParameters
 metadata:
   name: agentgateway-config
 spec:
+  # deployment:
+  #   spec:
+  #     replicas: 3
   logging:
      format: json
