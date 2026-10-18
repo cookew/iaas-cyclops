@@ -40,7 +40,8 @@ spec:
     protocol: HTTPS
     tls:
       certificateRefs:
-      - kind: Secret
+      - group: ""
+        kind: Secret
         name: https
       mode: Terminate
 ---
