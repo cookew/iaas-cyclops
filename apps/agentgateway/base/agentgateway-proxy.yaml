@@ -6,6 +6,9 @@ spec:
   addresses:
   - type: IPAddress
     value: 10.42.41.200
+  allowedListeners:
+    namespaces:
+      from: Same
   gatewayClassName: agentgateway
   listeners:
   - allowedRoutes:
