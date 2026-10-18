@@ -1,0 +1,89 @@
+# https://github.com/agentgateway/agentgateway/blob/main/controller/install/helm/agentgateway/values.yaml
+
+serviceAccount:
+  create: true
+
+rbac:
+  create: true
+  gatewayNamespaces: []
+
+securityContext:
+- runAsNonRoot: true
+
+controller:
+  replicaCount: 1
+  revisionHistoryLimit: 0
+  # -- Add extra environment variables to the controller container.
+  # Supports either a direct scalar value:
+  # extraEnv:
+  #   LOG_FORMAT: json
+  # Or Kubernetes valueFrom sources:
+  # extraEnv:
+  #   API_TOKEN:
+  #     valueFrom:
+  #       secretKeyRef:
+  #         name: agentgateway-secrets
+  #         key: apiToken
+  extraEnv: {}
+  # -- Add extra volume mounts to the controller container.
+  extraVolumeMounts: []
+  # -- Add extra volumes to the controller pod.
+  extraVolumes: []
+  # -- Configure xDS transport mode for the gRPC servers.
+  xds:
+    # -- One of: plaintext, tls, either.
+    mode: tls
+
+# -- Configure the integration with the Gateway API Inference Extension project, which lets you use agentgateway to route to AI inference workloads like LLMs that run locally in your Kubernetes cluster. Documentation for Inference Extension can be found here: https://agentgateway.dev/docs/kubernetes/latest/documentation/inference/
+inferenceExtension:
+  # -- Enable Inference Extension support in the agentgateway controller.
+  enabled: false
+
+# -- Configure the AgentgatewayModel API.
+agentgatewayModels:
+  # -- Enable AgentgatewayModel support in the agentgateway controller.
+  enabled: true
+
+# -- Configure the experimental Gateway API XBackend resource.
+xBackend:
+  # -- Enable XBackend support in the agentgateway controller.
+  enabled: false
+
+# -- List of namespace selectors (OR'ed): each entry can use 'matchLabels' or 'matchExpressions' (AND'ed within each entry if used together). Agentgateway includes the selected namespaces in config discovery. For more information, see the docs https://agentgateway.dev/docs/kubernetes/latest/documentation/install/advanced/#namespace-discovery.
+discoveryNamespaceSelectors: []
+
+# -- Map of GatewayClass names to GatewayParameters references that will be set on
+#    the default GatewayClasses managed by kgateway. Each entry must define both the
+#    name and namespace of the GatewayParameters resource.
+#    The default GatewayClasses managed by kgateway are:
+#    - agentgateway
+#    Example:
+#    gatewayClassParametersRefs:
+#      agentgateway:
+#        name: shared-gwp
+#        namespace: kgateway-system
+gatewayClassParametersRefs: {}
+
+# -- Name of the primary GatewayClass the controller creates and manages.
+#    Leave empty to use the built-in default ("agentgateway"). Sets AGW_AGENTGATEWAY_CLASS_NAME.
+gatewayClassName: ""
+
+# -- Value written to GatewayClass.spec.controllerName that this controller reconciles.
+#    Leave empty to use the built-in default ("agentgateway.dev/agentgateway"). Sets AGW_CONTROLLER_NAME.
+#    Change this together with gatewayClassName when running multiple agentgateway controllers.
+controllerName: ""
+
+istio:
+  enabled: false
+
+monitoring:
+  enabled: true
+
+  serviceMonitor:
+    scrapeNativeHistograms: true
+    scrapeClassicHistograms: false
+
+  proxy:
+    podMonitor:
+      scrapeNativeHistograms: true
+      scrapeClassicHistograms: false

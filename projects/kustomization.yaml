@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - core-applicationset.yaml
 - core-appproject.yaml
+- core-apps/agentgateway.yaml
 - core-apps/cdi.yaml
 # - core-apps/nifi.yaml
 # - core-apps/strimzi.yaml
