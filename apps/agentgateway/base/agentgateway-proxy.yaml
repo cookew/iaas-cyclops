@@ -10,7 +10,7 @@ spec:
   listeners:
   - allowedRoutes:
       namespaces:
-        from: All
+        from: Same
     name: http
     port: 443
     protocol: HTTP
