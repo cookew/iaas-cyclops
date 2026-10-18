@@ -59,5 +59,7 @@ spec:
     namespace: agentgateway-system
   rules:
   - backendRefs:
-    - name: agentgateway-proxy
+    - group: ""
+      kind: Service
+      name: agentgateway-proxy
       port: 443
