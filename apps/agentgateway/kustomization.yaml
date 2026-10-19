@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: agentgateway-system
 
 resources:
+# - base/agentgateway-models.yaml
 - base/agentgateway-proxy-gatewayapi.yaml
 - base/agentgateway-proxy-ingress.yaml
 - base/agentgateway-proxy-parameters.yaml

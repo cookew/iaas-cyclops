@@ -5,7 +5,8 @@ serviceAccount:
 
 rbac:
   create: true
-  gatewayNamespaces: []
+  gatewayNamespaces:
+  - agentgateway-system
 
 securityContext:
   runAsNonRoot: true
@@ -46,7 +47,10 @@ xBackend:
   enabled: false
 
 # -- List of namespace selectors (OR'ed): each entry can use 'matchLabels' or 'matchExpressions' (AND'ed within each entry if used together). Agentgateway includes the selected namespaces in config discovery. For more information, see the docs https://agentgateway.dev/docs/kubernetes/latest/documentation/install/advanced/#namespace-discovery.
-discoveryNamespaceSelectors: []
+discoveryNamespaceSelectors:
+- matchLabels:
+    kubernetes.io/metadata.name: agentgateway-system
+
 
 # -- Map of GatewayClass names to GatewayParameters references that will be set on
 #    the default GatewayClasses managed by kgateway. Each entry must define both the
@@ -59,10 +63,6 @@ discoveryNamespaceSelectors: []
 #        name: shared-gwp
 #        namespace: kgateway-system
 gatewayClassParametersRefs: {}
-
-# -- Name of the primary GatewayClass the controller creates and manages.
-#    Leave empty to use the built-in default ("agentgateway"). Sets AGW_AGENTGATEWAY_CLASS_NAME.
-gatewayClassName: ""
 
 # -- Value written to GatewayClass.spec.controllerName that this controller reconciles.
 #    Leave empty to use the built-in default ("agentgateway.dev/agentgateway"). Sets AGW_CONTROLLER_NAME.

@@ -7,7 +7,7 @@ metadata:
     forecastle.stakater.com/appName: agentgateway proxy
     forecastle.stakater.com/expose: "true"
     forecastle.stakater.com/group: AI
-    forecastle.stakater.com/icon: https://agentgateway.apps.iaas.wcooke.me/assets/images/logo.png
+    forecastle.stakater.com/icon: https://agentgateway.apps.iaas.wcooke.me/ui/favicon.svg
     forecastle.stakater.com/network-restricted: "true"
   name: agentgateway
 spec:
