@@ -10,4 +10,6 @@ spec:
      format: json
   service:
     spec:
-      externalTrafficPolicy: Local
+      template:
+        spec:
+          externalTrafficPolicy: Local
