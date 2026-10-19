@@ -50,6 +50,18 @@ spec:
         kind: Secret
         name: agentgateway-proxy-gwapi
       mode: Terminate
+  - allowedRoutes:
+      kinds:
+      - group: agentgateway.dev
+        kind: AgentgatewayModel
+      - group: gateway.networking.k8s.io
+        kind: HTTPRoute
+      namespaces:
+        from: Same
+    hostname: ai.wcooke.me
+    name: http
+    port: 80
+    protocol: HTTP
 # ---
 # apiVersion: gateway.networking.k8s.io/v1
 # kind: HTTPRoute
