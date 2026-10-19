@@ -32,24 +32,24 @@ spec:
     name: agentgateway-proxy
     namespace: agentgateway-system
   listeners:
-  # - allowedRoutes:
-  #     kinds:
-  #     - group: agentgateway.dev
-  #       kind: AgentgatewayModel
-  #     - group: gateway.networking.k8s.io
-  #       kind: HTTPRoute
-  #     namespaces:
-  #       from: Same
-  #   hostname: ai.wcooke.me
-  #   name: https
-  #   port: 443
-  #   protocol: HTTPS
-  #   tls:
-  #     certificateRefs:
-  #     - group: ""
-  #       kind: Secret
-  #       name: agentgateway-proxy-gwapi
-  #     mode: Terminate
+  - allowedRoutes:
+      kinds:
+      - group: agentgateway.dev
+        kind: AgentgatewayModel
+      - group: gateway.networking.k8s.io
+        kind: HTTPRoute
+      namespaces:
+        from: Same
+    hostname: ai.wcooke.me
+    name: https
+    port: 443
+    protocol: HTTPS
+    tls:
+      certificateRefs:
+      - group: ""
+        kind: Secret
+        name: agentgateway-proxy-gwapi
+      mode: Terminate
   - allowedRoutes:
       kinds:
       - group: agentgateway.dev

@@ -8,3 +8,6 @@ spec:
   #     replicas: 3
   logging:
      format: json
+  service:
+    spec:
+      externalTrafficPolicy: Local

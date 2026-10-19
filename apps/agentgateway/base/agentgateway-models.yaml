@@ -1,34 +1,4 @@
-# apiVersion: agentgateway.dev/v1alpha1
-# kind: AgentgatewayBackend
-# metadata:
-#   name: ollama
-# spec:
-#   ai:
-#     provider:
-#       host: ollama.ollama.svc
-#       openai:
-#         model: gemma4:e4b-mlx
-#       path: /v1/chat/completions
-#       port: 11434
-# ---
-# apiVersion: agentgateway.dev/v1alpha1
-# kind: AgentgatewayBackend
-# metadata:
-#   name: ollama
-#   namespace: agentgateway-system
-# spec:
-#   ai:
-#     provider:
-#       custom:
-#         formats:
-#         - path: /v1/chat/completions
-#           type: Completions
-#         - path: /v1/messages
-#           type: Messages
-#         model: gemma4:e4b-mlx
-#       host: ollama.ollama.svc
-#       port: 11434
----
+
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -48,10 +18,11 @@ spec:
       kind: AgentgatewayBackend
       name: ollama
       namespace: agentgateway-system
-    # matches:
-    # - path:
-    #     type: PathPrefix
-    #     value: /v1
+      weight: 1
+    matches:
+    - path:
+        value: /v1
+        type: PathPrefix
   # - backendRefs:
   #   - group: ""
   #     kind: Service
@@ -60,19 +31,51 @@ spec:
   #     weight: 1
   #   matches:
   #   - path:
-  #       type: PathPrefix
   #       value: /ui
+  #       type: PathPrefix
+# ---
+# apiVersion: agentgateway.dev/v1alpha1
+# kind: AgentgatewayModel
+# metadata:
+#   name: ollama
+#   namespace: agentgateway-system
+# spec:
+#   baseURL: http://ollama.ollama.svc:11434
+#   parentRefs:
+#   - group: gateway.networking.k8s.io
+#     kind: ListenerSet
+#     name: agentgateway-proxy
+#     sectionName: http
+#   provider: Ollama
+# ---
+# apiVersion: agentgateway.dev/v1alpha1
+# kind: AgentgatewayBackend
+# metadata:
+#   name: ollama
+# spec:
+#   ai:
+#     provider:
+#       host: ollama.ollama.svc
+#       openai:
+#         model: gemma4:e4b-mlx
+#       path: /v1/chat/completions
+#       # pathPrefix: /v1
+#       port: 11434
 ---
 apiVersion: agentgateway.dev/v1alpha1
-kind: AgentgatewayModel
+kind: AgentgatewayBackend
 metadata:
   name: ollama
   namespace: agentgateway-system
 spec:
-  baseURL: http://ollama.ollama.svc:11434
-  parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: ListenerSet
-    name: agentgateway-proxy
-    sectionName: http
-  provider: Ollama
+  ai:
+    provider:
+      custom:
+        formats:
+        - path: /v1/chat/completions
+          type: Completions
+        - path: /v1/messages
+          type: Messages
+        model: gemma4:e4b-mlx
+      host: ollama.ollama.svc
+      port: 11434
