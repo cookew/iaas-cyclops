@@ -19,10 +19,10 @@ spec:
       name: ollama
       namespace: agentgateway-system
       weight: 1
-    matches:
-    - path:
-        value: /v1
-        type: PathPrefix
+    # matches:
+    # - path:
+    #     value: /v1
+    #     type: PathPrefix
   # - backendRefs:
   #   - group: ""
   #     kind: Service
@@ -47,35 +47,35 @@ spec:
 #     name: agentgateway-proxy
 #     sectionName: http
 #   provider: Ollama
-# ---
-# apiVersion: agentgateway.dev/v1alpha1
-# kind: AgentgatewayBackend
-# metadata:
-#   name: ollama
-# spec:
-#   ai:
-#     provider:
-#       host: ollama.ollama.svc
-#       openai:
-#         model: gemma4:e4b-mlx
-#       path: /v1/chat/completions
-#       # pathPrefix: /v1
-#       port: 11434
 ---
 apiVersion: agentgateway.dev/v1alpha1
 kind: AgentgatewayBackend
 metadata:
   name: ollama
-  namespace: agentgateway-system
 spec:
   ai:
     provider:
-      custom:
-        formats:
-        - path: /v1/chat/completions
-          type: Completions
-        - path: /v1/messages
-          type: Messages
-        model: gemma4:e4b-mlx
       host: ollama.ollama.svc
+      openai:
+        model: qwen3.5:4b
+      path: /v1/chat/completions
+      # pathPrefix: /v1
       port: 11434
+# ---
+# apiVersion: agentgateway.dev/v1alpha1
+# kind: AgentgatewayBackend
+# metadata:
+#   name: ollama
+#   namespace: agentgateway-system
+# spec:
+#   ai:
+#     provider:
+#       custom:
+#         formats:
+#         - path: /v1/chat/completions
+#           type: Completions
+#         - path: /v1/messages
+#           type: Messages
+#         model: gemma4:e4b-mlx
+#       host: ollama.ollama.svc
+#       port: 11434

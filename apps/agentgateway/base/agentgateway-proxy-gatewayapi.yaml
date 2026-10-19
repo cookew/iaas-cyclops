@@ -10,6 +10,11 @@ spec:
     namespaces:
       from: Same
   gatewayClassName: agentgateway
+  infrastructure:
+    parametersRef:
+      name: agentgateway-config
+      group: agentgateway.dev
+      kind: AgentgatewayParameters
   listeners:
   - allowedRoutes:
       namespaces:
