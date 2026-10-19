@@ -9,7 +9,9 @@ spec:
   logging:
      format: json
   service:
+    externalTrafficPolicy: Local
     spec:
+      externalTrafficPolicy: Local
       template:
         spec:
           externalTrafficPolicy: Local
