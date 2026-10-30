@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: repo-sync
+
+resources:
+- base/repo-sync-rpm-configmap.yaml
+- base/repo-sync-rpm-cronjob.yaml
+- base/repo-sync-pvc.yaml
+- base/repo-sync-nginx-configmap.yaml
+- base/repo-sync-nginx-deployment.yaml
+- base/repo-sync-nginx-ingress.yaml
+- base/repo-sync-nginx-service.yaml

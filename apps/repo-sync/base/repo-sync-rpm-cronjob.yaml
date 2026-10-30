@@ -1,0 +1,142 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  labels:
+    app.kubernetes.io/component: rpm
+    app.kubernetes.io/name: repo-sync-rpm
+    app.kubernetes.io/part-of: repo-sync
+  name: repo-sync-rpm
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  schedule: "0 2 * * 0"  # Runs every sunday at 2 AM
+  timeZone: "America/Denver"
+  successfulJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/component: rpm
+            app.kubernetes.io/name: repo-sync-rpm
+            app.kubernetes.io/part-of: repo-sync
+        spec:
+          automountServiceAccountToken: false
+          initContainers:
+          - command:
+            - bash
+            - -c
+            - "cp -v /usr/lib/sysimage/rpm/{.r*,*} /rpm/"
+            image: registry.wcooke.me:5000/repo-sync/rpm:0.0.1
+            imagePullPolicy: Always
+            name: rpm-db-permission-fix
+            resources:
+              limits:
+                cpu: 250m
+                memory: 64Mi
+              requests:
+                cpu: 50m
+                memory: 32Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                - ALL
+              readOnlyRootFilesystem: true
+            volumeMounts:
+            - mountPath: /rpm
+              name: usr-lib-sysimage-rpm
+              readOnly: false
+          containers:
+          - env:
+            - name: DISABLE_CRON
+              value: "true"
+            - name: MAX_PARALLEL_DOWNLOADS
+              value: "10"
+            - name: NOW
+              value: "true"
+            - name: LOCAL_REPO_MIRROR_URL
+              value: https://repo.apps.iaas.wcooke.me/rpm
+            image: registry.wcooke.me:5000/repo-sync/rpm:0.0.1
+            imagePullPolicy: Always
+            # livenessProbe:
+            #   httpGet:
+            #     path: /
+            #     port: 8080
+            #   initialDelaySeconds: 60
+            #   periodSeconds: 10
+            name: repo-sync-rpm
+            # ports:
+            # - containerPort: 8080
+            #   name: http
+            #   protocol: TCP
+            # readinessProbe:
+            #   httpGet:
+            #     path: /
+            #     port: 8080
+            #   initialDelaySeconds: 30
+            #   periodSeconds: 10
+            #   failureThreshold: 20
+            resources:
+              limits:
+                cpu: 2000m
+                memory: 256Mi
+              requests:
+                cpu: 1000m
+                memory: 128Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                - ALL
+              readOnlyRootFilesystem: true
+            volumeMounts:
+            - mountPath: /etc/yum.repos.d
+              name: etc-yum-repos-d
+              readOnly: false
+            - mountPath: /repo-mirror
+              name: repo-mirror
+              readOnly: false
+            - mountPath: /repos.d/rpm-repo
+              name: repos-d-rpm-repo
+              readOnly: true
+            - mountPath: /usr/lib/sysimage/rpm
+              name: usr-lib-sysimage-rpm
+              readOnly: false
+            - mountPath: /var/tmp
+              name: var-tmp
+              readOnly: false
+          nodeSelector:
+            kubernetes.io/os: linux
+          restartPolicy: Never
+          securityContext:
+            fsGroup: 1000
+            runAsGroup: 1000
+            runAsUser: 1000
+          terminationGracePeriodSeconds: 5
+          volumes:
+          - emptyDir:
+              sizeLimit: 2Mi
+            name: etc-yum-repos-d
+          - name: repo-mirror
+            persistentVolumeClaim:
+              claimName: repo-sync-repo-mirror
+          - configMap:
+              name: repo-sync-rpm
+            name: repos-d-rpm-repo
+          - emptyDir:
+              sizeLimit: 20Mi
+            name: usr-lib-sysimage-rpm
+          - ephemeral:
+              volumeClaimTemplate:
+                metadata:
+                  labels:
+                    type: my-frontend-volume
+                spec:
+                  accessModes:
+                  - ReadWriteOnce
+                  resources:
+                    requests:
+                      storage: 1Gi
+                  storageClassName: ceph-filesystem
+            name: var-tmp

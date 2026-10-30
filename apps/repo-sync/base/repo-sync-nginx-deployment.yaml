@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: nginx
+    app.kubernetes.io/name: repo-sync-nginx
+    app.kubernetes.io/part-of: repo-sync
+  name: repo-sync-nginx
+spec:
+  replicas: 2
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: nginx
+      app.kubernetes.io/name: repo-sync-nginx
+      app.kubernetes.io/part-of: repo-sync
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: nginx
+        app.kubernetes.io/name: repo-sync-nginx
+        app.kubernetes.io/part-of: repo-sync
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - env:
+        - name: TZ
+          value: "America/Denver"
+        image: nginx
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 10
+        name: nginx
+        ports:
+        - containerPort: 8080
+          name: http
+        resources:
+          limits:
+            cpu: 250m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 28Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+#          capabilities:
+#            drop:
+#            - ALL
+#          readOnlyRootFilesystem: true
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 2
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: nginx-config
+          readOnly: true
+        - mountPath: /repo-mirror
+          name: repo-mirror
+          readOnly: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 5
+      volumes:
+      - name: nginx-config
+        configMap:
+          items:
+          - key: default.conf
+            path: default.conf
+          name: repo-sync-nginx
+      - name: repo-mirror
+        persistentVolumeClaim:
+          claimName: repo-sync-repo-mirror

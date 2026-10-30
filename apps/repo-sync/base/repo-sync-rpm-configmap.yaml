@@ -1,0 +1,209 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/component: rpm
+    app.kubernetes.io/name: repo-sync-rpm
+    app.kubernetes.io/part-of: repo-sync
+  name: repo-sync-rpm
+data:
+  repos.repo: |
+    [centos-stream-9-x86_64-appstream]
+    name = CentOS Stream 9 x86_64 - AppStream
+    baseurl = https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official-SHA256
+    metadata_expire = 3600
+
+    [centos-stream-9-x86_64-baseos]
+    name = CentOS Stream 9 x86_64 - BaseOS
+    baseurl = https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official-SHA256
+    metadata_expire = 3600
+
+    [centos-stream-10-x86_64-appstream]
+    name = CentOS Stream 10 x86_64 - AppStream
+    baseurl = https://mirror.stream.centos.org/10-stream/AppStream/x86_64/os/
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official-SHA256
+    metadata_expire = 3600
+
+    [centos-stream-10-x86_64-baseos]
+    name = CentOS Stream 10 x86_64 - BaseOS
+    baseurl = https://mirror.stream.centos.org/10-stream/BaseOS/x86_64/os/
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official-SHA256
+    metadata_expire = 3600
+
+    [docker-ce-centos-9]
+    name = Docker CE Stable - x86_64
+    baseurl = https://download.docker.com/linux/centos/9/x86_64/stable
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://download.docker.com/linux/centos/gpg
+    metadata_expire = 3600
+
+    [docker-ce-centos-10]
+    name = Docker CE Stable - x86_64
+    baseurl = https://download.docker.com/linux/centos/10/x86_64/stable
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://download.docker.com/linux/centos/gpg
+    metadata_expire = 3600
+
+    [docker-ce-rhel-8]
+    name = Docker CE Stable - x86_64
+    baseurl = https://download.docker.com/linux/rhel/8/x86_64/stable
+    enabled = 0
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://download.docker.com/linux/rhel/gpg
+    metadata_expire = 3600
+
+    [docker-ce-rhel-9]
+    name = Docker CE Stable - x86_64
+    baseurl = https://download.docker.com/linux/rhel/9/x86_64/stable
+    enabled = 0
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://download.docker.com/linux/rhel/gpg
+    metadata_expire = 3600
+
+    [docker-ce-rhel-10]
+    name = Docker CE Stable - x86_64
+    baseurl = https://download.docker.com/linux/rhel/10/x86_64/stable
+    enabled = 0
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://download.docker.com/linux/rhel/gpg
+    metadata_expire = 3600
+
+    [docker-ce-rocky-8]
+    name = Docker CE Stable - x86_64
+    baseurl = https://download.docker.com/linux/rocky/8/x86_64/stable
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://download.docker.com/linux/rocky/gpg
+    metadata_expire = 3600
+
+    [docker-ce-rocky-9]
+    name = Docker CE Stable - x86_64
+    baseurl = https://download.docker.com/linux/rocky/9/x86_64/stable
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://download.docker.com/linux/rocky/gpg
+    metadata_expire = 3600
+
+    [docker-ce-rocky-10]
+    name = Docker CE Stable - x86_64
+    baseurl = https://download.docker.com/linux/rocky/10/x86_64/stable
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://download.docker.com/linux/rocky/gpg
+    metadata_expire = 3600
+
+    [elastic-9]
+    name = Elastic 9 repository
+    baseurl = https://artifacts.elastic.co/packages/9.x/yum
+    enabled = 0
+    enabled_metadata = 1
+    exclude = *i686*,*aarch64*
+    #exclude = *-8.[0-9].*,*-8.1[0-5].*,*i686*
+    gpgcheck = 1
+    gpgkey = https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    metadata_expire = 3600
+
+    [epel-8]
+    name = Extra Packages for Enterprise Linux 8 - x86_64
+    baseurl = https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/
+    enabled = 0
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8
+    metadata_expire = 3600
+
+    [epel-9]
+    name = Extra Packages for Enterprise Linux 9 - x86_64
+    baseurl = https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/
+    enabled = 0
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+    metadata_expire = 3600
+
+    [epel-10]
+    name = Extra Packages for Enterprise Linux 10 - x86_64
+    baseurl = https://dl.fedoraproject.org/pub/epel/10/Everything/x86_64/
+    enabled = 0
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-10
+    metadata_expire = 3600
+
+    [rocky-8-x86_64-appstream]
+    name = Rocky Linux 8 x86_64 - AppStream
+    baseurl = https://dl.rockylinux.org/pub/rocky/8/AppStream/x86_64/os/
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://dl.rockylinux.org/pub/rocky/8/AppStream/x86_64/os/RPM-GPG-KEY-rockyofficial
+    metadata_expire = 3600
+
+    [rocky-8-x86_64-baseos]
+    name = Rocky Linux 8 x86_64 - BaseOS
+    baseurl = https://dl.rockylinux.org/pub/rocky/8/BaseOS/x86_64/os/
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://dl.rockylinux.org/pub/rocky/8/BaseOS/x86_64/os/RPM-GPG-KEY-rockyofficial
+    metadata_expire = 3600
+
+    [rocky-9-x86_64-appstream]
+    name = Rocky Linux 9 x86_64 - AppStream
+    baseurl = https://dl.rockylinux.org/pub/rocky/9/AppStream/x86_64/os/
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://dl.rockylinux.org/pub/rocky/9/AppStream/x86_64/os/RPM-GPG-KEY-Rocky-9
+    metadata_expire = 3600
+
+    [rocky-9-x86_64-baseos]
+    name = Rocky Linux 9 x86_64 - BaseOS
+    baseurl = https://dl.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://dl.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/RPM-GPG-KEY-Rocky-9
+    metadata_expire = 3600
+
+    [rocky-10-x86_64-appstream]
+    name = Rocky Linux 10 x86_64 - AppStream
+    baseurl = https://dl.rockylinux.org/pub/rocky/10/AppStream/x86_64/os/
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://dl.rockylinux.org/pub/rocky/10/AppStream/x86_64/os/RPM-GPG-KEY-Rocky-10
+    metadata_expire = 3600
+
+    [rocky-10-x86_64-baseos]
+    name = Rocky Linux 10 x86_64 - BaseOS
+    baseurl = https://dl.rockylinux.org/pub/rocky/10/BaseOS/x86_64/os/
+    enabled = 1
+    enabled_metadata = 1
+    gpgcheck = 1
+    gpgkey = https://dl.rockylinux.org/pub/rocky/10/BaseOS/x86_64/os/RPM-GPG-KEY-Rocky-10
+    metadata_expire = 3600

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: nginx
+    app.kubernetes.io/name: repo-sync-nginx
+    app.kubernetes.io/part-of: repo-sync
+  name: repo-sync-nginx
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/component: nginx
+    app.kubernetes.io/name: repo-sync-nginx
+    app.kubernetes.io/part-of: repo-sync
+  type: ClusterIP
