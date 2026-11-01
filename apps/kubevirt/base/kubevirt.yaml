@@ -66,5 +66,6 @@ spec:
     vmStateStorageClass: ceph-filesystem
   customizeComponents: {}
   imagePullPolicy: IfNotPresent
+  monitorNamespace: kube-prometheus-stack
   serviceMonitorNamespace: kubevirt
   workloadUpdateStrategy: {}
