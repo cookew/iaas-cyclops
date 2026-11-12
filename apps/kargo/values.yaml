@@ -121,13 +121,13 @@ api:
 
   tls:
     ## @param api.tls.enabled Whether to enable TLS directly on the API server. This is helpful if you do not intend to use an ingress controller or if you require TLS end-to-end. All other settings in this section EXCEPT `terminatedUpstream` will be ignored when this is set to `false`.
-    enabled: true
+    enabled: false
     ## @param api.tls.selfSignedCert Whether to generate a self-signed certificate for use by the API server. If `true`, `cert-manager` CRDs **must** be present in the cluster. The chart will create and use its own namespaced `Issuer`. If `false`, a cert `Secret` with the name specified by `api.tls.secretName` **must** be provided in the same namespace as Kargo. The value in this field has no effect if `api.tls.enabled` is `false`.
     selfSignedCert: true
     ## @param api.tls.secretName Name of the cert `Secret` to use for the API server. When `api.tls.selfSignedCert` is `true`, this will be the name of the generated cert `Secret`. When `api.tls.selfSignedCert` is `false`, a cert `Secret` with this name **must** be provided in the same namespace as Kargo. The value in this field has no effect if `api.tls.enabled` is `false`.
     secretName: kargo-api-cert
     ## @param api.tls.terminatedUpstream Whether TLS is terminated upstream, i.e. a load balancer, reverse-proxy, or an `Ingress` controller using a single wildcard cert is terminating it. Setting this to `true` forces all API server URLs to use HTTPS even if the `Ingress` (if applicable) or API server itself are listening for plain HTTP requests.
-    terminatedUpstream: false
+    terminatedUpstream: true
 
   ingress:
     enabled: true
