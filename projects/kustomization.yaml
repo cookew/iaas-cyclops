@@ -6,7 +6,7 @@ resources:
 - core-appproject.yaml
 - core-apps/agentgateway.yaml
 - core-apps/cdi.yaml
-# - core-apps/kargo.yaml
+- core-apps/kargo.yaml
 # - core-apps/nifi.yaml
 # - core-apps/strimzi.yaml
 
