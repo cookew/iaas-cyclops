@@ -5,7 +5,7 @@ metadata:
 spec:
   deletionPolicy: Delete
   forProvider:
-    accessType: public
+    accessType: PUBLIC
     baseUrl: /
     clientId: kargo
     directAccessGrantsEnabled: false
