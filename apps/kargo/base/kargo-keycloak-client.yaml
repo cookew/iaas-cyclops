@@ -75,7 +75,6 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   labels:
     keycloak/realm: iaas
-    keycloak/group-admins: ""
   name: kargo-project-creator
 spec:
   deletionPolicy: Delete
