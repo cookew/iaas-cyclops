@@ -4,7 +4,7 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   name: kargo
-  namespace: argocd
+  namespace: kargo
 spec:
   destination:
     name: in-cluster
@@ -21,7 +21,7 @@ spec:
     repoURL: git@github.com:cookew/iaas-cyclops.git
     targetRevision: main
   - kustomize: {}
-    path: apps/agentgateway
+    path: apps/kargo
     repoURL: git@github.com:cookew/iaas-cyclops.git
     targetRevision: main
   syncPolicy:
