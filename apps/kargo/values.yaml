@@ -56,7 +56,6 @@ api:
   requestLog:
     allEnabled: true
     sourceIPEnabled: true
-
   adminAccount:
     enabled: false
 
@@ -113,6 +112,16 @@ api:
         key:
       ## @param api.rollouts.logs.httpHeaders Specifies HTTP headers to include in the HTTP GET request for log retrieval. These are typically used for authentication. The header values support expressions offset by ${{ }}, with the same variables documented for urlTemplate pre-defined and injected with values.
       httpHeaders: {}
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: ca-all
+    name: ca
+  volumeMounts:
+  - mountPath: /etc/ssl/certs/ca-certificates.crt
+    name: ca
+    readOnly: true
+    subPath: ca-certificates.crt
 
   cabundle:
     ## @param api.cabundle.configMapName Specifies the name of an optional ConfigMap containing CA certs that is managed "out of band." Values in the ConfigMap named here should each contain a single PEM-encoded CA cert. If secretName is also defined, it will take precedence over this field.
