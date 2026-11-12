@@ -21,6 +21,8 @@ spec:
     - /
     validRedirectUris:
     - /*
+    webOrigins:
+    - "*"
   providerConfigRef:
     name: keycloak-iaas
 ---
