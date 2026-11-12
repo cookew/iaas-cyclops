@@ -4,7 +4,7 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   name: kargo
-  namespace: kargo
+  namespace: argocd
 spec:
   destination:
     name: in-cluster
