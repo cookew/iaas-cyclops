@@ -8,11 +8,6 @@ spec:
     accessType: public
     baseUrl: /
     clientId: kargo
-    # clientSecretSecretRef:
-    #   key: client-secret
-    #   name: kargo-keycloak-client
-    #   namespace: kargo
-    # directAccessGrantsEnabled: true
     name: Kargo
     pkceCodeChallengeMethod: S256
     realmIdRef:
