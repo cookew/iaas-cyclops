@@ -9,7 +9,7 @@ spec:
   destination:
     name: in-cluster
     namespace: kargo
-  project: default
+  project: core
   sources:
   - repoURL: ghcr.io/akuity/kargo-charts
     chart: kargo
