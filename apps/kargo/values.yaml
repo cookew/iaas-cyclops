@@ -1,0 +1,233 @@
+# https://github.com/akuity/kargo/blob/main/charts/kargo/values.yaml
+
+argocd:
+  ## @param argocd.dataPlane.install Coarse switch governing Argo CD data-plane resources — the RBAC granting the controller access to Argo CD `Application` resources. Separate from `dataPlane.install` because Argo CD may reside in a different cluster than Kargo's own data plane.
+  dataPlane:
+    install: true
+
+    kargoController:
+      ## @param argocd.dataPlane.kargoController.install Coarse switch governing whether per-Kargo-controller Argo CD data-plane resources are rendered.
+      install: true
+
+crds:
+  ## @param crds.install Indicates if Custom Resource Definitions should be installed and upgraded as part of the release. If set to `false`, the CRDs will only be installed if they do not already exist.
+  install: true
+  ## @param crds.keep Indicates if Custom Resource Definitions should be kept when a release is uninstalled.
+  keep: true
+
+## @section RBAC
+rbac:
+  ## @param rbac.installClusterRoles Indicates if `ClusterRoles` should be installed.
+  installClusterRoles: true
+  ## @param rbac.installClusterRoleBindings Indicates if `ClusterRoleBindings` should be installed.
+  installClusterRoleBindings: true
+
+## @section KubeConfigs
+## @descriptionStart
+## Optionally point to Kubernetes Secrets containing kubeconfig for:
+##
+## 1. A remote cluster hosting Kargo resources
+##
+## 2. A remote cluster hosting Argo CD resources
+##
+## This flexibility is useful for various advanced use cases -- especially
+## topologies where Kargo data may be sharded, with Kargo controllers distributed
+## across many clusters. Either or both of these configurations may be the same.
+## In the average case, these should all be left unspecified. All that are
+## unspecified will default to configuration for the cluster in which the Kargo
+## controller is running.
+## @descriptionEnd
+## @skip kubeconfigSecrets
+kubeconfigSecrets: {}
+  ## @param kubeconfigSecrets.kargo [nullable] Kubernetes `Secret` name containing kubeconfig for a remote Kubernetes cluster hosting Kargo resources. Used by all Kargo components.
+  # kargo: ""
+  ## @param kubeconfigSecrets.argocd [nullable] Kubernetes `Secret` name containing kubeconfig for a remote Kubernetes cluster hosting Argo CD resources. Used by Kargo controller(s) only.
+  # argocd: ""
+
+api:
+  revisionHistoryLimit: 0
+  host: kargo.apps.iaas.wcooke.me
+  logFormat: JSON
+  secretManagementEnabled: true
+  ## @param api.trustedProxies IP addresses or CIDRs of proxies (e.g. an ingress controller or load balancer) in front of the API server. When a request arrives from one of these, the client's IP address is taken from `api.clientIPHeader`, or else from the rightmost `X-Forwarded-For` entry that is not a trusted proxy. When empty, the client's IP address is always the address the request arrived from.
+  trustedProxies: []
+  ## @param api.clientIPHeader A header that every trusted proxy sets to the client's IP address, e.g. `CF-Connecting-IP` or `X-Real-IP`. Only honored on requests arriving from a trusted proxy.
+  clientIPHeader: ""
+  requestLog:
+    allEnabled: true
+    sourceIPEnabled: true
+
+  adminAccount:
+    enabled: false
+
+  oidc:
+    ## @param api.oidc.enabled Whether to enable authentication using Open ID Connect.
+    ## NOTE: Kargo uses the Authorization Code Flow with Proof Key for Code Exchange (PKCE) and does not require a client secret. Some OIDC identity providers may not support this. If yours does not, enabling the optional Dex server and configuring its connectors can adapt most identity providers to work this way.
+    ## Note also: The PKCE code challenge used by Kargo is SHA256 hashed.
+    ## For more information about PKCE, please visit: https://oauth.net/2/pkce/
+    enabled: true
+    ## @param api.oidc.issuerURL The issuer URL for the identity provider. If Dex is enabled, this value will be ignored and the issuer URL will be automatically configured. If Dex is not enabled, this should be set to the issuer URL provided to you by your identity provider.
+    issuerURL: https://keycloak.apps.iaas.wcooke.me/realms/iaas
+    ## @param api.oidc.clientID The client ID for the OIDC client. If Dex is enabled, this value will be ignored and the client ID will be automatically configured. If Dex is not enabled, this should be set to the client ID provided to you by your identity provider.
+    clientID: kargo
+    ## @param api.oidc.cliClientID The client ID for the OIDC client used by CLI (optional). Needed by some OIDC providers (such as Dex) that require a separate Client ID for web app login vs. CLI login (`http://localhost`). If Dex is enabled, this value will be ignored and cli client ID will be automatically configured. If Dex is not enabled, and a different client app is configured for localhost CLI login, this should be the client ID configured in the IdP.
+    cliClientID:
+    ## @param api.oidc.additionalScopes The additional scopes to send to the OIDC provider. This should be set to the scopes you wish to be provided to your identity provider from clients of Kargo, the scopes openid, profile and email are always requested and don't need to be added, this value is intended for any additional ones you require.
+    additionalScopes:
+    - groups
+    usernameClaim: preferred_username
+    admins:
+      claims:
+        groups:
+        - kargo-admin
+    projectCreators:
+      claims:
+        groups:
+        - kargo-project-creator
+    users:
+      claims:
+        groups:
+        - kargo-user
+    viewers:
+      claims:
+        groups:
+        - kargo-viewer
+
+  argocd:
+    ## @param api.argocd.urls Mapping of Argo CD shards names to URLs to support deep links to Argo CD URLs. If sharding is not used, map the empty string to the single Argo CD URL.
+    urls:
+      "": https://argocd.apps.iaas.wcooke.me
+
+  rollouts:
+    ## @param api.rollouts.integrationEnabled Specifies whether Argo Rollouts integration is enabled. When not enabled, the API server will not be capable of creating/updating/applying AnalysesTemplate resources in the Kargo control plane. When enabled, the API server will perform a sanity check at startup. If Argo Rollouts CRDs are not found, the API server will proceed as if this integration had been explicitly disabled. Explicitly disabling is still preferable if this integration is not desired, as it will grant fewer permissions to the API server.
+    integrationEnabled: false
+    logs:
+      enabled: true
+      ## @param api.rollouts.logs.urlTemplate Instructs Kargo on how to construct a URL for the retrieval of relevant logs via HTTP GET. Expressions offset by ${{ }} are supported with the following variables pre-defined and injected with values: project (name), namespace (always equal to the Project's name), stage (name), analysisRun (name), metricName (name of the JobMetric), jobNamespace (namespace of the Job; may be different that the Project namespace as the Job may actually execute in a different cluster), jobName, container (name; since a Pod associated with a Job could have more than one). Example: "https://logs.kargo.example.com/${{project}}/${{analysisRun}}/${{jobName}}/${{container}}".
+      urlTemplate: ""
+      tokenSecret:
+        ## @param api.rollouts.logs.tokenSecret.name specifies the name of a Kubernetes Secret managed "out of band" that contains a token usable for accessing job metric logs.
+        name:
+        ## @param api.rollouts.logs.tokenSecret.key specifies the key in a Kubernetes Secret (named by name) that is managed "out of band" and contains a token usable for accessing job metric logs.
+        key:
+      ## @param api.rollouts.logs.httpHeaders Specifies HTTP headers to include in the HTTP GET request for log retrieval. These are typically used for authentication. The header values support expressions offset by ${{ }}, with the same variables documented for urlTemplate pre-defined and injected with values.
+      httpHeaders: {}
+
+  cabundle:
+    ## @param api.cabundle.configMapName Specifies the name of an optional ConfigMap containing CA certs that is managed "out of band." Values in the ConfigMap named here should each contain a single PEM-encoded CA cert. If secretName is also defined, it will take precedence over this field.
+    configMapName: ""
+    ## @param api.cabundle.secretName Specifies the name of an optional Secret containing CA certs that is managed "out of band." Values in the Secret named here should each contain a single PEM-encoded CA cert. If defined, the value of this field takes precedence over any in configMapName.
+    secretName: ""
+
+  tls:
+    ## @param api.tls.enabled Whether to enable TLS directly on the API server. This is helpful if you do not intend to use an ingress controller or if you require TLS end-to-end. All other settings in this section EXCEPT `terminatedUpstream` will be ignored when this is set to `false`.
+    enabled: true
+    ## @param api.tls.selfSignedCert Whether to generate a self-signed certificate for use by the API server. If `true`, `cert-manager` CRDs **must** be present in the cluster. The chart will create and use its own namespaced `Issuer`. If `false`, a cert `Secret` with the name specified by `api.tls.secretName` **must** be provided in the same namespace as Kargo. The value in this field has no effect if `api.tls.enabled` is `false`.
+    selfSignedCert: true
+    ## @param api.tls.secretName Name of the cert `Secret` to use for the API server. When `api.tls.selfSignedCert` is `true`, this will be the name of the generated cert `Secret`. When `api.tls.selfSignedCert` is `false`, a cert `Secret` with this name **must** be provided in the same namespace as Kargo. The value in this field has no effect if `api.tls.enabled` is `false`.
+    secretName: kargo-api-cert
+    ## @param api.tls.terminatedUpstream Whether TLS is terminated upstream, i.e. a load balancer, reverse-proxy, or an `Ingress` controller using a single wildcard cert is terminating it. Setting this to `true` forces all API server URLs to use HTTPS even if the `Ingress` (if applicable) or API server itself are listening for plain HTTP requests.
+    terminatedUpstream: false
+
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: iaas-wcooke-me
+      # external-dns.alpha.kubernetes.io/hostname: argocd.apps.iaas.wcooke.me
+      forecastle.stakater.com/appName: Kargo
+      forecastle.stakater.com/expose: "true"
+      forecastle.stakater.com/group: Kubernetes
+      forecastle.stakater.com/icon: https://kargo.apps.iaas.wcooke.me/assets/images/logo.png
+      forecastle.stakater.com/network-restricted: "true"
+    ingressClassName: cilium
+    tls:
+      enabled: true
+      selfSignedCert: false
+      secretName: kargo-api-ingress-cert
+    pathType: Prefix
+
+controller:
+  revisionHistoryLimit: 0
+  kubeconfigSecrets: {}
+    ## @param controller.kubeconfigSecrets.kargo [nullable] Per-component override for `kubeconfigSecrets.kargo`. Lets the controller mount its own kubeconfig secret rather than the shared one. Falls back to the chart-level value when unset.
+    # kargo: ""
+    ## @param controller.kubeconfigSecrets.argocd [nullable] Per-component override for `kubeconfigSecrets.argocd`. Falls back to the chart-level value when unset.
+    # argocd: ""
+  logFormat: JSON
+
+  ## All settings relating to the use of Argo Rollouts AnalysisTemplates and
+  ## AnalysisRuns as a means of verifying Stages after a Promotion.
+  rollouts:
+    ## @param controller.rollouts.integrationEnabled Specifies whether Argo Rollouts integration is enabled. When not enabled, the controller will not reconcile Argo Rollouts AnalysisRun resources and attempts to verify Stages via Analysis will fail. When enabled, the controller will perform a sanity check at startup. If Argo Rollouts CRDs are not found, the controller will proceed as if this integration had been explicitly disabled. Explicitly disabling is still preferable if this integration is not desired, as it will grant fewer permissions to the controller.
+    integrationEnabled: false
+    ## @param controller.rollouts.controllerInstanceID Specifies a cluster on which Jobs corresponding to an AnalysisRun (used for Freight/Stage verification purposes) will be executed. This is useful in cases where the cluster hosting the Kargo control plane is not a suitable environment for executing user-defined logic. Kargo will use this as the value of the rgo-rollouts.argoproj.io/controller-instance-id label when creating AnalysisRuns. When this is left empty/undefined, no such label will be added to AnalysisRuns.
+    controllerInstanceID: ""
+
+  cabundle:
+    ## @param controller.cabundle.configMapName Specifies the name of an optional ConfigMap containing CA certs that is managed "out of band." Values in the ConfigMap named here should each contain a single PEM-encoded CA cert. If secretName is also defined, it will take precedence over this field.
+    configMapName: ""
+    ## @param controller.cabundle.secretName Specifies the name of an optional Secret containing CA certs that is managed "out of band." Values in the Secret named here should each contain a single PEM-encoded CA cert. If defined, the value of this field takes precedence over any in configMapName.
+    secretName: ""
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+garbageCollector:
+  kubeconfigSecrets: {}
+    ## @param garbageCollector.kubeconfigSecrets.kargo [nullable] Per-component override for `kubeconfigSecrets.kargo`. Lets the garbage collector mount its own kubeconfig secret rather than the shared one. Falls back to the chart-level value when unset.
+    # kargo: ""
+  logFormat: JSON
+
+externalWebhooksServer:
+  revisionHistoryLimit: 0
+  logFormat: JSON
+  tls:
+    ## @param externalWebhooksServer.tls.enabled Whether to enable TLS directly on the external webhook server. This is helpful if you do not intend to use an ingress controller or if you require TLS end-to-end. All other settings in this section EXCEPT `terminatedUpstream` will be ignored when this is set to `false`.
+    enabled: true
+    ## @param externalWebhooksServer.tls.selfSignedCert Whether to generate a self-signed certificate for use by the external webhooks server. If `true`, `cert-manager` CRDs **must** be present in the cluster. The chart will create and use its own namespaced `Issuer`. If `false`, a cert `Secret` with the name specified by `externalWebhooksServer.tls.secretName` **must** be provided in the same namespace as Kargo. The value in this field has no effect if `externalWebhooksServer.tls.enabled` is `false`.
+    selfSignedCert: true
+    ## @param externalWebhooksServer.tls.secretName Name of the cert `Secret` to use for the external webhooks server. When `externalWebhooksServer.tls.selfSignedCert` is `true`, this will be the name of the generated cert `Secret`. When `externalWebhooksServer.tls.selfSignedCert` is `false`, a cert `Secret` with this name **must** be provided in the same namespace as Kargo. The value in this field has no effect if `externalWebhooksServer.tls.enabled` is `false`.
+    secretName: kargo-external-webhooks-server-cert
+    ## @param externalWebhooksServer.tls.terminatedUpstream Whether TLS is terminated upstream, i.e. a load balancer, reverse-proxy, or an `Ingress` controller using a single wildcard cert is terminating it. Setting this to `true` forces all external webhook server URLs to use HTTPS even if the `Ingress` (if applicable) or external webhook server itself are listening for plain HTTP requests.
+    terminatedUpstream: false
+
+managementController:
+  revisionHistoryLimit: 0
+  ## @skip managementController.kubeconfigSecrets
+  kubeconfigSecrets: {}
+    ## @param managementController.kubeconfigSecrets.kargo [nullable] Per-component override for `kubeconfigSecrets.kargo`. Lets the management controller mount its own kubeconfig secret rather than the shared one. Falls back to the chart-level value when unset.
+    # kargo: ""
+  logFormat: JSON
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+webhooksServer:
+  revisionHistoryLimit: 0
+  logFormat: JSON
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  tls:
+    ## @param webhooksServer.tls.selfSignedCert Whether to generate a self-signed certificate for the (internal) webhooks server. If `true`, `cert-manager` CRDs **must** be present in the cluster. The chart will create and use its own namespaced `Issuer`. If `false`, a cert `Secret` with the name specified by `webhooksServer.tls.secretName` **must** be provided in the same namespace as Kargo. If that cert is not already trusted by the Kubernetes API server, you must specify a value for `webhooksServer.tls.caBundle`. This is why it is strongly recommended to leave this setting as `true`. There is no provision for running the webhooks server without TLS because the Kubernetes API server will not communicate with non-TLS endpoints.
+    selfSignedCert: true
+    ## @param webhooksServer.tls.secretName Name of the cert `Secret` for use with the (internal) webhooks server. When `webhooksServer.tls.selfSignedCert` is `true`, this will be the name of the generated cert `Secret`. When `webhooksServer.tls.selfSignedCert` is `false`, a cert `Secret` with this name **must** be provided in the same namespace as Kargo. There is no provision for running the webhooks server without TLS because the Kubernetes API server will not communicate with non TLS-endpoints.
+    secretName: kargo-webhooks-server-cert
+    ## @param webhooksServer.tls.caBundle PEM-encoded TLS certificates for certificate authorities to trust when `webhooksServer.tls.selfSignedCert` is `false`. If the cert has been signed by an authority already trusted by the Kubernetes API server, this setting can be ignored.
+    caBundle: ""
+    # caBundle: |
+    #   -----BEGIN CERTIFICATE-----
+    #   ...
+    #   -----END CERTIFICATE-----
+
+database:
+  migrations:
+    logFormat: JSON
+  postgres:
+    enabled: false
+  external:
+    secretName: kargo-pg-cluster-app
+    secretKey: fqdn-uri

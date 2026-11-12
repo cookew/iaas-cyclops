@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  name: kargo
+  namespace: kargo
+spec:
+  destination:
+    name: in-cluster
+    namespace: kargo
+  project: default
+  sources:
+  - repoURL: ghcr.io/akuity/kargo-charts
+    chart: kargo
+    targetRevision: 1.12.5
+    helm:
+      valueFiles:
+      - $config/apps/kargo/values.yaml
+  - ref: config
+    repoURL: git@github.com:cookew/iaas-cyclops.git
+    targetRevision: main
+  - kustomize: {}
+    path: apps/agentgateway
+    repoURL: git@github.com:cookew/iaas-cyclops.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      enabled: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - Replace=false
+    - ServerSideApply=true

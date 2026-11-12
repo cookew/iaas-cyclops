@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: kargo
+
+resources:
+- base/kargo-keycloak-client.yaml
+- base/kargo-pg-cluster.yaml
+
