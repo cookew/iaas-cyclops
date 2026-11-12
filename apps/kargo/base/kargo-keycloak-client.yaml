@@ -15,6 +15,7 @@ spec:
     realmIdRef:
       name: iaas
     rootUrl: https://kargo.apps.iaas.wcooke.me
+    serviceAccountsEnabled: false
     standardFlowEnabled: true
     validPostLogoutRedirectUris:
     - /
