@@ -137,7 +137,7 @@ api:
       forecastle.stakater.com/appName: Kargo
       forecastle.stakater.com/expose: "true"
       forecastle.stakater.com/group: Kubernetes
-      forecastle.stakater.com/icon: https://kargo.apps.iaas.wcooke.me/assets/images/logo.png
+      forecastle.stakater.com/icon: https://kargo.apps.iaas.wcooke.me/kargo-logo-head-only.png
       forecastle.stakater.com/network-restricted: "true"
     ingressClassName: cilium
     tls:
