@@ -58,6 +58,7 @@ envoy:
       - BPF
       - PERFMON
       keepCapNetBindService: true
+  xdsMode: ads
 
 gatewayAPI:
   enabled: true
