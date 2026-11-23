@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: repo-sync
 
 resources:
-- base/repo-sync-iso-configmap.yaml
+- base/repo-sync-iso-cronjob.yaml
 - base/repo-sync-nginx-certificate.yaml
 - base/repo-sync-nginx-configmap.yaml
 - base/repo-sync-nginx-deployment.yaml

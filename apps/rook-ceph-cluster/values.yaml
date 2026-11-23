@@ -410,13 +410,13 @@ cephECBlockPools:
         codingChunks: 1
       failureDomain: host
     enableRBDStats: true
-    # parameters:
-    #   # Enable this with ceph tentacle, v20
-    #   allow_ec_optimizations: "true"
     metadataPool:
       deviceClass: ssd
       replicated:
         size: 3
+    # parameters:
+    #   # Enable this with ceph tentacle, v20
+    #   allow_ec_optimizations: "true"
   parameters:
     clusterID: rook-ceph-cluster
     imageFeatures: layering,fast-diff,object-map,deep-flatten,exclusive-lock
