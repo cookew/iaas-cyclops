@@ -19,7 +19,7 @@ spec:
           service:
             name: repo-sync-nginx
             port:
-              name: http
+              name: https
         path: /
         pathType: Prefix
   tls:

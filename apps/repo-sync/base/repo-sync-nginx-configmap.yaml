@@ -12,19 +12,38 @@ data:
       default_type  text/plain;
       listen        8080;
       listen        [::]:8080;
-      server_name   localhost;
+      server_name   repos;
       location / {
-        # index                 index.html index.htm;
         autoindex             on;
         autoindex_exact_size  on;
         autoindex_format      html;
         autoindex_localtime   on;
         root                  /repo-mirror;
-
       }
       location = /healthz {
         access_log  off;
         add_header  Content-Type text/plain;
         return      200 "healthy\n";
+      }
+    }
+
+    server {
+      add_header                Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+      default_type              text/plain;
+      listen                    8443 ssl http2;
+      listen                    [::]:8443 ssl http2;
+      ssl_certificate           /certs/tls.crt;
+      ssl_certificate_key       /certs/tls.key;
+      ssl_ciphers               HIGH:!aNULL:!MD5;
+      ssl_prefer_server_ciphers on;
+      ssl_protocols             TLSv1.2 TLSv1.3;
+      server_name               repos;
+
+      location / {
+        autoindex             on;
+        autoindex_exact_size  on;
+        autoindex_format      html;
+        autoindex_localtime   on;
+        root                  /repo-mirror;
       }
     }

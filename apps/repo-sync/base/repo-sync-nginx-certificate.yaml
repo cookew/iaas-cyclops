@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: repo-sync-nginx
+spec:
+  commonName: repo-sync-nginx
+  dnsNames:
+  - repo-sync-nginx
+  - repo-sync-nginx.repo-sync.svc
+  - repo-sync-nginx.repo-sync.svc.cluster.local
+  - repo.apps.iaas.wcooke.me
+  - ipxe
+  duration: 960h
+  isCA: false
+  issuerRef:
+    kind: ClusterIssuer
+    name: iaas-wcooke-me
+  secretName: repo-sync-nginx
+  usages:
+  - client auth
+  - server auth
