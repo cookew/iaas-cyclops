@@ -22,101 +22,101 @@ spec:
             app.kubernetes.io/part-of: repo-sync
         spec:
           automountServiceAccountToken: false
-          args:
-          - |
-            #!/bin/bash
-
-            set -euo pipefail
-
-            ARCH="x86_64"
-            ISO_FLAVOR="minimal" # Options: minimal, dvd, boot
-            DOWNLOAD_DIR="/var/tmp"
-            DEST_DIR="/repo-mirror/iso"
-            MAJOR_VERSIONS=(8 9 10)
-            BASE_URL="https://download.rockylinux.org/pub/rocky"
-            DIST_FLAVOR_LOWER="rocky"
-            DIST_FLAVOR_CAPITALIZED="Rocky"
-
-            if [ ! -d "${DEST_DIR}" ]
-            then
-              mkdir -p "${DEST_DIR}"
-            fi
-
-            if [ ! -d "${DOWNLOAD_DIR}" ]
-            then
-              mkdir -p "${DOWNLOAD_DIR}"
-            fi
-            cd "${DOWNLOAD_DIR}"
-
-            for ver in "${MAJOR_VERSIONS[@]}"
-            do
-              DIR_URL="${BASE_URL}/${ver}/isos/${ARCH}"
-              echo "Checking ${DIST_FLAVOR_CAPITALIZED} ${ver} (${ARCH} - ${ISO_FLAVOR})..."
-
-              # Fetch directory listing and extract the exact ISO filename
-              # Matches patterns like ${DIST_FLAVOR_CAPITALIZED}-9.9-x86_64-minimal.iso or ${DIST_FLAVOR_CAPITALIZED}-10.3-x86_64-minimal.iso
-              REMOTE_ISO=$(curl -sL "${DIR_URL}/" \
-                | grep -oE "${DIST_FLAVOR_CAPITALIZED}-${ver}\.[0-9]+-${ARCH}-${ISO_FLAVOR}\.iso" \
-                | head -n 1 || true)
-
-              if [[ -z "${REMOTE_ISO}" ]]
-              then
-                echo "  [ERROR] Could not determine latest ISO filename from ${DIR_URL}/"
-                continue
-              fi
-
-              echo "  Latest online: ${REMOTE_ISO}"
-
-              # Check if the exact versioned filename already exists locally
-              if [[ -f "${DEST_DIR}/${REMOTE_ISO}" ]]
-              then
-                echo "  [SKIP] ${REMOTE_ISO} is already downloaded and up to date."
-                continue
-              fi
-
-              echo "  [DOWNLOADING] Newer ISO detected! Fetching ${REMOTE_ISO}..."
-              curl -fL -o "${DOWNLOAD_DIR}/${REMOTE_ISO}" "${DIR_URL}/${REMOTE_ISO}"
-              echo "  [DOWNLOADING] Completed fetching ${REMOTE_ISO}."
-
-              echo "  [VERIFYING] Checking SHA256 checksum..."
-              curl -sL -o "${DOWNLOAD_DIR}/CHECKSUM-${ver}" "${DIR_URL}/CHECKSUM"
-              if grep -q "${REMOTE_ISO}" "${DOWNLOAD_DIR}/CHECKSUM-${ver}"
-              then
-                echo "  [VERIFYING] Found checksum entry for ${REMOTE_ISO}, verifying..."
-                grep "${REMOTE_ISO}" "${DOWNLOAD_DIR}/CHECKSUM-${ver}" | sha256sum -c -
-              else
-                echo "  [WARN] Checksum entry not found for ${REMOTE_ISO}"
-                continue
-              fi
-
-              mv "${DOWNLOAD_DIR}/CHECKSUM-${ver}" "${DEST_DIR}/CHECKSUM-${ver}"
-              cp "${DOWNLOAD_DIR}/${REMOTE_ISO}" "${DEST_DIR}/${REMOTE_ISO}"
-              echo "  [CLEANUP] Removing older ISOs for ${DIST_FLAVOR_CAPITALIZED} ${ver} (${ARCH} - ${ISO_FLAVOR})..."
-              find "${DEST_DIR}" -maxdepth 1 -name "${DIST_FLAVOR_CAPITALIZED}-${ver}.*-${ARCH}-${ISO_FLAVOR}.iso" ! -name "${REMOTE_ISO}" -delete
-
-              if [ -d "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}" ]
-              then
-                echo "  [CLEANUP] Removing existing directory ${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}..."
-                rm -rf "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
-              fi
-
-              echo "  [CLEANUP] Preparing directory ${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver} for extraction..."
-              mkdir -p "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
-
-              echo "  [EXTRACTING] Extracting ${REMOTE_ISO} to ${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}..."
-              bsdtar -xf "${DEST_DIR}/${REMOTE_ISO}" -C "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
-
-              echo "  [LINKING] Creating symlinks for AppStream and BaseOS..."
-              ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-appstream/ "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}/AppStream"
-              ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-baseos/ "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}/BaseOS"
-
-              echo "  [DONE] ${DIST_FLAVOR_CAPITALIZED} ${ver} (${ARCH} - ${ISO_FLAVOR}) sync complete."
-            done
-          command:
-          - /bin/bash
-          - -c
           containers:
-          - image: registry.wcooke.me:5000/repo-sync/rpm:0.0.1
+          - args:
+            - |
+              #!/bin/bash
+
+              set -euo pipefail
+
+              ARCH="x86_64"
+              ISO_FLAVOR="minimal" # Options: minimal, dvd, boot
+              DOWNLOAD_DIR="/var/tmp"
+              DEST_DIR="/repo-mirror/iso"
+              MAJOR_VERSIONS=(8 9 10)
+              BASE_URL="https://download.rockylinux.org/pub/rocky"
+              DIST_FLAVOR_LOWER="rocky"
+              DIST_FLAVOR_CAPITALIZED="Rocky"
+
+              if [ ! -d "${DEST_DIR}" ]
+              then
+                mkdir -p "${DEST_DIR}"
+              fi
+
+              if [ ! -d "${DOWNLOAD_DIR}" ]
+              then
+                mkdir -p "${DOWNLOAD_DIR}"
+              fi
+              cd "${DOWNLOAD_DIR}"
+
+              for ver in "${MAJOR_VERSIONS[@]}"
+              do
+                DIR_URL="${BASE_URL}/${ver}/isos/${ARCH}"
+                echo "Checking ${DIST_FLAVOR_CAPITALIZED} ${ver} (${ARCH} - ${ISO_FLAVOR})..."
+
+                # Fetch directory listing and extract the exact ISO filename
+                # Matches patterns like ${DIST_FLAVOR_CAPITALIZED}-9.9-x86_64-minimal.iso or ${DIST_FLAVOR_CAPITALIZED}-10.3-x86_64-minimal.iso
+                REMOTE_ISO=$(curl -sL "${DIR_URL}/" \
+                  | grep -oE "${DIST_FLAVOR_CAPITALIZED}-${ver}\.[0-9]+-${ARCH}-${ISO_FLAVOR}\.iso" \
+                  | head -n 1 || true)
+
+                if [[ -z "${REMOTE_ISO}" ]]
+                then
+                  echo "  [ERROR] Could not determine latest ISO filename from ${DIR_URL}/"
+                  continue
+                fi
+
+                echo "  Latest online: ${REMOTE_ISO}"
+
+                # Check if the exact versioned filename already exists locally
+                if [[ -f "${DEST_DIR}/${REMOTE_ISO}" ]]
+                then
+                  echo "  [SKIP] ${REMOTE_ISO} is already downloaded and up to date."
+                  continue
+                fi
+
+                echo "  [DOWNLOADING] Newer ISO detected! Fetching ${REMOTE_ISO}..."
+                curl -fL -o "${DOWNLOAD_DIR}/${REMOTE_ISO}" "${DIR_URL}/${REMOTE_ISO}"
+                echo "  [DOWNLOADING] Completed fetching ${REMOTE_ISO}."
+
+                echo "  [VERIFYING] Checking SHA256 checksum..."
+                curl -sL -o "${DOWNLOAD_DIR}/CHECKSUM-${ver}" "${DIR_URL}/CHECKSUM"
+                if grep -q "${REMOTE_ISO}" "${DOWNLOAD_DIR}/CHECKSUM-${ver}"
+                then
+                  echo "  [VERIFYING] Found checksum entry for ${REMOTE_ISO}, verifying..."
+                  grep "${REMOTE_ISO}" "${DOWNLOAD_DIR}/CHECKSUM-${ver}" | sha256sum -c -
+                else
+                  echo "  [WARN] Checksum entry not found for ${REMOTE_ISO}"
+                  continue
+                fi
+
+                mv "${DOWNLOAD_DIR}/CHECKSUM-${ver}" "${DEST_DIR}/CHECKSUM-${ver}"
+                cp "${DOWNLOAD_DIR}/${REMOTE_ISO}" "${DEST_DIR}/${REMOTE_ISO}"
+                echo "  [CLEANUP] Removing older ISOs for ${DIST_FLAVOR_CAPITALIZED} ${ver} (${ARCH} - ${ISO_FLAVOR})..."
+                find "${DEST_DIR}" -maxdepth 1 -name "${DIST_FLAVOR_CAPITALIZED}-${ver}.*-${ARCH}-${ISO_FLAVOR}.iso" ! -name "${REMOTE_ISO}" -delete
+
+                if [ -d "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}" ]
+                then
+                  echo "  [CLEANUP] Removing existing directory ${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}..."
+                  rm -rf "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
+                fi
+
+                echo "  [CLEANUP] Preparing directory ${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver} for extraction..."
+                mkdir -p "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
+
+                echo "  [EXTRACTING] Extracting ${REMOTE_ISO} to ${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}..."
+                bsdtar -xf "${DEST_DIR}/${REMOTE_ISO}" -C "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
+
+                echo "  [LINKING] Creating symlinks for AppStream and BaseOS..."
+                ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-appstream/ "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}/AppStream"
+                ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-baseos/ "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}/BaseOS"
+
+                echo "  [DONE] ${DIST_FLAVOR_CAPITALIZED} ${ver} (${ARCH} - ${ISO_FLAVOR}) sync complete."
+              done
+            command:
+            - /bin/bash
+            - -c
+            image: registry.wcooke.me:5000/repo-sync/rpm:0.0.1
             imagePullPolicy: Always
             # livenessProbe:
             #   httpGet:
