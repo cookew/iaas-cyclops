@@ -3,7 +3,7 @@
 set -eou pipefail
 
 REGISTRY=registry.wcooke.me:5000
-REPO=bsdtar/bsdtar
+REPO=repo-sync-iso/repo-sync-iso
 VERSION=1
 
 podman buildx prune --all --force

@@ -38,13 +38,14 @@ spec:
               DIST_FLAVOR_LOWER="rocky"
               DIST_FLAVOR_CAPITALIZED="Rocky"
 
-              if command -v bsdtar >/dev/null 2>&1
-              then
-                echo "bsdtar is installed"
-              else
-                echo "bsdtar is not installed" >&2
-                exit 1
-              fi
+              for c in curl bsdtar sha256sum grep head find
+              do
+                if ! command -v "${c}" >/dev/null 2>&1
+                then
+                  echo "${c} is not installed" >&2
+                  exit 1
+                fi
+              done
 
               if [ ! -d "${DEST_DIR}" ]
               then
@@ -128,7 +129,7 @@ spec:
             command:
             - /bin/bash
             - -c
-            image: registry.wcooke.me:5000/bsdtar/bsdtar:1
+            image: registry.wcooke.me:5000/repo-sync-iso/repo-sync-iso:1
             imagePullPolicy: Always
             # livenessProbe:
             #   httpGet:
