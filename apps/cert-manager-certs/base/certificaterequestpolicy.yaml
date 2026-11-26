@@ -39,7 +39,6 @@ spec:
       - mattermost
       - rook-ceph-rgw-ceph-objectstore
       - rook-ceph-rgw-ceph-objectstore.rook-ceph-cluster
-      - repo-sync
     isCA: false
     subject:
       organizationalUnits:
