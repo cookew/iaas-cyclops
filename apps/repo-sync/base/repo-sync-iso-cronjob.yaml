@@ -178,6 +178,9 @@ spec:
             fsGroup: 1000
             runAsGroup: 1000
             runAsUser: 1000
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           terminationGracePeriodSeconds: 5
           volumes:
           - name: repo-mirror
