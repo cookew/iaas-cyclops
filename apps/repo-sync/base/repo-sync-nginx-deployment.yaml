@@ -60,6 +60,15 @@ spec:
           initialDelaySeconds: 3
           periodSeconds: 2
         volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+          readOnly: false
+        - mountPath: /var/cache/nginx
+          name: var-cache
+          readOnly: false
+        - mountPath: /var/run
+          name: var-run
+          readOnly: false
         - mountPath: /etc/nginx/conf.d
           name: nginx-config
           readOnly: true
@@ -70,8 +79,21 @@ spec:
           name: repo-sync-nginx
           readOnly: true
       restartPolicy: Always
+      securityContext:
+        fsGroup: 101
+        runAsGroup: 101
+        runAsUser: 101
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       terminationGracePeriodSeconds: 5
       volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: var-cache
+        emptyDir: {}
+      - name: var-run
+        emptyDir: {}
       - name: nginx-config
         configMap:
           items:
