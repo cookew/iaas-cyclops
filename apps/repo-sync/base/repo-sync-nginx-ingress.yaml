@@ -8,7 +8,7 @@ metadata:
     forecastle.stakater.com/group: Apps
     # forecastle.stakater.com/icon: https://repo.apps.iaas.wcooke.me/logo.png
     forecastle.stakater.com/network-restricted: "false"
-  name: repo-sync-nginx
+  name: repo
 spec:
   ingressClassName: cilium
   rules:
@@ -17,7 +17,7 @@ spec:
       paths:
       - backend:
           service:
-            name: repo-sync-nginx
+            name: repo
             port:
               name: https
         path: /

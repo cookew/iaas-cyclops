@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/component: nginx
     app.kubernetes.io/name: repo-sync-nginx
     app.kubernetes.io/part-of: repo-sync
-  name: repo-sync-nginx
+  name: repo
 spec:
   ports:
   - name: http
