@@ -118,7 +118,7 @@ spec:
                   echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Completed fetching ${REMOTE_ISO}."
 
                   echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Verifying local ISO against checksum..."
-                  if grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sha256sum -c - "${WORKING_DIR}/${REMOTE_ISO}"
+                  if echo $(grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sed "s@${REMOTE_ISO}.*@${WORKING_DIR}/&@g") | sha256sum -c -
                   then
                     echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Local ISO verification succeeded."
                     echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Moving verified ISO to destination."
@@ -197,9 +197,9 @@ spec:
             - mountPath: /repo-mirror
               name: repo-mirror
               readOnly: false
-            - mountPath: /var/tmp
-              name: var-tmp
-              readOnly: false
+            # - mountPath: /var/tmp
+            #   name: var-tmp
+            #   readOnly: false
           nodeSelector:
             kubernetes.io/os: linux
           restartPolicy: Never
@@ -215,16 +215,16 @@ spec:
           - name: repo-mirror
             persistentVolumeClaim:
               claimName: repo-sync-repo-mirror
-          - ephemeral:
-              volumeClaimTemplate:
-                metadata:
-                  labels:
-                    type: my-frontend-volume
-                spec:
-                  accessModes:
-                  - ReadWriteOnce
-                  resources:
-                    requests:
-                      storage: 32Gi
-                  storageClassName: ceph-filesystem
-            name: var-tmp
+          # - ephemeral:
+          #     volumeClaimTemplate:
+          #       metadata:
+          #         labels:
+          #           type: my-frontend-volume
+          #       spec:
+          #         accessModes:
+          #         - ReadWriteOnce
+          #         resources:
+          #           requests:
+          #             storage: 32Gi
+          #         storageClassName: ceph-filesystem
+          #   name: var-tmp
