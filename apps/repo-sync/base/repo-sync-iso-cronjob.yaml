@@ -31,7 +31,6 @@ spec:
 
               ARCH="x86_64"
               ISO_FLAVOR="minimal" # Options: minimal, dvd, boot
-              DOWNLOAD_DIR="/var/tmp"
               DEST_DIR="/repo-mirror/iso"
               TEMP_DIR="/repo-mirror/iso/.temp"
               MAJOR_VERSIONS=(8 9 10)
@@ -98,10 +97,11 @@ spec:
                 echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Latest online: ${REMOTE_ISO}"
 
                 # Check if the local filename matches the remote checksum
-                if [[ -f "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}" ]]
+                if [ -f "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}" ]
                 then
                   echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Verifying local ISO against checksum..."
-                  if grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sha256sum -c - "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}"
+                  if echo $(grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sed "s@${REMOTE_ISO}.*@${DEST_DIR}/${DIST_FLAVOR_LOWER}/&@g") | sha256sum -c -
+                  #if grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sha256sum -c -
                   then
                     echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Local ISO verification succeeded."
                   else
