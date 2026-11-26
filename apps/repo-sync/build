@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -eou pipefail
+
+REGISTRY=registry.wcooke.me:5000
+REPO=bsdtar/bsdtar
+VERSION=1
+
+podman buildx prune --all --force
+podman build -t ${REGISTRY}/${REPO}:${VERSION} .
+podman image push ${REGISTRY}/${REPO}:${VERSION}
+
+sed -i "s@ image: ${REGISTRY}/${REPO}:.*@ image: ${REGISTRY}/${REPO}:${VERSION}@g" base/repo-sync-iso-cronjob.yaml

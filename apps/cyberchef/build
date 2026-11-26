@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -eou pipefail
 
 REGISTRY=registry.wcooke.me:5000
 REPO=cyberchef

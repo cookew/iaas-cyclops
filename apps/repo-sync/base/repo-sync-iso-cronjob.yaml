@@ -38,6 +38,14 @@ spec:
               DIST_FLAVOR_LOWER="rocky"
               DIST_FLAVOR_CAPITALIZED="Rocky"
 
+              if command -v bsdtar >/dev/null 2>&1
+              then
+                echo "bsdtar is installed"
+              else
+                echo "bsdtar is not installed" >&2
+                exit 1
+              fi
+
               if [ ! -d "${DEST_DIR}" ]
               then
                 mkdir -p "${DEST_DIR}"
@@ -90,10 +98,18 @@ spec:
                   continue
                 fi
 
-                mv "${DOWNLOAD_DIR}/CHECKSUM-${ver}" "${DEST_DIR}/CHECKSUM-${ver}"
-                cp "${DOWNLOAD_DIR}/${REMOTE_ISO}" "${DEST_DIR}/${REMOTE_ISO}"
                 echo "  [CLEANUP] Removing older ISOs for ${DIST_FLAVOR_CAPITALIZED} ${ver} (${ARCH} - ${ISO_FLAVOR})..."
-                find "${DEST_DIR}" -maxdepth 1 -name "${DIST_FLAVOR_CAPITALIZED}-${ver}.*-${ARCH}-${ISO_FLAVOR}.iso" ! -name "${REMOTE_ISO}" -delete
+                find "${DEST_DIR}/${DIST_FLAVOR_LOWER}" -maxdepth 1 -name "${DIST_FLAVOR_CAPITALIZED}-${ver}.*-${ARCH}-${ISO_FLAVOR}.iso" ! -name "${REMOTE_ISO}" -delete
+
+                echo "  [EXTRACTING] Preparing directory ${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver} for extraction..."
+                mkdir -p "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}"
+
+                echo "  [EXTRACTING] Extracting ${REMOTE_ISO} to ${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}..."
+                bsdtar -xf "${DOWNLOAD_DIR}/${REMOTE_ISO}" -C "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}"
+
+                echo "  [LINKING] Creating symlinks for AppStream and BaseOS..."
+                ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-appstream/ "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}/AppStream"
+                ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-baseos/ "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}/BaseOS"
 
                 if [ -d "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}" ]
                 then
@@ -101,22 +117,18 @@ spec:
                   rm -rf "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
                 fi
 
-                echo "  [CLEANUP] Preparing directory ${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver} for extraction..."
-                mkdir -p "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
-
-                echo "  [EXTRACTING] Extracting ${REMOTE_ISO} to ${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}..."
-                bsdtar -xf "${DEST_DIR}/${REMOTE_ISO}" -C "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
-
-                echo "  [LINKING] Creating symlinks for AppStream and BaseOS..."
-                ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-appstream/ "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}/AppStream"
-                ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-baseos/ "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}/BaseOS"
+                echo "  [FINALIZE] Moving downloaded files to final location..."
+                mv "${DOWNLOAD_DIR}/CHECKSUM-${ver}" "${DEST_DIR}/CHECKSUM-${ver}"
+                cp "${DOWNLOAD_DIR}/${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${REMOTE_ISO}"
+                mv "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}"
+                mv "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
 
                 echo "  [DONE] ${DIST_FLAVOR_CAPITALIZED} ${ver} (${ARCH} - ${ISO_FLAVOR}) sync complete."
               done
             command:
             - /bin/bash
             - -c
-            image: registry.wcooke.me:5000/repo-sync/rpm:0.0.1
+            image: registry.wcooke.me:5000/bsdtar/bsdtar:1
             imagePullPolicy: Always
             # livenessProbe:
             #   httpGet:
