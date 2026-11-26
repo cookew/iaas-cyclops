@@ -26,7 +26,7 @@ spec:
       - env:
         - name: TZ
           value: "America/Denver"
-        image: nginx
+        image: nginx:latest
         livenessProbe:
           httpGet:
             path: /healthz
