@@ -42,6 +42,7 @@ spec:
               capabilities:
                 drop:
                 - ALL
+              privileged: false
               readOnlyRootFilesystem: true
             volumeMounts:
             - mountPath: /rpm
@@ -80,7 +81,7 @@ spec:
             resources:
               limits:
                 cpu: 2000m
-                memory: 256Mi
+                memory: 1Gi
               requests:
                 cpu: 1000m
                 memory: 128Mi
@@ -89,6 +90,7 @@ spec:
               capabilities:
                 drop:
                 - ALL
+              privileged: false
               readOnlyRootFilesystem: true
             volumeMounts:
             - mountPath: /etc/yum.repos.d
@@ -113,6 +115,9 @@ spec:
             fsGroup: 1000
             runAsGroup: 1000
             runAsUser: 1000
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           terminationGracePeriodSeconds: 5
           volumes:
           - emptyDir:
