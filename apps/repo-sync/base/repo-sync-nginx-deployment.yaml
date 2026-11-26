@@ -48,10 +48,11 @@ spec:
             memory: 28Mi
         securityContext:
           allowPrivilegeEscalation: false
-#          capabilities:
-#            drop:
-#            - ALL
-#          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+          readOnlyRootFilesystem: true
         startupProbe:
           httpGet:
             path: /healthz

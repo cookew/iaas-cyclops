@@ -55,7 +55,8 @@ spec:
           capabilities:
             drop:
             - ALL
-          readOnlyRootFilesystem: false
+          privileged: false
+          readOnlyRootFilesystem: true
         volumeMounts:
         - mountPath: /usr/local/tomcat/logs
           name: logs

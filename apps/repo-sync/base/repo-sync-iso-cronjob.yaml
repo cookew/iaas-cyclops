@@ -110,7 +110,8 @@ spec:
 
                 echo "  [LINKING] Creating symlinks for AppStream and BaseOS..."
                 ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-appstream/ "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}/AppStream"
-                ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-baseos/ "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}/BaseOS"
+                rm -rf "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}/BaseOS"
+                ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-baseos/    "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}/BaseOS"
 
                 if [ -d "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}" ]
                 then
@@ -119,7 +120,7 @@ spec:
                 fi
 
                 echo "  [FINALIZE] Moving downloaded files to final location..."
-                mv "${DOWNLOAD_DIR}/CHECKSUM-${ver}" "${DEST_DIR}/CHECKSUM-${ver}"
+                mv "${DOWNLOAD_DIR}/CHECKSUM-${ver}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}"
                 cp "${DOWNLOAD_DIR}/${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${REMOTE_ISO}"
                 mv "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}"
                 mv "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
@@ -161,6 +162,7 @@ spec:
               capabilities:
                 drop:
                 - ALL
+              privileged: false
               readOnlyRootFilesystem: true
             volumeMounts:
             - mountPath: /repo-mirror
