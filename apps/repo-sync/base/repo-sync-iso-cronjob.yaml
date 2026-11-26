@@ -33,6 +33,7 @@ spec:
               ISO_FLAVOR="minimal" # Options: minimal, dvd, boot
               DOWNLOAD_DIR="/var/tmp"
               DEST_DIR="/repo-mirror/iso"
+              TEMP_DIR="/repo-mirror/iso/.temp"
               MAJOR_VERSIONS=(8 9 10)
               BASE_URL="https://download.rockylinux.org/pub/rocky"
               DIST_FLAVOR_LOWER="rocky"
@@ -52,18 +53,28 @@ spec:
                 mkdir -p "${DEST_DIR}"
               fi
 
-              if [ ! -d "${DOWNLOAD_DIR}" ]
+              if [ ! -d "${TEMP_DIR}" ]
               then
-                mkdir -p "${DOWNLOAD_DIR}"
+                mkdir -p "${TEMP_DIR}"
               fi
-              cd "${DOWNLOAD_DIR}"
+
+              echo "  [INFO] Creating temporary subdirectory under ${TEMP_DIR}"
+              TEMP_SUBDIR=$(mktemp -d "${TEMP_DIR}/tmp.XXXXXX")
+              trap 'rm -rf "${TEMP_SUBDIR}"' EXIT
 
               for ver in "${MAJOR_VERSIONS[@]}"
               do
                 DIR_URL="${BASE_URL}/${ver}/isos/${ARCH}"
-                echo "Checking ${DIST_FLAVOR_CAPITALIZED} ${ver} (${ARCH} - ${ISO_FLAVOR})..."
+                echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Checking ..."
 
-                # Fetch directory listing and extract the exact ISO filename
+                WORKING_DIR="${TEMP_SUBDIR}/${DIST_FLAVOR_LOWER}/${ver}"
+                echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Preparing working directory ${WORKING_DIR}"
+                mkdir -p "${WORKING_DIR}"
+
+                echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Fetching CHECKSUM file"
+                curl -sL -o "${WORKING_DIR}/CHECKSUM-${ver}" "${DIR_URL}/CHECKSUM"
+
+                # Fetch directory listing and extract the ISO filename
                 # Matches patterns like ${DIST_FLAVOR_CAPITALIZED}-9.9-x86_64-minimal.iso or ${DIST_FLAVOR_CAPITALIZED}-10.3-x86_64-minimal.iso
                 REMOTE_ISO=$(curl -sL "${DIR_URL}/" \
                   | grep -oE "${DIST_FLAVOR_CAPITALIZED}-${ver}\.[0-9]+-${ARCH}-${ISO_FLAVOR}\.iso" \
@@ -71,61 +82,79 @@ spec:
 
                 if [[ -z "${REMOTE_ISO}" ]]
                 then
-                  echo "  [ERROR] Could not determine latest ISO filename from ${DIR_URL}/"
+                  echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] ERROR: Could not determine latest ISO filename from ${DIR_URL}/"
                   continue
                 fi
 
-                echo "  Latest online: ${REMOTE_ISO}"
+                if ! grep -q "${REMOTE_ISO}" "${WORKING_DIR}/CHECKSUM-${ver}"
+                then
+                  echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] ERROR: Checksum entry not found for ${REMOTE_ISO}"
+                  continue
+                else
+                  echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Checksum entry found for ${REMOTE_ISO}"
+                  mv "${WORKING_DIR}/CHECKSUM-${ver}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}"
+                fi
 
-                # Check if the exact versioned filename already exists locally
+                echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Latest online: ${REMOTE_ISO}"
+
+                # Check if the local filename matches the remote checksum
                 if [[ -f "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}" ]]
                 then
-                  echo "  [SKIP] ${REMOTE_ISO} is already downloaded and up to date."
-                  continue
+                  echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Verifying local ISO against checksum..."
+                  if grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sha256sum -c - "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}"
+                  then
+                    echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Local ISO verification succeeded."
+                  else
+                    echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Local ISO verification failed."
+                    echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Removing local ISO."
+                    rm -f "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}"
+                  fi
                 fi
 
-                echo "  [DOWNLOADING] ISO not found locally. Fetching ${REMOTE_ISO}..."
-                curl -fL -o "${DOWNLOAD_DIR}/${REMOTE_ISO}" "${DIR_URL}/${REMOTE_ISO}"
-                echo "  [DOWNLOADING] Completed fetching ${REMOTE_ISO}."
-
-                echo "  [VERIFYING] Checking SHA256 checksum..."
-                curl -sL -o "${DOWNLOAD_DIR}/CHECKSUM-${ver}" "${DIR_URL}/CHECKSUM"
-                if grep -q "${REMOTE_ISO}" "${DOWNLOAD_DIR}/CHECKSUM-${ver}"
+                if [ ! -f "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}" ]
                 then
-                  echo "  [VERIFYING] Found checksum entry for ${REMOTE_ISO}, verifying..."
-                  grep "${REMOTE_ISO}" "${DOWNLOAD_DIR}/CHECKSUM-${ver}" | sha256sum -c -
-                else
-                  echo "  [WARN] Checksum entry not found for ${REMOTE_ISO}"
-                  continue
+                  echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Local ISO not found. Fetching ${REMOTE_ISO}..."
+                  curl -fL -o "${WORKING_DIR}/${REMOTE_ISO}" "${DIR_URL}/${REMOTE_ISO}"
+                  echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Completed fetching ${REMOTE_ISO}."
+
+                  echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Verifying local ISO against checksum..."
+                  if grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sha256sum -c - "${WORKING_DIR}/${REMOTE_ISO}"
+                  then
+                    echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Local ISO verification succeeded."
+                    echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Moving verified ISO to destination."
+                    mv "${WORKING_DIR}/${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}"
+                  else
+                    echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Local ISO verification failed."
+                    echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Removing local ISO."
+                    rm -f "${WORKING_DIR}/${REMOTE_ISO}"
+                    continue
+                  fi
                 fi
 
-                echo "  [CLEANUP] Removing older ISOs for ${DIST_FLAVOR_CAPITALIZED} ${ver} (${ARCH} - ${ISO_FLAVOR})..."
-                find "${DEST_DIR}/${DIST_FLAVOR_LOWER}" -maxdepth 1 -name "${DIST_FLAVOR_CAPITALIZED}-${ver}.*-${ARCH}-${ISO_FLAVOR}.iso" ! -name "${REMOTE_ISO}" -delete
+                echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Preparing directory ${WORKING_DIR}/${ver} for extraction..."
+                mkdir -p "${WORKING_DIR}/${ver}"
 
-                echo "  [EXTRACTING] Preparing directory ${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver} for extraction..."
-                mkdir -p "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}"
+                echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Extracting ${REMOTE_ISO} to ${WORKING_DIR}/${ver}..."
+                bsdtar -xf "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}" -C "${WORKING_DIR}/${ver}"
 
-                echo "  [EXTRACTING] Extracting ${REMOTE_ISO} to ${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}..."
-                bsdtar -xf "${DOWNLOAD_DIR}/${REMOTE_ISO}" -C "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}"
-
-                echo "  [LINKING] Creating symlinks for AppStream and BaseOS..."
-                ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-appstream/ "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}/AppStream"
-                rm -rf "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}/BaseOS"
-                ln -s ../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-baseos/    "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}/BaseOS"
+                echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Creating symlinks for AppStream and BaseOS..."
+                ln -s ../../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-appstream/ "${WORKING_DIR}/${ver}/AppStream"
+                rm -rf "${WORKING_DIR}/${ver}/BaseOS"
+                ln -s ../../../rpm/${DIST_FLAVOR_LOWER}-${ver}-x86_64-baseos/ "${WORKING_DIR}/${ver}/BaseOS"
 
                 if [ -d "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}" ]
                 then
-                  echo "  [CLEANUP] Removing existing directory ${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}..."
+                  echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Removing existing directory ${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}..."
                   rm -rf "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
                 fi
 
-                echo "  [FINALIZE] Moving downloaded files to final location..."
-                mv "${DOWNLOAD_DIR}/CHECKSUM-${ver}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}"
-                cp "${DOWNLOAD_DIR}/${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${REMOTE_ISO}"
-                mv "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}"
-                mv "${DEST_DIR}/${DIST_FLAVOR_LOWER}/.${ver}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
+                echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Moving files to final location..."
+                mv "${WORKING_DIR}/${ver}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${ver}"
 
-                echo "  [DONE] ${DIST_FLAVOR_CAPITALIZED} ${ver} (${ARCH} - ${ISO_FLAVOR}) sync complete."
+                echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Removing older ISOs..."
+                find "${DEST_DIR}/${DIST_FLAVOR_LOWER}" -maxdepth 1 -name "${DIST_FLAVOR_CAPITALIZED}-${ver}.*-${ARCH}-${ISO_FLAVOR}.iso" ! -name "${REMOTE_ISO}" -delete
+
+                echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Sync complete."
               done
             command:
             - /bin/bash
