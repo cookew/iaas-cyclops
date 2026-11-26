@@ -101,11 +101,7 @@ spec:
                 if [ -f "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}" ]
                 then
                   echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Verifying local ISO against checksum..."
-                  echo grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}"
-                  echo sed "s@${REMOTE_ISO}.*@${DEST_DIR}/${DIST_FLAVOR_LOWER}/&@g"
-                  echo $(grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sed "s@${REMOTE_ISO}.*@${DEST_DIR}/${DIST_FLAVOR_LOWER}/&@g")
-
-                  if echo $(grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sed "s@${REMOTE_ISO}.*@${DEST_DIR}/${DIST_FLAVOR_LOWER}/&@g") | sha256sum -c -
+                  if echo $(grep -v '^#' "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | grep "${REMOTE_ISO}" | sed "s@${REMOTE_ISO}.*@${DEST_DIR}/${DIST_FLAVOR_LOWER}/&@g") | sha256sum -c -
                   #if grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sha256sum -c -
                   then
                     echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Local ISO verification succeeded."
@@ -123,10 +119,7 @@ spec:
                   echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Completed fetching ${REMOTE_ISO}."
 
                   echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Verifying local ISO against checksum..."
-                  echo grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}"
-                  echo sed "s@${REMOTE_ISO}.*@${WORKING_DIR}/&@g"
-                  echo $(grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sed "s@${REMOTE_ISO}.*@${WORKING_DIR}/&@g")
-                  if echo $(grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sed "s@${REMOTE_ISO}.*@${WORKING_DIR}/&@g") | sha256sum -c -
+                  if echo $(grep -v '^#' "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | grep "${REMOTE_ISO}" | sed "s@${REMOTE_ISO}.*@${WORKING_DIR}/&@g") | sha256sum -c -
                   then
                     echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Local ISO verification succeeded."
                     echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Moving verified ISO to destination."
