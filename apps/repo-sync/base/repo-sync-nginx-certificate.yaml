@@ -9,7 +9,6 @@ spec:
   - repo-sync-nginx.repo-sync.svc
   - repo-sync-nginx.repo-sync.svc.cluster.local
   - repo.apps.iaas.wcooke.me
-  - ipxe
   duration: 960h
   isCA: false
   issuerRef:
