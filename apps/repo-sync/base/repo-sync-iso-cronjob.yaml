@@ -144,6 +144,7 @@ spec:
                 bsdtar -xf "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}" -C "${WORKING_DIR}/${MAJOR_VERSION}"
 
                 echo "[${DIST_FLAVOR_CAPITALIZED} ${MAJOR_VERSION} ${ARCH}] INFO: Creating symlinks for AppStream and BaseOS..."
+                rm -rf "${WORKING_DIR}/${MAJOR_VERSION}/AppStream"
                 ln -s ../../../rpm/${DIST_FLAVOR_LOWER}-${MAJOR_VERSION}-x86_64-appstream/ "${WORKING_DIR}/${MAJOR_VERSION}/AppStream"
                 rm -rf "${WORKING_DIR}/${MAJOR_VERSION}/BaseOS"
                 ln -s ../../../rpm/${DIST_FLAVOR_LOWER}-${MAJOR_VERSION}-x86_64-baseos/ "${WORKING_DIR}/${MAJOR_VERSION}/BaseOS"
