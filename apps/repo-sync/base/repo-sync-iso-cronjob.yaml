@@ -78,24 +78,25 @@ spec:
                 echo "  Latest online: ${REMOTE_ISO}"
 
                 # Check if the exact versioned filename already exists locally
-                if [[ -f "${DEST_DIR}/${REMOTE_ISO}" ]]
+                if [[ -f "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}" ]]
                 then
                   echo "  [SKIP] ${REMOTE_ISO} is already downloaded and up to date."
-                else
-                  echo "  [DOWNLOADING] ISO not found locally. Fetching ${REMOTE_ISO}..."
-                  curl -fL -o "${DOWNLOAD_DIR}/${REMOTE_ISO}" "${DIR_URL}/${REMOTE_ISO}"
-                  echo "  [DOWNLOADING] Completed fetching ${REMOTE_ISO}."
+                  continue
+                fi
 
-                  echo "  [VERIFYING] Checking SHA256 checksum..."
-                  curl -sL -o "${DOWNLOAD_DIR}/CHECKSUM-${ver}" "${DIR_URL}/CHECKSUM"
-                  if grep -q "${REMOTE_ISO}" "${DOWNLOAD_DIR}/CHECKSUM-${ver}"
-                  then
-                    echo "  [VERIFYING] Found checksum entry for ${REMOTE_ISO}, verifying..."
-                    grep "${REMOTE_ISO}" "${DOWNLOAD_DIR}/CHECKSUM-${ver}" | sha256sum -c -
-                  else
-                    echo "  [WARN] Checksum entry not found for ${REMOTE_ISO}"
-                    continue
-                  fi
+                echo "  [DOWNLOADING] ISO not found locally. Fetching ${REMOTE_ISO}..."
+                curl -fL -o "${DOWNLOAD_DIR}/${REMOTE_ISO}" "${DIR_URL}/${REMOTE_ISO}"
+                echo "  [DOWNLOADING] Completed fetching ${REMOTE_ISO}."
+
+                echo "  [VERIFYING] Checking SHA256 checksum..."
+                curl -sL -o "${DOWNLOAD_DIR}/CHECKSUM-${ver}" "${DIR_URL}/CHECKSUM"
+                if grep -q "${REMOTE_ISO}" "${DOWNLOAD_DIR}/CHECKSUM-${ver}"
+                then
+                  echo "  [VERIFYING] Found checksum entry for ${REMOTE_ISO}, verifying..."
+                  grep "${REMOTE_ISO}" "${DOWNLOAD_DIR}/CHECKSUM-${ver}" | sha256sum -c -
+                else
+                  echo "  [WARN] Checksum entry not found for ${REMOTE_ISO}"
+                  continue
                 fi
 
                 echo "  [CLEANUP] Removing older ISOs for ${DIST_FLAVOR_CAPITALIZED} ${ver} (${ARCH} - ${ISO_FLAVOR})..."
