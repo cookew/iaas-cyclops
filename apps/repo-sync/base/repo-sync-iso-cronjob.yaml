@@ -217,7 +217,6 @@ spec:
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
-          terminationGracePeriodSeconds: 5
           volumes:
           - name: repo-mirror
             persistentVolumeClaim:
