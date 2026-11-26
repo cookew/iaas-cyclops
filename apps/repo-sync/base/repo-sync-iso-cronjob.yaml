@@ -75,6 +75,7 @@ spec:
 
                 # Fetch directory listing and extract the ISO filename
                 # Matches patterns like ${DIST_FLAVOR_CAPITALIZED}-9.9-x86_64-minimal.iso or ${DIST_FLAVOR_CAPITALIZED}-10.3-x86_64-minimal.iso
+                unset REMOTE_ISO
                 REMOTE_ISO=$(curl -sL "${DIR_URL}/" \
                   | grep -oE "${DIST_FLAVOR_CAPITALIZED}-${ver}\.[0-9]+-${ARCH}-${ISO_FLAVOR}\.iso" \
                   | head -n 1 || true)
