@@ -38,7 +38,7 @@ spec:
               DIST_FLAVOR_LOWER="rocky"
               DIST_FLAVOR_CAPITALIZED="Rocky"
 
-              for c in curl bsdtar sha256sum grep head find
+              for c in curl bsdtar sha256sum grep head find sed
               do
                 if ! command -v "${c}" >/dev/null 2>&1
                 then
@@ -101,6 +101,10 @@ spec:
                 if [ -f "${DEST_DIR}/${DIST_FLAVOR_LOWER}/${REMOTE_ISO}" ]
                 then
                   echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Verifying local ISO against checksum..."
+                  echo grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}"
+                  echo sed "s@${REMOTE_ISO}.*@${DEST_DIR}/${DIST_FLAVOR_LOWER}/&@g"
+                  echo $(grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sed "s@${REMOTE_ISO}.*@${DEST_DIR}/${DIST_FLAVOR_LOWER}/&@g")
+
                   if echo $(grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sed "s@${REMOTE_ISO}.*@${DEST_DIR}/${DIST_FLAVOR_LOWER}/&@g") | sha256sum -c -
                   #if grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sha256sum -c -
                   then
@@ -119,6 +123,9 @@ spec:
                   echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Completed fetching ${REMOTE_ISO}."
 
                   echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Verifying local ISO against checksum..."
+                  echo grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}"
+                  echo sed "s@${REMOTE_ISO}.*@${WORKING_DIR}/&@g"
+                  echo $(grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sed "s@${REMOTE_ISO}.*@${WORKING_DIR}/&@g")
                   if echo $(grep "${REMOTE_ISO}" "${DEST_DIR}/${DIST_FLAVOR_LOWER}/CHECKSUM-${ver}" | sed "s@${REMOTE_ISO}.*@${WORKING_DIR}/&@g") | sha256sum -c -
                   then
                     echo "[${DIST_FLAVOR_CAPITALIZED} ${ver} ${ARCH}] INFO: Local ISO verification succeeded."
@@ -182,11 +189,11 @@ spec:
             #   failureThreshold: 20
             resources:
               limits:
-                cpu: 2000m
-                memory: 256Mi
+                cpu: 4000m
+                memory: 1Gi
               requests:
                 cpu: 1000m
-                memory: 128Mi
+                memory: 512Mi
             securityContext:
               allowPrivilegeEscalation: false
               capabilities:
