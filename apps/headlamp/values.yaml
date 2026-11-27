@@ -6,8 +6,6 @@ replicaCount: 1
 config:
   clusterAPI:
     enabled: true
-  clusterInventory:
-    enabled: true
   inCluster: true
   oidc:
     autoLogin: true
