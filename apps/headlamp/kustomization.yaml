@@ -5,6 +5,7 @@ namespace: headlamp
 
 resources:
 - base/headlamp-keycloak-client.yaml
+- base/headlamp-kubevirt-config-cm.yaml
 - base/headlamp-rook-clusterrole.yaml
 - sealed-secrets/headlamp-oidc-client.yaml
 

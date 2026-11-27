@@ -37,14 +37,15 @@ deploymentAnnotations:
   reloader.stakater.com/auto: "true"
 
 initContainers:
-  - name: headlamp-kubevirt
-    image: ghcr.io/naval-group/headlamp-kubevirt:latest
-    command: ['/bin/sh', '-c']
-    args:
-    - 'cp -r /plugins/kubevirt /headlamp/plugins/'
-    volumeMounts:
-    - name: plugins-dir
-      mountPath: /headlamp/plugins
+- name: headlamp-kubevirt
+  image: ghcr.io/naval-group/headlamp-kubevirt:latest
+  command: ['/bin/sh', '-c']
+  args:
+  - 'cp -r /plugins/kubevirt /headlamp/plugins/'
+  volumeMounts:
+  - name: plugins-dir
+    mountPath: /headlamp/plugins
+    readOnly: false
 
 # volumeMounts:
 #   - name: headlamp-plugins
