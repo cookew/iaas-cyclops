@@ -64,7 +64,7 @@ metadata:
 spec:
   deletionPolicy: Delete
   forProvider:
-    adminEventsDetailsEnabled: true
+    adminEventsDetailsEnabled: false
     adminEventsEnabled: true
     eventsEnabled: true
     eventsExpiration: 30
