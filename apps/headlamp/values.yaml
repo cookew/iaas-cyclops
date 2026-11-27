@@ -75,13 +75,13 @@ ingress:
     secretName: headlamp-ingress-tls
 
 pluginsManager:
-  enabled: true
+  enabled: false
   configContent:  |
     plugins:
     - name: cert-manager
       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_cert-manager
       version: 0.1.1
-    - name: kubevirt1
+    - name: kubevirt
       source: https://artifacthub.io/packages/headlamp/headlamp-kubevirt/headlamp_kubevirt
       version: 0.3.1
     - name: ai-assistant
