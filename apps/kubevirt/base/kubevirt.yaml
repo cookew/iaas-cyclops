@@ -22,30 +22,30 @@ spec:
       - WorkloadEncryptionSEV
       - WorkloadEncryptionTDX
       - VSOCK
-      - KubevirtSeccompProfile
       - AlignCPUs
       - NodeRestriction
       - ImageVolume
-      - LibvirtHooksServerAndClient
       - IncrementalBackup
+      - ExternalVMSnapshot
+      - OfflineIncrementalBackup
       - EnableVirtioFsStorageVolumes
       - GPUsWithDRA
       - HostDevicesWithDRA
+      - CPUsWithDRA
       - PCINUMAAwareTopology
       - NetworkDevicesWithDRA
       - DecentralizedLiveMigration
+      - CrossClusterMigrationProxy
       - ObjectGraph
       - DeclarativeHotplugVolumes
       - PasstBinding
       - ConfigurableHypervisor
-      - PodSecondaryInterfaceNamingUpgrade
-      - ExternalNetResourceInjection
       - RebootPolicy
       - Template
-      - VmiMemoryOverheadReport
       - ContainerPathVolumes
       - ReservedOverheadMemlock
       - OptOutRoleAggregation
+      - MDevVGPULiveMigration
       - VGPULiveMigration
       - VMStatsCollector
       - OCIExport
@@ -57,6 +57,10 @@ spec:
       - MigrationDowntimeTuning
       - CrossArchitectureVirtualization
       - PortRangesSpec
+      - TLSGroupPreferences
+      - SCSIMultiIOThread
+      - ARM64SecureBoot
+      - DeclarativeVMState
     # permittedHostDevices:
     #   usb:
     #   - resourceName: "zwave"
