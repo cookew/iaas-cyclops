@@ -117,7 +117,7 @@ data:
     metadata_expire = 3600
 
     [elastic-9]
-    name = Elastic 9 repository
+    name = Elastic 9
     baseurl = https://artifacts.elastic.co/packages/9.x/yum
     enabled = 0
     enabled_metadata = 1
