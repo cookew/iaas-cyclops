@@ -79,7 +79,7 @@ pluginsManager:
     - name: cert-manager
       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_cert-manager
       version: 0.1.1
-    - name: kubevirt
+    - name: kubevirt1
       source: https://artifacthub.io/packages/headlamp/headlamp-kubevirt/headlamp_kubevirt
       version: 0.3.1
     - name: ai-assistant
