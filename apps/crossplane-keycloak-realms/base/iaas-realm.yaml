@@ -65,9 +65,9 @@ spec:
   deletionPolicy: Delete
   forProvider:
     adminEventsDetailsEnabled: false
-    adminEventsEnabled: true
-    eventsEnabled: true
-    eventsExpiration: 30
+    adminEventsEnabled: false
+    eventsEnabled: false
+    eventsExpiration: 5
     realmIdRef:
       name: iaas
   providerConfigRef:
