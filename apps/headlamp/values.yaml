@@ -4,6 +4,10 @@
 replicaCount: 1
 
 config:
+  clusterAPI:
+    enabled: true
+  clusterInventory:
+    enabled: true
   inCluster: true
   oidc:
     autoLogin: true
@@ -44,13 +48,13 @@ volumes:
   configMap:
     name: tm-ca-bundle
 
-persistentVolumeClaim:
-  enabled: true
-  accessModes:
-  - ReadWriteMany
-  size: 10Gi
-  storageClassName: ceph-filesystem
-  volumeMode: Filesystem
+# persistentVolumeClaim:
+#   enabled: true
+#   accessModes:
+#   - ReadWriteMany
+#   size: 10Gi
+#   storageClassName: ceph-filesystem
+#   volumeMode: Filesystem
 
 ingress:
   annotations:
@@ -70,7 +74,7 @@ ingress:
   tls:
   - hosts:
       - headlamp.apps.iaas.wcooke.me
-    secretName: chart-example-tls
+    secretName: headlamp-ingress-tls
 
 pluginsManager:
   enabled: true
