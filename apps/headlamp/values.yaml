@@ -87,13 +87,13 @@ pluginsManager:
       version: 0.3.1
     - name: ai-assistant
       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_ai_assistant
-      version: 0.3.0-alpha
+      version: 0.5.0-alpha
     - name: envoy-gateway
       source: https://artifacthub.io/packages/headlamp/headlamp-envoy-gateway/envoy-gateway
       version: 0.3.0
     - name: gatekeeper
       source: https://artifacthub.io/packages/headlamp/gatekeeper-headlamp-plugin/gatekeeper
-      version: 0.2.0
+      version: 0.3.0
     - name: kubescape
       source: https://artifacthub.io/packages/headlamp/kubescape-headlamp-plugin/headlamp_kubescape
       version: 0.11.2
@@ -105,16 +105,16 @@ pluginsManager:
       version: 0.3.2
     - name: keda
       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_keda
-      version: 0.1.1-beta
+      version: 0.1.2
     - name: knative
       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_knative
-      version: 0.2.0-alpha
+      version: 0.4.0-beta
     - name: rook
       source: https://artifacthub.io/packages/headlamp/headlamp-rook/headlamp-rook-plugin
       version: 1.0.2
     - name: strimzi
       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_strimzi
-      version: 0.4.0-alpha
+      version: 0.5.0-beta
     - name: sealed-secrets
       source: https://artifacthub.io/packages/headlamp/headlamp-sealed-secrets/headlamp-sealed-secrets
       version: 1.0.2
@@ -126,7 +126,7 @@ pluginsManager:
       version: 0.1.4
     - name: kyverno
       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_kyverno
-      version: 0.1.0
+      version: 0.2.0-alpha
     - name: metallb
       source: https://artifacthub.io/packages/headlamp/headlamp-metallb-plugin/headlamp-metallb-plugin
       version: 0.5.1
